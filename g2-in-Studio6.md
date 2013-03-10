@@ -11,7 +11,6 @@ Instructions to set up Arduino Due in Atmel Studio6
  * Compile it. You should see `cmsis` in the project directory
  * You should also see a Debug directory created by AS6
 
-
 * In the project directory populate these sub-directories using the github project sources. 
  * `arduino` from `/Arduino/hardware/arduino/sam/cores/arduino`
  * `system` from `/Arduino/hardware/arduino/sam/system`
@@ -20,4 +19,22 @@ Instructions to set up Arduino Due in Atmel Studio6
  * `variants` from `/Arduino/hardware/arduino/sam/variants`
 
 The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not need all the other stuff that's in and under the source directory
+
+* Add the following paths to the C compiler section
+<pre>
+Z:\some\wicked\path\name\that\you\use\AS6SolutionName\AS6ProjectName\arduino    (as absolute path)
+..\system   (all else as relative paths)
+..\system\include
+..\system\source
+..\variants
+</pre>
+
+* Add the following paths to the C++ compiler section
+<pre>
+..\arduino   (all as relative paths)
+..\system
+..\system\include
+..\system\source
+..\variants
+</pre>
 
