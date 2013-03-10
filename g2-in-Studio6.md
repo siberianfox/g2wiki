@@ -20,18 +20,9 @@ Instructions to set up Arduino Due in Atmel Studio6
 
 The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not need all the other stuff that's in and under the source directory
 
-* Add the following paths to the C compiler section
+* Add the following `relative` paths to both the C and C++ compiler sections
 <pre>
-Z:\some\wicked\path\name\that\you\use\AS6SolutionName\AS6ProjectName\arduino    (as absolute path)
-..\system   (all else as relative paths)
-..\system\include
-..\system\source
-..\variants
-</pre>
-
-* Add the following paths to the C++ compiler section
-<pre>
-..\arduino   (all as relative paths)
+..\arduino
 ..\system
 ..\system\include
 ..\system\source
