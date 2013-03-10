@@ -1,0 +1,1 @@
+Welcome to the g2 wiki!
