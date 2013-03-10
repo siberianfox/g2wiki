@@ -10,8 +10,8 @@ Instructions to set up Arduino Due in Atmel Studio6
  * Select ATSAM3X8E chip and finish
  * Compile it. You should see `cmsis` in the project directory. You should also see a Debug directory created by AS6
 
-* In the project directory create and populate these sub-directories using the github project sources. Studio6 is particular - use the Solution Explorer to first create New directory, then move the files into it and add them as Existing Items.  
- * `arduino` from `/Arduino/hardware/arduino/sam/cores/arduino`
+* Create and populate these sub-directories in the project directory using the indicated github project sources. Studio6 is particular - use the Solution Explorer to first create New directory, then move the files into it and add them as Existing Items.  
+ * `arduino` subdirectory with files from `/Arduino/hardware/arduino/sam/cores/arduino`
  * `system` from `/Arduino/hardware/arduino/sam/system`
  * `system\include` from `/Arduino/hardware/arduino/sam/system/include` 
  * `system\source` from `/Arduino/hardware/arduino/sam/system/source`
