@@ -31,4 +31,21 @@ The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not
 
 Here's where I'm a bit stuck. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h.
 
-You will also need to comment out the setup(), init() and loop() functions in main.cpp as these are undefined.
+You will also need to comment out the setup(), init() and loop() functions in main.cpp as these are undefined, or add these function in main or somewhere else:
+
+<pre>
+void init( void )
+{
+		
+}
+
+void setup( void )
+{
+	
+}
+
+void loop( void )
+{
+	
+}
+</pre>
