@@ -29,4 +29,4 @@ The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not
 ..\variants
 </pre>
 
-Here's where I'm a bit stuck. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. 
+Here's where I'm a bit stuck. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h.
