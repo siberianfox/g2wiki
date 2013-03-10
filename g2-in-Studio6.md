@@ -11,6 +11,7 @@ Instructions to set up Arduino Due in Atmel Studio6
  * Compile it. You should see `cmsis` in the project directory
  * You should also see a Debug directory created by AS6
 
+
 * In the project directory populate these sub-directories using the github project sources. 
  * `arduino` from `/Arduino/hardware/arduino/sam/cores/arduino`
  * `system` from `/Arduino/hardware/arduino/sam/system`
