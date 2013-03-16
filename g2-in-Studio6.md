@@ -27,7 +27,7 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 ..\variants
 </pre>
 
-* Edit the sam.h file. The above almost worked w/o modifications. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h. I think in the Arduino IDE this is injected at compile time.
+* Edit the sam.h file. The above almost worked w/o modifications. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h. I think in the Arduino IDE this is injected at compile time. Code is below, or get the file [here](https://github.com/synthetos/g2/blob/master/Extras/sam.h)
 <pre>
 /* Entire SAM3XA series 
    Changed this define to fix compilation problems
