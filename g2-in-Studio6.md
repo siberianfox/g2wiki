@@ -1,4 +1,5 @@
-Instructions to set up Arduino Due in Atmel Studio6
+# Setting Up a Arduino Due Project in Studio6
+There are some links on the web to import the Arduino Due libraries into Studio6. That is not what this is. The instructions here are how to set up the Arduino Due 1.5 SAM sources as part of an Atmel Studio6 project. They are compiled and part of your project - not as a library.
 
 * Clone the Arduino github
 
@@ -41,3 +42,8 @@ void loop( void )
 	
 }
 </pre>
+
+# Using the Atmel SAM-ICE Debugger
+The SAM-ICE (SAM In Circuit Emulator) is only officially supported programmer/debugger for the SAM3X8E under Studio6. It's a rebranded Segger J-Link, which is really a very nice unit, and the worth the $100, easy.
+ 
+1. Get/buy a [SAM-ICE](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFaduiSLswSzKKMtBJl3sH6Dl%252bGzJZewU2eQFM%3d) from Mouser and the [Olimex JTAG adapter cable](http://www.mouser.com/Search/ProductDetail.aspx?R=ARM-JTAG-20-10virtualkey63420000virtualkey909-ARM-JTAG-20-10). If you are like me this adds a week to your project and (at least) 2 setts of shipping charges. THis can be avoided. Total cost will be about $125 including shipping. 
