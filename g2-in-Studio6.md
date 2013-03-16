@@ -37,7 +37,7 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 #define SAM3XA_SERIES (SAM3X4 || SAM3X8 || SAM3A4 || SAM3A8)
 </pre>
 
-* You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main. Here's the code for the classic LED blinky test:
+* You will also need to add (or comment out) setup() and loop() functions in main.cpp. Here's the code for the classic LED blinky test:
 <pre>
 int led = 13;
 void setup() {
