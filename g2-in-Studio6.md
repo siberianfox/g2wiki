@@ -1,4 +1,4 @@
-# Setting Up a Arduino Due Project in Studio6
+## Setting Up a Arduino Due Project in Studio6
 There are some links on the web to import the Arduino Due libraries into Studio6. That is not what this is. The instructions here are how to set up the Arduino Due 1.5 SAM sources as part of an Atmel Studio6 project. They are compiled and part of your project - not as a library.
 
 * Clone the Arduino github
