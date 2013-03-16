@@ -39,14 +39,10 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 #define SAM3XA_SERIES (SAM3X4 || SAM3X8 || SAM3A4 || SAM3A8)
 </pre>
 
-* You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main:
+* You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main.
 <pre>
-void setup( void )
-{
-}
-void loop( void )
-{	
-}
+void setup( void ) { }
+void loop( void ) { }
 </pre>
 
 ## Using the Atmel SAM-ICE Debugger
