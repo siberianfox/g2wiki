@@ -31,10 +31,8 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 <pre>
 /* The following modifies the SAM3XA_SERIES #defines from the sam.h file to fix compilation problems
    Ref: http://asf.atmel.no/docs/latest/common.services.calendar.example2.stk600-rcuc3d/html/group__sam__part__macros__group.html
-   This file is found in: C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\ARMGCC\3.3.1.128\ARMSupportFiles\Device\ATMEL\sam.h
-   It has been included in the project in the Extras directory
 */
-//#define SAM3XA_SERIES (SAM3A4 || SAM3A8)
+//#define SAM3XA_SERIES (SAM3A4 || SAM3A8)	// original define in sam.h file
 #undef SAM3XA_SERIES
 #define SAM3XA_SERIES (SAM3X4 || SAM3X8 || SAM3A4 || SAM3A8)
 </pre>
