@@ -44,7 +44,7 @@ void loop( void )
 </pre>
 
 ## Using the Atmel SAM-ICE Debugger
-The SAM-ICE (SAM In Circuit Emulator) is only officially supported programmer/debugger for the SAM3X8E under Studio6. It's a rebranded Segger J-Link, which is really a very nice unit, and the worth the $100, easy.
+The SAM-ICE (SAM In Circuit Emulator) is only officially supported programmer/debugger for the SAM3X8E under Studio6. It's a rebranded Segger J-Link, which is really a very nice unit, and the worth the $100, easy. Supposedly there are cheaper alternatives out like clones and some others, but I haven't tested these. Her's a useful [Arduino forum post about this](http://arduino.cc/forum/index.php?topic=134907).
 
 FYI: I use a VMware Windows XP image under OSX, so some instructions are applicable to my setup and can be ignored if they don't apply to you.
 
