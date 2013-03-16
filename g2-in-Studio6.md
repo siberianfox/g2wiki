@@ -52,6 +52,6 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 
 2. Plug in the ICE USB port. The VM should recognize it and bong at you. Go into the `Project/Properties` tab in AS6 and set the `Tool` to be the SAM ICE. Upgrade the ICE firmware if it asks you to. Set JTAG Clock to `I don't know yet`.
 
-3. Plug the Olimex adapter cable into the ICE and onto the Due. The cable from the connector on the Due should exit over the Due's USB port - i.e. if you are looking the the Due and ATMEL reads right side up, the cable exits to the right of the board. Someone put the JTAG too close the the 4 pin 0.100 header, but it still makes good enough contact.
+3. Plug the Olimex adapter cable into the ICE and onto the Due. The cable from the connector on the Due should exit over the Due's USB port - i.e. if you are looking the the Due and ATMEL reads right side up, the cable exits to the right of the board. Someone at Arduino put the tiny JTAG connector too close the the 4 pin 0.100 header and it doesn't seat fully, but it still makes good enough contact.
 
 4. Go to the `Tools/Device Programming` tab and select the SAM-ICE. Set the device to be `ATSAM3X8E`. Select `JTAG` interface and hit `Apply`. Hit `Read` to 
