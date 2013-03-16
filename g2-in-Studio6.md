@@ -40,7 +40,6 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 </pre>
 
 * You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main:
-
 <pre>
 void setup( void )
 {
