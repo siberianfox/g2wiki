@@ -27,9 +27,20 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 ..\variants
 </pre>
 
-Here's where I'm a bit stuck. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h.
+* Edit the sam.h file. The above almost worked w/o modifications. Looks like the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. I think in the Arduino IDE this is injected at compile time. If you redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88) then it compiles. Otherwise, it errs out in the first use of adc.h.
 
-You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main:
+<pre>
+/* Entire SAM3XA series 
+   Changed this define to fix compilation problems
+   Ref: http://asf.atmel.no/docs/latest/common.services.calendar.example2.stk600-rcuc3d/html/group__sam__part__macros__group.html
+   This file is found in: C:\Program Files\Atmel\Atmel Studio 6.0\extensions\Atmel\ARMGCC\3.3.1.128\ARMSupportFiles\Device\ATMEL\sam.h
+   It has been included in the project in the Extras directory
+*/
+//#define SAM3XA_SERIES (SAM3A4 || SAM3A8)
+#define SAM3XA_SERIES (SAM3X4 || SAM3X8 || SAM3A4 || SAM3A8)
+</pre>
+
+* You will also need to comment out the setup() and loop() functions in main.cpp as these are undefined, or add these functions in main or somewhere accessible to main:
 
 <pre>
 void setup( void )
@@ -54,4 +65,6 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 
 3. Plug the Olimex adapter cable into the ICE and onto the Due. The cable from the connector on the Due should exit over the Due's USB port - i.e. if you are looking the the Due and ATMEL reads right side up, the cable exits to the right of the board. Someone at Arduino put the tiny JTAG connector too close to the 4 pin 0.100 header and it doesn't seat fully, but it still makes good enough contact.
 
-4. Go to the `Tools/Device Programming` tab and select the SAM-ICE. Set the device to be `ATSAM3X8E`. Select `JTAG` interface and hit `Apply`. Hit `Read` to 
+4. Go to the `Tools/Device Programming` tab and select the SAM-ICE. Set the device to be `ATSAM3X8E`. Select `JTAG` interface and hit `Apply`. Hit `Read`. You should get a device signature back and 3.3 volts.
+
+5. Program the test code. Go to the `Memories` menu.
