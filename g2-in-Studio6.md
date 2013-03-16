@@ -43,11 +43,9 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 <pre>
 void setup( void )
 {
-	
 }
 void loop( void )
-{
-	
+{	
 }
 </pre>
 
