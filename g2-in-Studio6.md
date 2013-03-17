@@ -27,6 +27,11 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
 ..\variants
 </pre>
 
+* Add the following the C++ Miscellaneous flags
+<pre>
+-fpermissive
+</pre>
+
 * Edit the chip.h file. The above almost worked w/o modifications. But the adc.h file has no definitions for the SAM3X family, of which the SAM3X8E on the Due is a member. You must redefine the SAM3XA_SERIES to contain the SAM3X8E (sam.h, line 88). Otherwise, it errs out in the first use of adc.h. I think in the Arduino IDE this is injected at compile time. The modifications to chip.h are below.
 <pre>
 /* The following modifies the SAM3XA_SERIES #defines from the sam.h file to fix compilation problems
