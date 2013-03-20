@@ -77,5 +77,5 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 ### SAM-ICE Debugger Caveats
 I'm not used to HW debuggers as all the xmega code I did was debugged using the simulator. Some of the caveats may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid
 * The processor keeps running even when you (the debugger) are not. The cycles and stopwatch may continue to increment even if you are sitting on a breakpoint.
-* Timers still run when you are on a breakpoint. If the counter value appears to flop around at random that's because effectively it is. You won't see the cycle counter and stopwatch increment cleanly when counting out a - say - 20 microsecond delay.
+* Timers still run when you are on a breakpoint. If the counter value appears to flop around at random that's because effectively it is. You won't see the cycle counter and stopwatch increment cleanly when counting out a - say - 20 microsecond delay. If you enter an interrupt from this timer you won;t see the stopwatch tell you it took 20 uSec, it will tell you whatever it wants to, instead.
 * Write-only registers such as REG_TC1_IER0 don't display what you just wrote to them in the IO view or memory. That's because they are write only (doh).  
