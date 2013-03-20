@@ -56,6 +56,9 @@ void loop() {
 }
 </pre>
 
+### Studio 6.1 Beta
+We switched over from Studio6.0 (1996) to Studio 6.1 (2440-beta). Are we happy about his? Mostly. I've had a few cases where the SAM-ICE didn't want to go into debug mode (programming only, it says) and the .cppproj files are incompatible, making git maintenance and collaboration more complicated, but otherwise it's been OK.
+
 ## Using the Atmel SAM-ICE Debugger
 The SAM-ICE (SAM In Circuit Emulator) is only officially supported programmer/debugger for the SAM3X8E under Studio6. It's a rebranded Segger J-Link, which is really a very nice unit, and the worth the $100, easy. Supposedly there are cheaper alternatives out like clones and some others, but I haven't tested these. Her's a useful [Arduino forum post about this](http://arduino.cc/forum/index.php?topic=134907).
 
@@ -70,3 +73,9 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 4. Go to the `Tools/Device Programming` tab and select the SAM-ICE. Set the device to be `ATSAM3X8E`. Select `JTAG` interface and hit `Apply`. Hit `Read`. You should get a device signature back and 3.3 volts.
 
 5. Program the test code. Go to the `Memories` menu.
+
+### SAM-ICE Debugger Caveats
+I'm not used to HW debuggers as all the xmega code I did was debugged using the simulator. Some of this may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid
+* THe processor keeps running even when you (the debugger) are not. The cycles and stopwatch will continue to increment even if you are sitting on an breakpoint.
+* Timers still run when you are on a breakpoint. If the counter value appears to flop around at random that's because effectively it is. You won't see the cycle counter and stopwatch increment cleanly when counting out a - say - 20 microsecond delay.
+* Write-only registers such as REG_TC1_IER0 don't display what you just wrote to them in the IO view or memory. That's because they are write only (doh).  
