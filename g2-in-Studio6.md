@@ -18,7 +18,7 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
  * `system\source` from `/Arduino/hardware/arduino/sam/system/source`
  * `variants` from `/Arduino/hardware/arduino/sam/variants` The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not need all the other stuff that's in and under the source directory
 
-* Add the following paths as `Relative Paths` to both the C and C++ compiler sections
+* Add the following paths as `Relative Paths` to both the C and C++ compiler sections. This is more complicated than it needs to be. Since there is no `add` dialog You have to select an existing path, then navigate through the directory browser to the directory you want. If you are on a virtual machine it doesn't pick up your drive alias, so you have to find the actual drive in the Network Places subdirectory. I'm not sure to blame for this, but I suspect they live in Redmond.
 <pre>
 ..\arduino
 ..\system
