@@ -18,7 +18,7 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
  * `system\source` from `/Arduino/hardware/arduino/sam/system/source`
  * `variants` from `/Arduino/hardware/arduino/sam/variants` The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not need all the other stuff that's in and under the source directory
 
-* Add the following paths as `Relative Paths` to both the C and C++ compiler sections. (I was able to do this the first time through but now there appears to be no way to add a new path)
+* Add the following paths as `Relative Paths` to both the C and C++ compiler sections. _NOTE: At some point the Add Item and other dialog buttons disappeared from Visual Studio so I was not able to add these from the UI. I had to go into the .cppproj file and edit the XML directly_
 <pre>
 ..\arduino
 ..\system
