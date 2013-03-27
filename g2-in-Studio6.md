@@ -76,10 +76,9 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 5. Program the test code. Go to the `Memories` menu.
 
 ### SAM-ICE Debugger Notes and Caveats
-Notes:
+I'm not used to HW debuggers as all the tinyg xmega code was debugged using the AVR simulator. Some of the caveats may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid.
 * There's a little toolbar tab for the ICE which is the Segger native program. Nice.
-
-I'm not used to HW debuggers as all the xmega code I did was debugged using the AVR simulator. Some of the caveats may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid.
+* If you upgrade to AS6.1 the Segger firmware will need to be updated. Once you do this the ICE does not appear to work properly on 6.0 any more. AT least that was my experience.
 * The processor keeps running even when you (the debugger) are not. The cycles and stopwatch may continue to increment even if you are sitting on a breakpoint.
 * Timers still run when you are on a breakpoint. If the counter value appears to flop around at random that's because effectively it is. You won't see the cycle counter and stopwatch increment cleanly when counting out a - say - 20 microsecond delay. If you enter an interrupt from this timer you won;t see the stopwatch tell you it took 20 uSec, it will tell you whatever it wants to, instead.
 * Write-only registers such as REG_TC1_IER0 don't display what you just wrote to them in the IO view or memory. That's because they are write only (doh). 
