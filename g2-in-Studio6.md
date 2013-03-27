@@ -62,6 +62,7 @@ We switched over from Studio6.0 (1996) to Studio 6.1 (2440-beta). Are we happy a
 ## Using the Atmel SAM-ICE Debugger
 The SAM-ICE (SAM In Circuit Emulator) is only officially supported programmer/debugger for the SAM3X8E under Studio6. It's a rebranded Segger J-Link, which is really a very nice unit, and the worth the $100, easy. Supposedly there are cheaper alternatives out like clones and some others, but I haven't tested these. Her's a useful [Arduino forum post about this](http://arduino.cc/forum/index.php?topic=134907).
 
+### Installing the SAM-ICE
 FYI: I use a VMware Windows XP image under OSX, so some instructions are applicable to my setup and can be ignored if they don't apply to you.
 
 1. Get/buy a [SAM-ICE](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFaduiSLswSzKKMtBJl3sH6Dl%252bGzJZewU2eQFM%3d) and the [Olimex JTAG adapter cable](http://www.mouser.com/Search/ProductDetail.aspx?R=ARM-JTAG-20-10virtualkey63420000virtualkey909-ARM-JTAG-20-10) from Mouser or similar. If you are like me this adds a week to your project and (at least) 2 sets of shipping charges. This can be avoided. Total cost will be about $125 including shipping. 
@@ -74,8 +75,11 @@ FYI: I use a VMware Windows XP image under OSX, so some instructions are applica
 
 5. Program the test code. Go to the `Memories` menu.
 
-### SAM-ICE Debugger Caveats
-I'm not used to HW debuggers as all the xmega code I did was debugged using the simulator. Some of the caveats may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid
+### SAM-ICE Debugger Notes and Caveats
+Notes:
+* There's a little toolbar tab for the ICE which is the Segger native program. Nice.
+
+I'm not used to HW debuggers as all the xmega code I did was debugged using the AVR simulator. Some of the caveats may be germane to all HW debuggers, some only to the SAM-ICE. I wouldn't know. But each of these caused some mystery or lost time which others might be able to avoid.
 * The processor keeps running even when you (the debugger) are not. The cycles and stopwatch may continue to increment even if you are sitting on a breakpoint.
 * Timers still run when you are on a breakpoint. If the counter value appears to flop around at random that's because effectively it is. You won't see the cycle counter and stopwatch increment cleanly when counting out a - say - 20 microsecond delay. If you enter an interrupt from this timer you won;t see the stopwatch tell you it took 20 uSec, it will tell you whatever it wants to, instead.
 * Write-only registers such as REG_TC1_IER0 don't display what you just wrote to them in the IO view or memory. That's because they are write only (doh). 
