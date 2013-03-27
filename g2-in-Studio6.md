@@ -1,6 +1,8 @@
 ## Setting Up a Arduino Due Project in Studio6
 There are some [links on the web](http://omarfrancisco.com/arduino-programing-using-atmel-studio-6-0/) explaining how to import the Arduino Due libraries into Studio6. That is not what this is. The instructions here are how to set up the Arduino Due 1.5 SAM sources as part of an Atmel Studio6 project. They are compiled and part of your project - not as a library.
 
+* First ensure that your VM is adequately configured. Make sure .NET is up-to-date with Windows updates, and that you have at least 2.5 Gb RAM allocated for the VM. It's also a good idea to make sure you have at least 2 GB free on your VM's C: drive. See this [Atmel app note](http://www.atmel.com/Images/AtmelStudio-6.1.2440-beta-Readme.pdf)
+
 * Clone the Arduino github
 
 * Checkout lib-1.5 branch
