@@ -87,3 +87,6 @@ I'm not used to HW debuggers as all the tinyg xmega code was debugged using the 
 
 #### Error message "None on SAM-ICE (000028011884) does not support debugging..."
 This happens when the ICE doesn't know what device it's debugging. The "None" is the device name. [Clear as mud?](http://www.avrfreaks.net/index.php?name=PNphpBB2&file=printview&t=125017&start=0) It's as if AS6 lost it's mind. You can reset the device by clicking the Device button on the toolbar (which should actually say ATSAM3X8E - or whatever you are running) and resetting the device to be the same device.
+
+#### SAM-ICE won't debug symbolically
+[Here](https://github.com/synthetos/g2/wiki/SAM-ICE-Cannot-Debug)
