@@ -2,12 +2,150 @@ The SAM-ICE would not debug. It would go into debug mode, but it would keep runn
 
 Environment / Initial conditions:
 <pre>
-Running AtmelStudio6.1-2443-beta
+Running AtmelStudio6.1-2440-beta
 XP VMware image on OSX 10.8.2
 XP is up-to date with latest .NET and XP patches
 VM is running 2.5 Gb RAM
 Segger J-Link V4.59e(beta) Compiled 11:12:12 on Jan 14 2013
 Target is Arduino Due connected to SAM-ICE with Olimex JTAG adapter cable
+</pre>
+
+Shell manifest
+<pre>
+Atmel Studio 6 (Version: 6.1.2440 - beta)
+© 2013 Atmel Corp.
+All rights reserved.
+
+
+OS Version: Microsoft Windows NT 5.1.2600 Service Pack 3
+Platform: Win32NT
+
+
+Installed Packages: Shell VSIX manifest - 6.1
+Shell VSIX manifest
+Version: 6.1
+Package GUID: 5aa6ea3e-da7b-48c1-9b2a-cab2329d32ac
+Company: Atmel Coproration
+
+
+Installed Packages: Atmel ARM GNU Toolchain - 4.7.2.87
+ARM Toolchain
+Version: ARM_Toolchain_Version:4.7.2.87 GCC_VERSION:4.7.2
+Package GUID: D83C9208-1D2D-4665-9760-EB9EE264CF8F
+Company: Atmel
+HelpUrl: 
+Release Description: ARM Toolchain
+
+CMSIS
+Version: 3.0
+Package GUID: D83C9208-1D2D-4665-9760-EB9EE264CF8F
+Company: Atmel
+HelpUrl: 
+Release Description: ARM Support File Version
+
+
+
+Installed Packages: AVR macro Assembler - 6.1.5
+AVR Assembler
+Version: 6.1.5
+Package GUID: 03CB4AE1-80EA-40C7-B561-98CC87EA539C
+Company: Atmel
+HelpUrl: 
+Release Description: AVR Assembler For 8-Bit Devices
+
+
+
+Installed Packages: Atmel AVR (32 bit) GNU Toolchain - 3.4.2.365
+AVR Toolchain 32
+Version: AVR32_Toolchain_Version:3.4.2.365 GCC_VERSION:4.4.7
+Package GUID: DB6D383F-C5D9-4E7E-BBF9-F37C6EEB59FD
+Company: Atmel
+HelpUrl: 
+Release Description: AVR Toolchain For 32-Bit Devices
+
+
+
+Installed Packages: Atmel AVR (8 bit) GNU Toolchain - 3.4.2.876
+AVR Toolchain 8 Bit
+Version: AVR8_Toolchain_Version:3.4.2.876 GCC_VERSION:4.7.2
+Package GUID: 2C7AA7CF-94C6-463C-81DA-4AA03B613C3B
+Company: Atmel
+HelpUrl: 
+Release Description: AVR Toolchain For 8-Bit Devices
+
+
+
+Installed Packages: Atmel Gallery - 1.3
+Atmel Gallery
+Version: 1.3
+Package GUID: AtmelStudioExtensionManager
+Company: Atmel
+
+
+Installed Packages: Atmel Kits - 1.1.104
+Atmel Kits
+Version: 1.1.104
+Package GUID: bea809ab-462e-4535-99f1-3f9ced2f09ff
+Company: Atmel
+
+
+Installed Packages: Atmel Software Framework - 3.7.2.705
+ASF
+Version: 3.7.2
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.7.2
+Release Description: ASF - 3.7.2 Release
+
+ASF
+Version: 3.6.0
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.6.0
+Release Description: ASF - 3.6.0 Release
+
+ASF
+Version: 3.5.1
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.5.1
+Release Description: ASF - 3.5.1 Release
+
+ASF
+Version: 3.5.0
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.5.0
+Release Description: ASF - 3.5.0 Release
+
+ASF
+Version: 3.4.1
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.4.1
+Release Description: ASF - 3.4.1 Release
+
+ASF
+Version: 3.3.0
+Package GUID: 519cc26f-02f6-4ace-8bf7-30c1cdea1f02
+Company: Atmel
+HelpUrl: http://asf.atmel.com/3.3.0
+Release Description: ASF - 3.3.0 Release
+
+
+
+Installed Packages: AtmelToolchainProvider - 6.1.0.0
+AtmelToolchainProvider
+Version: 6.1.0.0
+Package GUID: AtmelToolchainProvider.Atmel.83804b14-6626-4e13-bfdc-3a0135fa98f1
+Company: Atmel
+
+
+Installed Packages: Visual Assist X for Atmel Studio - 10.7.1920.0
+Visual Assist X for Atmel Studio
+Version: 10.7.1920.0
+Package GUID: 7997A33C-B154-4b75-B2AC658CD58C9510
+Company: Whole Tomato Software
 </pre>
 
 In Output window:
