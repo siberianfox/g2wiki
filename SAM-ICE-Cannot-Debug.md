@@ -10,7 +10,7 @@ Segger J-Link V4.59e(beta) Compiled 11:12:12 on Jan 14 2013
 Target is Arduino Due connected to SAM-ICE with Olimex JTAG adapter cable
 </pre>
 
-Shell manifest
+Shell VSIX Manifest
 <pre>
 Atmel Studio 6 (Version: 6.1.2440 - beta)
 © 2013 Atmel Corp.
