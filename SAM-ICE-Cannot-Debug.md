@@ -10,7 +10,7 @@ XP VMware image on OSX 10.8.2
 XP is up-to date with latest .NET and XP patches
 VM is running 2.5 Gb RAM
 Segger J-Link V4.59e(beta) Compiled 11:12:12 on Jan 14 2013
-I don't know what firmware it's running as I can't find this anywhere. I upgraded it from the dialog box when I moved to Studio 6.1
+I don't know what firmware version as I can't find this anywhere. I upgraded it from the dialog box when I moved to Studio 6.1
 Target is Arduino Due connected to SAM-ICE with Olimex JTAG adapter cable
 </pre>
 
