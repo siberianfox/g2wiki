@@ -11,7 +11,7 @@ Segger J-Link V4.59e(beta) Compiled 11:12:12 on Jan 14 2013
 Target is Arduino Due connected to SAM-ICE with Olimex JTAG adapter cable
 </pre>
 
-It might also be relevant to mention that on this machine I have never seen the Add Item, Delete Item, Edit Item, Move Up, Move Down dialog buttons in the Include directories dialogs for project setup. I believe I have seen these on my other development machine. This is a problem as I can't use the dialogs to set up or modify the include directories in the project.
+It might also be relevant to mention that on this machine I have never seen the Add Item, Delete Item, Edit Item, Move Up, Move Down dialog buttons in the Include directories dialogs for project setup. I believe I have seen these on my other development machine. This is a problem as I can't use the dialogs to set up or modify the include directories in the project. I should probably open another ticket for this issue.
 
 So I had to edit the cppproj XML directly to add the directories I needed. I don't know if this is relevant to the ICE problem. You can see what the makefile has by looking at the make output later on this page, or looking at the makefile [here](https://github.com/synthetos/g2/blob/master/TinyG3/Debug/Makefile).
 
