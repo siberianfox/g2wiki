@@ -306,3 +306,27 @@ Build succeeded.
 ========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========
 </pre>
 
+Ran debug and stop again. Same problem. No break. Output/build is:
+<pre>
+------ Build started: Project: TinyG3, Configuration: Debug ARM ------
+Build started.
+Project "TinyG3.cppproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files\Atmel\Atmel Studio 6.1\Vs\Compiler.targets" from project "Z:\Alden\Projects\proj64_ArduinoDue\g2\TinyG3\TinyG3.cppproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		C:\Program Files\Atmel\Atmel Studio 6.1\shellUtils\make.exe all 
+		make: Nothing to be done for `all'.
+	Done executing task "RunCompilerTask".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	38368 bytes   7.3 % Full
+				Data Memory Usage 		:	10144 bytes   10.3 % Full
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "TinyG3.cppproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files\Atmel\Atmel Studio 6.1\Vs\Avr.common.targets" from project "Z:\Alden\Projects\proj64_ArduinoDue\g2\TinyG3\TinyG3.cppproj" (entry point):
+Done building target "Build" in project "TinyG3.cppproj".
+Done building project "TinyG3.cppproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+</pre>
