@@ -1,8 +1,8 @@
 The SAM-ICE would not debug. It would go into debug mode, but it would keep running without stopping on the breakpoint. When stopped it was on an assembly instruction. Here's a sequence of events:
 
 ## Environment / Initial conditions
-<pre>
 Project is this one, see [g2 repository, master branch](https://github.com/synthetos/g2)
+<pre>
 Running AtmelStudio6.1-2440-beta
 XP VMware image on OSX 10.8.2
 XP is up-to date with latest .NET and XP patches
