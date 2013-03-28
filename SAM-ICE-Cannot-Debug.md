@@ -1,4 +1,4 @@
-**Please let me know if there's anything else you need form my machine and I'll either post it here or in the project repository**
+**Please let me know if there's anything else you need from my machine and I'll either post it here or in the project repository**
 
 The SAM-ICE would not debug. It would go into debug mode, but it would keep running without stopping on the breakpoint. When stopped it was on an assembly instruction. Here's a sequence of events:
 
