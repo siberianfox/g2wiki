@@ -6,6 +6,8 @@ Running AtmelStudio6.1-2443-beta
 XP VMware image on OSX 10.8.2
 XP is up-to date with latest .NET and XP patches
 VM is running 2.5 Gb RAM
+Segger J-Link V4.59e(beta) Compiled 11:12:12 on Jan 14 2013
+Target is Arduino Due connected to SAM-ICE with Olimex JTAG adapter cable
 </pre>
 
 In Output window:
@@ -329,4 +331,15 @@ Done building project "TinyG3.cppproj".
 
 Build succeeded.
 ========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+</pre>
+
+Output / backend agent:
+<pre>
+10 30 17 521: sgr Could not read hardware status!
+10 30 17 521: bp Error clearing breakpoint at address 0x80382
+10 30 17 536: bp Error clearing breakpoint at address 0x82a5a
+10 30 40 925:  Invalid context 1576_bp_00000000,
+10 30 40 940:  Invalid context 1576_bp_00000001,
+10 35 05 036:  Invalid context 1576_bp_00000002,
+10 37 17 189:  Invalid context 1576_bp_00000003,
 </pre>
