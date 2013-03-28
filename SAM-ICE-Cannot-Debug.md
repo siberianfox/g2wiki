@@ -15,6 +15,8 @@ It might also be relevant to mention that on this machine I have never seen the 
 
 So I had to edit the cppproj XML directly to add the directories I needed. I don't know if this is relevant to the ICE problem. You can see what the makefile has by looking at the make output later on this page, or looking at the makefile [here](https://github.com/synthetos/g2/blob/master/TinyG3/Debug/Makefile).
 
+I should also mention that this worked last night, but this morning after I recompiled it stopped working.
+
 Shell VSIX Manifest
 <pre>
 Atmel Studio 6 (Version: 6.1.2440 - beta)
