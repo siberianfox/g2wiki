@@ -1,6 +1,6 @@
 The SAM-ICE would not debug. It would go into debug mode, but it would keep running without stopping on the breakpoint. When stopped it was on an assembly instruction. Here's a sequence of events:
 
-Environment / Initial conditions:
+## Environment / Initial conditions
 <pre>
 Running AtmelStudio6.1-2440-beta
 XP VMware image on OSX 10.8.2
@@ -148,7 +148,8 @@ Package GUID: 7997A33C-B154-4b75-B2AC658CD58C9510
 Company: Whole Tomato Software
 </pre>
 
-In Output window:
+##Problem Log
+Ran the debugger. It failed to break. Captured from Output window:
 <pre>
 06:30:40: [ERROR] Invalid context 1576_bp_00000000,, ModuleName: TCF (TCF command: Breakpoints:getProperties failed.)
 06:30:40: [ERROR] Invalid context 1576_bp_00000001,, ModuleName: TCF (TCF command: Breakpoints:getProperties failed.)
@@ -159,7 +160,7 @@ In Call Stack window (after the next attempt)
 TinyG3.elf! no-debug-info
 </pre>
 
-Output / build window. Populated by the build iinvoked from Debug button:
+Output / build window. Populated by the build invoked from Debug button:
 <pre>
 ------ Build started: Project: TinyG3, Configuration: Debug ARM ------
 Build started.
