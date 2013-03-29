@@ -6,7 +6,9 @@ The SAM-ICE would not debug. It would go into debug mode, but it would keep runn
 I have since taken the following steps:
 * Tested the same sequence on a different machine. The same failures occur. This leads me to suspect the ICE itself, or the ICE firmware that was loaded during the conversion to Studio6.1. Since that firmware upgrade the ICE no longer works in my Studio6.0-1996 environment
 
-* I wiped all Studio5 and Studio6 sources from the second machine and reinstalled a virgin 6.1-2440. The problem of the disappearing edit buttons in the include directory settings has been fixed, but the ICE still fails synbolic debugging with the message `!TinyG.elf no symbols found`
+* I wiped all Studio5 and Studio6 sources from the second machine and reinstalled a virgin 6.1-2440. The problem of the disappearing edit buttons in the include directory settings has been fixed, but the ICE still fails symbolic debugging with the message `TinyG.elf! no-debug-info`
+
+# Problem Description
 
 ## Environment / Initial conditions
 Project is this one, see [g2 repository, master branch](https://github.com/synthetos/g2)
