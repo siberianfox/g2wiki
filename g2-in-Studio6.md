@@ -19,10 +19,13 @@ There are some [links on the web](http://omarfrancisco.com/arduino-programing-us
  * `system\include` from `/Arduino/hardware/arduino/sam/system/include` 
  * `system\source` from `/Arduino/hardware/arduino/sam/system/source`
  * `variants` from `/Arduino/hardware/arduino/sam/variants` The variants dir only needs variant.h, variant.cpp, pins_arduino.h.  It does not need all the other stuff that's in and under the source directory
+ * `motate` - create the directory - copy motate sources or leave this empty for now
 
 * Add the following paths as `Relative Paths` to both the C and C++ compiler sections. _NOTE: At some point the Add Item and other dialog buttons disappeared from Visual Studio so I was not able to add these from the UI. I had to go into the .cppproj file and edit the XML directly_
 <pre>
 ..\arduino
+..\motate
+..\cmsis
 ..\system
 ..\system\include
 ..\system\source
