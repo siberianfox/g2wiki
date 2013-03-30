@@ -13,9 +13,9 @@ The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked O
 
 * Start a `New Project`
  * Select `C++ Executable` project
- * Name `g2`
+ * Name `TinyG2`
  * Directory - browse to main project directory. Be aware that AS6 doesn;t know what you called your VMware attached drive so you have to find in `My Network Places \ Shared Folders on vm-ware`. How very Redmond.
- * Solution Name `TinyG2` - this label is mis-named. It's actually the project name, not the solution name. The solution name is g2
- * Check `Create Directory for Project`
+ * Solution Name `g2`
+ * Check `Create Directory for Project`. If you want to change the directory structure you can move things around and go edit the tinyg.atsln file so it can find the project sub-directory (relative path name).
 
 * Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
