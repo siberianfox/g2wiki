@@ -19,4 +19,6 @@ The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked O
  * Check `Create Directory for Project`. If you want to change the directory structure you can move things around and go edit the tinyg.atsln file so it can find the project sub-directory (relative path name).
  * Select the chip you want. THe Arduino Due is a ATSAM3X8E
 
+* Populate the project directories. At this point you have a choice. Visual Studio does nto have a way to import an entire existing directory in a single operation. So you can laboriously add every directory, move the files in, then select the file as existing items ... all the way down the hierarchy, or you can edit the cppproj file XML directly.
+
 * Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
