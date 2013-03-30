@@ -4,9 +4,17 @@ The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked O
 
 * Buy a [SAM-ICE (Segger Jlink) and adapter cable](https://github.com/synthetos/g2/wiki/g2-in-Studio6#installing-the-sam-ice)
 
+* Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
+
 * Do a minimal install of AtmelStudio6.0 build 1996 dotnet `as6installer-6.0.1996-net.exe`
  * Select the standard install locations
  * Fire it up
  * You don't need the Atmel Gallery
 
-* Port in the entiure CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
+* Start a `New Project`
+ * Select `C++ Executable` project
+ * Name `g2`
+ * Directory - main project directory
+ * Solution Name `TinyG2` - this label is mis-named. It's actually the project name, not the solution name. The solution name is g2
+
+* Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
