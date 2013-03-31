@@ -66,7 +66,6 @@ Target "CoreRebuild" in file "C:\Program Files\Atmel\Atmel Studio 6.0\Vs\Compile
 	Done executing task "RunCompilerTask" -- FAILED.
 Done building target "CoreRebuild" in project "TinyG2.cppproj" -- FAILED.
 Done building project "TinyG2.cppproj" -- FAILED.
-
-Build FAILED.
-========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
+ Build FAILED.
+ ========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
 </pre>
