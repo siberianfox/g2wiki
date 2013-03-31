@@ -24,6 +24,41 @@ SAM-ICE #1 ATMEL SAM-ICE V8.0, SN=28011884 - has been updated by Studio 6.1 to s
 SAM-ICE #2 ATMEL SAM-ICE V8.0, SN=28014099 - has been updated by Studio 6.0 to some flash level I cannot find
 </pre>
 
+* Jlink.config
+<pre>
+[BREAKPOINTS]
+ShowInfoWin = 1
+EnableFlashBP = 2
+BPDuringExecution = 0
+[CFI]
+CFISize = 0x00
+CFIAddr = 0x00
+[CPU]
+OverrideMemMap = 0
+AllowSimulation = 1
+ScriptFile=""
+[FLASH]
+MinNumBytesFlashDL = 0
+SkipProgOnCRCMatch = 1
+VerifyDownload = 1
+AllowCaching = 1
+EnableFlashDL = 2
+Override = 0
+Device="UNSPECIFIED"
+[GENERAL]
+WorkRAMSize = 0x00
+WorkRAMAddr = 0x00
+[SWO]
+SWOLogFile=""
+[MEM]
+RdOverrideOrMask = 0x00
+RdOverrideAndMask = 0xFFFFFFFF
+RdOverrideAddr = 0xFFFFFFFF
+WrOverrideOrMask = 0x00
+WrOverrideAndMask = 0xFFFFFFFF
+WrOverrideAddr = 0xFFFFFFFF
+</pre>
+
 **UPDATE 3/29**
 I have since taken the following steps:
 * Tested the same sequence on a different machine. The same failures occur. This leads me to suspect the ICE itself, or the ICE firmware that was loaded during the conversion to Studio6.1. Since that firmware upgrade the ICE no longer works in my Studio6.0-1996 environment
