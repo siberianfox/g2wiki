@@ -18,7 +18,7 @@ Added HW as a hello world test for ICE debugging
 https://github.com/synthetos/g2/commit/df363705239cafb7c06015f5774caa0bfefb0496
 </pre>
 
-* Verified operation of above build with Original SAM-ICE. Same behaviors. Details:
+* Verified operation of above build with Original SAM-ICE. Both units have identical behaviors. Details:
 <pre>
 SAM-ICE #1 ATMEL SAM-ICE V8.0, SN=28011884 - has been updated by Studio 6.1 to some flash level I cannot find
 SAM-ICE #2 ATMEL SAM-ICE V8.0, SN=28014099 - has been updated by Studio 6.0 to some flash level I cannot find
