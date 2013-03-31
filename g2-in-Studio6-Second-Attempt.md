@@ -33,10 +33,42 @@ Arduino/hardware/arduino/sam/system/libsam/source
 </pre>
 * Added the following lines to chip.h in the libsam dir
 <pre>
+/**** All fixes needed for this to compile are concentrated here ***/
 
+/* The following modifies the SAM3XA_SERIES #define from the sam.h file to fix compilation problems in adc.h
+   Ref: http://asf.atmel.no/docs/latest/common.services.calendar.example2.stk600-rcuc3d/html/group__sam__part__macros__group.html
+*/
+//#define SAM3XA_SERIES (SAM3A4 || SAM3A8)	// original define in sam.h file
+#undef SAM3XA_SERIES
+#define SAM3XA_SERIES (SAM3X4 || SAM3X8 || SAM3A4 || SAM3A8)
+
+#define USB_PID USB_PID_DUE
+
+/**** TO HERE ****/
 </pre>
 * Added back these Studio6 auto-generated dirs:
 <pre>
 CMSIS/linker_scripts
 CMSIS/src
+</pre>
+
+* Added Rob's Makefile and set the TinyG2 project to use it. But here's what I got:
+<pre>
+------ Rebuild All started: Project: TinyG2, Configuration: Debug ARM ------
+Build started.
+Project "TinyG2.cppproj" (ReBuild target(s)):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreRebuild" in file "C:\Program Files\Atmel\Atmel Studio 6.0\Vs\Compiler.targets" from project "Z:\Alden\Projects\proj64_ArduinoDue\g2\TinyG2\TinyG2.cppproj" (target "ReBuild" depends on it):
+	Task "RunCompilerTask"
+		C:\Program Files\Atmel\Atmel Studio 6.0\make\make.exe -C "Z:\Alden\Projects\proj64_ArduinoDue\g2\TinyG2" -f "Makefile" clean all 
+		make: Entering directory `Z:/Alden/Projects/proj64_ArduinoDue/g2/TinyG2'
+		rm -fR build/SAM3X8E bin/SAM3X8E
+		make: Leaving directory `Z:/Alden/Projects/proj64_ArduinoDue/g2/TinyG2'
+		make: *** No rule to make target `bin/SAM3X8E', needed by `all'.  Stop.
+	Done executing task "RunCompilerTask" -- FAILED.
+Done building target "CoreRebuild" in project "TinyG2.cppproj" -- FAILED.
+Done building project "TinyG2.cppproj" -- FAILED.
+
+Build FAILED.
+========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
 </pre>
