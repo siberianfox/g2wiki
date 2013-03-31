@@ -59,6 +59,8 @@ WrOverrideAndMask = 0xFFFFFFFF
 WrOverrideAddr = 0xFFFFFFFF
 </pre>
 
+* The entire project now appears to be debugging reliably - except for the lack of profile information in the Cycle Counter / Frequency / Stop Watch section. CoUld it be that the Frequency is not set? In the past this was set yo 1.0 MHz and could be updated from the Processor window. In this case it's zero and cannot be updated.
+
 **UPDATE 3/29**
 I have since taken the following steps:
 * Tested the same sequence on a different machine. The same failures occur. This leads me to suspect the ICE itself, or the ICE firmware that was loaded during the conversion to Studio6.1. Since that firmware upgrade the ICE no longer works in my Studio6.0-1996 environment
