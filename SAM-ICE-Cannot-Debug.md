@@ -1,6 +1,6 @@
 **Please let me know if there's anything else you need from my machine and I'll either post it here or in the project repository**
 
-The SAM-ICE would not debug. It would go into debug mode, but it would keep running without stopping on the breakpoint. When stopped it was on an assembly instruction. Here's a sequence of events:
+The SAM-ICE would not debug. It would go into debug mode, but it would keep running without stopping on the breakpoint. When stopped it was on an assembly instruction. Here's is the [original sequence of events](), with updates below:
 
 **UPDATE 3/31**
 * Wiped all environments and started with a virgin Studio6.0-1996 and a fresh SAM-ICE. The SAM-ICE updated when I first used it, but now I should be entirely on production 6.0 code. 
