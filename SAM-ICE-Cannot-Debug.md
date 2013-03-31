@@ -17,6 +17,12 @@ Added HW as a hello world test for ICE debugging
 https://github.com/synthetos/g2/commit/df363705239cafb7c06015f5774caa0bfefb0496
 </pre>
 
+* Verified operation of above build with Original SAM-ICE. Same behaviors. Details:
+<pre>
+SAM-ICE #1 ATMEL SAM-ICE V8.0, SN=28011884 - has been updated by Studio 6.1 to some flash level I cannot find
+SAM-ICE #2 ATMEL SAM-ICE V8.0, SN=28014099 - has been updated by Studio 6.0 to some flash level I cannot find
+</pre>
+
 **UPDATE 3/29**
 I have since taken the following steps:
 * Tested the same sequence on a different machine. The same failures occur. This leads me to suspect the ICE itself, or the ICE firmware that was loaded during the conversion to Studio6.1. Since that firmware upgrade the ICE no longer works in my Studio6.0-1996 environment
