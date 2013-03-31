@@ -5,11 +5,11 @@ The SAM-ICE would not debug. It would go into debug mode, but it would keep runn
 **UPDATE 3/31**
 * Wiped all environments and started with a virgin Studio6.0-1996 and a fresh SAM-ICE. The SAM-ICE updated when I first used it, but now I should be entirely on production 6.0 code. 
 
-* Initially I was able to get the TinyG2 project to debug symbolically with source code displays, single step, and breakpoints. THe Cycle Counter and associated functions (stopwatch) were not working.
+* Initially I was able to get the TinyG2 project to debug symbolically with source code displays, single step, and breakpoints. The Cycle Counter displays and associated functions (stopwatch) were not working.
 
 * After making changes to the project symbolic debugging stopped working again.
 
-* I have brought up a new project called HW (hellow world) for test purposes. I has functioanl debugging (albeit without Cycle Counter, as above) for the following cases:
+* I have brought up a new project called HW (hello world) for test purposes. Symbolic debugging is functional (albeit without Cycle Counter, as above) for the following cases:
  * Virgin AS6 project for ATSAM3X8E
  * Added Arduino sources from Arduino github. This project is here:
 <pre>
