@@ -31,3 +31,12 @@ The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked O
 Arduino/hardware/arduino/sam/system/libsam/include
 Arduino/hardware/arduino/sam/system/libsam/source
 </pre>
+* Added the following lines to chip.h in the libsam dir
+<pre>
+
+</pre>
+* Added back these Studio6 auto-generated dirs:
+<pre>
+CMSIS/linker_scripts
+CMSIS/src
+</pre>
