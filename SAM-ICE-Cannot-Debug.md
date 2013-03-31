@@ -61,6 +61,8 @@ WrOverrideAddr = 0xFFFFFFFF
 
 * The entire project now appears to be debugging reliably - except for the lack of profile information in the Cycle Counter / Frequency / Stop Watch section. CoUld it be that the Frequency is not set? In the past this was set yo 1.0 MHz and could be updated from the Processor window. In this case it's zero and cannot be updated.
 
+* Tried updating the Segger Jlink DLL. No change in behavior. Segger site supports download of a windows install package that generates a JLinkARM.dll that can be installed in `Atmel Studio 6.0\avrdbg` directory. Current revsion is 4.66 up from 4.56a distributed with Studio6.0.
+
 **UPDATE 3/29**
 I have since taken the following steps:
 * Tested the same sequence on a different machine. The same failures occur. This leads me to suspect the ICE itself, or the ICE firmware that was loaded during the conversion to Studio6.1. Since that firmware upgrade the ICE no longer works in my Studio6.0-1996 environment
