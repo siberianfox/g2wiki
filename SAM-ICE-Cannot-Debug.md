@@ -6,6 +6,7 @@ The SAM-ICE would not debug. It would go into debug mode, but it would keep runn
 * Wiped all environments and started with a virgin Studio6.0-1996 and a fresh SAM-ICE. The SAM-ICE updated when I first used it, but now I should be entirely on production 6.0 code. 
 
 * Initially I was able to get the TinyG2 project to debug symbolically with source code displays, single step, and breakpoints. The Cycle Counter displays and associated functions (stopwatch) were not working.
+ * Cycle Counter, Frequency, and Stop Watch items in Processor window are greyed out and inaccessible
 
 * After making changes to the project symbolic debugging stopped working again.
 
