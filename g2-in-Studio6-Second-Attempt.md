@@ -31,6 +31,7 @@ You can rename a project by:
 * deleting the .atsuo file
 * changing the name of the OLD.atsln and OLD.cppproj files
 * editing the NEW.atsln file with a text editor (not VisualStudio) to agree with the new name
+* I did not change the GUIDs but this seems not to have mattered
 
 ## Notes for Rob Regarding new g2 Project Structure
 _Some of this is already outdated_
