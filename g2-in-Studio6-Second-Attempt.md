@@ -24,7 +24,16 @@ The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked O
 
 * Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
 
+## Useful Facts about Studio 6.0
+
+#### Renaming A Project
+You can rename a project by:
+* deleting the .atsuo file
+* changing the name of the OLD.atsln and OLD.cppprof files
+* editing the NEW.atsln file with a text editor (not VisualStudio) to agree with the new name
+
 ## Notes for Rob Regarding new g2 Project Structure
+Some of this is already outdated
 * Started with the giseburt/g2 fork from 3/29/13
 * Replaced the contents of the libsam directory with the libsam from Arduino 1.5.x-cores branch - these dirs:
 <pre>
