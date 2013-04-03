@@ -5,7 +5,7 @@ You will need:
 * 6 [Female-to-Female jumper wires](http://www.adafruit.com/products/266)
 * Two [Small pin clips](http://www.adafruit.com/products/401) (IC Hooks)
 
-*BNote:* I am using [Occidentalis v0.2](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro) from [Adafruit](http://www.adafruit.com/). You should be able to install it fresh, follow the instructions to complete the setup, and then make sure ssh is turned on.
+*Note:* I am using [Occidentalis v0.2](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro) from [Adafruit](http://www.adafruit.com/). You should be able to install it fresh, follow the instructions to complete the setup, and then make sure ssh is turned on.
 
 We are using a recent version of [OpenOCD](http://openocd.sourceforge.net/) that has gpio-bitbang capabilities. This has been added since their latest release (v0.6.1 as I write this), and the openocd package that apt-get will give you is even older (v0.5.x). This means we have to compile it from the source, but don't worry. I've figured out the steps.
 
@@ -59,8 +59,9 @@ sudo wget https://gist.github.com/giseburt/e832ed40e3c77fcf7533/raw/e8c71233970e
 
 ##Wiring it up:
 
-TODO
-Cheap version: Using [this schematic of the Arduino Due](http://arduino.cc/en/uploads/Main/arduino-Due-schematic.pdf) and [this reference image](http://learn.adafruit.com/assets/3059) of the [Pi's GPIO pins](http://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/the-gpio-connector), you'll connect these connections:
+_TODO: Add images, cleanup description._
+
+Using [this schematic of the Arduino Due](http://arduino.cc/en/uploads/Main/arduino-Due-schematic.pdf) and [this reference image](http://learn.adafruit.com/assets/3059) of the [Pi's GPIO pins](http://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/the-gpio-connector), you'll connect these pins from the Due to the Pi (ideally with the power off -- you've been warned):
 
 | Due | Pi |
 |:----|---:|
@@ -71,11 +72,11 @@ Cheap version: Using [this schematic of the Arduino Due](http://arduino.cc/en/up
 | MASTER-RESET _(Debug header, closest to the reset button)_ |  7 |
 | GND _(Debug header)_ |  GND |
 
-The JTAG header on the Due is the really small 5x2 pin header on the corner near the Reset button. Note that on the Due schematic, there's a small notched corner on the JTAG header symbol, that's matched by a dot on the silkscreen of the actual Due. You'l use the clips to connect to only two of those connections.
+The JTAG header on the Due is the really small 5x2 pin header on the corner near the Reset button. Note that on the Due schematic, there's a small notched corner on the JTAG header symbol. That's matched by a dot on the silkscreen near a corner of the JTAG header of the actual Due. You'l use the clips to connect to two of those small pins.
 
-The Debug header is the 0.1" male header right next to the JTAG header. You'll use F-F header  to connect to all four of those connections.
+The Debug header is the 0.1" male header right next to the JTAG header. You'll use F-F headers to connect to all four of those connections.
 
-You'll also need to power the Due separately from the Pi, or you'll get resets on the Pi.
+You'll also need to power the Due separately from the Pi, or you'll get random resets on the Pi.
 
 ##Running it:
 
@@ -174,3 +175,5 @@ Now you have debugger control of the Due, from your computer, through the Pi.
 `n` -- next line -- single line step _into_ subroutines.
 
 See the [gdb quick reference](http://refcards.com/docs/peschr/gdb/gdb-refcard-a4.pdf) for more commands. Google is your friend as well.
+
+I was even able to run it with the Pi connected to the network via WiFi.
