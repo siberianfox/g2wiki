@@ -11,15 +11,15 @@ We are using a recent version of [OpenOCD](http://openocd.sourceforge.net/) that
 
 First, get the dependencies, and then grab the code:
 
-`bash
+```bash
 sudo apt-get update
 sudo apt-get install -y autoconf libtool libftdi-dev
 git clone --recursive git://git.code.sf.net/p/openocd/code openocd-git && cd openocd-git
-`
+````
 
 This is the compiling as one massive command, copy and paste it in, and let it run. It'll take a while.
 
-`bash
+```bash
 {
 ./bootstrap &&\
 ./configure --enable-sysfsgpio\
@@ -44,18 +44,18 @@ This is the compiling as one massive command, copy and paste it in, and let it r
 &&\
 make
 } > openocd_build.log 2>&1
-`
+```
 
 *Note:* You might get an error about not having makeinfo. It's not a problem.
 
 Now, to actually install OpenOCD (You'll probably be asked for your password for any command that starts with `sudo`):
 
-`bash
+```bash
 sudo make install
 sudo cp -r tcl/ /usr/share/openocd
 cd /usr/share/openocd/board
 sudo wget https://gist.github.com/giseburt/e832ed40e3c77fcf7533/raw/e8c71233970e4d42eed7c3bf4b13390cdcf2a1fd/raspberrypi-due.tcl
-`
+```
 
 ##Wiring it up:
 
@@ -75,12 +75,12 @@ Cheap version: Using [this schematic of the Arduino Due](http://arduino.cc/en/up
 
 Test that it connects properly:
 
-`bash
+```bash
 sudo openocd -s /usr/share/openocd -f board/raspberrypi-due.tcl
-`
+```
 
 You should get something that looks like this:
-`text
+```text
 pi@raspberrypi:~$ sudo openocd -s /usr/share/openocd -f board/raspberrypi-due.tcl
 Open On-Chip Debugger 0.7.0-dev-00217-g74db7f9 (2013-04-03-02:00)
 Licensed under GNU GPL v2
@@ -97,4 +97,4 @@ Info : SysfsGPIO JTAG bitbang driver
 Info : This adapter doesn't support configurable speed
 1Info : JTAG tap: sam3.cpu tap/device found: 0x4ba00477 (mfg: 0x23b, part: 0xba00, ver: 0x4)
 Info : sam3.cpu: hardware has 6 breakpoints, 4 watchpoints
-`
+```
