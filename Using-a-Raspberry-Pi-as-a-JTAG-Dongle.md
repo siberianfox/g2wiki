@@ -116,7 +116,7 @@ Turn on "Show verbose output during: [X] Debugging" in the Arduino preferences, 
 You should see a line similar (on OS X) to this one, near the end of the listing in the Arduino console (lines broken for readability):
 
 ```bash
-/Applications/Arduino/build/macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-objcopy -O binary
+/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-objcopy -O binary
 /var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf
 /var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.bin
 ```
@@ -125,12 +125,10 @@ Copy the part that starts with `/` and ends with `arm-none-eabi-objcopy` and rep
 
 Now, copy the part that starts with `/` and ends with `.elf` and paste it at the end of the gdb command.
 
-You should get something like this:
+You should get something like this (except you won't have `[...]` -- I put those there because the command get really long):
 
-```bash
-/Applications/Arduino/build/macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-gdb /var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf
-```
 ```text
+/Applications/Arduino.app/[...]/bin/arm-none-eabi-gdb /var/[...]/DebugTest.cpp.elf
 GNU gdb (GDB) 7.0.50.20100218-cvs
 Copyright (C) 2010 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -140,6 +138,39 @@ and "show warranty" for details.
 This GDB was configured as "--host=i386-apple-darwin10.3.0 --target=arm-none-eabi".
 For bug reporting instructions, please see:
 <http://www.gnu.org/software/gdb/bugs/>...
-Reading symbols from /private/var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf...done.
+Reading symbols from /private/var/[...]/DebugTest.cpp.elf...done.
 (gdb) 
 ```
+
+Now, you need the IP or DNS address of the Pi. On my local network, it's address is `raspberrypi` -- replace that as you see it below as needed.
+
+( SIDE NOTE:
+Making ssh keys are beyond the scope of this, but here's the command I used to send the keys to the Pi (whose) so that I won't have to enter my password anymore:
+`cat ~/.ssh/id_rsa.pub | ssh pi@raspberrypi -C "mkdir .ssh; cat - >> ~/.ssh/authorized_keys"`
+)
+
+Now, at the `(gdb)` prompt, enter `target extended-remote raspberrypi:3333`, and it should look like this:
+
+```
+(gdb) target extended-remote raspberrypi:3333
+Remote debugging using raspberrypi:3333
+0x00080170 in Reset_Handler ()
+(gdb) 
+```
+
+Now you have debugger control of the Due, from your computer, through the Pi.
+
+## A few commands
+
+`quit` -- exits the debugger. (You'll still need to hit Ctrol-C on the Pi to stop the OpenOCD that's running)
+`monitor reset halt` -- restarts the Due and stops it before running
+`run` -- almost the same, starts he Due from reset-state (I believe this may not wipe RAM or registers properly)
+`load` -- upload the hex file. (Will also cause gdb to rescan it for changes.) _You can recompile in the Arduino, and upload right over the debug connection._
+`file <filename.elf>` -- loads another `.elf` file into gdb. Use `load` to upload it.
+`^c` -- type Control-C to stop the sketch running and drop into the debugger.
+`break <function|filename:line>` -- see the gdb command reference. Note: gdb doesn't know about the .ino file, and so it's difficult to see code that's in the sketch. This is a problem I'm yet to overcome properly.
+`c` -- short for continue. Resumes running after a break.
+`s` -- single-line step, over subroutines.
+`n` -- next line -- single line step _into_ subroutines.
+
+See the [gdb quick reference](http://refcards.com/docs/peschr/gdb/gdb-refcard-a4.pdf) for more commands. Google is your friend as well.
