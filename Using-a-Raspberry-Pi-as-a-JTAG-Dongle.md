@@ -15,7 +15,7 @@ First, get the dependencies, and then grab the code:
 sudo apt-get update
 sudo apt-get install -y autoconf libtool libftdi-dev
 git clone --recursive git://git.code.sf.net/p/openocd/code openocd-git && cd openocd-git
-````
+```
 
 This is the compiling as one massive command, copy and paste it in, and let it run. It'll take a while.
 
@@ -62,14 +62,20 @@ sudo wget https://gist.github.com/giseburt/e832ed40e3c77fcf7533/raw/e8c71233970e
 TODO
 Cheap version: Using [this schematic of the Arduino Due](http://arduino.cc/en/uploads/Main/arduino-Due-schematic.pdf) and [this reference image](http://learn.adafruit.com/assets/3059) of the [Pi's GPIO pins](http://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/the-gpio-connector), you'll connect these connections:
 
-|Due|Pi|
-========
-|tck|11|
-|tms|25|
-|tdi|10|
-|tdi|9|
-|trst|7|
+| Due | Pi |
+|:----|---:|
+| JTAG_TCK _(Debug header)_ | 11 |
+| JTAG_TMS _(Debug header)_ | 25 |
+| JTAG_TDI _(JTAG header, with clip)_ | 10 |
+| JTAG_TDO _(JTAG header, with clip)_ |  9 |
+| MASTER-RESET _(Debug header, closest to the reset button)_ |  7 |
+| GND _(Debug header)_ |  GND |
 
+The JTAG header on the Due is the really small 5x2 pin header on the corner near the Reset button. Note that on the Due schematic, there's a small notched corner on the JTAG header symbol, that's matched by a dot on the silkscreen of the actual Due. You'l use the clips to connect to only two of those connections.
+
+The Debug header is the 0.1" male header right next to the JTAG header. You'll use F-F header  to connect to all four of those connections.
+
+You'll also need to power the Due separately from the Pi, or you'll get resets on the Pi.
 
 ##Running it:
 
@@ -97,4 +103,43 @@ Info : SysfsGPIO JTAG bitbang driver
 Info : This adapter doesn't support configurable speed
 1Info : JTAG tap: sam3.cpu tap/device found: 0x4ba00477 (mfg: 0x23b, part: 0xba00, ver: 0x4)
 Info : sam3.cpu: hardware has 6 breakpoints, 4 watchpoints
+```
+
+Now, on you dekstop computer you can run gdb, but it *has to be the arm gdb*. I'm using [Yatargo](http://www.yagarto.de/) on OS X. You can also dig around in the Arduino distribution and find it.
+
+## Debugging an Arduino sketch
+
+Maks sure you can program the Due from the Arduino environment normally.
+
+Turn on "Show verbose output during: [X] Debugging" in the Arduino preferences, and then compile your sketch.
+
+You should see a line similar (on OS X) to this one, near the end of the listing in the Arduino console (lines broken for readability):
+
+```bash
+/Applications/Arduino/build/macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-objcopy -O binary
+/var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf
+/var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.bin
+```
+
+Copy the part that starts with `/` and ends with `arm-none-eabi-objcopy` and replace the `objcopy` with `gdb` to make the gdb command. (Add `.exe`  and flip the slashes as needed for windows.) Paste that into a command line, and add a space.
+
+Now, copy the part that starts with `/` and ends with `.elf` and paste it at the end of the gdb command.
+
+You should get something like this:
+
+```bash
+/Applications/Arduino/build/macosx/work/Arduino.app/Contents/Resources/Java/hardware/tools/g++_arm_none_eabi/bin/arm-none-eabi-gdb /var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf
+```
+```text
+GNU gdb (GDB) 7.0.50.20100218-cvs
+Copyright (C) 2010 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "--host=i386-apple-darwin10.3.0 --target=arm-none-eabi".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /private/var/folders/bw/rccswxcn1vx0c_9_dwcrcp700000gn/T/build3809724137291763729.tmp/DebugTest.cpp.elf...done.
+(gdb) 
 ```
