@@ -1,11 +1,13 @@
 No answer to thie one yet. Here are some useful links and some notes:
 
 ## Notes
+Studio 6 uses version 1.20
 
 ## Useful Links
 ### Newlib sources
 * Newlib home page: http://sourceware.org/newlib/
-* Newlib on Github: https://github.com/kerlnel/newlib
+* Newlib ftp source: ftp://sources.redhat.com/pub/newlib/index.html
+* Newlib on Github: https://github.com/kerlnel/newlib  (version 2.0.0.0?)
 * Newline browsable source:
 
 ### Other links
