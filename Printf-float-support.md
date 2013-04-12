@@ -11,3 +11,6 @@ No answer to thie one yet. Here are some useful links and some notes:
 * More recompilation guidance: http://stackoverflow.com/questions/6873522/printing-float-double-using-printf-crashes-the-program
 
 * Good discussion of newlib embedded use: http://www.embedded.com/electronics-blogs/industry-comment/4023922/Embedding-GNU-Newlib-Part-2
+
+Other:
+* http://stackoverflow.com/questions/4921553/small-libc-for-embedded-systems
