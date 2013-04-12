@@ -4,4 +4,6 @@ No answer to thie one yet. Here are some useful links and some notes:
 
 * Guidance for recompiling newlib to support floats: http://embdev.net/topic/129790
 
+* More recompilation guidance: http://stackoverflow.com/questions/6873522/printing-float-double-using-printf-crashes-the-program
+
 * Good discussion of newlib embedded use: http://www.embedded.com/electronics-blogs/industry-comment/4023922/Embedding-GNU-Newlib-Part-2
