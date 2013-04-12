@@ -7,6 +7,7 @@ Studio 6 uses version 1.20
 ### Newlib sources
 * Newlib home page: http://sourceware.org/newlib/
 * Newlib ftp source: ftp://sources.redhat.com/pub/newlib/index.html
+* Newlib 1.20 from above: ftp://sources.redhat.com/pub/newlib/newlib-1.20.0.tar.gz
 * Newlib on Github: https://github.com/kerlnel/newlib  (version 2.0.0.0?)
 * Newline browsable source:
 
