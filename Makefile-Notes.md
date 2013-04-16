@@ -1,5 +1,3 @@
-I’m just now getting a moment to sit down at this stuff. Here is the Makefile documented, as I promised. If you think it’s worth it, we can put it on the wiki as well.
-
 What gets compiled:
 
 At the top of the Makefile is two variables, SOURCE_DIRS, and FIRST_LINK_SOURCES, that dictate where source files are located, and which ones are linked in first.
