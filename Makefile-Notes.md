@@ -5,9 +5,11 @@ What gets compiled:
 At the top of the Makefile is two variables, SOURCE_DIRS, and FIRST_LINK_SOURCES, that dictate where source files are located, and which ones are linked in first.
 
 SOURCE_DIRS is a list of directories. In each named directory (relative to the Makefile), the following shell-globs are searched for:
+<pre>
 	*.cpp
 	*.c
 	*.S
+</pre>
 
 Any files that match those patterns are then compiled using the same options for each type. All of the *.cpp files use CPPFLAGS, all of the *.c files use CFLAGS, and all of the *.S files use ASFLAGS. (It should be noted that, AFAIK, we don’t actually have ay *.S files in the project, but the support for them is there if we need it.)
 
@@ -25,33 +27,31 @@ One variable decides what platform the code will be compiled for: PLATFORM. It d
 
 Each platform has it’s own section of the makefile, in an ifeq block, where it will define a few important variables:
 
-CROSS_COMPILE — this is the prefix of the programs used for compiling. For the arm, this should be 'arm-none-eabi-‘ (the trailing dash is important). This will yield program names like arm-none-eabi-gcc, arm-none-eabi-objcopy, etc.
+* CROSS_COMPILE — this is the prefix of the programs used for compiling. For the arm, this should be 'arm-none-eabi-‘ (the trailing dash is important). This will yield program names like arm-none-eabi-gcc, arm-none-eabi-objcopy, etc.
 
-MEMORIES — this defines the different memory types that will be compiled for. These are actually arbitrary, and simply make wholly separate sub-platforms.
+* MEMORIES — this defines the different memory types that will be compiled for. These are actually arbitrary, and simply make wholly separate sub-platforms.
 
-DEVICE_RULES — This is a string that, when evaluated lated in the primary makefile, will generate any needed rules for that platform. You can think of the contents of this variable as an inline #include file, held in a variable. (See CREATE_DEVICE_LIBRARY later.)
+* DEVICE_RULES — This is a string that, when evaluated lated in the primary makefile, will generate any needed rules for that platform. You can think of the contents of this variable as an inline #include file, held in a variable. (See CREATE_DEVICE_LIBRARY later.)
 
-DEVICE_INCLUDE_DIRS — A device-specific list of include directories. Each item in this array will be prefixed with ‘-I’ and added to the compilation flags.
+* DEVICE_INCLUDE_DIRS — A device-specific list of include directories. Each item in this array will be prefixed with ‘-I’ and added to the compilation flags.
 
-DEVICE_LIBS contains library names to be included when linking. Each item in DEVICE_LIBS will have the prefix ‘-l’ (lowercase ‘ell’) added to it.
+* DEVICE_LIBS contains library names to be included when linking. Each item in DEVICE_LIBS will have the prefix ‘-l’ (lowercase ‘ell’) added to it.
 
-DEVICE_LIB_DIRS — A device-specific lists of directories to search for the libraries when linking. Each item in DEVICE_LIB_DIRS will have the prefix ‘-L’ (uppercase ‘ell’) added to it.
+* DEVICE_LIB_DIRS — A device-specific lists of directories to search for the libraries when linking. Each item in DEVICE_LIB_DIRS will have the prefix ‘-L’ (uppercase ‘ell’) added to it.
 
-DEVICE_OBJECTS_(memory_type) — A list of items that must be linked in for this device type and memory type combination. Rules to make these objects must otherwise be provided, usually in DEVICE_RULES. 
+* DEVICE_OBJECTS_(memory_type) — A list of items that must be linked in for this device type and memory type combination. Rules to make these objects must otherwise be provided, usually in DEVICE_RULES. 
 
 Additionally, it may directly alter the following variables:
 
-SOURCE_DIRS — Adding directories to this list will also add the contents to OBJECTS (so adding them to DEVICE_OBJECTS_(memory_type) is unnecessary) and creates rules for them with the standard options.
+* SOURCE_DIRS — Adding directories to this list will also add the contents to OBJECTS (so adding them to  DEVICE_OBJECTS_(memory_type) is unnecessary) and creates rules for them with the standard options.
 
-CFLAGS, CPPFLAGS, ASFLAGS, and LDFLAGS — these can each be added to as necessary, when the other facilities to do so are inadequate.
-
-
+* CFLAGS, CPPFLAGS, ASFLAGS, and LDFLAGS — these can each be added to as necessary, when the other facilities to do so are inadequate.
 
 
 What is being used right now  (generated with this command, and then reformatted some: make flash VERBOSE=2):
 
-
 INCLUDES:
+<pre>
 	platform/atmel_sam/libsam
 	platform/atmel_sam/libsam/include
 	"CMSIS/CMSIS/Include"
@@ -62,22 +62,27 @@ INCLUDES:
 	arduino
 	arduino/USB
 	variants
+</pre>
 
 LIBRARIES:
+<pre>
+</pre>
 	
 
 SOURCE DIRECTORIES:
+<pre>
 	.
 	arduino
 	arduino/USB
 	variants
 	platform/atmel_sam/libsam/source
-
+</pre>
 
 
 Those yield these actual files being compiled using their respective compiler:
 
 C SOURCES:
+<pre>
 	./config.c
 	./config_app.c
 	./json_parser.c
@@ -118,9 +123,10 @@ C SOURCES:
 	platform/atmel_sam/libsam/source/uotghs_host.c
 	platform/atmel_sam/libsam/source/usart.c
 	platform/atmel_sam/libsam/source/wdt.c
-	
+</pre>
 
 C++ SOURCES:
+<pre>
 	./controller.cpp
 	./main.cpp
 	./stepper.cpp
@@ -142,9 +148,11 @@ C++ SOURCES:
 	arduino/USB/HID.cpp
 	arduino/USB/USBCore.cpp
 	variants/variant.cpp
-
+</pre>
 
 And these files will be first in the link line:
 
 LINK FIRST SOURCES:
+<pre>
 	arduino/syscalls_sam3.c
+</pre>
