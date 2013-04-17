@@ -30,7 +30,6 @@ Sell products based on g2, without paying nothing nor giving your application so
 * If you modified g2, offer the modified version of g2 for download from your website. Otherwise, you can send your modifications to us, and when they get integrated within the official g2 release, you can stop offering them for download.
 
 * Exception - g2 is copyrighted software, provided under the term of the GNU General Public License version 2 with following exception:
-
 <pre>
 As a special exception, you may use this file as part of a software library without restriction.
 Specifically, if other files instantiate templates or use macros or inline functions from this file, 
