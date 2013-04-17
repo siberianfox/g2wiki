@@ -4,7 +4,7 @@ g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org
 This is the intent of the licensing structure:
 * Ensure that the project remains open source
 * Ensure that the bulk of changes and enhancements are contributed back to the community.
-* Enable free and commercial use of statically linked library components, including executables and macros, without invoking the GPLv2 viral requirement.
+* Enable free and commercial use of statically linked library components, including executables and macros, without invoking the GPLv2 copyleft requirement.
 * However, while enabling inclusion of libraries or other parts of the project into free and commercial projects/products, ensure that use of the entire project as a whole retains copyleft provisions. To this end some files in the project do not carry the BeRTOS exception. Please make note of this.
 
 Most of what follows is shamelessly cribbed from BeRTOS.
