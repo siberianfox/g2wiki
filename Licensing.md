@@ -1,35 +1,35 @@
 ## Intent
-g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license). Most of what we are doing is shamelessly cribbed from BeRTOS.
+g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license). 
 
 This is the intent of the licensing structure:
 * Ensure that the project remains open source
 * Ensure that the bulk of changes and enhancements are contributed back to the community.
+* Enable free and commercial use of statically linked library components, including executables and macros, without invoking the GPLv2 viral requirement.
+* However, while enabling inclusion of libraries or other parts of the project into free and commercial projects/products, ensure that use of the entire project as a whole retains copyleft provisions. To this end some files in the project do not carry the BeRTOS exception. Please make note of this.
 
-
-A distinctive feature of BeRTOS is its license, because it is a completely free, open source, real time operating system (RTOS) suitable for embedded platforms also for commercial or closed source projects.
+Most of what follows is shamelessly cribbed from BeRTOS.
 
 You are free:
+* to include g2 libraries and components within any product, distributed under any license (including commercial licenses and/or closed-source licenses)
+* to modify g2 as you want in any of its part under the following conditions:
+** Attribution - You must declare in a written statement that you are using g2 in your application and offer to provide the (possibly modified) g2 source code.
+** Share-alike - If you modify g2, you may distribute it only under the original license.
 
-to include BeRTOS within any product, distributed under any license (including commercial licenses and/or closed-source licenses)
-to modify BeRTOS as you want in any of its part under the following conditions:
-Attribution
-You must declare in a written statement that you are using BeRTOS in your application and offer to provide the (possibly modified) BeRTOS source code.
-Share-alike
-If you modify BeRTOS, you may distribute it only under the original license.
 You are encouraged to:
+* Contribute any modifications to g2 back to us, so that we can integrate and maintain them for you.
 
-Contribution. Contribute any modifications to BeRTOS back to us, so that we can integrate and maintain them for you (for free!)
-What you can do with BeRTOS
+What you can do with G2
+* If you are a company or individual doing commercial embedded products, you can:
 
-If you are a company or individual doing commercial embedded products, you can:
+* Download and use g2 as you want
+Sell products based on g2, without paying nothing nor giving your application source code but you must write that you are using g2 in the documentation. A text like this is sufficient:
+<pre>
+"This product uses g2 http://www.____.org), Copyright ____ "
+</pre>
 
-Download and use BeRTOS as you want
-Sell products based on BeRTOS, without paying nothing nor giving your application source code but you must write that you are using BeRTOS in the documentation. A text like this is sufficient:
-"This product uses BeRTOS ( http://www.bertos.org), Copyright 2005-2008 Develer S.r.l."
-If you modified BeRTOS, offer the modified version of BeRTOS for download from your website. Otherwise, you can send your modifications to us, and when they get integrated within the official BeRTOS release, you can stop offering them for download.
-Exception
+* If you modified g2, offer the modified version of g2 for download from your website. Otherwise, you can send your modifications to us, and when they get integrated within the official g2 release, you can stop offering them for download.
 
-G2 is copyrighted software, provided under the term of the GNU General Public License version 2 with following exception:
+* Exception - g2 is copyrighted software, provided under the term of the GNU General Public License version 2 with following exception:
 
 <pre>
 As a special exception, you may use this file as part of a software library without restriction.  Specifically, if other files instantiate templates or use macros or inline functions from this file, 
