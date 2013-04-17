@@ -32,13 +32,11 @@ Sell products based on g2, without paying nothing nor giving your application so
 * Exception - g2 is copyrighted software, provided under the term of the GNU General Public License version 2 with following exception:
 
 <pre>
-As a special exception, you may use this file as part of a software library without restriction.  Specifically, if other files instantiate templates or use macros or inline functions from this file, 
+As a special exception, you may use this file as part of a software library without restriction.
+Specifically, if other files instantiate templates or use macros or inline functions from this file, 
 or you compile this file and link it with other files to produce an executable, this file does not 
 by itself cause the resulting executable to be covered by the GNU General Public License.  This 
 exception does not however invalidate any other reasons why the executable file might be covered by
 the GNU General Public License.
 </pre>
 
-Focus on:
-
-Some other detailed information about BeRTOS license are written in our F.A.Q. area of the website. 
