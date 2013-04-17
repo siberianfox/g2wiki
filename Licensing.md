@@ -11,6 +11,7 @@ Most of what follows is shamelessly cribbed from BeRTOS.
 
 You are free:
 * to include g2 libraries and components within any product, distributed under any license (including commercial licenses and/or closed-source licenses)
+
 * to modify g2 as you want in any of its part under the following conditions:
 ** Attribution - You must declare in a written statement that you are using g2 in your application and offer to provide the (possibly modified) g2 source code.
 ** Share-alike - If you modify g2, you may distribute it only under the original license.
