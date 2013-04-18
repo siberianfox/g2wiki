@@ -5,7 +5,9 @@ The tinyg2 **project** is a motion control **application** built on a set of und
 * Make it easy to use tinyg2 components in free and commercial projects/products- i.e. encourage use of tinyg2 as a library
 * Notwithstanding the above, make the application when used as a whole retain GPLv2 copyleft and other provisions 
 
-tinyg2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. Most of what follows is shamelessly cribbed from the BeRTOS site.
+tinyg2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. To this end, all files in the project are licensed under GPLv2. Those files that are considered "components" carry the BeRTOS exception, that allows their use without opening source code that they come in contact with. 
+
+Most of what follows is shamelessly cribbed from the BeRTOS site.
 
 ## Info
 ###You are free to...
