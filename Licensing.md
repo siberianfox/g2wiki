@@ -5,7 +5,7 @@ The g2 **project** is really a motion control **application** built on a set of 
 * Make it easy to use g2 components in free and commercial projects/products- i.e. encourage use as a library
 * Notwithstanding the above, make the application when used as a whole retain GPLv2 copyleft and other provisions 
 
-g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. Most of what follows is shamelessly cribbed from the BeRTOS site.
+g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. _Most of what follows is shamelessly cribbed from the BeRTOS site._
 
 ###You are free to
 * Include g2 libraries and components within any product, distributed under any license (including commercial licenses and/or closed-source licenses)
@@ -13,7 +13,7 @@ g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org
  * Attribution - You must declare in a written statement that you are using g2 components in your application and offer to provide the (possibly modified) g2 source code.
  * Share-alike - If you modify g2 components, you may distribute them only under the original license.
 
-###You are encouraged to:
+###You are encouraged to
 * Contribute any modifications to g2 back to the project so that they can be incorporated and maintained
 
 ###What you can do with g2 components
