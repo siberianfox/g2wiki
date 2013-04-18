@@ -13,9 +13,9 @@ Most of what follows is shamelessly cribbed from the BeRTOS site.
 ###You are free to...
 * Include tinyg2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
 * Modify tinyg2 components as you want under the following conditions:
- * Attribution - You must declare in a written statement in documentation and source code that you are using tinyg2 components in your application and offer to provide the (possibly modified) tinyg2 source code.
- * Share-alike - If you modify tinyg2 components, you may distribute them only under the original license.
- * Contribute any modifications to tinyg2 back to the project
+ * Attribution - You must declare in a written statement in documentation and source code that you are using tinyg2 components in your application and offer to provide the (possibly modified) tinyg2 source code
+ * Share-alike - If you modify tinyg2 components, you may distribute them only under the original license
+ * Contribution - If you modify tinyg2 components, you must contribute the modifications back to the tinyg2 project
 
 ###What you can do with tinyg2 components...
 If you are a company or individual doing commercial embedded products, you can:
