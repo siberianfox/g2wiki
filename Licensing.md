@@ -27,7 +27,7 @@ If you are a company or individual doing commercial embedded products, you can:
 If you sell or otherwise distribute code/products that use tinyg2 components you must:
 * Provide attribution that you are using tinyg2 components in the documentation and source code. Text like this is sufficient:
 <pre>
-"This product uses tinyg2 components (http://www.synthetos.org), Copyright 2013"
+"This product uses tinyg2 components (http://www.synthetos.com), Copyright 2013"
 </pre>
 * If you modified tinyg2 components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the tinyg2 project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
 
