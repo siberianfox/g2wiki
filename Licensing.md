@@ -1,5 +1,5 @@
 ## Intent
-The tinyg2 **project** is a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the application somewhat differently than using the components as a library. The intent of the tinyg2 licensing structure can be summarized as:
+The tinyg2 **project** is a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the application somewhat differently than using the components as a library. The intent of the tinyg2 licensing scheme can be summarized as:
 * Ensure that the tinyg2 project remains open source
 * Encourage contribution to the project and ensure that most changes and enhancements are returned to the community
 * Make it easy to use tinyg2 components in free and commercial projects/products- i.e. encourage use as a library
