@@ -1,34 +1,32 @@
 ## Intent
-The g2 **project** is really a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the project as an application somewhat differently than using the components as a library. The intent of the g2 licensing structure can be summarized as:
-* Ensure that the g2 project remains open source
+The tinyg2 **project** is really a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the project as an application somewhat differently than using the components as a library. The intent of the tinyg2 licensing structure can be summarized as:
+* Ensure that the tinyg2 project remains open source
 * Encourage contribution to the project and ensure that most changes and enhancements are returned to the community
-* Make it easy to use g2 components in free and commercial projects/products- i.e. encourage use as a library
+* Make it easy to use tinyg2 components in free and commercial projects/products- i.e. encourage use as a library
 * Notwithstanding the above, make the application when used as a whole retain GPLv2 copyleft and other provisions 
 
-g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. _Most of what follows is shamelessly cribbed from the BeRTOS site._
+tinyg2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. Most of what follows is shamelessly cribbed from the BeRTOS site.
 
 ###You are free to
-* Include g2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
-* Modify g2 components as you want under the following conditions:
- * Attribution - You must declare in a written statement that you are using g2 components in your application and offer to provide the (possibly modified) g2 source code.
- * Share-alike - If you modify g2 components, you may distribute them only under the original license.
+* Include tinyg2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
+* Modify tinyg2 components as you want under the following conditions:
+ * Attribution - You must declare in a written statement that you are using tinyg2 components in your application and offer to provide the (possibly modified) tinyg2 source code.
+ * Share-alike - If you modify tinyg2 components, you may distribute them only under the original license.
+ * Contribute any modifications to tinyg2 back to the project
 
-###You are encouraged to
-* Contribute any modifications to g2 back to the project so that they can be incorporated and maintained
-
-###What you can do with g2 components
+###What you can do with tinyg2 components
 If you are a company or individual doing commercial embedded products, you can:
-* Download and use g2 components as you want
-* Sell products based on g2 components without paying royalties or other fees
-* Sell products based on g2 components without opening or giving away your application source code
+* Download and use tinyg2 components as you want
+* Sell products based on tinyg2 components without paying royalties or other fees
+* Sell products based on tinyg2 components without opening or giving away your other application source code
 
-###What you must do with g2 components
+###What you must do with tinyg2 components
 If you sell or otherwise distribute code/products that use g2 components you must:
-* Provide attribution that you are using g2 in the documentation and source code. Text like this is sufficient:
+* Provide attribution that you are using tinyg2 in the documentation and source code. Text like this is sufficient:
 <pre>
-"This product uses g2 components - http://www.synthetos.org), Copyright 2013"
+"This product uses tinyg2 components - http://www.synthetos.org), Copyright 2013"
 </pre>
-* If you modified g2 components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the g2 project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
+* If you modified tinyg2 components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the tinyg2 project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
 
 ###License Header
 <pre>
