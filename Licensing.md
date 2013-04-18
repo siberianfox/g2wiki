@@ -7,6 +7,7 @@ The tinyg2 **project** is really a motion control **application** built on a set
 
 tinyg2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft. Most of what follows is shamelessly cribbed from the BeRTOS site.
 
+## Info
 ###You are free to
 * Include tinyg2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
 * Modify tinyg2 components as you want under the following conditions:
@@ -28,7 +29,7 @@ If you sell or otherwise distribute code/products that use g2 components you mus
 </pre>
 * If you modified tinyg2 components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the tinyg2 project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
 
-###License Header
+##Text
 <pre>
 /*
  * tinyg2.h - tinyg2 main header - Application GLOBALS 
