@@ -9,7 +9,7 @@ g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org
 
 ###You are free to
 * Include g2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
-* Modify g2 as you want in any of its part under the following conditions:
+* Modify g2 components as you want under the following conditions:
  * Attribution - You must declare in a written statement that you are using g2 components in your application and offer to provide the (possibly modified) g2 source code.
  * Share-alike - If you modify g2 components, you may distribute them only under the original license.
 
