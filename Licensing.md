@@ -1,9 +1,3 @@
-Rob,
-
-I've got this listed for tinyg2 (or whatever we end up calling it), but the same could be lifted in for Motate.
-
---Alden
-
 ## Intent
 The tinyg2 **project** is a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the application as a whole somewhat differently than using the components as a library. The intent of the tinyg2 licensing scheme is summarized as:
 * Ensure that the tinyg2 project remains open source
