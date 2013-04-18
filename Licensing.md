@@ -1,11 +1,14 @@
 ## Intent
-g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license). 
+The g2 **project** is really a motion control **application** built on a set of underlying **components**. We want the licensing to reflect this, and to treat using the project as an application somewhat differently than using the components as a library. The intent of the g2 licensing structure can be summarized as:
+* Ensure that the g2 project remains open source
+* Encourage contribution to the project and ensure that most changes and enhancements are returned to the community
+* Make it easy to use g2 components in free and commercial projects/products- i.e. encourage use as a library
+* Notwithstanding the above, make the application when used as a whole retain GPLv2 copyleft and other provisions 
 
-This is the intent of the licensing structure:
-* Ensure that the project remains open source
-* Ensure that the bulk of changes and enhancements are contributed back to the community.
-* Enable free and commercial use of statically linked library components, including executables and macros, without invoking the GPLv2 copyleft requirement.
-* However, while enabling inclusion of libraries or other parts of the project into free and commercial projects/products, ensure that use of the entire project as a whole retains copyleft provisions. To this end some files in the project do not carry the BeRTOS exception. Please make note of this.
+g2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using a specific file without invoking GPL copyleft.
+
+
+whole retains copyleft provisions. To this end some files in the project do not carry the BeRTOS exception. Please make note of this.
 
 Most of what follows is shamelessly cribbed from BeRTOS.
 
