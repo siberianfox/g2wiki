@@ -1,4 +1,8 @@
-This page documents the current state of the g2 build and test environments. We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (win) environment. Typically we run both on a mac with the AS6 in a VM. They each do certain things better. The big plus for Xcode is usability and speed. AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, etc. 
+This page documents the current state of the g2 build and test environments. 
+
+We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (win) environment. Typically we run both on a mac with the AS6 in a VM. They each do certain things better. 
+* The big plus for Xcode is usability and speed. 
+* AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, call stack, etc. 
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
