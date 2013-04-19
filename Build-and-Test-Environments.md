@@ -7,6 +7,14 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 ##Getting Floating point printf() to work and other newlib issues
 The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
 
+Basic steps
+* If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
+
+* Get YAGARTo (4.7.2) and install: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
+
+* 
+
+<pre>
 Aldens-MacBook-Pro-4:TinyG2 Alden$ cp ~/Dropbox/g2/ /etc/paths.d/10-yagarto
 cp: /Users/Alden/Dropbox/g2/ is a directory (not copied).
 Aldens-MacBook-Pro-4:TinyG2 Alden$ cp ~/Dropbox/g2/10-yagarto /etc/paths.d/
@@ -14,10 +22,15 @@ cp: /etc/paths.d/10-yagarto: Permission denied
 Aldens-MacBook-Pro-4:TinyG2 Alden$ sudo cp ~/Dropbox/g2/10-yagarto /etc/paths.d/
 Password:
 Aldens-MacBook-Pro-4:TinyG2 Alden$ 
+</pre>
 
-* If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
+close the terminal window, open a new one 
+sudo -a (password entry)
+echo '/usr/local/yagarto-4.7.2/bin' >> /etc/paths.d/10-yagarto
 
-* DL and install: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
+close the terminal window, open a new one 
+
+
 
 * Make 
 
