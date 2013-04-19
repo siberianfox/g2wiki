@@ -49,7 +49,8 @@ close the terminal window, open a new one
 
 * It’s in $(ROOT)/Reference, and I .gitignore’d it. There’s a Makefile in there to grab and decompress the newlib source. We can easily add other sources as needed.
 
-
+###Yagarto for Studio6 / Windows
+http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
