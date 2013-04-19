@@ -5,13 +5,17 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 * AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, call stack, etc. 
 
 ##Getting Floating point printf() to work and other newlib issues
-The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it.
+The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
+
+* If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
+
+* DL and install: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
+
+* Make 
 
 * It’s in $(ROOT)/Reference, and I .gitignore’d it. There’s a Makefile in there to grab and decompress the newlib source. We can easily add other sources as needed.
 
-* In order to compile on OS X, once you have the command-line tools installed in XCode, download and install this:
 
-http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It’s a quick-and-easy install, and doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
