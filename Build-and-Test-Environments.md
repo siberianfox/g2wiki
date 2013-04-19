@@ -10,9 +10,13 @@ The newlib distributed with AS6 does not have floating point printf enabled. You
 Basic steps
 * If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
 
-* Get YAGARTo (4.7.2) and install: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
+* Get YAGARTO (4.7.2): http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ (Just the top file, the DMG.) It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.
 
-* 
+* Open and install yagarto. Unpack the yagarto dmg. You should see yagarto-4.7.2.app (or similar). Move this to your home directory (~). Run the app. If you can't run it by double clicking, right click it and hit "Open".  You should see a yagarto-4.7.2 directory. 
+ * In Mountain Lion this may not show up in the Finder window. You should be able to see it from the command line in a terminal window. In this case enter `open yagarto-4.7.2` from the command line. It should show up in the Finder.
+
+* Now move the yagarto-4.7.2 directory to /usr/local. OSX hides this directory from you. Type <cmd><shift>G /usr/local to open it.
+
 
 <pre>
 Aldens-MacBook-Pro-4:TinyG2 Alden$ cp ~/Dropbox/g2/ /etc/paths.d/10-yagarto
