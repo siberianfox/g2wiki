@@ -4,18 +4,16 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 * The big plus for Xcode is usability and speed. 
 * AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, call stack, etc. 
 
-##Getting Floating point printf() to work and other newlib issues
-The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
+##Using Yagarto to get Floating Point printf() to work
+The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. 
 
-Basic steps
+### Yagarto on the Mac for Xcode
+These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
 * If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
-
 * Get yagarto (4.7.2): http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ Just the top file, the DMG. (It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.)
-
 * Open and install yagarto. Unpack the yagarto .dmg. You should see the yagarto-4.7.2.app (or similar) in a new finder window. Move this to your home directory (~). Run the app. 
  * If you can't run it by double clicking, right click it and hit "Open". You should see a yagarto-4.7.2 directory in your home dir when it's done.
  * In Mountain Lion the yagarto-4.7.2 dir may not show up in the Finder window. You should be able to see it from the command line in a terminal window. (`cd ~`  `ls`) In this case enter `open yagarto-4.7.2` from the command line. It should show up in the Finder.
-
 * Close your terminal window and open a new one. Enter these commands from the command line
  * `sudo -s`
  * `arm-non-eabi-gcc`
@@ -43,14 +41,25 @@ echo '/usr/local/yagarto-4.7.2/bin' >> /etc/paths.d/10-yagarto
 
 close the terminal window, open a new one 
 
-
-
-* Make 
-
 * It’s in $(ROOT)/Reference, and I .gitignore’d it. There’s a Makefile in there to grab and decompress the newlib source. We can easily add other sources as needed.
 
-###Yagarto for Studio6 / Windows
-http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
+### Yagarto on Windows for Atmel Studio6.1
+These instructions install another flavor of toolchain for ARM CPP. We are using an XP VM under Mountain Lion, but other OS's sould be similar.
+Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
+
+* Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13<br> http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
+
+* Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
+
+* Open Studio6. 
+ * Select `Advanced` in the `Project / TinyG2 Properties` panel. 
+ * Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
+ * Select `Atmel ARM 32-Bit (CPP Language)`. 
+ * Add Flavour. Package name = `Yagarto`. Base path navigate to `C:\yagarto-20121222`. 
+ * Select it and `Set as Default`
+ * Set the Toolchain path to `C:\yagarto-20121222arm-none-eabi\bin` and finally hit `OK'
+
+* Go  
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
