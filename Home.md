@@ -1,5 +1,6 @@
 Welcome to the g2 wiki!
 
-* [g2 in Studio6](https://github.com/synthetos/g2/wiki/g2-in-Studio6-Second-Attempt)
+* [Development Environments](https://github.com/synthetos/g2/wiki/Development-Environments)
 * [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
+* [Atmel Studio6 Motes](https://github.com/synthetos/g2/wiki/g2-in-Studio6-Second-Attempt)
 * [Licensing](https://github.com/synthetos/g2/wiki/Licensing)
