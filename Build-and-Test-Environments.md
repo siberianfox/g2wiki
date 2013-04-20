@@ -4,6 +4,10 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 * The big plus for Xcode is usability and speed. 
 * AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, call stack, etc. 
 
+##Still To Go
+* Get Rebuild all to work - i.e. `make clean all`
+* Re-point the build size dialog to the root directory so it works again
+
 ##Using Yagarto to get Floating Point printf() to work
 The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. 
 
@@ -25,21 +29,9 @@ These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
  * `echo '/usr/local/yagarto-4.7.2/bin' >> /etc/paths.d/10-yagarto`
  * Now you should be able to drag it in
 
-<pre>
-Aldens-MacBook-Pro-4:TinyG2 Alden$ cp ~/Dropbox/g2/ /etc/paths.d/10-yagarto
-cp: /Users/Alden/Dropbox/g2/ is a directory (not copied).
-Aldens-MacBook-Pro-4:TinyG2 Alden$ cp ~/Dropbox/g2/10-yagarto /etc/paths.d/
-cp: /etc/paths.d/10-yagarto: Permission denied
-Aldens-MacBook-Pro-4:TinyG2 Alden$ sudo cp ~/Dropbox/g2/10-yagarto /etc/paths.d/
-Password:
-Aldens-MacBook-Pro-4:TinyG2 Alden$ 
-</pre>
-
 close the terminal window, open a new one 
 sudo -a (password entry)
 echo '/usr/local/yagarto-4.7.2/bin' >> /etc/paths.d/10-yagarto
-
-close the terminal window, open a new one 
 
 * It’s in $(ROOT)/Reference, and I .gitignore’d it. There’s a Makefile in there to grab and decompress the newlib source. We can easily add other sources as needed.
 
