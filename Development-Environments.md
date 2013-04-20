@@ -44,14 +44,14 @@ Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6
 * Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
 
 * Open Studio6. 
- * Select `Advanced` in the `Project / TinyG2 Properties` panel. 
- * Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
- * Select `Atmel ARM 32-Bit (CPP Language)`
- * Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. 
- * Select it and `Set as Default`
- * Do the same for `Atmel ARM 32-Bit (C Language)`
- * Set the Toolchain path to `C:\yagarto-20121222arm-none-eabi\bin` and finally hit `OK'
- * Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
+ 1 Select `Advanced` in the `Project / TinyG2 Properties` panel. 
+ 1 Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
+ 1 Select `Atmel ARM 32-Bit (CPP Language)`
+ 1 Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. 
+ 1 Select it and `Set as Default`
+ 1 Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK'
+ 1 Do the same for `Atmel ARM 32-Bit (C Language)`
+ 1 Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
