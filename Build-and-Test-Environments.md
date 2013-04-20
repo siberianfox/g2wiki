@@ -59,8 +59,7 @@ Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6
  * Select it and `Set as Default`
  * Do the same for `Atmel ARM 32-Bit (C Language)`
  * Set the Toolchain path to `C:\yagarto-20121222arm-none-eabi\bin` and finally hit `OK'
-
-* Go  
+ * Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
 
 ##Things We've Learned - Mostly The Hard Way
 In no particular order:
