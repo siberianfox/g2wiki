@@ -8,11 +8,11 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 * Get Rebuild all to work - i.e. `make clean all`
 * Re-point the build size dialog to the root directory so it works again
 
-##Using Yagarto to get Floating Point printf() to work
-The newlib distributed with AS6 does not have floating point printf enabled. You need to get a newlib that does and point the project to it. 
+##Getting Floating Point printf() to Work
+The newlib distributed with Studio6 does not have floating point printf() enabled. You need to get a newlib that does and point the project to it. We used the Yagarto toolchain. These instructions explain how to use the Yagarto toolchain as the default toolchain for Mac (Xcode), and Windows (Studio6)
 
 ### Yagarto on the Mac for Xcode
-These instructions explain how to do this on Max OSX using Xcode 4.4 or later.
+These instructions apply to Max OSX using Xcode 4.4 or later.
 * If you don't already have them, install Xcode Command Line tools from Xcode / Preferences / Downloads
 * Get yagarto (4.7.2): http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/ Just the top file, the DMG. (It doesn’t mess with anything. Better, it’s installing a generic ARM toolchain.)
 * Open and install yagarto. Unpack the yagarto .dmg. You should see the yagarto-4.7.2.app (or similar) in a new finder window. Move this to your home directory (~). Run the app. 
@@ -36,7 +36,7 @@ echo '/usr/local/yagarto-4.7.2/bin' >> /etc/paths.d/10-yagarto
 * It’s in $(ROOT)/Reference, and I .gitignore’d it. There’s a Makefile in there to grab and decompress the newlib source. We can easily add other sources as needed.
 
 ### Yagarto on Windows for Atmel Studio6.1
-These instructions install another flavor of toolchain for ARM CPP. We are using an XP VM under Mountain Lion, but other OS's sould be similar.
+These instructions apply to Atmel Studio 6.1. We are using a Windows XP VMware virtual machine running on OSX 10.8.3 (Mountain Lion), but other OS's should be similar. <br>
 Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
 
 * Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13<br> http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
