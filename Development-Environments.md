@@ -52,10 +52,3 @@ Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6
  * (6) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK'
  * (7) Repeat steps (3) - (6) for `Atmel ARM 32-Bit (C Language)`
  * (8) Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
-
-##Things We've Learned - Mostly The Hard Way
-In no particular order:
-* When you plug the SAM-ICE in it may be recognized in SWD or JTAG mode. You want it in JTAG mode or the cycle counter profiling won;t work
-* If the Arduino Due indicates that it is connecting to your VM as "Atmel Mode" instead of "Arduino Due", it's because its in the ARM bootloader. Unplug and reconnect the USB and it should connect as a Due. This is apparent when you have a Windows (or other) VM running in Mac and you get the mac dialog box. In other configs the USB might just stop working with no indication. Plug and replug.
-* Atmel Studio 6.x still doesn't display ASCII in arrays. We included an ASCII table at the end of xio.h so you can look up what the array says. Yuk.
-* If you install Studio6.x it may create a /Debug directory. Delete this directory. It will confuse the debugger into looking there for the tinyg2.elf file, which you don;t want. You want the AS6 debugger to look for tinyg2.elf in the TinyG2 directory - which it will if you delete the Debug dir.
