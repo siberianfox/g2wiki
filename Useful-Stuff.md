@@ -1,5 +1,5 @@
 ##Things We've Learned - Mostly The Hard Way
-Most of these assume the following development setup: Atmel Studio 6.1 on Windows XP in VMWare 5 running on Mac OSX 10.8.3 (Mountain Lion) and using Coolterm 1.4 on the Mac for the USB terminal window. Using the SAM-ICE for programming and real-time debugging from Studio 6. We also use Apple Xcode for editing and compilation and then use Studio6 for programming and debugging.
+Most of these assume the following development setup: Atmel Studio 6.1-2440-beta on Windows XP in VMWare (version 4 or 5) running on Mac OSX 10.8.3 (Mountain Lion) and using Coolterm 1.4 on the Mac for the USB terminal window. Using the SAM-ICE for programming and real-time debugging from Studio 6. We also use Apple Xcode for editing and compilation and then use Studio6 for programming and debugging.
 
 In no particular order:
 
