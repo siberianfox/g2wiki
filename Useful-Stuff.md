@@ -10,7 +10,7 @@ In no particular order:
 ### Studio6 related
 * If you install Studio6.x it may create a /Debug directory. Delete this directory. It will confuse the debugger into looking there for the tinyg2.elf file, which you don;t want. You want the AS6 debugger to look for tinyg2.elf in the TinyG2 directory - which it will if you delete the Debug dir.
 * When you plug the SAM-ICE in it may be recognized in SWD or JTAG mode. You want it in JTAG mode or the cycle counter profiling won't work.
-* The Makefile currently can't do a Rebuild SOlution or Rebuild Project. It will do the clean then fail in the build. If you need to do a complete rebuild run it to get the clean (accept the failure), then do a Build. 
+* The Makefile currently can't do a Rebuild Solution or Rebuild Project. It will do the clean then fail in the build. If you need to do a complete rebuild run it to get the clean (accept the failure), then do a Build. 
 
 ### VMware related
 * You need to go into the VMware USB Advanced dialog to make sure the Arduino Due always connects to the mac. Don't check the blue box - it means the USB is connected to the VM. Confusing.* Atmel Studio 6.x still doesn't display ASCII in arrays. We included an ASCII table at the end of xio.h so you can look up what the array says. Yuk.
