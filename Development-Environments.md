@@ -47,7 +47,7 @@ Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6
  * Select `Advanced` in the `Project / TinyG2 Properties` panel. 
  * Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
  * Select `Atmel ARM 32-Bit (CPP Language)`
- * Add Flavour. Package name = `Yagarto`. Base path navigate to `C:\yagarto-20121222`. 
+ * Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. 
  * Select it and `Set as Default`
  * Do the same for `Atmel ARM 32-Bit (C Language)`
  * Set the Toolchain path to `C:\yagarto-20121222arm-none-eabi\bin` and finally hit `OK'
