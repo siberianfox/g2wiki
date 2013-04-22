@@ -18,7 +18,7 @@ These instructions assume the following environment. Similar environments should
  * Select the standard install locations
  * You won't need the Atmel Gallery
 * Install Yagarto on Windows
- * Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13
+ * Download [Yagarto for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
  * Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
  * Ref: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
 * Open Studio6.
