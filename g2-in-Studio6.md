@@ -9,7 +9,7 @@ These instructions assume the following environment. Similar environments should
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 * Yagarto-20121222
 
-### Steps for bringing up project using the Studio6 project files from the g2 github
+## Steps for bringing up project using the Studio6 project files from the g2 github
 * For starters make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Clone the [g2 Github repository](https://github.com/synthetos/g2)
 * Get the following:
@@ -40,7 +40,7 @@ These instructions assume the following environment. Similar environments should
 * If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
  * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
 
-### Instructions for a virgin install - i.e. no TinyG2.atsln or TinyG2.cppproj files 
+## Instructions for a virgin install - i.e. no TinyG2.atsln or TinyG2.cppproj files 
 (These instructions are incomplete)
 * Start a `New Project`
  * Select `C++ Executable` project
