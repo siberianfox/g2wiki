@@ -9,26 +9,19 @@ These instructions assume the following environment. Similar environments should
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 
 ### Steps for bringing up project using AS6 project files from g2 github
+* Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Get the following:
  * [Atmel Studion 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
  * [Atmel SAM-ICE (Segger Jlink)](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFadujAZ79HQyfG%252bJm4Wmz2%2fLVln%2foieqku2gI%3d) 
  * [Olimex JTAG adapter](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMt%2f9hUFx8MktsRg8ShTvwMQusYCyASUbpU%3d)
-
-* Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
-
-* Download and do a minimal install of AtmelStudio6.1-2440-beta with dotnet `AtmelStudio-6.1.2440-beta-net.exe`
+* Install `AtmelStudio-6.1.2440-beta-net.exe` or `AtmelStudio-6.1.2440-beta.exe`
  * Select the standard install locations
- * Fire it up
  * You won't need the Atmel Gallery
-
-* Install Yagarto on Windows for Atmel Studio6.1
+* Install Yagarto on Windows
 Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
-
-* Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13<br> http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
-
-* Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
-
-* Open Studio6. 
+ * Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13<br> http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
+ * Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
+* Open Studio6.
  * (1) Select `Advanced` in the `Project / TinyG2 Properties` panel. 
  * (2) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
  * (3) Select `Atmel ARM 32-Bit (CPP Language)`
