@@ -39,6 +39,7 @@ These instructions assume the following environment. Similar environments should
  * (12) When you return to the Advanced panel select `Toolchain Flavour - Yagarto`
  * (13) Exit to project and say YES to save.
 * If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
+ * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
 
 ### Instructions for a virgin install - i.e. no TinyG2.atsln or TinyG2.cppproj files 
 (These instructions are incomplete)
