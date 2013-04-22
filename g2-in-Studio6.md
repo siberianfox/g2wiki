@@ -8,7 +8,8 @@ These instructions assume the following environment. Similar environments should
 * VMware 4 or 5 hosting XP on...
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 
-### Steps for bringing up project using AS6 project files from g2 github
+### Steps for bringing up project using the Studio6 project files from the g2 github
+* Clone the [g2 Github repository](https://github.com/synthetos/g2)
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Get the following:
  * [Atmel Studio 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
