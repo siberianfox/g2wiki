@@ -30,6 +30,7 @@ These instructions assume the following environment. Similar environments should
  * (6) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK'
  * (7) Repeat steps (3) - (6) for `Atmel ARM 32-Bit (C Language)`
  * (8) Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
+* If you click on the file `tinyg2.atsln` if should open the project and you should be able to compile and debug
 
 ### Instructions for a virgin install - i.e. no tinyg2.atsln or tinyg2.cppproj files 
 
