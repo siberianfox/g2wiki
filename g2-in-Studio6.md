@@ -13,10 +13,13 @@ These instructions assume the following environment. Similar environments should
 
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 
-* Do a minimal install of AtmelStudio6.0 build 1996 dotnet `as6installer-6.0.1996-net.exe`
+* Do a minimal install of AtmelStudio6.1-2440-beta with dotnet `AtmelStudio-6.1.2440-beta-net.exe`
  * Select the standard install locations
  * Fire it up
- * You don't need the Atmel Gallery
+ * You won't need the Atmel Gallery
+
+
+### Instructions for a virgin install - i.e. no tinyg2.atsln or tinyg2.cppproj files 
 
 * Start a `New Project`
  * Select `C++ Executable` project
