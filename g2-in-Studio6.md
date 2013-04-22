@@ -33,7 +33,7 @@ These instructions assume the following environment. Similar environments should
  * (6) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
  * (7) Select `Atmel ARM 32-Bit (CPP Language)`
  * (8) Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. Click `Add`
- * (9) Once you are back in the Add Flavour box select `Yagarto` and `Set as Default`
+ * (9) Once you are back in the `Add Flavour` dialo select `Yagarto` and `Set as Default`
  * (10) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK`
  * (11) Repeat steps (6) - (10) for `Atmel ARM 32-Bit (C Language)`
  * (12) When you return to the Advanced panel select `Toolchain Flavour - Yagarto`
