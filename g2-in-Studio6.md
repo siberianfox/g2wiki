@@ -8,12 +8,12 @@ These instructions assume the following environment. Similar environments should
 * VMware 4 or 5 hosting XP on...
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 
-### Steps for bringing up project using tinyg2.atsln or tinyg2.cppproj files from g2 github
+### Steps for bringing up project using AS6 project files from g2 github
 * Buy a [SAM-ICE (Segger Jlink) and adapter cable](https://github.com/synthetos/g2/wiki/g2-in-Studio6#installing-the-sam-ice)
 
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 
-* Do a minimal install of AtmelStudio6.1-2440-beta with dotnet `AtmelStudio-6.1.2440-beta-net.exe`
+* Download and do a minimal install of AtmelStudio6.1-2440-beta with dotnet `AtmelStudio-6.1.2440-beta-net.exe`
  * Select the standard install locations
  * Fire it up
  * You won't need the Atmel Gallery
