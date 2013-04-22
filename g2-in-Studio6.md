@@ -42,7 +42,7 @@ These instructions assume the following environment. Similar environments should
 * If you navigate to the Reference directory and run `make` (no arguments) from the command line it will pull in the Newlib sources and unzip them. This can be handy for providing source for symbolic debugging if you want to dive down that low.
 
 ## Setting Up Studio6 When You Don't Have Project Files From the g2 Github (Virgin Install)
-These instructions assume that you have all the sources, including these directories and their sub-directories. You just don't have the project files, or you need to regenerate them for some reason. _Note: These instructions are incomplete._
+These instructions assume that you have all the sources, including these directories and their sub-directories. You just don't have the project files, or you need to regenerate them for some reason.
 * First, do everything from above. Get AS6 and set up Yagarto
 * Make sure you have these source directories:
  * arduino
@@ -66,8 +66,6 @@ These instructions assume that you have all the sources, including these directo
  * Build command line is `TinyG2.elf COLOR=0 VERBOSE=1`
  * Clean commandline is `clean`
 * Be sure to exit and save the project to save your work.
-
-* Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
 
 ## Useful Facts about Studio 6.0
 
