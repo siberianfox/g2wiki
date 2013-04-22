@@ -1,5 +1,6 @@
 This setup is designed to be as portable as possible so the project can be run from Atmel Studio 6, Apple Xcode, native Linux GCC environments, and other development environments. As a result many sources that may be normally found in the IDE environments are pulled into the project to remove as many IDE dependencies as possible. 
-**NOTE: This page is not complete yet. Mostly just Notes for now**
+
+The project setup uses Studio6 as an IDE and debugging platform, but not the toolchain, auto-generated makefile, libraries or sources. It uses the Yagarto ARM GCC toolchain to get a newlib that's compiled for printf() floatinf point support. It also uses a Makefile provided by the project. This is an attempt to keep the project as portable as possible to non-Studio6 build environments
 
 ## Getting Started
 These instructions assume the following environment. Similar environments should work, but have not been tested.
@@ -7,6 +8,7 @@ These instructions assume the following environment. Similar environments should
 * Windows XP SP3 with all current patches up-to-date
 * VMware 4 or 5 hosting XP on...
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
+* Yagarto-20121222
 
 ### Steps for bringing up project using the Studio6 project files from the g2 github
 * Clone the [g2 Github repository](https://github.com/synthetos/g2)
@@ -21,19 +23,24 @@ These instructions assume the following environment. Similar environments should
 * Install Yagarto on Windows
  * Download [Yagarto GNU ARM Toolchain for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
  * Install in windows. Install everything. Let it create a yagarto-2012122 (or similar) directory in the C: drive
-* Setup the Yagarto toolchain in the project
- * (0) Start Studio6 by clicking on the yagarto_bootstrap.atsln file in the \g2\Reference directory  
- * (1) Select `Advanced` in the `Project / TinyG2 Properties` panel. 
- * (2) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
- * (3) Select `Atmel ARM 32-Bit (CPP Language)`
- * (4) Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. 
- * (5) Select it and `Set as Default`
- * (6) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK'
- * (7) Repeat steps (3) - (6) for `Atmel ARM 32-Bit (C Language)`
- * (8) Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
-* If you click on the file `tinyg2.atsln` if should open the project and you should be able to compile and debug
+* Bootstrap Yagarto into the project.
+ * (0) Don't attempt to open TinyG2.atsln or TinyG2.cppproj yet. They will crash because Yagarto is not yet installed
+ * (1) Open Studio6 by clicking on the desktop icon
+ * (2) Select `New Project` and make it a `GCC C++ Executable Project`
+ * (3) Just accept all the default names and file locations - it won't matter
+ * (4) Select the device to be `ATSAM3X8E`
+ * (5) Once the project opens select `Project / GccApplication1 Properties`. Go to the `Advanced` panel
+ * (6) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
+ * (7) Select `Atmel ARM 32-Bit (CPP Language)`
+ * (8) Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. Click `Add`
+ * (9) Back in the Add Flavor box select `Yagarto` and `Set as Default`
+ * (10) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK`
+ * (11) Repeat steps (6) - (10) for `Atmel ARM 32-Bit (C Language)`
+ * (12) When you return to the Advanced panel select `Toolchain Flavour - Yagarto`
+ * (13) Exit to project and say YES to save.
+* If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
 
-### Instructions for a virgin install - i.e. no tinyg2.atsln or tinyg2.cppproj files 
+### Instructions for a virgin install - i.e. no TinyG2.atsln or TinyG2.cppproj files 
 (These instructions are incomplete)
 * Start a `New Project`
  * Select `C++ Executable` project
