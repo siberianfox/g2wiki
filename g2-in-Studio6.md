@@ -21,7 +21,8 @@ These instructions assume the following environment. Similar environments should
 * Install Yagarto on Windows
  * Download [Yagarto GNU ARM Toolchain for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
  * Install in windows. Install everything. Let it create a yagarto-2012122 (or similar) directory in the C: drive
-* Open Studio6.
+* Setup the Yagarto toolchain in the project
+ * (0) Start Studio6 by clicking on the yagarto_bootstrap.atsln file in the \g2\Reference directory  
  * (1) Select `Advanced` in the `Project / TinyG2 Properties` panel. 
  * (2) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
  * (3) Select `Atmel ARM 32-Bit (CPP Language)`
