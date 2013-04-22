@@ -33,7 +33,7 @@ These instructions assume the following environment. Similar environments should
 * If you click on the file `tinyg2.atsln` if should open the project and you should be able to compile and debug
 
 ### Instructions for a virgin install - i.e. no tinyg2.atsln or tinyg2.cppproj files 
-
+(These instructions are incomplete)
 * Start a `New Project`
  * Select `C++ Executable` project
  * Name `TinyG2`
