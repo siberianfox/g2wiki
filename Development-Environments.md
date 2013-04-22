@@ -4,6 +4,11 @@ We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (
 * Xcode is more familiar for Mac users and complies faster than Studio6 if AS6 is running on a virtual machine.
 * AS6 has a really nice realtime debug environment using the SAM-ICE that displays registers, cycle counters and profiling, memory structures, IO devices, call stack, etc. 
 
+## Setting Up Atmel Studio 6
+These instructions walk through setting up a Studio 6 environment for use with existing project files available from the g2 github. (We will also post virgin setup instructions later).
+
+See [g2 in Studio 6](https://github.com/synthetos/g2/wiki/g2-in-Studio6)
+
 ##Still To Go
 * Get Rebuild all to work - i.e. `make clean all`
 * Re-point the build size dialog to the root directory so it works again
