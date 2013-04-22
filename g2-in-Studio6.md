@@ -2,7 +2,6 @@ This setup is designed to be as portable as possible so the project can be run f
 
 The project setup uses Studio6 as an IDE and debugging platform, but does not use the Studio6 toolchain, auto-generated makefile, libraries or sources. It uses the Yagarto ARM GCC toolchain to get a newlib that's compiled for printf() floatinf point support. It also uses a Makefile provided by the project. This is an attempt to keep the project as portable as possible to non-Studio6 build environments
 
-## Getting Started
 These instructions assume the following environment. Similar environments should work, but have not been tested.
 * Atmel Studio 6.1-2440-beta
 * Windows XP SP3 with all current patches up-to-date
