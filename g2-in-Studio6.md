@@ -9,7 +9,11 @@ These instructions assume the following environment. Similar environments should
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 
 ### Steps for bringing up project using AS6 project files from g2 github
-* Buy a [SAM-ICE (Segger Jlink) and adapter cable](https://github.com/synthetos/g2/wiki/g2-in-Studio6#installing-the-sam-ice)
+* Get the following:
+ * [Atmel Studion 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx)
+  * Get the one with our without .NET depending on whether you have .NET installed on your system or not
+ * [Atmel SAM-ICE (Segger Jlink)](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFadujAZ79HQyfG%252bJm4Wmz2%2fLVln%2foieqku2gI%3d) 
+ * [Olimex JTAG adapter](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMt%2f9hUFx8MktsRg8ShTvwMQusYCyASUbpU%3d)
 
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 
