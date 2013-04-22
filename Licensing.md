@@ -7,6 +7,8 @@ The tinyg2 **project** is a motion control **application** built on a set of und
 
 tinyg2 licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using component files without invoking GPL copyleft. To this end, all files in the project are licensed under GPLv2. Those files that are considered "components" carry the BeRTOS exception, that allows their use without opening source code that they come in contact with. 
 
+tinyg2 also includes [Motate](https://github.com/giseburt/Motate) hardware abstraction components that are licensed under the same scheme. 
+
 Most of what follows is shamelessly cribbed from the BeRTOS site.
 
 ## Info
