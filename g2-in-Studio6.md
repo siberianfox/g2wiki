@@ -1,6 +1,6 @@
 This setup is designed to be as portable as possible so the project can be run from Atmel Studio 6, Apple Xcode, native Linux GCC environments, and other development environments. As a result many sources that may be normally found in the IDE environments are pulled into the project to remove as many IDE dependencies as possible. 
 
-The project setup uses Studio6 as an IDE and debugging platform, but not the toolchain, auto-generated makefile, libraries or sources. It uses the Yagarto ARM GCC toolchain to get a newlib that's compiled for printf() floatinf point support. It also uses a Makefile provided by the project. This is an attempt to keep the project as portable as possible to non-Studio6 build environments
+The project setup uses Studio6 as an IDE and debugging platform, but does not use the Studio6 toolchain, auto-generated makefile, libraries or sources. It uses the Yagarto ARM GCC toolchain to get a newlib that's compiled for printf() floatinf point support. It also uses a Makefile provided by the project. This is an attempt to keep the project as portable as possible to non-Studio6 build environments
 
 ## Getting Started
 These instructions assume the following environment. Similar environments should work, but have not been tested.
