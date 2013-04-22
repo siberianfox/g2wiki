@@ -18,6 +18,22 @@ These instructions assume the following environment. Similar environments should
  * Fire it up
  * You won't need the Atmel Gallery
 
+* Install Yagarto on Windows for Atmel Studio6.1
+Ref: http://avrstudio5.wordpress.com/2013/03/07/using-winavr-with-atmel-studio-6-0-or-later/
+
+* Get yagarto for windows. The latest version is 20121222 as of today - 4/19/13<br> http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
+
+* Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
+
+* Open Studio6. 
+ * (1) Select `Advanced` in the `Project / TinyG2 Properties` panel. 
+ * (2) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
+ * (3) Select `Atmel ARM 32-Bit (CPP Language)`
+ * (4) Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. 
+ * (5) Select it and `Set as Default`
+ * (6) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK'
+ * (7) Repeat steps (3) - (6) for `Atmel ARM 32-Bit (C Language)`
+ * (8) Select `Toolchain Flavour - Yagarto` when you return to the main Advanced panel
 
 ### Instructions for a virgin install - i.e. no tinyg2.atsln or tinyg2.cppproj files 
 
