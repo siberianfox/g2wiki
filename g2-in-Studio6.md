@@ -9,7 +9,7 @@ These instructions assume the following environment. Similar environments should
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
 * Yagarto-20121222
 
-## Steps for bringing up project using the Studio6 project files from the g2 github
+## Setting Up Studio6 When You Have Project Files From the g2 Github
 * For starters make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Clone the [g2 Github repository](https://github.com/synthetos/g2)
 * Get the following:
