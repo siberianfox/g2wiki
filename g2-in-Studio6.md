@@ -44,6 +44,14 @@ These instructions assume the following environment. Similar environments should
 ## Setting Up Studio6 When You Don't Have Project Files From the g2 Github (Virgin Install)
 These instructions assume that you have all the sources, including these directories and their sub-directories. You just don't have the project files, or you need to regenerate them for some reason. _Note: These instructions are incomplete._
 * First, do everything from above. Get AS6 and set up Yagarto
+* Make sure you have these source directories:
+ * arduino
+ * CMSIS
+ * motate
+ * platform
+ * settings
+ * variants
+ * (bin, build and other dirs will be added automatically) 
 * Start a `New Project`
  * Select `GCC C++ Executable` project
  * Name is `TinyG2`
@@ -51,7 +59,13 @@ These instructions assume that you have all the sources, including these directo
  * Solution Name `g2`
  * Check `Create Directory for Project`. If you want to change the directory structure you can move things around and go edit the tinyg.atsln file so it can find the project sub-directory (relative path name).
  * Select the chip you want. The Arduino Due is a ATSAM3X8E in the SAM3 series
-* Populate the project directories. At this point you have a choice. Visual Studio does not have a way to import an entire existing directory in a single operation. So you can laboriously add every directory, move the files in, then select the file as existing items ... all the way down the hierarchy, or you can edit the cppproj file XML directly.
+* Populate the project directories. Since we are using an external makefile it's not necessary to include all sources, but if you want to edit things in AS6 it's handy to have the files in the project viewer.  
+ * At this point you have a choice. Visual Studio does not have a way to import an entire existing directory in a single operation. So you can laboriously add every directory, move the files in, then select the file as existing items ... all the way down the hierarchy, or you can edit the cppproj file XML directly.
+* Once you have added whatever files you want select `External Makefile` in the project properties `Build` panel
+ * Make file name is `Makefile`
+ * Build command line is `TinyG2.elf COLOR=0 VERBOSE=1`
+ * Clean commandline is `clean`
+* Be sure to exit and save the project to save your work.
 
 * Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
 
