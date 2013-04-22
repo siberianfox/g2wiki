@@ -19,7 +19,7 @@ These instructions assume the following environment. Similar environments should
  * [Olimex JTAG adapter](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMt%2f9hUFx8MktsRg8ShTvwMQusYCyASUbpU%3d)
 * Install `AtmelStudio-6.1.2440-beta-net.exe` or `AtmelStudio-6.1.2440-beta.exe`
  * Select the standard install locations
- * You won't need the Atmel Gallery
+ * When asked, you won't need the Atmel Gallery
 * Install Yagarto on Windows
  * Download [Yagarto GNU ARM Toolchain for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
  * Install in windows. Install everything. Let it create a yagarto-2012122 (or similar) directory in the C: drive
