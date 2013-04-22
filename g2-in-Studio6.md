@@ -21,7 +21,6 @@ These instructions assume the following environment. Similar environments should
 * Install Yagarto on Windows
  * Download [Yagarto for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
  * Install in windows. Let it create a yagarto-2012122 (or similar) directory in the C: drive
- * Ref: http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Windows/
 * Open Studio6.
  * (1) Select `Advanced` in the `Project / TinyG2 Properties` panel. 
  * (2) Click on the `Tools --> Options --> Toolchain --> Flavour Configuration` link. 
