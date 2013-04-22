@@ -2,13 +2,13 @@ This setup is designed to be as portable as possible so the project can be run f
 **NOTE: This page is not complete yet. Mostly just Notes for now**
 
 ## Getting Started
-* These instructions assume the following environment. Similar environments should work, but have not been tested.
- * Atmel Studio 6.1-2440-beta
- * Windows XP SP3 with all current patches up-to-date
- * VMware 4 or 5 hosting XP on...
- * Apple Macintosh OSX 10.8.3 (Mountain Lion)
+These instructions assume the following environment. Similar environments should work, but have not been tested.
+* Atmel Studio 6.1-2440-beta
+* Windows XP SP3 with all current patches up-to-date
+* VMware 4 or 5 hosting XP on...
+* Apple Macintosh OSX 10.8.3 (Mountain Lion)
 
-Steps:
+**Steps**
 * Buy a [SAM-ICE (Segger Jlink) and adapter cable](https://github.com/synthetos/g2/wiki/g2-in-Studio6#installing-the-sam-ice)
 
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
