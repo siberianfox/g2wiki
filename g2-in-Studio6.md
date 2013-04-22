@@ -41,7 +41,7 @@ These instructions assume the following environment. Similar environments should
  * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
 * If you navigate to the Reference directory and run `make` (no arguments) from the command line it will pull in the Newlib sources and unzip them. This can be handy for providing source for symbolic debugging if you want to dive down that low.
 
-## Setting Up Studio6 When You Don't Have Project Files From the g2 Github (Virgin Install)
+## Setting Up Studio6 When You Don't Have the Project Files (Virgin Install)
 These instructions assume that you have all the sources, including these directories and their sub-directories. You just don't have the project files, or you need to regenerate them for some reason.
 * First, do everything from above. Get AS6 and set up Yagarto
 * Make sure you have these source directories:
