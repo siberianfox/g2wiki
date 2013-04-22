@@ -11,7 +11,7 @@ These instructions assume the following environment. Similar environments should
 ### Steps for bringing up project using AS6 project files from g2 github
 * Make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Get the following:
- * [Atmel Studion 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
+ * [Atmel Studio 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
  * [Atmel SAM-ICE (Segger Jlink)](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFadujAZ79HQyfG%252bJm4Wmz2%2fLVln%2foieqku2gI%3d) 
  * [Olimex JTAG adapter](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMt%2f9hUFx8MktsRg8ShTvwMQusYCyASUbpU%3d)
 * Install `AtmelStudio-6.1.2440-beta-net.exe` or `AtmelStudio-6.1.2440-beta.exe`
