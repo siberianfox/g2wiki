@@ -39,18 +39,19 @@ These instructions assume the following environment. Similar environments should
  * (13) Exit to project and say YES to save.
 * If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
  * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
+* If you navigate to the Reference directory and run `make` (no arguments) from the command line it will pull in the Newlib sources and unzip them. This can be handy for providing source for symbolic debugging if you want to dive down that low.
 
-## Instructions for a virgin install - i.e. no TinyG2.atsln or TinyG2.cppproj files 
-(These instructions are incomplete)
+## Setting Up Studio6 When You Don't Have Project Files From the g2 Github (Virgin Install)
+These instructions assume that you have all the sources, including these directories and their sub-directories. You just don't have the project files, or you need to regenerate them for some reason. _Note: These instructions are incomplete._
+* First, do everything from above. Get AS6 and set up Yagarto
 * Start a `New Project`
- * Select `C++ Executable` project
- * Name `TinyG2`
- * Directory - browse to main project directory. Be aware that AS6 doesn;t know what you called your VMware attached drive so you have to find in `My Network Places \ Shared Folders on vm-ware`. How very Redmond.
+ * Select `GCC C++ Executable` project
+ * Name is `TinyG2`
+ * Directory - browse to main project directory. Be aware that VisualStudio doesn't know what you called your VMware attached drive so you have to find in `My Network Places \ Shared Folders on vm-ware`. Or type it in directly.
  * Solution Name `g2`
  * Check `Create Directory for Project`. If you want to change the directory structure you can move things around and go edit the tinyg.atsln file so it can find the project sub-directory (relative path name).
- * Select the chip you want. THe Arduino Due is a ATSAM3X8E
-
-* Populate the project directories. At this point you have a choice. Visual Studio does nto have a way to import an entire existing directory in a single operation. So you can laboriously add every directory, move the files in, then select the file as existing items ... all the way down the hierarchy, or you can edit the cppproj file XML directly.
+ * Select the chip you want. The Arduino Due is a ATSAM3X8E in the SAM3 series
+* Populate the project directories. At this point you have a choice. Visual Studio does not have a way to import an entire existing directory in a single operation. So you can laboriously add every directory, move the files in, then select the file as existing items ... all the way down the hierarchy, or you can edit the cppproj file XML directly.
 
 * Port in the entire CMSIS_Atmel hierarchy - change `CMSIS_Atmel` to `CMSIS`
 
