@@ -10,6 +10,7 @@ In no particular order:
 ### Studio6 related
 * If you install Studio6.x it may create a /Debug directory. Delete this directory. It will confuse the debugger into looking there for the tinyg2.elf file, which you don;t want. You want the AS6 debugger to look for tinyg2.elf in the TinyG2 directory - which it will if you delete the Debug dir.
 * When you plug the SAM-ICE in it may be recognized in SWD or JTAG mode. You want it in JTAG mode or the cycle counter profiling won't work.
+* If you start debug and are presented with a dialog box to select the SAM-ICE - select it, then start debug again. For some reason (timeout?) that first session does not connect to the ICE.
 * The Makefile currently can't do a Rebuild Solution or Rebuild Project. It will do the clean then fail in the build. If you need to do a complete rebuild run Clean first, then do a Build. 
 
 ### VMware related
