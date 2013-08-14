@@ -31,4 +31,4 @@ The output should look something like this (the numbers after cu.usbmodem will b
 	Set boot flash true
 	CPU reset.
 
-Now disconnect the Due and plug the SUB cable into the other port. You now have a Due/TinyG2.
+Now disconnect the Due and plug the USB cable into the other port. You now have a Due/TinyG2.
