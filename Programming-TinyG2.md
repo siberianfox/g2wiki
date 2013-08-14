@@ -15,7 +15,7 @@ Either place the .elf file you want to program into that directory or remove the
 
 	mv TinyG2.elf.13.01 TinyG2.elf
 
-Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
+Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers, debuggers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
 
 Copy and paste the following line into the Terminal window:
 
