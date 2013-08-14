@@ -11,7 +11,9 @@ Open Terminal.app and change to the directory with this programmer:
 * Now drag the *folder* that you found this ReadMe.txt file in to the Terminal.app window that has the "cd " you just typed. It should type in a path for you.
 * Now hit return.
 
-Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack), then copy and paste the following line into the Terminal window:
+Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
+
+Copy and paste the following line into the Terminal window:
 
 	./DueFromOSX.sh -f TinyG2.elf -p /dev/cu.usbmodem*
 
