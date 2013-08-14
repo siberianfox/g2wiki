@@ -13,7 +13,7 @@ Open Terminal.app and change to the directory with this programmer:
 
 Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack), then copy and paste the following line into the Terminal window:
 
-./DueFromOSX.sh -f TinyG2.elf -p /dev/cu.usbmodem*
+	./DueFromOSX.sh -f TinyG2.elf -p /dev/cu.usbmodem*
 
 The output should look something like this (the numbers after cu.usbmodem will be different):
 
