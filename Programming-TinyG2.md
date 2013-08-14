@@ -12,6 +12,7 @@ Open Terminal.app and change to the directory with this programmer:
 * Now hit return.
 
 Either place the .elf file you want to program into that directory or remove the trailing version number from the elf file that is present; e.g. 
+
 	mv TinyG2.elf.13.01 TinyG2.elf
 
 Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
