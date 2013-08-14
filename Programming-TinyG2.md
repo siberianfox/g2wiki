@@ -5,13 +5,11 @@ Download the Arduino 1.5.2 BETA (not the 1.0.5 release at the top of the page) f
 
 Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
 
-Open Terminal.app.
+Open Terminal.app and change to the directory with this programmer:
 
-Type "cd " (That's lowercase "c", then "d", then space), DON'T hit return.
-
-Now drag the *folder* that you found this ReadMe.txt file in to the Terminal.app window that has the "cd " you just typed. It should type in a path for you.
-
-Now hit return.
+* Type "cd " (That's lowercase "c", then "d", then space), DON'T hit return.
+* Now drag the *folder* that you found this ReadMe.txt file in to the Terminal.app window that has the "cd " you just typed. It should type in a path for you.
+* Now hit return.
 
 Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack), then copy and paste the following line into the Terminal window:
 
