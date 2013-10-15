@@ -1,7 +1,7 @@
 PROGRAMMING THE DUE FROM OS X
 =============================
 
-Download the Arduino 1.5.2 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for OS X.
+Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for OS X.
 
 Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
 
