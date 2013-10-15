@@ -10,12 +10,15 @@ TinyG2 is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/
 G2 has a number of advanced features, including:
 
 * Full 6 axis motion control - XYX linear axes and ABC rotary axes
+* Step outputs available for 6 motors (motors are mappable to axes)
 * Jerk controlled motion for acceleration planning (S curve 3rd order motion planning)
 * RESTful interface using JSON
+* Extremely stable and jitter-free 100 Khz step generation
 * Complete status and system state displays
 
 #TinyG2 User Pages
 By and large TinyG2 works identically to TinyG, and most configuration and other questions are handled at the [TinyG wiki](https://github.com/synthetos/TinyG/wiki). Here are some pages that are specific to TinyG2. 
+* [Project Status Page] along with differences between TinyG and G2
 * [Programming TinyG2 onto the Due](https://github.com/synthetos/g2/wiki/Programming-TinyG2)
 
 #TinyG2 Developer Pages
