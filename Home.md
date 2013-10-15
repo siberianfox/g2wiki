@@ -5,7 +5,7 @@ This wiki documents the TinyG ARM port, which (at least for now) we are calling 
 This wiki serves as a user and programmer manual, and documents progress on the project. We (Synthetos) maintain it, but it's an open wiki. If you want to post wiki-type stuff, feel free to do it here. Please let us know via a github Issue if it's anything that needs active attention - Issues are good for requested changes, discussions and bona-fide software bugs.
 
 #What is TinyG2?
-TinyG2 is an ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on the Arduino Due.
+TinyG2 is an ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue).
 
 G2 is cross-platform code that runs on the Arduino Due. It can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 3 axis motion control system.
 
