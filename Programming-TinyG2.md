@@ -2,8 +2,12 @@ PROGRAMMING THE DUE FROM OS X
 =============================
 
 ###Step 1
-Get the tinyg2.hex file from the master branch. The tinyg.hex file is found here:
+Get the tinyg2.elf file from the master branch:
+https://github.com/synthetos/g2/blob/master/TinyG2/TinyG2.elf
 
+Click on the RAW tab and it should download it for you. Go to Step 2.
+
+Alternately, you can get the tinyg2.hex file here:
 https://raw.github.com/synthetos/g2/master/TinyG2/TinyG2.hex
 
 You need the RAW page, that looks like this:
@@ -14,7 +18,7 @@ You need the RAW page, that looks like this:
 ...
 </pre>
 
-...not the HTML formatted page that just has the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
+...not the HTML formatted page that just shows the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
 
 ###Step 2
 
