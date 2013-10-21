@@ -1,6 +1,6 @@
 Please note: We do not yet have instructions for Windows or Linux, but the steps are similar.
 
-PROGRAMMING THE DUE FROM OS X
+Programming TinyG2 onto the Arduino Due from Apple OSX
 =============================
 
 ###Step 1 - Get the TinyG2.elf file
