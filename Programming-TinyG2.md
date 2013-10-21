@@ -1,3 +1,5 @@
+Please note: We do not yet have instructions for Windows or Linux, but the steps are similar.
+
 PROGRAMMING THE DUE FROM OS X
 =============================
 
