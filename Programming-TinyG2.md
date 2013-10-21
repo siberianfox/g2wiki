@@ -16,7 +16,7 @@ You need the RAW page, that looks like this:
 
 ...not the HTML formatted page that just has the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
 
-#Step 1
+###Step 2
 
 Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for OS X.
 
