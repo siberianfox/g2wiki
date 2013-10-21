@@ -1,6 +1,23 @@
 PROGRAMMING THE DUE FROM OS X
 =============================
 
+###Step 1
+Get the tinyg2.hex file from the master branch. The tinyg.hex file is found here:
+
+https://raw.github.com/synthetos/g2/master/TinyG2/TinyG2.hex
+
+You need the RAW page, that looks like this:
+<pre>
+:0200000280007C
+:1000000000800820C1B1080035B2080035B20800F0
+:1000100035B2080035B2080035B208000000000013
+...
+</pre>
+
+...not the HTML formatted page that just has the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
+
+#Step 1
+
 Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for OS X.
 
 Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
