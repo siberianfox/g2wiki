@@ -1,7 +1,7 @@
 PROGRAMMING THE DUE FROM OS X
 =============================
 
-###Step 1
+###Step 1 - Get the TinyG2.elf file
 Get the tinyg2.elf file from the master branch:
 https://github.com/synthetos/g2/blob/master/TinyG2/TinyG2.elf
 
@@ -20,11 +20,15 @@ You need the RAW page, that looks like this:
 
 ...not the HTML formatted page that just shows the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
 
-###Step 2
+###Step 2 - Install the Arduino Due environment
+
+_If you already have the Arduino Due environment installed you can skip this step_
 
 Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for OS X.
 
 Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
+
+###Step 3 - Program TinyG2 onto the Due
 
 Open Terminal.app and change to the directory with this programmer:
 
