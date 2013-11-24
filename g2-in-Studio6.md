@@ -20,7 +20,7 @@ These instructions assume the following environment. Similar environments should
  * Select the standard install locations
  * When asked, you won't need the Atmel Gallery
 * Install Yagarto on Windows
- * Download [Yagarto GNU ARM Toolchain for windows](http://www.yagarto.de/#download). The latest version is 20121222 as of today - 4/19/13
+ * Download [Yagarto GNU ARM Toolchain for windows](http://www.emb4fun.de/archive/gabmt/index.html). The latest version is 20121222 as of today - 11/23/13
  * Install in windows. Install everything. Let it create a yagarto-2012122 (or similar) directory in the C: drive
 * Bootstrap Yagarto into the project.
  * (0) Don't attempt to open TinyG2.atsln or TinyG2.cppproj yet. They will crash because Yagarto is not yet installed
