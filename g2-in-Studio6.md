@@ -31,7 +31,7 @@ These instructions assume the following environment. Similar environments should
  * (5) Once you are back in the `Package Configuration` dialog select `Yagarto` and `Set as Default`
  * (6) Set the Toolchain path to `C:\yagarto-20121222\bin` and finally hit `OK`
  * (7) Repeat steps (2) - (6) for `Atmel ARM 32-Bit (C Language)`
- * (8) Exit to project and say YES to save. 
+ * (8) Exit AS6 from the File menu. If prompted, say YES to save. 
 * If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
  * When you open the project go to the `Project \ TinyG2 Properties \ Advanced` panel and make sure it says  `Toolchain Flavour - Yagarto`
  * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
