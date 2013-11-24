@@ -33,7 +33,7 @@ These instructions assume the following environment. Similar environments should
  * (7) Repeat steps (2) - (6) for `Atmel ARM 32-Bit (C Language)`
  * (8) Exit AS6 from the File menu. If prompted, say YES to save. 
 * If you now click on the file `tinyg2.atsln` it should open the project and you should be able to compile and debug
- * To open the project properties window go to the right hand nav panel with all the files and double click on the bold `TinyG2`. Select `properties`. Make sure it says  `Toolchain Flavour - Yagarto`
+ * To open the project properties window go to the right hand nav panel with all the files and right click on the bold `TinyG2`. Select `properties`. Make sure it says  `Toolchain Flavour - Yagarto`
  * NB: At the current time the REBUILD does not work. It will clean everything and then fail. Use BUILD only. If you need to rebuild realize that it's a 2 step process. Rebuild (with the error), then build.
 * If you navigate to the Reference directory and run `make` (no arguments) from the command line it will pull in the Newlib sources and unzip them. This can be handy for providing source for symbolic debugging if you want to dive down that low.
 
