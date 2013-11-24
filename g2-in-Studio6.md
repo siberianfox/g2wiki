@@ -25,7 +25,7 @@ These instructions assume the following environment. Similar environments should
 * Bootstrap Yagarto into the project.
  * (0) Don't attempt to open TinyG2.atsln or TinyG2.cppproj yet. They will crash because Yagarto is not yet installed
  * (1) Open Studio6 by clicking on the desktop icon
- * (2) From the menu bar select `Tools / Options / toolchain` 
+ * (2) From the menu bar select `Tools / Options / toolchain`  (near the bottom)
  * (3) Select `Atmel ARM 32-Bit (CPP Language)`
  * (4) Add Flavour. Package name = `Yagarto`. Set the base to `C:\yagarto-20121222`. Click `Add`
  * (5) Once you are back in the `Package Configuration` dialog select `Yagarto` and `Set as Default`
