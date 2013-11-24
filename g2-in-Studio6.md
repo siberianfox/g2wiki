@@ -3,7 +3,7 @@ This setup is designed to be as portable as possible so the project can be run f
 The project setup uses Studio6 as an IDE and debugging platform, but does not use the Studio6 toolchain, auto-generated makefile, libraries or sources. It uses the Yagarto ARM GCC toolchain to get a newlib that's compiled for printf() floatinf point support. It also uses a Makefile provided by the project. This is an attempt to keep the project as portable as possible to non-Studio6 build environments
 
 These instructions assume the following environment. Similar environments should work, but have not been tested.
-* Atmel Studio 6.1-2440-beta
+* Atmel Studio 6.1 sp2 (2730)
 * Windows XP SP3 with all current patches up-to-date
 * VMware 4 or 5 hosting XP on...
 * Apple Macintosh OSX 10.8.3 (Mountain Lion)
@@ -13,14 +13,14 @@ These instructions assume the following environment. Similar environments should
 * For starters make sure your VM has at least 2.5 Gb RAM allocated to it, and your XP image (or whatever) is up to date with service packs. 
 * Clone the [g2 Github repository](https://github.com/synthetos/g2)
 * Get the following:
- * [Atmel Studio 6.1-2440-beta](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
+ * [Atmel Studio 6.1 sp2 (2730)](http://www.atmel.com/tools/atmelstudio.aspx). Get the one with .NET you don't have a current .NET install on your system
  * [Atmel SAM-ICE (Segger Jlink)](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=%2fha2pyFadujAZ79HQyfG%252bJm4Wmz2%2fLVln%2foieqku2gI%3d) 
  * [Olimex JTAG adapter](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMt%2f9hUFx8MktsRg8ShTvwMQusYCyASUbpU%3d)
-* Install `AtmelStudio-6.1.2440-beta-net.exe` or `AtmelStudio-6.1.2440-beta.exe`
+* Install `AStudio61sp2net.exe` or `AStudio61sp2.exe`
  * Select the standard install locations
  * When asked, you won't need the Atmel Gallery
 * Install Yagarto on Windows
- * Download [Yagarto GNU ARM Toolchain for windows](http://www.emb4fun.de/archive/gabmt/index.html). The latest version is 20121222 as of today - 11/23/13
+ * Download [Yagarto GNU ARM Toolchain for windows](http://sourceforge.net/projects/yagarto/files/YAGARTO%20for%20Mac%20OS%20X/20121222/). Here are some other [useful Yagarto links](http://www.emb4fun.de/archive/gabmt/index.html). The latest version is 20121222 as of today - 11/23/13
  * Install in windows. Install everything. Let it create a yagarto-2012122 (or similar) directory in the C: drive
 * Bootstrap Yagarto into the project.
  * (0) Don't attempt to open TinyG2.atsln or TinyG2.cppproj yet. They will crash because Yagarto is not yet installed
