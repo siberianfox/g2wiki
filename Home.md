@@ -27,5 +27,6 @@ By and large TinyG2 works identically to TinyG, and most configuration and other
 * [Development Environments](https://github.com/synthetos/g2/wiki/Development-Environments)
 * [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
 * [Atmel Studio6 Setup and Notes](https://github.com/synthetos/g2/wiki/g2-in-Studio6)
+* [Programming the v9 board with Studio6 and a SAM-ICE](https://github.com/synthetos/g2/wiki/Programming-v9-with-Studio6-and-the-SAM-ICE)
 * [Useful stuff to know](https://github.com/synthetos/g2/wiki/Useful-Stuff)
 * [Licensing](https://github.com/synthetos/g2/wiki/Licensing)
