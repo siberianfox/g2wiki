@@ -4,23 +4,9 @@ Flashing TinyG2 to the Arduino Due w/ Apple OSX
 =============================
 
 ###Step 1 - Get the TinyG2.elf file
-Get the tinyg2.elf file from the master branch:
-https://github.com/synthetos/g2/blob/master/TinyG2/TinyG2.elf
-
-Click on the RAW tab and it should download it for you. Go to Step 2.
-
-Alternately, you can get the tinyg2.hex file here:
-https://raw.github.com/synthetos/g2/master/TinyG2/TinyG2.hex
-
-You need the RAW page, that looks like this:
-<pre>
-:0200000280007C
-:1000000000800820C1B1080035B2080035B20800F0
-:1000100035B2080035B2080035B208000000000013
-...
-</pre>
-
-...not the HTML formatted page that just shows the hex in a window. Right click to "Save As" tinyg2.hex (you may need to get rid of a .txt extension during this save). Save it in some known directory that you can get back to. The downloaded file should be about 350K bytes. If it's much bigger than that you got the HTML file by mistake.
+Get the tinyg2.elf binary firmware files from the link below.
+<br>
+http://synthetos.github.io/g2/
 
 ###Step 2 - Install the Arduino Due environment
 
