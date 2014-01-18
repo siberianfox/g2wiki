@@ -3,7 +3,7 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 
 1. Setup
 
-1.1 Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
+* Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
 
 2. Programming
 
