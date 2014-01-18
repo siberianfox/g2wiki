@@ -7,7 +7,7 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 
 First, make sure the SAM-ICE is plugged in via USB. 
 
-Next, Make sure the SAM-ICE is connected to the virtual machine. IN the Virtual Machine/USB & Bluetooth menu, aslect `COnnecte SGEGGER J-Link`
+Next, make sure the SAM-ICE is connected to the virtual machine. In the Virtual Machine/USB & Bluetooth menu, select `Connect SEGGER J-Link`
 
 NOTE: If you get a dialog asking to upgrade the SAM-ICE firmware, do it.
 
