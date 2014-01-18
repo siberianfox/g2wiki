@@ -15,19 +15,22 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 
 _NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SAM-ICE firmware, do it._
 
-Select `SAM-ICE` for the tool
-Select `ATSAM3X8C` for the device _(Note: Use ATSAM3X8E if you are programming the Due)_
-Select `SWD` for the Interface
+1. Select `SAM-ICE` for the tool
+1. Select `ATSAM3X8C` for the device _(Note: Use ATSAM3X8E if you are programming the Due)_
+1. Select `SWD` for the Interface
 
-Hit `Apply`. You may get a `Device Signature` coming back - about 8 hex digits. The `Target Voltage` should also say 3.3 volts, plus or minus. If not, hit `Read`
+1. Hit `Apply`. You may get a `Device Signature` coming back - about 8 hex digits. The `Target Voltage` should also say 3.3 volts, plus or minus. If not, hit `Read`
 
-Click the `Memories` line in the left nav. Leave all settings at their defaults (Erase Chip, boxes checked)
+1. Click the `Memories` line in the left nav. Leave all settings at their defaults (Erase Chip, boxes checked)
 
-Navigate to the TinyG2.elf file in the file select box
+1. Use the file select box `...` to navigate to the TinyG2.elf file
 
-Hit `Program`
+1. Hit `Program` You should see a series of progress bars in the device window and also in the popup window driven by the SAM-ICE
 
-Close the programming dialog box and connect the board USB to the mac (it can be plugged in when you are programming, also). Make sure the USB port is recognized by the mac, not the VM (VMware or Parallels).
+1. Close the programming dialog box
+
+### Connect the board to the mac
+ and connect the board USB to the mac (it can be plugged in when you are programming, also). Make sure the USB port is recognized by the mac, not the VM (VMware or Parallels).
 
 If you turn on a terminal window in Coolterm you should see something like usbmodem001
 
