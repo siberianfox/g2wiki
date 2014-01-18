@@ -1,6 +1,6 @@
 _These are some really sketchy notes cribbed from a chat we were having._
 
-Bring up Atmel Studio 6
+1. Bring up Atmel Studio 6.1. If the project complains that you don;t have the complete project don;t worry - you don't need it if all you are doing is programming (and not compiling).
 
 Select `Tools`/`Device Programming`
 
