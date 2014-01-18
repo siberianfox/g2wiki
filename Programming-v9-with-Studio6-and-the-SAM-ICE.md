@@ -12,7 +12,7 @@ Next, make sure the SAM-ICE is connected to the virtual machine. In the Virtual 
 NOTE: If you get a dialog asking to upgrade the SAM-ICE firmware, do it.
 
 Select `SAM-ICE` for the tool
-Select `ATSAM3X8C` for the device
+Select `ATSAM3X8C` for the device _(Note: Use ATSAM3X8E if you are programming the Due)_
 Select `SWD` for the Interface
 
 Hit `Apply`. You should get a `Device Signature` coming back - about 8 hex digits. The `Target Voltage` should also say 3.3 volts, plus or minus.
