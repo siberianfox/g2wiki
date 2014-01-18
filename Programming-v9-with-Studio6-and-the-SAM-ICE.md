@@ -36,8 +36,9 @@ _NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SA
 
 1. You can verify that the USB was recognized by the mac by looking for it in the system report. Look here: <Apple> / About This Mac / More Info... / System Report ... / USB. You should see TinyG v2 in the device list. You can refresh this list by hitting `<command> r`. Make sure you see the TinyG v2 device.
 
-1. Select the `Options' menu in Coolterm. '`Re-Scan Serial Ports`. You should see usbmodem001. If not, go back to the system report, and also make sure the TinyG is not in the VMware USB devices. If so, disconnect it.
+1. Select the `Options' menu in Coolterm. '`Re-Scan Serial Ports`. You should see usbmodem001. If not, go back to the system report, and also make sure the TinyG is not in the VMware USB devices. If so, disconnect it. 
+1. In the `Terminal` select `Line Mode`
 
-Connect at 115,200 - or anything other than 1200. USB don't care. USB just takes what it needs.
+1. Hit `OK` to exit the Options menu
 
-Hit ? in the interface and see if you get a status screen back
+1. Hit for `Connect` menu item. Hit <CR> and you should see the `tinyg [mm] ok>` prompt. Hit ? in the interface and see if you get a status screen back. You can hit $ to see settings. See [TinyG Configuration Page](https://github.com/synthetos/TinyG/wiki/TinyG-Configuration) for details. There is also a wealth of information on the TinyG wiki that also applies to the G2 application you are now running. Have fun.
