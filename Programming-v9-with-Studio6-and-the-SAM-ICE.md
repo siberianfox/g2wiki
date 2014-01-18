@@ -30,7 +30,12 @@ _NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SA
 1. Close the programming dialog box
 
 ### Connect the board to the mac
- and connect the board USB to the mac (it can be plugged in when you are programming, also). Make sure the USB port is recognized by the mac, not the VM (VMware or Parallels).
+
+1. If you do not already have Coolterm get it here and install it http://freeware.the-meiers.org/
+
+1. Connect the board USB to the mac (it can be plugged in when you are programming, also). Make sure the USB port is recognized by the mac, not the VM (VMware or Parallels). When you connect the USB you might see a VMware dialog asking where to connect the TinyG. Choose the mac.
+
+1. You can verify that the USB was recognized by the mac by looing for it in the system report. Look here: <Appl> / About This Mac / More Info... / System Report ... / USB. You should see TinyG v2 in the device list
 
 If you turn on a terminal window in Coolterm you should see something like usbmodem001
 
