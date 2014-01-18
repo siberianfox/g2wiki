@@ -1,9 +1,13 @@
 _These are some really sketchy notes cribbed from a chat we were having._
 We are assuming you are using VMware Fusion 6 under OSX. If not, some of these instructions won't be relevant and can be ignored.
 
-1. Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
+1. Setup
 
-2. Select `Tools`/`Device Programming`
+1.1 Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
+
+2. Programming
+
+Select `Tools`/`Device Programming`
 
 First, make sure the SAM-ICE is plugged in via USB. 
 
