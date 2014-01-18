@@ -6,6 +6,7 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 1. Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
 
 ### Programming
+_NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SAM-ICE firmware, do it._
 
 1. Select `Tools`/`Device Programming`
 
@@ -13,10 +14,8 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 
 1. Next, make sure the SAM-ICE is connected to the virtual machine. In the Virtual Machine/USB & Bluetooth menu, select `Connect SEGGER J-Link`
 
-_NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SAM-ICE firmware, do it._
-
 1. Select `SAM-ICE` for the tool
-1. Select `ATSAM3X8C` for the device _(Note: Use ATSAM3X8E if you are programming the Due)_
+1. Select `ATSAM3X8C` for the device for the v9, use ATSAM3X8E if you are programming the Due
 1. Select `SWD` for the Interface
 
 1. Hit `Apply`. You may get a `Device Signature` coming back - about 8 hex digits. The `Target Voltage` should also say 3.3 volts, plus or minus. If not, hit `Read`
