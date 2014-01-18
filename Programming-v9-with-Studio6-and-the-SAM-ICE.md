@@ -7,13 +7,13 @@ We are assuming you are using VMware Fusion 6 under OSX. If not, some of these i
 
 ### Programming
 
-Select `Tools`/`Device Programming`
+1. Select `Tools`/`Device Programming`
 
-First, make sure the SAM-ICE is plugged in via USB. 
+1. First, make sure the SAM-ICE is plugged in via USB. 
 
-Next, make sure the SAM-ICE is connected to the virtual machine. In the Virtual Machine/USB & Bluetooth menu, select `Connect SEGGER J-Link`
+1. Next, make sure the SAM-ICE is connected to the virtual machine. In the Virtual Machine/USB & Bluetooth menu, select `Connect SEGGER J-Link`
 
-NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SAM-ICE firmware, do it.
+_NOTE: If anywhere in these next steps you get a dialog asking to upgrade the SAM-ICE firmware, do it._
 
 Select `SAM-ICE` for the tool
 Select `ATSAM3X8C` for the device _(Note: Use ATSAM3X8E if you are programming the Due)_
