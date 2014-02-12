@@ -1,6 +1,12 @@
 _These are some really sketchy notes cribbed from a chat we were having._
 We are assuming you are using VMware Fusion 6 under OSX. If not, some of these instructions won't be relevant and can be ignored.
 
+### SAM-ICE and Adapter
+You will need these 2 parts, both available from Mouser Electronics:
+
+* [Atmel SAM-ICE JTAG programmer/debugger (rebranded Segger J-Link](http://www.mouser.com/ProductDetail/Atmel/AT91SAM-ICE/?qs=sGAEpiMZZMv256HIxPBQcGzacOR4NmhW)
+* [Olimex ARM-JTAG-20-10 adapter for that ridiculously small 0.050" 10 pin connector](http://www.mouser.com/ProductDetail/Olimex-Ltd/ARM-JTAG-20-10/?qs=sGAEpiMZZMuqBwn8WqcFUlg5bvYBlkWg4C%252b45SvcQlw%3d)
+
 ### Setup
 
 1. Bring up Atmel Studio 6.1. If the project complains that you don't have the complete project or some parts are not found don't worry - you don't need it if all you are doing is programming (and not compiling).
