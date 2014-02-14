@@ -1,5 +1,3 @@
-Flashing TinyG2 to the Arduino Due w/ Windows
-=============================
 
 ###Step 1 - Get the TinyG2.bin file
 Get the tinyg2.bin binary firmware files from the link below.
