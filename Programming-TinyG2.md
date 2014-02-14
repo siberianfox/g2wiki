@@ -3,5 +3,5 @@ This page describes how to program the TinyG v9 (or Due) using the ERASE / bootl
 Please note: We do not yet have instructions for Windows or Linux, but the steps are similar.
 
 
-[Flashing TinyG2 in OSX](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Apple-OSX)
+[Flashing TinyG2 in OSX](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Apple-OSX)<br>
 [Flashing TinyG2 in Windows](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Windows-OSX)
