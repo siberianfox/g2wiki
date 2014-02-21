@@ -27,6 +27,8 @@ These instructions apply to Max OSX using Xcode 4.4 or later.
  * `sudo -s`
  * `arm-non-eabi-gcc`
 
+(Estee: `arm-non-eabi-gcc` is not found in the yagarto-4.7.2 directory after it has been installed)
+
 * Now move the yagarto-4.7.2 directory to /usr/local. OSX hides this directory from you. Type <cmd><shift>g /usr/local to open it. from the "Go to the folder:" dialog box.
 
 * Drag the yagarto-4.7.2 directory (not the app) into /usr/local. You will probably need to enter these commands first:
