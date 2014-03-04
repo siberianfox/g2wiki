@@ -2,6 +2,7 @@ This page is just some notes for now but will ultimately turn into the jump page
 
 ### Required Equipment / Parts
 
+asdasd
 	No. | Item | Summary Description
 	--|------|--------------------
 	1 | TinyG v9 Board | Referred to as UUT for unit-under-test
