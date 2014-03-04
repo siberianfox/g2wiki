@@ -9,7 +9,6 @@ This page is just some notes for now but will ultimately turn into the jump page
 	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.) (See also G92 Offsets)
 
 
-asdasd
 
 	No. | Item | Summary Description
 	--|------|--------------------
