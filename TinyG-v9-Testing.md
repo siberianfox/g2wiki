@@ -5,7 +5,7 @@ This page is just some notes for now but will ultimately turn into the jump page
 	No. | Item | Summary Description
 	----|------|--------------------
 	1 | TinyG v9 Board | Referred to as UUT for unit-under-test
-	2 | Bench Power Supply | Bench power supply capable of 2 amps at 24 volts. In the absence of a bench supply a standard 24 VDC will suffice, but some test steps will not be possible
+	2 | Bench_Power_Supply | Bench power supply capable of 2 amps at 24 volts. In the absence of a bench supply a standard 24 VDC will suffice, but some test steps will not be possible
 	3 | Stepper Motors | Five NEMA23 stepper motors with a current rating of approximately 2.5 to 3 amps
 	4 | Dumb Stepper Fins | Two Synthetos DumbStepper fins. Used to test slots 4 and 5
 
