@@ -2,14 +2,6 @@ This page is just some notes for now but will ultimately turn into the jump page
 
 ### Required Equipment / Parts
 
-
-	Gcode | Parameters | Command | Description
-	------|------------|---------|-------------
-	G28.2 | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis letter must be present. The value (number) must be provided but is ignored.
-	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.) (See also G92 Offsets)
-
-
-
 	No. | Item | Summary Description
 	----|------|--------------------
 	1 | TinyG v9 Board | Referred to as UUT for unit-under-test
