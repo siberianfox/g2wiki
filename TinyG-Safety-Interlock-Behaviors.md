@@ -6,14 +6,14 @@ This page describes the TinyG CNC controller's safety interlock shutdown system.
 
 The controller safety interlock is comprised of the following hardware components.
 
-* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal `Interlock_NC` is driven to logic HI.
+* **Interlock switch loop**. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal `Interlock_NC` is driven to logic HI.
 
-* Interlock delay timer. An isolated circuit located on the controller board delays by a pre-set time once the interlock switch loop is triggered. The timer is an analog circuit that uses no programming or other software and therefore does not require software validation.
+* **Interlock delay timer**. An isolated circuit located on the controller board delays by a pre-set time once Interlock_NC is activated. The timer is an analog circuit that uses no programming or other software and therefore does not require software validation.
 
-* System hardware lockouts. Once the timer expires it activates a set of hardware lockouts located on the controller board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
- * All stepper motor step signals are driven to logic LO through a dedicated line buffer. This prevents the controller from moving the stepper motors until the lockout is disabled
- * The Spindle ON signal is disabled by driving it logic LO
- * The Spindle pulse-width-module (PWM) signal is disabled driving it to logic LO
+* **Hardware lockouts**. Once the timer expires it activates a set of hardware lockouts located on the controller board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
+ * All four stepper motor step signals are driven to logic LO through a line buffer dedicated to this purpose. This prevents the controller from moving the stepper motors until the lockout is disabled.
+ * The Spindle ON signal is disabled via a line buffer by driving it logic LO
+ * The Spindle pulse-width-module (PWM) signal is disabled via a line buffer driving it to logic LO
 
 ##Sequence of Events
 
