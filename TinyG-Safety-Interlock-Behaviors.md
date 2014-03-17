@@ -6,12 +6,12 @@ This page describes the TinyG safety interlock shutdown system. The safety inter
 
 The TinyG safety interlock is comprised of the following hardware / electrical components.
 
-* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated. This signal starts the interlock delay time. It is also provided to the CPU as an interrupt, signaling the CPU that it should execute a controlled shutdown before the timer expires.
+* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated. This signal starts the interlock delay timer. It also causes a CPU interrupt, signaling that the CPU should execute a controlled shutdown before the timer expires.
 
-* Interlock delay timer. An isolated circuit located on the TinyG board delays by a pre-set time if the interlock switch loop is triggered. The circuit is an analog circuit that uses no programming or other software and therefore does not require software validation.
+* Interlock delay timer. An isolated circuit located on the TinyG board delays by a pre-set time once the interlock switch loop is triggered. The timer is an analog circuit that uses no programming or other software and therefore does not require software validation.
 
-* System hardware lockouts. Once the timer fires a series of hardware lockouts are activated on the TinyG board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
- * All stepper motor step signals are driven low through a dedicated line buffer. At this point the processor - should 
+* System hardware lockouts. Once the timer expires it activates a set of hardware lockouts located on the TinyG board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
+ * All stepper motor step signals are driven low through a dedicated line buffer. This prevents the processor from moving the stepp 
  * The Spindle ON signal is driven to logic LOW (disabled)
 
 ##Definition of Events
