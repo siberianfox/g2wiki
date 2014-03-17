@@ -21,8 +21,8 @@ The controller safety interlock is comprised of the following hardware component
 * Opening one or more interlock switches causes Interlock_NC to go HI (active).
 * Two things happen when Interlock_NC goes HI:
  1. An interrupt occurs on the CPU. The controller performs the following actions
-  * Issues a feedhold to stop the current movement while preserving position. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. The controller then enters an alarm state during which no command input is honored or executed.
-  * The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
+   * Issues a feedhold to stop the current movement while preserving position. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. The controller then enters an alarm state during which no command input is honored or executed.
+   * The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
  1. The interlock delay timer is started to time an interval of approximately 500 milliseconds. Once the interlock delay timer expires the hardware lockouts described above are activated.
 * Once the interlock switches are restored the lockouts are removed. The processor 
 
