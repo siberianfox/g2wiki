@@ -20,76 +20,24 @@ The controller safety interlock is comprised of the following hardware component
 	Step | Sequence | Description
 	------|------------|---------|-------------
 	0 | **Power Up** | The controller will not start operation unless the `Interlock_NC` signal is LO (switches closed)
-	1 | Interlock Opens | Opening one or more interlock switches causes `Interlock_NC` to go HI (active). The following things happen simultaneously:
-	1a | Controller Alarm | The controller immediately enters an alarm state during which no command input is honored or executed.
-	1b | Controller Feedhold | The controller performs a feedhold to stop the current movement while preserving positional information. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. 
-	1c | Spindle Stop | The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
-	1d | Timer Start | The interlock delay timer is started to time an interval of approximately 500 milliseconds. 
-	2 | Timer Expires | Once the interlock delay timer expires the hardware lockouts described above are activated.
-	3 | Interlock_NC_Restored | At some point after 1 or 2 (above) the interlock switches may be restored. This re-enables the hardware and allows the controller to receive commands. 
-	4 | Job Resume | The user program can issue a `cycle start` to resume the job that was halted
+	1 | **Interlock Opens** | Opening one or more interlock switches causes `Interlock_NC` to go HI (active). The following things happen simultaneously:
+	1a | **Controller Alarm** | The controller immediately enters an alarm state during which no command input is honored or executed.
+	1b | **Controller Feedhold** | The controller performs a feedhold to stop the current movement while preserving positional information. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. 
+	1c | **Spindle Stop** | The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
+	1d | **Timer Start** | The interlock delay timer is started to time an interval of approximately 500 milliseconds. 
+	2 | **Timer Expires** | Once the interlock delay timer expires the hardware lockouts described above are activated, as described following:
+	2a | **Stepper Motor Lockout** | The stepper motor lockout circuit disables step signals to the stepper motor drivers. This causes all motors to stop if they have not already been stopped by the controller. Motors still maintain a holding torque, so the do not lose position, but the controller is will now be unable to move them.
+	2b | **Spindle Lockout** | Disable signals are sent to the spindle lockout circuits. The Spindle ON signal is forced LO (inactive), and the Spindle PWM is disables. This is because there are two ways spindles get controlled, depending on spindle controller type one needs a "chip enable" type signal, and the other needs its PWM disabled. Note that the spindle must always be active HI in a safety situation, so that loss of signal (i.e. Spindle ON going LO) will not enable the spindle. 
+	3 | **Interlock_NC_Restored** | At some point after 1 or 2 (above) the interlock switches may be restored. This re-enables the hardware and allows the controller to receive commands. To prevent a race condition, the processor debounces the interlock interrupt and waits for it to stabilize before restoring motion.
+	4 | **Job Resume** | The user program can issue a `cycle start` to resume the job that was halted. This should be a manual operation requiring user interaction. This part of the sequence is under the control of the CNC application program. The controller requires the following sequence to be sent: (1) re-start the spindle to the RPM desired, (2) issue a cycle start to resume the job. Depending on the nature of the CNC job the CNC application may need to command the controller to perform other recovery actions.
 
 
-The following events can occur as part of a safety shutdown. 
+Notes for Mike:
 
-
-On Sat, Mar 15, 2014 at 12:22 PM, Alden Hart <alden@tenmilesquare.com> wrote:
-Mike,
-
-When the safety interlock cuts out what behaviors should occur? Define a number of behaviors :
-
-(1) Interlock tripped (broken)
-
-- immediately an interrupt on the ARM triggers. this tells the processor it needs hustle and shutdown the spindle and the motors.
-- at the same time a one shot timer on the board starts. it does not disable anything, just starts a count down
- 
-(2) Safety timer times out
-
-- when the once shot timer completes, the disable lines for the step trains are disabled. the motor will still maintain a holding torque, so it will not loose position, but the processor will be unable to move it. a disable signal is sent to the speed controller, and the PWM wave is disabled. (why both? there are two ways spindles get controlled... depending on spindle controller type one needs a "chip enable" type signal, and the other needs its PWM disabled.)
- 
-(3) Interlock re-engaged
-
-- the timer is cancelled and reset, and the interrupt line to the ARM returns to enabled. the step and direction lines are re-enabled, and the spindle PWM and spindle enabled signals are restored. to prevent a race condition, the processor should debounce the interlock interrupt and wait for it to stabilize before restoring motion. 
- 
-(4) manual or automatic cycle-start to resume program, operation
-
-this is machine dependent, but i would favor manual resume. the state machine should probably be left in a FEED_HOLD state.
- 
-Stepper behavior
-On (1) the program goes into a feedhold. We need to know a worst case for the OM to go into feedhold so we can pick a time constant for the timer.
-
-it will vary, but it will most certainly be less than 1 second at the most. it has to do with the time it takes to decelerate the X/Y & Z carriages at maximum speed (1500mm/min). 
- 
-On (2) the step lines are disengaged (overridden) by the interlock timer
-
-they're tied to what ever their last value is. if they are high they remain high, if they are low, they remain low.
- 
-On (3) the step lines are re-engaged.
-
-they ripple the current input to the output. if the processor changed the input while the timer fired then it is a software bug. to detect this state, the oneshot firing could trigger a second interrupt, but i think it will be unnecessary in non-debugging situations.
- 
-On (4) does the program start from a new cycle start? Or does it wait for the user to manually issue the cycle start?
-
-it would need to do the ramp up to finish what ever line it was in the middle of. i would think that waiting for user input to continue would be prudent.
- 
-Spindle behavior
-On (1) the CPU turns the spindle control to OFF and drops PWM to 0 RPM (but NOT off - need to feed the ESC)
-
-yup.
- 
-On (2) the spindle ON line is overridden to be OFF (same as disconnecting the step line). This is more complicated because the notion of active HI or active LO must now be baked into the interlock circuit. It cannot be under SW control.
-
-true. always use active high for safety circuits, that way, if the control signal is broken it defaults to disabled instead of enabled (no interlock). by the same token, always use NC switches, so if they're improperly wired, the machine is disabled.
- 
-On (3) at a HW level the Spindle ON line is re-engaged.
- 
-On (4) what happens? As above, does the program resume it's previous state or wait for a manual cycle start? How about the PWM? Does to go back to the RPM that it was before the break?
-
-at this point, the processor should have returned the spindle control PWM cycles to 0 RPM. re-engaging should warm up the spindle until it comes up to the desired speed, and then continue as before.
+* You said regarding the stepper driver lockout: "they're tied to what ever their last value is. if they are high they remain high, if they are low, they remain low." Im not sure how this works. If the buffers go into tri-state then it might preserve the step pulse phase, but I will need to put a pulldown on this line. The only time that this matters is if the feedhold did not fully take effect. That is the only time that the step pulse might actually be high. In that case you have already lost position - as the feedhold did not complete before the timer fired. Otherwise the step pulse will always be low.
  
 
-As you can see - we need some detailed review of behaviors.
+* The spindle behavior we describe will kill the ESC as the PWM is shut down. Are you sure this is what we want?
+"On (1) the CPU turns the spindle control to OFF and drops PWM to 0 RPM (but NOT off - need to feed the ESC)
 
-hope my answers clear up some of the details. FYI: i think we're going to design our own speed controller for certification purposes. i'm going to shoot for a low cost closed loop speed controller ;)
-
---mikest
+yup."
