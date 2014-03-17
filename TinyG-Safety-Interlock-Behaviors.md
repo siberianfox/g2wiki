@@ -21,8 +21,8 @@ The controller safety interlock is comprised of the following hardware component
 	------|------------|---------|-------------
 	0 | Power Up | The controller will not start operation unless the `Interlock_NC` signal is LO (switches closed)
 	1 | Interlock Opens | Opening one or more interlock switches causes `Interlock_NC` to go HI (active). The following things happen simultaneously:
-	1a | Controller Alarm | The controller immediately enters an alarm state during which no command input is honored or executed
-	1b | Controller Feedhold | The controller performs a feedhold to stop the current movement while preserving position. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. 
+	1a | Controller Alarm | The controller immediately enters an alarm state during which no command input is honored or executed.
+	1b | Controller Feedhold | The controller performs a feedhold to stop the current movement while preserving positional information. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in approximately 210 milliseconds. 
 	1c | Spindle Stop | The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
 	1d | Timer Start | The interlock delay timer is started to time an interval of approximately 500 milliseconds. 
 	2 | Timer Expires | Once the interlock delay timer expires the hardware lockouts described above are activated.
