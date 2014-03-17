@@ -6,7 +6,7 @@ This page describes the TinyG safety interlock shutdown system. The safety inter
 
 The TinyG safety interlock is comprised of the following hardware / electrical components.
 
-* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated. This signal starts the interlock delay timer and is also provided to the CPU as an interrupt, signaling the CPU that it should execute a controlled shutdown before the timer expires.
+* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated. This signal starts the interlock delay time. It is also provided to the CPU as an interrupt, signaling the CPU that it should execute a controlled shutdown before the timer expires.
 
 * Interlock delay timer. An isolated circuit located on the TinyG board delays by a pre-set time if the interlock switch loop is triggered. The circuit is an analog circuit that uses no programming or other software and therefore does not require software validation.
 
