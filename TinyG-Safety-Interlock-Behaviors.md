@@ -1,20 +1,33 @@
-This page describes the TinyG safety interlock shutdown system. The safety interlock is designed to shut down a machine in a controlled manner if a safety envelope switch is tripped. Machine state is preserved so that jobs can be resumed after a safe conditions are restored.
+This page describes the TinyG CNC controller's safety interlock shutdown system. The safety interlock is designed to shut down a machine in a controlled manner if a safety envelope switch is tripped. Machine state is preserved so that jobs can be resumed after a safe conditions are restored.
 
 *** Note - At the current time this page is just a specification. No TinyG's in production have this feature ***
 
-##Physical and Electrical Components
+##Hardware Components
 
-The TinyG safety interlock is comprised of the following hardware / electrical components.
+The controller safety interlock is comprised of the following hardware components.
 
-* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated. This signal starts the interlock delay timer. It also causes a CPU interrupt, signaling that the CPU should execute a controlled shutdown before the timer expires.
+* Interlock switch loop. One or more normally closed switches (NC) may be wired in series. If any switch is tripped - opening the loop - a safety interlock signal is generated (called Interlock_NC). This signal starts the interlock delay timer. It also causes a CPU interrupt, signaling that the CPU should execute a controlled shutdown before the timer expires.
 
-* Interlock delay timer. An isolated circuit located on the TinyG board delays by a pre-set time once the interlock switch loop is triggered. The timer is an analog circuit that uses no programming or other software and therefore does not require software validation.
+* Interlock delay timer. An isolated circuit located on the controller board delays by a pre-set time once the interlock switch loop is triggered. The timer is an analog circuit that uses no programming or other software and therefore does not require software validation.
 
-* System hardware lockouts. Once the timer expires it activates a set of hardware lockouts located on the TinyG board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
- * All stepper motor step signals are driven low through a dedicated line buffer. This prevents the processor from moving the stepp 
- * The Spindle ON signal is driven to logic LOW (disabled)
+* System hardware lockouts. Once the timer expires it activates a set of hardware lockouts located on the controller board. All lockouts are implemented in hardware - no software is involved in their operation. Lockouts are:
+ * All stepper motor step signals are driven to logic LO through a dedicated line buffer. This prevents the controller from moving the stepper motors until the lockout is disabled
+ * The Spindle ON signal is disabled by driving it logic LO
+ * The Spindle pulse-width-module (PWM) signal is disabled driving it to logic LO
 
-##Definition of Events
+##Sequence of Events
+
+* The controller will not start operation unless the Interlock_NC signal is LO (switches are closed)
+* Opening one or more interlock switches causes Interlock_NC to go HI (active).
+* Two things happen when Interlock_NC goes HI:
+ * An interrupt occurs on the CPU
+ * The interlock timeout is started. The timeout is approximately 500 milliseconds.
+* On receiving the interrupt the controller performs the following actions
+ * The controller issues a feedhold to stop the current movement while preserving position. A feedhold from 1500 mm/min with a jerk value of 500 million mm/min^3 will execute in less than 250 milliseconds. The controller enters an alarm state during which no command input is honored or executed.
+ * The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
+* Once the interlock delay timer expires a further set of hardware lockouts are activated (as described above).
+* Once the interlock switches are restored the lockouts are removed. The processor 
+
 
 The following events can occur as part of a safety shutdown. 
 
