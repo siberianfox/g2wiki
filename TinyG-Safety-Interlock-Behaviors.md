@@ -26,7 +26,7 @@ The controller safety interlock is comprised of the following hardware component
 	1c | Spindle Stop | The controller stops the spindle if the spindle is running. The spindle should decelerate to a stop in less than _____ seconds
 	1d | Timer Start | The interlock delay timer is started to time an interval of approximately 500 milliseconds. 
 	2 | Timer Expires | Once the interlock delay timer expires the hardware lockouts described above are activated.
-	3 | Interlock_NC Restored | At some point after 1 or 2 (above) the interlock switches may be restored. This re-enables the hardware and allows the controller to receive commands. 
+	3 | Interlock_NC_Restored | At some point after 1 or 2 (above) the interlock switches may be restored. This re-enables the hardware and allows the controller to receive commands. 
 	4 | Job Resume | The user program can issue a `cycle start` to resume the job that was halted
 
 
