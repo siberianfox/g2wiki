@@ -1,6 +1,6 @@
 This page describes the TinyG CNC controller's safety interlock shutdown system. The safety interlock is designed to shut down a machine in a controlled manner if a safety envelope switch is tripped. Machine state is preserved so that jobs can be resumed after a safe conditions are restored.
 
-*** Note - At the current time this page is just a specification. No TinyG's in production have this feature ***
+**Note - At the current time this page is just a specification. No TinyG's in production have this feature**
 
 ##Hardware Components
 
