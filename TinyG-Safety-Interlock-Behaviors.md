@@ -15,6 +15,11 @@ The controller safety interlock is comprised of the following hardware component
  * The Spindle ON signal is disabled via a line buffer by driving it logic LO
  * The Spindle pulse-width-module (PWM) signal is disabled via a line buffer driving it to logic LO
 
+* **Interlock header**
+The interlock mechanism may also need to control external controllers such as spindles, coolant systems & laser drivers. To support this the interlock pinouts should be included on the Kinen & SPI control interfaces. There are two output logic level signals:
+ * Interlock triggered. This is the signal that should be connected to the MCU interrupt.
+ * Interlock timed out. This is the signal that is active when the interlock has timeout has passed, and is connected to the lockout circuitry.
+
 ##Sequence of Events
 
 	Step | Sequence | Description
