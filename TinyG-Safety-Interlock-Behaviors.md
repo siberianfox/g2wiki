@@ -17,7 +17,7 @@ The controller safety interlock is comprised of the following hardware component
 
 * **Interlock header**
 The interlock mechanism may also need to control external controllers such as spindles, coolant systems & laser drivers. To support this the interlock pinouts should be included on the Kinen & SPI control interfaces. There are two output logic level signals:
- * Interlock triggered. This is the signal that should be connected to the MCU interrupt.
+ * Interlock triggered. This is the signal that should be connected to the MCU interrupt and is enabled when the lockout switch loop opens.
  * Interlock timed out. This is the signal that is active when the interlock has timeout has passed, and is connected to the lockout circuitry.
 
 ##Sequence of Events
