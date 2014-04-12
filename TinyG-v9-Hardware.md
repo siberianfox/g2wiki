@@ -27,6 +27,7 @@ Mating parts are:
 * Molex 08-50-0134     crimp terminal (2 required per plug)
 
 Power inputs are listed below. Pin 1 is towards the inside of the board (closest to the big capacitor C1)
+
 1. Ground
 1. +Vmot (+12v = +30v)
 
