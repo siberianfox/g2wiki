@@ -2,7 +2,7 @@ This page contains general information about TinyG v9 hardware. The v9 is still 
 
 _PRELIMINARY - This is still being iterated_
 
-TinyG v9 is intended for use by individuals building a system, as well as by system manufacturers looking to reduce costs in assembly and maintenance while maintaing high reliability. TinyG v9 has a number of features designed to support these 2 (sometime competing) goals. In general, there are choices for how to assemble and use the IO connectors.
+TinyG v9 is intended for use by individuals building a system, as well as by system manufacturers looking to reduce costs in assembly and maintenance while maintaining high reliability. TinyG v9 has a number of features designed to support these 2 (sometime competing) goals. In general, there are choices for how to assemble and use the IO connectors.
 
 ### Board Dimensions
 
@@ -39,13 +39,21 @@ Mating parts are:
 * Molex 08-50-0134     crimp terminal (4 required per plug)
 
 ### Limit Switch Connectors
-The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is labeled on the bottom silkscreen and (from top to bottom) is: (1) ground, (2) 3.3v, (3) min in, (4) max in. The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with and RC network (2.7K / 0.47 uF) and have ESD protection.
+The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is labeled on the bottom silkscreen and (from top to bottom):
+* (1) ground
+* (2) 3.3v
+* (3) min in
+* (4) max in 
 
-The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides  Amin, Amax and a safety interlock inputs.
+The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
+
+The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides  Amin, Amax and a safety interlock inputs. The header footprint is large enough to accommodate oversized headers such as box and latching headers.
 
 ### Spindle and Coolant Output Signals
 
-These output signals are available on a terminal block and also on a 2x6 dual inline 0.100" header. These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of a jumper on the board.
+These output signals are available on a terminal block and also on a 2x6 dual inline 0.100" header. The header footprint accommodates box and latching headers.
+
+These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of a jumper on the board.
 
 * Spindle On/Off
 * Spindle Direction
@@ -53,7 +61,7 @@ These output signals are available on a terminal block and also on a 2x6 dual in
 * Coolant On/Off
 
 ### SPI Connector
-SPI signals are available on a 2x5 dual inline 0.100" header. These are at 3.3v.
+SPI signals are available on a 2x5 dual inline 0.100" header. The header footprint accommodates box and latching headers. All signals are 3.3v.
 * MOSI
 * MISO
 * CLK
@@ -66,7 +74,7 @@ SPI signals are available on a 2x5 dual inline 0.100" header. These are at 3.3v.
 * Interlock OUT
 
 ### Stepper Breakout Connectors
-Stepper signals are taken out on four 1x5 single inline 0.100" headers. These are at 3.3v. Please note that the pinout of these connectors is different than similar connectors on the v7 and v8 boards
+Stepper signals are taken out on four 1x5 single inline 0.100" headers. The header footprint accommodates box and latching headers. All signals are 3.3v. Please note that the pinout of the stepper breakout connectors is different than similar connectors on the v7 and v8 boards.
 
 * 3.3v
 * Step
