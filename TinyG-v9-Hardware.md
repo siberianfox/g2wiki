@@ -16,7 +16,7 @@ TinyG v9 is intended for use by individuals building a system, as well as by sys
 
 ### Power Connector
 
-The power connector can be populated with either a standard 5.00 mm screw terminal block or a straight or right angle 2 position 0.156" (3.96mm) friction lock header. The friction lock header is rated for 7 amps, so if you are using NEMA23 motors (or larger) we recommend using the screw terminal option. 
+The power connector can be populated with either a 5.00 mm screw terminal block or a straight or right angle 2 position 0.156" (3.96mm) friction lock header. The friction lock header is rated for 7 amps, so if you are using NEMA23 motors (or larger) we recommend using the screw terminal option. 
 
 Friction Lock Header (Molex parts are listed but any equivalent part should work)
 * Molex 171813-0002     2 position right angle header
@@ -51,7 +51,7 @@ Phase outputs are listed below. Pin 1 is towards the LED end of the board (botto
 1. B1
 
 ### Limit Switch Connectors
-The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
+The homing/limit switches are brought in on 3.81mm 4 position terminal blocks for X, Y and Z axes. The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
 
 The pinout is listed below. Pin 1 is towards the power input side of the board (top).
 
@@ -60,7 +60,7 @@ The pinout is listed below. Pin 1 is towards the power input side of the board (
 1. Min in (X, Y or Z)
 1. Max in (X, Y or Z)
 
-The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides  Amin, Amax and a safety interlock inputs. The header footprint is large enough to accommodate oversized headers such as box and latching headers. Pin 1 is the square pin towards the power input side of the board (top). The even row is all ground. Signals are:
+The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides Amin, Amax and a safety interlock inputs. The header footprint is large enough to accommodate oversized headers such as box and latching headers. Pin 1 is the square pin towards the power input side of the board (top). Signals are:
 
 1. 3.3v
 1. GND
@@ -87,14 +87,12 @@ The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The h
 1. A max
 1. GND
 1. Safety interlock in
+1. GND
 
 ### Spindle and Coolant Output Signals
-
-These output signals are available on a terminal block and also on a 2x6 dual inline 0.100" header. The header footprint accommodates box and latching headers.
+Spindle and coolant output pins are brought out on a 3.8mm 6 position screw terminal block. The pinout is listed below. Pin 1 is towards the power input side of the board (top).
 
 These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of the J22 jumper on the board. The selection affects all signals.
-
-The pinout is listed below. Pin 1 is towards the power input side of the board (top).
 
 1. Ground
 1. +3.3v
@@ -102,6 +100,19 @@ The pinout is listed below. Pin 1 is towards the power input side of the board (
 1. Spindle Direction
 1. Spindle PWM signal
 1. Coolant On/Off
+
+These signals are available on a 2x6 dual inline 0.100" header. The header footprint accommodates box and latching headers. Pin 1 is the square pin towards the power input side of the board (top). Signals are:
+
+1. 3.3v/5v out (depending on selection of J22)
+1. GND
+1. Spindle On/Off
+1. GND
+1. Spindle Direction
+1. GND
+1. Spindle PWM signal
+1. GND
+1. Coolant On/Off
+1. GND
 
 ### SPI Connector
 SPI signals are available on a 2x5 dual inline 0.100" header. The header footprint accommodates box and latching headers. All signals are 3.3v. The pinout is listed below. Pin 1 is the square pin towards the power input side of the board (top). Pins alternate with odd pins on the left and even pins on the right.
