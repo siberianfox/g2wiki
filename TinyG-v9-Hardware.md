@@ -51,22 +51,48 @@ Phase outputs are listed below. Pin 1 is towards the LED end of the board (botto
 1. B1
 
 ### Limit Switch Connectors
-The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is listed below. Pin 1 is towards the power input side of the board (top).
+The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
+
+The pinout is listed below. Pin 1 is towards the power input side of the board (top).
 
 1. Ground
 1. +3.3v
 1. Min in (X, Y or Z)
 1. Max in (X, Y or Z)
 
-The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
+The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides  Amin, Amax and a safety interlock inputs. The header footprint is large enough to accommodate oversized headers such as box and latching headers. Pin 1 is the square pin towards the power input side of the board (top). The even row is all ground. Signals are:
 
-The X, Y, Z inputs are also available to a 2x13 dual inline 0.100" header. The header also provides  Amin, Amax and a safety interlock inputs. The header footprint is large enough to accommodate oversized headers such as box and latching headers.
+1. 3.3v
+1. GND
+1. X min
+1. GND
+1. X max
+1. GND
+1. 3.3v
+1. GND
+1. Y min
+1. GND
+1. Y max
+1. GND
+1. 3.3v
+1. GND
+1. Z min
+1. GND
+1. Z max
+1. GND
+1. 3.3v
+1. GND
+1. A min
+1. GND
+1. A max
+1. GND
+1. Safety interlock in
 
 ### Spindle and Coolant Output Signals
 
 These output signals are available on a terminal block and also on a 2x6 dual inline 0.100" header. The header footprint accommodates box and latching headers.
 
-These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of a jumper on the board.
+These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of the J22 jumper on the board. The selection affects all signals.
 
 The pinout is listed below. Pin 1 is towards the power input side of the board (top).
 
