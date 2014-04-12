@@ -42,6 +42,26 @@ These output signals are available on a terminal block and also on a 2x6 dual in
 * Spindle PWM signal
 * Coolant On/Off
 
+### SPI Connector
+SPI signals are available on a 2x5 dual inline 0.100" header. These are at 3.3v.
+* MOSI
+* MISO
+* CLK
+* Reset
+* CS1
+* CS2
+* 3.3v
+* GND
+* Interlock IN
+* Interlock OUT
 
+### Stepper Breakout Connectors
+Stepper signals are taken out on four 1x5 single inline 0.100" headers. These are at 3.3v. Please note that the pinout of these connectors is different than similar connectors on the v7 and v8 boards
+
+* 3.3v
+* Step
+* Enable (active low)
+* Direction
+* Ground
 
 
