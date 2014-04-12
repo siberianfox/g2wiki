@@ -84,7 +84,7 @@ SPI signals are available on a 2x5 dual inline 0.100" header. The header footpri
 1. 3.3v
 1. CLK
 1. MOSI
-1. Reset
+1. ~Reset (active low)
 1. GND
 1. CS1
 1. CS2
@@ -92,12 +92,12 @@ SPI signals are available on a 2x5 dual inline 0.100" header. The header footpri
 1. Interlock OUT
 
 ### Stepper Breakout Connectors
-Stepper signals are taken out on four 1x5 single inline 0.100" headers. The header footprint accommodates box and latching headers. All signals are 3.3v. Please note that the pinout of the stepper breakout connectors is different than similar connectors on the v7 and v8 boards.
+Stepper signals are taken out on four 1x5 single inline 0.100" headers. The header footprint accommodates box and latching headers. All signals are 3.3v. Please note that the pinout of the stepper breakout connectors is different than similar connectors on the v7 and v8 boards. Pin 1 is the pin closest to the power inout side of the board (top).
 
-* 3.3v
-* Step
-* Enable (active low)
-* Direction
-* Ground
+1. 3.3v
+1. Direction
+1. ~Enable (active low)
+1. Step
+1. Ground
 
 
