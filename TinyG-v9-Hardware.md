@@ -8,8 +8,7 @@ TinyG v9 is intended for use by individuals building a system, as well as by sys
 
 * Width  3.500" (x dimension)
 * Depth  4.000" (y dimension)
-* Heigh  0.75" (but depends on how you plug the motors and power. Straight headers will increase required clearance)
-
+* Height 0.750" (but depends on how you plug the motors and power. Straight headers will increase required clearance)
 * Holes (x, y)
   * 0.150", 0.150"
   * 3.350", 0.150"
