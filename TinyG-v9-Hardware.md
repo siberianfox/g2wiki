@@ -17,7 +17,7 @@ TinyG v9 is intended for use by individuals building a system, as well as by sys
 
 ### Power Connector
 
-The power connector can be populated with either a 5.00 mm screw terminal block or a straight or right angle 2 position 0.156" (3.96mm) friction lock header. The friction lock header is rated for 7 amps, so if you are using NEMA23 motors (or larger) we recommend using the screw terminal option. 
+The power connector can be populated with either a 5.00 mm screw terminal block or a straight or right angle 2 position 0.156" (3.96mm) friction lock header. The friction lock header is rated for 7 amps, so if you are using NEMA23 motors (or larger) you should use the screw terminal option. 
 
 Friction Lock Header (Molex parts are listed but any equivalent part should work)
 * Molex 171813-0002     2 position right angle header
