@@ -11,6 +11,7 @@ The v9 has a dual hole patterns for motors. It will accommodate 3.81mm screw ter
 Friction Lock Headers
 * Molex 26-60-4040      4 position straight header
 * Molex 26-60-5040      4 position right angle header
+
 Mating parts are:
 * Molex 09-50-3041     4 position housing
 * Molex 08-50-0134     crimp terminal (4 required per plug)
@@ -18,8 +19,11 @@ Mating parts are:
 ### Power Connector
 
 The power connector can be plugged with either a standard 5.00 mm screw terminal block or a 2 position friction lock header. The friction lock header is rated for 7 amps, so if you are using NEMA23 motors (or larger) we recommend using the screw terminal option. 
+
+Friction Lock Header
 * Molex 171813-0002     2 position right angle header
 * Molex 171814-0002     2 position right angle header
+
 Mating parts are:
 * Molex 09-50-3021     2 position housing
 * Molex 08-50-0134     crimp terminal (2 required per plug)
