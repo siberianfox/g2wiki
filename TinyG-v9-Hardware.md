@@ -44,17 +44,19 @@ Mating parts are:
 * Molex 08-50-0134     crimp terminal (4 required per plug)
 
 Phase outputs are listed below. Pin 1 is towards the LED end of the board (bottom)
+
 1. A1
 1. A2
 1. B2
 1. B1
 
 ### Limit Switch Connectors
-The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is labeled on the bottom silkscreen and (from top to bottom):
+The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is listed below. Pin 1 is towards the power input side of the board (top).
+
 1. Ground
 1. +3.3v
-1. Min in
-1. Max in 
+1. Min in (X, Y or Z)
+1. Max in (X, Y or Z)
 
 The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
 
@@ -66,23 +68,28 @@ These output signals are available on a terminal block and also on a 2x6 dual in
 
 These signals are buffered and may be driven at either 3.3v or 5v, depending on the setting of a jumper on the board.
 
-* Spindle On/Off
-* Spindle Direction
-* Spindle PWM signal
-* Coolant On/Off
+The pinout is listed below. Pin 1 is towards the power input side of the board (top).
+
+1. Ground
+1. +3.3v
+1. Spindle On/Off
+1. Spindle Direction
+1. Spindle PWM signal
+1. Coolant On/Off
 
 ### SPI Connector
-SPI signals are available on a 2x5 dual inline 0.100" header. The header footprint accommodates box and latching headers. All signals are 3.3v.
-* MOSI
-* MISO
-* CLK
-* Reset
-* CS1
-* CS2
-* 3.3v
-* GND
-* Interlock IN
-* Interlock OUT
+SPI signals are available on a 2x5 dual inline 0.100" header. The header footprint accommodates box and latching headers. All signals are 3.3v. The pinout is listed below. Pin 1 is the square pin towards the power input side of the board (top). Pins alternate with odd pins on the left and even pins on the right.
+
+1. MISO
+1. 3.3v
+1. CLK
+1. MOSI
+1. Reset
+1. GND
+1. CS1
+1. CS2
+1. Interlock IN
+1. Interlock OUT
 
 ### Stepper Breakout Connectors
 Stepper signals are taken out on four 1x5 single inline 0.100" headers. The header footprint accommodates box and latching headers. All signals are 3.3v. Please note that the pinout of the stepper breakout connectors is different than similar connectors on the v7 and v8 boards.
