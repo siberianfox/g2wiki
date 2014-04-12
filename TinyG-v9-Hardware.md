@@ -1,8 +1,18 @@
-This page contains general information about TinyG v9 hardware. 
+This page contains general information about TinyG v9 hardware. The v9 is still under development and may change.
 
 _PRELIMINARY - This is still being iterated_
 
 TinyG v9 is intended for use by individuals building a system, as well as by system manufacturers looking to reduce costs in assembly and maintenance while maintaing high reliability. TinyG v9 has a number of features designed to support these 2 (sometime competing) goals. In general, there are choices for how to assemble and use the IO connectors.
+
+### Board Dimensions
+
+* Width  3.500" (x dimension)
+* Height 4.000" (y dimension)
+* Holes (x, y)
+  * 0.150", 0.150"
+  * 3.350", 0.150"
+  * 3.350", 3.850"
+  * 0.150", 3.850"
 
 ### Power Connector
 
