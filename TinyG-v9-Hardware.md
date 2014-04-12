@@ -26,6 +26,10 @@ Mating parts are:
 * Molex 09-50-3021     2 position housing
 * Molex 08-50-0134     crimp terminal (2 required per plug)
 
+Power inputs are listed below. Pin 1 is towards the inside of the board (closest to the big capacitor C1)
+1. Ground
+1. +Vmot (+12v = +30v)
+
 ### Motor Connectors
 
 The v9 has a dual hole patterns for motors. It will accommodate 3.81mm screw terminals but can also be populated for vertical or right angle 0.156" (3.96mm) friction lock headers. 
@@ -38,12 +42,18 @@ Mating parts are:
 * Molex 09-50-3041     4 position housing
 * Molex 08-50-0134     crimp terminal (4 required per plug)
 
+Phase outputs are listed below. Pin 1 is towards the LED end of the board (bottom)
+1. A1
+1. A2
+1. B2
+1. B1
+
 ### Limit Switch Connectors
 The homing/limit switches are brought in on 4 position terminal blocks for X, Y and Z axes. The pinout is labeled on the bottom silkscreen and (from top to bottom):
-* (1) ground
-* (2) 3.3v
-* (3) min in
-* (4) max in 
+1. Ground
+1. +3.3v
+1. Min in
+1. Max in 
 
 The switch inputs are designed for standard "dry" switches but will accommodate opto or other active inputs as long as they do not exceed 3.3v. These signals are conditioned with an RC network (2.7K / 0.47 uF) and have ESD protection.
 
