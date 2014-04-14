@@ -1,3 +1,5 @@
+**This is old an no longer valid.**
+
 This page documents the current state of the g2 build and test environments. 
 
 We are currently using both an Xcode (mac) environment and an Atmel Studio 6.1 (win) environment. Typically we run both on a mac with the AS6 in a VM. They each do certain things better. 
