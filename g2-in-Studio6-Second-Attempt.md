@@ -1,3 +1,5 @@
+**This is old and no longer valid.**
+
 The [first attempt](https://github.com/synthetos/g2/wiki/g2-in-Studio6) worked OK, but we wanted to get all the sources into the project and not rely on the Studio6 CMSIS hierarchy and other baked-in assumptions. This is so the project can be run from Apple Xcode, native Linux GCC environments, and other non-Studio6 development environments.
 
 **Just Notes for now**
