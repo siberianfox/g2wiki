@@ -22,9 +22,21 @@ ls /dev/tty.usbmodem*
 stty -f /dev/tty.usbmodem* 1200
 ```
 
-On Windows 64, connect only _one_ USB-serial device to your machine then, in `cmd.exe`:
+On **Linux**, the instructions should be the same or similar to OSX. (TODO: Test this.)
+
+On **Windows**, connect only _one_ USB-serial device to your machine then, look up the com port number in the device manager (will either say "Arduino Due" or "TinyG v2"). Then, assuming _COM6_ (change it accordingly), in `cmd.exe`:
 
 ```batch
-cd %ProgramFiles% (x86)\Arduino\hardware\tools
+mode COM6 BAUD=1200
 ```
 
+# Programming the board with BOSSAc
+
+In order to program the board now that it's reset into the loader, you will need to download the [Arduino IDE](http://arduino.cc/en/Main/Software#toc3). Note that this _must_ be the version that supports the Due, which is not currently the release version.
+
+
+TODO: How to convert an ELF to a BIN.
+
+TODO: Upload the BIN with OS X. Basis: `$arduinoAppDir/Arduino.app/Contents/Resources/Java/hardware/tools/bossac -e -w -v -b "${file/.elf/.bin}"`
+
+TODO: Upload the BIN with Windows. Basis: `bossac.exe --port=COM6 -e -w -v -b %HOMEPATH%\file_path.bin -R`
