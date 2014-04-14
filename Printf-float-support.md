@@ -1,4 +1,4 @@
-No answer to thie one yet. Here are some useful links and some notes:
+**This is old and no longer valid. printf is handled by all supported build environments now.**
 
 ## Notes
 Studio 6 uses version 1.20
