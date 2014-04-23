@@ -16,7 +16,7 @@ An alternative method of getting into the "bootloader" -- by clearing the curren
 
 From here on I will refer to is as a "loader" instead of a "bootloader."
 
-The loader build in to the is the [SAM-BA® Boot Assistant](http://www.atmel.com/tools/atmelsam-bain-systemprogrammer.aspx).
+If you want more details, the loader build in to the ROM is the [SAM-BA® Boot Assistant](http://www.atmel.com/tools/atmelsam-bain-systemprogrammer.aspx).
 
 ## Programming with the ROM loader and BOSSAc
 
