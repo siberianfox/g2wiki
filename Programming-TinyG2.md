@@ -2,6 +2,8 @@
 
 There are two ways to program the SAM ARM processors that are on the TinyG v9 and Arduino Due: With a special hardware device called a "programmer," or just with the chips' built-in "bootloader."
 
+If you are looking to program using a SAM-ICE from Atmel Studio 6, please see [here](https://github.com/synthetos/g2/wiki/Programming-v9-with-Studio6-and-the-SAM-ICE)
+
 ## Note about the SAM3X8x "bootloader"
 
 The ROM of the SAM3X8x processors in use on the TinyG v9 and Arduino Due contains a program that will allow you to reprogram the flash in the processor.
@@ -19,8 +21,6 @@ The loader build in to the is the [SAM-BA® Boot Assistant](http://www.atmel.com
 ## Programming with the ROM loader and BOSSAc
 
 The TinyG v9 has a ERASE jumper, and the Due has an ERASE button. So, in order to put the board in the loader, you must either connect the ERASE jumper or hold the ERASE button _while_ hitting the Reset button. Then remove the ERASE jumper or release the ERASE button.
-
-If you are looking to program using a SAM-ICE from Atmel Studio 6, please see [here](https://github.com/synthetos/g2/wiki/Programming-v9-with-Studio6-and-the-SAM-ICE)
    
 Please note: We do not yet have instructions Linux, but the steps are similar to that of OS X.
 
