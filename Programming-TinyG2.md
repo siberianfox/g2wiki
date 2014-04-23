@@ -16,18 +16,13 @@ From here on I will refer to is as a "loader" instead of a "bootloader."
 
 The loader build in to the is the [SAM-BA® Boot Assistant](http://www.atmel.com/tools/atmelsam-bain-systemprogrammer.aspx).
 
-## Programming with a SAM-BA® loader and BOSSAc
+## Programming with the ROM loader and BOSSAc
 
-The TinyG v9 has a ERASE jumper, and the Due has an ERASE button. So, in order to put the board in the loader 
-
-Locate the ERASE / bootloader option on the Atmel SAM ARM chip.
-
- -- IN PROGRESS --
+The TinyG v9 has a ERASE jumper, and the Due has an ERASE button. So, in order to put the board in the loader, you must either connect the ERASE jumper or hold the ERASE button _while_ hitting the Reset button. Then remove the ERASE jumper or release the ERASE button.
 
 If you are looking to program using a SAM-ICE from Atmel Studio 6, please see [here](https://github.com/synthetos/g2/wiki/Programming-v9-with-Studio6-and-the-SAM-ICE)
    
-Please note: We do not yet have instructions Linux, but the steps are similar.
-
+Please note: We do not yet have instructions Linux, but the steps are similar to that of OS X.
 
 [Flashing TinyG2 in OSX](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Apple-OSX)<br>
 [Flashing TinyG2 in Windows](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Windows)
