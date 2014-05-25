@@ -54,3 +54,15 @@ X is used as an example but all axes should be set. Only the axis mode needs to 
 	Token | Element | Description / Instruction 
 	------|------------|---------
 	Xam | axis-mode | Same as the corresponding axis on the test board
+
+###Sys Configuration
+
+	Token | Element | Description / Instruction 
+	------|------------|---------
+	sv | status-verbosity | 2=VERBOSE (recommended, not mandatory)
+
+##Use
+You can use this many ways, but here's a common example
+
+ - Set the system to JSON mode by typing { <CR>
+ - Run the board under test and watch the streaming position and step count
