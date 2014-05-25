@@ -10,13 +10,13 @@ Due pinouts are numbered as they appear on the board. Assumes motor mapping 1,2,
 	------|------------|---------|-------------
 	2 | X step | 
 	5 | X dir | 
-	5 | X enable | 
+	22 | X enable | 
 	3 | Y step | 
 	6 | Y dir | 
-	5 | Y enable | 
+	25 | Y enable | 
 	4 | Z step | 
 	7 | Z dir | 
-	5 | Z enable | 
+	28 | Z enable | 
 	31 | A step | 
 	32 | A dir | 
 	33 | A enable | 
