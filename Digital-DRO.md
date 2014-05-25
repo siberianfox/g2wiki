@@ -1,4 +1,4 @@
-##Documentation for Using the Digital Digital Readout
+##Using the Digital Digital Readout
 
 ##Building the DDRO
 The digital DRO builds from the digital-dro branch of the Synthetos G2 github repo. Do this:
