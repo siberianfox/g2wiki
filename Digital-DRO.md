@@ -46,7 +46,7 @@ The following elements in the config much match the board under test.
 	1sa | step-angle | Same as the corresponding motor on the test board
 	1tr | travel-per-revolution | Same as the corresponding motor on the test board
 	1mi | microsteps | Same as the corresponding motor on the test board
-	1po | polarity | Set so the steps and position go positive when the test board goes positive. SHould be the same as on the test board, but might not be. Best to test.
+	1po | polarity | Set so the steps and position go positive when the test board goes positive. Should be the same settings as on the test board, but might not be. Best to test.
 
 ###Axis Configuration
 X is used as an example but all axes should be set. Only the axis mode needs to be set.
