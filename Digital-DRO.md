@@ -66,3 +66,9 @@ You can use this many ways, but here's a common example
 
  - Set the system to JSON mode by typing { <CR>
  - Run the board under test and watch the streaming position and step count
+
+To clear (zero) the counters type
+
+{clc:n} or $clc
+
+Remember to reset to JSON mode by typing a { if the latter.
