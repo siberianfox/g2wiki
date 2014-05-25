@@ -7,7 +7,8 @@ Documentation for the digital digital readout.
 Due pinouts are numbered as they appear on the board. Assumes motor mapping 1,2,3,4 to X,Y,Z,A
 
 	Pin | Signal | Description
-	------|------------|---------|-------------
+	------|------------|---------
+	14 | GROUND | 
 	2 | X step | 
 	5 | X dir | 
 	22 | X enable | 
