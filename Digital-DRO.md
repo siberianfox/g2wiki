@@ -35,14 +35,22 @@ Due pinouts are numbered as they appear on the board. Assumes motor mapping 1,2,
 #Software Setup
 You should see an OpenMoko TinyG v2 USB port which will show up as usbmodem001 or something similar in the Coolterm Options / Serial Port dialog (did we mention Coolterm was our favorite?). You do not need to set a baud rate or flow control as these are handed by the USB on the Due. You may want to select terminal mode, CR line feed from the Terminal page
 
-The following elements in the config much match the board under test:
+The following elements in the config much match the board under test.
 
 ###Motor Configuration
+1 is used as an example but all motors should be set.
 
 	Token | Element | Description / Instruction 
 	------|------------|---------
-	Xma | map-to-axis | Map the motors to the same axes as the board under test 
-	Xsa | step-angle | Same as the corresponding motor on the test board
-	Xtr | travel-per-revolution | Same as the corresponding motor on the test board
-	Xmi | microsteps | Same as the corresponding motor on the test board
-	Xpo | polarity | Set so the steps and position go positive when the test board goes positive
+	1ma | map-to-axis | Map the motors to the same axes as the board under test 
+	1sa | step-angle | Same as the corresponding motor on the test board
+	1tr | travel-per-revolution | Same as the corresponding motor on the test board
+	1mi | microsteps | Same as the corresponding motor on the test board
+	1po | polarity | Set so the steps and position go positive when the test board goes positive
+
+###Axis Configuration
+X is used as an example but all axes should be set. Only the axis mode needs to be set.
+
+	Token | Element | Description / Instruction 
+	------|------------|---------
+	Xam | axis-mode | Same as the corresponding axis on the test board
