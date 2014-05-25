@@ -4,9 +4,19 @@ Documentation for the digital digital readout.
 - Compile the DDRO configuration
 - Flash to a Due
 
-Due pinouts are numbered as they appear on the board.
+Due pinouts are numbered as they appear on the board. Assumes motor mapping 1,2,3,4 to X,Y,Z,A
 
 	Pin | Signal | Description
 	------|------------|---------|-------------
-	2 | X step | T
-	1 | **Interlock Opens** | Opening one or more interlock switches causes `Interlock_NC` to go HI (active). The following things happen simultaneously:
+	2 | X step | 
+	5 | X dir | 
+	5 | X enable | 
+	3 | Y step | 
+	6 | Y dir | 
+	5 | Y enable | 
+	4 | Z step | 
+	7 | Z dir | 
+	5 | Z enable | 
+	31 | A step | 
+	32 | A dir | 
+	33 | A enable | 
