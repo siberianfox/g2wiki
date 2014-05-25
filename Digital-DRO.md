@@ -41,7 +41,8 @@ The following elements in the config much match the board under test:
 
 	Token | Element | Description / Instruction 
 	------|------------|---------
-	ma | GROUND | 
-	2 | X step | 
-
-
+	Xma | map-to-axis | Map the motors to the same axes as the board under test 
+	Xsa | step-angle | Same as the corresponding motor on the test board
+	Xtr | travel-per-revolution | Same as the corresponding motor on the test board
+	Xmi | microsteps | Same as the corresponding motor on the test board
+	Xpo | polarity | Set so the steps and position go positive when the test board goes positive
