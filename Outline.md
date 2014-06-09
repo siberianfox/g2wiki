@@ -1,5 +1,5 @@
 Home
-* Getting Started
+* [Getting Started](Getting-Started-with-G2)
   * Getting Stated on Due
     * What you will need (hardware)
     * What you will need (software)
