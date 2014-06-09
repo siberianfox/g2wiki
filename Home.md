@@ -6,6 +6,22 @@ This wiki serves as a user and programmer manual and documents progress on the p
 
 ![TinyG2 on an Arduino Due](http://farm4.staticflickr.com/3739/10301325295_31cb0dc6ab_h.jpg)
 
+### Getting Started
+* [What is G2? A hardware and software description](https://github.com/synthetos/G2/wiki/What-is-G2)
+* [G2 Start Page](https://github.com/synthetos/G2/wiki/G2-Start)
+* [Connecting G2](https://github.com/synthetos/G2/wiki/Connecting-G2)
+
+### Firmware Update and Programming
+* [Updating Firmware](https://github.com/synthetos/G2/wiki/Updating-Firmware)
+
+### Reference Pages
+* [Licensing](https://github.com/synthetos/G2/wiki/G2-Licensing)
+
+### Resources
+
+### Developer Pages
+* [Tool Chain and Project Setup](https://github.com/synthetos/G2/wiki/Tool-Chain-and-Project-Setup)
+
 ##What is G2?
 G2 is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue) and on Synthetos hardware. On the Due it can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 3 axis motion control system. This wiki covers both platforms.
 
