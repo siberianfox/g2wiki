@@ -28,10 +28,10 @@ It was pretty simple when there was just TinyG but now there are more options. H
  * G1. I guess that makes the original Xmega code G1. The G1 firmware still goes by TinyG on github. We have been merging the G1 and G2 code bases as you can see by examining the git branches and the code. The plan is to eventually retire G1 and run G2 on the Xmega hardware to continue support for the v8 and earlier TinyG hardware.  
 
 #G2 User Pages
-By and large TinyG2 works identically to TinyG, and most configuration and other questions are handled at the [TinyG wiki](https://github.com/synthetos/TinyG/wiki). Here are some pages that are specific to TinyG2. 
+By and large G2 works identically to TinyG, and most configuration and other questions are handled at the [TinyG wiki](https://github.com/synthetos/TinyG/wiki). Here are some pages that are specific to TinyG2. 
 * [Project Status Page](https://github.com/synthetos/g2/wiki/G2-Project-Status-Page) along with differences between TinyG and G2
 
-#TinyG2 Developer Pages
+#G2 Developer Pages
 * [Development Environments](https://github.com/synthetos/g2/wiki/Development-Environments)
 * [Programming TinyG2 onto the Due](https://github.com/synthetos/g2/wiki/Programming-TinyG2)
 * [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
