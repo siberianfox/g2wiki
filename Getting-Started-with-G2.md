@@ -1,7 +1,7 @@
 G2 is an Open Source CNC, 3D Printer, and general stepper-motor-based motion control firmware that runs on the next generation of TinyG hardware (currently in private beta) as well as the Arduino Due.
 
-* [Hardware Needed To Use G2](#Hardware Needed To Use G2)
-* [Software Needed To Use G2](#Software Needed To Use G2)
+* [Hardware Needed To Use G2](#hardware-needed-to-use-g2)
+* [Software Needed To Use G2](#software-needed-to-use-g2)
 
 ## Hardware Needed To Use G2
 
