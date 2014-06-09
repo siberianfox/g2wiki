@@ -1,8 +1,8 @@
 _This page is for compiling the G2 project on OS X with XCode. Please see [Getting Started with G2](Getting-Started-with-G2) for information about hardware and compiling on other platforms._
 
-# What's Needed To Compile G2 On OS X (with Xcode)
+# What's Needed
 
-First, you will need to install XCode ([Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)). Luckily, it's free.
+To compile G2 on OS X with Xcode you will need to install XCode ([Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)). Luckily, it's free.
 
 _If you wish to use the OS X command line, then visit [[Compiling G2 on OS X and Linux (command line)]] as well._
 
