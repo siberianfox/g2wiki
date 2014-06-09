@@ -1,7 +1,7 @@
 Home
 * [Getting Started](Getting-Started-with-G2)
-  * What you will need (hardware)
-  * What you will need (software)
+  * [What you will need (hardware)](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#hardware-needed-to-use-g2)
+  * [What you will need (software)](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#software-needed-to-use-g2)
   * Getting Started on gShield/Due
   * Getting Started on pre-release TinyG v9
 * Updating Firmware
