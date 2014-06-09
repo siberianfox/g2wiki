@@ -27,10 +27,11 @@ The following is a list of the minimum you will need strictly for the use of G2,
 
 If you are _not_ planning on compiling the firmware yourself, then all you need the the Arduino 1.5+ IDE installed on your machine (for the `bossac` binary). You can then program any provided hex directly onto the Due or TinyG v9.
 
+
 [![XKCD Comic About Compiling](http://imgs.xkcd.com/comics/compiling.png)](http://xkcd.com/303/)
 
 If you _are_ planning on compiling the firmware yourself, go to the appropriate pages for your OS:
 
 * Windows (using Atmel Studio 6.2)
-* OS X (using XCode)
+* [[OS X (using XCode)\Compiling-G2-on-OS-X-(with-Xcode)]]
 * Linux and OS X (using the command line)
