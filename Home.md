@@ -24,7 +24,8 @@ G2 has a number of advanced features, including:
 ##Some Clarification on Naming
 It was pretty simple when there was just TinyG, but now there are more options. Here's the scheme:
  * TinyG is the Synthetos hardware. TinyG v8 is the Xmega based hardware, and v9 is the (first) ARM based hardware. Presumably there will be more TinyG variant, including a 5 axis board, expandable Kinen boards and some custom boards.
- * G2 is the ARM code base. It is cross platform based on the Motate hardware abstraction layer. G2 is written in C++ and is licensed under GPLv2 with the BeRTOS exception
+ * G2 is the ARM code base. It is cross platform based on the Motate hardware abstraction layer. G2 is written in C++ and is licensed under [GPLv2 with the BeRTOS exception](https://github.com/synthetos/g2/wiki/Licensing). We are now making the distinction between the firmware and the hardware as there are a growing number of combinations. 
+ * G1. I guess that makes the original Xmega code G1. The G1 firmware still goes by TinyG on github. We have been merging the G1 and G2 code bases as you can see by examining the git branches and the code. The plan is to eventually retire G1 and run G2 on the Xmega hardware to continue support for the v8 and earlier TinyG hardware.  
 
 #G2 User Pages
 By and large TinyG2 works identically to TinyG, and most configuration and other questions are handled at the [TinyG wiki](https://github.com/synthetos/TinyG/wiki). Here are some pages that are specific to TinyG2. 
