@@ -6,10 +6,10 @@ This wiki serves as a user and programmer manual and documents progress on the p
 
 ![TinyG2 on an Arduino Due](http://farm4.staticflickr.com/3739/10301325295_31cb0dc6ab_h.jpg)
 
-#What is G2?
+##What is G2?
 G2 is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue) and on Synthetos hardware. On the Due it can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 3 axis motion control system. This wiki covers both platforms.
 
-## Features
+### Features
 G2 has a number of advanced features, including:
 
 * Full 6 axis motion control - XYX linear axes and ABC rotary axes
@@ -21,7 +21,7 @@ G2 has a number of advanced features, including:
 * Complete status and system state displays
 * Advanced hardware abstraction layer for easy port to multiple ARM and non-ARM processing environments
 
-##Some Clarification on Naming
+###Some Clarification on Naming
 It was pretty simple when there was just TinyG, but now there are more options. Here's the scheme:
  * TinyG is the Synthetos hardware. TinyG v8 is the Xmega based hardware, and v9 is the (first) ARM based hardware. Presumably there will be more TinyG variant, including a 5 axis board, expandable Kinen boards and some custom boards.
  * G2 is the ARM code base. It is cross platform based on the Motate hardware abstraction layer. G2 is written in C++ and is licensed under [GPLv2 with the BeRTOS exception](https://github.com/synthetos/g2/wiki/Licensing). We are now making the distinction between the firmware and the hardware as there are a growing number of combinations. 
