@@ -11,5 +11,5 @@ Home
   * Using ICE (Atmel and SAM)
 * Toolchain Setup
   * Windows (Atmel Studio 6.2)
-  * OSX (XCode)
+  * [OSX (XCode)](https://github.com/synthetos/g2/wiki/Compiling-G2-on-OS-X-(with-Xcode))
   * OSX or Linux (Command Line)
