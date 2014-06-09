@@ -15,7 +15,7 @@ The easiest way on OS X to clone the git repo is probably to:
 3. Browse to the G2 project page and then click on the <a href="github-mac://openRepo/https://github.com/synthetos/g2" data-url="github-mac://openRepo/https://github.com/synthetos/g2" class="minibutton sidebar-button js-conduit-rewrite-url" title="Save synthetos/g2 to your computer and use it in GitHub Desktop." aria-label="Save synthetos/g2 to your computer and use it in GitHub Desktop."><span class="octicon octicon-device-desktop"></span>Clone in Desktop</a> button.
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
 4. In the GitHub app, chose Branches on the left and then click on Edge to checkout the Edge branch.
-5. (Convenience) In the **Repository** Menu, choose Open in Finder to display the folder of the the newly checked out repo.
+5. (Convenience) In the `Repository` menu, choose `Open in Finder` to display the folder of the the newly checked out repo.
 
 # Compiling
 
