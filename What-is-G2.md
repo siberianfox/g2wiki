@@ -1,4 +1,3 @@
-##What is G2?
 G2 is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue) and on Synthetos hardware. On the Due it can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 3 axis motion control system. This wiki covers both platforms.
 
 ### Features
