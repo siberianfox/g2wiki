@@ -1,11 +1,10 @@
-Flashing TinyG2 to the Arduino Due w/ Apple OSX
-=============================
+_This page is for uploading an already compiled G2 binary to a target board without a debugger from OS X. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
 
 ###Step 1 - Get the TinyG2.elf file
-Get the tinyg2.elf binary firmware files from the link below.
-<br>
-http://synthetos.github.io/g2/
 
+**Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
+
+**Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
 ###Step 2 - Install the Arduino Due environment
 
 _If you already have the Arduino Due environment installed you can skip this step_
