@@ -20,16 +20,15 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 2. Log into the GitHub web site -- register if needed, it's free.
 3. Browse to the [G2 project page](https://github.com/synthetos/g2) and then click on the `Clone in Desktop` button.
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
-4. In the GitHub app, chose Branches on the left and then click on Edge to checkout the Edge branch.
-5. (Convenience) In the `Repository` menu, choose `Open in Finder` to display the folder of the the newly checked out repo.
+4. In the GitHub app, click on the unnamed menu in the top-left and then click on `edge` to checkout the edge branch.
 
-* Run git clone to set up TinyG working directory. First you must install git. See github for instructions to do this if you haven't already.
-<pre>
-From a command line navigate to the directory where you want the tinyg git directory to exist, then run:
-git clone git@github.com:synthetos/TinyG.git
-</pre>
-* You should have a directory with all the source files and the Atmel project files for both Studio4 and Studio6. Some of the project files are ignored by git so they don't cause havoc. You will need the AtmelStudio6 project files, which are `tinyg.atsln` and `tinyg.cproj`
-* If you are on a mac, you may want to get Gitx. It's a GUI that makes git management much easier.
+![Choose edge from the unnamed menu near the top-left of the GitHub window](image/Windows-GitHub-Edge-Branch.png)
+5. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.
+
+![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
+
+* You should have a directory with all the source files and the Atmel project files for both Studio 4 and Studio 6. Some of the project files are ignored by git so they don't cause havoc. You will need the Atmel Studio 6 project files, which are `tinyg.atsln` and `tinyg.cproj`
+
 
 ### Atmel Studio6 Bugs, Workarounds, and Other Topics
 Here are some known bugs that we have had to work around
