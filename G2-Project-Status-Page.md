@@ -11,7 +11,7 @@ Main differences between TinyG and G2
 * Both TinyG and G2 compute 6 axes. G2 can output 6 axes (depending on platform hardware), TinyG is limited to 4 axes
 
 ###Update as of June 9, 2014
-
+We recommend working from the edge branch, which is the most stable branch to date. As changes are made and tested in lower branches these will be posted to edge.
 
 ###Update as of Oct 16, 2013
 Build 020.20 has been pushed to edge and master. 
