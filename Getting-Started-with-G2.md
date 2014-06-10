@@ -37,4 +37,4 @@ If you _are_ planning on compiling the firmware yourself, go to the appropriate 
 
 * [[Compiling G2 on Windows (Atmel Studio 6.2)]]
 * [[Compiling G2 on OS X (with Xcode)]]
-* Linux and OS X (using the command line)
+* Linux and OS X (using the command line) _TODO_
