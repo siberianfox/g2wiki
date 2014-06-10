@@ -1,8 +1,8 @@
 ###Step 1 - Get the TinyG2.bin file
-Get the tinyg2.bin binary firmware files from the link below.
-<br>
-http://synthetos.github.io/g2/<br>
-Get the **USB Test for Due - default settings** bin file.
+
+**Option 1** - Compile your own using the instruction in [[Compiling G2 on Windows (Atmel Studio 6.2)]]
+
+**Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
 
 ###Step 2 - Install the Arduino Due environment
 
