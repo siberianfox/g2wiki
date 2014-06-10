@@ -27,6 +27,9 @@ The following is a list of the minimum you will need strictly for the use of G2,
 
 If you are _not_ planning on compiling the firmware yourself, then all you need the the Arduino 1.5+ IDE installed on your machine (for the `bossac` binary). You can then program any provided hex directly onto the Due or TinyG v9.
 
+* [[Flashing G2 with Windows]]
+* [[Flashing G2 with OSX]]
+
 
 [![XKCD Comic About Compiling](http://imgs.xkcd.com/comics/compiling.png)](http://xkcd.com/303/)
 
