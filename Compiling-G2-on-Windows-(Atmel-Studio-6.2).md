@@ -32,7 +32,8 @@ In the project directory all of the source files and the Atmel project files for
 _Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
 To compile the project:
-![](Windows-Choose-Build-And-Processor.png)
+
+![](images/Windows-Choose-Build-And-Processor.png)
 
 1. Choose the platform you are building for (for the Due with gShield pinout, choose `gShield`).
 2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
