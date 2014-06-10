@@ -49,5 +49,5 @@ To compile the project:
 
 ## Uploading G2 to a target board (without a Atmel ICE)
 
-To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [Flashing TinyG2 with Windows](Flashing-TinyG2-with-Windows) page.
+To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
 
