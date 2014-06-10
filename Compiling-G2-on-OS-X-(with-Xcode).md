@@ -31,6 +31,6 @@ The resulting files will be in `${projectRoot}/TinyG2/bin/`, in a folder named a
 
 ## Uploading G2 to a target board
 
-To flash G2 onto a target board, see the [Flashing TinyG2 with OS X](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Apple-OSX) page.
+To flash G2 onto a target board, see the [[Flashing G2 with OS X]] page.
 
 TODO: Instruction on debugging with OS X, GDB, OpenOCD, and Atmel ICE.
