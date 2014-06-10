@@ -1,12 +1,12 @@
 _This page is for compiling the G2 project on OS X with XCode. Please see [Getting Started with G2](Getting-Started-with-G2) for information about hardware and compiling on other platforms._
 
-# What's needed
+## What's needed
 
 To compile G2 on OS X with Xcode you will need to install XCode ([Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)). Luckily, it's free.
 
 _If you wish to use the OS X command line, then visit [[Compiling G2 on OS X and Linux (command line)]] as well._
 
-# Cloning the git repository.
+## Cloning the git repository.
 
 The easiest way on OS X to clone the git repo is probably to:
 
@@ -17,7 +17,7 @@ The easiest way on OS X to clone the git repo is probably to:
 4. In the GitHub app, chose Branches on the left and then click on Edge to checkout the Edge branch.
 5. (Convenience) In the `Repository` menu, choose `Open in Finder` to display the folder of the the newly checked out repo.
 
-# Compiling
+## Compiling
 
 In the newly cloned repo, open the `TinyG2` folder, and then open the file named `TinyG2.xcodeproj`.
 
@@ -29,7 +29,7 @@ Now you can choose `Build` for the `Project` menu of Xcode (or click the "play" 
 
 The resulting files will be in `${projectRoot}/TinyG2/bin/`, in a folder named after the platform. For example, there will be a folder named `gShield` with a file named `gShield_flash.elf`.
 
-# Uploading G2 to a target board
+## Uploading G2 to a target board
 
 To flash G2 onto a target board, see the [Flashing TinyG2 with OS X](https://github.com/synthetos/g2/wiki/Flashing-TinyG2-with-Apple-OSX) page.
 
