@@ -22,7 +22,8 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
 4. In the GitHub app, click on the unnamed menu in the top-left and then click on `edge` to checkout the edge branch.
 
-![Choose edge from the unnamed menu near the top-left of the GitHub window](image/Windows-GitHub-Edge-Branch.png)
+![Choose edge from the unnamed menu near the top-left of the GitHub window](images/Windows-GitHub-Edge-Branch.png)
+
 5. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.
 
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
