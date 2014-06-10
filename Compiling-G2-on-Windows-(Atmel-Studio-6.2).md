@@ -25,8 +25,24 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 5. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.<br/>
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
 
-* You should have a directory with all the source files and the Atmel project files for both Studio 4 and Studio 6. Some of the project files are ignored by git so they don't cause havoc. You will need the Atmel Studio 6 project files, which are `tinyg.atsln` and `tinyg.cproj`
+## Compiling
 
+In the project directory all of the source files and the Atmel project files for both Studio 4 and Studio 6 are inside the `TinyG2` directory. Once Atmel Studio 6 is installed, open the solution file `tinyg.atsln`. (Atmel studio will also open the project file `tinyg.cproj` automatically.)
+
+_Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
+
+To compile the project:
+![](Windows-Choose-Build-And-Processor.png)
+
+1. Choose the platform you are building for (for the Due with gShield pinout, choose `gShield`).
+2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
+3. Make sure the correct processor is selected for programming with a Atmle ICE.
+  * This step can be skipped if not using a debugger to upload the firmware to the board.
+  * For the Due, it needs to read `ATSAM3X8E`, and for TinyG v9 is needs to read `ATSAM3X8C`.
+4. (Optional) To upload _any_ binary (particularly useful if you didn't compile it), you can use the "Device Programming" tool (also available under the Tools menu) to upload to the board without compiling.
+5. (Optional) To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
+
+## Uploading G2 to a target board
 
 ### Atmel Studio6 Bugs, Workarounds, and Other Topics
 Here are some known bugs that we have had to work around
