@@ -2,6 +2,7 @@ G2 is an Open Source CNC, 3D Printer, and general stepper-motor-based motion con
 
 * [Hardware Needed To Use G2](#hardware-needed-to-use-g2)
 * [Software Needed To Use G2](#software-needed-to-use-g2)
+* [Compiling G2 From Source](#compiling-g2-from-source)
 
 ## Hardware Needed To Use G2
 
@@ -32,7 +33,7 @@ If you are _not_ planning on compiling the firmware yourself, then all you need 
 
 _TODO: Provide links to CNC software resources._
 
-## Compiling G2 from source
+## Compiling G2 From Source
 
 [![XKCD Comic About Compiling](http://imgs.xkcd.com/comics/compiling.png)](http://xkcd.com/303/)
 
