@@ -1,3 +1,5 @@
+_This page is for uploading an already compiled G2 binary to a target board without a debugger from Windows. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
+
 ###Step 1 - Get the TinyG2.bin file
 
 **Option 1** - Compile your own using the instruction in [[Compiling G2 on Windows (Atmel Studio 6.2)]]
