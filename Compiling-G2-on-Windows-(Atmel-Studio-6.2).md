@@ -20,12 +20,9 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 2. Log into the GitHub web site -- register if needed, it's free.
 3. Browse to the [G2 project page](https://github.com/synthetos/g2) and then click on the `Clone in Desktop` button.
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
-4. In the GitHub app, click on the unnamed menu in the top-left and then click on `edge` to checkout the edge branch.
-
+4. In the GitHub app, click on the unnamed menu in the top-left and then click on `edge` to checkout the edge branch.<br/>
 ![Choose edge from the unnamed menu near the top-left of the GitHub window](images/Windows-GitHub-Edge-Branch.png)
-
-5. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.
-
+5. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.<br/>
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
 
 * You should have a directory with all the source files and the Atmel project files for both Studio 4 and Studio 6. Some of the project files are ignored by git so they don't cause havoc. You will need the Atmel Studio 6 project files, which are `tinyg.atsln` and `tinyg.cproj`
