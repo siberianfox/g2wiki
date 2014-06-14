@@ -10,7 +10,7 @@
     cd g2
 
 3. Choose the right branch.
-    Note: as of now, ```master``` branch is very outdated. There's no stable version available, but the brave souls can try ```edge``` branch.
+    Note: as of now, ```master``` branch is very outdated. There's no stable version available, but the brave souls may try ```edge``` branch.
     
     ```git checkout edge```
 
