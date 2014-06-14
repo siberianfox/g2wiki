@@ -30,6 +30,7 @@ If you are _not_ planning on compiling the firmware yourself, then all you need 
 
 * [[Flashing G2 with Windows]]
 * [[Flashing G2 with OSX]]
+* [[Flashing G2 with Linux]]
 
 _TODO: Provide links to CNC software resources._
 
