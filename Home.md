@@ -16,6 +16,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [Licensing](https://github.com/synthetos/G2/wiki/G2-Licensing)
 
 ### Resources
+* [[Digital DRO]] Using G2 as a real-time step counter (digital readout)
 
 ### Developer Pages
 * [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
