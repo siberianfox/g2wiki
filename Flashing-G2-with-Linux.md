@@ -19,7 +19,7 @@ stty -F /dev/ttyACM0 1200
 ```
 ####Step 4. Flash the chip with `bossac`:
 ```
-bossac  --port=ttyACM0  -U true -e -w -v -i -R ./bin/gShield/gShield_flash.bin
+bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/gShield_flash.bin
 ```
 It will output something like:
 
