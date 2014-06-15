@@ -46,4 +46,4 @@ Boot Flash   : true
 CPU reset.
 ```
 
-You're done.
+You're done. If everything went right, RX orange led should be slowly blinking.
