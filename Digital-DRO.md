@@ -1,4 +1,5 @@
 ##Using the Digital Digital Readout
+The DIgital DIgital Read Out uses G2 on a Due to count steps an an external device and convert them back to position for display as JSON. This is useful for very fine accuracy measurement and testing.
 
 ##Building the DDRO
 The digital DRO builds from the digital-dro branch of the Synthetos G2 github repo. Do this:
