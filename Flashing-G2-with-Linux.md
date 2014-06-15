@@ -46,4 +46,4 @@ Boot Flash   : true
 CPU reset.
 ```
 
-You're done. If everything went right, RX orange led should be slowly blinking.
+You're done. If everything went right, RX orange led should be slowly blinking. To connect to the board through serial, you will need to attach the cable to "Native USB" port.
