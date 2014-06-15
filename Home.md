@@ -18,17 +18,10 @@ This wiki serves as a user and programmer manual and documents progress on the p
 ### Resources
 
 ### Developer Pages
+* [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
+* [Useful stuff to know](https://github.com/synthetos/g2/wiki/Useful-Stuff)
 
 
 #G2 User Pages
 By and large G2 works identically to TinyG, and most configuration and other questions are handled at the [TinyG wiki](https://github.com/synthetos/TinyG/wiki). Here are some pages that are specific to TinyG2. 
 * [Project Status Page](https://github.com/synthetos/g2/wiki/G2-Project-Status-Page) along with differences between TinyG and G2
-
-#G2 Developer Pages
-* [Development Environments](https://github.com/synthetos/g2/wiki/Development-Environments)
-* [Programming TinyG2 onto the Due](https://github.com/synthetos/g2/wiki/Programming-TinyG2)
-* [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
-* [Atmel Studio6 Setup and Notes](https://github.com/synthetos/g2/wiki/g2-in-Studio6)
-* [Programming the v9 board with Studio6 and a SAM-ICE](https://github.com/synthetos/g2/wiki/Programming-v9-with-Studio6-and-the-SAM-ICE)
-* [Useful stuff to know](https://github.com/synthetos/g2/wiki/Useful-Stuff)
-* [Licensing](https://github.com/synthetos/g2/wiki/Licensing)
