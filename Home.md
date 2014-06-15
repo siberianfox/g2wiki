@@ -9,9 +9,8 @@ This wiki serves as a user and programmer manual and documents progress on the p
 ### Getting Started
 * [What is G2? A hardware and software description](https://github.com/synthetos/G2/wiki/What-is-G2)
 * [Getting Started with G2](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2)
-
-### Firmware Update and Programming
-* [Updating Firmware](https://github.com/synthetos/G2/wiki/Updating-Firmware)
+* [Flashing Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#software-needed-to-use-g2)
+* [Compiling Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#compiling-g2-from-source)
 
 ### Reference Pages
 * [Licensing](https://github.com/synthetos/G2/wiki/G2-Licensing)
@@ -19,7 +18,6 @@ This wiki serves as a user and programmer manual and documents progress on the p
 ### Resources
 
 ### Developer Pages
-* [Tool Chain and Project Setup](https://github.com/synthetos/G2/wiki/Tool-Chain-and-Project-Setup)
 
 
 #G2 User Pages
