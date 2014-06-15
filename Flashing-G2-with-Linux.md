@@ -30,6 +30,7 @@ Write 117704 bytes to flash
 Verify 117704 bytes of flash
 [==============================] 100% (460/460 pages)
 Verify successful
+Set boot flash true
 Device       : ATSAM3X8
 Chip ID      : 285e0a60
 Version      : v1.1 Dec 15 2010 19:25:04
@@ -41,7 +42,7 @@ Planes       : 2
 Lock Regions : 32
 Locked       : none
 Security     : false
-Boot Flash   : false
+Boot Flash   : true
 CPU reset.
 ```
 
