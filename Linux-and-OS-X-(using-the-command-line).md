@@ -18,7 +18,7 @@
 
     ```
     cd TinyG2
-    make TinyG2.hex -j4
+    make -j4
     ```
 
-After that, you will likely want to flash the firmware. See [[Flashing G2 with Linux]].
+The output is ```./bin/gShield/gShield_flash.bin```. After that, you will likely want to flash the firmware. See [[Flashing G2 with Linux]].
