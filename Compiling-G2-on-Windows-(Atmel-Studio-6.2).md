@@ -41,14 +41,19 @@ To compile the project:
 2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
   * This will create a file named `TinyG2.elf` and another named `TinyG2.bin`, both in the `TinyG2` folder.
   * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually.
-3. Connect, configure and test the Atmel-ICE Tool. In the Device Programming window: 
+3. Configure the Device and Atmel-ICE Tool in the TinyG project Properties window, which can be found by right clicking the TinyG2 root in the solution explorer pane.
+  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due
+  * In the Tool tab select your Atmel-ICE, which must be plugged in to appear. If you have more than one plugged in identify them by the last 4 digits of the serial number.
+  * The Interface is must be SWD. JTAG doesn't work.
+  * You can now program and debug the buttons labeled '5' in the picture, as per step 5, below.
+4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window: 
   * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
-  * The Device is correct: For the Due its `ATSAM3X8E`, for TinyG v9 its`ATSAM3X8C`.
-  * The Interface is SWD. JTAG doesn't work.
+  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due
+  * The Interface must be SWD. JTAG doesn't work.
   * Hit Apply
-  * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab.
-4. Program using Program in Memories. Make sure the file selected is the TinyG2.elf in the main TinyG2 directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it).
-5. (Optional) To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
+  * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab
+  * Program from the Memories tab. Make sure the file selected is the TinyG2.elf in the main TinyG2 directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it).
+5. To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
 
 ## Uploading G2 to a target board (without a Atmel ICE)
 
