@@ -41,11 +41,14 @@ To compile the project:
 2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
   * This will create a file named `TinyG2.elf` and another named `TinyG2.bin`, both in the `TinyG2` folder.
   * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually.
-3. Make sure the correct processor is selected for programming with a Atmel ICE.
-  * This step is only necessary if using using a debugger to upload the firmware to the board.
-  * For the Due, it needs to read `ATSAM3X8E`, and for TinyG v9 is needs to read `ATSAM3X8C`.
-4. (Optional) To upload _any_ binary (particularly useful if you didn't compile it), you can use the "Device Programming" tool (also available under the Tools menu) to upload to the board without compiling.
-5. (Optional) To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
+3. Connect, configure and test the Atmel-ICE Tool. In the Device Programming window: 
+  * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
+  * The Device is correct: For the Due its `ATSAM3X8E`, for TinyG v9 its`ATSAM3X8C`.
+  * The Interface is SWD. JTAG doesn't work.
+  * Hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab.
+4. Program using Program in Memories. Make sure the file is the TinyG2.elf in the main TInyG2 directory. 
+  * (Optional) To upload _any_ binary (particularly useful if you didn't compile it), you can use the "Device Programming" tool (also available under the Tools menu) to upload to the board without compiling.
+  * (Optional) To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
 
 ## Uploading G2 to a target board (without a Atmel ICE)
 
