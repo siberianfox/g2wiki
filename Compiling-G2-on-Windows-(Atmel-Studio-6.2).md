@@ -45,9 +45,9 @@ To compile the project:
   * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
   * The Device is correct: For the Due its `ATSAM3X8E`, for TinyG v9 its`ATSAM3X8C`.
   * The Interface is SWD. JTAG doesn't work.
-  * Hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab.
-4. Program using Program in Memories. Make sure the file is the TinyG2.elf in the main TInyG2 directory. 
-  * (Optional) To upload _any_ binary (particularly useful if you didn't compile it), you can use the "Device Programming" tool (also available under the Tools menu) to upload to the board without compiling.
+  * Hit Apply
+  * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab.
+4. Program using Program in Memories. Make sure the file selected is the TinyG2.elf in the main TinyG2 directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it).
 5. (Optional) To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
 
 ## Uploading G2 to a target board (without a Atmel ICE)
