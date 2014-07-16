@@ -59,9 +59,8 @@ To compile the project:
 
 You have 2 options:
 
-1. To flash usint the Atmel-ICE and Studio 6.2 see
+1. To flash using the Atmel-ICE and Studio 6.2 see
 [[Flashing G2 with Atmel Studio6 and Atmel ICE]]
-https://github.com/synthetos/g2/wiki/Flashing-G2-with-Atmel-Studio6-and-Atmel-ICE
 
 2. To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
 
