@@ -10,5 +10,6 @@ _This page is for uploading an already compiled G2 binary to a target board usin
 Select the Tools / Device Programming menu. 
 _I've omitted a lot of steps, but there are some things to watch for_
 * Make sure the ribbon cable is plugged into the SAM port, not the AVR port
-* Select SWD, not JTAG
-* Program the fuses to boot from FLASH, not ROM
+* Make sure the connection from the ribbon cable to the 10 pin micro connector on the board is properly polarozed (red wire by the white dot), and contacts both rows of pins. It's easy to mess this up as the connector is so small.
+* In the programing dialog box select SWD, not JTAG
+* Program the fuses (GPNVM Bits) to boot from FLASH, not ROM
