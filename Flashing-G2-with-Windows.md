@@ -14,7 +14,7 @@ Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) fro
 
 Get the "installer" and run installer executable.
 
-###Step 3 - Program TinyG2 onto the Due
+###Step 3a - Program TinyG2 onto the Due Using Arduino Tools
 
 Hold down the Windows Key and press r then type cmd.exe and hit enter:
 
@@ -28,3 +28,10 @@ After that go ahead and run these commands.  You should be good to go.
 * `bossac.exe --port=COM6 -e -w -v -b %HOMEPATH%\Downloads\TinyG2_Due_rob_usbtest.bin -R`
 
 Note that COM4 is the port that my ArduinoDUE showed up as.  You can run the `mode` command by itself and it should return a COMx.  Just use your port number.
+
+###Step 3b - Program TinyG2 onto the Due Using Atmel-ICE
+This requires Atmel Studio6.2 (or later) and an Atmel-ICE programmer. I've omitted a lot of steps, but there are some things to watch for
+
+* Make sure the ribbon cable is plugged into the SAM port, not the AVR port
+* Select SWD, not JTAG
+* Program the fuses to boot from FLASH, not ROM
