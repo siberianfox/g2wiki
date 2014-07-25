@@ -37,9 +37,9 @@ The following are expected on the data channel and the control channel.
     * text-mode responses of all kinds
     * Gcode comment messages
 
-**Discovery / Channel Assignment (UC_1)**<br>
+**Channel Assignment**<br>
 Initially neither channel is assigned as data or control. 
-* The first channel to receive any of these characters will become the control channel
+* The first channel to receive any of these characters will become the control channel:
   * {
   * ?
   * $
@@ -47,7 +47,7 @@ Initially neither channel is assigned as data or control.
   * %
   * ~
 * When initially assigned the control channel will accept control and data (UC_3)
-* To assign the other channel as a data channel send `{The other channel will be assigned as the data channel
+* To assign the other channel as a data channel send `{data:"second"}`
 * To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
 
 **Assign Data Channel to and Alternate Source (UC_2)**
