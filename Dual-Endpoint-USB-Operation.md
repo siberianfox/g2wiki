@@ -15,7 +15,16 @@ This arrangement greatly simplifies flow control for the UI or host, as the data
 
 * UC_3: One USB serial port - Both USB serial ports are "piggybacked" on the same channel. Used to support v8 and earlier boards and cases where 2 endpoints are not availabnle for some reason.
 
+##Functional Specifications
+Let's suppose it works like this:
 
+**Communications**
+The following are expected on the data channel and the command channel.
+* Data Channel
+  * 
 
+**UC_1: Two USB serial ports**
+* Two USB ports are made available to the host. The host connect to both.
+* The host 
 
 ##Design and Implementation Notes
