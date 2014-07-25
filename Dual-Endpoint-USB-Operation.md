@@ -24,7 +24,8 @@ The following are expected on the data channel and the control channel.
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
   * Blocks are read one line at a time
   * Lines terminated with LF, CR or both
-  * No response is provided back on the data channel (no echo, acknowledgements, or errors). 
+  * All input is interpreted as Gcode (or whatever data prototocl is in effect). All else is treated as an error.
+  * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 * Control Channel
   * Control channel accepts all other commands and controls, including:
     * Configuration commands (JSON and text mode)
@@ -36,7 +37,7 @@ The following are expected on the data channel and the control channel.
     * text-mode responses of all kinds
     * Gcode comment messages
 
-**Discovery / Channel Assignment**<br>
+**Discovery / Channel Assignment (UC_1)**<br>
 Initially neither channel is assigned as data or control. 
 * The first channel to receive any of these characters will become the control channel
   * {
@@ -45,13 +46,16 @@ Initially neither channel is assigned as data or control.
   * !
   * %
   * ~
-* The other channel will be assigned as the data channel
+* When initially assigned the control channel will accept control and data (UC_3)
+* To assign the other channel as a data channel send `{The other channel will be assigned as the data channel
 * To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
 
-**Assign Data Channel to and Alternate Source**
-* To assign the data channel to an alternate source use: `{data:"_source_"}` where _source_ is a device name or file name
+**Assign Data Channel to and Alternate Source (UC_2)**
+* To assign the data channel to an alternate source send: `{data:"source"}` to the command channel. where _source_ is a device name or file name
 * If the data source closes due to end-of-file or other error condition the data channel reverts to the default data channel
-* To force the data channel back issue `{data:"default"}`
+* To force the data channel back issue `{data:"default"}` to the command channel.
+
+**Single Channel Mode (UC_3)**
 
 
 ##Design and Implementation Notes
