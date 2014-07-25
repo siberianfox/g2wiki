@@ -9,6 +9,13 @@ This arrangement greatly simplifies flow control for the UI or host, as the data
 
 ##Requirements & Use Cases
 
+* UC_1: Two USB serial ports - The USB has configured two virtual serial ports
+ 
+* UC_2: One USB Serial Port, One mass storage device - One virtual serial port is configured for the control channel. Data is made available from a mass storage device. Sub-cases include data from (a) USB mass storage device, (b) SD card or similar off-board, serial accessed storage, (c) on-chip FLASH or EEPROM. Each case may assume read/write or read only mass storage.
+
+* UC_3: One USB serial port - Both USB serial ports are "piggybacked" on the same channel. Used to support v8 and earlier boards and cases where 2 endpoints are not availabnle for some reason.
+
+
 
 
 ##Design and Implementation Notes
