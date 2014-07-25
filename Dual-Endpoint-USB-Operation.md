@@ -9,14 +9,13 @@ This arrangement greatly simplifies flow control for the UI or host, as the data
 
 ##Requirements & Use Cases
 
-* UC_1: Two USB serial ports - The USB has two virtual serial ports configured.
+* UC_1: Two USB serial ports - The USB has two virtual serial ports configured, control and data.
  
 * UC_2: One USB Serial Port, One mass storage device - One virtual serial port is configured for the control channel. Data is made available from a mass storage device. Sub-cases include data channel being from (a) USB mass storage device, (b) SD card or similar off-board, serial accessed storage, (c) on-chip FLASH or EEPROM. Each case may assume read/write or read only mass storage.
 
-* UC_3: One USB serial port - Both USB serial ports are "piggybacked" on the same channel. Used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason.
+* UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port. This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason.
 
 ##Functional Specifications
-Let's suppose it works like this:
 
 **Communications**<br>
 The following are expected on the data channel and the control channel.
@@ -24,12 +23,12 @@ The following are expected on the data channel and the control channel.
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
   * Blocks are read one line at a time
   * Lines terminated with LF, CR or both
-  * All input is interpreted as Gcode (or whatever data prototocl is in effect). All else is treated as an error.
+  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error.
   * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 * Control Channel
   * Control channel accepts all other commands and controls, including:
     * Configuration commands (JSON and text mode)
-    * Single-character controls: !, % ~
+    * Single-character controls: !, %, ~
   * Control channel returns all responses, including
     * JSON response objects
     * JSON status reports
