@@ -39,12 +39,12 @@ The following are expected on the data channel and the control channel.
 **Channel Assignment**<br>
 Initially neither channel is assigned as data or control. 
 * The first channel to receive any of these characters will become the control channel:
-  * {
-  * ?
-  * $
-  * !
-  * %
-  * ~
+  {
+  ?
+  $
+  !
+  %
+  ~
 * When initially assigned the control channel will accept control and data (UC_3)
 * To assign the other channel as a data channel send `{data:"second"}`
 * To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
