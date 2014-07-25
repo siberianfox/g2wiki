@@ -17,7 +17,7 @@ This arrangement greatly simplifies flow control for the UI or host, as the data
 
 ##Functional Specifications
 
-**Communications**<br>
+**Functions**<br>
 The following are expected on the data channel and the control channel.
 * Data Channel
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
@@ -38,6 +38,9 @@ The following are expected on the data channel and the control channel.
 
 **Channel Assignment**<br>
 Initially neither channel is assigned as data or control. 
+* The control and data channels are known as:
+  * /tty0 is the control channel
+  * /tty1 is the data channel
 * The first channel to receive any of these characters will become the control channel:
   * {
   * ?
@@ -46,7 +49,7 @@ Initially neither channel is assigned as data or control.
   * %
   * ~
 * When initially assigned the control channel will accept control and data (UC_3 mode)
-* To assign the other channel as a data channel send `{data:"dual"}` (UC_1 mode)
+* To assign the other channel as a data channel send `{data:"/tty1"}` (UC_1 mode)
 * To disconnect and return both channels to an uninitialized state send three ESC characters in a row (0x1B) to any open channel. This works regardless of the use case, UC_1, UC_2 or UC3.
 
 **Assign Data Channel to and Alternate Source (UC_2 mode)**
