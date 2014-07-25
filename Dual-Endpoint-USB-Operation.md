@@ -46,9 +46,6 @@ Initially neither channel is assigned as data or control.
   * %
   * ~
 * The other channel will be assigned as the data channel
-* To disconnect and return to an un-assigned state 
-**UC_1: Two USB serial ports**
-* Two USB ports are made available to the host. The host connect to both.
-* The host 
+* To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
 
 ##Design and Implementation Notes
