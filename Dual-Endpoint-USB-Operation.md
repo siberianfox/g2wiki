@@ -18,7 +18,7 @@ This arrangement greatly simplifies flow control for the UI or host, as the data
 ##Functional Specifications
 Let's suppose it works like this:
 
-**Communications**
+**Communications**<br>
 The following are expected on the data channel and the control channel.
 * Data Channel
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
@@ -34,8 +34,19 @@ The following are expected on the data channel and the control channel.
     * JSON status reports
     * JSON exception reports
     * text-mode responses of all kinds
+    * Gcode comment messages
 
-
+**Discovery / Channel Assignment**<br>
+Initially neither channel is assigned as data or control. 
+* The first channel to receive any of these characters will become the control channel
+  * {
+  * ?
+  * $
+  * !
+  * %
+  * ~
+* The other channel will be assigned as the data channel
+* To disconnect and return to an un-assigned state 
 **UC_1: Two USB serial ports**
 * Two USB ports are made available to the host. The host connect to both.
 * The host 
