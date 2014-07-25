@@ -49,9 +49,9 @@ Initially neither channel is assigned as data or control.
 * To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
 
 **Assign Data Channel to and Alternate Source**
-* Use the following command to assign the data channel to an alternate source `{data:<source>}` where source is a device name or file name
-* If the data source closes due to end-of-file or other error condition the data channel reverts to the previous channel
-* To force the data 
+* To assign the data channel to an alternate source use: `{data:"_source_"}` where _source_ is a device name or file name
+* If the data source closes due to end-of-file or other error condition the data channel reverts to the default data channel
+* To force the data channel back issue `{data:"default"}`
 
 
 ##Design and Implementation Notes
