@@ -48,4 +48,7 @@ Initially neither channel is assigned as data or control.
 * The other channel will be assigned as the data channel
 * To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
 
+* Use the following command to assign the data channel to an alternate source
+  * `{data:<source>}` where <source> is a device name or file name
+
 ##Design and Implementation Notes
