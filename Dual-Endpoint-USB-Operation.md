@@ -39,22 +39,20 @@ The following are expected on the data channel and the control channel.
 **Channel Assignment**<br>
 Initially neither channel is assigned as data or control. 
 * The first channel to receive any of these characters will become the control channel:
-  {
-  ?
-  $
-  !
-  %
-  ~
-* When initially assigned the control channel will accept control and data (UC_3)
-* To assign the other channel as a data channel send `{data:"second"}`
-* To disconnect and return to an un-assigned state send three ESC characters in a row. (0x1B)
+  * {
+  * ?
+  * $
+  * !
+  * %
+  * ~
+* When initially assigned the control channel will accept control and data (UC_3 mode)
+* To assign the other channel as a data channel send `{data:"dual"}` (UC_1 mode)
+* To disconnect and return both channels to an uninitialized state send three ESC characters in a row (0x1B) to any open channel. This works regardless of the use case, UC_1, UC_2 or UC3.
 
-**Assign Data Channel to and Alternate Source (UC_2)**
-* To assign the data channel to an alternate source send: `{data:"source"}` to the command channel. where _source_ is a device name or file name
-* If the data source closes due to end-of-file or other error condition the data channel reverts to the default data channel
-* To force the data channel back issue `{data:"default"}` to the command channel.
-
-**Single Channel Mode (UC_3)**
+**Assign Data Channel to and Alternate Source (UC_2 mode)**
+* To assign the data channel to an alternate source send: `{data:"source"}` to the command channel, where "source" is a device name or file name
+* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel
+* To force the data channel back to dual at any time issue `{data:"dual"}` to the command channel
 
 
 ##Design and Implementation Notes
