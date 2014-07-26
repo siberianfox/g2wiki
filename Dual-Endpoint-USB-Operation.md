@@ -60,13 +60,13 @@ Initially neither channel is assigned as data or control.
 
 ##Design and Implementation Notes
 
-* Some channels will be read/write [RW], and others will be read-only [R] (plus flow control). Of the ones that are [RW] will be a subset that are interactive [I] and capable of sending commands (JSON, etc) and receiving status reports.
-  * A USB serial device is default [I]. It will become [RW] when set as a data channel. 
-  * An SD card is either [R] or [RW], but never [I]. (Note: You still talk to an SD card to get data, even when the card is [R].)
-  * An SPI device may be [R], [RW], or [I]. There needs to be a mechanism to determine which. 
+* Some channels will be read/write `RW`, and others will be read-only `R` (plus flow control). Of the ones that are `RW` will be a subset that are interactive `I` and capable of sending commands (JSON, etc) and receiving status reports.
+  * A USB serial device is default `I`. It will become `RW` when set as a data channel. 
+  * An SD card is either `R` or `RW`, but never `I`. (Note: You still talk to an SD card to get data, even when the card is `R`.)
+  * An SPI device may be `R`, `RW`, or `I`. There needs to be a mechanism to determine which. 
 * All usable channels must have a sense of "connected/available" ("available" from here on).
   * USB-serial gets a signal when the host side has an active connection.
   * An SD card socket has a Card-Detect (CD) pin to know when an SD card is present.
   * An SPI socket has the !Interupt pin to detect the presence of an device on a select line.
 * What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
-  * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are [I]_ are _also_ **Control**. IOW, Control is a broadcast on send and accept-from-anywhere on receive, but will reject from any channel not **Data**. 
+  * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast on send and accept-from-anywhere on receive, but will reject from any channel not **Data**. 
