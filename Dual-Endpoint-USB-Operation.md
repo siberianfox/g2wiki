@@ -80,3 +80,18 @@ Initially neither channel is assigned as data or control.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
+
+
+## Device mapping
+
+###Things we need to describe
+* What's a logical device and what's a physical device?
+  * How do we keep them distinct?
+* Serial devices: `usb-serial0`, `usb-serial1`, `uart0`, `spi0.1`
+ * Subdevices: `spi0.1` would be sub-channel `1` of peripheral `spi0`?
+ * Nested devices: 
+  * How would we describe an sd card that is on a fin at `spi0.1`?
+  * How about an individual websocket on a WiFi fin?
+* "Teletype" Channels: `tty0`, `tty1`
+* File storage devices: `sd`, `flash`, `ram`
+  * Files, stored on those devices
