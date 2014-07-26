@@ -23,7 +23,7 @@ The following are expected on the data channel and the control channel.
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
   * Blocks are read one line at a time
   * Lines terminated with LF, CR or both
-  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. **[This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from this channel.]**
+  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. **[This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from this channel. -Rob]**
   * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 * Control Channel
   * Control channel accepts all other commands and controls, including:
@@ -54,7 +54,7 @@ Initially neither channel is assigned as data or control.
 
 **Assign Data Channel to and Alternate Source (UC_2 mode)**
 * To assign the data channel to an alternate source send: `{data:"source"}` to the command channel, where "source" is a device name or file name
-* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel _[Does this mean UC_1 mode or UC_3 mode? -Rob]_
+* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel **[Does this mean UC_1 mode or UC_3 mode? -Rob]**
 * To force the data channel back to dual at any time issue `{data:"/tty1"}` to the command channel
 
 
