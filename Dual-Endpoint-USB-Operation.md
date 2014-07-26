@@ -54,8 +54,8 @@ Initially neither channel is assigned as data or control.
 
 **Assign Data Channel to and Alternate Source (UC_2 mode)**
 * To assign the data channel to an alternate source send: `{data:"source"}` to the command channel, where "source" is a device name or file name
-* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel
-* To force the data channel back to dual at any time issue `{data:"dual"}` to the command channel
+* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel _[Does this mean UC_1 mode or UC_3 mode? -Rob]_
+* To force the data channel back to dual at any time issue `{data:"/tty1"}` to the command channel
 
 
 ##Design and Implementation Notes
