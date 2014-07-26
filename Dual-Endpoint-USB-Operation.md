@@ -90,8 +90,8 @@ Initially neither channel is assigned as data or control.
 * Serial devices: `usb-serial0`, `usb-serial1`, `uart0`, `spi0.1`
  * Subdevices: `spi0.1` would be sub-channel `1` of peripheral `spi0`?
  * Nested devices: 
-   * How would we describe an sd card that is on a fin at `spi0.1`?
-   * How about an individual websocket on a WiFi fin?
+    * How would we describe an sd card that is on a fin at `spi0.1`?
+    * How about an individual websocket on a WiFi fin?
 * "Teletype" Channels: `tty0`, `tty1`
 * File storage devices: `sd`, `flash`, `ram`
   * Files, stored on those devices
