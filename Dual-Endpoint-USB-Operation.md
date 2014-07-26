@@ -23,7 +23,7 @@ The following are expected on the data channel and the control channel.
   * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
   * Blocks are read one line at a time
   * Lines terminated with LF, CR or both
-  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. **[This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from this channel. -Rob]**
+  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. See note on JSON wrapped Gcode.
   * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 * Control Channel
   * Control channel accepts all other commands and controls, including:
@@ -35,6 +35,8 @@ The following are expected on the data channel and the control channel.
     * JSON exception reports
     * text-mode responses of all kinds
     * Gcode comment messages
+
+JSON Wrapped Gcode: **[This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from the data channel. -Rob]**
 
 **Channel Assignment**<br>
 Initially neither channel is assigned as data or control. 
