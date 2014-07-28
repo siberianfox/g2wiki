@@ -17,7 +17,7 @@ This arrangement greatly simplifies flow control for the UI or host, as the cont
 
 ##Functional Specifications
 
-**Functions**<br>
+###Functions
 The following are expected on the control and data channels.
 * Control Channel
   * Control channel accepts all non-gcode commands and controls, including:
@@ -41,22 +41,44 @@ The following are expected on the control and data channels.
   * Data channel returns:
     * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 
-JSON Wrapped Gcode: **This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from the data channel. -Rob**
+JSON Wrapped Gcode: **This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from the data channel. -Rob** We need to decide what to with it. The easiest thing is not to accept it at all.
 
-**Channel Assignment**<br>
-Initially neither channel is assigned as data or control. 
-* The control and data channels are known as:
-  * /tty0 is the control channel
-  * /tty1 is the data channel
-* The first channel to receive any of these characters will become the control channel:
+###USB Channel Binding
+* The two USB channels appear as physical devices:
+  * `/dev/usb-serial0` is the control channel
+  * `/dev/usb-serial1` is the data channel
+* The logical devices are `ctrl` and `data`
+* The logical devices can be queried to determine the device binding:
+  * `{"ctrl":null}`
+  * `{"data":null}`
+* These return the device string, or null if not bound.
+
+Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state, the USB channel that receives the first character will become both the control and data channel. The other USB port will then be ignored. This is to maintain compatibility with UC_3 and not require an additional setup steps for legacy UIs and hosts. 
+
+To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below: 
+  * `{"ctrl":"/dev/usb-serial0"}`
+  * `{"data":"/dev/usb-serial1"}` or
+will execute them. 
+
+Binding may be performed manual - for example:
+  * `{"ctrl":"/dev/usb-serial0"}`
+  * `{"data":"/dev/usb-serial1"}` or
+  * `{"ctrl":"/dev/usb-serial1"}`
+  * `{"data":"/dev/usb-serial0"}`
+* (This also enables binding other devices such as SD card files to the data channel - more later)
+
+####Automatic Binding 
+Automatic binding is designed to select the correct binding channels 
+* The first channel to receive any of these characters will bind to the control channel:
   * {
   * ?
   * $
   * !
   * %
   * ~
+* At this point that channel will receive and act on any control or data characters. I.e. both control and data are bound to the port. THis is to support UC_3 and provide backwards compatibility
+* To bind the data channel to the remaining USB port send `{"data":"auto"}`
 * When initially assigned the control channel will accept control and data (UC_3 mode)
-* To assign the other channel as a data channel send `{data:"/tty1"}` (UC_1 mode)
 * To disconnect and return both channels to an uninitialized state send three ESC characters in a row (0x1B) to any open channel. This works regardless of the use case, UC_1, UC_2 or UC3.
 
 **Assign Data Channel to and Alternate Source (UC_2 mode)**
