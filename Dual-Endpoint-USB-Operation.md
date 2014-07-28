@@ -63,7 +63,7 @@ Assigning the control and data channels to the 2 USB ports must accommodate the 
   * `{"data":null}` is similar
 
 **Binding Operation**<br>
-Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state the USB channel that receives the first character will be bound to both the control and data channels. The other USB port will then be ignored (all input ignored). This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
+Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state the control and data channels will be bound to the USB channel that receives the first character. The other USB port will remain unbound and all inout will be ignored. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
 To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below:
 <pre>
