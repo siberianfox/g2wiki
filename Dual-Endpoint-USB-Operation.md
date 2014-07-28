@@ -33,15 +33,16 @@ The following are expected on the control and data channels.
     * Gcode comment messages
 
 * Data Channel
-  * Data channel accepts all Gcode input
-    * Raw Gcode blocks or JSON wrapped Gcode blocks are presented on the data channel
+  * Data channel accepts all Gcode input:
+    * Raw Gcode blocks
+    * JSON wrapped Gcode blocks
     * Blocks are read one line at a time
     * Lines terminated with LF, CR or both
     * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. See note on JSON wrapped Gcode.
   * Data channel returns:
     * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 
-JSON Wrapped Gcode: **This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from the data channel. -Rob** We need to decide what to with it. The easiest thing is not to accept it at all.
+JSON Wrapped Gcode: We need a decision on JSON wrapped Gcode. It's easy enough to allow JSON wrapped Gcode as the only JSON allowed on the data channel. We already have a similar check required to ensure that JSON wrapped Gcode on the control channel is rejected. We could also remove JSON wrapped Gcode as valid input to either channel.
 
 ###USB Channel Binding
 Assigning the control and data channels to the 2 USB ports must accommodate the 3 use cases above. This scheme should do that. Comments?
