@@ -44,10 +44,10 @@ The following are expected on the control and data channels.
 
 JSON Wrapped Gcode: We need a decision on JSON wrapped Gcode. It's easy enough to allow JSON wrapped Gcode as the only JSON allowed on the data channel. We already have a similar check required to ensure that JSON wrapped Gcode on the control channel is rejected. We could also remove JSON wrapped Gcode as valid input to either channel.
 
-###USB Channel Binding
+###USB Communications and Channel Binding
 Assigning the control and data channels to the 2 USB ports must accommodate the 3 use cases above. This scheme should do that. Comments?
 
-**Background**
+**Background**<br>
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0`
   * `/dev/usb-serial1`
@@ -62,7 +62,7 @@ Assigning the control and data channels to the 2 USB ports must accommodate the 
     * `{"ctrl":null}` (unassigned)
   * `{"data":null}` is similar
 
-**Binding Operation**
+**Binding Operation**<br>
 Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state the USB channel that receives the first character will be bound to both the control and data channels. The other USB port will then be ignored (all input ignored). This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
 To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below:
@@ -75,7 +75,7 @@ returns:  {"data":"/dev/usb-serial1"}
 
 Other devices such as SD card files can also be bound to the data channel - more later.
 
-**Unbinding**
+**Unbinding**<br>
 There are 2 ways to unbind:
 * Send `{"ctrl":"unbind"}` or `{"data":"unbind"}`
 * Send three ESC characters in a row (0x1B) to the channel
