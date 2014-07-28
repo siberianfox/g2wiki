@@ -54,7 +54,7 @@ Assigning the control and data channels to the 2 USB ports must accommodate the 
 * Control and data appear as two logical devices:
   * `ctrl`
   * `data`
-* We 'bind' the physical devices to the logical devices to set up communications
+* Physical devices are manually or automatically 'bound' to logical devices to set up communications
 * The logical devices can be queried to determine the device binding:
   * `{"ctrl":null}` returns one of:
     * `{"ctrl":"/dev/usb-serial0"}`
