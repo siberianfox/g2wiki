@@ -44,48 +44,39 @@ The following are expected on the control and data channels.
 JSON Wrapped Gcode: **This seems to invalidate the ability to have JSON-wrapped Gcode. I suggest removing JSON-wrapped Gcode as valid from the data channel. -Rob** We need to decide what to with it. The easiest thing is not to accept it at all.
 
 ###USB Channel Binding
+Assigning the control and data channels to the 2 USB ports must accommodate the 3 use cases above. This scheme should do that. Comments?
+
+**Background**
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0` is the control channel
   * `/dev/usb-serial1` is the data channel
-* The logical devices are `ctrl` and `data`
+* Control and data appear as two logical devices:
+  * `ctrl`
+  * `data`
 * The logical devices can be queried to determine the device binding:
-  * `{"ctrl":null}`
-  * `{"data":null}`
-* These return the device string, or null if not bound.
+  * `{"ctrl":null}` returns one of:
+    * `{"ctrl":"/dev/usb-serial0"}`
+    * `{"ctrl":"/dev/usb-serial1"}`   
+    * `{"ctrl":null}` (unassigned)
+  * `{"data":null}` is similar
 
-Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state, the USB channel that receives the first character will become both the control and data channel. The other USB port will then be ignored. This is to maintain compatibility with UC_3 and not require an additional setup steps for legacy UIs and hosts. 
+**Binding Operation**
+Initially neither USB channel is assigned as control or data, and will report back null if queried. In this state the USB channel that receives the first character will be bound to both the control and data channels. The other USB port will then be ignored (all input ignored). This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
-To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below: 
-  * `{"ctrl":"/dev/usb-serial0"}`
-  * `{"data":"/dev/usb-serial1"}` or
-will execute them. 
+To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below:
+<pre>
+send:     {"ctrl":null}                  (query which channel is control)
+returns:  {"ctrl":"/dev/usb-serial0"}    (usb-serial0 in this example)
+send:     {"data":"/dev/usb-serial1"}
+returns:  {"data":"/dev/usb-serial1"}
+</pre>
 
-Binding may be performed manual - for example:
-  * `{"ctrl":"/dev/usb-serial0"}`
-  * `{"data":"/dev/usb-serial1"}` or
-  * `{"ctrl":"/dev/usb-serial1"}`
-  * `{"data":"/dev/usb-serial0"}`
-* (This also enables binding other devices such as SD card files to the data channel - more later)
+Other devices such as SD card files can also be bound to the data channel - more later.
 
-####Automatic Binding 
-Automatic binding is designed to select the correct binding channels 
-* The first channel to receive any of these characters will bind to the control channel:
-  * {
-  * ?
-  * $
-  * !
-  * %
-  * ~
-* At this point that channel will receive and act on any control or data characters. I.e. both control and data are bound to the port. THis is to support UC_3 and provide backwards compatibility
-* To bind the data channel to the remaining USB port send `{"data":"auto"}`
-* When initially assigned the control channel will accept control and data (UC_3 mode)
-* To disconnect and return both channels to an uninitialized state send three ESC characters in a row (0x1B) to any open channel. This works regardless of the use case, UC_1, UC_2 or UC3.
-
-**Assign Data Channel to and Alternate Source (UC_2 mode)**
-* To assign the data channel to an alternate source send: `{data:"source"}` to the command channel, where "source" is a device name or file name
-* If the data source closes due to end-of-file or other error condition the data channel reverts to the original "dual" data channel **[Does this mean UC_1 mode or UC_3 mode? -Rob]**
-* To force the data channel back to dual at any time issue `{data:"/tty1"}` to the command channel
-
+**Unbinding**
+There are 2 ways to unbind:
+* Send `{"ctrl":"unbind"}` or `{"data":"unbind"}`
+* Send three ESC characters in a row (0x1B) to the channel
 
 ##Design and Implementation Notes
 
