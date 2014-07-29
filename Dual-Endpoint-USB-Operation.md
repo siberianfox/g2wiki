@@ -1,4 +1,4 @@
-_NOTE: This page is currently a discussion about the specification for using 2 USB serial devices to drive G2 (a specifiction?). At some point it will be edited to become the specification._
+_NOTE: This page is currently a discussion about the specification for using two USB serial devices to drive G2 (a specifiction?). At some point it will be edited to become the specification._
 
 This page describes using two USB serial devices with G2 - aka dual endpoint USB. 
 
