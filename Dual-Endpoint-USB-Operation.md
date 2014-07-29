@@ -118,7 +118,8 @@ Logical channels are functions to which physical devices are attached (bound). T
 _Note: Need a definition of the state model. To include connected/available, active, etc._
 
 **Logical Channels**
-* The control channel is where G2 reads commands. See here a compound entity that is made of one or more 
+* The control channel is where G2 reads commands. See [here](#control-channel) for details
+* The data channel is where G2 reads the Gcode file. See [here](#data-channel) for details
 
 **Physical Device Behaviors**<br>
 
