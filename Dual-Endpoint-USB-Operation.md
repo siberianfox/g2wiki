@@ -96,7 +96,7 @@ Physical Devices are functions to which logical devices are attached (bound). Th
 
 **Physical Device Read/Write Capabilities**<br>
 * `R/W` devices are physical devices that are read/write
-* `R` devices are read-only `R` (plus flow control)
+* `R` devices are read-only (plus flow control)
 * `I` devices are a subset of `RW` devices that are interactive and capable of sending commands (JSON, etc), receiving status reports, and sending GCode
 * `IC` devices are a subset of interactive devices that cannot transmit GCode such as a front-panel device.
 * Examples:
