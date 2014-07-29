@@ -54,47 +54,48 @@ The following are expected on the control and data channels.
 
 
 ###USB Communications and Channel Binding
-We can implicitly bind the channels using the available/connected state of the USB channels. See later section for more on manual binding.
+G2 will implicitly bind channels using the available/connected state of the USB channels.
 
 **Background**<br>
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0`
   * `/dev/usb-serial1`
-* These are mapped to the control and data logical devices:
+* These are bound to the control and data logical devices:
   * `ctrl0`
   * `data0`
 
 **Automatic Binding**<br>
-G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
+G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side 'connects' to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
 1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
 
 1. The first usb-serial channel opened (connected to) will be *both* control and data as long as it's the only channel open. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
-1. If a second usb-serial channel is opened, then the first channel becomes control-only, and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order, and the first opened will become command and the second opened will become data.
+1. If a second usb-serial channel is opened then the first channel becomes control-only and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order - the first opened will become command and the second opened will become data.
 
-Multiple control ports and other devices such as SD card files can also be bound to the channels - more later.
+_Note: Multiple control ports and the use of other devices such as SD card files is supported using manual binding - more later._
 
 **Automatic Unbinding**<br>
 * If one of the two USB channels are closed then the other must become both data and control.
 * If both channels are closed, then there is no data or control.
 
 ##Design and Implementation Notes
-**Logical Devices**<br>
-Logical devices are described by a fully qualified path. The following logical devices are known or supposed:
-* `/dev/usb-serial0`, `/dev/usb-serial1`
-* `/dev/uart0`, `/dev/uart1`,etc.
-* `/dev/spi0`, `/dev/spi1`, etc. Describes entire SPI channel
-* `/dev/spi0.0`, `/dev/spi0.1`, etc. Describes an endpoint (slave select) on an SPI channel
-* `/dev/sd0` describes an SD card
-* `/dev/sd0/filename` describes a file on an SD card
 
 **Physical Devices**<br>
-Physical Devices are functions to which logical devices are attached (bound). These include:
-* `ctrl0`, `ctrl1`, etc. Control channels (multiple may be open at a time)
+Physical devices are described by a fully qualified path. Most physical devices describe a single piece of hardware functionality, but some may be subset using filenames, slave select numbers, or other qualifiers. The following physical devices are known or supposed:
+* `/dev/usb-serial0`, `/dev/usb-serial1`
+* `/dev/uart0`, `/dev/uart1`, etc.
+* `/dev/spi0`, `/dev/spi1`, etc. Describes entire SPI channel
+* `/dev/spi0.0`, `/dev/spi0.1`, etc. Describes an endpoint (slave select) on an SPI channel
+* `/dev/sd0` describes an SD card itself
+* `/dev/sd0/filename` describes a file on an SD card
+
+**Logical Channels**<br>
+Logical channels are functions to which physical devices are attached (bound). These include:
+* `ctrl0`, `ctrl1`, etc. Control channels (multiple may be active at a time)
 * `data0`, `data1`, etc. Data channels (only one may be active at a time)
 
-**Physical Device Read/Write Capabilities**<br>
+**Physical Device Read/Write/Interactive Capabilities**<br>
 * `R/W` devices are physical devices that are read/write
 * `R` devices are read-only (plus flow control)
 * `I` devices are a subset of `RW` devices that are interactive and capable of sending commands (JSON, etc), receiving status reports, and sending GCode
@@ -104,15 +105,22 @@ Physical Devices are functions to which logical devices are attached (bound). Th
   * An SD card is either `R` or `RW`, but never `I`. (Note: You still talk to an SD card to get data, even when the card is `R`.)
 * An SPI device may be `R`, `RW`, `I`, or `IC`. There needs to be a mechanism to determine which. 
 
-* **Physical Device Behaviors**
-  * When an non-`I` device, such as an SD card, is the Data channel, it's expected to automatically keep the gcode buffer full until there is no more (EOF, etc).
-  * When selecting a Data channel, the rest of the path beyond that necessary to designate the device itself, if any, will be used to determine a subset of the channel.
-    * "/sd/file/path" will pass "/file/path" to the sd channel. It might not *accept* the Data channel designation (file not found, card missing, etc).
-    * "/spi0/cs1" will pass "/cs1" to the SPI device for determining which sub-channel ("chip select") to use. 
-  * All usable channels must have a sense of "connected/available" ("available" from here on).
-    * USB-serial gets a signal when the host side has an active connection.
-    * An SD card socket has a Card-Detect (CD) pin to know when an SD card is present.
-    * An SPI socket has the !Interupt pin to detect the presence of an device on a select line.
+**Physical Device Behaviors**<br>
+* When an non-`I` device, such as an SD card, is the data channel it's expected to automatically keep the gcode buffer full until there is no more (EOF, etc).
+* When selecting a data channel the rest of the path beyond that necessary to designate the device itself, if any, will be used to determine a subset of the channel. Example:
+  * "/sd/file/path" will pass "/file/path" to the sd channel. It might not *accept* the Data channel designation (file not found, card missing, etc).
+  * "/spi0/cs1" will pass "/cs1" to the SPI device for determining which sub-channel ("chip select") to use. 
+* All usable channels must have a sense of "connected/available" ("available" from here on).
+  * USB-serial gets a signal when the host side has an active connection.
+  * An SD card socket has a Card-Detect (CD) pin to know when an SD card is present.
+  * An SPI socket has the !Interrupt pin to detect the presence of an device on a select line.
+
+_Note: Need a definition of the state model. To include connected/available, active, etc._
+
+**Logical Channels**
+* The control channel is where G2 reads commands. See here a compound entity that is made of one or more 
+
+**Physical Device Behaviors**<br>
 
 * What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
