@@ -18,6 +18,12 @@ This arrangement greatly simplifies flow control for the UI or host, as the cont
 ##Functional Specifications
 
 ###Functions
+* **Channels** are any communications channel. We are mostly concerned with USB virtual serial ports at this point but channels may include:
+  * USB virtual serial ports
+  * USB mass storage devices
+  * SD card and other mass storage devices
+  * SPI connected devices
+  * Other devices
 The following are expected on the control and data channels.
 * Control Channel
   * Control channel accepts all non-gcode commands and controls, including:
@@ -31,6 +37,7 @@ The following are expected on the control and data channels.
     * text-mode responses of all kinds
     * Gcode echo (if enabled)
     * Gcode comment messages
+  * Multiple control channels may be opened at a time. Command input will be processed line-by-line (no character interleaves), first-come-first-serve, and round-robin. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI connected front panel controller.
 
 * Data Channel
   * Data channel accepts all Gcode input:
@@ -48,7 +55,7 @@ We can implicitly bind the channels using the available/connected state of the U
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0`
   * `/dev/usb-serial1`
-* The USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently.
+* The USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
 **Binding**
 
@@ -61,7 +68,7 @@ We can implicitly bind the channels using the available/connected state of the U
 Other devices such as SD card files can also be bound to the data channel - more later.
 
 **Unbinding**<br>
-* If one of the two USB channels are closed, then the other must become both data and control.
+* If one of the two USB channels are closed then the other must become both data and control.
 * If both channels are closed, then there is no data or control.
 
 ##Design and Implementation Notes
