@@ -79,8 +79,8 @@ _Note: Multiple control ports and the use of other devices such as SD card files
 * If one of the two USB channels are closed then the other must become both data and control.
 * If both channels are closed, then there is no data or control.
 
-###Design and Implementation Notes
-
+##Design and Implementation Notes
+###Channels
 ####Logical Channels
 Logical channels are functions to which physical devices are attached (bound). These include:
 * `ctrl0`, `ctrl1`, etc. Control channels. [See here for details](#control-channel)
@@ -121,29 +121,20 @@ Physical devices are described by a fully qualified path. Most physical devices 
 _Note: Need a definition of the state model. To include connected/available, active, etc._
 
 ####Multiple Control Channels
-
-####SD Card Operation
-
-
-* What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
+What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
 
-## Manual Binding
+###SD Card Operation
+####Reading a file from an SD card (as Data)
+####Writing a file to an SD card
+####Listing SD Card Directory
+####Initializing an SD Card (Erase/Format)
 
-* These are mapped to the control and data logical devices:
-  * `ctrl0`
-  * `data0`
-* What's a logical device and what's a physical device?
-  * How do we keep them distinct?
-* Serial devices: `usb-serial0`, `usb-serial1`, `uart0`, `spi0.1`
- * Subdevices: `spi0.1` would be sub-channel `1` of peripheral `spi0`?
- * Nested devices: 
-    * How would we describe an sd card that is on a fin at `spi0.1`?
-    * How about an individual websocket on a WiFi fin?
-* "Teletype" Channels: `tty0`, `tty1`
-* File storage devices: `sd`, `flash`, `ram`
-  * Files, stored on those devices
 
-### Multiple Device Channels
+## Notes and Open Questions
+* Nested devices: 
+  * How would we describe an sd card that is on a fin at `spi0.1`?
+  * How about an individual websocket on a WiFi fin?
+* "Teletype" Channels: `tty0`, `tty1`. Do we need these?
