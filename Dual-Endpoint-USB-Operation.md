@@ -39,7 +39,7 @@ The following are expected on the control and data channels.
     * text-mode responses of all kinds
     * Gcode echo (if enabled)
     * Gcode comment messages
-  * Multiple control channels may be opened at a time. Command input will be processed line-by-line (no character interleaves), first-come-first-serve, and round-robin. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI connected front panel controller.
+  * Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
 * **Data Channel**
   * Data channel accepts all Gcode input:
