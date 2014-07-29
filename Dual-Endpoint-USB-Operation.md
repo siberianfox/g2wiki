@@ -19,6 +19,7 @@ The following use cases support most configurations. _Please note any other case
 ##Functional Specifications
 
 ###Functions
+####Channel
 A **channel** is any communications channel to the board. We are mostly concerned with USB virtual serial ports at this point but channels may include:
   * USB virtual serial ports
   * USB mass storage devices
@@ -27,31 +28,30 @@ A **channel** is any communications channel to the board. We are mostly concerne
   * Other devices
 
 The following are expected on the control and data channels.
-* **Control Channel**
-  * Control channel accepts all non-gcode commands and controls, including:
-    * Configuration commands (JSON and text mode)
-    * Single-character controls: !, %, ~
-    * multi-character controls such as feed rate overrides and other in-cycle commands
-  * Control channel returns all responses from both channels, including
-    * JSON response objects
-    * JSON status reports
-    * JSON exception reports
-    * text-mode responses of all kinds
-    * Gcode echo (if enabled)
-    * Gcode comment messages
-  * Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all open control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
+####Control Channel
+* Control channel accepts all non-gcode commands and controls, including:
+  * Configuration commands (JSON and text mode)
+  * Single-character controls: !, %, ~
+  * multi-character controls such as feed rate overrides and other in-cycle commands
+* Control channel returns all responses from both channels, including
+  * JSON response objects
+  * JSON status reports
+  * JSON exception reports
+  * text-mode responses of all kinds
+  * Gcode echo (if enabled)
+  * Gcode comment messages
+* Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all open control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
-* **Data Channel**
-  * Data channel accepts all Gcode input:
-    * Raw Gcode blocks
-    * Blocks are read one line at a time
-    * Lines terminated with LF, CR or both
-    * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error.
-    * _Note: JSON wrapped Gcode is not supported_ 
-  * Data channel returns:
-    * No response is provided back on the data channel (no echo, acknowledgements, or errors)
-  * Only one data channel may be open at any given time.
-
+####Data Channel
+* Data channel accepts all Gcode input:
+  * Raw Gcode blocks
+  * Blocks are read one line at a time
+  * Lines terminated with LF, CR or both
+  * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error.
+  * _Note: JSON wrapped Gcode is not supported_ 
+* Data channel returns:
+  * No response is provided back on the data channel (no echo, acknowledgements, or errors)
+* Only one data channel may be open at any given time.
 
 ###USB Communications and Channel Binding
 G2 will implicitly bind channels using the available/connected state of the USB channels.
