@@ -8,6 +8,7 @@ The basic idea of dual endpoint USB operation is to have 2 independent channels 
 This arrangement greatly simplifies flow control for the UI or host, as the control channel can be viewed as always being available to process incoming commands such as feedholds (stops), whereas the data channel can be  heavily buffered, and therefore always have the next Gcode block at the ready. 
 
 ##Requirements & Use Cases
+The following use cases support most configurations. _Please point out any other cases that are not covered._
 
 * UC_1: Two USB serial ports - The USB has two virtual serial ports configured, control and data.
  
@@ -18,12 +19,13 @@ This arrangement greatly simplifies flow control for the UI or host, as the cont
 ##Functional Specifications
 
 ###Functions
-* **Channels** are any communications channel. We are mostly concerned with USB virtual serial ports at this point but channels may include:
+A **channel** is any communications channel to the board. We are mostly concerned with USB virtual serial ports at this point but channels may include:
   * USB virtual serial ports
   * USB mass storage devices
   * SD card and other mass storage devices
   * SPI connected devices
   * Other devices
+
 The following are expected on the control and data channels.
 * **Control Channel**
   * Control channel accepts all non-gcode commands and controls, including:
