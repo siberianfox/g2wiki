@@ -47,9 +47,12 @@ The following are expected on the control and data channels.
     * Blocks are read one line at a time
     * Lines terminated with LF, CR or both
     * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error.
+    * _Note: JSON wrapped Gcode is not supported_ 
   * Data channel returns:
     * No response is provided back on the data channel (no echo, acknowledgements, or errors)
   * Only one data channel may be active at any given time.
+
+
 
 ###USB Communications and Channel Binding
 We can implicitly bind the channels using the available/connected state of the USB channels.
