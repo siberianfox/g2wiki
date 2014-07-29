@@ -10,7 +10,7 @@ This arrangement greatly simplifies flow control for the UI or host, as the cont
 ##Requirements & Use Cases
 The following use cases support most configurations. _Please point out any other cases that are not covered._
 
-* UC_1: Two USB serial ports - The USB has two virtual serial ports configured, control and data.
+* UC_1: Two USB serial ports - The USB has two virtual serial ports configured, control and data. This case also encompasses multiple simultaneous control channels.
  
 * UC_2: One USB Serial Port, One mass storage device - One virtual serial port is configured for the control channel. Data is made available from a mass storage device. Sub-cases include data channel being from (a) USB mass storage device, (b) SD card or similar off-board, serial accessed storage, (c) on-chip FLASH or EEPROM. Each case may assume read/write or read-only mass storage.
 
