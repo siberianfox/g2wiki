@@ -127,7 +127,28 @@ What about cases where there are multiple logical "control channels?" Example: S
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
 
-###SD Card Operation
+#SD Card Operation
+## SD Card Use Cases
+
+* UC_SD1: Return card parameters
+
+* UC_SD1: Erase and initialize card
+* UC_SD2: Retrieve directory listing
+
+* UC_SD1: Read a data file from SD card. A file on the SD card is used as a data source (data channel) to deliver a Gcode program. The following behaviors and limitations apply:
+  * When the SD file is selected the code will start executing automatically (Do we want this behavior or do we want an explicit cycle start?)
+  * When the program is complete the data channel reverts to the data channel that was in effect at the time the file was selected. 
+  * A program completes when either an M2 or M30 is encountered (Gcode Program End), or an end-of-file is encountered.
+  * Embedded Stops (M0, M1) will cause the program to halt at that point. Program execution resumes with a Resume (cycle start) being received on any control channel.
+
+* UC_SD2: Write a data file to an SD card
+* UC_SD3: Stream a data file to an SD card
+
+* UC_SD4: Read a control file from an SD card
+* UC_SD5: Write a control file to an SD card
+
+
+##Functionality
 ####Reading a file from an SD card (as Data)
 ####Writing a file to an SD card
 ####Listing SD Card Directory
