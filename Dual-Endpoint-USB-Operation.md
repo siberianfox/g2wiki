@@ -121,6 +121,8 @@ Physical devices are described by a fully qualified path. Most physical devices 
 
 _Note: Need a definition of the state model. To include connected/available, active, etc._
 
+_Note 2: Motate will hide the chip-select semantics, so consider their use here as merely example. In the end, it will just appears as a series of SPI<b>n</b> channels._
+
 ####Multiple Control Channels
 What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
@@ -131,8 +133,38 @@ What about cases where there are multiple logical "control channels?" Example: S
 ## SD Card Use Cases
 
 * UC_SD1: Return card parameters
+  * Query the device, for device info:
+  ```javascript
+  {fs:{info:"/dev/sd"}}
+  ```
+  Response (roughly):
+  ```javascript
+  {fs:{info:{device:"/dev/sd", mount:"/sd", present:true}}}
+  ```
+  * Query the mount for card info:
+  ```javascript
+  {fs:{info:"/sd"}}
+  ```
+  Response (roughly):
+  ```javascript
+  {fs:{info:{mount:"/sd", present:true, volume:"UNAMED_CARD", size:4194304, read:true, write:false}}}
+  ```
+
 * UC_SD2: Erase and initialize card
+  * _I think this is a bad idea. Let this be done with a full host. -Rob_
 * UC_SD3: Retrieve directory listing
+  ```javascript
+  {fs:{ls:"/sd"}}
+  ```
+  Response:
+  ```javascript
+  {fs:{ls:"/sd", item:"test.gc", file:true}}
+  {fs:{ls:"/sd", item:"braid.gcode", file:true}}
+  {fs:{ls:"/sd", item:"image.jpg", file:true}}
+  {fs:{ls:"/sd", item:"test.gc", file:true}}
+  {fs:{ls:"/sd", item:"old_stuff", directory:true}}
+  {fs:{ls:"/sd", item:null}}
+  ```
 
 * UC_SD4: Read a data file from SD card. A file on the SD card is used as a data source (data channel) to deliver a Gcode program. The following behaviors and limitations apply:
   * When the SD file is selected the code will start executing automatically (Do we want this behavior or do we want an explicit cycle start?)
