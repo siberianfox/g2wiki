@@ -8,7 +8,7 @@ The basic idea of dual endpoint USB operation is to have 2 independent channels 
 This arrangement greatly simplifies flow control for the UI or host, as the control channel can be viewed as always being available to process incoming commands such as feedholds (stops), whereas the data channel can be  heavily buffered, and therefore always have the next Gcode block at the ready. 
 
 ##Requirements & Use Cases
-The following use cases support most configurations. _Please point out any other cases that are not covered._
+The following use cases support most configurations. _Please note any other cases that are not covered._
 
 * UC_1: Two USB serial ports - The USB has two virtual serial ports configured, control and data. This case also encompasses multiple simultaneous control channels.
  
@@ -23,7 +23,7 @@ A **channel** is any communications channel to the board. We are mostly concerne
   * USB virtual serial ports
   * USB mass storage devices
   * SD card and other mass storage devices
-  * SPI connected devices
+  * SPI channels and SPI connected devices
   * Other devices
 
 The following are expected on the control and data channels.
@@ -39,7 +39,7 @@ The following are expected on the control and data channels.
     * text-mode responses of all kinds
     * Gcode echo (if enabled)
     * Gcode comment messages
-  * Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
+  * Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all open control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
 * **Data Channel**
   * Data channel accepts all Gcode input:
@@ -50,30 +50,32 @@ The following are expected on the control and data channels.
     * _Note: JSON wrapped Gcode is not supported_ 
   * Data channel returns:
     * No response is provided back on the data channel (no echo, acknowledgements, or errors)
-  * Only one data channel may be active at any given time.
-
+  * Only one data channel may be open at any given time.
 
 
 ###USB Communications and Channel Binding
-We can implicitly bind the channels using the available/connected state of the USB channels.
+We can implicitly bind the channels using the available/connected state of the USB channels. See later section for more on manual binding.
 
 **Background**<br>
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0`
   * `/dev/usb-serial1`
-* The USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
+* These are mapped to the control and data logical devices:
+  * `ctrl0`
+  * `data0`
 
-**Binding**
+**Automatic Binding**
+G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
 1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
 
 1. The first usb-serial channel opened (connected to) will be *both* control and data as long as it's the only channel open. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
-1. If a second channel is opened, then the first channel becomes control-only, and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order, and the first opened will become command and the second opened will become data.
+1. If a second usb-serial channel is opened, then the first channel becomes control-only, and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order, and the first opened will become command and the second opened will become data.
 
-Other devices such as SD card files can also be bound to the data channel - more later.
+Multiple control ports and other devices such as SD card files can also be bound to the channels - more later.
 
-**Unbinding**<br>
+**Automatic Unbinding**<br>
 * If one of the two USB channels are closed then the other must become both data and control.
 * If both channels are closed, then there is no data or control.
 
@@ -93,15 +95,27 @@ Other devices such as SD card files can also be bound to the data channel - more
   * USB-serial gets a signal when the host side has an active connection.
   * An SD card socket has a Card-Detect (CD) pin to know when an SD card is present.
   * An SPI socket has the !Interupt pin to detect the presence of an device on a select line.
+
 * What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
 
+## Device Innards and Manual Binding
+The automatic binding operations hide the details of the device internals. Manual device manipulation is available for more complex cases. The model is to map physical devices to logical devices (functions).
 
-## Device mapping
+Logical devices are described by a fully qualified path. The following logical devices are known or supposed:
+  * `/dev/usb-serial0`, `/dev/usb-serial1`
+  * `/dev/uart0`, `/dev/uart1`,etc.
+  * `/dev/spi0`, `/dev/spi1`, etc. Describes entire SPI channel
+  * `/dev/spi0.0`, `/dev/spi0.1`, etc. Describes an endpoint (slave select) on an SPI channel
+  * `/dev/sd0` describes an SD card
+  * `/dev/sd0/filename` describes a file on an SD card
 
-###Things we need to describe
+
+* These are mapped to the control and data logical devices:
+  * `ctrl0`
+  * `data0`
 * What's a logical device and what's a physical device?
   * How do we keep them distinct?
 * Serial devices: `usb-serial0`, `usb-serial1`, `uart0`, `spi0.1`
@@ -112,3 +126,5 @@ Other devices such as SD card files can also be bound to the data channel - more
 * "Teletype" Channels: `tty0`, `tty1`
 * File storage devices: `sd`, `flash`, `ram`
   * Files, stored on those devices
+
+### Multiple Device Channels
