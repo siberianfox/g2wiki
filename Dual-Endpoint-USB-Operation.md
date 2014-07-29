@@ -15,7 +15,7 @@ _Please note any other cases that are not covered._
  
 * UC_2: One USB virtual serial port, one mass storage device - One virtual serial port is configured as the control channel. Data is made available from a mass storage device. Sub-cases include data channel being from (a) USB mass storage device, (b) SD card or similar off-board, serial accessed storage, (c) on-chip FLASH or EEPROM. Each case may assume read/write or read-only mass storage. This case also encompasses multiple simultaneous control channels.
 
-* UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port. This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason. In this case only one port is supported.
+* UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port. This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason. Since only one port is used this case assumes only one control channel.
 
 ##Functional Specifications
 
