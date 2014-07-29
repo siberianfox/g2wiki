@@ -64,7 +64,7 @@ We can implicitly bind the channels using the available/connected state of the U
   * `ctrl0`
   * `data0`
 
-**Automatic Binding**
+**Automatic Binding**<br>
 G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
 1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
@@ -95,9 +95,11 @@ Physical Devices are functions to which logical devices are attached (bound). Th
 * `data0`, `data1`, etc. Data channels (only one may be active at a time)
 
 **Physical Device Read/Write Capabilities**<br>
-* Some physical devices will be read/write `RW`, and others will be read-only `R` (plus flow control).
-* Of the ones that are `RW` will be a subset that are interactive `I` and capable of sending commands (JSON, etc), receiving status reports, and sending GCode.
-* One other situation is where there's an interactive device that cannot transmit GCode, such as a front-panel device. These are interactive command-only `IC` devices. 
+* 'R/W' devices are physical devices that are read/write
+* `R` devices are read-only `R` (plus flow control)
+* `I` devices are a subset of `RW` devices that are interactive and capable of sending commands (JSON, etc), receiving status reports, and sending GCode
+* `IC` devices are a subset of interactive devices that cannot transmit GCode such as a front-panel device.
+* Examples:
   * A USB serial device is default `I`. It will become `RW` when set as a data channel. Writing to a data channel has the effect of storing or piping the contents, depending on the device. _(Is this true? - alden)_
   * An SD card is either `R` or `RW`, but never `I`. (Note: You still talk to an SD card to get data, even when the card is `R`.)
 * An SPI device may be `R`, `RW`, `I`, or `IC`. There needs to be a mechanism to determine which. 
