@@ -35,50 +35,34 @@ The following are expected on the control and data channels.
 * Data Channel
   * Data channel accepts all Gcode input:
     * Raw Gcode blocks
-    * JSON wrapped Gcode blocks
     * Blocks are read one line at a time
     * Lines terminated with LF, CR or both
-    * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error. See note on JSON wrapped Gcode.
+    * All input is interpreted as Gcode (or whatever data protocol is in effect). All else is treated as an error.
   * Data channel returns:
     * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 
-JSON Wrapped Gcode: We need a decision on JSON wrapped Gcode. It's easy enough to allow JSON wrapped Gcode as the only JSON allowed on the data channel. We already have a similar check required to ensure that JSON wrapped Gcode on the control channel is rejected. We could also remove JSON wrapped Gcode as valid input to either channel.
-
 ###USB Communications and Channel Binding
-Assigning the control and data channels to the 2 USB ports must accommodate the 3 use cases above. This scheme should do that. Comments?
+We can implicitly bind the channels using the available/connected state of the USB channels.
 
 **Background**<br>
 * The two USB channels appear as physical devices:
   * `/dev/usb-serial0`
   * `/dev/usb-serial1`
-* Control and data appear as two logical devices:
-  * `ctrl`
-  * `data`
-* Physical devices are manually or automatically 'bound' to logical devices to set up communications
-* The logical devices can be queried to determine the device binding:
-  * `{"ctrl":null}` returns one of:
-    * `{"ctrl":"/dev/usb-serial0"}`
-    * `{"ctrl":"/dev/usb-serial1"}`   
-    * `{"ctrl":null}` (unassigned)
-  * `{"data":null}` is similar
+* The USB-serial subsystem is able to detect when software on the host side "connects" to each channel independently.
 
-**Binding**<br>
-Initially neither USB channel is assigned as control or data, and would report back null if it were possible to query them (presumably via some other channel). In this state the control and data channels will be bound to the USB channel that receives the first character. The other USB port will remain unbound and all input will be ignored. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
+**Binding**
 
-To enable dual-endpoint operation the host must then bind the data channel to the other port USB port, as in the example below:
-<pre>
-send:     {"ctrl":null}                  (query which channel is control)
-returns:  {"ctrl":"/dev/usb-serial0"}    (usb-serial0 in this example)
-send:     {"data":"/dev/usb-serial1"}
-returns:  {"data":"/dev/usb-serial1"}
-</pre>
+1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
+
+1. The first usb-serial channel opened (connected to) will be *both* control and data as long as it's the only channel open. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
+
+1. If a second channel is opened, then the first channel becomes control-only, and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order, and the first opened will become command and the second opened will become data.
 
 Other devices such as SD card files can also be bound to the data channel - more later.
 
 **Unbinding**<br>
-There are 2 ways to unbind:
-* Send `{"ctrl":"unbind"}` or `{"data":"unbind"}`
-* Send three ESC characters in a row (0x1B) to the channel
+* If one of the two USB channels are closed, then the other must become both data and control.
+* If both channels are closed, then there is no data or control.
 
 ##Design and Implementation Notes
 
