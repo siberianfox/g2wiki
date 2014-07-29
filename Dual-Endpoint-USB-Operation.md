@@ -94,10 +94,10 @@ Physical devices are described by a fully qualified path. Most physical devices 
 * `/dev/spi0`, `/dev/spi1`, etc. Describes entire SPI channel
 * `/dev/spi0.0`, `/dev/spi0.1`, etc. Describes an endpoint (slave select) on an SPI channel
 * `/dev/sd0` describes an SD card itself
-* `/dev/sd0/filename` describes a file on an SD card
-* `/dev/flash/0x00000000` depending on the chip this may make sense
-* `/dev/eeprom/0x00000000` same
-* `/dev/ram/0x00000000` same
+* `/dev/sd0/file/filename` describes a file on an SD card
+* `/dev/flash/addr/0x00000000` depending on the chip this may make sense
+* `/dev/eeprom/addr/0x00000000` same
+* `/dev/ram/addr/0x00000000` same
 
 ####Physical Device Read/Write/Interactive Capabilities
 * `R/W` devices are physical devices that are read/write
