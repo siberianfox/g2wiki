@@ -129,8 +129,18 @@ What about cases where there are multiple logical "control channels?" Example: S
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
 
+#Filesystem Commands
+
+All filesystem commands will be in the `{fs:{...}}` namespace.
+
+* As for all commands in the G2 system, queries/commands and responses are loosely coupled.
+* When a query is received, one or more responses are sent out.
+* The response format will be dictated by the request. That format will either implicitly indicate that there will be no more responses (such as when only one was expected), or will explicitly indicate which response is the last.
+* There _might_ be other information - such as status reports - transmitted by G2 between the request and the response or between responses.
+
 #SD Card Operation
 ## SD Card Use Cases
+
 
 * UC_SD1: Return card parameters
   * Query the device, for device info:
@@ -139,7 +149,10 @@ What about cases where there are multiple logical "control channels?" Example: S
   ```
   Response (roughly):
   ```javascript
+  // Card present
   {fs:{info:{device:"/dev/sd", mount:"/sd", present:true}}}
+  // Card missing/ejected
+  {fs:{info:{device:"/dev/sd", present:false}}}
   ```
   * Query the mount for card info:
   ```javascript
@@ -147,7 +160,10 @@ What about cases where there are multiple logical "control channels?" Example: S
   ```
   Response (roughly):
   ```javascript
+  // Card present
   {fs:{info:{mount:"/sd", present:true, volume:"UNAMED_CARD", size:4194304, read:true, write:false}}}
+  // Card missing/ejected
+  {fs:{info:{mount:"/sd", present:false}}}
   ```
 
 * UC_SD2: Retrieve directory listing
