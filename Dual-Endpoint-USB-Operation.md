@@ -167,7 +167,7 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
 * UC_SD2: Retrieve directory listing
   ```javascript
   // Query (list "/sd", only list the first five items)
-  {fs:{ls:"/sd", first:1, count:5}}
+  {fs:{ls:"/sd", first:null, count:5}}
   // Possible responses:
     // Files may or may not be sorted.
     // If unsorted, the order may change on any change to the filesystem.
@@ -181,13 +181,15 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
   
     // A null item indicates that there will be no more responses for
     //  this listing request. 'more' being true means there are more
-    //  items to list. 'next' is the value you would provide as "first"
-    //  to get the next group of items.
-    {fs:{ls:"/sd", item:null, more:true, next:6}}
+    //  items to list. 'next' is the token you would provide as "first"
+    //  to get the next group of items. It should not be considered
+    //  an index into an array.
+    {fs:{ls:"/sd", item:null, more:true, next:1155}}
 
   // Query (list "/sd", only list the next five items)
-  {fs:{ls:"/sd", first:6, count:5}}
-    // The next six (or less) {fs:{ls:...}} responses
+  {fs:{ls:"/sd", first:1155, count:5}}
+    // The next five (or less) {fs:{ls:...}} responses
+    {fs:{ls:"/sd", item:null, more:false}}
   ```
 
 * UC_SD3: Read a data file from SD card. A file on the SD card is used as a data source (data channel) to deliver a Gcode program. The following behaviors and limitations apply:
