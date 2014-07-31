@@ -141,43 +141,52 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
 #SD Card Operation
 ## SD Card Use Cases
 
-
 * UC_SD1: Return card parameters
-  * Query the device, for device info:
+  * Query the device, for **device** info:
   ```javascript
+  // Query
   {fs:{info:"/dev/sd"}}
+  // Possible responses:
+    // Card present
+    {fs:{info:{device:"/dev/sd", mount:"/sd", available:true}}}
+    // Card missing/ejected
+    {fs:{info:{device:"/dev/sd", available:false}}}
   ```
-  Response (roughly):
+    * Note 1: The string used in the info request must be the string used in the response, even if several possible paths would lead to the same physical device.
+  * Query the mount for **card** info:
   ```javascript
-  // Card present
-  {fs:{info:{device:"/dev/sd", mount:"/sd", present:true}}}
-  // Card missing/ejected
-  {fs:{info:{device:"/dev/sd", present:false}}}
-  ```
-  * Query the mount for card info:
-  ```javascript
+  // Query:
   {fs:{info:"/sd"}}
-  ```
-  Response (roughly):
-  ```javascript
-  // Card present
-  {fs:{info:{mount:"/sd", present:true, volume:"UNAMED_CARD", size:4194304, read:true, write:false}}}
-  // Card missing/ejected
-  {fs:{info:{mount:"/sd", present:false}}}
+  // Possible responses:
+    // Card present
+    {fs:{info:{mount:"/sd", available:true, volume:"UNAMED_CARD", size:4194304, read:true, write:false}}}
+    // Card missing/ejected
+    {fs:{info:{mount:"/sd", available:false}}}
   ```
 
 * UC_SD2: Retrieve directory listing
   ```javascript
-  {fs:{ls:"/sd"}}
-  ```
-  Response:
-  ```javascript
+  // Query (list "/sd", only list the first five items)
+  {fs:{ls:"/sd", first:1, count:5}}
+  // Possible responses:
+  // Files may or may not be sorted.
+  // If unsorted, the order may change on any change to the filesystem.
+  // Reply must use the same string as the request, even if several
+  //  paths may lead to the same directory.
   {fs:{ls:"/sd", item:"test.gc", file:true}}
   {fs:{ls:"/sd", item:"braid.gcode", file:true}}
   {fs:{ls:"/sd", item:"image.jpg", file:true}}
   {fs:{ls:"/sd", item:"test.gc", file:true}}
   {fs:{ls:"/sd", item:"old_stuff", directory:true}}
-  {fs:{ls:"/sd", item:null}}
+  // A null item indicates that there will be no more responses for
+  //  this listing request. 'more' being true means there are more
+  //  items to list. 'next' is the value you would provide as "first"
+  //  to get the next group of items.
+  {fs:{ls:"/sd", item:null, more:true, next:6}}
+
+  // Query (list "/sd", only list the next five items)
+  {fs:{ls:"/sd", first:6, count:5}}
+  //...
   ```
 
 * UC_SD3: Read a data file from SD card. A file on the SD card is used as a data source (data channel) to deliver a Gcode program. The following behaviors and limitations apply:
