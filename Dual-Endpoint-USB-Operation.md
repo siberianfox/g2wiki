@@ -169,28 +169,30 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
   // Query (list "/sd", only list the first five items)
   {fs:{ls:"/sd", first:1, count:5}}
   // Possible responses:
-  // Files may or may not be sorted.
-  // If unsorted, the order may change on any change to the filesystem.
-  // Reply must use the same string as the request, even if several
-  //  paths may lead to the same directory.
-  {fs:{ls:"/sd", item:"test.gc", file:true}}
-  {fs:{ls:"/sd", item:"braid.gcode", file:true}}
-  {fs:{ls:"/sd", item:"image.jpg", file:true}}
-  {fs:{ls:"/sd", item:"test.gc", file:true}}
-  {fs:{ls:"/sd", item:"old_stuff", directory:true}}
-  // A null item indicates that there will be no more responses for
-  //  this listing request. 'more' being true means there are more
-  //  items to list. 'next' is the value you would provide as "first"
-  //  to get the next group of items.
-  {fs:{ls:"/sd", item:null, more:true, next:6}}
+    // Files may or may not be sorted.
+    // If unsorted, the order may change on any change to the filesystem.
+    // Reply must use the same string as the request, even if several
+    //  paths may lead to the same directory.
+    {fs:{ls:"/sd", item:"test.gc", file:true}}
+    {fs:{ls:"/sd", item:"braid.gcode", file:true}}
+    {fs:{ls:"/sd", item:"image.jpg", file:true}}
+    {fs:{ls:"/sd", item:"test.gc", file:true}}
+    {fs:{ls:"/sd", item:"old_stuff", directory:true}}
+  
+    // A null item indicates that there will be no more responses for
+    //  this listing request. 'more' being true means there are more
+    //  items to list. 'next' is the value you would provide as "first"
+    //  to get the next group of items.
+    {fs:{ls:"/sd", item:null, more:true, next:6}}
 
   // Query (list "/sd", only list the next five items)
   {fs:{ls:"/sd", first:6, count:5}}
-  //...
+    // The next six (or less) {fs:{ls:...}} responses
   ```
 
 * UC_SD3: Read a data file from SD card. A file on the SD card is used as a data source (data channel) to deliver a Gcode program. The following behaviors and limitations apply:
   * When the SD file is selected the code will start executing automatically (Do we want this behavior or do we want an explicit cycle start?)
+    * Is there a reason not to? It could be simulated with an M0 as the first item in the file.
   * When the program is complete the data channel reverts to the data channel that was in effect at the time the file was selected. 
   * A program completes when either an M2 or M30 is encountered (Gcode Program End), or an end-of-file is encountered.
   * Embedded Stops (M0, M1) will cause the program to halt at that point. Program execution resumes with a Resume (cycle start) being received on any control channel.
@@ -200,7 +202,7 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
 * UC_SD5: Stream a data file to an SD card
 
 * UC_SD6: Read a control file from an SD card
-
+  * What would a control file be?
 * UC_SD7: Write a control file to an SD card
 
 
