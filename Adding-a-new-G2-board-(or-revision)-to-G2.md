@@ -10,13 +10,23 @@ _Note about naming: In G2 there are `PLATFORM`, `BASE_PLATFORM`, and `MOTATE_BOA
 
 There are two steps to adding a new revision of an already existing board.
 
+1. Add the new 'platform' to the main Makefile.
+1. Duplicate and alter the appropriate pin assignment file.
+
 ###Add the new 'platform' to the main Makefile.
 
-```makefile
-ifeq ("$(PLATFORM)","G2v9i")
+In the main makefile you will see several clauses like the following:
 
-BASE_PLATFORM=v9_3x8c
-DEVICE_DEFINES += MOTATE_BOARD="G2v9i"
+  ```makefile
+  ifeq ("$(PLATFORM)","NewBoardName")
+  
+  BASE_PLATFORM=v9_3x8c
+  DEVICE_DEFINES += MOTATE_BOARD="NewBoardName"
+  
+  endif
+  ```
 
-endif
-```
+Make a new clause, using an existing base platform, and change `NewBoardName` to the name of your board. (Naming rules: no spaces, CamelCaseFirstCaps. Preferably matching the naming scheme of other boards, such as `G2v9x`, which `x` changing.)
+
+###Making a new pin assignment file
+
