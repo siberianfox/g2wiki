@@ -1,17 +1,19 @@
 There are three different ways to add a new board or revision to G2:
 
-1. [Adding a new revision of an already existing board, such as G2v9](#adding-a-new-revision-of-an-already-existing-board).
-1. Adding a new shield to an already existing base board, such as the Due.
+1. [Adding a new revision of an already existing board like the G2v9](#adding-a-new-revision-of-an-already-existing-board).
+1. Adding a new shield of the Due.
 1. Adding a new board that uses one of the supported platforms. (Currently, this is SAM3X8E and SMA3X8C.)
 
 _Note about naming: In G2 there are `PLATFORM`, `BASE_PLATFORM`, and `MOTATE_BOARD`,  where `PLATFORM` is the top-level that is selected when compiling, and the rest are implied based on that setting. In newer versions of Motate, these have been rearranged and clarified to make more sense: `BOARD`, `BASE_BOARD`, `PLATFORM`, and `ARCH`, where `BOARD` is the top-level that is passed when compiling. This document will be changed to reflect those changes when they happen. Until then, accept that the naming is somewhat nonsensical._
 
 ##Adding a new revision of an already existing board.
 
-There are two steps to adding a new revision of an already existing board.
+There are two steps to adding a new revision of an already existing board based on the `v9_3x8c` layout.
+
+_This is different than adding a new shield layout to the Due, which is described later._
 
 1. Add the new 'platform' to the main Makefile.
-1. Duplicate and alter the appropriate pin assignment file.
+1. Duplicate and alter the appropriate pin assignment files.
 
 ###Add the new 'platform' to the main Makefile.
 
@@ -30,13 +32,9 @@ Make a new clause, using an existing base platform, and change `NewBoardName` to
 
 ###Making a new pin assignment
 
-Further down in the makefile you'll see `ifeq ("$(BASE_PLATFORM)","v9_3x8c")` clauses that will contain a addition to `DEVICE_INCLUDE_DIRS` (it will likely refer to `PLATFORM_BASE`, which should also be defined in that clause).
+In the `platform/atmel_sam/board/v9_3x8c` directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files.
 
-For example, for `BASE_PLATFORM` of `v9_3x8c` the resulting value is `platform/atmel_sam//board/v9_3x8c`
-
-In that directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files.
-
-In G2, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*.
+For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*. (Note that the Due uses the same file naming scheme, but the usage is reversed since the Due pinout is se, but the shields each have different constant values.)
 
 1. If you are *adding* new pin types to the project, then you must add the constants to `motate_pin_assignments.h`. New pins should be over 100, and must be below 253. It's okay if only one board uses that function and has a definition for that number. To reserve a name for a pin that no boards define yet, just give it the value -1.
 
@@ -49,7 +47,9 @@ In G2, the `motate_pin_assignments.h` file defines all of the constants used thr
     pin_number kNewFunctionPinNumber            = 121;
  ```
 
-  Naming convention: `k` + CamelCasedName_WithUnderscore + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
+  Naming convention: `k` + `CamelCasedName_WithUnderscore` + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
+
+**Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `v9_3x8c` file, you must also follow the directions below to add the same named constant to the Due files.
 
 1. Duplicate the `XYZ-pinout.h` file and rename it to replace `XYZ` with your `PLATFORM` value, resulting in something like `G2v9i-pinout.h`. (Note: The dash *must* be there, and not be an underscore.)
 
@@ -76,3 +76,22 @@ In G2, the `motate_pin_assignments.h` file defines all of the constants used thr
   ```bash
   make PLATFORM=gShield
   ```
+
+##Adding a new shield to an already existing base board
+
+This is almost the same as adding a variant to the `v9_3x8c` line, except that the pin number assignments are static for the Due, and the constants change values based on the functions that are attached to which pins. 
+
+1. Add the new 'platform' to the main Makefile.
+1. Duplicate and alter the appropriate pin assignment files.
+
+###Add the new 'platform' to the main Makefile.
+
+Follow the same instructions for altering the Makefile as for the `v9_3x8c`.
+
+###Making a new pin assignment
+
+In the `platform/atmel_sam/board/due` directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files.
+
+For the `due`, the `motate_pin_assignments.h` file defines the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions for the Arduino Due, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get all of the constants used throughout the G2 project. This means many "shields" will use the Due pin assignments and silkscreen numbering, but the *constants will likely have different values*. (Note that the `v9_3x8c` uses the same file naming scheme, but the usage is reversed since the `v9_3x8c` boards will each have different pinouts, but the constants will all have the same values.)
+
+
