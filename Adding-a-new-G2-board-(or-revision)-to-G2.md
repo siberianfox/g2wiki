@@ -34,7 +34,7 @@ Make a new clause, using an existing base platform, and change `NewBoardName` to
 
 In the `platform/atmel_sam/board/v9_3x8c` directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files.
 
-For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*. (Note that the Due uses the same file naming scheme, but the usage is reversed since the Due pinout is se, but the shields each have different constant values.)
+For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*. (Note that the Due uses the same file naming scheme, but the usage is reversed since the Due pinout is set, but the shields each have different constant values.)
 
 1. If you are *adding* new pin types to the project, then you must add the constants to `motate_pin_assignments.h`. New pins should be over 100, and must be below 253. It's okay if only one board uses that function and has a definition for that number. To reserve a name for a pin that no boards define yet, just give it the value -1.
 
@@ -95,3 +95,19 @@ In the `platform/atmel_sam/board/due` directory will be a `motate_pin_assignment
 For the `due`, the `motate_pin_assignments.h` file defines the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions for the Arduino Due, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get all of the constants used throughout the G2 project. This means many "shields" will use the Due pin assignments and silkscreen numbering, but the *constants will likely have different values*. (Note that the `v9_3x8c` uses the same file naming scheme, but the usage is reversed since the `v9_3x8c` boards will each have different pinouts, but the constants will all have the same values.)
 
 
+1. Duplicate the `XYZ-pinout.h` file and rename it to replace `XYZ` with your `PLATFORM` value, resulting in something like `gShield-pinout.h`. (Note: The dash *must* be there, and not be an underscore.)
+
+1. Alter the pin constants to match the pin mapping of the new shield, using the silk-screen pin numbers of the Due. If you are *adding* new pin types to the project, then you must add the constants. It's okay if only one board uses that function and has a definition for that number. To reserve a name for a pin that no boards define yet, just give it the value -1.
+
+  ```c++
+    // Already existing pins:
+    pin_number kSD_CardDetectPinNumber          = 119;
+    pin_number kInterlock_InPinNumber           = 120;
+
+    // Newly added pin:
+    pin_number kNewFunctionPinNumber            = 121;
+ ```
+
+  Naming convention: `k` + `CamelCasedName_WithUnderscore` + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
+
+**Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `Due` files, you must also follow the directions above to add the same named constant to the `v9_3x8c` files.
