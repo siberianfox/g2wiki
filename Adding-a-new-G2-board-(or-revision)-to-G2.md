@@ -49,7 +49,7 @@ For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the consta
 
   Naming convention: `k` + `CamelCasedName_WithUnderscore` + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
 
-  **Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `v9_3x8c` file, you must also follow the directions [below](adding-a-new-shield-to-an-already-existing-base-board) to add the same named constant to the existing `Due` files.
+  **Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `v9_3x8c` file, you must also follow the directions [below](#adding-a-new-shield-to-an-already-existing-base-board) to add the same named constant to the existing `Due` files.
 
 1. Duplicate the `XYZ-pinout.h` file and rename it to replace `XYZ` with your `PLATFORM` value, resulting in something like `G2v9i-pinout.h`. (Note: The dash *must* be there, and not be an underscore.)
 
