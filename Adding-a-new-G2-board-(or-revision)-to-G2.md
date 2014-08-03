@@ -59,7 +59,10 @@ In G2, the `motate_pin_assignments.h` file defines all of the constants used thr
 
   ```c++
   _MAKE_MOTATE_PIN(119, B, 'B', 15);	// SD_CardDetect
-    _MAKE_MOTATE_PWM_PIN(119, Motate::PWMTimer<3>, /*Channel:*/ A, /*Peripheral:*/ B, /*Inverted:*/ true); // INVERTED!
+    _MAKE_MOTATE_PWM_PIN(119, Motate::PWMTimer<3>, 
+                              /*Channel:*/ A,
+                              /*Peripheral:*/ B,
+                              /*Inverted:*/ true); // INVERTED!
   ```
 
   When changing that pin number `119` in the first line, the `119` on the second line should change to the same value, since it's actually `PORTB 15` that is attached to `PWMTimer<3>` channel `A`. (Note that newer versions of Motate have fixed this to use the Port/Pin to assign the pins functions, simplifying this a fair bit.)
