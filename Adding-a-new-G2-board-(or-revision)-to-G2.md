@@ -49,7 +49,7 @@ For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the consta
 
   Naming convention: `k` + `CamelCasedName_WithUnderscore` + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
 
-**Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `v9_3x8c` file, you must also follow the directions below to add the same named constant to the Due files.
+  **Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `v9_3x8c` file, you must also follow the directions below to add the same named constant to the existing `Due` files.
 
 1. Duplicate the `XYZ-pinout.h` file and rename it to replace `XYZ` with your `PLATFORM` value, resulting in something like `G2v9i-pinout.h`. (Note: The dash *must* be there, and not be an underscore.)
 
@@ -110,4 +110,14 @@ For the `due`, the `motate_pin_assignments.h` file defines the actual mapping of
 
   Naming convention: `k` + `CamelCasedName_WithUnderscore` + `PinNumber`. The underscore is optional and used as a divider between the "group" and "function" portions of the name. For example, `kSocket6_DirPinNumber` - all of the pins that are on socket 6 start with `kSocket6_`.
 
-**Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `Due` files, you must also follow the directions above to add the same named constant to the `v9_3x8c` files.
+  **Important!** All boards of all kinds *must* have the same pin constants defined, even if they aren't used. Known unused pins should have the value of `-1`. If you add constants to the `Due` files, you must also follow the directions above to add the same named constant to the existing `v9_3x8c` files.
+
+1. Any newly created pins can now be used in G2.
+
+1. To compile, call `make` with `PLATFORM=NewPlatformName` with your new platform name instead of `NewPlatformName`. It *is* case sensitive. For example, to build the `gShield` variant:
+
+  ```bash
+  make PLATFORM=gShield
+  ```
+
+## Adding a new board that uses one of the supported platforms. (Currently, this is SAM3X8E and SMA3X8C.)
