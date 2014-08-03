@@ -30,3 +30,9 @@ Make a new clause, using an existing base platform, and change `NewBoardName` to
 
 ###Making a new pin assignment file
 
+Further down in the makefile you'll see `ifeq ("$(BASE_PLATFORM)","v9_3x8c")` clauses that will contain a addition to `DEVICE_INCLUDE_DIRS` (it will likely refer to `PLATFORM_BASE`, which should also be defined in that clause).
+
+For example, for `BASE_PLATFORM` of `v9_3x8c` the resulting value is `platform/atmel_sam//board/v9_3x8c`
+
+In that directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files. Duplicate the `XYZ-pinout.h` file and rename it to replace `XYZ` with your `PLATFORM` value, resulting in something like `G2v9i-pinout.h`. (Note: The dash *must* be there, and not be an underscore.)
+
