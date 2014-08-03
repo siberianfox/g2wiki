@@ -86,7 +86,7 @@ This is almost the same as adding a variant to the `v9_3x8c` line, except that t
 
 ###Add the new 'platform' to the main Makefile.
 
-Follow the same instructions for altering the Makefile as for the `v9_3x8c`.
+Follow the [same instructions](#add-the-new-platform-to-the-main-makefile) for altering the Makefile as for the `v9_3x8c`.
 
 ###Making a new pin assignment
 
