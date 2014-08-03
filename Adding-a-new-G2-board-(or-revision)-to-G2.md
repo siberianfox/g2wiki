@@ -36,9 +36,9 @@ For example, for `BASE_PLATFORM` of `v9_3x8c` the resulting value is `platform/a
 
 In that directory will be a `motate_pin_assignments.h` and one or more `XYZ-pinout.h` files.
 
-1. In G2, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*.
+In G2, the `motate_pin_assignments.h` file defines all of the constants used throughout the G2 project, and it `#include`s the `${MOTATE_BOARD}-pinout.h` file to get the actual mapping of the Motate pin numbers to their hardware Port/Pin assignments and related functions. This means many boards will use the *same pin numbering and constants*.
 
-  If you are *adding* new pin types to the project, then you must add the constants to `motate_pin_assignments.h`. New functions should be over 100, and must be below 253. It's okay if only one board uses that function (and has a definition for that number), Motate will simply generate a Null pin that can be checked for in the code if necessary. To reserve a name for a pin that no boards define yet, just give it the value -1.
+1. If you are *adding* new pin types to the project, then you must add the constants to `motate_pin_assignments.h`. New pins should be over 100, and must be below 253. It's okay if only one board uses that function and has a definition for that number. To reserve a name for a pin that no boards define yet, just give it the value -1.
 
   ```c++
     // Already existing pins:
