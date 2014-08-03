@@ -140,5 +140,7 @@ For the `due`, the `motate_pin_assignments.h` file defines the actual mapping of
     include $(PLATFORM_BASE).mk
   endif
   ```
-1. Duplicate one of the `Due` or `v9_3x8c` section, depending on usage pattern.
-1. Alter the files accordingly.
+1. Duplicate one of the `platform/atmel_sam/board/v9_3x8c` or `platform/atmel_sam/board/due` directories, depending on usage pattern.
+
+1. Alter the new files accordingly.
+
