@@ -1,6 +1,6 @@
 There are three different ways to add a new board or revision to G2:
 
-1. Adding a new revision of an already existing board, such as G2v9.
+1. [Adding a new revision of an already existing board, such as G2v9](#adding-a-new-revision-of-an-already-existing-board).
 1. Adding a new shield to an already existing base board, such as the Due.
 1. Adding a new board that uses one of the supported platforms. (Currently, this is SAM3X8E and SMA3X8C.)
 
@@ -76,4 +76,3 @@ In G2, the `motate_pin_assignments.h` file defines all of the constants used thr
   ```bash
   make PLATFORM=gShield
   ```
-
