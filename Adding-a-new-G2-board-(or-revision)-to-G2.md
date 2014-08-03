@@ -65,7 +65,15 @@ In G2, the `motate_pin_assignments.h` file defines all of the constants used thr
                               /*Inverted:*/ true); // INVERTED!
   ```
 
-  When changing that pin number `119` in the first line, the `119` on the second line should change to the same value, since it's actually `PORTB 15` that is attached to `PWMTimer<3>` channel `A`. (Note that newer versions of Motate have fixed this to use the Port/Pin to assign the pins functions, simplifying this a fair bit.)
+  When changing pin number `119` in the first line, the `119` on the second line should change to the same value, since it's actually `PORTB 15` that is attached to `PWMTimer<3>` channel `A`. (Note that newer versions of Motate have fixed this to use the Port/Pin to assign the pins functions, simplifying this a fair bit.)
 
-1.  Unassigned pins should be commented out and moved to the bottom of the file.
+1. Unassigned pins should be commented out and moved to the bottom of the file.
+
+1. Any newly created pins can now be used in G2.
+
+1. To compile, call `make` with `PLATFORM=NewPlatformName` with your new platform name instead of `NewPlatformName`. It *is* case sensitive. For example, to build the `gShield` variant:
+
+  ```bash
+  make PLATFORM=gShield
+  ```
 
