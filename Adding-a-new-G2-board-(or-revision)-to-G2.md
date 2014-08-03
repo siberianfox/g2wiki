@@ -120,4 +120,4 @@ For the `due`, the `motate_pin_assignments.h` file defines the actual mapping of
   make PLATFORM=gShield
   ```
 
-## Adding a new board that uses one of the supported platforms. (Currently, this is SAM3X8E and SMA3X8C.)
+## Adding a new board that uses one of the supported platforms.
