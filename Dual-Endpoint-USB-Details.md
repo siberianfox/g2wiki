@@ -1,8 +1,8 @@
 The code is organized like so.
 * The low-level devices are provided by Motate devices
 * Most of the intermediate layer code is in xio.cpp/.h
-* devices are DEVs and each has a dev structure in xio.
-* 
+* Devices are DEVs and each has a dev structure in xio.
+* The interface presented to the controller provides a 
 
 Controller.cpp  controll_init():
 <pre>
