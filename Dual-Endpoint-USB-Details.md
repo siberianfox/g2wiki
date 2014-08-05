@@ -1,6 +1,7 @@
-It’s now in the Alden branch. It’s a stub.
-
-Here’s where it shows up:
+The code is organized like so.
+* Most work is on xio.cpp/.h
+* low-level devices are DEVs and have a dev structure
+* 
 
 Controller.cpp  controll_init():
 <pre>
