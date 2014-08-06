@@ -89,13 +89,11 @@ struct xioDeviceWrapperBase {				// base class for the reading from a device
 
 This class is the base class (parent class), and will be subclassed for each device instance. It has a virtual function for reading characters from the device. Each device subclass must provide its own function for reading which will override the virtual function in the base class.
 
-The virtual class is defined as 0 and will return en error if it's ever called directly. (Is this true?)
-
-(Q: Do you prefer xioDeviceWrapper_t or xioDeviceWrapperBase?)
+The `= 0` portion of the readchar() definition makes it a _pure virtual function_ and also makes `xioDeviceWrapperBase` an _abstract base class_, which means you cannot instantiate a `xioDeviceWrapperBase` object directly. However, you can have a pointer to a `xioDeviceWrapperBase`, and since you cannot instantiate one that means that it _must_ point to a subclass. (See [this document](http://www.cplusplus.com/doc/tutorial/polymorphism/) for more info.)
 
 The following is the template for the class definition for each device:
 
-<pre>
+```c++
 template<typename Device>
 struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such as reading for a given device
     Device _dev;
@@ -106,13 +104,13 @@ struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such
         return _dev->readByte();
     };
 };
-</pre>
+```
 Starting with the template declaration:
 
-<pre>
+```c++
 template<typename Device>
 struct …
-</pre>
+```
 
 This says that whatever structure is defined after struct will take a template parameter that is a typename and it’ll be called Device. Device can be any valid type, such as char *, int, const int, or even other templated structures. Think of it like a macro, except it’s not a brain-dead copy-and-paste that happens in the preprocessor, but it’s part of the compiler and it can deal with it intelligently. (Obviously, macros still have their place…)
 
