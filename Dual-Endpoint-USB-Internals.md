@@ -11,7 +11,7 @@ The code is organized like so.
 _Notes from here out are unfinished. Please don't rely on them just yet_
  
 Controller.cpp  controll_init():
-<pre>
+```c++
     SerialUSB.setConnectionCallback([&](bool connected) {
         cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
     });
@@ -19,19 +19,19 @@ Controller.cpp  controll_init():
     SerialUSB1.setConnectionCallback([&](bool connected) {
         cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
     });
-</pre>
+```
 ( Yes, those are lambdas, ignore that for now. It’s likely to change, but I’ll handle that. This gets it done fast, but not necessarily efficiently. )
 
 `cs.state_usb0` and `cs.state_usb1` are probably not what you want, after further investigation. It doesn’t matter, they’r easy to set back.
 
 What does matter is that somewhere in an init (one-time call — but if it gets called again it’ll be fine, just wasteful) SerialUSB.setConnectionCallback() to tell it what to call. It can be a function pointer or a labda like shown, as long as it has the signature of
-<pre>
+```c++
 	void F(bool)
-</pre>
+```
 then it’ll work.
 
 This works the exact same:
-<pre>
+```c++
 void changedStateCh0(bool connected) {
     cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
 }
@@ -47,7 +47,8 @@ void controller_init(uint8_t std_in, uint8_t std_out, uint8_t std_err)
 
     SerialUSB1.setConnectionCallback(changedStateCh1);
 }
-</pre>
+```
+
  `Connected` is as it says, true for now connected, false for now disconnected. It should only get called on an edge — when it changes. You shouldn’t see two back-to-back connected=true calls with the same callback.
 
 
@@ -59,13 +60,15 @@ As for reading and writing:
 There are two SerialUSB objects: SerialUSB  (NO zero, but easily changed), and SerialUSB1. They are identical in function. From here on, when I say SerialUSB, I also mean SerialUSB1 — they’re identical.
 
 The interface is simple:
-<pre>
+
+```c++
 int16_t SerialUSB.readByte()
 
 uint16_t read(uint8_t *buffer, const uint16_t length); // Blocking for now
 
 int32_t write(const uint8_t *data, const uint16_t length); // Also blocking
-</pre>
+```
+
 There is also `readSome()` and `writeSome()` functions that are non-blocking, but otherwise have the same call syntax. read/readSome and write/writeSome all return the amount they read or wrote, which is possibly 0 in the *Some cases.
 
 We haven’t used the blocking read() yet, and the blocking write only blocks until another 256 (or 128 for dual USB) buffer becomes available and it can push the data to it. This is rarely very long.
@@ -81,11 +84,11 @@ This section provides an explanation of what's going on with the device classes,
 
 Starting at the beginning. We are constructing a C++ class for the primitive functions for a class. For this example we are only looking at reading characters from a device. 
 
-<pre>
+```c++
 struct xioDeviceWrapperBase {				// base class for the reading from a device
 	virtual int16_t readchar() = 0;			// Pure virtual. Will be subclassed for every device
 };
-</pre>
+```
 
 This class is the base class (parent class), and will be subclassed for each device instance. It has a virtual function for reading characters from the device. Each device subclass must provide its own function for reading which will override the virtual function in the base class.
 
