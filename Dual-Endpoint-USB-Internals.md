@@ -9,16 +9,16 @@ The code is organized like so.
 
 ### xio.cpp Notes
 _Notes from here out are unfinished. Please don't rely on them just yet_
- 
+
 Controller.cpp  controll_init():
 ```c++
-    SerialUSB.setConnectionCallback([&](bool connected) {
-        cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
-    });
+SerialUSB.setConnectionCallback([&](bool connected) {
+    cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
+});
 
-    SerialUSB1.setConnectionCallback([&](bool connected) {
-        cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
-    });
+SerialUSB1.setConnectionCallback([&](bool connected) {
+    cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
+});
 ```
 ( Yes, those are lambdas, ignore that for now. It’s likely to change, but I’ll handle that. This gets it done fast, but not necessarily efficiently. )
 
@@ -26,7 +26,7 @@ Controller.cpp  controll_init():
 
 What does matter is that somewhere in an init (one-time call — but if it gets called again it’ll be fine, just wasteful) SerialUSB.setConnectionCallback() to tell it what to call. It can be a function pointer or a labda like shown, as long as it has the signature of
 ```c++
-	void F(bool)
+void F(bool)
 ```
 then it’ll work.
 
@@ -57,7 +57,7 @@ I think you’re going to want to move those to xio.cpp, but you’re going to w
 
 As for reading and writing:
 
-There are two SerialUSB objects: SerialUSB  (NO zero, but easily changed), and SerialUSB1. They are identical in function. From here on, when I say SerialUSB, I also mean SerialUSB1 — they’re identical.
+There are two `SerialUSB` objects: `SerialUSB`  (NO zero, but easily changed), and `SerialUSB1`. They are identical in function. From here on, when I say `SerialUSB`, I also mean `SerialUSB1` — they’re identical.
 
 The interface is simple:
 
@@ -69,20 +69,26 @@ uint16_t read(uint8_t *buffer, const uint16_t length); // Blocking for now
 int32_t write(const uint8_t *data, const uint16_t length); // Also blocking
 ```
 
-There is also `readSome()` and `writeSome()` functions that are non-blocking, but otherwise have the same call syntax. read/readSome and write/writeSome all return the amount they read or wrote, which is possibly 0 in the *Some cases.
+There is also `readSome()` and `writeSome()` functions that are non-blocking, but otherwise have the same call syntax. read/readSome and write/writeSome all return the amount they read or wrote, which is possibly 0 in the Some cases.
 
-We haven’t used the blocking read() yet, and the blocking write only blocks until another 256 (or 128 for dual USB) buffer becomes available and it can push the data to it. This is rarely very long.
+We haven’t used the blocking `read()` yet, and the blocking write only blocks until another 256 (or 128 for dual USB) buffer becomes available and it can push the data to it. This is rarely very long.
 
-`length` is required in all cases. I have fixed this in the Motate repo to allow length==0 to means until the terminating NULL, but that’s not ported yet, and porting it’s not practical yet. So, always give a value length (strlen(ptr) works).
+`length` is required in all cases. I have fixed this in the Motate repo to allow `length==0` to means until the terminating `NULL`, but that’s not ported yet, and porting it’s not practical yet. So, always give a value length (`strlen(ptr)` works).
 
-readByte() will return -1 if there’s nothing to read. It’s been doing that this whole time, inside xio -> read_char(), which is in turn called by read_line(), where it’s called _FDEV_ERR and means the same thing.
+`readByte()` will return `-1` if there’s nothing to read. It’s been doing that this whole time, inside xio -> `read_char()`, which is in turn called by `read_line()`, where it’s called `_FDEV_ERR` and means the same thing.
 
-I modified the _write() system call (that gets called from printf) to take file id == 1 as the SerialUSB1, and everything else as SerialUSB. It calls SerialUSB.write(), the blocking version.
+I modified the `_write()` system call (that gets called from `printf`) to take file id == 1 as the `SerialUSB1`, and everything else as `SerialUSB`. It calls `SerialUSB.write()``, the blocking version.
 
 ## C++ Classes, Virtual Functions and Inheritance
 This section provides an explanation of what's going on with the device classes, virtual functions and inheritance. It's intended for those who know C but not C++, or need a C++ refresher.
 
-Starting at the beginning. We are constructing a C++ class for the primitive functions for a class. For this example we are only looking at reading characters from a device. 
+Starting at the beginning. We are constructing a C++ class for the primitive functions for a class. For this example we are only looking at reading characters from a device.
+
+Each of the Motate devices have a distinct type, such as `SPI<0, 1, 2, 3>`, and `UART<...>`. This makes it impossible to put them in an array, much like you can't (easily) have an array that contains strings, `int`s, and `struct`s.
+
+In order to put these diverse types in an array and treat them as equal types that can be called the same way, we will have to create an intermediate wrapper type base-class, and various subclasses for each of the device types.
+
+Here's our base type (for simplicity, we only define one function in these examples):
 
 ```c++
 struct xioDeviceWrapperBase {				// base class for the reading from a device
@@ -90,7 +96,7 @@ struct xioDeviceWrapperBase {				// base class for the reading from a device
 };
 ```
 
-This class is the base class (parent class), and will be subclassed for each device instance. It has a virtual function for reading characters from the device. Each device subclass must provide its own function for reading which will override the virtual function in the base class.
+This class is the base class, or "parent class", and will be subclassed for each device type. It has a _pure virtual function_ that the overridden version of will read characters from the device. Each device subclass must provide its own function for reading which will override the virtual function in the base class.
 
 The `= 0` portion of the readchar() definition makes it a _pure virtual function_ and also makes `xioDeviceWrapperBase` an _abstract base class_, which means you cannot instantiate a `xioDeviceWrapperBase` object directly. However, you can have a pointer to a `xioDeviceWrapperBase`, and since you cannot instantiate one that means that it _must_ point to a subclass. (See [this document](http://www.cplusplus.com/doc/tutorial/polymorphism/) for more info.)
 
@@ -211,4 +217,4 @@ void drawNextShape() {
     nextShapeToDraw->draw();
 }
 </pre>
-Now if nextShapeToDraw is assigned to the pointer of a Circle object, it will call Circle::draw(). 
+Now if nextShapeToDraw is assigned to the pointer of a Circle object, it will call Circle::draw().
