@@ -12,54 +12,34 @@ _Notes from here out are unfinished. Please don't rely on them just yet_
 
 Controller.cpp  controll_init():
 ```c++
-	// setup for USBserial0
-	SerialUSB.setConnectionCallback([&](bool connected) {
-		usb0->next_state = connected ? DEVICE_CONNECTED : DEVICE_NOT_CONNECTED;
-	});
+// setup for USBserial0
+SerialUSB.setConnectionCallback([&](bool connected) {
+    usb0->next_state = connected ? DEVICE_CONNECTED : DEVICE_NOT_CONNECTED;
+});
 ```
-Yes, those are lambda functions, this might change later. Her's a good reference for lambda functions in C++<br>
+Yes, that's a lambda function, this might change later. Here's a good lambda function C++ reference:<br>
 http://www.cprogramming.com/c++11/c++11-lambda-closures.html
 
-
-`cs.state_usb0` and `cs.state_usb1` are probably not what you want, after further investigation. It doesn’t matter, they’r easy to set back.
-
-What does matter is that somewhere in an init (one-time call — but if it gets called again it’ll be fine, just wasteful) SerialUSB.setConnectionCallback() to tell it what to call. It can be a function pointer or a labda like shown, as long as it has the signature of
-```c++
-void F(bool)
-```
-then it’ll work.
-
-This works the exact same:
+This works exactly the same:
 ```c++
 void changedStateCh0(bool connected) {
-    cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
-}
-void changedStateCh1(bool connected) {
-    cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
+    usb0->next_state = connected ? DEVICE_CONNECTED : DEVICE_NOT_CONNECTED;
 }
 
 void controller_init(uint8_t std_in, uint8_t std_out, uint8_t std_err)
 {
-    //…
-
+    ...
     SerialUSB.setConnectionCallback(changedStateCh0);
-
-    SerialUSB1.setConnectionCallback(changedStateCh1);
+    ...
 }
 ```
 
- `Connected` is as it says, true for now connected, false for now disconnected. It should only get called on an edge — when it changes. You shouldn’t see two back-to-back connected=true calls with the same callback.
+`Connected` is as it says, true for now connected, false for now disconnected. It should only get called on an edge — when it changes. You shouldn’t see two back-to-back connected=true calls with the same callback.
 
 
-I think you’re going to want to move those to xio.cpp, but you’re going to want to make a way for controller to get that generated info, I suspect.
-
-
-As for reading and writing:
-
-There are two `SerialUSB` objects: `SerialUSB`  (NO zero, but easily changed), and `SerialUSB1`. They are identical in function. From here on, when I say `SerialUSB`, I also mean `SerialUSB1` — they’re identical.
+As for reading and writing: There are two `SerialUSB` objects: `SerialUSB`  (NO zero, but easily changed), and `SerialUSB1`. They are identical in function. From here on, when I say `SerialUSB`, I also mean `SerialUSB1` — they’re identical.
 
 The interface is simple:
-
 ```c++
 int16_t SerialUSB.readByte()
 
