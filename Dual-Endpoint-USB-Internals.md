@@ -77,7 +77,7 @@ struct xioDeviceWrapperBase {				// base class for the reading from a device
 
 This class is the base class, or "parent class", and will be subclassed for each device type. It has a _pure virtual function_ that the subclasses will override to read characters from the device.
 
-The `= 0` portion of the readchar() definition makes it a _pure virtual function_ and also makes `xioDeviceWrapperBase` an _abstract base class_, which means you cannot instantiate a `xioDeviceWrapperBase` object directly. However, you can have a pointer to a `xioDeviceWrapperBase`, and since you cannot instantiate one that means that it _must_ point to a subclass. (See [this document](http://www.cplusplus.com/doc/tutorial/polymorphism/) for more info.)
+The `= 0` portion of the readchar() definition makes it a _pure virtual function_ and also makes `xioDeviceWrapperBase` an _abstract base class_, which means you cannot instantiate a `xioDeviceWrapperBase` object directly. However, you can have a pointer to a `xioDeviceWrapperBase`, and since you cannot instantiate one that means that it _must_ point to a subclass. (See this page on [C++ polymorphism](http://www.cplusplus.com/doc/tutorial/polymorphism/) for more info.)
 
 Next we need a subclass for each type of object we want to handle. We are specifically interested in the objects (**NOT classes**) `SerialUSB` and `SerialUSB1`. These are global objects of the type `Motate::USBSerial<Motate::USBDevice<Motate::USBCDC, Motate::USBCDC> >`, which isn't very pretty. We can use a typedef to make that more accessible, and then create our specially-crafted base class:
 
