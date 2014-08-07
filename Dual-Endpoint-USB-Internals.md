@@ -12,13 +12,10 @@ _Notes from here out are unfinished. Please don't rely on them just yet_
 
 Controller.cpp  controll_init():
 ```c++
-SerialUSB.setConnectionCallback([&](bool connected) {
-    cs.state_usb0 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
-});
-
-SerialUSB1.setConnectionCallback([&](bool connected) {
-    cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
-});
+	// setup for USBserial0
+	SerialUSB.setConnectionCallback([&](bool connected) {
+		usb0->next_state = connected ? DEVICE_CONNECTED : DEVICE_NOT_CONNECTED;
+	});
 ```
 Yes, those are lambda functions, this might change later. Her's a good reference for lambda functions in C++<br>
 http://www.cprogramming.com/c++11/c++11-lambda-closures.html
