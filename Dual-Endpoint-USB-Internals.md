@@ -127,10 +127,11 @@ It would be called like this:
 int16_t c = SerialUSBWrapper.readchar();
 ```
 
+From here there are a few things we can to do make the code more manageable and robust:
+* We can make the wrapper class _templated_ so that it will work with any device class, regardless of actual type, as long as it has the calls we use. (Right now we _only_ use `readByte()`.)
+* We can make the constructor more efficient by using a _member initialization list_ in the constructor -- for global objects like these the optimizer will often remove the constructor altogether, and initialize the structure like any other static value.
 
-**TODO: Explain how this next version is the same as the previous version, and cleanup redundancies.**
-
-The following is the template for the class definition for each device:
+The following is the templated version of the same wrapper class, except it takes the device type by template parameter:
 
 ```c++
 template<typename Device>
@@ -153,6 +154,8 @@ struct …
 
 This says that whatever structure is defined after struct will take a template parameter that is a typename and it’ll be called Device. Device can be any valid type, such as char *, int, const int, or even other templated structures. Think of it like a macro, except it’s not a brain-dead copy-and-paste that happens in the preprocessor, but it’s part of the compiler and it can deal with it intelligently. (Obviously, macros still have their place…)
 
+We have one template parameter, `Device`. It is defined as typename, so it could be any valid type, from a pointer to a serial usb object to a char. **In this case we are expecting it to be a pointer to the device type.**. When it comes time to compile, if we used `_dev` in a way that doesn’t make sense for a Device then we’ll get an error.
+
 Now for the struct declaration:
 
 ```c++
@@ -162,13 +165,13 @@ struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such
 };
 ```
 
-That says we have a template structure named xioDeviceWrapper that is a subclass (child) of xioDeviceWrapperBase and has the following definition (in {…}; like a normal structure). This means that whatever is defined in xioDeviceWrapperBase will also implicitly be defined in xioDeviceWrapper.
+So far this part is the same, except that our class name has changed from `xioDeviceSerialUSBWrapper` to `xioDeviceWrapper`.
 
-Now for the structure declaration, starting with:
+Now for the contents of our class, starting with:
 ```c++
     Device _dev;
 ```
-We declare a variable (called a member) of type Device and name it _dev. This is our template parameter, so it could be anything, really, from a pointer to a serial usb object to a char. **In this case we are going to use it as a pointer to the object**. When it comes time to compile, if we used _dev in a way that doesn’t make sense for a Device then we’ll get an error.
+We declare a variable (called a member) of type Device and name it _dev.
 
 The next is a method definition, that is a special method called the constructor, and constructors have no return value. (It’s implied that it’s assisting it setting up a new object of this class.) Here it is:
 
