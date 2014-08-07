@@ -77,7 +77,7 @@ We haven’t used the blocking `read()` yet, and the blocking write only blocks 
 
 `readByte()` will return `-1` if there’s nothing to read. It’s been doing that this whole time, inside xio -> `read_char()`, which is in turn called by `read_line()`, where it’s called `_FDEV_ERR` and means the same thing.
 
-I modified the `_write()` system call (that gets called from `printf`) to take file id == 1 as the `SerialUSB1`, and everything else as `SerialUSB`. It calls `SerialUSB.write()``, the blocking version.
+I modified the `_write()` system call (that gets called from `printf`) to take file id == 1 as the `SerialUSB1`, and everything else as `SerialUSB`. It calls `SerialUSB.write()`, the blocking version.
 
 ## C++ Classes, Virtual Functions and Inheritance
 This section provides an explanation of what's going on with the device classes, virtual functions and inheritance. It's intended for those who know C but not C++, or need a C++ refresher.
@@ -96,9 +96,60 @@ struct xioDeviceWrapperBase {				// base class for the reading from a device
 };
 ```
 
-This class is the base class, or "parent class", and will be subclassed for each device type. It has a _pure virtual function_ that the overridden version of will read characters from the device. Each device subclass must provide its own function for reading which will override the virtual function in the base class.
+This class is the base class, or "parent class", and will be subclassed for each device type. It has a _pure virtual function_ that the subclasses will override to read characters from the device.
 
 The `= 0` portion of the readchar() definition makes it a _pure virtual function_ and also makes `xioDeviceWrapperBase` an _abstract base class_, which means you cannot instantiate a `xioDeviceWrapperBase` object directly. However, you can have a pointer to a `xioDeviceWrapperBase`, and since you cannot instantiate one that means that it _must_ point to a subclass. (See [this document](http://www.cplusplus.com/doc/tutorial/polymorphism/) for more info.)
+
+Next we need a subclass for each type of object we want to handle. We are specifically interested in the objects (**NOT classes**) `SerialUSB` and `SerialUSB1`. These are global objects of the type `Motate::USBSerial<Motate::USBDevice<Motate::USBCDC, Motate::USBCDC> >`, which isn't very pretty. We can use a typedef to make that more accessible, and then create our specially-crafted base class:
+
+```c++
+typedef Motate::USBSerial<
+          Motate::USBDevice<
+            Motate::USBCDC,
+            Motate::USBCDC
+          >
+        > SerialUSB_t;
+
+struct xioDeviceSerialUSBWrapper : xioDeviceWrapperBase {
+    SerialUSB_t* _dev;
+
+    xioDeviceWrapper(SerialUSB_t* dev) {
+      _dev = dev;
+    };
+
+    int16_t readchar() final {
+        return _dev->readByte();
+    };
+};
+```
+
+Here we created a class `xioDeviceSerialUSBWrapper` that is a subclass of `xioDeviceWrapperBase`. It has one _member_, exactly like that of a C structure, that is a pointer to a `SerialUSB_t` called `_dev`.
+
+We then define a _constructor_ for it, which is a convenient way to initilize the contents of the class when it's declared -- IOW, there's no need to create a seperate function that initializes it. This allows us to create a fully-formed and ready-to-use `xioDeviceSerialUSBWrapper` object in one line, at global scope if we wish:
+
+```c++
+xioDeviceSerialUSBWrapper SerialUSBWrapper { &SerialUSB };
+// This is the exact same, with different syntax:
+// xioDeviceSerialUSBWrapper SerialUSBWrapper = { &SerialUSB };
+
+// This is almost the same (older syntax), with less type safety:
+// xioDeviceSerialUSBWrapper SerialUSBWrapper ( &SerialUSB );
+
+// Any of those would work for this case, and yield the same result.
+```
+
+As you see, we have one parameter in our constructor, `SerialUSB_t* dev`, and we then use that value to assign to the value of `_dev`. So, in that last example, we created an object named `SerialUSBWrapper` that already has it's `_dev` set to a pointer to `SerialUSB`.
+
+Next we defined a function `readchar()` that overrides the virtual function of the same name in the base class. We use the keyword `final` to indicate not only  that it's a virtual function, but also that it needs to override the same function in the base class _and_ that it's not to be overridden.
+
+It would be called like this:
+
+```c++
+int16_t c = SerialUSBWrapper.readchar();
+```
+
+
+**TODO: Explain how this next version is the same as the previous version, and cleanup redundancies.**
 
 The following is the template for the class definition for each device:
 
@@ -125,19 +176,19 @@ This says that whatever structure is defined after struct will take a template p
 
 Now for the struct declaration:
 
-<pre>
+```c++
 template<typename Device>
 struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such as reading for a given device
   …
 };
-</pre>
+```
 
 That says we have a template structure named xioDeviceWrapper that is a subclass (child) of xioDeviceWrapperBase and has the following definition (in {…}; like a normal structure). This means that whatever is defined in xioDeviceWrapperBase will also implicitly be defined in xioDeviceWrapper.
 
 Now for the structure declaration, starting with:
-<pre>
+```c++
     Device _dev;
-</pre>
+```
 We declare a variable (called a member) of type Device (our template parameter, so it could be anything, really, from a pointer to a serial usb object to a char) and name it _dev. When it comes time to compile, if we used _dev in a way that doesn’t make sense for a Device then we’ll get an error.
 
 <This is where I get lost. What is this for? Is this the name or ID of the device? What would be a way that doesn't make sense to the compiler? I can guess and probably be right, but can you provide a correct and incorrect example?
