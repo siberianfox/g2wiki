@@ -107,12 +107,12 @@ Here we created a class `xioDeviceSerialUSBWrapper` that is a subclass of `xioDe
 We then define a _constructor_ for it, which is a convenient way to initilize the contents of the class when it's declared -- IOW, there's no need to create a seperate function that initializes it. This allows us to create a fully-formed and ready-to-use `xioDeviceSerialUSBWrapper` object in one line, at global scope if we wish:
 
 ```c++
-xioDeviceSerialUSBWrapper SerialUSBWrapper { &SerialUSB };
+xioDeviceSerialUSBWrapper serialUSBWrapper { &SerialUSB };
 // This is the exact same, with different syntax:
-// xioDeviceSerialUSBWrapper SerialUSBWrapper = { &SerialUSB };
+// xioDeviceSerialUSBWrapper serialUSBWrapper = { &SerialUSB };
 
 // This is almost the same (older syntax), with less type safety:
-// xioDeviceSerialUSBWrapper SerialUSBWrapper ( &SerialUSB );
+// xioDeviceSerialUSBWrapper serialUSBWrapper ( &SerialUSB );
 
 // Any of those would work for this case, and yield the same result.
 ```
@@ -124,7 +124,7 @@ Next we defined a function `readchar()` that overrides the virtual function of t
 It would be called like this:
 
 ```c++
-int16_t c = SerialUSBWrapper.readchar();
+int16_t c = serialUSBWrapper.readchar();
 ```
 
 From here there are a few things we can to do make the code more manageable and robust:
@@ -135,7 +135,7 @@ The following is the templated version of the same wrapper class, except it take
 
 ```c++
 template<typename Device>
-struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such as reading for a given device
+struct xioDeviceWrapper : xioDeviceWrapperBase {
     Device _dev;
 
     xioDeviceWrapper(Device  dev) : _dev{dev} {};
@@ -154,13 +154,15 @@ struct …
 
 This says that whatever structure is defined after struct will take a template parameter that is a typename and it’ll be called Device. Device can be any valid type, such as char *, int, const int, or even other templated structures. Think of it like a macro, except it’s not a brain-dead copy-and-paste that happens in the preprocessor, but it’s part of the compiler and it can deal with it intelligently. (Obviously, macros still have their place…)
 
-We have one template parameter, `Device`. It is defined as typename, so it could be any valid type, from a pointer to a serial usb object to a char. **In this case we are expecting it to be a pointer to the device type.**. When it comes time to compile, if we used `_dev` in a way that doesn’t make sense for a Device then we’ll get an error.
+We have one template parameter, `Device`. It is defined as `typename`, so it could be any valid type, from a pointer to a serial usb object to a char. **In this case we are expecting it to be a pointer to the device type, such as `SerialUSB_t*`.** (This'll come together in a second...)
+
+When it comes time to compile, if we used `_dev` in a way that doesn’t make sense for a variable of type `Device` then we’ll get an error.
 
 Now for the struct declaration:
 
 ```c++
 template<typename Device>
-struct xioDeviceWrapper : xioDeviceWrapperBase {	// describes the functions such as reading for a given device
+struct xioDeviceWrapper : xioDeviceWrapperBase {
   …
 };
 ```
@@ -171,47 +173,64 @@ Now for the contents of our class, starting with:
 ```c++
     Device _dev;
 ```
-We declare a variable (called a member) of type Device and name it _dev.
+We declare a variable (called a member) of type `Device` and name it `_dev`. Remember in our `xioDeviceSerialUSBWrapper` class we had a similar definition:
 
-The next is a method definition, that is a special method called the constructor, and constructors have no return value. (It’s implied that it’s assisting it setting up a new object of this class.) Here it is:
+```c++
+SerialUSB_t* _dev;
+```
 
-<pre>
+Well, if we construct an object with `Device` set to `SerialUSB_t*`, then it will be result in the _exact same thing_:
+
+```c++
+// The specific (non-templated class):
+xioDeviceSerialUSBWrapper serialUSBWrapper { &SerialUSB };
+
+// The templated class, which is functionally identical:
+xioDeviceWrapper<SerialUSB_t*> anotherSerialUSBWrapper { &SerialUSB };
+
+```
+
+
+
+Here is our new constructor, which changes names because the constructor is always the name of the class:
+
+```c++
     xioDeviceWrapper(Device  dev) : _dev{dev} {};
-</pre>
-It also has a special syntax to allow simple member initialization after the : but before the body of the function {…}; In this case it’s _dev{dev} which basically says _dev = dev. _(It could have been written _dev(dev) as well, but the {…} construction is a new thing that prevents implicit type conversion.)_
+```
 
-**In this case `_dev` is a private member (i.e. not visible outside the object) that is set to the function pointer `dev` that we pass as an argument when we use the object. In this regard `_dev` acts like the `self` member in Python, if you are familiar with that.**
+Here we use the _member initialization_ special syntax for simple and efficient member initialization. Starting after the : but before the body of the function `{…}`; In this case it’s `_dev{dev}` which basically says `_dev = dev`. _(It could have been written `_dev(dev)` as well, but the `_dev{dev}` construction is a C++11 addition that provides more type safety, among other things.)_
 
-We don’t want to do anything else in this constructor so we define the body here and the body is empty: {};
 
-Now we have a member function, which is called a method:
-<pre>
+We no longer have anything else to do in this constructor, so we define the body here and the body is empty: `{};`
+
+Now we the `readchar()` function, which stays the exact same as in the non-templated version:
+
+```c++
     int16_t readchar() final {
         return _dev->readByte();
     };
-</pre>
-It’s a pretty normal function, except for a few things:
 
-* final in the declaration means that it’s a virtual function that overrides the base class’s virtual function. We could have declared it virtual, but final gets us more protection since the compiler will error if the base class doesn’t have this function declared virtual OR any subclass tries to override this one.
+```
 
-* We use the variable _dev which implies the member _dev in this instance of the xioDeviceWrapper class. If we have an xioDeviceWrapper object called w, then when we call w.readchar() it will use w._dev.
-<I'm not sure what this means. Can you explain and/or provide an example? What is "an xioDeviceWrapper object called w"?>
+However, since we we passed `Device`, the type of `_dev`, we could have a compile time error. For example, if we were passed a string:
 
-* This allows for encapsulation — the external interface doesn’t have to know about any of the internal variables.
+```c++
+xioDeviceWrapper<char *> anotherSerialUSBWrapper {"blah"}; // ERROR
+```
 
-* Another thing to note is that if Device isn’t a pointer type or doesn’t have a readByte() method, then there will be an error at compile time.
+We would get an error, since we cannot call `"blah"->readByte()` -- it doesn't make sense.
 
 ####More about Virtual Functions and Inheritance
+
 Inheritance without virtual functions is basically the same as dumping the parent class definitions into the child class definitions. The child class can then use the variables and call the methods of the parent class as if they had been defined in the child class directly.
 
 There’s the added benefit that the compiler knows that they are related, so a pointer to the base class can point to the subclasses as well.
 
-<Example? I'm not even sure how one references the parent and subclasses to define the pointer. Assume zero background in C++.>
-
 However, that’s not worth much without virtual functions. Since the pointer refers to the base class, calling a method of that pointer will use the base-class function.
 
 For example, if we have a type called Shape and subclasses for various shapes (Circle, Rectangle, etc), we can to this:
-<pre>
+
+```c++
 struct Shape {
     void draw() {};
 };
@@ -224,8 +243,17 @@ Shape *nextShapeToDraw;
 void drawNextShape() {
     nextShapeToDraw->draw();
 }
-</pre>
-drawNextShape() will always call Shape::draw(), since nextShapeToDraw is a pointer to a Shape object, even if it’s actually pointing to a Circle.
+
+void main() {
+  Circle c;
+
+  nextShapeToDraw = &c;
+
+  nextShapeToDraw->draw(); // ERROR: draws a Shape!!
+}
+```
+
+`drawNextShape()` will always call `Shape::draw()`, since `nextShapeToDraw` is a pointer to a `Shape` object, even if it’s actually pointing to a `Circle`.
 
 <That's a bit confusing. We might need to walk through this. So I assume that the pointer to the Shape object set up in drawNextShape point to the base class? It might be clearer to call it ShapeBase or ShapeParent. Is there a C++ naming convention that differentiates the parents from the subclasses?>
 
