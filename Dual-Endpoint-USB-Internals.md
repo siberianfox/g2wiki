@@ -20,7 +20,9 @@ SerialUSB1.setConnectionCallback([&](bool connected) {
     cs.state_usb1 = connected ? CONTROLLER_CONNECTED : CONTROLLER_NOT_CONNECTED;
 });
 ```
-( Yes, those are lambdas, ignore that for now. It’s likely to change, but I’ll handle that. This gets it done fast, but not necessarily efficiently. )
+Yes, those are lambda functions, this might change later. Her's a good reference for lambda functions in C++<br>
+http://www.cprogramming.com/c++11/c++11-lambda-closures.html
+
 
 `cs.state_usb0` and `cs.state_usb1` are probably not what you want, after further investigation. It doesn’t matter, they’r easy to set back.
 
