@@ -168,20 +168,16 @@ Now for the structure declaration, starting with:
 ```c++
     Device _dev;
 ```
-We declare a variable (called a member) of type Device (our template parameter, so it could be anything, really, from a pointer to a serial usb object to a char) and name it _dev. When it comes time to compile, if we used _dev in a way that doesn’t make sense for a Device then we’ll get an error.
-
-<This is where I get lost. What is this for? Is this the name or ID of the device? What would be a way that doesn't make sense to the compiler? I can guess and probably be right, but can you provide a correct and incorrect example?
-
-This next part is really confusing. What is the constructor for - does it initialize the methods that follow? Is it callable by the user? Should it read something like "The constructor is required for every subclassed object. They run once to set up the object, and have no return value. This format for constructors is pretty standard, here's what it means:">
+We declare a variable (called a member) of type Device and name it _dev. This is our template parameter, so it could be anything, really, from a pointer to a serial usb object to a char. **In this case we are going to use it as a pointer to the object**. When it comes time to compile, if we used _dev in a way that doesn’t make sense for a Device then we’ll get an error.
 
 The next is a method definition, that is a special method called the constructor, and constructors have no return value. (It’s implied that it’s assisting it setting up a new object of this class.) Here it is:
 
 <pre>
     xioDeviceWrapper(Device  dev) : _dev{dev} {};
 </pre>
-It also has a special syntax to allow simple member initialization after the : but before the body of the function {…}; In this case it’s _dev{dev} which basically says _dev = dev. (It could have been written _dev(dev) as well, but the {…} construction is a new thing that prevents implicit type conversion.)
+It also has a special syntax to allow simple member initialization after the : but before the body of the function {…}; In this case it’s _dev{dev} which basically says _dev = dev. _(It could have been written _dev(dev) as well, but the {…} construction is a new thing that prevents implicit type conversion.)_
 
-<The above is confusing because I don't know where '_dev' came from or what it does, or what 'dev' is. Is it something that is substituted later? Is it generic? What does _dev = dev mean? Assign the value on dev to _dev, presumably, what not knowing what either of these are it's a bit abstract. I surmise from later text that _dev is a self reference to the object like Python's self, but you get to define it.>
+**In this case `_dev` is a private member (i.e. not visible outside the object) that is set to the function pointer `dev` that we pass as an argument when we use the object. In this regard `_dev` acts like the `self` member in Python, if you are familiar with that.**
 
 We don’t want to do anything else in this constructor so we define the body here and the body is empty: {};
 
@@ -201,8 +197,6 @@ It’s a pretty normal function, except for a few things:
 * This allows for encapsulation — the external interface doesn’t have to know about any of the internal variables.
 
 * Another thing to note is that if Device isn’t a pointer type or doesn’t have a readByte() method, then there will be an error at compile time.
-Where was the device declared as a pointer type, or is it just always that way?
-
 
 ####More about Virtual Functions and Inheritance
 Inheritance without virtual functions is basically the same as dumping the parent class definitions into the child class definitions. The child class can then use the variables and call the methods of the parent class as if they had been defined in the child class directly.
