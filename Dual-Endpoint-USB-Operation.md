@@ -151,8 +151,8 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
 * The response format will be dictated by the request. That format will either implicitly indicate that there will be no more responses (such as when only one was expected), or will explicitly indicate which response is the last.
 * There _might_ be other information - such as status reports - transmitted by G2 between the request and the response or between responses.
 
-#SD Card Operation
-## SD Card Use Cases
+##SD Card Operation
+### SD Card Use Cases
 
 * UC_SD1: Return card parameters
   * Query the device, for **device** info:
@@ -221,7 +221,7 @@ All filesystem commands will be in the `{fs:{...}}` namespace.
 * UC_SD7: Write a control file to an SD card
 
 
-## Notes and Open Questions
+# Notes and Open Questions
 * Nested devices: 
   * How would we describe an sd card that is on a fin at `spi0.1`?
   * How about an individual websocket on a WiFi fin?
