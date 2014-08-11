@@ -18,9 +18,7 @@ _Please note any other cases that are not covered._
 * UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port. This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason. Since only one port is used this case assumes only one control channel.
 
 ##Functional Specifications
-
-###Functions
-####Channel
+##Channel
 A **channel** is any communications channel to the board. We are mostly concerned with USB virtual serial ports at this point but channels may include:
   * USB virtual serial ports
   * USB mass storage devices
@@ -29,7 +27,7 @@ A **channel** is any communications channel to the board. We are mostly concerne
   * Other devices
 
 The following are expected on the control and data channels.
-####Control Channel
+###Control Channel
 * Control channel accepts all non-gcode commands and controls, including:
   * Configuration commands (JSON and text mode)
   * Single-character controls: !, %, ~
@@ -43,7 +41,7 @@ The following are expected on the control and data channels.
   * Gcode comment messages
 * Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all open control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
-####Data Channel
+###Data Channel
 * Data channel accepts all Gcode input:
   * Raw Gcode blocks
   * Blocks are read one line at a time
@@ -57,15 +55,7 @@ The following are expected on the control and data channels.
 ###USB Communications and Channel Binding
 G2 will implicitly bind channels using the available/connected state of the USB channels.
 
-####Background
-* The two USB channels appear as physical devices:
-  * `/dev/usb-serial0`
-  * `/dev/usb-serial1`
-* These are bound to the control and data logical devices:
-  * `ctrl0`
-  * `data0`
-
-####Automatic Binding
+###Automatic Binding
 G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side 'connects' to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
 1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
@@ -76,13 +66,13 @@ G2 automatically binds the USB physical devices to the logical devices. USB-seri
 
 _Note: Multiple control ports and the use of other devices such as SD card files is supported using manual binding - more later._
 
-####Automatic Unbinding
+###Automatic Unbinding
 * If one of the two USB channels are closed then the other must become both data and control.
 * If both channels are closed, then there is no data or control.
 
 A rough version of dual-endpoint USB has been pushed to the alden branch for testing. There are some shortcuts taken, but it should behave more or less according the description in the above wiki page. In short, use it like this:
 
-#Implementation
+#Notes on the Current Implementation
 _This section describes the current implementation, that may have some differences from the above specifiction. The current implementation is available as build 048.14 in the alden branch_
 
 Steps are:
@@ -105,6 +95,13 @@ A few observations/questions:
 
 #Design and Implementation Notes
 ##Channels
+* The two USB channels appear as physical devices:
+  * `/dev/usb-serial0`
+  * `/dev/usb-serial1`
+* These are bound to the control and data logical devices:
+  * `ctrl0`
+  * `data0`
+
 ###Logical Channels
 Logical channels are functions to which physical devices are attached (bound). These include:
 * `ctrl0`, `ctrl1`, etc. Control channels. [See here for details](#control-channel)
