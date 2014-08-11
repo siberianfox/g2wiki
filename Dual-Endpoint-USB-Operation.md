@@ -15,16 +15,16 @@ _Please note any other cases that are not covered._
  
 * UC_2: One USB virtual serial port, one mass storage device - One virtual serial port is configured as the control channel. Data is made available from a mass storage device. Sub-cases include data channel being from (a) USB mass storage device, (b) SD card or similar off-board, serial accessed storage, (c) on-chip FLASH or EEPROM. Each case may assume read/write or read-only mass storage. This case also encompasses multiple simultaneous control channels.
 
-* UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port. This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason. Since only one port is used this case assumes only one control channel.
+* UC_3: One USB serial port - Both control and data are "piggybacked" on the same USB port ("device"). This mode is used to support v8 and earlier boards and cases where 2 endpoints are not available for some reason. Since only one port is used this case assumes only one control channel.
 
-##Functional Specifications
-##Channel
-A **channel** is any communications channel to the board. We are mostly concerned with USB virtual serial ports at this point but channels may include:
+#Functional Specifications
+##Channels & Devices
+A **channel** is a logical communications channel such as ctrl or data. **Device** is a port or other data source that gets mapped to a channel. Right now we are mostly concerned with USB virtual serial port devices but devices may include:
   * USB virtual serial ports
   * USB mass storage devices
   * SD card and other mass storage devices
   * SPI channels and SPI connected devices
-  * Other devices
+  * Other bulk storage or serial devices
 
 The following are expected on the control and data channels.
 ###Control Channel
@@ -53,14 +53,14 @@ The following are expected on the control and data channels.
 * Only one data channel may be active at any given time.
 
 ###USB Communications and Channel Binding
-G2 will implicitly bind channels using the available/connected state of the USB channels.
+G2 will implicitly bind channels using the available/connected state of the USB devices.
 
 ###Automatic Binding
-G2 automatically binds the USB physical devices to the logical devices. USB-serial subsystem is able to detect when software on the host side 'connects' to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
+G2 automatically binds the USB devices to the control and data channels. USB-serial subsystem is able to detect when software on the host side 'connects' to each channel independently. (This is done by a flag in the USB system that is set the the host connects and 'asserts RTS')
 
-1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
+1. Initially neither USB device is assigned as control or data, and there is nothing connected to communicate with them anyway.
 
-1. The first usb-serial channel connected will be *both* control and data as long as it's the only channel connected. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
+1. The first usb-serial device connected will be *both* control and data as long as it's the only device connected. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
 1. If a second usb-serial channel is connected then the first channel becomes control-only and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order - the first connected will become command and the second connected will become data.
 
