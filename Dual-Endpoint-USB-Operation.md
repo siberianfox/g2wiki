@@ -27,7 +27,7 @@ A **channel** is a logical communications channel such as ctrl or data. **Device
   * Other bulk storage or serial devices
 
 The following are expected on the control and data channels.
-###Control Channel
+####Control Channel
 * Control channel accepts all non-gcode commands and controls, including:
   * Configuration commands (JSON and text mode)
   * Single-character controls: !, %, ~
@@ -41,7 +41,7 @@ The following are expected on the control and data channels.
   * Gcode comment messages
 * Multiple control channels may be active at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all active control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
-###Data Channel
+####Data Channel
 * Data channel accepts all Gcode input:
   * Raw Gcode blocks
   * Blocks are read one line at a time
@@ -52,7 +52,7 @@ The following are expected on the control and data channels.
   * No response is provided back on the data channel (no echo, acknowledgements, or errors)
 * Only one data channel may be active at any given time.
 
-###USB Communications and Channel Binding
+##USB Communications and Channel Binding
 G2 will implicitly bind channels using the available/connected state of the USB devices.
 
 ###Automatic Binding
