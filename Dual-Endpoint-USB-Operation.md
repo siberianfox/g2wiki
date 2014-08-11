@@ -67,49 +67,42 @@ G2 automatically binds the USB devices to the control and data channels. USB-ser
 _Note: Multiple control ports and the use of other devices such as SD card files is supported using manual binding - more later._
 
 ###Automatic Unbinding
-* If one of the two USB channels are closed then the other must become both data and control.
-* If both channels are closed, then there is no data or control.
-
-A rough version of dual-endpoint USB has been pushed to the alden branch for testing. There are some shortcuts taken, but it should behave more or less according the description in the above wiki page. In short, use it like this:
+* If the ctrl+data channel disconnects you are simply disconnected. No surprises here.
+* If the data channel is disconnected then the ctrl channel reverts to being ctrl+data
+* If the ctrl channel disconnects then both teh data and ctrl channels are disconnected
 
 #Notes on the Current Implementation
-_This section describes the current implementation, that may have some differences from the above specifiction. The current implementation is available as build 048.14 in the alden branch_
+_This section describes the current implementation, that may have some differences from the above specifiction._
 
-Steps are:
+The current implementation is available as build 048.14 in the alden branch. There are some shortcuts taken, but it should behave more or less according the above description. In short, use it like this:
 
 1. System is idle. Nothing is connected.
 1. Connect to usbserial001. This will become a ctrl+data channel
-1. Connect to usbserial003. This will become the data channel, and usbserial001 will become the control channel.
-1. Send controls (JSON) to ctrl (001) and Gcode to data (003). The reader will prioritize controls over data and always read and process the control if one is available before attempting to read the next gcode block.
+1. Connect to usbserial003. This will become the data channel and usbserial001 will become the control channel.
+1. Send control messages (JSON) to ctrl (001) and Gcode to data (003). The reader (controller.cpp) will prioritize controls over data and always read and process a control if one is available before attempting to read the next gcode block.
 1. If data (003) disconnects the ctrl (001) reverts to being a ctrl+data channel. 003 can be re-connected as a data channel. If ctrl (001) disconnects then both channels disconnect.
 
 That's it.
 
 A few observations/questions:
 
-* There is currently no distinction at the controller (reader) level between text lines returned by the control channel and lines returned by data (gcode blocks). The controller will happily receive both and execute both. I don't think this is a problem, but people should be aware of this.
+* There is currently no distinction at the controller/dispatcher between text lines returned by the control channel and lines returned by data (gcode blocks). The controller will happily receive both and execute both. I don't think this is a problem, but people should be aware of this.
 
-* Any command received on either channel will send its responses to the control channel. Including received data. This may or may not be a good idea. Depends on use. Also, there is no output sent to the data channel. Feedback welcome.
+* Any command received on either channel will send its responses to the control channel. Including received data, which will return a response at the current JSON verbosity level (an {R:{... response). This may or may not be a good idea. Depends on use. Also, be aware there is no output sent to the data channel at all. Feedback welcome.
 
 * One possible enhancement would be to send a connect message back up the channel that was was just connected or changed. So the first connect would send a message indicating ctrl+data, the second would send a message over both ports, one for data, the other for control. SImilar messages would be send for other state transitions. This is more complexity, but if it's useful we should discuss. Part of this might also be the ability to query a channel for it's capabilities and state.
 
 #Design and Implementation Notes
-##Channels
-* The two USB channels appear as physical devices:
-  * `/dev/usb-serial0`
-  * `/dev/usb-serial1`
-* These are bound to the control and data logical devices:
-  * `ctrl0`
-  * `data0`
-
-###Logical Channels
-Logical channels are functions to which physical devices are attached (bound). These include:
+These are notes for future enhancements that will support SD cards, manual binding, and other device-specific functions.  
+###Channels
+Channels are logical communications channels functions to which physical devices are attached (bound). These include:
 * `ctrl0`, `ctrl1`, etc. Control channels. [See here for details](#control-channel)
 * `data0`, `data1`, etc. Data channels [See here for details](#data-channel)
 
-###Physical Devices
-Physical devices are described by a fully qualified path. Most physical devices describe a single piece of hardware functionality, but some may be subset using filenames, slave select numbers, or other qualifiers. The following physical devices are known or supposed:
-* `/dev/usb-serial0`, `/dev/usb-serial1`
+###Devices
+Devices are described by a fully qualified path. Most physical devices describe a single piece of hardware functionality, but some may be subset using filenames, slave select numbers, or other qualifiers; others may be synthetic devices made of multiple physical devices and/or software devices. The following devices are known or supposed:
+* `/dev/usb-serial0` (currently implemented, but not named as such)
+* `/dev/usb-serial1` (ditto)
 * `/dev/uart0`, `/dev/uart1`, etc.
 * `/dev/spi0`, `/dev/spi1`, etc. Describes entire SPI channel
 * `/dev/spi0.0`, `/dev/spi0.1`, etc. Describes an endpoint (slave select) on an SPI channel
@@ -119,17 +112,17 @@ Physical devices are described by a fully qualified path. Most physical devices 
 * `/dev/eeprom/addr/0x00000000` same
 * `/dev/ram/addr/0x00000000` same
 
-###Physical Device Read/Write/Interactive Capabilities
-* `R/W` devices are physical devices that are read/write
+###Device Read/Write/Interactive Capabilities
+* `R/W` devices are read/write
 * `R` devices are read-only (plus flow control)
 * `I` devices are a subset of `RW` devices that are interactive and capable of sending commands (JSON, etc), receiving status reports, and sending GCode
 * `IC` devices are a subset of interactive devices that cannot transmit GCode such as a front-panel device.
 * Examples:
-  * A USB serial device is default `I`. It will become `RW` when set as a data channel. Writing to a data channel has the effect of storing or piping the contents, depending on the device. _(Is this true? - alden)_
+  * A USB serial device is default `I`. It may become `RW` when bound to a data channel. Writing to a data channel has the effect of storing or piping the contents, depending on the device. _(Is this true? - alden)_
   * An SD card is either `R` or `RW`, but never `I`. (Note: You still talk to an SD card to get data, even when the card is `R`.)
 * An SPI device may be `R`, `RW`, `I`, or `IC`. There needs to be a mechanism to determine which. 
 
-###Physical Device Behaviors
+###Device Behaviors
 * When an non-`I` device, such as an SD card, is the data channel it's expected to automatically keep the gcode buffer full until there is no more (EOF, etc).
 * When selecting a data channel the rest of the path beyond that necessary to designate the device itself, if any, will be used to determine a subset of the channel. Example:
   * "/sd/file/path" will pass "/file/path" to the sd channel. It might not *accept* the Data channel designation (file not found, card missing, etc).
