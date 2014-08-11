@@ -3,7 +3,7 @@ _NOTE: This page is currently a discussion about the specification for using two
 This page describes using two USB serial devices with G2 - aka dual endpoint USB. 
 
 ##Theory Of Operation
-The basic idea of dual endpoint USB operation is to have 2 independent channels for communication to the board. The first channel is a **control** channel through which machine commands are sent. The control channel is always open to process commands in near-real time. The second is a **data** channel through which the Gcode file is queued. 
+The basic idea of dual endpoint USB operation is to have 2 independent channels for communication to the board. The first channel is a **control** channel through which machine commands are sent. The control channel is always active to process commands in near-real time. The second is a **data** channel through which the Gcode file is queued. 
 
 This arrangement greatly simplifies flow control for the UI or host, as the control channel can be viewed as always being available to process incoming commands such as feedholds (stops), whereas the data channel can be  heavily buffered, and therefore always have the next Gcode block at the ready. 
 
@@ -39,7 +39,7 @@ The following are expected on the control and data channels.
   * text-mode responses of all kinds
   * Gcode echo (if enabled)
   * Gcode comment messages
-* Multiple control channels may be open at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all open control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
+* Multiple control channels may be active at a time. Command input will be processed on a line-by-line basis (no character interleaves), first-come-first-serve, and round-robin. Responses are "broadcast" to all active control channels. This supports multiple control devices such as a desktop and a mobile pendant, or an SPI or USB connected front panel controller.
 
 ###Data Channel
 * Data channel accepts all Gcode input:
@@ -50,7 +50,7 @@ The following are expected on the control and data channels.
   * _Note: JSON wrapped Gcode is not supported_ 
 * Data channel returns:
   * No response is provided back on the data channel (no echo, acknowledgements, or errors)
-* Only one data channel may be open at any given time.
+* Only one data channel may be active at any given time.
 
 ###USB Communications and Channel Binding
 G2 will implicitly bind channels using the available/connected state of the USB channels.
@@ -60,9 +60,9 @@ G2 automatically binds the USB physical devices to the logical devices. USB-seri
 
 1. Initially neither USB channel is assigned as control or data, and there is nothing connected to communicate with them anyway.
 
-1. The first usb-serial channel opened (connected to) will be *both* control and data as long as it's the only channel open. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
+1. The first usb-serial channel connected will be *both* control and data as long as it's the only channel connected. This is to maintain compatibility with UC_3 and not require any additional setup steps for legacy UIs and hosts. 
 
-1. If a second usb-serial channel is opened then the first channel becomes control-only and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order - the first opened will become command and the second opened will become data.
+1. If a second usb-serial channel is connected then the first channel becomes control-only and the second channel becomes data-only. This allows simple adoption of UC_1 mode by simply opening the two connections in a controlled order - the first connected will become command and the second connected will become data.
 
 _Note: Multiple control ports and the use of other devices such as SD card files is supported using manual binding - more later._
 
@@ -144,7 +144,7 @@ _Note: Need a definition of the state model. To include connected/available, act
 _Note 2: Motate will hide the chip-select semantics, so consider their use here as merely example. In the end, it will just appears as a series of SPI<b>n</b> channels._
 
 ###Multiple Control Channels
-What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection open and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
+What about cases where there are multiple logical "control channels?" Example: SPI-connected "front panel" device while there's a USB serial connection and the data channel is an sd card. We would like the front panel to be able to "pause" and "resume" as well as get status reports while the USB serial is is still getting status reports and can control via some UI there as well.
   * Possible solution: One channel is **Data**, and might also be a **Control** (UC_3 mode) but all other channels _that are `I`_ are _also_ **Control**. IOW, Control is a broadcast (status reports, etc) and accept-from-anywhere of commands, but will reject GCode from any channel not **Data**.
   * The first "available" `I` channel is the default Data.
   * It's possible that there is no current Data channel, such as when there's an `IC` front panel but no USB serial and no selected SD file to run from. 
