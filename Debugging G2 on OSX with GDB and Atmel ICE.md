@@ -23,15 +23,15 @@ install the Command Line Tools for Xcode: https://developer.apple.com/downloads.
 That should have you debugging in gdb. If you get connection errors make sure the Atmel-ICE is connected as in Hardware, above.
 
 ####Use GSB
-Info here: 
-* [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
-* [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
+* References: 
+  * [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
+  * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
 
-Notes:
 * Some useful commands
   * `monitor reset halt` to reset
   * `monitor load` programs the board with the current elf
+
 * The make command sets the "current elf"
+
 * This is Embedded GDB, so some commands in the cheat sheets do not work:
   * `run`
-
