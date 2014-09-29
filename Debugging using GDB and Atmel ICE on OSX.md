@@ -13,7 +13,9 @@ install the Command Line Tools for Xcode: https://developer.apple.com/downloads.
 3. cd into the <project>/TinyG2/ directory, have the V9 all wired up and run:<br>
 `make VERBOSE=2 PLATFORM=G2v9i debug`
 
-That should have you debugging in gdb. If you get connection errors make sure the Atmel-ICE is connected. Look at the System Report / USB section (command R to refresh). Some times this takes some unplugging and replugging to get USB to behave. make sure the TinyGv2 device is also connected. 
+That should have you debugging in gdb. 
+
+If you get connection errors make sure the Atmel-ICE is connected. Look at the System Report / USB section (command R to refresh). Some times this takes some unplugging and replugging to get USB to behave. make sure the TinyGv2 device is also connected. 
 
 ####Use
 Info here: 
