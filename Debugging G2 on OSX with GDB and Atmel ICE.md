@@ -31,7 +31,7 @@ That should have you debugging in gdb. If you get connection errors make sure th
   * `monitor reset halt` to reset
   * `monitor load` programs the board with the current elf
 
-* The make command sets the "current elf"
+* The `make` command sets the "current elf"
 
 * This is Embedded GDB, so some commands in the cheat sheets do not work:
   * `run`
