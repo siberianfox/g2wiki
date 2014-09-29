@@ -20,5 +20,6 @@ If you get connection errors make sure the Atmel-ICE is connected. Look at the S
 ####Use
 Info here: 
 * https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top
+* http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf
 * http://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
