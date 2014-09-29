@@ -1,6 +1,8 @@
 1) Install hombrew: http://brew.sh/
    Look for "Install Homebrew” near the bottom of that page. Follow those instructions.<br>
+<pre>
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</pre>
 
 2) In terminal, run:<br>
 `brew install openocd`
