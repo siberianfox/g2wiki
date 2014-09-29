@@ -1,3 +1,9 @@
+###Hardware
+You will need the following hw and configuration
+* TinyGv9 board
+* Atmel-ICE debugger
+* Both plugged into an OSX machine via USB, preferably without a hub. See the <Apple> / About this Mac / More Info System Report / USB section. Hit command R if you want to refresh. Some times getting these connected takes some unplugging and replugging to get USB to behave.
+
 ###Install
 1. Install hombrew: http://brew.sh/
    Look for "Install Homebrew” near the bottom of that page. Follow those instructions in Terminal.<br>
@@ -13,9 +19,7 @@ install the Command Line Tools for Xcode: https://developer.apple.com/downloads.
 3. cd into the <project>/TinyG2/ directory, have the V9 all wired up and run:<br>
 `make VERBOSE=2 PLATFORM=G2v9i debug`
 
-That should have you debugging in gdb. 
-
-If you get connection errors make sure the Atmel-ICE is connected. Look at the System Report / USB section (command R to refresh). Some times this takes some unplugging and replugging to get USB to behave. make sure the TinyGv2 device is also connected. 
+That should have you debugging in gdb. If you get connection errors make sure the Atmel-ICE is connected as in Hardware, above.
 
 ####Use
 Info here: 
