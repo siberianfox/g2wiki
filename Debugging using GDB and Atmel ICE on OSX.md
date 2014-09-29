@@ -1,3 +1,4 @@
+###Install
 1. Install hombrew: http://brew.sh/
    Look for "Install Homebrew” near the bottom of that page. Follow those instructions in Terminal.<br>
 <pre>
@@ -14,4 +15,8 @@ install the Command Line Tools for Xcode: https://developer.apple.com/downloads.
 
 That should have you debugging in gdb.
 
-Info here: https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top
+####Use
+Info here: 
+* https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top
+* http://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+
