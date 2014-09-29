@@ -2,6 +2,9 @@
    Look for "Install Homebrew” near the bottom of that page. Follow those instructions.<br>
 <pre>
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Install the Command Line Tools for Xcode: https://developer.apple.com/downloads
+Run `brew doctor` before you install anything
+Run `brew help` to get started
 </pre>
 
 2) In terminal, run:<br>
