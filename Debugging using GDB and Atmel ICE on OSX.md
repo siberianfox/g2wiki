@@ -2,7 +2,7 @@
 You will need the following hw and configuration
 * TinyGv9 board
 * Atmel-ICE debugger
-* Both plugged into an OSX machine via USB, preferably without a hub. See the <Apple> / About this Mac / More Info System Report / USB section. Hit command R if you want to refresh. Some times getting these connected takes some unplugging and replugging to get USB to behave.
+* Both plugged into an OSX machine via USB, preferably without a hub. See the [Apple] / About this Mac / More Info System Report / USB section. Hit command R if you want to refresh. Some times getting these connected takes some unplugging and replugging to get USB to behave.
 
 ###Install
 1. Install hombrew: http://brew.sh/
