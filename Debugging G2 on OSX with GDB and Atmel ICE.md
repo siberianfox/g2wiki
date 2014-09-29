@@ -30,7 +30,8 @@ Info here:
 
 Notes:
 * This is Embedded GDB, so some command sin the cheat sheets do not work:
-  * run
-* To reset type `monitor reset halt`
+  * `run`
+* Some useful commands
+  * `monitor reset halt` to reset
 
 
