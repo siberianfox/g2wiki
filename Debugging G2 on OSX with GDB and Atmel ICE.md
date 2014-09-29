@@ -24,14 +24,14 @@ That should have you debugging in gdb. If you get connection errors make sure th
 
 ####Use GSB
 Info here: 
-* https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top
-* http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf
-* http://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+* [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
+* [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
 
 Notes:
-* This is Embedded GDB, so some command sin the cheat sheets do not work:
-  * `run`
 * Some useful commands
   * `monitor reset halt` to reset
-
+  * `monitor load` programs the board with the current elf
+* The make command sets the "current elf"
+* This is Embedded GDB, so some commands in the cheat sheets do not work:
+  * `run`
 
