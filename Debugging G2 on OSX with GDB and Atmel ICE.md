@@ -1,3 +1,4 @@
+See also: [Compiling G2 on OSX wit Xcode](Compiling-G2-on-OS-X-(with-Xcode))
 ###Hardware
 You will need the following hw and configuration
 * TinyGv9 board
