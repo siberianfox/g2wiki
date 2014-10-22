@@ -1,10 +1,10 @@
-1. Install prerequisites:
+* Install the prerequisites:
 
 ```
 sudo apt-get install git-core gcc make
 ```
 
-2. Checkout TinyG2 source
+* Checkout TinyG2 source
 as of now, *master* branch is very outdated. There's no stable version available, but the brave souls may try *edge* branch.
 
 ```
@@ -20,7 +20,7 @@ To clone the edge branch directly you can run the following command:
 git clone -b edge git@github.com:synthetos/g2.git
 ```
 
-4. Build the sources:
+* Build the sources:
 
 ```
 cd g2/TinyG2
