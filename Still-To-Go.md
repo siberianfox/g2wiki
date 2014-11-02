@@ -9,4 +9,4 @@ Applies to `Edge branch, build 071.02`
 * **Power Management needs work.** It doesn't always shut the motors off at the end of a cycle.
 
 * **Different Behaviors**. There are some behaviors that are different.
-  * Feedhold / queue flush on v8 works with !%~ in one line. In g2 it requires a newline. Try !\n%\n
+  * Feedhold / queue flush on v8 works with !%~ in one line. In g2 it requires a newline. Use !\n%\n  This is due to using a USB stack that is partly on the chip and not being able to get at the individual characters that far upstream. This will probably not change in v9.
