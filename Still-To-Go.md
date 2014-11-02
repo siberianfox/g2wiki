@@ -7,3 +7,6 @@ Applies to `Edge branch, build 071.02`
 * **Still working on feedhold.** The serial communications runs a native USB on the ARM instead of through an FTDI USB-to-Serial adapter. We are still shing some bugs out of the single character commands such as feedhold (!), queue flush (%) and cycle start (~). 
 
 * **Power Management needs work.** It doesn't always shut the motors off at the end of a cycle.
+
+* **Different Behaviors**. There are some behaviors that are different.
+  * Feedhold / queue flush on v8 works with !%~ in one line. In g2 it requires a newline. Try !\n%\n
