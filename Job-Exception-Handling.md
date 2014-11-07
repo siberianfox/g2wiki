@@ -16,3 +16,11 @@ Also, our queue-flush character (%) is also a start-of-file marker output by som
 ## Implementation Discussion
 
 We have two separate use cases. Are they demanding separate implementations, or can we solve them both at the same time?
+
+## Queue Flush
+
+There are a few ways this could be done.  One would be to wait for a g-code "End of program" (M2, M30) on the G-code port once a queue flush is received on the control port, and use that as a marker to allow for the release of stuff backed up on the host.
+
+Another could be to just read everything on the g-code port when a queue flush is received until a timeout occurred.  Presumably, when a flush is recieved, the host is no longer actively sending data, so if you're worried about anything, you're only worried about the stuff that's sitting in the buffer on the host.  If you just started reading in a loop, and bailed once you had a read timeout of a second or so, you could be pretty sure that you got everything that was backed up on the host.
+
+The second method above carries the distadvantage of costing a second every time you do a queue flush, which would be extremely undesirable in many cases.  The first solution is more of a "closed loop" - it essentially requires the sending of a token to indicate the end of the buffer on the G-Code port.  This of course carries the new possible error of having received a feed hold on the control port, but never actually seeing the end of program (for whatever reason) on the G-code port.
