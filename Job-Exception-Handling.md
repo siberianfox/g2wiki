@@ -23,4 +23,13 @@ There are a few ways this could be done.  One would be to wait for a g-code "End
 
 Another could be to just read everything on the g-code port when a queue flush is received until a timeout occurred.  Presumably, when a flush is recieved, the host is no longer actively sending data, so if you're worried about anything, you're only worried about the stuff that's sitting in the buffer on the host.  If you just started reading in a loop, and bailed once you had a read timeout of a second or so, you could be pretty sure that you got everything that was backed up on the host.
 
-The second method above carries the distadvantage of costing a second every time you do a queue flush, which would be extremely undesirable in many cases.  The first solution is more of a "closed loop" - it essentially requires the sending of a token to indicate the end of the buffer on the G-Code port.  This of course carries the new possible error of having received a feed hold on the control port, but never actually seeing the end of program (for whatever reason) on the G-code port.
+The second method above carries the disadvantage of costing a second every time you do a queue flush, which would be extremely undesirable in many cases.  The first solution is more of a "closed loop" - it essentially requires the sending of a token to indicate the end of the buffer on the G-Code port.  This of course carries the new possible error of having received a feed hold on the control port, but never actually seeing the end of program (for whatever reason) on the G-code port.
+
+Another way of dealing with this is potentially just leave it up to the PC to flush its output buffer? As I've said above, the PC should be clever enough not to send down any more data once it's requested a queue flush, and this could extend to its output buffer as well.  I guess the correct chain of events on the host side is something like this:
+
+ * Need to stop the tool is encountered
+ * issue feed hold
+ * Stop sending g-codes on g-code port
+ * Flush g-code port (drain)
+ * issue queue flush
+
