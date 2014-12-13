@@ -10,7 +10,8 @@ as of now, *master* branch is very outdated. There's no stable version available
 ```
 mkdir -p ~/src/github.com/synthetos
 cd ~/src/github.com/synthetos
-git clone https://github.com/synthetos/g2
+git clone https://github.com/synthetos/g2 g2
+cd ./g2
 git checkout edge
 ```
 
