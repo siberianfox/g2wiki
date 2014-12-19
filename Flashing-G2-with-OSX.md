@@ -1,5 +1,9 @@
 _This page is for uploading an already compiled G2 binary to a target board without a debugger from OS X. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
 
+Note that these instructions are for flashing TinyG2 to a Arduino Due or TinyG v9, and even though it *requires* the Arduino IDE it doesn't use the Arduino IDE. You will still need to use the command line.
+
+This is also for flashing *without* a hardware debugger such as the Atmel ICE, Atmel SAM-ICE, or Segger JLink.
+
 ###Step 1 - Get the TinyG2.elf file
 
 **Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
