@@ -35,7 +35,10 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
 
 Cases for handling %
 
-* % received at beginning of Gcode file; not in machining cycle. Applies to data, control and combined channel modes.
+* % received at beginning of Gcode file; not in machining cycle. 
+  * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
+   * Received over data channel: same as above
+   * Received over combined channel: same as above
 
 * % at end of Gcode file. Not in cycle (following M2 / M30)
 
