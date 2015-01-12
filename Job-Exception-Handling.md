@@ -53,15 +53,14 @@ Cases to be handled:
 
 1. If we *are* in a feed-hold or in the process of a feed-hold, we will:
 
-  1. Put the machine into soft-alarm, which will make it continue to read from both data and control channels, ignoring any commands and responding with errors. We have to send a `{clr:n}` to clear the soft alarm. This should be sent of the combined or data channel. **Insert link to further explanation of soft alarm here.**
+  1. Put the machine into soft-alarm. This board will continue to read from both data and control channels and will consume but ignore any new (queued) data. New lines will not be executed (they're tossed) and are responded with a 203 MACHINE_ALARMED status. The host will need to send a `{clr:n}` to clear the soft alarm before any further processing can occur. The clear may be sent on the data or combined (data+control) channel. As the board will continue to consume commands and respond with 203 this has the effect of draining the local serial buffers and potentially any data queued at the host end.
 
-  1. Flush the planner queue, effectively resetting all motion.
+  1. ...and flush the planner queue, effectively resetting all motion.
+
 
 2. If we are *not* in a feed-hold:
 
-  1. We will treat the % as a comment character, and ignore the rest of the line that it was on.
-
-  1. There will be no further special handling of %.
+  1. We will treat the % as a comment character, and ignore the rest of the line that it was on. There will be no further special handling of %.
 
 ### Notes about V9 serial processing
 
