@@ -33,3 +33,27 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
  * Flush g-code port (drain)
  * issue queue flush
 
+Cases for handling %
+
+* % at beginning of Gcode file. Not in cycle. 
+
+* % at end of Gcode file. Not in cycle (following M2 / M30)
+
+* % at end of Gcode file. Is in cycle (No M2 / M30)
+
+* % in middle of Gcode file masqueraring as a comment (Inkspace case)
+
+* % after feedhold 
+
+* % in cycle on control channel (v9 only)
+
+
+
+
+
+
+* #1 - Shared data and control channel
+
+
+#2 - 
+
