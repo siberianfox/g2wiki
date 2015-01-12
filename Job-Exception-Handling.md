@@ -33,26 +33,38 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
  * Flush g-code port (drain)
  * issue queue flush
 
-Cases for handling %
+## Implementation suggestion:
 
-% is a comment character, unless it's in a feedhold. In a feedhold it's a job kill. Soft alarm
+### Background
 
-* % received at beginning of Gcode file with no other characters on that line. I.e the machine is not in a machining cycle. Use case: A lone % is common at the start of a Gcode file, by convention. It is meant to "clear" the system.
-  * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
-   * Received over data channel: same as above
-   * Received over combined channel: same as above
+Cases to be handled:
 
-* % at end of Gcode file with no other characters on that line, following M2 or M30. I.e the machine is not in a machining cycle. Use case: A % is common at the end of a Gcode file, by convention. It is meant to "clear" the system.
-  * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
-   * Received over data channel: same as above
-   * Received over combined channel: same as above
-   * NOTE: It is not expected, nor possible, to stream 2 gcode jobs (files) w/%'s back-to-back. You must quiesce the serial system prior to introducing the second job.
+1. The % character is used at the beginning and end of a gcode file traditionally in order to delimit the file.
 
-* % at end of Gcode file with no other characters on that line, but not following an M2 or M30. I.e. the machine is technically still in a machining cycle. 
+  * We do NOT plan on supporting running two files concatenated. Or, at least, we don't plan on adding any special handling for that case.
 
-* % in middle of Gcode file / cycle masquerading as a comment (the Inkspace case). 
+  * We don't need any special handling in these cases. M2 and M30 handle the "end-of-job" case, and should be used for that purpose.
 
-* % after feedhold 
+2. The % character is used by some gcode generators (InkScape, for example) as a beginning-of-comment.
 
-* % in cycle on control channel (v9 only)
+3. Using % as a "kill-job" doesn't make any sense without a ! "feed hold" proceeding it.
 
+### Implementation:
+
+1. If we *are* in a feed-hold or in the process of a feed-hold, we will:
+
+  1. Put the machine into soft-alarm, which will make it continue to read from both data and control channels, ignoring any commands and responding with errors. We have to send a `{clr:n}` to clear the soft alarm. This should be sent of the combined or data channel. **Insert link to further explanation of soft alarm here.**
+
+  1. Flush the planner queue, effectively resetting all motion.
+
+2. If we are *not* in a feed-hold:
+
+  1. We will treat the % as a comment character, and ignore the rest of the line that it was on.
+
+  1. There will be no further special handling of %.
+
+### Notes about V9 serial processing
+
+The current V9 USB serial port implementation relies on the USB hardware's buffers, and only reads data from those buffers as the system can parse them. This doesn't allow for immediate-processing of special characters `!%~` nor does it adhere to the byte-counting flow-control methods. Programs written to use the byte-counting of V8 and that only use a single channel will likely see a "lock up" where the single channel no longer responds to incoming data if only once channel is opened.
+
+In order to solve this, we will add an additional serial buffer to the USB Serial on V9, mimicking the behavior of the V8.
