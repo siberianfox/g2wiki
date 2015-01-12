@@ -40,7 +40,7 @@ Cases for handling %
    * Received over data channel: same as above
    * Received over combined channel: same as above
 
-* % at end of Gcode file. Machine is not in cycle, i.e. following M2 or M30. A % is common at the end of a Gcode file, by convention. It is meant to "clear" the system.
+* % at end of Gcode file with no other characters on that line, following M2 or M30. I.e the machine is not in a machining cycle. Use case: A % is common at the end of a Gcode file, by convention. It is meant to "clear" the system.
   * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
    * Received over data channel: same as above
    * Received over combined channel: same as above
