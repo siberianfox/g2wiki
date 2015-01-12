@@ -35,7 +35,7 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
 
 Cases for handling %
 
-* % at beginning of Gcode file. Not in cycle. 
+* % received at beginning of Gcode file; not in machining cycle. Applies to data, control and combined channel modes.
 
 * % at end of Gcode file. Not in cycle (following M2 / M30)
 
