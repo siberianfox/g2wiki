@@ -46,7 +46,7 @@ Cases for handling %
    * Received over combined channel: same as above
    * NOTE: It is not expected, nor possible, to stream 2 gcode jobs (files) w/%'s back-to-back. You must quesce the serial system prior to introducing the second job.
 
-* % at end of Gcode file. Is in cycle - i.e. no M2 or M30
+* % at end of Gcode file with no other characters on that line, but not following an M2 or M30
 
 * % in middle of Gcode file / cycle masquerading as a comment (the Inkspace case). 
 
