@@ -47,13 +47,3 @@ Cases for handling %
 
 * % in cycle on control channel (v9 only)
 
-
-
-
-
-
-* #1 - Shared data and control channel
-
-
-#2 - 
-
