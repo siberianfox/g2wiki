@@ -35,12 +35,16 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
 
 Cases for handling %
 
-* % received at beginning of Gcode file; not in machining cycle. 
+* % received at beginning of Gcode file; not in machining cycle. A % is common at the start of a Gcode file, by convention. It is meant to "clear" the system.
   * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
    * Received over data channel: same as above
    * Received over combined channel: same as above
 
-* % at end of Gcode file. Not in cycle (following M2 / M30)
+* % at end of Gcode file. Not in cycle, i.e. following M2 or M30. A % is common at the end of a Gcode file, by convention. It is meant to "clear" the system.
+  * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
+   * Received over data channel: same as above
+   * Received over combined channel: same as above
+   * NOTE: It is not expected, nor possible, to stream 2 gcode jobs (files) w/%'s back-to-back. You must quesce the serial system prior to introducing the second job.
 
 * % at end of Gcode file. Is in cycle (No M2 / M30)
 
