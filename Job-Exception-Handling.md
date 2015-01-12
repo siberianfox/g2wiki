@@ -35,6 +35,8 @@ Another way of dealing with this is potentially just leave it up to the PC to fl
 
 Cases for handling %
 
+% is a comment character, unless it's in a feedhold. In a feedhold it's a job kill. Soft alarm
+
 * % received at beginning of Gcode file with no other characters on that line. I.e the machine is not in a machining cycle. Use case: A lone % is common at the start of a Gcode file, by convention. It is meant to "clear" the system.
   * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
    * Received over data channel: same as above
@@ -44,9 +46,9 @@ Cases for handling %
   * Received over data channel: Flush planner queue. Do not flush serial queue. Permit continued command and data processing
    * Received over data channel: same as above
    * Received over combined channel: same as above
-   * NOTE: It is not expected, nor possible, to stream 2 gcode jobs (files) w/%'s back-to-back. You must quesce the serial system prior to introducing the second job.
+   * NOTE: It is not expected, nor possible, to stream 2 gcode jobs (files) w/%'s back-to-back. You must quiesce the serial system prior to introducing the second job.
 
-* % at end of Gcode file with no other characters on that line, but not following an M2 or M30
+* % at end of Gcode file with no other characters on that line, but not following an M2 or M30. I.e. the machine is technically still in a machining cycle. 
 
 * % in middle of Gcode file / cycle masquerading as a comment (the Inkspace case). 
 
