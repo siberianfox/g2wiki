@@ -24,7 +24,9 @@ You can also run this command in terminal to install Xcode Command Line Tools:
 
 That should have you debugging in gdb. If you get connection errors make sure the Atmel-ICE is connected as in Hardware, above.
 
-####Use GSB
+On OSX it might pop a dialog box requesting you to accept an inbound connection. Do it. You may also need to try to connect more than once for it to work.
+
+####Use GDB
 * References: 
   * [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
   * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
