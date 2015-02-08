@@ -26,7 +26,7 @@ That should have you debugging in gdb. If you get connection errors make sure th
 
 On OSX it might pop a dialog box requesting you to accept an inbound connection. Do it. You may also need to try to connect more than once for it to work.
 
-##Use GDB
+##Using GDB
 * References: 
   * [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
   * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
