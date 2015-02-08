@@ -27,7 +27,7 @@ Ensure that the TinyG2 scheme is selected, as shown:
 
 ![TinyG2 Scheme Selected in Xcode](./images/XCode-TinyG2-Scheme-Selected.jpg)
 
-Now you can choose `Build` for the `Project` menu of Xcode (or click the "play" button in the top-left of the window) to build G2 for all supported "platforms" simultaneously.
+Now you can choose `Build` for the `Product` menu of Xcode (or click the "play" button in the top-left of the window) to build G2 for all supported "platforms" simultaneously.
 
 The resulting files will be in `${projectRoot}/TinyG2/bin/`, in a folder named after the platform. For example, there will be a folder named `gShield` with a file named `gShield_flash.elf`.
 
