@@ -11,6 +11,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [Getting Started with G2](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2)
 * [Flashing Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#software-needed-to-use-g2)
 * [Compiling Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#compiling-g2-from-source)
+* [Debugging Firmware](https://github.com/synthetos/g2/wiki/Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
 ### Reference Pages
 * [Licensing](https://github.com/synthetos/G2/wiki/G2-Licensing)
