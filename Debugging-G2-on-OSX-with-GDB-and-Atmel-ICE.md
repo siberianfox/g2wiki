@@ -40,7 +40,17 @@ On OSX it might pop a dialog box requesting you to accept an inbound connection.
 * This is Embedded GDB, so some commands in the cheat sheets do not work:
   * `run`
 
-### Debugging and loading
+### A Very Brief Embedded GDB primer
+Even if you are familiar with GDB, you may find a few important differences when using it with an embedded project. This will not be a thorough how-to on this topic, but will hopefully serve enough to get you started.
+
+Using `make debug` will call `gdb` (technically it's `arm-none-eabi-gdb` or whatever variant is specified in the makefile for your board, but we'll just call it `gdb` from now on) with parameters and configuration to:
+* Know which binary/elf file to use for this debug session.
+* Connect to the board using `openocd`.
+* And halt the board, and leave you at a command line prompt.
+
+Now for a few commands to get you started:
+
+#### Debugging and Loading
 In order to debug you need a debugger capable of debugging the chip you use. For the Due and V9 we use either a Atmel SAM-ICE (which is a OEM Segger J-Link locked to Atmel ARMs) or the cheaper and more recently released Atmel ICE. Either can be found at Mouser.com.
 
 You choose which debug adapter you wish to use by *copying* the `openocd.cfg.example` file to `openocd.cfg` and then editing the `openocd.cfg` file. Simply follow the instructions in that file. Hint: It's just uncommenting the correct lines.
@@ -59,15 +69,11 @@ make PLATFORM=UltimakerTests SETTINGS_FILE=my_settings.h debug
 
 This will build the code (if it needs it) and then open `gdb` connected to the hardware and reset and halt the TinyG2 system.
 
-### A Very Brief Embedded GDB primer
-Even if you are familiar with GDB, you may find a few important differences when using it with an embedded project. This will not be a thorough how-to on this topic, but will hopefully serve enough to get you started.
+#### Quitting the debugger
 
-Using `make debug` will call `gdb` (technically it's `arm-none-eabi-gdb` or whatever variant is specified in the makefile for your board, but we'll just call it `gdb` from now on) with parameters and configuration to:
-* Know which binary/elf file to use for this debug session.
-* Connect to the board using `openocd`.
-* And halt the board, and leave you at a command line prompt.
+`q` or `quit` will exit GDB. If the processor is running, you may need to type `CTRL-C` to get the prompt first.
 
-Now for a few commands to get you started:
+You will often need to reset or power-cycle the board after quitting GDB, since it will likely leave it in a halt state.
 
 #### Flashing the firmware onto the board
 
@@ -87,12 +93,6 @@ Transfer rate: 14 KB/sec, 13524 bytes/write.
 `monitor reset halt` - Once we flash new code, or if we just want the "program" to start over, we call `monitor reset halt` to reset and halt the processor. This will freeze the processor at the reset state, before any code has executed.
 
 You *must* call `monitor reset halt` after (or *immediately* before) a `load` command so that the processor starts from the new code. Otherwise, the processor will likely crash, sometimes after appearing to work for some time. **To avoid nightmare debug sessions, be sure you always follow `load` with `monitor reset halt`!**
-
-#### Quitting the debugger
-
-`q` or `quit` will exit GDB. If the processor is running, you may need to type `CTRL-C` to get the prompt first.
-
-You will often need to reset or power-cycle the board after quitting GDB, since it will likely leave it in a halt state.
 
 #### Running the code
 
