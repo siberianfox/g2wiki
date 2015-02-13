@@ -2,11 +2,11 @@ _This page is for compiling the G2 project on Windows with Atmel Studio 6.2. Ple
 
 ## What's needed
 
-To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 (build 1153) Installer – with .NET.
+To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 (build 1548) Installer – with .NET. We recommend a clean machine or VM. We have tried this with Windows 7. Win 8 has problems with driver signing that we'd prefer to avoid.
 
 * Go to Atmel and download the [Atmel Studio 6.2 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
-  * Be sure to get he one **including the .NET part**. It's about 700 Mbytes.
-  * Current build is build 1548. (Do not use an earlier build - e.g. 1153 - as it has serious bugs in the debugger (how ironic))
+  * The current build is build 1548. Do not use an earlier build - e.g. 1153 - as it has serious bugs in the debugger (how ironic).
+  * Be sure to get the one **including the .NET part**. It's about 800 Mbytes.
   * They require you to either register or fill out a "guest" form. Otherwise it's free.
 * Walk through the entire installation process. 
   * You **will not** need the Atmel Solutions framework when asked.
