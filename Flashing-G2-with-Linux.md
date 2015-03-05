@@ -71,3 +71,7 @@ sleep 3
 # Program
 bossac -e -w -v -i -b -R ./bin/gShield/gShield.bin
 ```
+
+It takes about 20 seconds after flashing before the native port to become available for use. You can use: ```find_port.py --vid 1d50``` or ```find_port.py --vendor Synthetos``` to find the native port.
+
+```find_port.py --list``` will show all connected USB-serial devices.
