@@ -17,6 +17,13 @@ Make sure, you use the Programming USB port.
 ```
 stty -F /dev/ttyACM0 1200
 ```
+Note: This changes the default baud rate for port /dev/ttyACM0 to 1200, so if you leave the programming port and the native port both hooked up and the accidentally open /dev/ttyACM0 at a later time, you will erase your flash. So I do this instead:
+```
+stty -F /dev/ttyACM0 1200
+stty -F /dev/ttyACM0 9600
+```
+which I think will wind up erasing twice, but it leaves the default at 9600, so that if you accidentally open /dev/ttyACM0 then it won't wipe out your firmware.
+
 ####Step 4. Flash the chip with `bossac`:
 ```
 bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/gShield_flash.bin
@@ -47,3 +54,20 @@ CPU reset.
 ```
 
 You're done. If everything went right, RX orange led should be slowly blinking. To connect to the board through serial, you will need to attach the cable to "Native USB" port.
+
+I found that the following script allows me to leave both the programming port and the native port both hooked up, and flashes over the native port, which is much faster than flashing over the programming port.
+I wrote a script called find_port.py which you can find here: https://github.com/dhylands/usb-ser-mon/blob/master/find_port.py
+
+```
+#!/bin/bash
+set -x
+PORT=$(find_port.py --vid 2341)
+
+# Activate the bootloader
+stty -F ${PORT} 1200
+stty -F ${PORT} 9600
+sleep 3
+
+# Program
+bossac -e -w -v -i -b -R ./bin/gShield/gShield.bin
+```
