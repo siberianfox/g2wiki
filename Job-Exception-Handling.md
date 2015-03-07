@@ -12,6 +12,8 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
   1. Dual USB endpoints - one channel is control (! and %), the other is data (gcode). We need to have some way of draining the queued buffers, potentially as far back as the host without having the tool do anything unpredictable. There could be multiple megabytes of data backed up on the host side.
   1. For an SD-card data channel, the solution may be as easy as "close the file". In fact, that would be the behavior we should emulate with the dual-usb.
 
+1. **Reset System** - Do a hard reset if the controller is unresponsive or has entered a SHUTDOWN state.
+
 ### Further Background
 
 Additional considerations:
@@ -28,15 +30,16 @@ Additional considerations:
 
 ### Implementation:
 
-1. If the machine is (1) in a feed-hold or (2) in the process of a feed-hold, or (3) has a feedhold requested it will do one of 2 things:
+1. **% Handling** [handles cases 1 and 2]: Implement the following behaviors
+  1. Intercept % in the serial stream and act on immediately. ]
+     1. If the system is in FEEDHOLD (or has one requested) this sets a flag to request queue flush
+     1. If the system is in ALARM transition to STOP (this is an auto-clear)
+     1. Otherwise the % is ignored
+  1. Replace the % with a ; in the serial stream. This allows the % to act as a start-comment character for Gcode comments (supporting the Inkscape comment case), and prevents a comment start from masquerading as an autoclear.
 
-  1. If the % discovers a planner that is not full it assumes that it is processing either a single move or a series of manual jog moves. The queue flush clears the queue and puts the machine in a STOP state. This behavior supports homing, probing, and both system implemented and manual jogging functions.
+1. **Control-d** [handles case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until a {clear:n} (or $clear) is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
 
-  1. If the planner buffer is blocked (full) it assumes that more moves are backed up. In this case it clears the planner queue and puts the machine into ALARM. This board will continue to read from both data and control channels and will consume but ignore any new (queued) data. New lines will not be executed (they're tossed) and are responded with a 203 MACHINE_ALARMED status. The host will need to send a `{clear:n}` to clear the soft alarm before any further processing can occur. The clear may be sent on the data or combined (data+control) channel. As the board will continue to consume commands and respond with 203 this has the effect of draining the local serial buffers and potentially any data queued at the host end.
-
-2. If we are *not* in a feed-hold:
-
-  1. We will treat the % as a comment character, and ignore the rest of the line that it was on. There will be no further special handling of %.
+1. **Control-x** [handles case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
 
 ### Notes about V9 serial processing
 
