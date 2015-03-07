@@ -1,5 +1,4 @@
-# DEV PAGE: This page is a discussion about future implementation.
-
+_DEV PAGE: This page is a discussion about implementation._
 _This is not intended to be end-user data, and G2 may or may not implement what's discussed there._
 
 ## We have two cases that we need to discuss and come up with solutions to:
