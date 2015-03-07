@@ -30,16 +30,18 @@ Additional considerations:
 
 ### Implementation:
 
-1. **% Handling** [handles cases 1 and 2]: Implement the following behaviors
+1. **% Handling** [cases 1 and 2]: Implement the following behaviors
   1. Intercept % in the serial stream and act on immediately. ]
      1. If the system is in FEEDHOLD (or has one requested) this sets a flag to request queue flush
-     1. If the system is in ALARM transition to STOP (this is an auto-clear)
+     1. If the system is in ALARM and has a single USB channel, transition to STOP (this is an auto-clear)
      1. Otherwise the % is ignored
-  1. Replace the % with a ; in the serial stream. This allows the % to act as a start-comment character for Gcode comments (supporting the Inkscape comment case), and prevents a comment start from masquerading as an autoclear.
+  1. Replace the % with a ; in the serial stream. This allows the % to act as a start-comment character for Gcode comments (supporting the Inkscape comment case), and prevents a % comment from masquerading as an autoclear.
 
-1. **Control-d** [handles case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until a {clear:n} (or $clear) is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
+Note: There is no equivalent auto-clear for dual channel USB, which is expected to use a more integrated jogging mechanism (in development).
 
-1. **Control-x** [handles case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
+1. **Control-d** [case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until a {clear:n} (or $clear) is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
+
+1. **Control-x** [case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
 
 ### Notes about V9 serial processing
 
