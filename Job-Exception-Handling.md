@@ -1,11 +1,13 @@
 _DEV PAGE: This page is a discussion about implementation._
 _This is not intended to be end-user data, and G2 may or may not implement what's discussed there._
 
-## There are two main cases that the board needs to handle:
+## There are a few main cases that the board needs to handle:
 
-1. **Terminate The Move (or set of moves)** - feedhold + queue flush (!%) is used to terminate a move in cases such as homing, probing, and manual jogging. We need the ability to do a !% and take the system to a STOP. This is complicated by the fact that some host-based homing mechanisms may buffer many many moves for a single homing operation; filling the planner buffer, serial input buffer, USB internal buffers, and even host-based buffers for a single homing move. All these moves need to be flushed before transitioning to a stop.
+1. **Stop a Single Move** - Feedhold + queue flush (!%) is used to terminate a single move in cases such as homing, probing, and some forms of jogging. A !% will transition the system to a STOP. At this point the controlling program in the firmware, or on the host can perform the next action.
 
-1. **Kill Entire Job** - while  a job is running we need a way to terminate the rest of the job and indicate that all new commands are to be ignored until some point defined by the host. We need to have some way of draining the queued buffers, potentially as far back as the host without having the tool do anything unpredictable. There could be multiple megabytes of data backed up on the host side. This is complicated by needing to work for both single endpoint and dual endpoints (separate control and data channels). Some cases:
+1. **Stop Multiple Moves** - In some jogging implementations multiple moves may be queued up as part of a single jogging move. In this case the We need the ability to do a !% and take the system to a STOP, while draining all other moves that are queued before the %. It is possible that the sender has filled the planner buffer, serial input RX buffer, USB internal buffers, and even host-based buffers for this single jog move. All these moves need to be flushed before transitioning to a stop.
+
+1. **Kill Job** - Terminate the rest of the job and indicate that all new commands are to be ignored until some point defined by the host. This needs to be able to drain all queued buffers, potentially as far back as the host without having the tool do anything unpredictable (there could be multiple megabytes of data backed up on the host side). This is complicated by needing to work for both single endpoint and dual endpoints (separate control and data channels). Some cases:
   1. Single USB endpoint - gcode commands and ! and % chars share the same channel. ! and % "jump the queue" once they are received by the board.
   1. Dual USB endpoints - one channel is control (! and %), the other is data (gcode). We need to have some way of draining the queued buffers, potentially as far back as the host without having the tool do anything unpredictable. There could be multiple megabytes of data backed up on the host side.
   1. For an SD-card data channel, the solution may be as easy as "close the file". In fact, that would be the behavior we should emulate with the dual-usb.
