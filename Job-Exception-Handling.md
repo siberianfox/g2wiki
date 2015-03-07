@@ -3,7 +3,7 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
 
 ## There are a few main cases that the board needs to handle:
 
-1. **Stop a Single Move** - Feedhold + queue flush (!%) is used to terminate a single move in cases such as homing, probing, and some forms of jogging. A !% will transition the system to a STOP. At this point the controlling program in the firmware, or on the host can perform the next action.
+1. **Stop a Single Move** - Feedhold + queue flush `!%` is used to terminate a single move in cases such as homing, probing, and some forms of jogging. A `!%` will transition the system to a STOP. At this point the controlling program in the firmware, or on the host can perform the next action.
 
 1. **Stop Multiple Moves** - In some jogging implementations multiple moves may be queued up as part of a single jogging move. In this case the We need the ability to do a !% and take the system to a STOP, while draining all other moves that are queued before the %. It is possible that the sender has filled the planner buffer, serial input RX buffer, USB internal buffers, and even host-based buffers for this single jog move. All these moves need to be flushed before transitioning to a stop.
 
