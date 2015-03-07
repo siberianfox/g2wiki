@@ -26,12 +26,11 @@ Cases to be handled:
 
 ### Implementation:
 
-1. If we *are* in a feed-hold or in the process of a feed-hold, we will:
+1. If the machine is (1) in a feed-hold or (2) in the process of a feed-hold, or (3) has a feedhold requested it will do one of 2 things:
 
-  1. Put the machine into soft-alarm. This board will continue to read from both data and control channels and will consume but ignore any new (queued) data. New lines will not be executed (they're tossed) and are responded with a 203 MACHINE_ALARMED status. The host will need to send a `{clr:n}` to clear the soft alarm before any further processing can occur. The clear may be sent on the data or combined (data+control) channel. As the board will continue to consume commands and respond with 203 this has the effect of draining the local serial buffers and potentially any data queued at the host end.
+  1. If the % discovers a planner that is not full it assumes that it is processing either a single move or a series of manual jog moves. The queue flush clears the queue and puts the machine in a STOP state. This behavior supports homing, probing, and both system implemented and manual jogging functions.
 
-  1. ...and flush the planner queue, effectively resetting all motion.
-
+  1. If the planner buffer is blocked (full) it assumes that more moves are backed up. In this case it puts the machine into ALARM. This board will continue to read from both data and control channels and will consume but ignore any new (queued) data. New lines will not be executed (they're tossed) and are responded with a 203 MACHINE_ALARMED status. The host will need to send a `{clear:n}` to clear the soft alarm before any further processing can occur. The clear may be sent on the data or combined (data+control) channel. As the board will continue to consume commands and respond with 203 this has the effect of draining the local serial buffers and potentially any data queued at the host end.
 
 2. If we are *not* in a feed-hold:
 
