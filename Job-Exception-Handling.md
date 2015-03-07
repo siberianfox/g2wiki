@@ -31,7 +31,7 @@ Additional considerations:
 ### Implementation:
 
 1. **% Handling** [cases 1 and 2]: Implement the following behaviors
-  1. Intercept % in the serial stream and act on immediately. ]
+  1. Intercept % in the serial stream and act on it immediately
      1. If the system is in FEEDHOLD (or has one requested) this sets a flag to request queue flush
      1. If the system is in ALARM and has a single USB channel, transition to STOP (this is an auto-clear)
      1. Otherwise the % is ignored
