@@ -26,7 +26,7 @@ Additional considerations:
 
 2. The % character is used by some gcode generators (InkScape, for example) as a start-comment character.
 
-3. Using % as a "kill-job" doesn't make any sense without a ! "feed hold" proceeding it.
+3. Using % as a "buffer flush" doesn't make any sense without a ! "feed hold" proceeding it.
 
 ### Implementation:
 
