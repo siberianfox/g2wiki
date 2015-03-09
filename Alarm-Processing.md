@@ -98,38 +98,5 @@ In this state it is possible to query the board, (i.e. GET commands), but not po
 
 Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
 
-**Clear on Dual Endpoint USB*** Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
-
-###Alarm States
-The following processing is based on the use cases above.
-####Soft_Alarm
-A soft alarm is an alarm state where the job is potentially recoverable. The desired behavior is to decelerate (stop) all motion and leave the system open to inspection – preserving as much state as possible.
-Soft alarm is triggered in the following cases:
-
-- A soft limit has been tripped due to a Gcode block exceeding travel limits
-- An input is fired which puts the machine into soft alarm (a flag is set and a function is called)
-- When a queue flush is processed when MOTION_HOLD && FEEDHOLD_HOLD && !runtime_busy() (This is current behavior, and should probably be removed.)
-
-Desired processing of soft alarms is outlined by the Limit Switch Hit / Recoverable use case. Current g2 processing of soft alarms is listed below. Some of this may need to change:
-
-- Machine state is set to MACHINE_ALARM
-- An exception report is returned indicating the machine has entered an Alarm state
-- Commands are rejected in the controller(). This could be a problem as CLEARS won’t get through.
-- Set commands are rejected in the JSON and text parsers (_json_parser_kernal(), text_parser())
-- Commands are rejected in the Gcode parser. This is redundant if SETs are  (redundant with above)
-- Note to self: review exec_program_finalize() behavior relative to alarms.
-
-####Hard Alarm
-A hard alarm is an alarm state that is not recoverable. The desired behavior is to stop all motion as fast as possible and leave the system open to inspection – preserving as much state as possible even is position is lost.
-Hard alarms are triggered in the following cases:
-- An input that is configured to trigger a hard alarm is fired (e.g. a limit switch)
-- An unrecoverable internal state is detected in a function
-- Assertion failure is detected
-Desired processing of hard alarms is outlined by the Limit Switch Hit / Unrecoverable use case. Current g2 processing of soft alarms is listed below. Some of this may need to change:
-- All motion is stopped
-- Machine state is set to MACHINE_SHUTDOWN
-- An exception report is returned indicating the machine has entered a Shutdown state (hard alarm)
-- No further Set commands or Gcode are accepted
-- Get commands are accepted and processed – if possible
-- Hard alarms cannot be cleared. Clears are ignored
-
+####Clear on Dual Endpoint USB 
+Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
