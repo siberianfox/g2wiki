@@ -1,4 +1,7 @@
 ##Machine State and Alarm Processing
+Related pages
+- [Digital IO (GPIO)](Digital-IO-(GPIO))
+
 ###Machine States
 Machine states are listed below. Interlock is a new addition to the combined machine state. The behavior of some other states have been slightly redefined, as described in the remainder of this page. 
 
