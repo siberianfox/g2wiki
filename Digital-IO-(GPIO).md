@@ -25,6 +25,7 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override).
 
 Internal state for inputs may include:
+
 	Name | Description 
 	------|------------
 	lockout_timer | time in ticks (ms) to remove lockout
