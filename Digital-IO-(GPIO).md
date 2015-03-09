@@ -19,8 +19,8 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 
 - STOP is a deceleration to zero at the axes normal jerk value {xjm}
 - FAST_STOP is a high speed stop at the high-speed jerk value {xjh}. High speed jerk may be too high to start the motor, but can be used to stop it without losing position
-- HALT stops immediately without regard to deceleration. Expect position to be lost
-- RESET resets the board if the input triggers.
+- HALT stops immediately without regard to deceleration. Position may be lost.
+- RESET resets the board if the input triggers
 
 The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override).
 
