@@ -2,6 +2,7 @@
 ###Machine States
 A minor addition to the combined machine state is the addition of the Interlock state. Some other states have been slightly redefined. The ALARM state refers to both hard and soft alarms. Limits no longer cause SHUTDOWN, which is now invoked by an estop event. Here are the revised machine states (from canonical_machine.h)
 
+<pre>
 enum cmCombinedState { strings
 	COMBINED_INITIALIZING = 0,	// [0] machine is initializing
 	COMBINED_READY,		// [1] machine is ready for use
@@ -17,6 +18,7 @@ COMBINED_JOG,			// [10] jogging cycle active
 COMBINED_SHUTDOWN,		// [11] machine in shutdown (due to emergency stop)
 COMBINED_INTERLOCK		// [12] machine in interlock hold
 };
+</pre>
 
 ####Alarm Enables
 There are a few settings that enable and disable various alarm cases:
