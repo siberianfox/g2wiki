@@ -15,7 +15,7 @@ Digital inputs have these attributes (using di1 as an example)
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
 	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=spindle_ready, 5=temperature_ready, 6=M66
 
-Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically 100 – 250 ms.
+Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
 
 A STOP is a deceleration to zero at the axes normal jerk value {xjm}. A FAST_STOP is a high speed stop at the high-speed jerk value {xjh}. High speed jerk may be too high to start the motor, but can be used to stop it without losing position. HALT stops immediately without regard to deceleration. Expect position to be lost. RESET resets the board if the input triggers.
 
