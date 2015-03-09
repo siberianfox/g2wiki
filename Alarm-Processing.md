@@ -27,7 +27,7 @@ There are a few settings that enable and disable various alarm cases:
 - {lim:1} Limit switch enable: set to 0 or 1
 - {ilck:1} Interlock enable: set to 0 or 1
 
-Setting hard limit enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value. {clear:n} or $clear
+Setting limit switch enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value using {clear:n} or $clear
 
 ###Alarm Use Cases
 The following use cases are supported:
@@ -39,44 +39,44 @@ The following use cases are supported:
   - Stop spindle or other actuator (extruder, laser, torch…)
   - No change to coolant output
   - Motor power timeouts activate based on motor power settings – e.g. only-when-moving or in-cycle
-  - Flush the planner queue 
-  - Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
+  - Flush the planner queue of any remaining moves
+  - Drain the serial queues: Reject any motion commands and parameter setting commands.
   - Generate exception report for SOFT_LIMIT w/line number of the limit (if Gcode has line numbers)
   - Transition to PROGRAM_END state on receipt of CLEAR command
 
-- **Limit Switch Hit**: A limit switch has been hit. The input has been configured so that hitting that limit switch on that axis is unrecoverable, as position information will have been lost. The desired behavior is:
-  - Transition to HARD_ALARM state (from RUN)
-  - Stop movement without preserving position (STOP_STEPPING)
-    - Do not perform this action already in feedhold
+- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is:
+  - Transition to ALARM state (from RUN)
+  - Stop movement with our without preserving position (STOP, FAST_STOP, HALT)
+    - Do not perform this action already started a feedhold
   - Stop spindle or other actuator (extruder, laser, torch…)
   - No change to coolant output
   - Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
-  - Flush the planner queue
+  - Flush the planner queue of any remaining moves
   - Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
   - Mark the limit axis as UNHOMED and mark the machine as UNHOMED
   - Generate exception report for LIMIT HIT, and indicate which input was tripped
   - Transition to PROGRAM_END state on receipt of CLEAR command 
-  - Accept LIMIT_OVERRIDE to disable limits before moving machine off limit switch
-  - Host should remove LIMIT_OVERRIDE before the next cycle
+  - Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
+  - Host should reset {lim:1} before the next cycle
 
 - **Interlock Hold**: An interlock condition has been detected on an input. Interlocks should allow jobs to resume once the interlock condition has been removed. The desired behavior is:
   - Transition to INTERLOCK state (from RUN)
-  - Stop movement with rapid deceleration while preserving position (HALT into feedhold)
+  - Stop movement with rapid deceleration while preserving position (HALT)
     - If already in feedhold do not execute the HALT
   - Stop spindle or other actuator (extruder, laser, torch…)
   - No change to coolant output
   - Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
     - Q: Or do we want them to stay energized indefinitely?
   - Generate exception report for entering INTERLOCK condition w/the interlock input number
-  - Wait for interlock condition to be cleared by the input.
+  - Wait for interlock condition to be cleared by the input
   - Generate exception report for exiting INTERLOCK condition w/the interlock input number
   - Restore spindle to prior state, with delay dwell of N seconds (settable)
   - Resume motion by resuming from feedhold (CYCLE_START)
-    - ...unless the board was already in feedhold at the time of INTERLOCK
+    - ...unless already in feedhold at the time of INTERLOCK
 
-- **Emergency Shutdown**: Emergency shutdown is the controller’s reaction to an EStop being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain. The Emergency Shutdown input is used to tell the controller that this condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
+- **Emergency Shutdown**: Emergency shutdown is the controller’s reaction to an external Emergency Stop (EStop) being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain, as Estop needs to function even if the controller has malfunctioned. The Emergency Shutdown input is used to tell the controller that an Estop condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
   - Transition to SHUTDOWN state (from RUN)
-  - Stop movement with deceleration without preserving position (STOP_STEPPING)
+  - Stop movement immediately without preserving position (HALT)
   - Stop spindle or other actuator (extruder, laser, torch…)
   - Stop coolant output
   - Disable motor power (no timeout)
@@ -84,16 +84,13 @@ The following use cases are supported:
   - Mark all axes as UNHOMED and mark the machine as UNHOMED
   - Drain the queues: Read and reject motion and SET commands (See CLEAR command).
   - Exception report is generated reporting SHUTDOWN condition
-  - Transition to PROGRAM_END state on receipt of CLEAR
-  - Note: The external Estop logic or the host may decide to reset the controller
+  - Shutdown is only recoverable by a RESET (soft or hard), or power cycle
+    - Note: The external Estop logic or the host may decide to reset the controller
 
-Open Questions:
-
- - Do we need to have some kind of a mask for what to do about digital outputs in these cases – both trigger and restore? Ultimately flexible, but lots of complexity in configuration. Or rely on the host to perform this somehow. The response from CLEAR should be the trigger for the host to take more actions if they want to.
-- Recoverable limit still has problems. How to you get the CLEAR ahead of the other commands? We can manage this on the board with a ~, and can probably do this on G2, but v8 and configs with upstream buffering may have problems with this.
+- **Internal Shutdown**: An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
 
 ### CLEAR Command
-When entering an alarm state there may be Gcode and configuration commands buffered in multiple places including on-board serial receive queues (RX), board and host internal USB queues, sender queue (e.g. serial-port-json-server), terminal emulator or host transmit buffer queues, or other upstream buffers. 
+When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including on-board serial receive queues (RX), board and host internal USB queues, sender queue (e.g. serial-port-json-server), terminal emulator or host transmit buffer queues, or other upstream buffers. 
 In an unrecoverable alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in a HARD_ALARM or SHUTDOWN state will be “eaten” and not processed, and will return with status code 203, STAT_MACHINE_ALARMED. 
 In this state it is possible to query g2, (i.e. GET commands), but not possible to change the state of the machine. 
 (Q: do we want to let SR requests get through? Probably. Test this.)
