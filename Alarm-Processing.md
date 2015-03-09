@@ -22,34 +22,36 @@ enum cmCombinedState {
 
 ####Alarm Enables
 There are a few settings that enable and disable various alarm cases:
-•	{sl:1} Soft limit enable: set to 0 or 1
-•	{lim:1} Hard limit enable: set to 0 or 1
-•	{ilck:1} Interlock enable: set to 0 or 1
 
-Setting hard limit enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value. {clear:n}
+- {sl:1} Soft limit enable: set to 0 or 1
+- {lim:1} Hard limit enable: set to 0 or 1
+- {ilck:1} Interlock enable: set to 0 or 1
+
+Setting hard limit enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value. {clear:n} or $clear
 
 ###Alarm Use Cases
 The following use cases are supported:
-•	Soft Limit Case: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted, and is:
-o	Transition to ALARM state (from RUN)
-o	Stop movement while preserving position (feedhold to a STOP)
-•	If already in feedhold do not execute the STOP
-o	Stop spindle or other actuator (extruder, laser, torch…)
-o	No change to coolant output
-o	Motor power timeouts activate based on motor power settings – e.g. only-when-moving or in-cycle
-o	Flush the planner queue 
-o	Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
-o	Generate exception report for SOFT_LIMIT w/line number of the limit (if Gcode has line numbers)
-o	Transition to PROGRAM_END state on receipt of CLEAR command
 
-•	Limit Switch Hit / Unrecoverable Case: A limit switch has been hit. The input has been configured so that hitting that limit switch on that axis is unrecoverable, as position information will have been lost. The desired behavior is:
-o	Transition to HARD_ALARM state (from RUN)
-o	Stop movement without preserving position (STOP_STEPPING)
-•	Do not perform this action already in feedhold
-o	Stop spindle or other actuator (extruder, laser, torch…)
-o	No change to coolant output
-o	Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
-o	Flush the planner queue
+- Soft Limit Case: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted, and is:
+  - Transition to ALARM state (from RUN)
+  - Stop movement while preserving position (feedhold to a STOP)
+    - If already in feedhold do not execute the STOP
+  - Stop spindle or other actuator (extruder, laser, torch…)
+  - No change to coolant output
+  - Motor power timeouts activate based on motor power settings – e.g. only-when-moving or in-cycle
+  - Flush the planner queue 
+  - Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
+  - Generate exception report for SOFT_LIMIT w/line number of the limit (if Gcode has line numbers)
+  - Transition to PROGRAM_END state on receipt of CLEAR command
+
+- Limit Switch Hit / Unrecoverable Case: A limit switch has been hit. The input has been configured so that hitting that limit switch on that axis is unrecoverable, as position information will have been lost. The desired behavior is:
+  - Transition to HARD_ALARM state (from RUN)
+  - Stop movement without preserving position (STOP_STEPPING)
+    - Do not perform this action already in feedhold
+  - Stop spindle or other actuator (extruder, laser, torch…)
+  - No change to coolant output
+  - Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
+  - Flush the planner queue
 o	Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
 o	Mark the limit axis as UNHOMED and mark the machine as UNHOMED
 o	Generate exception report for LIMIT HIT, and indicate which input was tripped
