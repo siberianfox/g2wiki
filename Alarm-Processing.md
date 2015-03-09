@@ -24,7 +24,7 @@ enum cmCombinedState {
 There are a few settings that enable and disable various alarm cases:
 
 - {sl:1} Soft limit enable: set to 0 or 1
-- {lim:1} Hard limit enable: set to 0 or 1
+- {lim:1} Limit switch enable: set to 0 or 1
 - {ilck:1} Interlock enable: set to 0 or 1
 
 Setting hard limit enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value. {clear:n} or $clear
