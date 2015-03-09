@@ -13,7 +13,7 @@ Digital inputs have these attributes (using di1 as an example)
 	------|------------|---------
 	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=spindle_ready, 5=temperature_ready, 6=M66
+	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, more TBD
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
 
@@ -22,7 +22,11 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 - HALT stops immediately without regard to deceleration. Position may be lost.
 - RESET resets the board if the input triggers
 
-The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override).
+The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override). Please see [Alarm Processing](Alarm-Processing) for more details. Functions include:
+
+- LIMIT acts as a limit switch. The machine does into an ALARM state and will need to be cleared.
+- INTERLOCK pauses all movement until the interlock input is restored
+- SHUTDOWN puts the machine into a shutdown state. It must be recovered with a reset of power cycle
 
 Internal state for inputs may include:
 
