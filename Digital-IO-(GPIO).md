@@ -1,4 +1,4 @@
-Configuring Inputs
+##Configuring Inputs
 Digital inputs are controlled using a set of digital input objects referenced as so:
 di1
 di2
@@ -27,7 +27,7 @@ Internal state for inputs may include:
 	lockout_timer | time in ticks (ms) to remove lockout
 	homing_mode | set true if the switch is the homing switch now
 
-Homing
+##Homing
 Homing is an exception as an input can be configured as a homing input and a limit input. To configure homing these new parameters are added to the axis config:
 
 	Name | Description | Values
