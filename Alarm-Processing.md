@@ -90,14 +90,15 @@ The following use cases are supported:
 - **Internal Shutdown**: An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
 
 ### CLEAR Command
-When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including on-board serial receive queues (RX), board and host internal USB queues, sender queue (e.g. serial-port-json-server), terminal emulator or host transmit buffer queues, or other upstream buffers. 
-In an unrecoverable alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in a HARD_ALARM or SHUTDOWN state will be “eaten” and not processed, and will return with status code 203, STAT_MACHINE_ALARMED. 
-In this state it is possible to query g2, (i.e. GET commands), but not possible to change the state of the machine. 
-(Q: do we want to let SR requests get through? Probably. Test this.)
+When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
+ 
+In an alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in an state will be read but not processed, and will return with status code 203, STAT_MACHINE_ALARMED.
+
+In this state it is possible to query the board, (i.e. GET commands), but not possible to change the state of the machine (i.e. SET commands or Gcode)
 
 Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
 
-This is complicated by dual endpoint USB, as a CLEAR can be sent via the control channel while there are still commands in the data channel. It is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent. (Do we want this to only accept CLEAR on the data channel?)
+**Clear on Dual Endpoint USB*** Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
 
 ###Alarm States
 The following processing is based on the use cases above.
