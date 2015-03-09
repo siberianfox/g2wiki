@@ -4,19 +4,19 @@ A minor addition to the combined machine state is the addition of the Interlock 
 
 <pre>
 enum cmCombinedState {
-	COMBINED_INITIALIZING,	// [0] machine is initializing
-	COMBINED_READY,		// [1] machine is ready for use
-	COMBINED_ALARM,		// [2] machine in alarm state (soft or hard)
-	COMBINED_PROGRAM_STOP,	// [3] program stop/no more blocks
-	COMBINED_PROGRAM_END,	// [4] program end
-	COMBINED_RUN,		// [5] motion is running
-	COMBINED_HOLD,		// [6] motion is holding
-	COMBINED_PROBE,		// [7] probe cycle active
-	COMBINED_CYCLE,		// [8] DEPRECATED: now just COMBINED_RUN
-	COMBINED_HOMING,	// [9] homing cycle 
-	COMBINED_JOG,		// [10] jogging cycle active
-	COMBINED_SHUTDOWN,	// [11] machine in shutdown (due to emergency stop)
-	COMBINED_INTERLOCK	// [12] machine in interlock hold
+	COMBINED_INITIALIZING,  // [0] machine is initializing
+	COMBINED_READY,         // [1] machine is ready for use
+	COMBINED_ALARM,         // [2] machine in alarm state (soft or hard)
+	COMBINED_PROGRAM_STOP,  // [3] program stop/no more blocks
+	COMBINED_PROGRAM_END,   // [4] program end
+	COMBINED_RUN,           // [5] motion is running
+	COMBINED_HOLD,          // [6] motion is holding
+	COMBINED_PROBE,         // [7] probe cycle active
+	COMBINED_CYCLE,         // [8] DEPRECATED: now just COMBINED_RUN
+	COMBINED_HOMING,        // [9] homing cycle 
+	COMBINED_JOG,           // [10] jogging cycle active
+	COMBINED_SHUTDOWN,      // [11] machine in shutdown (due to emergency stop)
+	COMBINED_INTERLOCK      // [12] machine in interlock hold
 };
 </pre>
 
