@@ -1,6 +1,6 @@
 ##Machine State and Alarm Processing
 ###Machine States
-A minor addition to the combined machine state is the addition of the Interlock state. Some other states have been slightly redefined. The ALARM state refers to both hard and soft alarms. Limits no longer cause SHUTDOWN, which is now invoked by an estop event. Here are the revised machine states (from canonical_machine.h)
+Machine states are listed below. Interlock is a new addition to the combined machine state. The behavior of some other states have been slightly redefined, as described in the remainder of this page. 
 
 <pre>
 enum cmCombinedState {
