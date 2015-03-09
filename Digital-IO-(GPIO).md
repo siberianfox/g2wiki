@@ -24,7 +24,7 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 
 The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override). Please see [Alarm Processing](Alarm-Processing) for more details. Functions include:
 
-- LIMIT acts as a limit switch. The machine does into an ALARM state and will need to be cleared.
+- LIMIT acts as a limit switch which goes into an ALARM state. Enter {clear:n} to clear
 - INTERLOCK pauses all movement until the interlock input is restored
 - SHUTDOWN puts the machine into a shutdown state. It must be recovered with a reset of power cycle
 
