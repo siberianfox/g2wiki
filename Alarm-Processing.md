@@ -12,7 +12,7 @@ enum cmCombinedState {
 	COMBINED_RUN,		// [5] motion is running
 	COMBINED_HOLD,		// [6] motion is holding
 	COMBINED_PROBE,		// [7] probe cycle active
-	COMBINED_CYCLE,		// [8] DEPRECATED: machine is cycling, now just COMBINED_RUN
+	COMBINED_CYCLE,		// [8] DEPRECATED: now just COMBINED_RUN
 	COMBINED_HOMING,	// [9] homing cycle 
 	COMBINED_JOG,		// [10] jogging cycle active
 	COMBINED_SHUTDOWN,	// [11] machine in shutdown (due to emergency stop)
