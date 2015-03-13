@@ -40,7 +40,6 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
 1. **% Handling** [cases 1 and 2]: Implement the following behaviors
   1. Intercept % in the serial stream and act on it immediately
      1. If the system is in FEEDHOLD (or has one requested) this sets a flag to request queue flush
-     1. If the system is in ALARM and has a single USB channel, transition to STOP (this is an auto-clear)
      1. Otherwise the % is ignored
   1. Replace the % with a ; in the serial stream. This allows the % to act as a start-comment character for Gcode comments (supporting the Inkscape comment case), and prevents a % comment from masquerading as an autoclear.
 
