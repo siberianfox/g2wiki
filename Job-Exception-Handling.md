@@ -1,6 +1,15 @@
 _DEV PAGE: This page is a discussion about implementation._
 _This is not intended to be end-user data, and G2 may or may not implement what's discussed there._
 
+## Summary
+	Character | Operation | Description
+	------|------------|---------
+	! | Feedhold | Starts a feedhold
+	~ | End Feedhold | Resumes from feedhold
+	% | Flush Queues | Flush remaining moves after a feedhold has been processed
+	^d | Kill Job | Kill an entire job by putting system into an ALARM. Send {clear:n} to end
+	^x | Reset Board | Provide as hardware reset and restart the board
+
 ## There are a few main cases that the board needs to handle:
 
 1. **Stop a Single Move** - Feedhold + queue flush `!%` is used to terminate a single move in cases such as homing, probing, and some forms of jogging. A `!%` will transition the system to a STOP. At this point the controlling program in the firmware, or on the host can perform the next action.
