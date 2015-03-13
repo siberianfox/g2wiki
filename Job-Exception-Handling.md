@@ -27,9 +27,9 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
 
 1. The % character is commonly used at the beginning and end of a gcode file to delimit the file.
 
+  * We don't need any special handling in these cases. M2 and M30 handle the "end-of-job" case, and should be used for that purpose.
   * We do NOT plan on supporting running two Gcode files concatenated. Or, at least, we don't plan on adding any special handling for that case.
 
-  * We don't need any special handling in these cases. M2 and M30 handle the "end-of-job" case, and should be used for that purpose.
 
 2. The % character is used by some gcode generators (InkScape, for example) as a start-comment character.
 
