@@ -4,11 +4,11 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
 ## Summary
 	Character | Operation | Description
 	------|------------|---------
-	! | Feedhold | Start a feedhold
-	~ | End Feedhold | Resume from feedhold
-	% | Queue Flush | Flush remaining moves after a feedhold has been processed
-	^d | Kill Job | Kill a job by putting system into an ALARM. Send {clear:n} to end
-	^x | Reset Board | Provide a hardware reset and restart the board
+	! | Feedhold | Start a feedhold. Ignored if already in a feedhold
+	~ | End Feedhold | Resume from feedhold. Ignored if not in feedhold
+	% | Queue Flush | Flush remaining moves during feedhold. Ignored if not in feedhold
+	^d | Kill Job | Trigger ALARM to kill current job. Send {clear:n} to end ALARM
+	^x | Reset Board | Perform hardware reset to restart the board
 
 ## There are a few main cases that the board needs to handle:
 
