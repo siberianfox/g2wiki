@@ -23,9 +23,7 @@ _This is not intended to be end-user data, and G2 may or may not implement what'
 
 1. **Reset System** - Do a hard reset if the controller is unresponsive or has entered a SHUTDOWN state.
 
-### Further Background
-
-Additional considerations:
+**Additional considerations:**
 
 1. The % character is commonly used at the beginning and end of a gcode file to delimit the file.
 
