@@ -79,7 +79,11 @@ A PANIC occurs if the firmware has detected an unrecoverable internal error such
 
 PANIC can only be exited by a hardware reset or soft reset (^x)
 
-### CLEAR
+### CLEARs
+An ALARM may be cleared by any of:
+
+- {clear:n}, {“clear”:n}, {clr:n}, {“clr”:n} --- JSON options 
+- $clear
 When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
  
 In an alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in an state will be read but not processed, and will return with status code 203, STAT_MACHINE_ALARMED.
