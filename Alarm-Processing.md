@@ -25,18 +25,39 @@ enum cmCombinedState {
 };
 </pre>
 
+##Description of Exception States
+###ALARM
+
+###SHUTDOWN
+
+###PANIC
+
+### CLEAR
+When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
+ 
+In an alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in an state will be read but not processed, and will return with status code 203, STAT_MACHINE_ALARMED.
+
+In this state it is possible to query the board, (i.e. GET commands), but not possible to change the state of the machine (i.e. SET commands or Gcode)
+
+Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
+
+####Clear on Dual Endpoint USB 
+Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
+
+###Other Topics
+
 ####Alarm Enables
 There are a few settings that enable and disable various alarm cases:
 
 - {sl:1} Soft limit enable: set to 0 or 1
 - {lim:1} Limit switch enable: set to 0 or 1
-- {ilck:1} Interlock enable: set to 0 or 1
+- {saf:1} Safety interlock enable: set to 0 or 1
 
 Setting limit switch enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value using {clear:n} or $clear
-
-###Alarm Use Cases
+##Alarm Use Cases
 The following use cases are supported:
 
+####Soft Limit
 - **Soft Limit**: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted, and is:
   - Transition to ALARM state (from RUN)
   - Stop movement while preserving position (feedhold to a STOP)
@@ -49,6 +70,7 @@ The following use cases are supported:
   - Generate exception report for SOFT_LIMIT w/line number of the limit (if Gcode has line numbers)
   - Transition to PROGRAM_END state on receipt of CLEAR command
 
+####Limit Switches
 - **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is:
   - Transition to ALARM state (from RUN)
   - Stop movement with our without preserving position (STOP, FAST_STOP, HALT)
@@ -64,6 +86,7 @@ The following use cases are supported:
   - Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
   - Host should reset {lim:1} before the next cycle
 
+####Safety Interlock Engaged/Disengaged
 - **Interlock Hold**: An interlock condition has been detected on an input. Interlocks should allow jobs to resume once the interlock condition has been removed. The desired behavior is:
   - Transition to INTERLOCK state (from RUN)
   - Stop movement with rapid deceleration while preserving position (HALT)
@@ -79,6 +102,7 @@ The following use cases are supported:
   - Resume motion by resuming from feedhold (CYCLE_START)
     - ...unless already in feedhold at the time of INTERLOCK
 
+####Emergency Shutdown
 - **Emergency Shutdown**: Emergency shutdown is the controller’s reaction to an external Emergency Stop (EStop) being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain, as Estop needs to function even if the controller has malfunctioned. The Emergency Shutdown input is used to tell the controller that an Estop condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
   - Transition to SHUTDOWN state (from RUN)
   - Stop movement immediately without preserving position (HALT)
@@ -92,16 +116,5 @@ The following use cases are supported:
   - Shutdown is only recoverable by a RESET (soft or hard), or power cycle
     - Note: The external Estop logic or the host may decide to reset the controller
 
-- **Internal Shutdown**: An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
-
-### CLEAR Command
-When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
- 
-In an alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in an state will be read but not processed, and will return with status code 203, STAT_MACHINE_ALARMED.
-
-In this state it is possible to query the board, (i.e. GET commands), but not possible to change the state of the machine (i.e. SET commands or Gcode)
-
-Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
-
-####Clear on Dual Endpoint USB 
-Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
+####Unrecoverable Internal Error - Panic
+- **Panic**: An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
