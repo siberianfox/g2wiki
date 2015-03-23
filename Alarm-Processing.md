@@ -109,7 +109,19 @@ There are a few settings that enable and disable various alarm cases:
 - {lim:1} Limit switch enable: set to 0 or 1
 - {saf:1} Safety interlock enable: set to 0 or 1
 
-Setting limit switch enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value using {clear:n} or $clear
+Setting limit switch enable to 0 is the same as a limit override. This can be used to drive the system off a limit switch. Note that if the system is in an alarm state the alarm must be cleared prior to changing this value.
+
+####Spindle and Coolant Optional Behavior
+The spindle and coolant can be instructed to pause on feedhold by setting:
+
+- {sph:0}, $sph=0 --- spindle pause on hold disabled
+- {sph:1}, $sph=1 --- spindle pause on hold enabled
+
+- {coph:0}, $coph=0 --- coolant pause on hold disabled
+- {coph:1}, $coph=1 --- coolant pause on hold enabled
+ 
+The pause will resume once the hold is lifted. These options affect any feedhold case, which therefore includes soft limits, limit switches, and safety interlocks.
+
 ##Alarm Use Cases
 The following use cases are supported:
 
