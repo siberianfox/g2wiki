@@ -27,13 +27,22 @@ enum cmCombinedState {
 
 ##Description of Alarm Exception States
 ###ALARM
-ALARM is typically entered by a soft limit or a limit switch being hit. An ALARM sets the ALARM machine state, starts a feedhold to stop motion, stops the spindle, turns off coolant, clears out queued planner moves and serial input, and rejects new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared.
+Alarm is typically entered by a soft limit or a limit switch being hit. the following occur:
+
+- Set ALARM machine state
+- Start a feedhold to stop motion
+- Optionally stop the spindle
+- Optionally turn off coolant
+- Clear out queued planner moves and any commands in the serial buffer
+- Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm
+
+Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
 In the case where the alarm is triggered by a limit switch the input line's INPUT_ACTION setting overrides the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
 
-Job state and and machine state is preserved. It may be possible to recover the job from an alarm, but in many cases this is not possible. Since ALARM attempts to preserve Gcode and machine state it does not END the job.
+Job state and and machine state is preserved and will report the position at the end of the feedhold. Since ALARM attempts to preserve Gcode and machine state it does not END the job. It may be possible to recover the job from an alarm, but in many cases this is not possible. 
 
-An ALARM may also be invoked from the command line using {alarm:n} or $alarm ALARM can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. ALARMs will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue.
+An ALARM may also be invoked from the command line using {alarm:n} or $alarm 
 
 ###SHUTDOWN
 
