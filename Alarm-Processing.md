@@ -36,6 +36,7 @@ Alarm is typically entered by a soft limit or a limit switch being hit. The foll
 - Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing.
+- Generate an JSON exception report indicating the ALARM state and the input channel or command line that invoked the alarm
 
 Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
@@ -58,18 +59,20 @@ other moving parts. The following actions occur:
 - Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown.
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing. It is the responsibility of the external Estop system to determine is power is still applied to these motors.
+- Generate an JSON exception report indicating the SHUTDOWN state and the input channel or command line that invoked the shutdown
 
 Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr, or by a hard or soft system reset (^x). Shutdowns do not clear with an M30 or M2.
 
 Shutdown may also be invoked from the command line by sending {shutd:n} or $shutd
 
 ###PANIC
+A PANIC occurs if the firmware has detected an unrecoverable internal error such as an assertion failure or a code condition that should never occur. The following occur:
 
- * PANIC occurs if the firmware has detected an unrecoverable internal error
- * such as an assertion failure or a code condition that should never occur.
- * It sets PANIC machine state, and leaves the system inspect able (if possible).
- *
- * PANIC can only be exited by a hardware reset or soft reset (^x)
+- Set PANIC machine state
+- Stop all motion as in a leaves the system inspectable (if possible). All new action commands are rejected.
+- Generate an JSON exception report indicating the PANIC state and the input channel, command line, or coded error that invoked the panic
+
+PANIC can only be exited by a hardware reset or soft reset (^x)
 
 ### CLEAR
 When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
