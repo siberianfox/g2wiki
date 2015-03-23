@@ -40,9 +40,9 @@ Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr.
 
 In the case where the alarm is triggered by a limit switch the input line's INPUT_ACTION setting overrides the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
 
-Job state and and machine state is preserved and will report the position at the end of the feedhold. Since ALARM attempts to preserve Gcode and machine state it does not END the job. It may be possible to recover the job from an alarm, but in many cases this is not possible. 
+Job state and and machine state is preserved and will report the position at the end of the feedhold. Since ALARM attempts to preserve Gcode and machine state it does not END the job unless an explicit M30 or M2 is received. It may be possible to recover a job from an alarm, but in many cases this is not possible.
 
-An ALARM may also be invoked from the command line using {alarm:n} or $alarm 
+An ALARM may also be invoked from the command line sending {alarm:n} or $alarm 
 
 ###SHUTDOWN
 
