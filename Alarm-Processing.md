@@ -35,6 +35,7 @@ Alarm is typically entered by a soft limit or a limit switch being hit. The foll
 - Optionally turn off coolant
 - Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm
+- Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing.
 
 Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
@@ -56,6 +57,7 @@ other moving parts. The following actions occur:
 - Turn off coolant (unconditionally)
 - Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown.
+- Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing. It is the responsibility of the external Estop system to determine is power is still applied to these motors.
 
 Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Shutdowns do not clear with an M30 or M2
 
