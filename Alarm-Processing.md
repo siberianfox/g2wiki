@@ -129,41 +129,30 @@ A Gcode block is received that would exceed the maximum or minimum travel in one
 - Transition to [ALARM state](#alarm) (from RUN state)
 
 ####Limit Switches
-- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an 
-  - Transition to [ALARM state](#alarm) (from RUN state)
-  - Mark the limit axis as UNHOMED and mark the machine as UNHOMED
-  - Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
-  - Host should reset {lim:1} before the next cycle
+A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an 
+- Transition to [ALARM state](#alarm) (from RUN state)
+- Mark the limit axis as UNHOMED and mark the machine as UNHOMED
+- Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
+- Host should reset {lim:1} before the next cycle
 
 ####Safety Interlock Engaged/Disengaged
-- **Interlock Hold**: An interlock condition has been detected on an input. Interlocks should allow jobs to resume once the interlock condition has been removed. The desired behavior is:
-  - Transition to INTERLOCK state (from RUN)
-  - Stop movement with rapid deceleration while preserving position (HALT)
-    - If already in feedhold do not execute the HALT
-  - Stop spindle or other actuator (extruder, laser, torch…)
-  - No change to coolant output
-  - Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
-    - Q: Or do we want them to stay energized indefinitely?
-  - Generate exception report for entering INTERLOCK condition w/the interlock input number
-  - Wait for interlock condition to be cleared by the input
-  - Generate exception report for exiting INTERLOCK condition w/the interlock input number
-  - Restore spindle to prior state, with delay dwell of N seconds (settable)
-  - Resume motion by resuming from feedhold (CYCLE_START)
-    - ...unless already in feedhold at the time of INTERLOCK
+An interlock condition has been detected on an input. Interlocks should allow jobs to resume once the interlock condition has been removed. The desired behavior is:
+- Invoke [ALARM processing](#alarm)
+- Transition to INTERLOCK state
+- Generate exception report for entering INTERLOCK condition (disengaged) w/the interlock input number
+- Wait for interlock condition to be cleared by the input
+- Generate exception report for exiting INTERLOCK condition (engaged) w/the interlock input number
+- Restore spindle to prior state, with delay dwell of N seconds (settable)
+- Resume motion by resuming from feedhold (CYCLE_START)
+  - ...unless already in feedhold at the time of INTERLOCK
 
 ####Emergency Shutdown
-- **Emergency Shutdown**: Emergency shutdown is the controller’s reaction to an external Emergency Stop (EStop) being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain, as Estop needs to function even if the controller has malfunctioned. The Emergency Shutdown input is used to tell the controller that an Estop condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
-  - Transition to SHUTDOWN state (from RUN)
-  - Stop movement immediately without preserving position (HALT)
-  - Stop spindle or other actuator (extruder, laser, torch…)
-  - Stop coolant output
-  - Disable motor power (no timeout)
-  - Flush the planner queue
-  - Mark all axes as UNHOMED and mark the machine as UNHOMED
-  - Drain the queues: Read and reject motion and SET commands (See CLEAR command).
-  - Exception report is generated reporting SHUTDOWN condition
-  - Shutdown is only recoverable by a RESET (soft or hard), or power cycle
-    - Note: The external Estop logic or the host may decide to reset the controller
+Emergency shutdown is the controller’s reaction to an external Emergency Stop (EStop) being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain, as Estop needs to function even if the controller has malfunctioned. The Shutdown input is used to tell the controller that an Estop condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
+- Transition to [SHUTDOWN state](#shutdown) (from RUN)
+- Mark all axes as UNHOMED and mark the machine as UNHOMED
+- Exception report is generated reporting SHUTDOWN condition
+- Shutdown is only recoverable by a RESET (soft or hard), or power cycle
+  - Note: The external Estop logic or the host may decide to reset the controller
 
 ####Unrecoverable Internal Error - Panic
-- **Panic**: An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
+An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
