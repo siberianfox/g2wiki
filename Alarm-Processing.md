@@ -26,7 +26,7 @@ enum cmCombinedState {
 </pre>
 
 ##Description of Alarm Exception States
-These exception states support the [use case](#alarm-use-cases) later on this page.
+These exception states support the [alarm use cases](#alarm-use-cases) later on this page.
 ###ALARM
 Alarm is typically entered by a soft limit, a limit switch, or a safety interlock being disengaged. The following occur:
 
