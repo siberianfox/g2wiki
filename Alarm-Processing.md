@@ -4,7 +4,7 @@ Related pages
 - [Job Exception Handling](Job-Exception-Handling)
 
 ###Machine States
-Machine states are listed below. Interlock is a new addition to the combined machine state. The behavior of some other states have been slightly redefined, as described in the remainder of this page. 
+Machine states are listed below. Interlock and panic are new additions to the combined machine state. The behavior of some other states have been slightly redefined, as described in the remainder of this page. 
 
 <pre>
 enum cmCombinedState {
@@ -19,8 +19,9 @@ enum cmCombinedState {
 	COMBINED_CYCLE,         // [8] DEPRECATED: now just COMBINED_RUN
 	COMBINED_HOMING,        // [9] homing cycle 
 	COMBINED_JOG,           // [10] jogging cycle active
-	COMBINED_SHUTDOWN,      // [11] machine in shutdown (due to emergency stop)
-	COMBINED_INTERLOCK      // [12] machine in interlock hold
+	COMBINED_INTERLOCK,     // [11] machine in safety interlock hold
+	COMBINED_SHUTDOWN,      // [12] machine in shutdown state
+	COMBINED_PANIC          // [13] machine in panic state
 };
 </pre>
 
