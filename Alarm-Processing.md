@@ -45,19 +45,21 @@ Job state and and machine state is preserved and will report the position at the
 An ALARM may also be invoked from the command line sending {alarm:n} or $alarm 
 
 ###SHUTDOWN
+Shutdown is typically invoked as an electrical input signal sent to the board as
+part of an external emergency stop (Estop).  Shutdown is meant to augment but not
+replace the external Estop functions that shut down power to motors, spindles and
+other moving parts. The following actions occur:
 
- * SHUTDOWN stops all motion, spindle and coolant immediately, sets a SHUTDOWN machine
- * state, clears out queued moves and serial input, and rejects new action commands
- * (gcode blocks, SET commands, and some others).
- *
- * Shutdown is typically invoked as an electrical input signal sent to the board as
- * part of an external emergency stop (Estop). Shutdown is meant to augment but not
- * replace the external Estop functions that shut down power to motors, spindles and
- * other moving parts.
- *
- * Shutdown may also be invoked from the command line using {shutd:n} or $shutd
- * Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr
- * Shutdown does not clear on M30 or M2 Gcode commands
+- Set SHUTDOWN machine state
+- Stop all motion immediately - motors HALT without deceleration
+- Stop spindle (unconditionally)
+- Turn off coolant (unconditionally)
+- Flush queued planner moves and any commands in the serial buffer
+- Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown.
+
+Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Shutdowns do not clear with an M30 or M2
+
+Shutdown may also be invoked from the command line by sending {shutd:n} or $shutd
 
 ###PANIC
 
