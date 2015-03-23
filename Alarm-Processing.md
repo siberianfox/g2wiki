@@ -10,14 +10,14 @@ Machine states are listed below. Interlock and panic are new additions to the co
 enum cmCombinedState {
 	COMBINED_INITIALIZING,  // [0] machine is initializing
 	COMBINED_READY,         // [1] machine is ready for use
-	COMBINED_ALARM,         // [2] machine in alarm state (soft or hard)
+	COMBINED_ALARM,         // [2] machine in alarm state
 	COMBINED_PROGRAM_STOP,  // [3] program stop/no more blocks
 	COMBINED_PROGRAM_END,   // [4] program end
-	COMBINED_RUN,           // [5] motion is running
-	COMBINED_HOLD,          // [6] motion is holding
+	COMBINED_RUN,           // [5] machine is running
+	COMBINED_HOLD,          // [6] machine is holding
 	COMBINED_PROBE,         // [7] probe cycle active
 	COMBINED_CYCLE,         // [8] reserved for canned cycles
-	COMBINED_HOMING,        // [9] homing cycle 
+	COMBINED_HOMING,        // [9] homing cycle active 
 	COMBINED_JOG,           // [10] jogging cycle active
 	COMBINED_INTERLOCK,     // [11] machine in safety interlock hold
 	COMBINED_SHUTDOWN,      // [12] machine in shutdown state
