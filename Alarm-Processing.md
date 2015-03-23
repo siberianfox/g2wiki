@@ -134,7 +134,7 @@ A Gcode block is received that would exceed the maximum or minimum travel in one
 A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is: 
 - Run [ALARM processing](#alarm) (the INPUT ACTION may override the default feedhold with a faster version)
 - Mark the affected axis as UNHOMED and mark the machine as UNHOMED
-- Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
+- Once the alarm is cleared, accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
 - Host should reset {lim:1} before the next cycle
 
 ####Safety Interlock Engaged/Disengaged
