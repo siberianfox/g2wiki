@@ -66,7 +66,7 @@ Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $c
 Shutdown may also be invoked from the command line by sending {shutd:n} or $shutd
 
 ###PANIC
-A PANIC occurs if the firmware has detected an unrecoverable internal error such as an assertion failure or a code condition that should never occur. The following occur:
+A PANIC occurs if the firmware has detected an unrecoverable internal error such as an assertion failure or a code condition that should never occur. Panics may also be invoked from input switches or command input. The following occur:
 
 - Set PANIC machine state
 - Stop all motion as in a leaves the system inspectable (if possible). All new action commands are rejected.
