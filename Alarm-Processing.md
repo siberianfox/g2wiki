@@ -27,7 +27,7 @@ enum cmCombinedState {
 
 ##Description of Alarm Exception States
 ###ALARM
-Alarm is typically entered by a soft limit or a limit switch being hit. the following occur:
+Alarm is typically entered by a soft limit or a limit switch being hit. The following occur:
 
 - Set ALARM machine state
 - Start a feedhold to stop motion
