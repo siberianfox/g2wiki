@@ -114,10 +114,10 @@ Setting limit switch enable to 0 is the same as a limit override. This can be us
 ####Spindle and Coolant Optional Behavior
 The spindle and coolant can be instructed to pause on feedhold by setting:
 
-- {sph:0} --- spindle pause-on-hold disabled
-- {sph:1} --- spindle pause-on-hold enabled
-- {coph:0} --- coolant pause-on-hold disabled
-- {coph:1} --- coolant pause-on-hold enabled
+- {sph:0} Spindle pause-on-hold disabled
+- {sph:1} Spindle pause-on-hold enabled
+- {coph:0} Coolant pause-on-hold disabled
+- {coph:1} Coolant pause-on-hold enabled
 
 (Or their text-mode equivalents). The pause will resume once the hold is lifted. These options affect any feedhold case, which therefore includes soft limits, limit switches, and safety interlocks.
 
