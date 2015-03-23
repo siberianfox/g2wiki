@@ -27,9 +27,9 @@ enum cmCombinedState {
 
 ##Description of Alarm Exception States
 ###ALARM
-ALARM is typically entered by a soft limit or a limit switch being hit. In the limit switch case the INPUT_ACTION will override the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
+ALARM is typically entered by a soft limit or a limit switch being hit. An ALARM sets the ALARM machine state, starts a feedhold to stop motion, stops the spindle, turns off coolant, clears out queued planner moves and serial input, and rejects new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared.
 
-An ALARM sets the ALARM machine state, starts a feedhold to stop motion, stops the spindle, turns off coolant, clears out queued planner moves and serial input, and rejects new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared.
+In the case where the alarm is triggered by a limit switch the input line's INPUT_ACTION setting overrides the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
 
 Job state and and machine state is preserved. It may be possible to recover the job from an alarm, but in many cases this is not possible. Since ALARM attempts to preserve Gcode and machine state it does not END the job.
 
