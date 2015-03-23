@@ -31,9 +31,9 @@ Alarm is typically entered by a soft limit or a limit switch being hit. The foll
 
 - Set ALARM machine state
 - Start a feedhold to stop motion
-- Optionally stop the spindle
+- Optionally stop spindle
 - Optionally turn off coolant
-- Clear out queued planner moves and any commands in the serial buffer
+- Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm
 
 Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
