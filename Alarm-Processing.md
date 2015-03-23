@@ -37,7 +37,7 @@ Alarm is typically entered by a soft limit, a limit switch, or a safety interloc
 - Flush queued planner moves and any commands in the serial buffer
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm. Rejected commands are responded with a 204 status code: STAT_COMMAND_REJECTED_BY_ALARM
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing.
-- Generate a JSON exception report indicating the ALARM state and the input channel or command line that invoked the alarm
+- Generate a JSON exception report indicating that and ALARM has occurred and the input channel, command line, or other source of the alarm
 
 Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
