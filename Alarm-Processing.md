@@ -34,7 +34,7 @@ Alarm is typically entered by a soft limit or a limit switch being hit. The foll
 - Optionally stop spindle
 - Optionally turn off coolant
 - Flush queued planner moves and any commands in the serial buffer
-- Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm
+- Reject new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared. Non-action commands are still processed (GETs) so the system can be inspected during an alarm. Rejected commands are responded with a 204 status code: STAT_COMMAND_REJECTED_BY_ALARM
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing.
 - Generate a JSON exception report indicating the ALARM state and the input channel or command line that invoked the alarm
 
@@ -57,7 +57,7 @@ other moving parts. The following actions occur:
 - Stop spindle (unconditionally)
 - Turn off coolant (unconditionally)
 - Flush queued planner moves and any commands in the serial buffer
-- Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown.
+- Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown. Rejected commands are responded with a 205 status code: STAT_COMMAND_REJECTED_BY_SHUTDOWN
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing. It is the responsibility of the external Estop system to determine is power is still applied to these motors.
 - Generate a JSON exception report indicating the SHUTDOWN state and the input channel or command line that invoked the shutdown
 
@@ -73,8 +73,8 @@ A PANIC occurs if the firmware has detected an unrecoverable internal error such
 - Stop spindle (unconditionally)
 - Turn off coolant (unconditionally)
 - Flush queued planner moves and any commands in the serial buffer
-- Reject new action commands (gcode blocks, SET commands, and other actions). Non-action commands are still honored (GETs), assuming the system is still operational enough to be inspectable.
-- Motor power management remains in effect, although the machining cycle is now over. 
+- Reject new action commands. Non-action commands are still honored (GETs), assuming the system is still operational enough to be inspectable. Rejected commands are responded with a 206 status code: STAT_COMMAND_REJECTED_BY_PANIC
+- Motor power management remains in effect, although the machining cycle is now over.
 - Generate a JSON exception report indicating the PANIC state and the input channel, command line, or coded error that invoked the panic
 
 PANIC can only be exited by a hardware reset or soft reset (^x)
