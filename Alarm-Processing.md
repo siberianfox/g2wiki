@@ -59,7 +59,7 @@ other moving parts. The following actions occur:
 - Reject new action commands (gcode blocks, SET commands, and other actions) until the shutdown is cleared. Non-action commands are still processed (GETs) so the system can be inspected during a shutdown.
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing. It is the responsibility of the external Estop system to determine is power is still applied to these motors.
 
-Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Shutdowns do not clear with an M30 or M2
+Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr, or by a hard or soft system reset (^x). Shutdowns do not clear with an M30 or M2.
 
 Shutdown may also be invoked from the command line by sending {shutd:n} or $shutd
 
