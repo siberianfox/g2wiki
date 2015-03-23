@@ -29,7 +29,6 @@ enum cmCombinedState {
 These exception states support the [alarm use cases](#alarm-use-cases) later on this page.
 ###ALARM
 Alarm is typically entered by a soft limit, a limit switch, or a safety interlock being disengaged. The following occur:
-
 - Set ALARM machine state
 - Start a feedhold to stop motion
 - Optionally stop spindle
@@ -41,18 +40,14 @@ Alarm is typically entered by a soft limit, a limit switch, or a safety interloc
 
 Alarms can be manually cleared by entering {clear:n} or a [variant](#clear). Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
-In the case where the alarm is triggered by a limit switch the input line's INPUT_ACTION setting overrides the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
-
 Job state and and machine state is preserved and will report the position at the end of the feedhold. Since ALARM attempts to preserve Gcode and machine state it does not END the job unless an explicit M30 or M2 is received. It may be possible to recover a job from an alarm, but in many cases this is not possible.
+
+In the case where the alarm is triggered by a limit switch the INPUT_ACTION setting may override the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function. The limit input can also be set up to PANIC or RESET, if so desired.
 
 An ALARM may also be invoked from the command line sending {alarm:n} or $alarm 
 
 ###SHUTDOWN
-Shutdown is typically invoked as an electrical input signal sent to the board as
-part of an external emergency stop (Estop).  Shutdown is meant to augment but not
-replace external Estop functions that shut down power to motors, spindle, coolant and
-other moving parts. The following actions occur:
-
+Shutdown is typically invoked as an electrical input signal sent to the board as part of an external emergency stop (Estop).  Shutdown is meant to augment but not replace external Estop functions that shut down power to motors, spindle, coolant and other moving parts. The following actions occur:
 - Set SHUTDOWN machine state
 - Stop all motion immediately - motors HALT without deceleration
 - Stop spindle (unconditionally)
