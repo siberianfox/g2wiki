@@ -125,21 +125,13 @@ The spindle and coolant can be instructed to pause on feedhold by setting:
 The following use cases are supported:
 
 ####Soft Limit
-- **Soft Limit**: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted. An ALARM state is invoked (see ALARM behaviors)
+- **Soft Limit**: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted. 
+  - Transition to [ALARM state](#alarm) (from RUN state)
 
 ####Limit Switches
-- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an ALARM state
-  - Transition to ALARM state (from RUN)
-  - Stop movement with our without preserving position (STOP, FAST_STOP, HALT)
-    - Do not perform this action already started a feedhold
-  - Stop spindle or other actuator (extruder, laser, torch…)
-  - No change to coolant output
-  - Motor power timeouts activate based on motor power settings – i.e. no longer moving or in cycle
-  - Flush the planner queue of any remaining moves
-  - Drain the serial queues: Read and reject motion and SET commands (See CLEAR command).
+- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an 
+  - Transition to [ALARM state](#alarm) (from RUN state)
   - Mark the limit axis as UNHOMED and mark the machine as UNHOMED
-  - Generate exception report for LIMIT HIT, and indicate which input was tripped
-  - Transition to PROGRAM_END state on receipt of CLEAR command 
   - Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
   - Host should reset {lim:1} before the next cycle
 
