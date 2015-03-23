@@ -39,7 +39,7 @@ Alarm is typically entered by a soft limit, a limit switch, or a safety interloc
 - Motor power management remains in effect, although the machining cycle is now over. Motors that are "always on" will remain energized, as these motors may require power to avoid crashing.
 - Generate a JSON exception report indicating that and ALARM has occurred and the input channel, command line, or other source of the alarm
 
-Alarms can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
+Alarms can be manually [cleared](#clear) by entering: {clear:n}, {clr:n}, $clear, or $clr. Alarms will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue (i.e. when rejecting new commands from the host USB input).
 
 In the case where the alarm is triggered by a limit switch the input line's INPUT_ACTION setting overrides the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
 
