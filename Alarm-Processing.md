@@ -27,7 +27,7 @@ enum cmCombinedState {
 
 ##Description of Alarm Exception States
 ###ALARM
-Alarm is typically entered by a soft limit or a limit switch being hit. The following occur:
+Alarm is typically entered by a soft limit, a limit switch, or a safety interlock being disengaged. The following occur:
 
 - Set ALARM machine state
 - Start a feedhold to stop motion
@@ -82,21 +82,23 @@ PANIC can only be exited by a hardware reset or soft reset (^x)
 ### CLEARs
 An ALARM may be cleared by any of:
 
-- {clear:n}, {“clear”:n}, {clr:n}, {“clr”:n} --- JSON options 
-- $clear
-When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
- 
-In an alarm it is desirable to cease all motion, so this requires rejecting all new commands that may be received after the alarm condition is triggered. Commands received in an state will be read but not processed, and will return with status code 203, STAT_MACHINE_ALARMED.
+- {clear:n}, {“clear”:n}, {clr:n}, {“clr”:n} --- JSON options
+- $clear, $clr --- Text-mode options
+- M30, M2 --- Gcode options
+- ^x (control x) --- resets the system
 
-In this state it is possible to query the board, (i.e. GET commands), but not possible to change the state of the machine (i.e. SET commands or Gcode)
+SHUTDOWN may be cleared by any of:
 
-Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
+- {clear:n}, {“clear”:n}, {clr:n}, {“clr”:n} --- JSON options
+- $clear, $clr --- Text-mode options
+- ^x (control x) --- resets the system
 
- * Parse clear interprets an M30 or M2 PROGRAM_END as a $clear condition and clear ALARMs and
- * SHUTDOWNs but not PANICs. Assumes Gcode string has no leading or embedded whitespace
+PANIC may only be cleared by:
+
+- ^x (control x) --- resets the system
 
 ####Clear on Dual Endpoint USB 
-Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
+Using clear is slightly more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all queued commands are cleared up to the clear command itself. A clear will be honored if sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
 
 ###Other Topics
 
