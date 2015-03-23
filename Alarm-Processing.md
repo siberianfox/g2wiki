@@ -126,18 +126,19 @@ The alarm state handling supports the following use cases, some of which are imp
 
 ####Soft Limit
 A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted. 
-- Transition to [ALARM state](#alarm) (from RUN state)
+- Run [ALARM processing](#alarm)
+- Soft limits always use normal feedholds, never fast_stop or halt
 
 ####Limit Switches
-A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an 
-- Transition to [ALARM state](#alarm) (from RUN state)
-- Mark the limit axis as UNHOMED and mark the machine as UNHOMED
+A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is: 
+- Run [ALARM processing](#alarm) (the INPUT ACTION may override the default feedhold with a faster version)
+- Mark the affected axis as UNHOMED and mark the machine as UNHOMED
 - Accept {lim:0} (LIMIT_OVERRIDE) to disable limits before moving machine off limit switch
 - Host should reset {lim:1} before the next cycle
 
 ####Safety Interlock Engaged/Disengaged
-An interlock condition has been detected on an input. Interlocks should allow jobs to resume once the interlock condition has been removed. The desired behavior is:
-- Invoke [ALARM processing](#alarm)
+An safety interlock has disengaged on an input. Interlocks should allow jobs to resume once the interlock is re-engaged. The desired behavior is:
+- Run [ALARM processing](#alarm)
 - Transition to INTERLOCK state
 - Generate exception report for entering INTERLOCK condition (disengaged) w/the interlock input number
 - Wait for interlock condition to be cleared by the input
@@ -148,11 +149,11 @@ An interlock condition has been detected on an input. Interlocks should allow jo
 
 ####Emergency Shutdown
 Emergency shutdown is the controller’s reaction to an external Emergency Stop (EStop) being activated. Note that Estop is NOT a controller function, it is an external condition that must remove power and/or brake all moving parts, including axes, spindles, etc. This occurs outside of the controller’s domain, as Estop needs to function even if the controller has malfunctioned. The Shutdown input is used to tell the controller that an Estop condition has occurred, and for it to take appropriate steps on its own. Emergency Shutdown is not recoverable. The desired behavior is:
-- Transition to [SHUTDOWN state](#shutdown) (from RUN)
+- Run [SHUTDOWN state](#shutdown)
 - Mark all axes as UNHOMED and mark the machine as UNHOMED
-- Exception report is generated reporting SHUTDOWN condition
-- Shutdown is only recoverable by a RESET (soft or hard), or power cycle
+- Generate exception report reporting SHUTDOWN condition
+- Shutdown is recoverable by a clear, a hard or soft reset, or a power cycle
   - Note: The external Estop logic or the host may decide to reset the controller
 
 ####Unrecoverable Internal Error - Panic
-An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled identically to emergency shutdown, with the exception of the contents of the exception report. In some cases an exception report cannot be generated. If you see this case please note the exception report contents and let us know about it.  
+An internal condition is detected that indicates controller malfunction of some other unrecoverable problem. Internal shutdown is handled by [PANIC](#panic).
