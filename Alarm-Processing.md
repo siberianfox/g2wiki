@@ -125,20 +125,10 @@ The spindle and coolant can be instructed to pause on feedhold by setting:
 The following use cases are supported:
 
 ####Soft Limit
-- **Soft Limit**: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted, and is:
-  - Transition to ALARM state (from RUN)
-  - Stop movement while preserving position (feedhold to a STOP)
-    - If already in feedhold do not execute the STOP
-  - Stop spindle or other actuator (extruder, laser, torch…)
-  - No change to coolant output
-  - Motor power timeouts activate based on motor power settings – e.g. only-when-moving or in-cycle
-  - Flush the planner queue of any remaining moves
-  - Drain the serial queues: Reject any motion commands and parameter setting commands.
-  - Generate exception report for SOFT_LIMIT w/line number of the limit (if Gcode has line numbers)
-  - Transition to PROGRAM_END state on receipt of CLEAR command
+- **Soft Limit**: A Gcode block is received that would exceed the maximum or minimum travel in one or more axes. This could be true because the cutting path exceeds the available machine extents, or because the part was located (zeroed) on the table incorrectly (e.g. “not centered”). In either case assume the job is not recoverable. Soft limits are only applied if the machine is homed. The desired behavior is triggered as soon as the Gcode block is interpreted. An ALARM state is invoked (see ALARM behaviors)
 
 ####Limit Switches
-- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is:
+- **Limit Switch Hit**: A limit switch has been hit. Depending on the action settings, machine type, velocities, switches and other factors the position may or may not be preserved. The desired behavior is to transition to an ALARM state
   - Transition to ALARM state (from RUN)
   - Stop movement with our without preserving position (STOP, FAST_STOP, HALT)
     - Do not perform this action already started a feedhold
