@@ -47,7 +47,7 @@ An ALARM may also be invoked from the command line sending {alarm:n} or $alarm
 ###SHUTDOWN
 Shutdown is typically invoked as an electrical input signal sent to the board as
 part of an external emergency stop (Estop).  Shutdown is meant to augment but not
-replace the external Estop functions that shut down power to motors, spindles and
+replace external Estop functions that shut down power to motors, spindle, coolant and
 other moving parts. The following actions occur:
 
 - Set SHUTDOWN machine state
