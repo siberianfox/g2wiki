@@ -80,7 +80,7 @@ A PANIC occurs if the firmware has detected an unrecoverable internal error such
 
 PANIC can only be exited by a hardware reset or soft reset (^x)
 
-### CLEARs
+### CLEAR
 An ALARM may be cleared by any of:
 
 - {clear:n}, {“clear”:n}, {clr:n}, {“clr”:n} --- JSON options
