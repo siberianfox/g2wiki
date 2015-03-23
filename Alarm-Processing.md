@@ -25,12 +25,38 @@ enum cmCombinedState {
 };
 </pre>
 
-##Description of Exception States
+##Description of Alarm Exception States
 ###ALARM
+ALARM is typically entered by a soft limit or a limit switch being hit. In the limit switch case the INPUT_ACTION will override the feedhold - i.e. if the input action is "FAST_STOP" or "HALT" that setting will take precedence over the feedhold native to the alarm function.
+
+An ALARM sets the ALARM machine state, starts a feedhold to stop motion, stops the spindle, turns off coolant, clears out queued planner moves and serial input, and rejects new action commands (gcode blocks, SET commands, and other actions) until the alarm is cleared.
+
+Job state and and machine state is preserved. It may be possible to recover the job from an alarm, but in many cases this is not possible. Since ALARM attempts to preserve Gcode and machine state it does not END the job.
+
+An ALARM may also be invoked from the command line using {alarm:n} or $alarm ALARM can be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr. ALARMs will also clear on receipt of an M30 or M2 command if one is received while draining the host command queue.
 
 ###SHUTDOWN
 
+ * SHUTDOWN stops all motion, spindle and coolant immediately, sets a SHUTDOWN machine
+ * state, clears out queued moves and serial input, and rejects new action commands
+ * (gcode blocks, SET commands, and some others).
+ *
+ * Shutdown is typically invoked as an electrical input signal sent to the board as
+ * part of an external emergency stop (Estop). Shutdown is meant to augment but not
+ * replace the external Estop functions that shut down power to motors, spindles and
+ * other moving parts.
+ *
+ * Shutdown may also be invoked from the command line using {shutd:n} or $shutd
+ * Shutdown must be manually cleared by entering: {clear:n}, {clr:n}, $clear, or $clr
+ * Shutdown does not clear on M30 or M2 Gcode commands
+
 ###PANIC
+
+ * PANIC occurs if the firmware has detected an unrecoverable internal error
+ * such as an assertion failure or a code condition that should never occur.
+ * It sets PANIC machine state, and leaves the system inspect able (if possible).
+ *
+ * PANIC can only be exited by a hardware reset or soft reset (^x)
 
 ### CLEAR
 When entering an ALARM state there may be Gcode and configuration commands buffered in multiple places including the planner buffer, on-board serial receive queues (RX), onboard USB queues, various sender and other queues on the host.
@@ -40,6 +66,9 @@ In an alarm it is desirable to cease all motion, so this requires rejecting all 
 In this state it is possible to query the board, (i.e. GET commands), but not possible to change the state of the machine (i.e. SET commands or Gcode)
 
 Once a CLEAR command is received – any of {clear:n}, {“clear”:n}, $clear – the machine will once again act on commands following the CLEAR.
+
+ * Parse clear interprets an M30 or M2 PROGRAM_END as a $clear condition and clear ALARMs and
+ * SHUTDOWNs but not PANICs. Assumes Gcode string has no leading or embedded whitespace
 
 ####Clear on Dual Endpoint USB 
 Using clear is more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all commands are cleared up to the clear command itself. Clear can be sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be honored, but will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
