@@ -16,7 +16,7 @@ Pin changes are *not* a substitute for a proper debugger.
   pin_number kSpindle_EnablePinNumber         = -1; // was 112
   ```
 
-  __Warning__ -- don't use the input pins for timing via pin changes. They have an R/C filter on them and will slew the output significantly. You should limit the debug pins to those that are normally outputs, and have a screw terminal or other pinout.
+  __Warning__ -- don't use the input pins on a TinyG board for timing via pin changes. They have an R/C filter on them and will slew the output significantly. You should limit the debug pins to those that are normally outputs, and have a screw terminal or other pinout.
 
 1. Assign one or more debug pins to pins you want to temporarily "take over".
 
