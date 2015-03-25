@@ -27,6 +27,9 @@ Pin changes are *not* a substitute for a proper debugger.
 1. Then at the top of the file you want to instrument, put (or, more likely, uncomment) the `OutputPin<>` definition. For example, at the top of plan_exec.cpp now is:
 
   ```c++
+  // This next "using" line just has to be in the file before you use OutputPin<>. It likely already is.
+  // You don't want it in the file twice, or the compiler will bark at you.
+  using namespace Motate;
   //OutputPin<kDebug1_PinNumber> exec_debug_pin1;
   //OutputPin<kDebug2_PinNumber> exec_debug_pin2;
   OutputPin<kDebug3_PinNumber> exec_debug_pin3;
