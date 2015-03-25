@@ -48,6 +48,12 @@ Pin changes are *not* a substitute for a proper debugger.
   exec_debug_pin3 = 0;
   ```
 
+  and to toggle the pin:
+
+  ```c++
+  exec_debug_pin3.toggle();
+  ```
+
 __PLEASE__ -- don't git commit the changes to the `motate_pin_assignments.h` file.
 
 __ALSO__ -- avoid putting more than just the pin changes in. `if...then` statements around the pins can easily have side effects, and it you're just timing or doing light debugging, you don't want that.
