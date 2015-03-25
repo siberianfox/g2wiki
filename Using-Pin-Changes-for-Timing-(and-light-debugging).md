@@ -2,7 +2,7 @@ Making pin changes in the code can allow you to do timing using a logic analyzer
 
 Pin changes are *not* a substitute for a proper debugger.
 
-# How to debug with pin changes in G2
+## How to debug with pin changes in G2
 
 1. Go to the motate_pin_assignments.h file, e.g. in the `v9_3x8c/motate_pin_assignments.h` file, and swap the pin you want to "steal from" with the debug pin you want
 
@@ -60,3 +60,8 @@ Pin changes are *not* a substitute for a proper debugger.
 __PLEASE__ -- don't git commit the changes to the `motate_pin_assignments.h` file.
 
 __ALSO__ -- avoid putting more than just the pin changes in. `if...then` statements around the pins can easily have side effects, and it you're just timing or doing light debugging, you don't want that.
+
+###Tips:
+
+- Make sure the that pin isn't already being used elsewhere as well.
+Just search for the name: kDebug1_PinNumber (for example)
