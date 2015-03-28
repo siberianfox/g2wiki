@@ -183,7 +183,7 @@ _Note: In TinyG the motor travel settings are independent of each other. You don
 * $1tr=60   (which is 3 * 20)
 * $1mi=8
 
-### $1MA - MAp motor to axis
+### 1ma - MAp motor to axis
 Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko setup. Movement in Y will drive both motor2 and motor4. 
 
 <pre>
