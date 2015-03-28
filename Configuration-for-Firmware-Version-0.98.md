@@ -34,11 +34,11 @@ The footer is an array of 3 elements:
 ##Motor Groups
 Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors.<br><br>
 
-All examples below are are relaxed JSON mode & use Motor 1, but any motor active for your platform is OK. 
+All examples below are are relaxed JSON mode & use Motor 1, but any motor active for your platform is OK. "__" means some value.
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	[$1ma](#1ma---map-motor-to-axis) | Motor mapping to axis | Configures the axis to which this motor is connected (for Cartesian machines) Typically: $1ma=0, $2ma=1, $3ma=2, $4ma=3 to map motors 1-4 to X,Y,Z,A, respectively
+	[{1ma:__}](#1ma---map-motor-to-axis) | Motor mapping to axis | Configures the axis to which this motor is connected (for Cartesian machines) Typically: $1ma=0, $2ma=1, $3ma=2, $4ma=3 to map motors 1-4 to X,Y,Z,A, respectively
 	[$1sa](#1sa---step-angle-for-the-motor) | Step angle | Motor parameter indicating the angle traveled per whole step. Typical setting is $1sa=1.8 for 1.8 degrees per step (200 steps per revolution)
 	[$1tr](#1tr---travel-per-revolution) | Travel per revolution | How far the mapped axis moves per motor revolution. E.g 2.54mm for a 10 TPI screw axis
 	[$1mi](#1mi---microsteps) | Microsteps | Microsteps per whole step. TinyG uses 1,2,4 and 8. Other values are accepted but warned
