@@ -53,7 +53,7 @@ Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5
 	[{1mi:_}](#1mi---microsteps) | Microsteps | Microsteps per whole step. G2 uses 1,2,4,8,16,32. Other values are accepted but warned
 	[{1po:_}](#1po---polarity) | Polarity | Set polarity for proper movement of the axis. 0=clockwise rotation, 1=counterclockwise - although these are dependent on your motor wiring, and axis movement is dependent on the mechanical system.
 	[{1pm:_}](Power-Management) | Power management mode | 0=motor disabled, 1=motor always on, 2=motor on when in cycle, 3=motor on only when moving
-	[{1pl:_}](#1pm---power-management-mode) | Power level | 0.000=no power to steppers, 1.000=max power to steppers
+	[{1pl:_}](#1pl---power-level) | Power level | 0.000=no power to steppers, 1.000=max power to steppers
 
 ## Axis Groups
 Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
