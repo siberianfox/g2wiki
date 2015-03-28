@@ -10,7 +10,7 @@ Connect to the G2 USB.
 To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
 Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
 ### JSON Cheat Sheet
-This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode akak [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
+This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode aka [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
 {"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
 {NAME:n} == $NAME              Read value in relaxed JSON mode
