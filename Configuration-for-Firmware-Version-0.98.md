@@ -252,14 +252,14 @@ Sets the function of the axis.
 - {xam:2}  Inhibited. Axis values are taken into account when planning moves, but the axis will not move. Use this to perform a Z kill or to do a compute-only run.
 - {xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
 
-### xvm- Velocity Maximum
+### xvm - Velocity Maximum
 (aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 move (traverse). This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
 
 Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will actually occur at the fastest speed the combined set of axes and the geometry will allow, and may be faster than the individual axis max velocities. For example, max velocity for X and Y are set to 1000 mm/min. For a 45 degree traverse in X and Y the toolhead would travel at 1414.21 mm/min. 
 
 <pre>
-{xvm:1200}   sets X maximum velocity (G0) to 1200 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
-{zvm:30.0}   sets Z to 30 inches per minute - assuming G20 is active (i.e. inches mode)
+{xvm:1200}   sets X maximum velocity (G0) to 1200 mm/min
+{zvm:30.0}   sets Z to 30 inches per minute - in G20 / inches mode
 {avm:36000}  sets A to 100 revolutions per minute (360 * 100)
 </pre>
  
