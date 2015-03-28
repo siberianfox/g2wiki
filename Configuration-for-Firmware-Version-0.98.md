@@ -211,40 +211,36 @@ Note that Travel per Revolution is a motor parameter, not an axis parameter as o
 ### 1mi - Microsteps
 G2 microsteps are set in firmware, not as hardware jumpers as on some other systems. The following microstep values are supported: 
 
-- 1 = no microsteps (whole steps)
-- 2 = half stepping
-- 4 = quarter stepping
-- 8 = eighth stepping
-- 16 = sixteenth stepping
-- 32 = thirty second stepping
-
 <pre>
-{3mi:8}	 Set 1/8 microsteps for motor 3 
+{1mi:1}   no microsteps (whole steps)
+{1mi:2}   half stepping
+{1mi:4}   quarter stepping
+{1mi:8}   eighth stepping
+{1mi:16}  sixteenth stepping
+{1mi:32}  thirty second stepping
 </pre>
 
-TinyG can also drive external stepper drivers using the breakout headers. Some drivers use other values than the above, so any value is accepted. Values other than those above are warned as non-standard.
+G2 can also drive external stepper drivers using the breakout headers. Some drivers use other values than the above, so any value is accepted. Values other than those above are warned as non-standard.
 
-_Note about Microsteps: It is a misconception that higher microstep values are better - beyond a certain point they are a detriment to performance. In a typical setup the total power delivered to the motor (and hence torque) will go down as you increase the microsteps, especially at higher speeds. Also, using microsteps to set the finest machine resolution is source of error as the shaft angle isn't necessarily going to be at the theoretical point. Don't just assume that 1/8 microstepping is the right setting for your application. Try out different settings to balance smoothness and power._
+_Note about Microsteps: It is a misconception that higher microstep values are better - beyond a certain point they degrade motor performance. In a typical setup the total power delivered to the motor (and hence torque) will go down as you increase the microsteps, especially at higher speeds. Also, using microsteps to set the finest machine resolution is source of error as the shaft angle isn't necessarily going to be at the theoretical point. Don't just assume that 1/32 microstepping is the right setting for your application. Try out different settings to balance smoothness and power._
 
-### 1po - POlarity
+### 1po - Polarity
 Set to one of the following: 
 
-* 0 = Normal motor polarity
-* 1 = Invert motor polarity
+<pre>
+{1po:0}   Normal motor polarity
+{1po:1}   Invert motor polarity
+</pre>
 
 Polarity sets which direction the motor will turn when presented with positive and negative Gcode coordinates. It's affected by how you wired the motors and by mechanical factors. Set polarity so the indicated axis travels in the correct orientation for your machine. 
 
-Travel in X and Y is dependent on the conventions for your particular machine and CAD setup. Typically X is left/right movement, and Y is towards and away from you, but people often set up the machine to agree with the visualization their CAD program provides, and can depend on where you stand when operating the machine. Typically X+ moves to the right, X- to the left, Y+ away from you, and Y- towards you. Z is by convention the cutting axis, which is the vertical axis on a typical milling machine. Z+ should move up, and Z- should move down, into the work.
+Travel in X and Y is dependent on the conventions for your particular machine and CAD setup. Typically X is left/right movement, and Y is towards and away from you, but people often set up the machine to agree with the visualization their CAD program provides, and can depend on where you stand when operating the machine. Typically +X moves to the right, -X to the left, +Y away from you, and -Y towards you. Z is by convention the cutting axis, which is the vertical axis on a typical milling machine. +Z should move up, and -Z should move down, into the work.
 
-<pre>
-$3po=0        Set polarity to normal
-</pre>
-
-### 1pm - Power Management mode
+### 1pm - Power management mode
 Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power Management](Power-Management) page.
 
 ### 1pl - Power Level
-Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power 
+Power level is used to set the stepper driver current. 0 is off, 1.000 is maximum, which is about 2.5 amps for the DRV8825 drivers used on most G2 boards. Set the current carefully, as overdriving the motor typically yields motor performance that's actually worse than a more moderate power setting. The motor "runs rough", heats up excessively and may even burn out. If there is too much current the drivers may also go into thermal shutdown to protect themselves.
 
 ## Axis Settings
 
