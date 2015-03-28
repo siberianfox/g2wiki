@@ -1,12 +1,14 @@
 This page is a log of items updated in the edge branch and in the feature development branches cleaved off the main edge branch. Edge is moving pretty fast, and a number of people are working on projects, so we'll do our best to keep up with the changes here.
 
 ###Edge branch, build 079.60
-THese changes are still under test. If you find bugs or other issues please log to Issues.
+These changes are still under test. If you find bugs or other issues please log to Issues.
 - Major changes to the way switches and other inputs are handled. See [Digital IO (GPIO)](Digital-IO-(GPIO)). The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and hold behaviors. See settings/settings_shapeoko2.h for an example of setup and use. See also [Alarm Processing](Alarm-Processing).
+
 - [Alarm processing](Alarm-Processing) has been significantly updated. There are now 3 alarm states:
   - alarms - used to support soft and hard limits, safety interlock behaviors (door open), and other conditions.
   - shutdown - used to support external ESTOP functions (the controller doe NOT do ESTOP - read [here](Alarm-Processing#shutdown) as to why.
   - panic - shuts down the machine immediately if there is an assertion failure or some other unrecoverable error
+
 - [Job Exception Handling](Job-Exception-Handling) has been refined. A new Job Kill has been introduced which is different than a queue flush (%), as these are actually 2 very different use cases.
 
 ###Edge branch, build 071.02
