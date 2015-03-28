@@ -93,25 +93,25 @@ There is currently only one PWM channel (p1), but the configs are structured for
 	[{p1pof:_}] | Phase off | 0.000 to 1.000 used to set OFF phase for PWM devices that are not off at 0 phase
 
 ## System Group
-The system group contains the following global machine and communication settings. The system group can be listed by requesting `$sys`  or {"sys":""} in JSON mode
+The system group contains the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
 
 **Identification Settings**
 These are reported on the startup strings and should be included in any support discussions.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 435.05 
-	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.97
+	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 82.06
+	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.98
 	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
-	[{hv:_}](#hv---hardware-version) | Hardware Version | Read-write value, set this to to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards, respectively. Defaults to 8
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
+	[{hv:_}](#hv---hardware-version) | Hardware Version | **V8 only** Set to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards. Defaults to 8. 
 
 **Global System Settings**
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{ja:_}](#ja---junction-acceleration) | Junction_Acceleration | Global cornering acceleration value
-	[{ct:_}](#ct---chordal-tolerance) | Chordal tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+	[{ja:_}](#ja---junction-acceleration) | Junction Acceleration | Global cornering acceleration value
+	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
 	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
 
@@ -121,14 +121,14 @@ Set communications speeds and modes.
 	Setting | Description | Notes
 	--------|-------------|-------
 	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
-	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose (see details)
+	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
 	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
 	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
-	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (50 ms minimum interval)
+	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
 
-V8-Only Communications Settings (not needed on g2)
+V8-Only Communications Settings (not available on g2)
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -139,31 +139,31 @@ V8-Only Communications Settings (not needed on g2)
 
 
 **Gcode Initialization Defaults**
-Gcode settings loaded on power up, abort/reset and Program End (M2 or M30). Changing these does NOT change the current Gcode mode, only the initialization settings. 
+Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[$gpl](#gpl---gcode-default-plane-selection) | Default plane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G19)
-	[$gun](#gun---gcode-default-units) | Default units mode | 0=inches mode (G20), 1=mm mode (G21) 
-	[$gco](#gco---gcode-default-coordinate-system) | Default coordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
-	[$gpa](#gpa---gcode-default-path-control) | Default path control mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
-	[$gdi](#gdi---gcode-distance-mode) | Default distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
+	[{gpl:_}](#gpl---gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
+	[{gun:_}](#gun---gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
+	[{gco:_}](#gco---gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
+	[{gpa:_}](#gpa---gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
+	[{gdi:_}](#gdi---gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
 
 ##Commands and Reports
 These $configs invoke reports and functions
 
 	Command | Description | Notes
 	--------|-------------|-------
-	[$sr](#sr---status-report) | Request status report | SR also sets status report format in JSON mode
-	[$qr]#qr---queue-report) | Request queue report | 
-	[$qf](#qf---queue-flush) | Flush planner queue | Used with '!' feedhold for jogging, probes and other sequences. Usage: {"qf":1}
-	[$md](Power-Management) | Disable motors | Unpower all motors
-	[$me](Power-Management) | Energize motors | Energize all motors with timeout in seconds 
-	[$test](#test---run-self-test) | Invoke self tests | $test=n for test number; $test returns help screen in text mode
-	[$defa](#defa---reset-default-profile-settings) | Reset to factory defaults | $defa=1 to reset
-	$boot | Enter boot loader | $boot=1 enters boot loader
+	[{sr:n}](#sr---status-report) | get Status Report | SR also sets status report format in JSON mode
+	[{qr:n}]#qr---queue-report) | get Queue Report | 
+	[{qf:_}](#qf---queue-flush) | flush_planner_queue | Used with '!' feedhold for jogging, probes and other sequences. Usage: {qf:1}
+	[{md:n}](Power-Management) | Disable motors | Unpower all motors
+	[{me:_}](Power-Management) | Energize motors | Energize all motors with timeout in seconds 
+	[{test:_}](#test---run-self-test) | Invoke self tests | $test=n for test number; $test returns help screen in text mode
+	[{defa:1}](#defa---reset-default-profile-settings) | Reset to factory defaults | $defa=1 to reset
+	[{flash:1}] | Enter_FLASH_loader | WILL ERASE AND REFLASH BOARD. BE CAREFUL WITH THIS
         ^x | Reset tinyG | cntl+x restarts tinyG same as hardware rest button
-	$help | Show help screen | Show system help screen; $h also works
+	[{help:_}] | Show help screen | Show system help screen; $h also works
 
 Note: Status report parameters is settable in JSON only - see JSON mode for details
 
