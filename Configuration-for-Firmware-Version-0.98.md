@@ -5,7 +5,6 @@
 **The settings on this page are for firmware version 0.98**
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.98 encompasses g2 builds 082.06 and later.
 
-<br>
 # Summary / Cheat Sheet
 Connect to the G2 USB.
 To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
