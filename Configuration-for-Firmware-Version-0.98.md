@@ -14,7 +14,7 @@ This page describes how configuration works in [JSON mode](JSON-Operation). Most
 <pre>
 {"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
 {NAME:n} == $NAME              Read value in relaxed JSON mode
-{"NAME":123.4} == $NAME=123.4  Set value in strict JSON mode
+{"NAME":123.4} == $NAME=123.4  Set value to 123.4 in strict JSON mode
 {NAME:123.4} == $NAME=123.4    Set value in relaxed JSON mode
 {xvm:50000}                    Set X max velocity to 50000 as an example
 </pre>
