@@ -81,16 +81,16 @@ There is currently only one PWM channel (p1), but the configs are structured for
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	$p1frq | Frequency | in Hz, e.g. 100
-	$p1csl | Clockwise speed low | In RPM - arbitrary units unless you calibrate it, e.g. 1000
-	$p1csh | Clockwise speed high | In RPM
-	$p1cpl | Clockwise phase low | 0.000 to 1.000, e.g. 0.125 for 12.5% phase angle
-	$p1cph | Clockwise phase high | 0.000 to 1.000
-	$p1wsl | Counter clockwise speed low | In RPM 
-	$p1wsh | Counter clockwise speed high | In RPM
-	$p1wpl | Counter clockwise phase low | 0.000 to 1.000
-	$p1wph | Counter clockwise phase high | 0.000 to 1.000
-	$p1pof | Phase off | 0.000 to 1.000 used to set OFF phase for PWM devices that are not off at 0 phase
+	[{p1frq:_}] | Frequency | in Hz, e.g. 100
+	[{p1csl:_}] | Clockwise speed low | In RPM - arbitrary units unless you calibrate it, e.g. 1000
+	[{p1csh:_}] | Clockwise speed high | In RPM
+	[{p1cpl:_}] | Clockwise phase low | 0.000 to 1.000, e.g. 0.125 for 12.5% phase angle
+	[{p1cph:_}] | Clockwise phase high | 0.000 to 1.000
+	[{p1wsl:_}] | Counter clockwise speed low | In RPM 
+	[{p1wsh:_}] | Counter clockwise speed high | In RPM
+	[{p1wpl:_}] | Counter clockwise phase low | 0.000 to 1.000
+	[{p1wph:_}] | Counter clockwise phase high | 0.000 to 1.000
+	[{p1pof:_}] | Phase off | 0.000 to 1.000 used to set OFF phase for PWM devices that are not off at 0 phase
 
 ## System Group
 The system group contains the following global machine and communication settings. The system group can be listed by requesting `$sys`  or {"sys":""} in JSON mode
@@ -100,20 +100,19 @@ These are reported on the startup strings and should be included in any support 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[$fb](#fb---firmware-build-number) | Firmware build | Read-only value, e.g. 435.05 
-	[$fv](#fv---firmware-version) | Firmware version | Read-only value, e.g. 0.97
-	[$hp](#hp---hardware-platform) | Hardware platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
-	[$hv](#hv---hardware-version) | Hardware version | Read-write value, set this to to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards, respectively. Defaults to 8
-	[$id](#id---unique-board-identifier) | Unique ID | Each board has a read-only unique ID
+	[{fb:n}](#fb---firmware-build-number) | Firmware build | Read-only value, e.g. 435.05 
+	[{fv:n}](#fv---firmware-version) | Firmware version | Read-only value, e.g. 0.97
+	[{hp:n}](#hp---hardware-platform) | Hardware platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
+	[{hv:_}](#hv---hardware-version) | Hardware version | Read-write value, set this to to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards, respectively. Defaults to 8
+	[{id:n}](#id---unique-board-identifier) | Unique ID | Each board has a read-only unique ID
 
 **Global System Settings**
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[$ja](#ja---junction-acceleration) | Junction acceleration | Global cornering acceleration value
-	[$ct](#ct---chordal-tolerance) | Chordal tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
-	[$st](#st---switch-type) | Switch type | 0=NO, 1=NC
-	[$mt](#mt---motor-power-timeout) | Motor disable timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
+	[{ja:_}](#ja---junction-acceleration) | Junction acceleration | Global cornering acceleration value
+	[{ct:_}](#ct---chordal-tolerance) | Chordal tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+	[{mt:_}](#mt---motor-power-timeout) | Motor disable timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
 
 **Communications Settings**
@@ -121,18 +120,18 @@ Set communications speeds and modes.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[$ej](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
-	[$jv](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose (see details)
-	[$js](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
-	[$tv](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
-	[$qv](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
-	[$sv](#sv---status-report-verbosity) | Status report verbosity | 0=off, 1=filtered, 2=verbose
-	[$si](#si---status-interval) | Status report interval | in milliseconds (50 ms minimum interval)
-	[$ic](#ic---ignore-cr-or-lf-on-rx) | Ignore CR / LF on RX | REMOVED IN 0.97. Not needed.
-	[$ec](#ec---expand-lf-to-crlf-on-tx-data) | Enable CR on TX | 0=send LF line termination on TX, 1= send both LF and CR termination
-	[$ee](#ee---enable-character-echo) | Enable character echo | 0=off, 1=enabled
-	[$ex](#ex---enable-flow-control) | Enable flow control | 0=off, 1=XON/XOFF enabled, 2=RTS/CTS enabled
-	[$baud](#baud---set-usb-baud-rate) | Baud rate | 1=9600, 2=19200, 3=38400, 4=57600, 5=115200, 6=230400 -- 115200 is default
+	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
+	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose (see details)
+	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
+	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
+	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
+	[{sv:_}](#sv---status-report-verbosity) | Status report verbosity | 0=off, 1=filtered, 2=verbose
+	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (50 ms minimum interval)
+	[{ic:_}](#ic---ignore-cr-or-lf-on-rx) | Ignore CR / LF on RX | REMOVED IN 0.97. Not needed.
+	[{ec:_}](#ec---expand-lf-to-crlf-on-tx-data) | Enable CR on TX | 0=send LF line termination on TX, 1= send both LF and CR termination
+	[{ee:_}](#ee---enable-character-echo) | Enable character echo | 0=off, 1=enabled
+	[{ex:_}](#ex---enable-flow-control) | Enable flow control | 0=off, 1=XON/XOFF enabled, 2=RTS/CTS enabled
+	[{baud:_}](#baud---set-usb-baud-rate) | Baud rate | 1=9600, 2=19200, 3=38400, 4=57600, 5=115200, 6=230400 -- 115200 is default
 
 **Gcode Initialization Defaults**
 Gcode settings loaded on power up, abort/reset and Program End (M2 or M30). Changing these does NOT change the current Gcode mode, only the initialization settings. 
