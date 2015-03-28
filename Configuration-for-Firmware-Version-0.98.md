@@ -10,7 +10,7 @@ The version number can be found as the fv variable in the startup JSON message, 
 - Underscore "_" means some numeric value
 - "ABC" means some string value
 - Motor examples use Motor 1, but any motor active for your platform is OK
-- Axis examples use X axis 1, but any axis is OK unless noted
+- Axis examples use X axis, but any axis is OK unless otherwise noted
 
 # Summary / Cheat Sheet
 Connect to the G2 USB.
