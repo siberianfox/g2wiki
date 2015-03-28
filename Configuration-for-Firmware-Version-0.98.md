@@ -6,9 +6,13 @@
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.98 encompasses g2 builds 082.06 and later.
 
 <br>
-This page describes how configuration works in text mode from the [Command Line](TinyG-Command-Line). All configs on this page are also accessible in [JSON mode](JSON-Operation). Well almost. Those few commands that apply to only one mode or the other are noted.
-
-**Note: If you are scripting or otherwise automating settings see [Scripting Settings]()**
+This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode akak [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
+<pre>
+{"<name>":n} == $<name>            Read a value for command "<name>" in strict JSON mode
+{<name>:n} == $<name>              Read a value in relaxed JSON mode
+{"<name>":123.4} == $<name>=123.4  Set a value for command "<name>" in strict JSON mode
+{<name>:123.4} == $<name>=123.4    Set a value in relaxed JSON mode
+</pre>
 
 # Summary / Cheat Sheet
 Connect to the G2 USB.
