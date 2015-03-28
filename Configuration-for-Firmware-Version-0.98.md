@@ -11,8 +11,8 @@ This page describes how configuration works in text mode from the [Command Line]
 **Note: If you are scripting or otherwise automating settings see [Scripting Settings]()**
 
 # Summary / Cheat Sheet
-Connect to the TinyG USB at 115,200 baud.
-To see a value enter `$cmd`. To set a value enter `$cmd=value`. 
+Connect to the G2 USB.
+To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
 Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
 ### JSON Cheat Sheet
 All of the commands in this cheat sheet are also available using JSON, which is the preferred access method if you are writing a UI or controller. The equivalent JSON commands follow these examples:
