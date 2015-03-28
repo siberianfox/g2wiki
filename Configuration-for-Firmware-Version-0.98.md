@@ -50,31 +50,31 @@ Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5
 	[{1ma:_}](#1ma---map-motor-to-axis) | Motor mapping to axis | Configure axis to which this motor is connected (for Cartesian machines) E.g. {1ma:0}, {2ma:1}, {3ma:2}, {4ma:3} to map motors 1-4 to X,Y,Z,A, respectively
 	[{1sa:_}](#1sa---step-angle-for-the-motor) | Step angle | Motor parameter indicating the angle traveled per whole step. Typical setting is {1sa:1.8} for 1.8 degrees per step (200 steps per revolution)
 	[{1tr:_}](#1tr---travel-per-revolution) | Travel per revolution | How far the mapped axis moves per motor revolution. E.g. {1tr:2.54} (millimeters) for a 10 TPI screw axis
-	[$1mi](#1mi---microsteps) | Microsteps | Microsteps per whole step. TinyG uses 1,2,4 and 8. Other values are accepted but warned
-	[$1po](#1po---polarity) | Polarity | Set polarity for proper movement of the axis. 0=clockwise rotation, 1=counterclockwise - although these are dependent on your motor wiring, and axis movement is dependent on the mechanical system.
-	[$1pm](Power-Management) | Power management mode | 0=motor disabled, 1=motor always on, 2=motor on when in cycle, 3=motor on only when moving
-	[$1pl](#1pm---power-management-mode) | Power level (ARM only) | 0.000=no power to steppers, 1.00=max power to steppers
+	[{1mi:_}](#1mi---microsteps) | Microsteps | Microsteps per whole step. G2 uses 1,2,4,8,16,32. Other values are accepted but warned
+	[{1po:_}](#1po---polarity) | Polarity | Set polarity for proper movement of the axis. 0=clockwise rotation, 1=counterclockwise - although these are dependent on your motor wiring, and axis movement is dependent on the mechanical system.
+	[{1pm:_}](Power-Management) | Power management mode | 0=motor disabled, 1=motor always on, 2=motor on when in cycle, 3=motor on only when moving
+	[{1pl:_}](#1pm---power-management-mode) | Power level | 0.000=no power to steppers, 1.000=max power to steppers
 
 ## Axis Groups
 Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[$xam](#xam---axis-mode) | Axis mode | Normally this is =1 "normal". See details for setting. 
-	[$xvm](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
-	[$xfr](#xfr---feed-rate-maximum) | Feed rate maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
-	[$xtn](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
-	[$xtm](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
-	[$xjm](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management (Note: takes the place of a max acceleration value)
-	[$xjh](#xjh---jerk-homing) | Jerk Homing | Jerk used during homing operations. (found on axes XYZA only)
-	[$xjd](#xjd---junction-deviation) | Junction deviation | Sets the theoretical radius For cornering control. Larger values yield faster cornering, but more corner jerk.
-	[$ara](#ara---radius-value) | Radius setting | An artificial radius to convert incoming linear values to degrees. Found on rotational axes (ABC) only.
-	[$xsn](#homing-settings) | Minimum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
-	[$xsx](#homing-settings) | Maximum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
-	[$xsv](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch) (XYZA only)
-	[$xlv](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch) (XYZA only)
-	[$xlb](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch) (XYZA only)
-	[$xzb](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates (XYZA only)
+	[{xam:_}](#xam---axis-mode) | Axis mode | Normally this is =1 "normal". See details for setting. 
+	[{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
+	[{xfr:_}](#xfr---feed-rate-maximum) | Feed rate maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
+	[{xtn:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
+	[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
+	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management (Note: takes the place of a max acceleration value)
+	[{xjh:_}](#xjh---jerk-homing) | Jerk Homing | Jerk used during homing operations. (found on axes XYZA only)
+	[{xjd:_}](#xjd---junction-deviation) | Junction deviation | Sets the theoretical radius For cornering control. Larger values yield faster cornering, but more corner jerk.
+	[{ara:_}](#ara---radius-value) | Radius setting | An artificial radius to convert incoming linear values to degrees. Found on rotational axes (ABC) only.
+	[{xsn:_}](#homing-settings) | Minimum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
+	[{xsx:_}](#homing-settings) | Maximum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
+	[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch) (XYZA only)
+	[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch) (XYZA only)
+	[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch) (XYZA only)
+	[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates (XYZA only)
 
 ##PWM Group (Pulse Width Modulation)
 There is currently only one PWM channel (p1), but the configs are structured for multiple PWM groups. The PWM channel is set up to act as a remote control Electronic Speed Controller (ESC), but can be used for other PWM functions using these settings. 
