@@ -193,14 +193,14 @@ Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you migh
  $4ma=1	    Maps motor 4 to the Y axis
 </pre> 
 
-### $1SA - Step Angle for the motor
+### 1sa - Step Angle for the motor
 This is a decimal number which is often 1.8 degrees per step, but should reflect the motor in use. You might also find 0.9, 3.6, 7.5 or other values. You can usually read this off the motor label. If a motor is indicated in steps per revolution just divide 360 by that number. A 200 step-per-rev motor is 1.8 degrees, a 400 step-per-rev motor has 0.9 degrees per step.
 
 <pre>
  $1sa=1.8	This is a typical value for many motors 
 </pre> 
 
-### $1TR - Travel per Revolution
+### 1tr - Travel per Revolution
 TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then $1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees. See examples below.
 
 For XYZ the travel-per-revolution value is usually the result of the lead screw pitch or pulley circumference.
@@ -217,7 +217,7 @@ Note that Travel per Revolution is a motor parameter, not an axis parameter as o
 $1tr=2.54          Sets motor 1 to a 10 TPI travel from millimeters (2.54 mm per revolution)
 </pre>
 
-### $1MI - MIcrosteps
+### 1mi - MIcrosteps
 TinyG microsteps are set in firmware, not as hardware jumpers as on some other systems. The following microstep values are supported: 
 
 * 1 = no microsteps (whole steps)
@@ -233,7 +233,7 @@ TinyG can also drive external stepper drivers using the breakout headers. Some d
 
 _Note about Microsteps: It is a misconception that higher microstep values are better - beyond a certain point they are a detriment to performance. In a typical setup the total power delivered to the motor (and hence torque) will go down as you increase the microsteps, especially at higher speeds. Also, using microsteps to set the finest machine resolution is source of error as the shaft angle isn't necessarily going to be at the theoretical point. Don't just assume that 1/8 microstepping is the right setting for your application. Try out different settings to balance smoothness and power._
 
-### $1PO - POlarity
+### 1po - POlarity
 Set to one of the following: 
 
 * 0 = Normal motor polarity
@@ -247,8 +247,11 @@ Travel in X and Y is dependent on the conventions for your particular machine an
 $3po=0        Set polarity to normal
 </pre>
 
-### $1PM - Power Management mode
+### 1pm - Power Management mode
 Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power Management](Power-Management) page.
+
+### 1pl - Power Level
+Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power 
 
 ## Axis Settings
 
