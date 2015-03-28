@@ -174,29 +174,29 @@ _Note: In TinyG the motor travel settings are independent of each other. You don
 * $1tr=60   (which is 3 * 20)
 * $1mi=8
 
-### 1ma - MAp motor to axis
-Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko setup. Movement in Y will drive both motor2 and motor4. 
+### 1ma - Map motor to axis
+Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor4. 
 
 <pre>
- $1ma=0	    Maps motor 1 to the X axis
- $2ma=1	    Maps motor 2 to the Y axis
- $3ma=2	    Maps motor 3 to the Z axis
- $4ma=1	    Maps motor 4 to the Y axis
+{1ma:0}    Map motor 1 to X axis
+{2ma:1}    Map motor 2 to Y1 axis
+{3ma:1}    Map motor 3 to Y2 axis
+{4ma:2}    Map motor 4 to Z axis
 </pre> 
 
-### 1sa - Step Angle for the motor
+### 1sa - Step angle for the motor
 This is a decimal number which is often 1.8 degrees per step, but should reflect the motor in use. You might also find 0.9, 3.6, 7.5 or other values. You can usually read this off the motor label. If a motor is indicated in steps per revolution just divide 360 by that number. A 200 step-per-rev motor is 1.8 degrees, a 400 step-per-rev motor has 0.9 degrees per step.
 
 <pre>
- $1sa=1.8	This is a typical value for many motors 
+{1sa:1.8}  This is a typical value for many motors 
 </pre> 
 
-### 1tr - Travel per Revolution
-TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then $1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees. See examples below.
+### 1tr - Travel per revolution
+TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then 1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees. See examples below.
 
 For XYZ the travel-per-revolution value is usually the result of the lead screw pitch or pulley circumference.
 * A 10 thread-per-inch (TPI) leadscrew moves 0.100" per revolution. TR in inches would be 0.100, or 2.54 in mm mode. 
-* A 0.500" radius pulley will travel 3.14159" per revolution, absent any other gearing. A typical value for a Shapeoko or Reprap belt driven machine is on the order of 36.540 mm per revolution. Don't take this as exact - you will need to do your own calibration on your machine to get this setting exact.
+* A 0.500" radius pulley will travel 3.14159" per revolution, absent any other gearing. A typical value for a Shapeoko2 or Reprap belt driven machine is on the order of 36.540 mm per revolution. Don't take this as exact - you will need to do your own calibration on your machine to get this setting exact.
 
 For ABC the travel-per-revolution value is entered in degrees. This value will be 360 degrees for an axis that is not geared down - one revolution = 360 degrees. The value for a geared rotary axis is 360 divided by the gear ratio. For example, a motor-driven rotary table with 4 degrees of table movement per handle rotation has a gear ratio of 90:1. The Travel per Revolution value should be set to 4. 
 
@@ -205,19 +205,21 @@ Note that the travel-per-revolution is independent of the radius setting in the 
 Note that Travel per Revolution is a motor parameter, not an axis parameter as one might think. Consider the case of a dual Y gantry with lead screws of different pitch (how weird). The travel per revolution would be different for each motor. 
 
 <pre>
-$1tr=2.54          Sets motor 1 to a 10 TPI travel from millimeters (2.54 mm per revolution)
+{1tr:2.54}   Sets motor 1 to a 10 TPI travel from millimeters (2.54 mm per revolution)
 </pre>
 
-### 1mi - MIcrosteps
-TinyG microsteps are set in firmware, not as hardware jumpers as on some other systems. The following microstep values are supported: 
+### 1mi - Microsteps
+G2 microsteps are set in firmware, not as hardware jumpers as on some other systems. The following microstep values are supported: 
 
-* 1 = no microsteps (whole steps)
-* 2 = half stepping
-* 4 = quarter stepping
-* 8 = eighth stepping
+- 1 = no microsteps (whole steps)
+- 2 = half stepping
+- 4 = quarter stepping
+- 8 = eighth stepping
+- 16 = sixteenth stepping
+- 32 = thirty second stepping
 
 <pre>
-$3mi=8	        Set 1/8 microsteps for motor 3 
+{3mi:8}	 Set 1/8 microsteps for motor 3 
 </pre>
 
 TinyG can also drive external stepper drivers using the breakout headers. Some drivers use other values than the above, so any value is accepted. Values other than those above are warned as non-standard.
