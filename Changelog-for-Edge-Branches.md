@@ -16,6 +16,10 @@ These changes are still under test. If you find bugs or other issues please log 
 
 - [Job Exception Handling](Job-Exception-Handling) has been refined. A new Job Kill has been introduced which is different than a queue flush (%), as these are actually 2 very different use cases.
 
+- **Homing** changes. Homing input switches are now configured differently. The switch configurations have been removed from the axes and move the the digital IO inputs. Two new parameters have been added to the axis configs. All other parameters remain the same.
+  - {xhd:1} - homing direction - 0=search-to-negative, 1=search-to-positive
+  - {xhi:N} - homing input - input 1-N or 0 to disable homing this axis for homing. Note that setting this to a non-zero valaue (1) enables homing for this axis, and (2) overrides whatever settings for that input for the duration of homing. So it's possible to set di1 (Xmin) as a limit switch and a homing switch. Whenn not in homing it will be used as a limit switch.
+
 ###Edge branch, build 071.02
 
 * **No Persistence**. Most ARM chips (including the ATSAM3X8C on v9 and ATSAM3X8E on the Arduino Due) do not have persistence. This is the main reason the v9 has a microSD slot. But this has not been programmed yet. So your options are to either load the board each time you fire it up or reset it, or to build yourself a profile and compile your own settings as the defaults.
