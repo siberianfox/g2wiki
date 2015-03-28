@@ -13,9 +13,6 @@ The version number can be found as the fv variable in the startup JSON message, 
 - Axis examples use X axis, but any axis is OK unless otherwise noted
 
 # Summary / Cheat Sheet
-Connect to the G2 USB.
-To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
-Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
 ### JSON Cheat Sheet
 All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode-Operation). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
