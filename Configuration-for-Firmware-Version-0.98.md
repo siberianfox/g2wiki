@@ -192,7 +192,11 @@ This is a decimal number which is often 1.8 degrees per step, but should reflect
 </pre> 
 
 ### 1tr - Travel per revolution
-TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then 1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees. See examples below.
+TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then 1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees.
+
+<pre>
+{1tr:2.54}   Sets motor 1 to a 10 TPI travel from millimeters (2.54 mm per revolution)
+</pre>
 
 For XYZ the travel-per-revolution value is usually the result of the lead screw pitch or pulley circumference.
 * A 10 thread-per-inch (TPI) leadscrew moves 0.100" per revolution. TR in inches would be 0.100, or 2.54 in mm mode. 
@@ -203,10 +207,6 @@ For ABC the travel-per-revolution value is entered in degrees. This value will b
 Note that the travel-per-revolution is independent of the radius setting in the rotary axis settings. Set TR first to reflect the gearing, then set any Radius values if that is needed.  
 
 Note that Travel per Revolution is a motor parameter, not an axis parameter as one might think. Consider the case of a dual Y gantry with lead screws of different pitch (how weird). The travel per revolution would be different for each motor. 
-
-<pre>
-{1tr:2.54}   Sets motor 1 to a 10 TPI travel from millimeters (2.54 mm per revolution)
-</pre>
 
 ### 1mi - Microsteps
 G2 microsteps are set in firmware, not as hardware jumpers as on some other systems. The following microstep values are supported: 
@@ -247,13 +247,11 @@ Power level is used to set the stepper driver current. 0 is off, 1.000 is maximu
 ### xam - Axis Mode
 Sets the function of the axis.
 
-* 0 = Disable. All input to that axis will be ignored and the axis will not move. 
-* 1 = Standard. Linear axes move in length units. Rotary axes move in degrees. 
-* 2 = Inhibited. Axis values are taken into account when planning moves, but the axis will not move. Use this to perform a Z kill or to do a compute-only run.
-* 3 = Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
-
 <pre>
-$zam=2 	     Inhibit the Z axis; $zam1 will restore standard operation
+{xam:0}  Disable. All input to that axis will be ignored and the axis will not move. 
+{xam:1}  Standard. Linear axes move in length units. Rotary axes move in degrees. 
+{xam:2}  Inhibited. Axis values are taken into account when planning moves, but the axis will not move. Use this to perform a Z kill or to do a compute-only run.
+{xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
 </pre>
 
 ### xvm- Velocity Maximum
