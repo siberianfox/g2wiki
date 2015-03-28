@@ -1,5 +1,4 @@
-_DEV PAGE: This page is a discussion about implementation._
-_This is not intended to be end-user data, and G2 may or may not implement what's discussed there._
+_PRELIMINARY PAGE: Functions on this page are still in test as of build 079.60 and later._
 
 ## Summary
 	Character | Operation | Description
