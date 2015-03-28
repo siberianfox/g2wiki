@@ -5,7 +5,8 @@ These changes are still under test. If you find bugs or other issues please log 
 - [Digital IO (GPIO)](Digital-IO-(GPIO)) introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
   - **Your configurations will need to change to accommodate these changes.** See settings/settings_shapeoko2.h for an example of setup and use - pay particular attention to `axis settings` and the new `inputs` section. 
   - Typing `$`, `$x`, `$di`, `$in` at the command line is also informative. Of course, all these commands are available as JSON, but in text mode you get the human readable annotations. 
-  - These changes also rev the firmware version to 0.98 from 0.97, as a new configuration wiki page will need to be generated (not started yet). 
+  - These changes also rev the firmware version to 0.98 from 0.97, as a new configuration wiki page will need to be generated (not started yet).
+  - {lim:0}, {lim:1} was added to allow a limit override to backing off switches when a limit is tripped
   - See also [Alarm Processing](Alarm-Processing), which is intimately related to these changes.
 
 - [Alarm processing](Alarm-Processing) has been significantly updated. There are now 3 alarm states:
@@ -23,7 +24,10 @@ These changes are still under test. If you find bugs or other issues please log 
     - {xhi:N} - homing input - 0=disable axis for homing, 1-N=enable homing for this input (switch) 
   - Note that setting the homing input to a non-zero value (1) enables homing for this axis, and (2) overrides whatever settings for that input for the duration of homing. So it's possible to set di1 (Xmin) as a limit switch and a homing switch. When not in homing it will be used as a limit switch.
 
-- **Safety Interlock** added. An input configured for interlock will invoke a feedhold when the interlock becomes diseangaged and restart movement when re-engaged. There are optional settings for spindle and coolant actions on feedhold. See below
+- **Safety Interlock** added. 
+  - An input configured for interlock will invoke a feedhold when the interlock becomes diseangaged and restart movement when re-engaged. 
+  - {saf:0}, {saf:1} was added to enable or disable the interlock system.
+  - There are optional settings for spindle and coolant actions on feedhold. See below
 
 - **Spindle Changes** Expect updates to spindle behaviors in future branches. Here's where it is now:
   - The spindle can be paused on feedhold with the Spindle-pause-on-hold global setting {spph:1}. For now we recommend not using this {spph:0} as there is not yet a delay in spindle restart. 
