@@ -12,6 +12,7 @@ These changes are still under test. If you find bugs or other issues please log 
   - [ALARM](Alarm-Processing#alarm) - used to support soft and hard limits, safety interlock behaviors (door open), and other conditions.
   - [SHUTDOWN](Alarm-Processing#shutdown) - used to support external ESTOP functions (the controller doe NOT do ESTOP - read the SHUTDOWN section as to why.
   - [PANIC](Alarm-Processing#panic) - shuts down the machine immediately if there is an assertion failure or some other unrecoverable error
+  - [CLEAR](Alarm-Processing#clear) describes how to clear alarm states.
 
 - [Job Exception Handling](Job-Exception-Handling) has been refined. A new Job Kill has been introduced which is different than a queue flush (%), as these are actually 2 very different use cases.
 
