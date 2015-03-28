@@ -29,7 +29,7 @@ All configuration commands are available using [JSON mode](JSON-Operation), whic
 {CMD:123.4} == $CMD=123.4    Set value in relaxed JSON mode
 {xvm:50000}                  Set X max velocity to 50000 as an example
 </pre>
-Follow the JSON convention for reading an entire object - examples for motor and axis:
+You can also use JSON to read an entire object - examples for motor and axis:
 <pre>
 {1:n}
 {"r":{"1":{"ma":0,"sa":1.800,"tr":40.0000,"mi":8,"po":0,"pm":2,"pl":0.375}},"f":[1,0,5]}
