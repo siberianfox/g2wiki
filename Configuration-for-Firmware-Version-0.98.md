@@ -125,13 +125,18 @@ Set communications speeds and modes.
 	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
 	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
-	[{sv:_}](#sv---status-report-verbosity) | Status report verbosity | 0=off, 1=filtered, 2=verbose
+	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (50 ms minimum interval)
-	[{ic:_}](#ic---ignore-cr-or-lf-on-rx) | Ignore CR / LF on RX | REMOVED IN 0.97. Not needed.
+
+These settings are only relevant to the v8 boards:
+
+	Setting | Description | Notes
+	--------|-------------|-------
 	[{ec:_}](#ec---expand-lf-to-crlf-on-tx-data) | Enable CR on TX | 0=send LF line termination on TX, 1= send both LF and CR termination
-	[{ee:_}](#ee---enable-character-echo) | Enable character echo | 0=off, 1=enabled
+	[{ee:_}](#ee---enable-character-echo) | Enable_character_Echo | 0=off, 1=enabled
 	[{ex:_}](#ex---enable-flow-control) | Enable flow control | 0=off, 1=XON/XOFF enabled, 2=RTS/CTS enabled
 	[{baud:_}](#baud---set-usb-baud-rate) | Baud rate | 1=9600, 2=19200, 3=38400, 4=57600, 5=115200, 6=230400 -- 115200 is default
+
 
 **Gcode Initialization Defaults**
 Gcode settings loaded on power up, abort/reset and Program End (M2 or M30). Changing these does NOT change the current Gcode mode, only the initialization settings. 
