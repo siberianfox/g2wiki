@@ -60,21 +60,21 @@ Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, a
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{xam:_}](#xam---axis-mode) | Axis mode | Normally this is =1 "normal". See details for setting. 
+	[{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
 	[{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
 	[{xfr:_}](#xfr---feed-rate-maximum) | Feed rate maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
 	[{xtn:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
 	[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
-	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management (Note: takes the place of a max acceleration value)
-	[{xjh:_}](#xjh---jerk-homing) | Jerk Homing | Jerk used during homing operations. (found on axes XYZA only)
-	[{xjd:_}](#xjd---junction-deviation) | Junction deviation | Sets the theoretical radius For cornering control. Larger values yield faster cornering, but more corner jerk.
-	[{ara:_}](#ara---radius-value) | Radius setting | An artificial radius to convert incoming linear values to degrees. Found on rotational axes (ABC) only.
-	[{xsn:_}](#homing-settings) | Minimum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
-	[{xsx:_}](#homing-settings) | Maximum switch mode | 0=disabled, 1=homing-only, 2=limit-only, 3=homing-and-limit (XYZA only)
-	[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch) (XYZA only)
-	[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch) (XYZA only)
-	[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch) (XYZA only)
-	[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates (XYZA only)
+	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management
+	[{xjh:_}](#xjh---jerk-high) | Jerk High | Jerk used during homing operations
+	[{xjd:_}](#xjd---junction-deviation) | Junction deviation | Sets the imaginary radius For cornering. Larger values yield faster cornering but more corner jerk.
+	[{ara:_}](#ara---radius-value) | Radius setting | Artificial radius to convert linear values to degrees. ABC axes only.
+	[{xhi:_}](#homing-settings) | Homing Input | Switch (input) to use for homing this axis
+	[{xhd:_}](#homing-settings) | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
+	[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch)
+	[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch)
+	[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
+	[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates
 
 ##PWM Group (Pulse Width Modulation)
 There is currently only one PWM channel (p1), but the configs are structured for multiple PWM groups. The PWM channel is set up to act as a remote control Electronic Speed Controller (ESC), but can be used for other PWM functions using these settings. 
