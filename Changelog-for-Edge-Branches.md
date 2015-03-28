@@ -2,7 +2,7 @@ This page is a log of items updated in the edge branch and in the feature develo
 
 ###Edge branch, build 082.06
 These changes are still under test. If you find bugs or other issues please log to Issues.
-- [Digital IO (GPIO)](Digital-IO-(GPIO)) introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
+- **[Digital IO (GPIO)](Digital-IO-(GPIO))** introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
   - **Your configurations will need to change to accommodate these changes.** See settings/settings_shapeoko2.h for an example of setup and use - pay particular attention to `axis settings` and the new `inputs` section. 
   - Typing `$`, `$x`, `$di`, `$in` at the command line is also informative. Of course, all these commands are available as JSON, but in text mode you get the human readable annotations. 
   - These changes also rev the firmware version to 0.98 from 0.97, as a new configuration wiki page will need to be generated (not started yet).
