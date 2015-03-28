@@ -1,6 +1,6 @@
 This page is a log of items updated in the edge branch and in the feature development branches cleaved off the main edge branch. Edge is moving pretty fast, and a number of people are working on projects, so we'll do our best to keep up with the changes here.
 
-###Edge branch, build 082.05
+###Edge branch, build 082.06
 These changes are still under test. If you find bugs or other issues please log to Issues.
 - [Digital IO (GPIO)](Digital-IO-(GPIO)) introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
   - **Your configurations will need to change to accommodate these changes.** See settings/settings_shapeoko2.h for an example of setup and use - pay particular attention to `axis settings` and the new `inputs` section. 
@@ -25,26 +25,28 @@ These changes are still under test. If you find bugs or other issues please log 
 
 - **Safety Interlock** added. An input configured for interlock will invoke a feedhold when the interlock becomes diseangaged and restart movement when re-engaged. There are optional settings for spindle and coolant actions on feedhold. See below
 
-- **Spindle Changes**  
-Expect updates to spindle behaviors in future branches. Here's where it is now:
+- **Spindle Changes** Expect updates to spindle behaviors in future branches. Here's where it is now:
   - The spindle can be paused on feedhold with the Spindle-pause-on-hold global setting {spph:1}. For now we recommend not using this {spph:0} as there is not yet a delay in spindle restart. 
   - Spindle enable and direction polarity can now be set using the {spep: } and {spdp: } commands.
   - Spindle enable and direction state can be returned using {spe:n} and {spd:n}, and these can be configured in status reports
 
-- **Coolant Changes**
-Expect coolant changes in future branches, in particular to accommodate changes in the digital outputs.
+- **Coolant Changes** Expect coolant changes in future branches, in particular to accommodate changes in the digital outputs.
   - The coolant can be paused on feedhold with the Coolant-pause-on-hold global setting {coph:0}.
   - Flood and mist coolant polarity can now be set using the {cofp: } and {comp: } commands.
   - Flood and mist coolant state can be returned using {cof:n} and {com:n}, and these can be configured in status reports
   - In v9 the flood (M8) and mist (M7) commands are operative, but map the same pin. M9 clears them both, as expected. These should both be set to the same polarity for proper operation. On a Due or a platform with more output pins these can be separated - the code is written for this possibility. The changes should be limited to the pin mapping layers.
 
-- **Power Management** is fixed, as far as we can tell
+- **Power Management** is fixed, as far as we can tell. See $1pm for settings
 
-- **Arc Changes**
+- **Arc Changes** have been added. Please note any issues immediately. This is still under test.
+ - Fixed bug on very large arcs 
+ - Fixed bug on G18 rotation direction
+ - Added P parameter to allow for arcs > 360 degree rotation
 
-- **G10 L20**
+- **G10 L20** was added for easier offset setting
 
-- 
+-
+ 
 ###Edge branch, build 071.02
 
 * **No Persistence**. Most ARM chips (including the ATSAM3X8C on v9 and ATSAM3X8E on the Arduino Due) do not have persistence. This is the main reason the v9 has a microSD slot. But this has not been programmed yet. So your options are to either load the board each time you fire it up or reset it, or to build yourself a profile and compile your own settings as the defaults.
