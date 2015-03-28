@@ -100,19 +100,19 @@ These are reported on the startup strings and should be included in any support 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{fb:n}](#fb---firmware-build-number) | Firmware build | Read-only value, e.g. 435.05 
-	[{fv:n}](#fv---firmware-version) | Firmware version | Read-only value, e.g. 0.97
-	[{hp:n}](#hp---hardware-platform) | Hardware platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
-	[{hv:_}](#hv---hardware-version) | Hardware version | Read-write value, set this to to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards, respectively. Defaults to 8
-	[{id:n}](#id---unique-board-identifier) | Unique ID | Each board has a read-only unique ID
+	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 435.05 
+	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.97
+	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
+	[{hv:_}](#hv---hardware-version) | Hardware Version | Read-write value, set this to to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards, respectively. Defaults to 8
+	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 **Global System Settings**
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{ja:_}](#ja---junction-acceleration) | Junction acceleration | Global cornering acceleration value
+	[{ja:_}](#ja---junction-acceleration) | Junction_Acceleration | Global cornering acceleration value
 	[{ct:_}](#ct---chordal-tolerance) | Chordal tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
-	[{mt:_}](#mt---motor-power-timeout) | Motor disable timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
+	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
 
 **Communications Settings**
