@@ -160,7 +160,7 @@ These $configs invoke reports and functions
 	[{md:n}](Power-Management) | Disable motors | Unpower all motors
 	[{me:_}](Power-Management) | Energize motors | Energize all motors with timeout in seconds 
 	[{test:_}](#test---run-self-test) | Invoke self tests | $test=n for test number; $test returns help screen in text mode
-	[{defa:1}](#defa---reset-default-profile-settings) | Reset to factory defaults | $defa=1 to reset
+	[{defa:1}](#defa---reset-default-profile-settings) | reset to DEFAults | Reset to compiled default settings
 	[{flash:1}] | Enter_FLASH_loader | WILL ERASE AND REFLASH BOARD. BE CAREFUL WITH THIS
         ^x | Reset tinyG | cntl+x restarts tinyG same as hardware rest button
 	[{help:_}] | Show help screen | Show system help screen; $h also works
