@@ -247,12 +247,10 @@ Power level is used to set the stepper driver current. 0 is off, 1.000 is maximu
 ### xam - Axis Mode
 Sets the function of the axis.
 
-<pre>
-{xam:0}  Disable. All input to that axis will be ignored and the axis will not move. 
-{xam:1}  Standard. Linear axes move in length units. Rotary axes move in degrees. 
-{xam:2}  Inhibited. Axis values are taken into account when planning moves, but the axis will not move. Use this to perform a Z kill or to do a compute-only run.
-{xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
-</pre>
+- {xam:0}  Disable. All input to that axis will be ignored and the axis will not move. 
+- {xam:1}  Standard. Linear axes move in length units. Rotary axes move in degrees. 
+- {xam:2}  Inhibited. Axis values are taken into account when planning moves, but the axis will not move. Use this to perform a Z kill or to do a compute-only run.
+- {xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
 
 ### xvm- Velocity Maximum
 (aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 move (traverse). This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
