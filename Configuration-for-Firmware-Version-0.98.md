@@ -7,7 +7,7 @@ The version number can be found as the fv variable in the startup JSON message, 
 
 ###Conventions Used on this Page
 - Examples show relaxed JSON mode. Strict JSON is also accepted in all cases
-- CMD means some command - aka the "name" of the name/value pair
+- CMD means some command - aka the "name" of the name/value pair. CMDs are case insensitive.
 - Underscore "_" means some numeric value
 - "abcd" means some string value
 - Motor examples use Motor 1, but any motor active for your platform is OK
@@ -155,7 +155,7 @@ These $configs invoke reports and functions
 	Command | Description | Notes
 	--------|-------------|-------
 	[{sr:n}](#sr---status-report) | get Status Report | SR also sets status report format in JSON mode
-	[{qr:n}]#qr---queue-report) | get Queue Report | 
+	[{qr:n}](#qr---queue-report) | get Queue Report | 
 	[{qf:_}](#qf---queue-flush) | flush_planner_queue | Used with '!' feedhold for jogging, probes and other sequences. Usage: {qf:1}
 	[{md:n}](Power-Management) | Disable motors | Unpower all motors
 	[{me:_}](Power-Management) | Energize motors | Energize all motors with timeout in seconds 
@@ -166,21 +166,8 @@ These $configs invoke reports and functions
 	[{help:_}] | Show help screen | Show system help screen; $h also works
 
 Note: Status report parameters is settable in JSON only - see JSON mode for details
-
-**Hidden System Settings**
-
-The following settings are accessible but do not appear in the system group listings. This is because they really should not be messed with.
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[$ml](#ml--minimum-line-segment) | Minimum line length | 
-	[$ma](#ma---minimum-arc-segment) | Arc segment length |
-	[$ms](#ms---minimum-segment-time-in-microseconds---refers-to-s-curve-interpolation-segments) | Segment timing | 
-<br>
 <br>
 # Settings Details
-Settings are case insensitive - they are shown in upper case for emphasis only. The leading '1' can be any motor, 1-4, and the leading 'x' can be any axis (with some restrictions as noted).
-
 ## Motor Settings
 _Note: In TinyG the motor travel settings are independent of each other. You don't need to put them into an equation - the board does that for you. For example, if you want run motor #1 with a 200 step per revolution motor, a 3mm GT2 timing belt with a 20 tooth pulley, and 8 microsteps you simply enter:_
 * $1sa=1.8
