@@ -15,10 +15,18 @@ Connect to the G2 USB.
 To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
 Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
 ### JSON Cheat Sheet
-All of the commands in this cheat sheet are also available using JSON, which is the preferred access method if you are writing a UI or controller. The equivalent JSON commands follow these examples:
+All of the commands in this cheat sheet are also available using JSON, which is the preferred access method if you are writing a UI or controller. The equivalent JSON commands follow these examples for reading or setting a variable:
 <pre>
 $1ma   equivalents: {"1ma":null}  {1ma:null}   {1ma:n}    {1:{ma:null}}
 $1ma=0 equivalents: {"1ma":0}     {1ma:0}                 {1:{ma:0}}
+</pre>
+Follow this convention for reading an entire object - examples for motor and axis:
+<pre>
+{1:n}
+{"r":{"1":{"ma":0,"sa":1.800,"tr":40.0000,"mi":8,"po":0,"pm":2,"pl":0.375}},"f":[1,0,5]}
+
+{x:n}
+{"r":{"x":{"am":1,"vm":50000,"fr":50000,"tn":0.000,"tm":420.000,"jm":10000,"jh":20000,"jd":0.1000,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":20.000,"zb":3.000}},"f":[1,0,5]}
 </pre>
 There are a few exceptions where JSON offers commands that are not available in text mode. These are noted. See also:
 
