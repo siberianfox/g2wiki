@@ -26,10 +26,10 @@ Follow the JSON convention for reading an entire object - examples for motor and
 {x:n}
 {"r":{"x":{"am":1,"vm":50000,"fr":50000,"tn":0.000,"tm":420.000,"jm":10000,"jh":20000,"jd":0.1000,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":20.000,"zb":3.000}},"f":[1,0,5]}
 </pre>
-There are a few exceptions where JSON offers commands that are not available in text mode. These are noted. See also:
-
-* [JSON Operation - for basic on JSON use](JSON-Operation)
-* [JSON Details - more information](JSON-Details)
+The footer is an array of 3 elements:
+- (1) Footer revision
+- (2) [Status code](Status-Codes)
+- (3) Receive buffer count (explainned later)
 
 ##Motor Groups
 Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors.<br><br>
