@@ -7,6 +7,7 @@ The version number can be found as the fv variable in the startup JSON message, 
 
 ##Conventions Used on this Page
 - Examples show relaxed JSON mode. Strict JSON is also accepted in all cases
+- CMD means some command - aka the "name" of the name/value pair
 - Underscore "_" means some numeric value
 - "ABC" means some string value
 - Motor examples use Motor 1, but any motor active for your platform is OK
