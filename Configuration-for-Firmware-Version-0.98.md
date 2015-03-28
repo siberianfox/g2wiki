@@ -6,6 +6,11 @@
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.98 encompasses g2 builds 082.06 and later.
 
 <br>
+# Summary / Cheat Sheet
+Connect to the G2 USB.
+To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
+Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
+### JSON Cheat Sheet
 This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode akak [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
 {"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
@@ -15,11 +20,6 @@ This page describes how configuration works in [JSON mode](JSON-Operation). Most
 {xvm:50000}                    Set X max velocity to 50000 as an example
 </pre>
 
-# Summary / Cheat Sheet
-Connect to the G2 USB.
-To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
-Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
-### JSON Cheat Sheet
 All of the commands in this cheat sheet are also available using JSON, which is the preferred access method if you are writing a UI or controller. The equivalent JSON commands follow these examples for reading or setting a variable:
 <pre>
 $1ma   equivalents: {"1ma":null}  {1ma:null}   {1ma:n}    {1:{ma:null}}
