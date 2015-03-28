@@ -33,7 +33,8 @@ The footer is an array of 3 elements:
 
 ##Motor Groups
 Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors.<br><br>
-_Please note: In TinyG the motor travel settings are independent of each other. You don't need to put them into an equation. The board does this for you. Please see note about this in the [Motor Settings](#motor-settings) section._
+
+All examples below are are relaxed JSON mode & use Motor 1, but any motor active for your platform is OK. 
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
