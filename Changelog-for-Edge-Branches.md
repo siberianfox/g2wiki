@@ -20,7 +20,8 @@ These changes are still under test. If you find bugs or other issues please log 
   - The switch configurations have been removed from the axes and moved to the digital IO inputs. 
   - Two new parameters have been added to the axis configs (see below). All other parameters remain the same.
     - {xhd:1} - homing direction - 0=search-to-negative, 1=search-to-positive
-    - {xhi:N} - homing input - input 1-N or 0 to disable homing this axis for homing. Note that setting this to a non-zero valaue (1) enables homing for this axis, and (2) overrides whatever settings for that input for the duration of homing. So it's possible to set di1 (Xmin) as a limit switch and a homing switch. Whenn not in homing it will be used as a limit switch.
+    - {xhi:N} - homing input - input 1-N or 0 to disable homing this axis for homing. 
+  - Note that setting the homing input to a non-zero value (1) enables homing for this axis, and (2) overrides whatever settings for that input for the duration of homing. So it's possible to set di1 (Xmin) as a limit switch and a homing switch. When not in homing it will be used as a limit switch.
 
 ###Edge branch, build 071.02
 
