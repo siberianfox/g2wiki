@@ -17,6 +17,7 @@ The version number can be found as the fv variable in the startup JSON message, 
 **A note about units:**
 - All data entry and display occurs in the prevailing units set in the Gcode mode. Set G20 for inches, G21 for mm.
 - Units entered in one system are correctly preserved and do not need to be re-entered or adjusted in the units mode changes.
+- The Gcode default units setting `{gun:_}` sets the units the system "comes up in" during power-on or reset (Note: PROGRAM END (M2, M30) does not change units). So changing GUN will not change your units until you reset.
 
 # Summary / Cheat Sheet
 ### JSON Cheat Sheet
