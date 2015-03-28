@@ -49,7 +49,12 @@ These changes are still under test. If you find bugs or other issues please log 
  - Added P parameter to allow for arcs > 360 degree rotation
 
 - **G10 L20** was added for easier offset setting
- 
+
+- **Still To Go**
+  - SD card persistence
+  - Spindle restart dwell
+  - Digital output generalization and changes
+
 ###Edge branch, build 071.02
 
 * **No Persistence**. Most ARM chips (including the ATSAM3X8C on v9 and ATSAM3X8E on the Arduino Due) do not have persistence. This is the main reason the v9 has a microSD slot. But this has not been programmed yet. So your options are to either load the board each time you fire it up or reset it, or to build yourself a profile and compile your own settings as the defaults.
