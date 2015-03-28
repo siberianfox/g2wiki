@@ -8,10 +8,10 @@ The version number can be found as the fv variable in the startup JSON message, 
 <br>
 This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode akak [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
-{"NAME":n} == $NAME            Read a value for command "NAME" in strict JSON mode
-{NAME:n} == $NAME              Read a value in relaxed JSON mode
-{"NAME":123.4} == $NAME=123.4  Set a value in strict JSON mode
-{NAME:123.4} == $NAME=123.4    Set a value in relaxed JSON mode
+{"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
+{NAME:n} == $NAME              Read value in relaxed JSON mode
+{"NAME":123.4} == $NAME=123.4  Set value in strict JSON mode
+{NAME:123.4} == $NAME=123.4    Set value in relaxed JSON mode
 {xvm:50000}                    Set X max velocity to 50000 as an example
 </pre>
 
