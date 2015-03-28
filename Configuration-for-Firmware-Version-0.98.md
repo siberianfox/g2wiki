@@ -5,6 +5,13 @@
 **The settings on this page are for firmware version 0.98**
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.98 encompasses g2 builds 082.06 and later.
 
+##Conventions Used on this Page
+- Examples show relaxed JSON mode. Strict JSON is also accepted in all cases
+- Underscore "_" means some numeric value
+- "ABC" means some string value
+- Motor examples use Motor 1, but any motor active for your platform is OK
+- Axis examples use X axis 1, but any axis is OK unless noted
+
 # Summary / Cheat Sheet
 Connect to the G2 USB.
 To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
