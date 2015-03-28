@@ -9,13 +9,13 @@ These changes are still under test. If you find bugs or other issues please log 
   - {lim:0}, {lim:1} was added to allow a limit override to backing off switches when a limit is tripped
   - See also [Alarm Processing](Alarm-Processing), which is intimately related to these changes.
 
-- [Alarm processing](Alarm-Processing) has been significantly updated. There are now 3 alarm states:
+- **[Alarm processing](Alarm-Processing)** has been significantly updated. There are now 3 alarm states:
   - [ALARM](Alarm-Processing#alarm) - used to support soft and hard limits, safety interlock behaviors (door open), and other conditions.
   - [SHUTDOWN](Alarm-Processing#shutdown) - used to support external ESTOP functions (the controller doe NOT do ESTOP - read the SHUTDOWN section as to why.
   - [PANIC](Alarm-Processing#panic) - shuts down the machine immediately if there is an assertion failure or some other unrecoverable error
   - [CLEAR](Alarm-Processing#clear) describes how to clear alarm states.
 
-- [Job Exception Handling](Job-Exception-Handling) has been refined. A new Job Kill has been introduced which is different than a queue flush (%), as these are actually 2 very different use cases.
+- **[Job Exception Handling](Job-Exception-Handling)** has been refined. A new Job Kill has been introduced which is different than a queue flush (%), as these are actually 2 very different use cases.
 
 - **Homing** changes. Homing input switches are now configured differently.
   - The switch configurations have been removed from the axes and moved to the digital IO inputs. 
@@ -33,6 +33,7 @@ These changes are still under test. If you find bugs or other issues please log 
   - The spindle can be paused on feedhold with the Spindle-pause-on-hold global setting {spph:1}. For now we recommend not using this {spph:0} as there is not yet a delay in spindle restart. 
   - Spindle enable and direction polarity can now be set using the {spep: } and {spdp: } commands.
   - Spindle enable and direction state can be returned using {spe:n} and {spd:n}, and these can be configured in status reports
+  - Spindle speed can be returned using {sps:n} and can be configured in status reports
 
 - **Coolant Changes** Expect coolant changes in future branches, in particular to accommodate changes in the digital outputs.
   - The coolant can be paused on feedhold with the Coolant-pause-on-hold global setting {coph:0}.
@@ -40,7 +41,7 @@ These changes are still under test. If you find bugs or other issues please log 
   - Flood and mist coolant state can be returned using {cof:n} and {com:n}, and these can be configured in status reports
   - In v9 the flood (M8) and mist (M7) commands are operative, but map the same pin. M9 clears them both, as expected. These should both be set to the same polarity for proper operation. On a Due or a platform with more output pins these can be separated - the code is written for this possibility. The changes should be limited to the pin mapping layers.
 
-- **Power Management** is fixed, as far as we can tell. See $1pm for settings
+- **Power Management** is fully working, as far as we can tell. See $1pm for settings
 
 - **Arc Changes** have been added. Please note any issues immediately. This is still under test.
  - Fixed bug on very large arcs 
@@ -48,8 +49,6 @@ These changes are still under test. If you find bugs or other issues please log 
  - Added P parameter to allow for arcs > 360 degree rotation
 
 - **G10 L20** was added for easier offset setting
-
--
  
 ###Edge branch, build 071.02
 
