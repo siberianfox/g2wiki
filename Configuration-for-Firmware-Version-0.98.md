@@ -174,7 +174,7 @@ _Note: In TinyG the motor travel settings are independent of each other. You don
 * $1tr=60   (which is 3 * 20)
 * $1mi=8
 
-### 1ma - Map motor to axis
+### 1ma - Map Motor to Axis
 Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor4. 
 
 <pre>
@@ -184,14 +184,14 @@ Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you migh
 {4ma:2}    Map motor 4 to Z axis
 </pre> 
 
-### 1sa - Step angle for the motor
+### 1sa - Step Angle
 This is a decimal number which is often 1.8 degrees per step, but should reflect the motor in use. You might also find 0.9, 3.6, 7.5 or other values. You can usually read this off the motor label. If a motor is indicated in steps per revolution just divide 360 by that number. A 200 step-per-rev motor is 1.8 degrees, a 400 step-per-rev motor has 0.9 degrees per step.
 
 <pre>
 {1sa:1.8}  This is a typical value for many motors 
 </pre> 
 
-### 1tr - Travel per revolution
+### 1tr - Travel per Revolution
 TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then 1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees.
 
 <pre>
@@ -236,7 +236,7 @@ Polarity sets which direction the motor will turn when presented with positive a
 
 Travel in X and Y is dependent on the conventions for your particular machine and CAD setup. Typically X is left/right movement, and Y is towards and away from you, but people often set up the machine to agree with the visualization their CAD program provides, and can depend on where you stand when operating the machine. Typically +X moves to the right, -X to the left, +Y away from you, and -Y towards you. Z is by convention the cutting axis, which is the vertical axis on a typical milling machine. +Z should move up, and -Z should move down, into the work.
 
-### 1pm - Power management mode
+### 1pm - Power Management
 Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power Management](Power-Management) page.
 
 ### 1pl - Power Level
@@ -258,41 +258,43 @@ Sets the function of the axis.
 Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will actually occur at the fastest speed the combined set of axes and the geometry will allow, and may be faster than the individual axis max velocities. For example, max velocity for X and Y are set to 1000 mm/min. For a 45 degree traverse in X and Y the toolhead would travel at 1414.21 mm/min. 
 
 <pre>
-$xvm=1200        sets X maximum velocity (G0) to 1200 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
-$zvm=30.0        sets Z to 30 inches per minute - assuming G20 is active (i.e. inches mode)
-$avm=36000       sets A to 100 revolutions per minute (360 * 100)
+{xvm:1200}   sets X maximum velocity (G0) to 1200 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
+{zvm:30.0}   sets Z to 30 inches per minute - assuming G20 is active (i.e. inches mode)
+{avm:36000}  sets A to 100 revolutions per minute (360 * 100)
 </pre>
  
-### xfr - Feed Rate maximum
+### xfr - Feed Rate Maximum
 Sets the maximum velocity the axis will move during a feed in a G1, G2, or G3 move. This works similarly to maximum velocity, but instead of actually setting the speed, it only serves to establish a "do not exceed" for Gcode F words. Put another way, the maximum feed rate setting is NOT used to set the Gcode's F value; it is only a maximum that may be used to limit the F value provided in a gcode file.
 
 Axis feed rates should be equal to or less than the maximum velocity. See [TinyG Tuning](https://github.com/synthetos/TinyG/wiki/TinyG-Tuning) for more details. 
 
 <pre>
-$xfr=1000       sets X max feed rate to 1000 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
+{xfr:1000}  sets X max feed rate to 1000 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
 </pre> 
 
 ### xtn, xtm - Travel Minimum, Travel Maximum
-Defines the maximum extent of travel in that axis. This is used during homing. See [Homing](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation) for more details on how this is used. 
+Defines the minimum and maximum extent of travel in that axis. This is used during homing. See [Homing](Homing-Operation) for more details on how this is used. 
 
 Both values can be positive or negative, but maximum must be greater than minimum or equal to minimum. If minimum and maximum are equal the axis is treated as an infinite axis (i.e. no limits). This is useful for rotary axes - for example:
 <pre>
-$xtn = -1
-$xtm = -1
+{xtn:-1}
+{xtm:-1}
 or
-$xtn = 0
-$xtm = 0
+{xtn:0}
+{xtm:0}
 </pre> 
 
 ### xjm - Jerk Maximum
-Sets the maximum jerk value for that axis. Jerk is settable independently for each axis to support machines with different dynamics per axis - such as Shapeoko with belts for X and Y, screws for Z, Probotix with 5 pitch X and Y screws and 12 pitch Z screws, and any machine with both linear and rotary axes.
+Sets the maximum jerk value for that axis. Jerk is settable independently for each axis to support machines with different dynamics per axis - such as Shapeoko2 with belts for X and Y, screws for Z, Probotix with 5 pitch X and Y screws and 12 pitch Z screws, and any machine with both linear and rotary axes.
 
-Jerk is in units per minutes^3, so the numbers are quite large (but see note below). Some common values are shown in *millimeters* in the examples below 
+Jerk is in units per minutes^3, so the numbers are quite large (but see note below). Some common values are shown in *millimeters* in the examples below. 
+
+To manage these large numbers better the complete number can be entered, or the number divided by a million. Any number less than 1M will be automatically multiplied by 1M internally. Jerk values are displaye din dive-by-million form.
 
 <pre>
-$xjm=50,000,000          Set X jerk to 50 million MM per min^3. This is a good value for a moderate speed machine
-$zjm=25,000,000          A reasonable setting for a slower Z axis
-$xjm=5,000,000,000       X jerk for Shapeoko. Yes, that's 5 billion
+{xjm:50000000}  Set X jerk to 50 million MM per min^3. This is a good value for a moderate speed machine
+{xjm:50}        Same as above
+{xjm:5000}      X jerk for Shapeoko. Yes, that's 5 billion
 </pre> 
 
 The jerk term in mm is measured in mm/min^3. In inches mode it's units are inches/min^3. So the conversion from mm to inches is 1/(25.4). The same values as above are shown in inches are: 
