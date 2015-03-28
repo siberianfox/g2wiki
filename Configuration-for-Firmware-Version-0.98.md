@@ -5,23 +5,28 @@
 **The settings on this page are for firmware version 0.98**
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.98 encompasses g2 builds 082.06 and later.
 
-##Conventions Used on this Page
+###Conventions Used on this Page
 - Examples show relaxed JSON mode. Strict JSON is also accepted in all cases
 - CMD means some command - aka the "name" of the name/value pair
 - Underscore "_" means some numeric value
 - "ABC" means some string value
 - Motor examples use Motor 1, but any motor active for your platform is OK
 - Axis examples use X axis, but any axis is OK unless otherwise noted
+- All examples are in millimeter units
+
+**A note about units:**
+- All data entry and display occurs in the prevailing units set in the Gcode mode. Set G20 for inches, G21 for mm.
+- Units entered in one system are correctly preserved and do not need to be re-entered or adjusted in the units mode changes.
 
 # Summary / Cheat Sheet
 ### JSON Cheat Sheet
 All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode-Operation). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
-{"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
-{NAME:n} == $NAME              Read value in relaxed JSON mode
-{"NAME":123.4} == $NAME=123.4  Set value to 123.4 in strict JSON mode
-{NAME:123.4} == $NAME=123.4    Set value in relaxed JSON mode
-{xvm:50000}                    Set X max velocity to 50000 as an example
+{"CMD":n} == $CMD            Read value for command "NAME" in strict JSON mode
+{CMD} == $CMD                Read value in relaxed JSON mode
+{"CMD":123.4} == $CMD=123.4  Set value to 123.4 in strict JSON mode
+{CMD:123.4} == $CMD=123.4    Set value in relaxed JSON mode
+{xvm:50000}                  Set X max velocity to 50000 as an example
 </pre>
 Follow the JSON convention for reading an entire object - examples for motor and axis:
 <pre>
@@ -34,18 +39,16 @@ Follow the JSON convention for reading an entire object - examples for motor and
 The footer is an array of 3 elements:
 - (1) Footer revision
 - (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
-- (3) Receive buffer count (explainned later)
+- (3) RX buffer info (explained later)
 
 ##Motor Groups
 Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors.<br><br>
 
-All examples below are are relaxed JSON mode & use Motor 1, but any motor active for your platform is OK. Underscore "_" means some value.
-
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	[{1ma:_}](#1ma---map-motor-to-axis) | Motor mapping to axis | Configure axis to which this motor is connected (for Cartesian machines) Typically: {1ma:0}, {2ma:1}, {3ma:2}, {4ma:3} to map motors 1-4 to X,Y,Z,A, respectively
+	[{1ma:_}](#1ma---map-motor-to-axis) | Motor mapping to axis | Configure axis to which this motor is connected (for Cartesian machines) E.g. {1ma:0}, {2ma:1}, {3ma:2}, {4ma:3} to map motors 1-4 to X,Y,Z,A, respectively
 	[{1sa:_}](#1sa---step-angle-for-the-motor) | Step angle | Motor parameter indicating the angle traveled per whole step. Typical setting is {1sa:1.8} for 1.8 degrees per step (200 steps per revolution)
-	[{1tr:_}](#1tr---travel-per-revolution) | Travel per revolution | How far the mapped axis moves per motor revolution. E.g {1tr:2.54} (millimeters) for a 10 TPI screw axis
+	[{1tr:_}](#1tr---travel-per-revolution) | Travel per revolution | How far the mapped axis moves per motor revolution. E.g. {1tr:2.54} (millimeters) for a 10 TPI screw axis
 	[$1mi](#1mi---microsteps) | Microsteps | Microsteps per whole step. TinyG uses 1,2,4 and 8. Other values are accepted but warned
 	[$1po](#1po---polarity) | Polarity | Set polarity for proper movement of the axis. 0=clockwise rotation, 1=counterclockwise - although these are dependent on your motor wiring, and axis movement is dependent on the mechanical system.
 	[$1pm](Power-Management) | Power management mode | 0=motor disabled, 1=motor always on, 2=motor on when in cycle, 3=motor on only when moving
