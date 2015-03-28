@@ -128,7 +128,7 @@ Set communications speeds and modes.
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (50 ms minimum interval)
 
-These settings are only relevant to the v8 boards:
+V8-Only Communications Settings (not needed on g2)
 
 	Setting | Description | Notes
 	--------|-------------|-------
