@@ -2,6 +2,8 @@ This page is a log of items updated in the edge branch and in the feature develo
 
 ###Edge branch, build 079.60
 - Major changes to the way switches and other inputs are handled. See [Digital IO (GPIO)](Digital-IO-(GPIO)). The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and hold behaviors. See settings/settings_shapeoko2.h for an example of setup and use. See also [Alarm Processing](Alarm-Processing).
+- [Alarm processing](Alarm-Processing) has been significantly updated. There are now 3 alarm states:
+  - alarms - used to support soft and hard limits, safety interlock behaviors (door open), and other conditions.    - shutdown - used to support external 
 
 
 ###Edge branch, build 071.02
