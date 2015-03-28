@@ -28,7 +28,7 @@ Follow the JSON convention for reading an entire object - examples for motor and
 </pre>
 The footer is an array of 3 elements:
 - (1) Footer revision
-- (2) [Status code](Status-Codes)
+- (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
 - (3) Receive buffer count (explainned later)
 
 ##Motor Groups
