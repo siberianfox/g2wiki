@@ -2,7 +2,7 @@ This page is a log of items updated in the edge branch and in the feature develo
 
 ###Edge branch, build 079.60
 These changes are still under test. If you find bugs or other issues please log to Issues.
-- Major changes to the way switches and other inputs are handled. See [Digital IO (GPIO)](Digital-IO-(GPIO)). The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and hold behaviors. See settings/settings_shapeoko2.h for an example of setup and use. See also [Alarm Processing](Alarm-Processing).
+- [Digital IO (GPIO)](Digital-IO-(GPIO)) introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and hold behaviors. **Your configurations will need to change to accommodate these changes.** See settings/settings_shapeoko2.h for an example of setup and use - pay particular attention to axes settings and the new `Inputs` section. Typing the following commands at the command line is also informative: `$`, `$x`, '$di', `$in`. These changes also rev the firmware revision to 0.98 from 0.97, as a new configuration wiki page will need to be generated (not started yet). See also [Alarm Processing](Alarm-Processing), which is intimately related to these changes.
 
 - [Alarm processing](Alarm-Processing) has been significantly updated. There are now 3 alarm states:
   - alarms - used to support soft and hard limits, safety interlock behaviors (door open), and other conditions.
