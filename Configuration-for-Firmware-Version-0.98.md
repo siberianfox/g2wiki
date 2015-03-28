@@ -253,27 +253,27 @@ Sets the function of the axis.
 - {xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
 
 ### xvm - Velocity Maximum
-(aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 move (traverse). This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
+(aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 traverse move. This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
 
 Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will actually occur at the fastest speed the combined set of axes and the geometry will allow, and may be faster than the individual axis max velocities. For example, max velocity for X and Y are set to 1000 mm/min. For a 45 degree traverse in X and Y the toolhead would travel at 1414.21 mm/min. 
 
 <pre>
-{xvm:1200}   sets X maximum velocity (G0) to 1200 mm/min
-{zvm:30.0}   sets Z to 30 inches per minute - in G20 / inches mode
-{avm:36000}  sets A to 100 revolutions per minute (360 * 100)
+{xvm:1200}   set X maximum velocity (G0) to 1200 mm/min
+{avm:36000}  set A to 100 revolutions per minute (360 * 100)
+{zvm:30.0}   set Z to 30 inches per minute - in G20 / inches mode
 </pre>
  
 ### xfr - Feed Rate Maximum
 Sets the maximum velocity the axis will move during a feed in a G1, G2, or G3 move. This works similarly to maximum velocity, but instead of actually setting the speed, it only serves to establish a "do not exceed" for Gcode F words. Put another way, the maximum feed rate setting is NOT used to set the Gcode's F value; it is only a maximum that may be used to limit the F value provided in a gcode file.
 
-Axis feed rates should be equal to or less than the maximum velocity. See [TinyG Tuning](https://github.com/synthetos/TinyG/wiki/TinyG-Tuning) for more details. 
+Axis feed rates should be equal to or less than the maximum velocity. See [G2 Tuning](G2-Tuning) for more details. 
 
 <pre>
-{xfr:1000}  sets X max feed rate to 1000 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
+{xfr:1000}  set X max feed rate to 1000 mm/min
 </pre> 
 
 ### xtn, xtm - Travel Minimum, Travel Maximum
-Defines the minimum and maximum extent of travel in that axis. This is used during homing. See [Homing](Homing-Operation) for more details on how this is used. 
+Defines the minimum and maximum extent of travel in that axis. This is used during homing and for soft limits. See [Homing](Homing-Operation) for homing details
 
 Both values can be positive or negative, but maximum must be greater than minimum or equal to minimum. If minimum and maximum are equal the axis is treated as an infinite axis (i.e. no limits). This is useful for rotary axes - for example:
 <pre>
@@ -289,7 +289,7 @@ Sets the maximum jerk value for that axis. Jerk is settable independently for ea
 
 Jerk is in units per minutes^3, so the numbers are quite large (but see note below). Some common values are shown in *millimeters* in the examples below. 
 
-To manage these large numbers better the complete number can be entered, or the number divided by a million. Any number less than 1M will be automatically multiplied by 1M internally. Jerk values are displaye din dive-by-million form.
+To manage these large numbers better the complete number can be entered, or the number divided by a million. Any number less than 1M will be automatically multiplied by 1M internally. Jerk values are displayed in divide-by-million form.
 
 <pre>
 {xjm:50000000}  Set X jerk to 50 million MM per min^3. This is a good value for a moderate speed machine
@@ -304,10 +304,8 @@ The jerk term in mm is measured in mm/min^3. In inches mode it's units are inche
 5,000,000,000 mm/min^3   is 196,850,400 in/min^3 200,000,000 would suffice
 </pre> 
 
-_Note: Jerk values that are less than 1,000,000 are assumed to be multiplied by 1 million. This keeps from having to keep track of all those zeros. For example, to enter 5 billion the value '5000' can be entered._
-
 ### xjh - Jerk High
-Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the $xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
+Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
 
 ### xjd - Junction Deviation
 This one is somewhat complicated. Junction deviation - in combination with Junction Acceleration ($JA) from the system group - sets the velocity reduction used during cornering through the junction of two lines. The reduction is based on controlling the centripetal acceleration through the junction to the value set in JA with the junction deviation being the "tightness" of the controlling cornering circle. An explanation of what's happening here can be found on [Sonny Jeon's blog: Improving grbl cornering algorithm] (http://onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/ onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/). 
@@ -317,30 +315,30 @@ It's important to realize that the tool head does not actually follow the contro
 While JA is set globally and applies to all axes, JD is set per axis and can vary depending on the characteristics of the axis. An axis that moves more slowly should have a JD that is less than an axis that can move more quickly, as the larger the JD the faster the machine will move through the junction (i.e. a bigger controlling circle). The following example has some representative values for a Probotix Fireball V90 machine. The V90 has 5 TPI X and Y screws, and 12 TPI Z. All values in MM. 
 
 <pre>
- $xJD 0.05     Units are mm
- $yJD 0.05
- $zJD 0.02     Setting Z to a smaller value means that moves with a change in the Z component will move proportionately slower depending on the contribution in Z. 
- $JA 200,000   Units are mm/min^2. As before, commas are ignored and are provided only for clarity
+{ja:200000}  Units are mm/min^2
+{xjd:0.05}   Units are mm
+{yjd:0.05}
+{zjd:0.02}   Setting Z to a smaller value means that moves with a change in the Z component will move proportionately slower depending on the contribution in Z. 
 </pre>
 
 ### ara - Radius value
 The radius value is used by rotational axes only (A, B and C) to convert linear units to degrees when in radius mode. 
 
-For example; if the A radius is set to 10 mm it means that a value of 62.8318531 mm will make the A axis travel one full revolution - as 62.383... is the circumference of the circle of radius R ( 2*PI*R, or 10 * 2 * 3.14159...) (Assuming $nTR = 360 -- see note below). Receiving the gcode block `G0 A62.83` will turn the A axis one full revolution (360 degrees) from a starting position of 0. All internal computations and settings are still in degrees - it's just that gcode units received for the axis are converted to degrees using the specified radius. 
+For example; if the A radius is set to 10 mm it means that a value of 62.8318531 mm will make the A axis travel one full revolution - as 62.383... is the circumference of the circle of radius R ( 2*PI*R, or 10 * 2 * 3.14159...) (Assuming nTR = 360 -- see note below). Receiving the gcode block `G0 A62.83` will turn the A axis one full revolution (360 degrees) from a starting position of 0. All internal computations and settings are still in degrees - it's just that gcode units received for the axis are converted to degrees using the specified radius. 
 
-Note that the Travel per Revolution value ($1TR) is used but unaffected in radius mode. The degrees per revolution still applies, it's just that the degrees were computed based on the radius and the Gcode axis values. See Travel per Revolution (See $1TR) in the motor group. 
+Note that the Travel per Revolution value (1tr) is used but unaffected in radius mode. The degrees per revolution still applies, it's just that the degrees were computed based on the radius and the Gcode axis values. See Travel per Revolution in the motor group. 
 
 ### Homing Settings
-Please see [TinyG Homing](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation) for details and more help on homing settings:
+Please see [G2 Homing](Homing-Operation) for details and more help on homing settings:
 
-* $xSN - Minimum switch mode
-* $xSX - Maximum switch mode
-* $xSV - Homing Search Velocity
-* $xLV - Homing Latch Velocity
-* $xLB - Homing Latch Backoff
-* $xZB - Homing Zero Backoff
+<pre>
+{xsv:_}  Homing Search Velocity
+{xlv:_}  Homing Latch Velocity
+{xlb:_}  Homing Latch Backoff
+{xzb:_}  Homing Zero Backoff
+</pre>
 
-By way of example, my Shapeoko is set up this way:
+By way of example, a Shapeoko2 can be set up this way:
 
 	Setting | Description | Example
 	--------|-------------|--------------
