@@ -10,7 +10,7 @@ Connect to the G2 USB.
 To see a value enter `$<cmd>`. To set a value enter `$<cmd>=value`. 
 Most commands are self explanatory. See the sections following the cheat sheet for those that require further explanation.
 ### JSON Cheat Sheet
-This page describes how configuration works in [JSON mode](JSON-Operation). Most commands are also available from command line mode aka [Text Mode](TinyG-Command-Line). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
+All of the commands in this cheat sheet are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode-Operation). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
 {"NAME":n} == $NAME            Read value for command "NAME" in strict JSON mode
 {NAME:n} == $NAME              Read value in relaxed JSON mode
@@ -18,13 +18,7 @@ This page describes how configuration works in [JSON mode](JSON-Operation). Most
 {NAME:123.4} == $NAME=123.4    Set value in relaxed JSON mode
 {xvm:50000}                    Set X max velocity to 50000 as an example
 </pre>
-
-All of the commands in this cheat sheet are also available using JSON, which is the preferred access method if you are writing a UI or controller. The equivalent JSON commands follow these examples for reading or setting a variable:
-<pre>
-$1ma   equivalents: {"1ma":null}  {1ma:null}   {1ma:n}    {1:{ma:null}}
-$1ma=0 equivalents: {"1ma":0}     {1ma:0}                 {1:{ma:0}}
-</pre>
-Follow this convention for reading an entire object - examples for motor and axis:
+Follow the JSON convention for reading an entire object - examples for motor and axis:
 <pre>
 {1:n}
 {"r":{"1":{"ma":0,"sa":1.800,"tr":40.0000,"mi":8,"po":0,"pm":2,"pl":0.375}},"f":[1,0,5]}
