@@ -255,7 +255,7 @@ Power management is used to keep the steppers on when you need them and turn the
 
 ## Axis Settings
 
-### $xAM - Axis Mode
+### xam - Axis Mode
 Sets the function of the axis.
 
 * 0 = Disable. All input to that axis will be ignored and the axis will not move. 
@@ -267,7 +267,7 @@ Sets the function of the axis.
 $zam=2 	     Inhibit the Z axis; $zam1 will restore standard operation
 </pre>
 
-### $xVM - Velocity Maximum
+### xvm- Velocity Maximum
 (aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 move (traverse). This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
 
 Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will actually occur at the fastest speed the combined set of axes and the geometry will allow, and may be faster than the individual axis max velocities. For example, max velocity for X and Y are set to 1000 mm/min. For a 45 degree traverse in X and Y the toolhead would travel at 1414.21 mm/min. 
@@ -278,7 +278,7 @@ $zvm=30.0        sets Z to 30 inches per minute - assuming G20 is active (i.e. i
 $avm=36000       sets A to 100 revolutions per minute (360 * 100)
 </pre>
  
-### $xFR - Feed Rate maximum
+### xfr - Feed Rate maximum
 Sets the maximum velocity the axis will move during a feed in a G1, G2, or G3 move. This works similarly to maximum velocity, but instead of actually setting the speed, it only serves to establish a "do not exceed" for Gcode F words. Put another way, the maximum feed rate setting is NOT used to set the Gcode's F value; it is only a maximum that may be used to limit the F value provided in a gcode file.
 
 Axis feed rates should be equal to or less than the maximum velocity. See [TinyG Tuning](https://github.com/synthetos/TinyG/wiki/TinyG-Tuning) for more details. 
@@ -287,7 +287,7 @@ Axis feed rates should be equal to or less than the maximum velocity. See [TinyG
 $xfr=1000       sets X max feed rate to 1000 mm/min - assuming G21 is active (i.e. the machine is in MM mode)
 </pre> 
 
-### $xTN, $xTM - Travel Minimum, Travel Maximum
+### xtn, xtm - Travel Minimum, Travel Maximum
 Defines the maximum extent of travel in that axis. This is used during homing. See [Homing](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation) for more details on how this is used. 
 
 Both values can be positive or negative, but maximum must be greater than minimum or equal to minimum. If minimum and maximum are equal the axis is treated as an infinite axis (i.e. no limits). This is useful for rotary axes - for example:
@@ -299,7 +299,7 @@ $xtn = 0
 $xtm = 0
 </pre> 
 
-### $xJM - Jerk Maximum
+### xjm - Jerk Maximum
 Sets the maximum jerk value for that axis. Jerk is settable independently for each axis to support machines with different dynamics per axis - such as Shapeoko with belts for X and Y, screws for Z, Probotix with 5 pitch X and Y screws and 12 pitch Z screws, and any machine with both linear and rotary axes.
 
 Jerk is in units per minutes^3, so the numbers are quite large (but see note below). Some common values are shown in *millimeters* in the examples below 
@@ -319,10 +319,10 @@ The jerk term in mm is measured in mm/min^3. In inches mode it's units are inche
 
 _Note: Jerk values that are less than 1,000,000 are assumed to be multiplied by 1 million. This keeps from having to keep track of all those zeros. For example, to enter 5 billion the value '5000' can be entered._
 
-### $xJH - Jerk Homing
+### xjh - Jerk High
 Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the $xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
 
-### $xJD - Junction Deviation
+### xjd - Junction Deviation
 This one is somewhat complicated. Junction deviation - in combination with Junction Acceleration ($JA) from the system group - sets the velocity reduction used during cornering through the junction of two lines. The reduction is based on controlling the centripetal acceleration through the junction to the value set in JA with the junction deviation being the "tightness" of the controlling cornering circle. An explanation of what's happening here can be found on [Sonny Jeon's blog: Improving grbl cornering algorithm] (http://onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/ onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/). 
 
 It's important to realize that the tool head does not actually follow the controlling circle - the circle is just used to set the speed of the tool through the defined path. In other words, the tool does go through the sharp corner, just not as fast. This is a Gcode G61 - Exact Path Mode operation, not a Gcode G64 - Continuous Path Mode (aka corner rounding, or splining) operation. 
@@ -336,7 +336,7 @@ While JA is set globally and applies to all axes, JD is set per axis and can var
  $JA 200,000   Units are mm/min^2. As before, commas are ignored and are provided only for clarity
 </pre>
 
-### $aRA - Radius value
+### ara - Radius value
 The radius value is used by rotational axes only (A, B and C) to convert linear units to degrees when in radius mode. 
 
 For example; if the A radius is set to 10 mm it means that a value of 62.8318531 mm will make the A axis travel one full revolution - as 62.383... is the circumference of the circle of radius R ( 2*PI*R, or 10 * 2 * 3.14159...) (Assuming $nTR = 360 -- see note below). Receiving the gcode block `G0 A62.83` will turn the A axis one full revolution (360 degrees) from a starting position of 0. All internal computations and settings are still in degrees - it's just that gcode units received for the axis are converted to degrees using the specified radius. 
