@@ -1,6 +1,6 @@
 This page is a log of items updated in the edge branch and in the feature development branches cleaved off the main edge branch. Edge is moving pretty fast, and a number of people are working on projects, so we'll do our best to keep up with the changes here.
 
-###Edge branch, build 082.06
+###Edge branch, build 082.10
 These changes are still under test. If you find bugs or other issues please log to Issues.
 - **[Digital IO (GPIO)](Digital-IO-(GPIO))** introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
   - **Your configurations will need to change to accommodate these changes.** See settings/settings_shapeoko2.h for an example of setup and use - pay particular attention to `axis settings` and the new `inputs` section. 
@@ -50,10 +50,14 @@ These changes are still under test. If you find bugs or other issues please log 
 
 - **G10 L20** was added for easier offset setting
 
+- **Bug Fixes**
+  - Fixed some units mode display errors for G20 mode (inches)
+
 - **Still To Go**
   - SD card persistence
   - Spindle restart dwell
   - Digital output generalization and changes
+  - Still needs rigorous testing for very fast feedhold/resume and flush cycles
 
 ###Edge branch, build 071.02
 
