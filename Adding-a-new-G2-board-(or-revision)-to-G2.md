@@ -74,7 +74,8 @@ For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the consta
 
 ###Adding a new Config to an Atmel Studio Project
 
-1. Add the new pinouts file to the platform directory by adding an existing item
+1. Open Atmel Studio 6 to the TinyG2 project
+1. Go to the Solution Explore and add the new pinouts file to the platform directory by adding an existing item to the board/xxxxx sub-directory 
 1. Go to the Configuration Manager in the Build menu item
 1. Select <New..>, add your new platform, and copy the parameters from one that's close (or not).
 1. Bring up the Properties window by right clicking on the TinyG2 root in solution explorer and select Properties (at the bottom)
