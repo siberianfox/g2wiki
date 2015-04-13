@@ -79,7 +79,10 @@ For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the consta
 1. Go to the Configuration Manager in the Build menu item
 1. Select `<New...>`, add your new platform, and copy the parameters from one that's close (or not).
 1. Bring up the Properties window by right clicking on the TinyG2 root in solution explorer and select Properties (at the bottom)
-1. Go to the Build tab and edit the PLATFORM argument for the new platform
+1. Go to the Build tab and edit the PLATFORM argument for the new platform. Do this for both the Build commandline and the Clean commandline
+1. You should now be able to compile using the standard Build compile options
+
+###Compiling from Command Line (Xcode or Linux)
 
 1. To compile, call `make` with `PLATFORM=NewPlatformName` with your new platform name instead of `NewPlatformName`. It *is* case sensitive. For example, to build the `gShield` variant:
 
