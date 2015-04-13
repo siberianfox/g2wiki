@@ -13,8 +13,8 @@ There are two steps to adding a new revision of an already existing board based 
 _This is different than adding a new shield layout to the Due, which is described later._
 
 1. Add the new 'platform' to the main Makefile.
-1. Duplicate and alter the appropriate pin assignment files; e.g. `platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
-1. Add the new config to AS6
+1. Duplicate and alter the appropriate pin assignment files; e.g. `TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
+1. Add the new config to Atmel Studio 6
 
 ###Add the new 'platform' to the main Makefile.
 
