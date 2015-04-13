@@ -8,12 +8,13 @@ _Note about naming: In G2 there are `PLATFORM`, `BASE_PLATFORM`, and `MOTATE_BOA
 
 ##Adding a new revision of an already existing board.
 
-There are two steps to adding a new revision of an already existing board based on the `v9_3x8c` layout.
+There are two steps to adding a new revision of an already existing board based on the `v9_3x8c` layout. Threee if you want to add it to an Atmel Studio 6 project
 
 _This is different than adding a new shield layout to the Due, which is described later._
 
 1. Add the new 'platform' to the main Makefile.
 1. Duplicate and alter the appropriate pin assignment files.
+1. Add the new config to AS6
 
 ###Add the new 'platform' to the main Makefile.
 
@@ -70,6 +71,14 @@ For the `v9_3x8c`, the `motate_pin_assignments.h` file defines all of the consta
 1. Unassigned pins should be commented out and moved to the bottom of the file.
 
 1. Any newly created pins can now be used in G2.
+
+###Adding a new Config to an Atmel Studio Project
+
+1. Add the new pinouts file to the platform directory by adding an existing item
+1. Go to the Configuration Manager in the Build menu item
+1. Select <New..>, add your new platform, and copy the parameters from one that's close (or not).
+1. Bring up the Properties window by right clicking on the TinyG2 root in solution explorer and select Properties (at the bottom)
+1. Go to the Build tab and edit the PLATFORM argument for the new platform
 
 1. To compile, call `make` with `PLATFORM=NewPlatformName` with your new platform name instead of `NewPlatformName`. It *is* case sensitive. For example, to build the `gShield` variant:
 
