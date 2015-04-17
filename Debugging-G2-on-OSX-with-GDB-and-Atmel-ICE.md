@@ -41,12 +41,12 @@ On OSX it might pop a dialog box requesting you to accept an inbound connection.
 * Some useful commands
 
   * The `make` command (make VERBOSE=2 PLATFORM=G2v9k debug) sets the "current elf" for your PLATFORM
-
   * `load` programs the board with the current elf for your PLATFORM. (Do this after a recompile)
-
   * `monitor reset halt` to reset the board. Do this every time you load.
 
 * This is Embedded GDB, so `run` and some commands in the cheat sheets do not work
+
+* for help on any command type `help <command>` 
 
 ### A Very Brief Embedded GDB primer
 Even if you are familiar with GDB, you may find a few important differences when using it with an embedded project. This will not be a thorough how-to on this topic, but will hopefully serve enough to get you started.
@@ -185,3 +185,8 @@ Documented [here](https://sourceware.org/gdb/current/onlinedocs/gdb/Variables.ht
 	(gdb)
 
 	```
+
+One option is to `disp`lay a variable or structure every time you step. Like the following:
+`disp arc`
+
+To delete type `undisplay` with no argument
