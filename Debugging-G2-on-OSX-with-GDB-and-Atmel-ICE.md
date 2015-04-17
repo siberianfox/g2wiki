@@ -189,4 +189,4 @@ Documented [here](https://sourceware.org/gdb/current/onlinedocs/gdb/Variables.ht
 One option is to `disp`lay a variable or structure every time you step. Like the following:
 `disp arc`
 
-To delete type `undisplay` with no argument
+To delete type `undisplay arc`
