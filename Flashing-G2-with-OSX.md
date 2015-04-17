@@ -19,7 +19,7 @@ Expand the downloaded zip file and move Arduino.app to /Applications on your har
 
 ###Step 3 - Program TinyG2 onto the Due
 
-Open Terminal.app and change to the directory with this programmer:
+Open Terminal.app and change to the directory:
 
 * Type "cd " (That's lowercase "c", then "d", then space), DON'T hit return.
 * Now drag the *folder* that you found this ReadMe.txt file in to the Terminal.app window that has the "cd " you just typed. It should type in a path for you.
