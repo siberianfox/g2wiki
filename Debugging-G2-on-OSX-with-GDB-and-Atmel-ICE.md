@@ -27,6 +27,8 @@ xcode-select --install
 `make VERBOSE=2 PLATFORM=G2v9k debug`<br>
 ...for your platform
 
+You may see a message instructing you to copy openocd.cfg.example to openocd.cfg. Copy then edit this file for the debugger as per the instructions in the file.
+
 That should have you debugging in gdb. If you get connection errors make sure the Atmel-ICE is connected as in Hardware, above.
 
 On OSX it might pop a dialog box requesting you to accept an inbound connection. Do it. You may also need to try to connect more than once for it to work.
