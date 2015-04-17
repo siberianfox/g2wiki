@@ -39,13 +39,14 @@ On OSX it might pop a dialog box requesting you to accept an inbound connection.
   * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
 
 * Some useful commands
-  * `load` programs the board with the current elf for your PLATFORM. Always do this after every recompile
-  * `monitor reset halt` to reset. Do this next. 
 
-* The `make` command sets the "current elf" for your PLATFORM
+  * The `make` command (make VERBOSE=2 PLATFORM=G2v9k debug) sets the "current elf" for your PLATFORM
 
-* This is Embedded GDB, so some commands in the cheat sheets do not work:
-  * `run`
+  * `load` programs the board with the current elf for your PLATFORM. (Do this after a recompile)
+
+  * `monitor reset halt` to reset the board. Do this every time you load.
+
+* This is Embedded GDB, so `run` and some commands in the cheat sheets do not work
 
 ### A Very Brief Embedded GDB primer
 Even if you are familiar with GDB, you may find a few important differences when using it with an embedded project. This will not be a thorough how-to on this topic, but will hopefully serve enough to get you started.
