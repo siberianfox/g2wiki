@@ -14,8 +14,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 As instructed, run `brew doctor` before you install anything, and 
 install the Command Line Tools for Xcode: https://developer.apple.com/downloads. Search "Command Line Tools for Xcode". You may need to register as an Apple Developer for this step.
-You can also run this command in terminal to install Xcode Command Line Tools:<br>
-`xcode-select --install` (and select Install in the popup window).
+You can also run this command in terminal to install Xcode Command Line Tools:
+```bash
+xcode-select --install
+```
+...and select Install in the popup window.
 
 2. In terminal, run:<br>
 `brew install openocd`
