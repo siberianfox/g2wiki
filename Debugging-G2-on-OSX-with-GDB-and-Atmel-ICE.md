@@ -7,7 +7,7 @@ You will need the following hw and configuration
 
 ##Install OpenOCD Debugger
 1. Install hombrew: http://brew.sh/
-   Look for "Install Homebrew” near the bottom of that page. Follow those instructions in Terminal.<br>
+   Homebrew is a package manager for OSX which (in this case) provides an easy way to install OpenOCD. Look for "Install Homebrew” near the bottom of that page. Follow those instructions in Terminal.<br>
 <pre>
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 </pre>
