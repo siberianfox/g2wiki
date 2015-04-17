@@ -186,6 +186,14 @@ Documented [here](https://sourceware.org/gdb/current/onlinedocs/gdb/Variables.ht
 
 	```
 
+#### More Advanced Stuff
+
+Try these commands:
+* help disp
+* help comm
+
+Useful for displaying and tracking variables during a debugging run.
+
 One option is to `disp`lay a variable or structure every time you step. Like the following:
 `disp arc`
 
