@@ -11,6 +11,7 @@ You will need the following hw and configuration
 <pre>
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 </pre>
+
 As instructed, run `brew doctor` before you install anything, and 
 install the Command Line Tools for Xcode: https://developer.apple.com/downloads. Search "Command Line Tools for Xcode". You may need to register as an Apple Developer for this step.
 You can also run this command in terminal to install Xcode Command Line Tools:
