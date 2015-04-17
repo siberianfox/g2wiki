@@ -145,7 +145,10 @@ These are more advanced topics covered very well all over the internet, so I won
 Documented [here](https://sourceware.org/gdb/current/onlinedocs/gdb/Set-Breaks.html#Set-Breaks).
 
 * `b` -- set a breakpoint. Will default to "here" but you can pass it a function name or a `filename:line` to break on a specific line.
-* `info b` -- show breakpoints.
+* `info br` -- show breakpoints. In the listing the first column in the breakpoint number.
+* `dis N` -- Disables (but does not delete) breakpoint number N.
+* `ena N` -- Enables (but does not delete) breakpoint number N.
+* `del N` -- Deletes (but does not delete) breakpoint number N.
 
 #### Showing Variables
 
