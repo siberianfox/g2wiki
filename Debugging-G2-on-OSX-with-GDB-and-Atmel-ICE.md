@@ -39,10 +39,10 @@ On OSX it might pop a dialog box requesting you to accept an inbound connection.
   * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
 
 * Some useful commands
-  * `monitor reset halt` to reset
-  * `monitor load` programs the board with the current elf
+  * `load` programs the board with the current elf for your PLATFORM. Always do this after every recompile
+  * `monitor reset halt` to reset. Do this next. 
 
-* The `make` command sets the "current elf"
+* The `make` command sets the "current elf" for your PLATFORM
 
 * This is Embedded GDB, so some commands in the cheat sheets do not work:
   * `run`
