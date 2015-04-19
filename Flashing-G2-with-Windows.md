@@ -10,7 +10,7 @@ _This page is for uploading an already compiled G2 binary to a target board with
 
 _If you already have the Arduino Due environment installed you can skip this step_
 
-Download the Arduino 1.5 BETA (not the 1.0.5 release at the top of the page) from http://arduino.cc/en/Main/Software for Windows.
+Download the Arduino 1.6.x from http://arduino.cc/en/Main/Software for Windows.
 
 Get the "installer" and run installer executable.
 
