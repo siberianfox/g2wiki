@@ -1,4 +1,5 @@
 This page assumes you have already built or downloaded ```gShield_flash.bin```.
+
 Edit: 4/23/2015 Make is now building ```gShield.bin```, modify file name in commands as necessary
 
 ####Step 1. Install BOSSA flash programming utility.
