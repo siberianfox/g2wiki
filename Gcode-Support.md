@@ -15,7 +15,7 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 	G3 | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	G4 | P | Dwell | Pause for P seconds
 	[G10 L2](#g10-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
-	[G10 L20](#g10-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
+	[G10 L20](#g10-l20-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
 	G17 | | Select XY plane | G17, G18 and G19 set the plan in which the G2/G3 arcs are drawn
 	G18 | | Select XZ plane |
 	G19 | | Select YZ plane |
@@ -73,11 +73,11 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 #Gcode Reference
 Some of the more complicated commands are described here. Much of this is shamelessly cribbed from the [LinuxCNC Gcode pages](http://www.linuxcnc.org/docs/2.4/html/gcode_main.html)<br>
 
-##G10 Set Parameters (Offsets)
-Currently the only G10 command supported is G10 L2, which is used to set coordinate offsets. Use Pn to select coordinate system 1-6 (G54 - G59, respectively), and one or more axis value to set the offset for that axis. The format is:
-<pre>
-G10 L2 P1 X0 Y0 Z0 A0 B0 C0  - set G54 offsets to zero, making G54 act as persistent absolute coordinates
-</pre>
+##G10 L2 Set Parameters (Offsets)
+The G10 L2 command is used to set coordinate offsets. Use Pn to select coordinate system 1-6 (G54 - G59, respectively), and one or more axis values to set the offset for that axis. The axis value is the offset you want for that axis, relative the zero set during homing. For example, if you wanted the X origin of coordinate system 1 (G54) to be 100 mm to the right of zero you would enter G10 L2 X100.
+
+##G10 L20 Set Parameters (Offsets)
+The G10 L20 command is also used to set coordinate offsets. Use Pn to select coordinate system 1-6 (G54 - G59, respectively), and one or more axis values to set the offset for that axis. The axis value is the value you wish the current point to be. For example, if you wanted the current X location to be X0 in coordinate system 1 (G54) you would enter G10 L20 X0.
 
 ##G28, G28.1, G30, G30.1 Go To Predefined Position
 G28 (and G30) will move the machine to the absolute coordinates set in G28.1 (G30.1), optionally through an intermediate point.  Movement will occur at the traverse rate (G0 rate). Axes that are not specified are ignored (not moved). The axis value is the intermediate point for that axis. 
