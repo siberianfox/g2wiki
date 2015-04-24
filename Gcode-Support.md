@@ -9,12 +9,13 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
-	G0 | _axes_ | Straight traverse | Traverse at maximum velocity. At least one axis must be present
-	G1 | _axes_, F | Straight feed | Feed at feed rate F. At least one axis must be present
+	G0 | _axes_ | Straight traverse | Traverse at maximum velocity
+	G1 | _axes_, F | Straight feed | Move at feed rate F
 	G2 | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	G3 | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	G4 | P | Dwell | Pause for P seconds
 	[G10 L2](#g10-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
+	[G10 L20](#g10-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
 	G17 | | Select XY plane | G17, G18 and G19 set the plan in which the G2/G3 arcs are drawn
 	G18 | | Select XZ plane |
 	G19 | | Select YZ plane |
