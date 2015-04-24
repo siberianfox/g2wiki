@@ -14,9 +14,9 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 	G2 | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	G3 | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	G4 | P | Dwell | Pause for P seconds
-	[G10 L2](#g10-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
+	[G10 L2](#g10-l2-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
 	[G10 L20](#g10-l20-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
-	G17 | | Select XY plane | G17, G18 and G19 set the plan in which the G2/G3 arcs are drawn
+	G17 | | Select XY plane | G17, G18 and G19 set the plane in which the G2/G3 arcs are drawn
 	G18 | | Select XZ plane |
 	G19 | | Select YZ plane |
 	[G20](Inch-and-Millimeter-Units-Mode) | | Select inches units mode | All Gcode from this point on will be interpreted in inches
@@ -38,8 +38,10 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 	[G61.1](#g61-g611-g64-path-control-modes) | | Exact path mode | Continuous motion between Gcode blocks - exact path will be traced
 	[G64](#g61-g611-g64-path-control-modes) | | Continuous path mode | Same as exact path mode 
 	G80 | | Cancel motion mode |
-	G90 | | Set absolute mode |
-	G91 | | Set incremental mode |
+	G90 | | Set absolute distance mode |
+	G90.1 | | Set absolute arc distance mode |
+	G91 | | Set incremental distance mode |
+	G91.1 | | Set incremental arc distance mode |
 	G92 | _axes_ | Set origin offsets |
 	G92.1 | | Reset origin offsets |
 	G92.2 | | Suspend origin offsets |
