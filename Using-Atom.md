@@ -1,0 +1,1 @@
+This page records how we are using the Atom text editor in this project
