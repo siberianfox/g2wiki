@@ -1,7 +1,3 @@
-**WARNING** <br>
-**THIS PAGE IS BEING BUILT AND MANY THINGS ARE NOT YET CORRECT** <br>
-**THIS WARNING WILL BE REMOVED WHEN THE PAGE IS DONE** <br>
-
 **The settings on this page are for firmware version 0.98**
 The version number can be found as the fv variable in the startup JSON message, or by entering {fv:n} or $fv. Version 0.98 starts with g2 build 082.06.
 
