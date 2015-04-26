@@ -1,4 +1,6 @@
 ##Machine State and Alarm Processing
+This page describes the internal machine state and how exception processing such as alarms and shutdown affect this state. 
+
 Related pages
 - [Digital IO (GPIO)](Digital-IO-(GPIO))
 - [Job Exception Handling](Job-Exception-Handling)
