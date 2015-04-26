@@ -1,5 +1,12 @@
 This page is a log of items updated in the edge branch and in the feature development branches cleaved off the main edge branch. Edge is moving pretty fast, and a number of people are working on projects, so we'll do our best to keep up with the changes here.
 
+###Edge branch, build 083.07
+These changes are primarily fixes applied after testing
+- Fixes to spindle speed settings (082.11)
+- Fixes to build environments for Linux and other platforms
+- Fixes to planner operation from edge-replan-replan
+- Fixes for reporting error in inches mode
+
 ###Edge branch, build 082.10
 These changes are still under test. If you find bugs or other issues please log to Issues.
 - **[Digital IO (GPIO)](Digital-IO-(GPIO))** introduces major changes to the way switches and other inputs are handled. The digital inputs are completed, the digital outputs have not been. In short, inputs are now just numbered inputs that are mapped to axes, functions, and motion behaviors (feedholds). 
