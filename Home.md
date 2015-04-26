@@ -12,7 +12,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [Flashing Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#software-needed-to-use-g2)
 * [Compiling Firmware](https://github.com/synthetos/g2/wiki/Getting-Started-with-G2#compiling-g2-from-source)
 * [Connecting to G2](https://github.com/synthetos/g2/wiki/Connecting-to-TinyG)
-* [Configuring TinyG]9Configuring-TinyG)
+* [Configuring TinyG](Configuring-TinyG)
 * [Debugging Firmware](https://github.com/synthetos/g2/wiki/Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
 ### Reference Pages
