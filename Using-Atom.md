@@ -4,3 +4,10 @@ This page records how we are using the Atom text editor in this project
 - Use these settings from the Atom/Preferences menu item:
 
 ![](images/AtomSettings.png)
+
+- From the command line (anywhere) run"
+```
+apm install language-yaml
+apm install linter
+apm install linter-js-yaml
+``` 
