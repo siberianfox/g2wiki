@@ -1,6 +1,5 @@
 The following status codes are supported as of build 083.07. See Tinyg2.h and main.cpp for the source:
 ```
-
 // OS, communications and low-level status (must align with XIO_xxxx codes in xio.h)
 #define	STAT_OK 0						// function completed OK
 #define	STAT_ERROR 1					// generic error return (EPERM)
@@ -41,63 +40,6 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define	STAT_FLOAT_IS_NAN 33
 #define	STAT_PERSISTENCE_ERROR 34
 #define	STAT_BAD_STATUS_REPORT_SETTING 35
-#define	STAT_ERROR_36 36
-#define	STAT_ERROR_37 37
-#define	STAT_ERROR_38 38
-#define	STAT_ERROR_39 39
-
-#define	STAT_ERROR_40 40
-#define	STAT_ERROR_41 41
-#define	STAT_ERROR_42 42
-#define	STAT_ERROR_43 43
-#define	STAT_ERROR_44 44
-#define	STAT_ERROR_45 45
-#define	STAT_ERROR_46 46
-#define	STAT_ERROR_47 47
-#define	STAT_ERROR_48 48
-#define	STAT_ERROR_49 49
-
-#define	STAT_ERROR_50 50
-#define	STAT_ERROR_51 51
-#define	STAT_ERROR_52 52
-#define	STAT_ERROR_53 53
-#define	STAT_ERROR_54 54
-#define	STAT_ERROR_55 55
-#define	STAT_ERROR_56 56
-#define	STAT_ERROR_57 57
-#define	STAT_ERROR_58 58
-#define	STAT_ERROR_59 59
-
-#define	STAT_ERROR_60 60
-#define	STAT_ERROR_61 61
-#define	STAT_ERROR_62 62
-#define	STAT_ERROR_63 63
-#define	STAT_ERROR_64 64
-#define	STAT_ERROR_65 65
-#define	STAT_ERROR_66 66
-#define	STAT_ERROR_67 67
-#define	STAT_ERROR_68 68
-#define	STAT_ERROR_69 69
-
-#define	STAT_ERROR_70 70
-#define	STAT_ERROR_71 71
-#define	STAT_ERROR_72 72
-#define	STAT_ERROR_73 73
-#define	STAT_ERROR_74 74
-#define	STAT_ERROR_75 75
-#define	STAT_ERROR_76 76
-#define	STAT_ERROR_77 77
-#define	STAT_ERROR_78 78
-#define	STAT_ERROR_79 79
-
-#define	STAT_ERROR_80 80
-#define	STAT_ERROR_81 81
-#define	STAT_ERROR_82 82
-#define	STAT_ERROR_83 83
-#define	STAT_ERROR_84 84
-#define	STAT_ERROR_85 85
-#define	STAT_ERROR_86 86
-#define	STAT_ERROR_87 87
 
 // Assertion failures - build down from 99 until they meet the system internal errors
 
@@ -131,24 +73,6 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define	STAT_JSON_TOO_LONG 110					// JSON output exceeds buffer size
 #define	STAT_CONFIG_NOT_TAKEN 111				// configuration value not taken while in machining cycle
 #define	STAT_COMMAND_NOT_ACCEPTED 112			// command cannot be accepted at this time
-#define	STAT_ERROR_113 113
-#define	STAT_ERROR_114 114
-#define	STAT_ERROR_115 115
-#define	STAT_ERROR_116 116
-#define	STAT_ERROR_117 117
-#define	STAT_ERROR_118 118
-#define	STAT_ERROR_119 119
-
-#define	STAT_ERROR_120 120
-#define	STAT_ERROR_121 121
-#define	STAT_ERROR_122 122
-#define	STAT_ERROR_123 123
-#define	STAT_ERROR_124 124
-#define	STAT_ERROR_125 125
-#define	STAT_ERROR_126 126
-#define	STAT_ERROR_127 127
-#define	STAT_ERROR_128 128
-#define	STAT_ERROR_129 129
 
 // Gcode errors and warnings (Most originate from NIST - by concept, not number)
 // Fascinating: http://www.cncalarms.com/
@@ -208,28 +132,6 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define STAT_T_WORD_IS_MISSING 178
 #define STAT_T_WORD_IS_INVALID 179
 
-#define	STAT_ERROR_180 180									// reserved for Gcode errors
-#define	STAT_ERROR_181 181
-#define	STAT_ERROR_182 182
-#define	STAT_ERROR_183 183
-#define	STAT_ERROR_184 184
-#define	STAT_ERROR_185 185
-#define	STAT_ERROR_186 186
-#define	STAT_ERROR_187 187
-#define	STAT_ERROR_188 188
-#define	STAT_ERROR_189 189
-
-#define	STAT_ERROR_190 190
-#define	STAT_ERROR_191 191
-#define	STAT_ERROR_192 192
-#define	STAT_ERROR_193 193
-#define	STAT_ERROR_194 194
-#define	STAT_ERROR_195 195
-#define	STAT_ERROR_196 196
-#define	STAT_ERROR_197 197
-#define	STAT_ERROR_198 198
-#define	STAT_ERROR_199 199
-
 // TinyG errors and warnings
 
 #define STAT_GENERIC_ERROR 200
@@ -240,19 +142,6 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define	STAT_COMMAND_REJECTED_BY_SHUTDOWN 205           // command was not processed because machine is shutdown
 #define	STAT_COMMAND_REJECTED_BY_PANIC 206              // command was not processed because machine is paniced
 #define	STAT_KILL_JOB 207                               // ^d received (job kill)
-#define	STAT_ERROR_208 208
-#define	STAT_ERROR_209 209
-
-#define	STAT_ERROR_210 210
-#define	STAT_ERROR_211 211
-#define	STAT_ERROR_212 212
-#define	STAT_ERROR_213 213
-#define	STAT_ERROR_214 214
-#define	STAT_ERROR_215 215
-#define	STAT_ERROR_216 216
-#define	STAT_ERROR_217 217
-#define	STAT_ERROR_218 218
-#define	STAT_ERROR_219 219
 
 #define	STAT_SOFT_LIMIT_EXCEEDED 220					// soft limit error - axis unspecified
 #define	STAT_SOFT_LIMIT_EXCEEDED_XMIN 221				// soft limit error - X minimum
@@ -269,12 +158,6 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define	STAT_SOFT_LIMIT_EXCEEDED_CMIN 231				// soft limit error - C minimum
 #define	STAT_SOFT_LIMIT_EXCEEDED_CMAX 232				// soft limit error - C maximum
 #define	STAT_SOFT_LIMIT_EXCEEDED_ARC 233				// soft limit err on arc
-#define	STAT_ERROR_234 234
-#define	STAT_ERROR_235 235
-#define	STAT_ERROR_236 236
-#define	STAT_ERROR_237 237
-#define	STAT_ERROR_238 238
-#define	STAT_ERROR_239 239
 
 #define	STAT_HOMING_CYCLE_FAILED 240					// homing cycle did not complete
 #define	STAT_HOMING_ERROR_BAD_OR_NO_AXIS 241
@@ -284,13 +167,8 @@ The following status codes are supported as of build 083.07. See Tinyg2.h and ma
 #define	STAT_HOMING_ERROR_NEGATIVE_LATCH_BACKOFF 245
 #define	STAT_HOMING_ERROR_HOMING_INPUT_MISCONFIGURED 246
 #define	STAT_HOMING_ERROR_MUST_CLEAR_SWITCHES_BEFORE_HOMING 247
-#define	STAT_ERROR_248 248
-#define	STAT_ERROR_249 249
 
 #define	STAT_PROBE_CYCLE_FAILED 250						// probing cycle did not complete
 #define STAT_PROBE_ENDPOINT_IS_STARTING_POINT 251
 #define	STAT_JOGGING_CYCLE_FAILED 252					// jogging cycle did not complete
-#define	STAT_ERROR_253 253
-#define	STAT_ERROR_254 254
-#define	STAT_ERROR_255 255
 ```
