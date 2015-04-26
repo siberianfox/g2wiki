@@ -17,6 +17,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 
 ### Reference Pages
 * [Gcode Support](Gcode-Support)
+* [Status Codes](Status-Codes)
 * [Licensing](G2-Licensing)
 
 ### Resources
