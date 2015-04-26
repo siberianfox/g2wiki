@@ -40,7 +40,7 @@ The footer is an array of 3 elements:
 - Note: The checksum that used to be in the footer has been removed as no-one was using it.
 
 ##Motor Groups
-Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors.<br><br>
+Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled [here](Arduino-DUE-Pinout-for-tinyG2).<br><br>
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
