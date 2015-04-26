@@ -23,6 +23,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 
 ### Developer Pages
 * [Makefile Notes](Makefile-Notes)
+* [Adding a new G2 board (or revision) to G2](Adding-a-new-G2-board-(or-revision)-to-G2)
 * [Useful stuff to know](Useful-Stuff)
 
 
