@@ -19,6 +19,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [Licensing](G2-Licensing)
 
 ### Resources
+* [Arduino DUE Pinout for tinyG2](Arduino-DUE-Pinout-for-tinyG2)
 * [[Digital DRO]] Using G2 as a real-time step counter (digital readout)
 
 ### Developer Pages
