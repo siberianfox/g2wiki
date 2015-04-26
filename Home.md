@@ -15,14 +15,15 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [Debugging Firmware](https://github.com/synthetos/g2/wiki/Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
 ### Reference Pages
-* [Licensing](https://github.com/synthetos/G2/wiki/G2-Licensing)
+* [Gcode Support](Gcode-Support)
+* [Licensing](G2-Licensing)
 
 ### Resources
 * [[Digital DRO]] Using G2 as a real-time step counter (digital readout)
 
 ### Developer Pages
-* [Makefile Notes](https://github.com/synthetos/g2/wiki/Makefile-Notes)
-* [Useful stuff to know](https://github.com/synthetos/g2/wiki/Useful-Stuff)
+* [Makefile Notes](Makefile-Notes)
+* [Useful stuff to know](Useful-Stuff)
 
 
 #G2 User Pages
