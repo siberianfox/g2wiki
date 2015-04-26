@@ -23,6 +23,7 @@ This wiki serves as a user and programmer manual and documents progress on the p
 * [[Digital DRO]] Using G2 as a real-time step counter (digital readout)
 
 ### Developer Pages
+* [Changelog for Edge Branch](Changelog-for-Edge-Branches)
 * [Makefile Notes](Makefile-Notes)
 * [Adding a new G2 board (or revision) to G2](Adding-a-new-G2-board-(or-revision)-to-G2)
 * [Useful stuff to know](Useful-Stuff)
