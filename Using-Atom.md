@@ -11,3 +11,9 @@ apm install language-yaml
 apm install linter
 apm install linter-js-yaml
 ``` 
+
+### Tips
+
+- Cmd-shift-p is the shortcut to ALL Atom features
+- Snippets: https://atom.io/docs/v0.196.0/using-atom-snippets
+
