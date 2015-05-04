@@ -15,5 +15,5 @@ apm install linter-js-yaml
 
 - Cmd-shift-p is the shortcut to ALL Atom features
 - Snippets: https://atom.io/docs/v0.196.0/using-atom-snippets
-- Install this `sudo npm install -g js-yaml' to dump the JSON from a yaml file
+- Install this `sudo npm install -g js-yaml` to dump the JSON from a yaml file
   - run `js-yaml <filename>` from the command line to see the JSON
