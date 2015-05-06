@@ -31,8 +31,8 @@ Now you can choose `Build` for the `Product` menu of Xcode (or click the "play" 
 
 The resulting files will be in `${projectRoot}/TinyG2/bin/`, in a folder named after the platform. For example, there will be a folder named `gShield` with a file named `gShield_flash.elf`.
 
-## Uploading G2 to a target board
+## Uploading G2 to a target board and Debugging
 
-To flash G2 onto a target board, see the [[Flashing G2 with OSX]] page.
+- See [[Flashing G2 with OSX]]
+- See [Degugging G2 on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
-TODO: Instruction on debugging with OS X, GDB, OpenOCD, and Atmel ICE.
