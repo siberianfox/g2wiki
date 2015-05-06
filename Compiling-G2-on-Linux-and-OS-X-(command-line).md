@@ -29,4 +29,8 @@ make
 ```
 
 **WARNING!** Do not use *-j* option when running make. It will break everything! See #11 for the details.
-The output is *./bin/gShield/gShield_flash.bin*. After that, you will likely want to flash the firmware. See [[Flashing G2 with Linux]].
+The output is *./bin/gShield/gShield_flash.bin*. 
+
+After that, you will likely want to flash the firmware. 
+- See [[Flashing G2 with Linux]].
+- See [Degugging G2 on OSX with GDB and Atmel ICE](https://github.com/synthetos/g2/wiki/Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
