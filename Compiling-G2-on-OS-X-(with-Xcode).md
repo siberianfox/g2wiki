@@ -4,7 +4,7 @@ See also: [Debugging G2 on OSX with GDB and Atmel-ICE](https://github.com/synthe
 
 ## What's needed
 
-To compile G2 on OS X with Xcode you will need to install XCode ([Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)). Luckily, it's free.
+To compile G2 on OS X with Xcode you will need to install the free XCode (Download the installer from the [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) *or* run this command in Terminal: `xcode-select --install`).
 
 _If you wish to use the OS X command line, then visit [[Compiling G2 on Linux and OS X (command line)]] as well._
 
