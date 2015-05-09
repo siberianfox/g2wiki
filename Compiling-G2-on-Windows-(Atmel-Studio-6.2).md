@@ -31,7 +31,7 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 
 _Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
 
-In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio 6.2 is installed, open the solution file `tinyg.atsln`. (Atmel studio will also open the project file `tinyg.cproj` automatically.)
+In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio 6.2 is installed, open the solution file `TinyG2.atsln`. (Atmel studio will also open the project file `TinyG2.cppproj` automatically.)
 
 _Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
@@ -65,4 +65,3 @@ You have 2 options:
 [[Flashing G2 with Atmel Studio6 and Atmel ICE]]
 
 2. To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
-
