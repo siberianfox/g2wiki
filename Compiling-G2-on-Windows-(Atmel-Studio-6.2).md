@@ -12,6 +12,8 @@ To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 (b
   * You **will not** need the Atmel Solutions framework when asked.
   * You **will** need the USB drivers when asked.
 
+**Note: do NOT use an ASF project (like the Arduino Due board) when setting up you project! It's best not to even download ASF.** 
+
 ## Cloning the git repository.
 
 The easiest way on Windows to clone the git repo is probably to use the GitHub Windows app.
