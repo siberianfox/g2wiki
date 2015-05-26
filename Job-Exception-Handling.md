@@ -39,7 +39,11 @@ _NOTE: Functions on this page are in effect as of build 079.60 and later._
 1. **% Handling** [cases 1 and 2]: Implement the following behaviors
 If the system is not in a feedhold replace the `%` with a `;` in the serial stream. This allows the `%` to act as a start-comment character for Gcode comments (supporting the Inkscape comment case). _Note that g2 treats `;` as a start-comment character even though this is not part of the Gcode specification._
 
-1. **Control-d** [case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until a {clear:n} (or $clear) is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
+1. **Control-d** [case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until one of the following commands is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
+  * {clear:n}
+  * $clear
+  * M2
+  * M30
 
 1. **Control-x** [case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
 
