@@ -45,8 +45,11 @@ _NOTE: Functions on this page are in effect as of build 079.60 and later._
 
 1. **Control-x** [case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
 
-### Notes about V9 serial processing
+### Notes about g2 serial processing
 
-The current V9 USB serial port implementation relies on the USB hardware's buffers, and only reads data from those buffers as the system can parse them. This doesn't allow for immediate-processing of special characters `!%~` nor does it adhere to the byte-counting flow-control methods. Programs written to use the byte-counting of V8 and that only use a single channel will likely see a "lock up" where the single channel no longer responds to incoming data if only once channel is opened.
+The current g2 USB serial port implementation relies on the USB hardware's buffers, and only reads data from those buffers as the system can parse them. This doesn't allow for immediate-processing of special characters `!%~` nor does it adhere to the byte-counting flow-control methods. Programs written to use the byte-counting of V8 and that only use a single channel will likely see a "lock up" where the single channel no longer responds to incoming data if only once channel is opened.
 
 In order to solve this, we will add a line-mode (packet-mode) to the USB Serial on V9, allowing the host to send one line at a time and only need to keep track of the number of available lines in the line buffer (no character counting)
+
+####Queue Flush Differences
+In g2 the queue flush operation (%) also ends a feed hold if one is in effect. The `!%~` sequence can be shortened to `!%`
