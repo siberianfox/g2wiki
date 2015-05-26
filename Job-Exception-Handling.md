@@ -37,9 +37,7 @@ _NOTE: Functions on this page are in effect as of build 079.60 and later._
 ### Implementation:
 
 1. **% Handling** [cases 1 and 2]: Implement the following behaviors
-  1. If the system is not in a feedhold replace the `%` with a `;` in the serial stream. This allows the `%` to act as a start-comment character for Gcode comments (supporting the Inkscape comment case). _Note that g2 treats `;` as a start-comment character even though this is not part of the Gcode specification._
-
-  1. If the system is in feedhold intercept % in the serial stream and set a flag to request queue flush, and write an end-of-text (ETX, ^c) marker into the serial buffer to mark the position in the stream where the % was received. The queue flush will begin as soon as the hold has come to a complete stop (as the hold might need some of the planner buffers you are about to flush). The flush zeros the runtime buffer (mr), removes any moves remaining in the planner queue, and clears the serial input queue up to the ETX marker.
+If the system is not in a feedhold replace the `%` with a `;` in the serial stream. This allows the `%` to act as a start-comment character for Gcode comments (supporting the Inkscape comment case). _Note that g2 treats `;` as a start-comment character even though this is not part of the Gcode specification._
 
 1. **Control-d** [case (3) - Kill Job]: Add a new control character end-of-transmission / control-d / ^d. This will set an ALARM state which stops motion and spindle, clears internal planner queues and rejects all queued and incoming commands until a {clear:n} (or $clear) is received. ^d is intercepted by the serial system and is NOT queued, so it is acted on immediately on receipt.
 
