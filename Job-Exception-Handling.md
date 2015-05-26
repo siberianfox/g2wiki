@@ -6,7 +6,7 @@ _NOTE: Functions on this page are in effect as of build 079.60 and later._
 	! | Feedhold | Start a feedhold. Ignored if already in a feedhold
 	~ | End Feedhold | Resume from feedhold. Ignored if not in feedhold
 	% | Queue Flush | Flush remaining moves during feedhold. Ignored if not in feedhold
-	^d | Kill Job | Trigger ALARM to kill current job. Send {clear:n} to end ALARM
+	^d | Kill Job | Trigger ALARM to kill current job. Send {clear:n}, M2 or M30 to end ALARM state
 	^x | Reset Board | Perform hardware reset to restart the board
 
 ## There are a few main cases that the board needs to handle:
