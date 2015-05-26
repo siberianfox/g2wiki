@@ -55,7 +55,7 @@ If the system is not in a feedhold replace the `%` with a `;` in the serial stre
 ####No Byte Counting
 The current g2 USB serial port implementation relies on the USB hardware's buffers, and only reads data from those buffers as the system can parse them. This doesn't allow for byte-counting flow-control methods. Programs written to use the byte-counting of v8 and that only use a single channel will likely see a "lock up" where the single channel no longer responds to incoming data if only once channel is opened.
 
-In order to solve this, we will add a line-mode (packet-mode) to the USB Serial on V9, allowing the host to send one line at a time and only need to keep track of the number of available lines in the line buffer (no character counting)
+In order to solve this, we will add a line-mode (packet-mode) to the USB Serial on g2, allowing the host to send one line at a time and only need to keep track of the number of available lines in the line buffer (no character counting)
 
 ####Special Characters
 the g2 USB serial does not perform immediate-processing of special characters `!`, `%`, `~`, `^x`, or `^d`. Instead it receives these from the USB sub-system and executes them as part of the normal command dispatch. However, these characters do take priority over a single command, and can "jump the queue", but will not jump the queue over multiple commands that may be backed up in the on-board USB buffers. The line-mode processing should also take care of this issue. 
