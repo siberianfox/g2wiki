@@ -9,7 +9,7 @@ _NOTE: Functions on this page are in effect as of build 079.60 and later._
 	^d | Kill Job | Trigger ALARM to kill current job. Send {clear:n}, M2 or M30 to end ALARM state
 	^x | Reset Board | Perform hardware reset to restart the board
 
-## There are a few main cases that the board needs to handle:
+## There are a few key use cases that need to be handled:
 
 1. **Stop a Single Move** - Feedhold + queue flush `!%` is used to terminate a single move in cases such as homing, probing, and some forms of jogging. A `!%` will transition the system to a STOP. At this point the controlling program in the firmware, or on the host can perform the next action.
 
