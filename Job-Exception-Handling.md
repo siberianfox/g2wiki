@@ -1,4 +1,4 @@
-_NOTE: Functions on this page are in effect as of build 079.60 and later._
+_NOTE: Functions on this page are in effect as of build 083.xx and later._
 
 ## Summary
 	Character | Operation | Description
