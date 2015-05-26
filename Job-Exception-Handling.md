@@ -45,7 +45,11 @@ If the system is not in a feedhold replace the `%` with a `;` in the serial stre
   * M2
   * M30
 
-1. **Control-x** [case (4) - Kill Job]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset.
+1. **Control-x** [case (4) - Reset System]: Resets the board, exiting a SHUTDOWN state. A shutdown is unrecoverable and requires a reset:
+  * `^x`
+  * hardware reset
+  * power cycle
+
 
 ### Notes about g2 serial processing
 
