@@ -11,11 +11,11 @@ Pin changes are *not* a substitute for a proper debugger.
   Say spindle change:
 
   ```c++
-  pin_number kSpindle_EnablePinNumber         = 112;
+  pin_number kCoolant_EnablePinNumber         = 116;
   ```
   to
   ```c++
-  pin_number kSpindle_EnablePinNumber         = -1; // was 112
+  pin_number kCoolant_EnablePinNumber         = -1; // was 116
   ```
 
   __Warning__ -- don't use the input pins on a TinyG board for timing via pin changes. They have an R/C filter on them and will slew the output significantly. You should limit the debug pins to those that are normally outputs, and have a screw terminal or other pinout.
@@ -23,7 +23,7 @@ Pin changes are *not* a substitute for a proper debugger.
 1. Assign one or more debug pins to pins you want to temporarily "take over".
 
   ```c++
-  pin_number kDebug1_PinNumber                =  112; // using the spindle pin temporarily
+  pin_number kDebug1_PinNumber                =  116; // using the coolant pin temporarily
   pin_number kDebug2_PinNumber                =  -1;
   pin_number kDebug3_PinNumber                =  -1;
   pin_number kDebug4_PinNumber                =  -1;
@@ -35,28 +35,28 @@ Pin changes are *not* a substitute for a proper debugger.
   // This next "using" line just has to be in the file before you use OutputPin<>. It likely already is.
   // You don't want it in the file twice, or the compiler will bark at you.
   using namespace Motate;
-  //OutputPin<kDebug1_PinNumber> exec_debug_pin1;
+  OutputPin<kDebug1_PinNumber> exec_debug_pin1;
   //OutputPin<kDebug2_PinNumber> exec_debug_pin2;
-  OutputPin<kDebug3_PinNumber> exec_debug_pin3;
+  //OutputPin<kDebug3_PinNumber> exec_debug_pin3;
   //OutputPin<-1> exec_debug_pin3;
   ```
 
 1. Now, in that file, anywhere you want to set the pin:
 
   ```c++
-  exec_debug_pin3 = 1;
+  exec_debug_pin1 = 1;
   ```
 
   and the clear it:
 
   ```c++
-  exec_debug_pin3 = 0;
+  exec_debug_pin1 = 0;
   ```
 
   and to toggle the pin:
 
   ```c++
-  exec_debug_pin3.toggle();
+  exec_debug_pin1.toggle();
   ```
 
 __PLEASE__ -- don't git commit the changes to the `motate_pin_assignments.h` file.
