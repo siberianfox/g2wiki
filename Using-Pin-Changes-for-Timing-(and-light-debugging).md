@@ -4,7 +4,9 @@ Pin changes are *not* a substitute for a proper debugger.
 
 ## How to debug with pin changes in G2
 
-1. Go to the motate_pin_assignments.h file, e.g. in the `v9_3x8c/motate_pin_assignments.h` file, and swap the pin you want to "steal from" with the debug pin you want
+1. Go to the motate_pin_assignments.h file and swap the pin you want to "steal from" with the debug pin you want. The path is something like:
+
+  `TinyG2/platform/atmel_sam/v9_3x8c/motate_pin_assignments.h`
 
   Say spindle change:
 
