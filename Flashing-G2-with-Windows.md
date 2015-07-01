@@ -24,7 +24,7 @@ If you are on Windows x64 then run this command.
 If you are on Windows x32 then run this command.
 * `cd %ProgramFiles%\Arduino\hardware\tools`<br>
 After that go ahead and run these commands.  You should be good to go.
-* `mode COM6 BAUD=2400`
+* `mode COM6 BAUD=1200`
 * `bossac.exe --port=COM6 -e -w -v -b %HOMEPATH%\Downloads\TinyG2_Due_rob_usbtest.bin -R`
 
 Note that COM4 is the port that my ArduinoDUE showed up as.  You can run the `mode` command by itself and it should return a COMx.  Just use your port number.
