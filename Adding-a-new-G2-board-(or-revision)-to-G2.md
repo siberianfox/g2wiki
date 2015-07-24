@@ -12,14 +12,14 @@ There are two steps to adding a new revision of an already existing board based 
 
 _This is different than adding a new shield layout to the Due, which is described later._
 
-1. Add the new 'PLATFORM' to the main Makefile.
-1. Duplicate and alter the appropriate pin assignment files; e.g. 'TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
-1. Add the new config to Atmel Studio 6
-  - To add your files to the AS6 project:
-    - Open AS6, navigate to the `TinyG2/platform/atmel_sam/board` directory. Use AS6's `Add New Folder` to create a board family name e.g. `g2ref`
+1. Add the new 'PLATFORM' and if needed, 'BASE_PLATFORM' to the main Makefile. E.g. `TinyG2/platform/atmel_sam/board/BASE_PLATFORM/PLATFORM_pinout.h`
+1. Duplicate and alter the appropriate pin assignment files; e.g. `TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
+1. To add the new files and configuration to Atmel Studio 6:
+  - Add your files to the AS6 project:
+    - Open AS6, navigate to the `TinyG2/platform/atmel_sam/board` directory. If you are adding a new base platform use AS6's `Add New Folder` to create a base platform directory e.g. `g2ref`. Otherwise use an existing base platform directory
     - Use AS6's `Add Existing Items` to copy your starting ...pinout.h and motate_pin_assignments.h file into this directory 
     - You can now edit these files from within AS6.
-  - Set up a new configuration 
+  - Set up a new configuration:
     - Menu: Build / Configuration Manager - add the new configuration, e.g. `g2ref_revA`
     - In the Properties / Build panel change the PLATFORM to the above in the `Build Commandline` and the `Clean Commandline` 
   - Be sure to save or close AS6 so this all sticks
