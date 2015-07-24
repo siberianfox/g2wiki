@@ -2,7 +2,7 @@ There are three different ways to add a new board or revision to G2:
 
 1. [Adding a new revision of an already existing board like the G2v9](#adding-a-new-revision-of-an-already-existing-board).
 1. [Adding a new shield of the Due](#adding-a-new-shield-to-an-already-existing-base-board).
-1. [Adding a new board that usess one of the supported platforms](#adding-a-new-board-that-uses-one-of-the-supported-platforms). (Currently, this is SAM3X8E and SMA3X8C.)
+1. [Adding a new board that uses one of the supported platforms](#adding-a-new-board-that-uses-one-of-the-supported-platforms). (Currently, this is SAM3X8E and SMA3X8C.)
 
 _Note about naming: In G2 there are `PLATFORM`, `BASE_PLATFORM`, and `MOTATE_BOARD`,  where `PLATFORM` is the top-level that is selected when compiling, and the rest are implied based on that setting. In newer versions of Motate, these have been rearranged and clarified to make more sense: `BOARD`, `BASE_BOARD`, `PLATFORM`, and `ARCH`, where `BOARD` is the top-level that is passed when compiling. This document will be changed to reflect those changes when they happen. Until then, accept that the naming is somewhat nonsensical._
 
