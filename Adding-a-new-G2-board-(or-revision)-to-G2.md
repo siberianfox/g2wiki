@@ -14,7 +14,7 @@ _This is different than adding a new shield layout to the Due, which is describe
 
 1. Add the new 'platform' to the main Makefile.
 1. Duplicate and alter the appropriate pin assignment files; e.g. `TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
-1. Add the new config to Atmel Studio 6
+1. Add the new config to Atmel Studio 6 (Menu: Build / Configuration Manager)
 
 ###Add the new 'platform' to the main Makefile.
 
