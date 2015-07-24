@@ -16,6 +16,7 @@ _This is different than adding a new shield layout to the Due, which is describe
 1. Duplicate and alter the appropriate pin assignment files; e.g. `TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
 1. Add the new config to Atmel Studio 6
   - Menu: Build / Configuration Manager - add the new configuration, e.g. `g2ref_revA`
+  - Go into the Build panel of the Properties window and change the PLATFORM in the build command line 
   - Open AS6, navigate to the `TinyG2/platform/atmel_sam/board` directory and Add New Folder board family name e.g. `g2ref`
   - Copy your starting ...pinout.h and motate_pin_assignments.h file into this directory using Add Existing Items
   - Edit these files. Be sure to save of close AS6 so this sticks
