@@ -12,7 +12,7 @@ There are two steps to adding a new revision of an already existing board based 
 
 _This is different than adding a new shield layout to the Due, which is described later._
 
-1. Add the new 'PLATFORM' and if needed, 'BASE_PLATFORM' to the main Makefile. E.g. `TinyG2/platform/atmel_sam/board/BASE_PLATFORM/PLATFORM_pinout.h`
+1. Add the new 'PLATFORM' to the main Makefile. If you are adding a new board type add the ['BASE_PLATFORM'](https://github.com/synthetos/g2/wiki/Adding-a-new-G2-board-(or-revision)-to-G2#adding-a-new-board-that-uses-one-of-the-supported-platforms) as well. E.g. `TinyG2/platform/atmel_sam/board/BASE_PLATFORM/PLATFORM_pinout.h`
 1. Duplicate and alter the appropriate pin assignment files; e.g. `TinyG2/platform/atmel_sam/board/v9_3x8c/G2v9k_pinout.h`
 1. To add the new files and configuration to Atmel Studio 6:
   - Add your files to the AS6 project:
