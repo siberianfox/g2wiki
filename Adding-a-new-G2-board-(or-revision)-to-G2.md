@@ -20,7 +20,7 @@ _This is different than adding a new shield layout to the Due, which is describe
     - Use AS6's `Add Existing Items` to copy your starting ...pinout.h and motate_pin_assignments.h file into this directory 
     - You can now edit these files from within AS6.
   - Set up a new configuration:
-    - Menu: Build / Configuration Manager - add the new configuration, e.g. `g2ref_revA`
+    - Menu: Build / Configuration Manager - add the new configuration, e.g. `g2refa`
     - In the Properties / Build panel change the PLATFORM to the above in the `Build Commandline` and the `Clean Commandline` 
   - Be sure to save or close AS6 so this all sticks
 
