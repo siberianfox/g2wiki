@@ -13,4 +13,6 @@ New tasks can be added as callbacks inserted into the main loop. Any task that i
 - Return STAT_EAGAIN if that task's end state should prevent lower priority tasks from executing. Eagain will force the main loop to start over from the top.
 - A callback should generally not take more than +/- 2 milliseconds to execute (ideally less), and must not block internally. If it encounters a blocking condition it should return control to the main loop, possibly with STAT_EAGAIN if lower-priority tasks are dependent on its completion.
 
-Write tasks as co-routines with an entry point to initiate the task, and a continuation installed as a callback to continue the task. A singleton structure can be used to keep state between initiation and repeated calls to the continuation. See plan_arc.cpp, cm_arc_feed() and cm_arc_callback() for a good example of an entry function and a continuation.
+Write tasks as co-routines with an entry point to initiate the task, and a continuation installed as a callback to continue the task. A singleton structure can be used to keep state between initiation and repeated calls to the continuation. 
+
+See plan_arc.cpp, cm_arc_feed() and cm_arc_callback() for a good example of an entry function and a continuation. See st_motor_power_callback() for an example that uses the system timer to schedule events.
