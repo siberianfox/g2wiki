@@ -4,6 +4,8 @@ Note that these instructions are for flashing TinyG2 to a Arduino Due or TinyG v
 
 This is also for flashing *without* a hardware debugger such as the Atmel ICE, Atmel SAM-ICE, or Segger JLink.
 
+Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-firmware-onto-the-board) for instructions on flashing *with* a hardware debugger
+
 ###Step 1 - Get the TinyG2.elf file
 
 **Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
