@@ -185,7 +185,8 @@ Documented [here](https://sourceware.org/gdb/current/onlinedocs/gdb/Variables.ht
 	(gdb)
 
 	```
-#### Flashing brand new chip
+
+#### Fixing a board that won't boot after flashing
 
 Sometimes the board will appear like it was flashed correctly, however it will never boot up. You may also notice that all LED's are on, and that only one USB port is listed when trying to connect. This may happen when you flash the chip that has never been programmed before, or the previous image somehow gets corrupted.
 
