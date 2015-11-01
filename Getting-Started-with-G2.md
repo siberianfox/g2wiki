@@ -34,12 +34,4 @@ If you are _not_ planning on compiling the firmware yourself, then all you need 
 
 _TODO: Provide links to CNC software resources._
 
-## Compiling G2 From Source
 
-[![XKCD Comic About Compiling](http://imgs.xkcd.com/comics/compiling.png)](http://xkcd.com/303/)
-
-If you _are_ planning on compiling the firmware yourself, go to the appropriate pages for your OS:
-
-* [[Compiling G2 on Windows (Atmel Studio 6.2)]]
-* [[Compiling G2 on OS X (with Xcode)]]
-* [[Compiling G2 on Linux and OS X (command line)]]
