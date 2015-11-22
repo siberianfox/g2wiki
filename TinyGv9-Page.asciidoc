@@ -4,7 +4,7 @@ This page contains items specific to the TinyGv9 board.
 
 .Digital Input Mapping to v9 Connectors
 |===
-| Input | Label | Mode | Action | Function | Notes 
+| Input | Label | Input Mode | Action | Function | Notes 
 | DI1 | Xmin | Normally Closed | Stop | Limit |
 | DI2 | Xmax | Normally Closed | Stop | Limit |
 | DI3 | Ymin | Normally Closed | Stop | Limit |
@@ -16,13 +16,19 @@ This page contains items specific to the TinyGv9 board.
 | DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
 |===
 
+.Parameter Values
+|===
+| Parameter | Value | Value Label | Notes 
+| Input Mode | -1 | Disabled |
+| | 0 | Active Low | aka Normally Open
+| | 1 | Active High | aka Normally Closed
+| Action | 0 | None |
+| | 1 | Stop | Stop without losing position, observe jerk
+| | 2 | Fast Stop | Stop without losing position, fast jerk
+| | 3 | Halt | Stop immediately, may lose position
+| | 4 | Reset | Reset system
 
-==== Legend
-Input Mode::
-. INPUT_MODE_DISABLED = -1
-. INPUT_ACTIVE_LOW = 0 (aka NORMALLY_OPEN)
-. INPUT_ACTIVE_HIGH = 1 (aka NORMALLY_CLOSED)
-
+|===
 Input Action::
     INPUT_ACTION_NONE
     INPUT_ACTION_STOP
