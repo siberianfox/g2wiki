@@ -1,7 +1,7 @@
 This page describes how digital inputs work in firmware version 0.98. To report the version use {fv:n}. G2 from build 87.01 on is version 0.98. Other pages that may be of interest:
 
 * [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
-* [Configuring digital inputs on TinyGv9 boards]()
+* [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
 
 ##Configuring Inputs
 Digital inputs are controlled using a set of digital input objects referenced as so:
