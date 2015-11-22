@@ -4,13 +4,23 @@ This page describes how digital inputs work in firmware version 0.98. To report 
 * [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
 
 ##Configuring Inputs
-Digital inputs are controlled using a set of digital input objects referenced as so:
-di1
-di2
-…
-diN
+Digital inputs are controlled using a set of digital input objects referenced as:
+<pre>
+{di1:n}
+{di2:n}
+...
+{diN:n}
+{d1:n}   Group of all digital inputs
+</pre>
 
-The group of all digital inputs can be referenced as: `di`
+The state of a digital inputs can be referenced as: 
+<pre>
+{in1:n}
+{in2:n}
+...
+{inN:n}
+{in:n}   Group of all digital inputs
+</pre>
 
 Digital inputs have these attributes (using di1 as an example)
 
@@ -18,7 +28,7 @@ Digital inputs have these attributes (using di1 as an example)
 	------|------------|---------
 	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, more TBD
+	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
 
@@ -31,7 +41,8 @@ The function is the default function for that input. These functions set flags t
 
 - LIMIT acts as a limit switch which goes into an ALARM state. Enter {clear:n} to clear
 - INTERLOCK pauses all movement until the interlock input is restored
-- SHUTDOWN puts the machine into a shutdown state. It must be recovered with a reset of power cycle
+- SHUTDOWN puts the machine into a shutdown state. It must be recovered with a reset or power cycle
+- PANIC puts the machine into a panic state. It must be recovered with a reset or power cycle
 
 Internal state for inputs may include:
 
@@ -60,12 +71,18 @@ Notes and questions:
 -	The above works for dedicated homing switches. It will also work for shared homing switches except for the initial backoff (off a homing switch), which will somehow need to be disabled.
 -	Note – this does not address dual-axis homing such as squaring a dual-gantry Y. Do we need to discuss this?
 
-Configuring Outputs
-Digital outputs are controlled using a set of digital output objects referenced as so:
+##Probing
+Probing is also an exception. Currently probing can only be performed on the Zmin input (di5 on the v9). Di5 should be set as Normally Open (Active Low).
+
+#Configuring Outputs
+(Not yet implemented)
+Digital outputs are controlled using a set of digital output objects referenced as:
+<pre>
 do1
 do2
 …
 doN
+<pre>
 
 The group of all digital inputs can be referenced as: `do`
 
