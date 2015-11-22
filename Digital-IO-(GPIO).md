@@ -13,7 +13,7 @@ Digital inputs are controlled using a set of digital input objects referenced as
 {d1:n}   Group of all digital inputs
 </pre>
 
-The state of a digital inputs can be referenced as: 
+The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense. Disabled inputs are returned as -1.
 <pre>
 {in1:n}
 {in2:n}
@@ -21,6 +21,11 @@ The state of a digital inputs can be referenced as:
 {inN:n}
 {in:n}   Group of all digital inputs
 </pre>
+
+
+{in1:n}		input state
+{in2:n}		etc…
+{in:n}		returns all inputs in a single JSON object
 
 Digital inputs have these attributes (using di1 as an example)
 
@@ -78,13 +83,12 @@ Probing is also an exception. Currently probing can only be performed on the Zmi
 (Not yet implemented)
 Digital outputs are controlled using a set of digital output objects referenced as:
 <pre>
-do1
-do2
+{do1:n}
+{do2:n}
 …
-doN
-<pre>
-
-The group of all digital inputs can be referenced as: `do`
+{doN:n}
+{do:n}     Group of all digital outputs
+</pre>
 
 Digital outputs have these attributes (using do1 as an example)
 
