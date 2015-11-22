@@ -1,41 +1,29 @@
-:toc: macro
-:toclevels: 4
-:icons: font
-
-toc::[]
-
 This page contains items specific to the TinyGv9 board.
 
 === v9 Digital Inputs
 
-Inputs are mapped to the connectors:
-
-* DI1 is Xmin 
-* DI2 is Xmax
-* DI3 is Ymin 
-* DI4 is Ymax 
-* DI5 is Zmin, which is also used as a Z probe 
-* DI6 is Zmax
-* DI7 is Amin (only available on J15 2x13 0.100 header) 
-* DI8 is Amax (only available on J15 2x13 0.100 header)  
-* DI9 is Interlock (only available on J15 2x13 0.100 header) 
-
-
-.v9 Digital Input Mapping
+.Digital Input Mapping to v9 Connectors
 |===
 | Input | Label | Mode | Action | Function | Notes 
-| DI1 | Xmax | NC | None | Limit |
-
-
-
+| DI1 | Xmin | Normally Closed | Stop | Limit |
+| DI2 | Xmax | Normally Closed | Stop | Limit |
+| DI3 | Ymin | Normally Closed | Stop | Limit |
+| DI4 | Ymax | Normally Closed | Stop | Limit |
+| DI5 | Zmin | Active High | None | None | Also used as Z probe
+| DI6 | Zmax | Disabled | Stop | Limit |
+| DI7 | Amin | Disabled | Stop | Limit | Only on J15 2x13 header
+| DI8 | Amax | Disabled | Stop | Limit | Only on J15 2x13 header
+| DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
 |===
 
-==== Legend
-. Input Mode
-.. INPUT_MODE_DISABLED = -1
-.. INPUT_ACTIVE_LOW = 0 (aka NORMALLY_OPEN)
-.. INPUT_ACTIVE_HIGH = 1 (aka NORMALLY_CLOSED)
 
+==== Legend
+Input Mode::
+. INPUT_MODE_DISABLED = -1
+. INPUT_ACTIVE_LOW = 0 (aka NORMALLY_OPEN)
+. INPUT_ACTIVE_HIGH = 1 (aka NORMALLY_CLOSED)
+
+Input Action::
     INPUT_ACTION_NONE
     INPUT_ACTION_STOP
     INPUT_ACTION_FAST_STOP
