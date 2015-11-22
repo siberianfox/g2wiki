@@ -1,11 +1,39 @@
 This page contains items specific to the TinyGv9 board.
 
+=== v9 Digital Inputs
 
-//*** Input / output settings ***
-/*
-    INPUT_MODE_DISABLED
-    INPUT_ACTIVE_LOW    aka NORMALLY_OPEN
-    INPUT_ACTIVE_HIGH   aka NORMALLY_CLOSED
+Inputs are mapped to the connectors:
+
+* DI1 is Xmin 
+* DI2 is Xmax
+* DI3 is Ymin 
+* DI4 is Ymax 
+* DI5 is Zmin, which is also used as a Z probe 
+* DI6 is Zmax
+* DI7 is Amin (only available on J15 2x13 0.100 header) 
+* DI8 is Amax (only available on J15 2x13 0.100 header)  
+* DI9 is Interlock (only available on J15 2x13 0.100 header) 
+
+
+.v9 Digital Input Mapping
+|===
+| Input | Label | Mode | Action | Function | Notes 
+
+| DI1 | Xmax | 
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+|Cell in column 3, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|Cell in column 3, row 2
+|===
+
+==== Legend
+. Input Mode
+.. INPUT_MODE_DISABLED = -1
+.. INPUT_ACTIVE_LOW = 0 (aka NORMALLY_OPEN)
+.. INPUT_ACTIVE_HIGH = 1 (aka NORMALLY_CLOSED)
 
     INPUT_ACTION_NONE
     INPUT_ACTION_STOP
@@ -18,7 +46,7 @@ This page contains items specific to the TinyGv9 board.
     INPUT_FUNCTION_INTERLOCK
     INPUT_FUNCTION_SHUTDOWN
     INPUT_FUNCTION_PANIC
-*/
+
 // Xmin on v9 board
 #define DI1_MODE                    NORMALLY_CLOSED
 //#define DI1_ACTION                  INPUT_ACTION_STOP
