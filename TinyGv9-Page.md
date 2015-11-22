@@ -1,1 +1,0 @@
-This page contains items specific to the TinyGv9 board.
