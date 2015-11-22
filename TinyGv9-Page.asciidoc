@@ -1,6 +1,6 @@
 This page contains items specific to the TinyGv9 board.
 
-https://github.com/synthetos/g2/wiki/Digital-IO-(GPIO)[Back to Digital IO Page]
+* https://github.com/synthetos/g2/wiki/Digital-IO-(GPIO)[Back to Digital IO Page]
 
 === v9 Digital Inputs
 
