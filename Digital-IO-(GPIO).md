@@ -19,13 +19,8 @@ The state of IO can be read by separate variables. 0 = inactive, 1 = active (tri
 {in2:n}
 ...
 {inN:n}
-{in:n}   Group of all digital inputs
+{in:n}   Group of all digital inputs as a single JSON object
 </pre>
-
-
-{in1:n}		input state
-{in2:n}		etc…
-{in:n}		returns all inputs in a single JSON object
 
 Digital inputs have these attributes (using di1 as an example)
 
