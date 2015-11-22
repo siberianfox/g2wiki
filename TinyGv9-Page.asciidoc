@@ -1,3 +1,9 @@
+:toc: macro
+:toclevels: 4
+:icons: font
+
+toc::[]
+
 This page contains items specific to the TinyGv9 board.
 
 === v9 Digital Inputs
@@ -18,8 +24,7 @@ Inputs are mapped to the connectors:
 .v9 Digital Input Mapping
 |===
 | Input | Label | Mode | Action | Function | Notes 
-
-| DI1 | Xmax | 
+| DI1 | Xmax | NC | None | Limit |
 
 
 
