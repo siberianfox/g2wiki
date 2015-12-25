@@ -30,8 +30,8 @@ Turn on the enables before executing Gcode. Adjust the MFO factor during motion.
 
 ## Future implementation notes
 
-- Override adjustments are not to be applied immediately, which may not give the operator time to react to too-aggressive of a speedup during tooling.
-  - In order to provide time for the operator to react to the changes, a "ramping" function is to be used, to apply the requested override over time. A linear ramping from one override setting to the latest requested setting will be used.
+- Override adjustments are not to be applied all at once, as this may not give the operator time to react to too-aggressive of a speedup during tooling.
+  - In order to provide time for the operator to react to the changes, a "ramping" function is to be used to apply the requested override over time. A linear ramping from one override setting to the latest requested setting will be used.
 - At no point will an override allow any of the configured limitations to be violated. The override is *only* to adjust the incoming requested feedrate (and separately, the traverse rates). None of the jerk, chordal tolerance, etc. limits will be adjusted or violated.
   - In order to facilitate applying an override, the values (velocity, jerk, etc) that are coming from the incoming gcode will be stored in the planner buffer unmodified, then the configured limitations for each axis will be applied and the resulting values will stored as well. This allows for the originally requested values to be adjusted, and the limitations to be honored, without a large cost for computation.
 - When an overrider adjustment comes it (from the system managing the delay and override ramping), it will be applied to the planner buffer starting immediately after the currently running block of gcode. All moves from that point on in the plan will be adjusted.
