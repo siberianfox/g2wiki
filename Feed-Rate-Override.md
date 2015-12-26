@@ -28,7 +28,7 @@ Turn on the enables before executing Gcode. Adjust the MFO factor during motion.
 ###Bugs and Comments
 - Please report and bugs or other comments to g2 Issues
 
-## Future implementation notes
+## Implementation notes
 
 - Override adjustments are not to be applied all at once, as this may not give the operator time to react to too-aggressive of a speedup during tooling.
   - In order to provide time for the operator to react to the changes, a "ramping" function is to be used to apply the requested override over time. A linear ramping from one override setting to the latest requested setting will be used.
