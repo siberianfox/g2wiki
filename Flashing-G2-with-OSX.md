@@ -19,15 +19,19 @@ Download the Arduino 1.6.x from http://arduino.cc/en/Main/Software for OS X.
 
 Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
 
-###Step 3 - Program TinyG2 onto the Due
+###Step 3 - Clone the g2 git repository to your local disk
+
+You need some of the scripts in the https://github.com/synthetos/g2 git repository, so clone it to your local disk.
+
+###Step 4 - Program TinyG2 onto the Due
 
 ####Step 
 
-Open Terminal.app and change to the directory:
+Open Terminal.app, then change to the Resources/TinyG2-OSX-Programmer/ subdirectory in the g2 repository you just cloned.  One way to do that is:
 
-* Type "cd " (That's lowercase "c", then "d", then space), DON'T hit return.
-* Now drag the *folder* that you found this ReadMe.txt file in to the Terminal.app window that has the "cd " you just typed. It should type in a path for you.
-* Now hit return.
+1. Type "cd " (That's lowercase "c", then "d", then space), DON'T press return yet.
+2. Then drag the Resources/TinyG2-OSX-Programmer/ *folder* from the cloned g2 repository to that Terminal.app window. It should type in a path for you.
+3. Now press return.
 
 Either place the .elf file you want to program into that directory or remove the trailing version number from the elf file that is present; e.g. 
 
