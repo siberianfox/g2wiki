@@ -25,8 +25,6 @@ You need some of the scripts in the https://github.com/synthetos/g2 git reposito
 
 ###Step 4 - Program TinyG2 onto the Due
 
-####Step 
-
 Open Terminal.app, then change to the Resources/TinyG2-OSX-Programmer/ subdirectory in the g2 repository you just cloned.  One way to do that is:
 
 1. Type "cd " (That's lowercase "c", then "d", then space), DON'T press return yet.
