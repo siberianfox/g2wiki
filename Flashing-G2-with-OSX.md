@@ -55,4 +55,14 @@ The output should look something like this (the numbers after cu.usbmodem will b
 	Set boot flash true
 	CPU reset.
 
-Now disconnect the Due and plug the USB cable into the other port. You now have a Due/TinyG2.
+The flashing is done.  You now have a Due/TinyG2. :grinning:
+
+You may need to press the reset button on the Due before continuing.
+
+###Step 5.  Make use of your new Due/TinyG2
+
+Generally the next step will be connecting to your Due to verify it's working, and to make use of it.
+
+Disconnect the Due, then plug the USB cable into the other port.
+
+Continue on with [connecting to TinyG](https://github.com/synthetos/g2/wiki/Connecting-to-TinyG).
