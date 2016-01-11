@@ -34,5 +34,5 @@ The resulting files will be in `${projectRoot}/TinyG2/bin/`, in a folder named a
 ## Uploading G2 to a target board and Debugging
 
 - See [[Flashing G2 with OSX]]
-- See [Degugging G2 on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
+- See [Debugging G2 on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
