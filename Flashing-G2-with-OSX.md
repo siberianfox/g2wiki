@@ -11,13 +11,21 @@ Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-
 **Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
 
 **Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
-###Step 2 - Install the Arduino Due environment
+###Step 2 - Install the Arduino IDE
+####Part a
 
-_If you already have the Arduino Due environment installed you can skip this step_
+_If you already have the Arduino IDE installed you can skip this step_
 
-Download the Arduino 1.6.x from http://arduino.cc/en/Main/Software for OS X.
+Download the Arduino 1.6.x for MacOS X from http://arduino.cc/en/Main/Software
 
-Expand the downloaded zip file and move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
+Expand the downloaded zip file then move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
+
+####Part b
+Start the Arduino IDE.  In the main menu bar, go to Tools→Board→Boards Manager.
+
+Click on the "Arduino SAM Boards (32-bit ARM Cortex-M3)" entry (likely the 2nd one down), and click the INSTALL button.  This can take a while to install, depending on the speed of your computer.
+
+Once it has installed, close the Boards Manager, then quit the Arduino IDE.
 
 ###Step 3 - Clone the g2 git repository to your local disk
 
