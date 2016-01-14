@@ -41,3 +41,4 @@ The output is *./bin/gShield/gShield_flash.bin*.
 
 After compiling, you will likely want to flash the firmware. 
 - [[Flashing G2 with Linux]].
+- [[Flashing G2 with OSX]].
