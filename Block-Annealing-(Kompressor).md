@@ -11,9 +11,9 @@ In the following example 3 new blocks are received. The first 2 are annealed, th
 
 ###Definitions
 - b0	Head block. Block being tested for additions		
-  - b0_target - Target endpoint of B0. Changes with each new annealed block		
-  - b0_unit - Unit vector of B0. May change with each new annealed block		
-  - b0_unit0 - Initial unit vector of B0. Does not change as blocks are added so error cylinder does not drift		
+  - b0_target - Target endpoint of b0. Changes with each new annealed block		
+  - b0_unit - Unit vector of b0. May change with each new annealed block		
+  - b0_unit0 - Initial unit vector of b0. Does not change as blocks are added so error cylinder does not drift		
 - b1	New block - just received and not yet planned		
   - b1_target - Target endpoint of b1		
   - b1_unit - Unit vector of b1		
