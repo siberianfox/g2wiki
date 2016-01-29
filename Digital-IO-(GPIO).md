@@ -126,8 +126,14 @@ We have a few things we need to resolve:
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `False`.
 
+   Name | Description | Values
+   ------|------------|---------
+   {di1mo: | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
+   {di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+   {di1fn: | function | 0=none, (see list below for more)
+
 - *Analog Input "Pin"*
-  - Accesible as JSON via `ai`_N_.
+  - Accessible as JSON via `ai`_N_.
   - May be a physical pin, or the output from an internal "signal".
   - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `ain`_N_.
     - Read-only.
@@ -135,8 +141,15 @@ We have a few things we need to resolve:
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `0.0`.
 
+
+   Name | Description | Values
+   ------|------------|---------
+   {ai1mo: | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
+   {ai1fn: | function | 0=none, (see list below for more)
+
+
 - *Digital Output "Pin"*
-  - Accesible as JSON via `do`_N_.
+  - Accessible as JSON via `do`_N_.
   - May be a physical pin, or used as an internal "signal".
   - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
     - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured.
@@ -145,8 +158,15 @@ We have a few things we need to resolve:
       - For example, if the pis was set to `0.75` but is not PWM capable, it will read back as `1`.
       - If set with `true` it will return `1` and if set to `false` it will return `0`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
-  - Disabled pins, when read, will always read `False` or `0`.
+  - Disabled pins, when read, will always read `0` for "Inactive".
   - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
+
+
+   Name | Description | Values
+   ------|------------|---------
+   {do1mo: | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
+   {do1frq: | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
+   {do1fn: | function | 0=none, (see list below for more)
 
 
 
