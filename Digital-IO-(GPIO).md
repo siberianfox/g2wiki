@@ -128,9 +128,9 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   {di1mo: | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
-   {di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-   {di1fn: | function | 0=none, (see list below for more)
+   `di1mo` | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
+   `di1ac` | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+   `di1fn` | function | 0=none, (see list below for more)
 
 - *Analog Input "Pin"*
   - Accessible as JSON via `ai`_N_.
@@ -144,8 +144,8 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   {ai1mo: | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   {ai1fn: | function | 0=none, (see list below for more)
+   `ai1mo` | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
+   `ai1fn` | function | 0=none, (see list below for more)
 
 
 - *Digital Output "Pin"*
