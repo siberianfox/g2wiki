@@ -130,6 +130,7 @@ We have a few things we need to resolve:
     - For example, if not associated with a tool but assigned function `1`, it can be accessed as `{in1:n}`
     - If associated with tool 3, then it can be accessed as `{t3in1:n}`
     - (*Question:* If we have switched to tool 3 (with `M6`), does `{in1:n}` act like `{t3in1:n}`?)
+  - Digital inputs can be waited on with `M101`.
 
    Name | Description | Values
    ------|------------|---------
@@ -145,13 +146,12 @@ We have a few things we need to resolve:
     - Reads as a float value from `0.0` to `1.0`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `0.0`.
-  - Analog inputs may be associated with tools. See discussion on inputs above.
+  - Analog inputs cannot _directly_ be waited on by `M101`, nor can they be _directly_ associated with a tool. Tool functions may be associated with an analog pin, however, and that may indirectly provide boolean values than can be waited on. (For example, a Heater may use an analog input for the temperature sensor, and then a wait can be used for when the heater is at temperature.)
 
    Name | Description | Values
    ------|------------|---------
    `ai1mo` | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   `ai1tn` | tool number | 0=none, 1=tool 1, etc.
-   `ai1fn` | function | 0=other/none, 1=in1, 2=in2, etc.
+   `ai1fn` | function | 0=other/none, 1=ain1, 2=ain2, etc.
 
 
 - *Digital Output "Pin"*
@@ -212,18 +212,23 @@ We have a few things we need to resolve:
 - **Analog Input**
   - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
   - _Tool specific:_ No
-  - _Functions:_
-    - Input (Analog)
+
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Analog Input | `{ain2:n}` | Analog Input | Input as `ain2`: `{ai1fn:2}` | _None_
+
 
 - **Heater**
   - Controlled by JSON as `out`_N_, directly or with `M100`
   - `M101` waits can wait for the `at` subvalue of a `he` object, like this: `M101 ({he1at:t})`
   - _Tool specific:_ Optional
-  - _Functions:_
-    - Heater (Output, PWM optional)
-    - Temperature Sensor (required)
-    - Fan (Output, PWM optional)
-    
+
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Heater | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
+    Temperature Sensor | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
+    Fan | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
+
 - **Temperature Sensor**
   - Can be read like an analog input with JSON as `ts`_N_, but the floating point value is in degrees C.
   - _Tool specific:_ No, can be attached _to_ by a tool, however.
