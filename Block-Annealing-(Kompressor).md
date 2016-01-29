@@ -1,0 +1,1 @@
+![](images/BlockAnnealing-2016-01-29.png)
