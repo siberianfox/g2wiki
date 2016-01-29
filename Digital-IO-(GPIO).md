@@ -193,10 +193,10 @@ We have a few things we need to resolve:
   - Controlled by JSON as `out`_N_, directly or with `M100`
   - _Tool specific:_ Optional
 
-    Function | Type | DI/DO/AI Setting | Other Setting
-    --- | --- | --- | ---
-    Output (no tool) | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
-    Output (part of tool) | Output |  Output as `t1out1`: `{do1fn:1}`, Tool 1: `{do1tn:1}` | _None_
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Output (no tool) | `M100 ({out1:t})` | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
+    Output (part of tool) | `M6 T3` -> `M100 ({out2:t})` | Output |  Output as `out2`: `{do1fn:2}`, Tool 3: `{do1tn:3}` | _None_
 
 
 - **Generic Input**
@@ -204,10 +204,10 @@ We have a few things we need to resolve:
   - `M101` waits can wait for these.
   - _Tool specific:_ Optional
 
-    Function | Type | DI/DO/AI Setting | Other Setting
-    --- | --- | --- | ---
-    Input (no tool) | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
-    Input (part of tool) | Input |  Input as `t1in2`: `{di1fn:2}`, Tool 3: `{di1tn:3}` | _None_
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Input (no tool) | `M101 ({in2:t})` | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
+    Input (part of tool) | `M6 T4` -> `M101 ({in3:t})` | Input |  Input as `in3`: `{di1fn:3}`, Tool 4: `{di1tn:4}` | _None_
 
 - **Analog Input**
   - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
