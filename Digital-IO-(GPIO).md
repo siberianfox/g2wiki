@@ -225,17 +225,20 @@ We have a few things we need to resolve:
 
     Function |  Control via | Type | DI/DO/AI Setting | Other Setting
     --- | --- | --- | --- | ---
-    Heater | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
-    Temperature Sensor | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
-    Fan | `{he1st:100}` (etc.) | Output | Output as 'other': `{do1fn:0}`, Assign heater to output 1: `{he1out:1}` | _None_
+    Heater | `{he1st:100}` (etc.) | Output | Output 1 as 'other': `{do1fn:0}` | Assign heater to output 1: `{he1out:1}`
+    Temperature Sensor | (same) | Temperature Sensor | Analog input 2 as 'other': `{ai2fn:0}` | Assign `ts4` to use `ai2`: `{ts4in:2}`, , Assign `ts4` function to `other`: `{ts4fn:0}`, Assign heater temp. sensor to `ts4`: `{he1ts:4}`
+    Fan |  (same) | Output | Output 3 as 'other': `{do3fn:0}` | Assign heater temp. sensor to `out3`: `{he1fo:3}`
 
 - **Temperature Sensor**
   - Can be read like an analog input with JSON as `ts`_N_, but the floating point value is in degrees C.
   - _Tool specific:_ No, can be attached _to_ by a tool, however.
-  - _Functions:_
-    - Input (Analog Input)
 
-**Controls for the above functions**:
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Input | `{temp1:n}` | Input (Bridge) | Analog input 4 as 'other': `{ai4fn:0}` | Assign temp. sensor 2 to analog input 4: `{ts2in:4}`, Assign temp. sensor 2 function to `temp1`: `{ts2fn:1}`
+
+
+**Detailed Controls for the above functions (incomplete)**:
 
  Name (spaces added) | Description | R/W | Values
  ---- | ---------- | :-: | -------
@@ -262,4 +265,11 @@ We have a few things we need to resolve:
  `in1` | "input 1 value" | RO | Access the value of a given input. Return value is BOOL True or False.
  `ain1` | "analog input 1 value" | RO | Access the value of a given analog input. Return value is float between `0` and `1`.
  `he1` | "heater 1" group | RO | Heater 1
+ ... | TODO | TODO | TODO
  `fan1` | "heater 1" group | RO | Fan 1
+ ... | TODO | TODO | TODO
+ `ts1` | "temperature sensor 1" group | RO | Temperature sensor 1
+ ... | TODO | TODO | TODO
+ `temp1` | "temperature value 1" | RO | Temperature output 1
+ ... | TODO | TODO | TODO
+
