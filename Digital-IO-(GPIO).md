@@ -116,7 +116,41 @@ We have a few things we need to resolve:
   - The pins need to have the capabilities necessary for those functions. Beyond the obvious of an input not being an output, we would also have some functions need PWM output capability.
 - Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant.
 
-High-level function, and the input and output they would need:
+**Primitives** - types of inputs or outputs and some of their properties:
+- *Digital Input "Pin"*
+  - Controlled using JSON via `di`_N_.
+  - May be a physical pin, or the output from an internal "signal".
+  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `in`_N_.
+    - Read-only.
+    - Reads as boolean `True` or `False`.
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
+  - Disabled pins, when read, will always read `False`.
+
+- *Analog Input "Pin"*
+  - Accesible as JSON via `ai`_N_.
+  - May be a physical pin, or the output from an internal "signal".
+  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `ain`_N_.
+    - Read-only.
+    - Reads as a float value from `0.0` to `1.0`.
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
+  - Disabled pins, when read, will always read `0.0`.
+
+- *Digital Output "Pin"*
+  - Accesible as JSON via `do`_N_.
+  - May be a physical pin, or used as an internal "signal".
+  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
+    - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured.
+    - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
+    - Reads back as the value it was set to as a float, which may not be the value given in the set.
+      - For example, if the pis was set to `0.75` but is not PWM capable, it will read back as `1.0`.
+      - If set with `true` it will return `1` and if set to `false` it will return `0`.
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
+  - Disabled pins, when read, will always read `False` or '0.0'.
+  - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, iven if the pin is set to "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as "1.0" to indicate "active", reflecting the value it was set as.
+
+
+
+**Functions** - the inputs and outputs would be assigned a function from this list:
 - **Spindle**
   - Controlled by `M3`, `M4`, `M5`, and `M6`, along with feed hold and other functions.
   - _Tool specific:_ Y
@@ -136,4 +170,25 @@ High-level function, and the input and output they would need:
   - `M101` waits can wait for these.
   - _Tool specific:_ Optional
   - _Functions:_
-    - Input
+    - Input (Digital)
+
+- **Analog Input**
+  - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
+  - _Tool specific:_ No
+  - _Functions:_
+    - Input (Analog)
+
+- **Heater**
+  - Controlled by JSON as `out`_N_, directly or with `M100`
+  - `M101` waits can wait for the `at` subvalue of a `he` object, like this: `M101 ({he1at:t})`
+  - _Tool specific:_ Optional
+  - _Functions:_
+    - Heater (Output, PWM optional)
+    - Temperature Sensor (required)
+    - Fan (Output, PWM optional)
+    
+- **Temperature Sensor**
+  - Can be read like an analog input with JSON as `ts`_N_, but the floating point value is in degrees C.
+  - _Tool specific:_ No, can be attached _to_ by a tool, however.
+  - _Functions:_
+    - Input (Analog Input)
