@@ -118,9 +118,22 @@ We have a few things we need to resolve:
 
 High-level function, and the input and output they would need:
 - **Spindle**
+  - Controlled by `M3`, `M4`, `M5`, and `M6`, along with feed hold and other functions.
   - _Tool specific:_ Y
-  - _Attributes:_
+  - _Functions:_
     - Speed (Output w/PWM)
     - On/Off (Output)
     - Direction (Output)
 
+- **Generic Output**
+  - Controlled by JSON as `out`_N_, directly or with `M100`
+  - _Tool specific:_ Optional
+  - _Functions:_
+    - Output
+
+- **Generic Input**
+  - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
+  - `M101` waits can wait for these.
+  - _Tool specific:_ Optional
+  - _Functions:_
+    - Input
