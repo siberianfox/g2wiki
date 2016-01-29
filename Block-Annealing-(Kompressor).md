@@ -4,7 +4,7 @@
 - Calculate if b1's endpoint falls inside or outside of the cylinder
 - If b1 endpoint falls inside then combine b1 into b0. Do not change the projection of the original b0
 - If b1 endpoint falls outside then queue b0 and make b1 the new b0
-- If no new blocks arrive after the new-block-timeout queue b0 (typ 50 ms)
+- If no new blocks arrive after the new-block-timeout, queue b0 for planning (typically ~50 ms)
 	
 In the following example 3 new blocks are received. The first 2 are annealed, the 3rd falls outside the tolerance
 ![](images/BlockAnnealing-2016-01-29.png)
