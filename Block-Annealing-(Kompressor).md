@@ -1,4 +1,4 @@
-##Algorithm Summary
+###Algorithm Summary
 - Generate an imaginary cylinder surrounding the projection of the target block (b0, b0proj)
 - The radius of the cylinder is the tolerance for annealing the new block (b1)
 - Calculate if the b1 endpoint falls inside or outside of the cylinder
@@ -9,7 +9,7 @@
 In the following example 3 new blocks are received. The first 2 are annealed, the 3rd falls outside the tolerance
 ![](images/BlockAnnealing-2016-01-29.png)
 
-##Definitions
+###Definitions
 - b0	Head block. Block being tested for additions		
   - b0_target	Target endpoint of B0. Changes with each new annealed block		
   - b0_unit	Unit vector of B0. May change with each new annealed block		
@@ -24,7 +24,7 @@ In the following example 3 new blocks are received. The first 2 are annealed, th
   - b	The side of the triangle formed by the b1 vector		
   - c	The side of the triangle formed by the right angle of b0 projection to b1_target		
 
-##Algorithm
+###Algorithm
 - Perform the following tests on b1. If any fail, exit and queue the current b0 and make b1 the new b0			
   - (a) Exit if b1 exceeds a length threshold			
   - (b) Exit if b0 and b1 target velocities are different (beyond a very small threshold)			
@@ -44,6 +44,4 @@ In the following example 3 new blocks are received. The first 2 are annealed, th
     - Recalculate the b0 unit vector			
 				
 ###Notes and Discussion
-- Annealing the block resets the endpoint of the annealed line - i.e. washes out the previous endpoint			
-   - This will change the unit vector of the B0 block.			
-   - In order to keep the "error cylinder" from drifting the initial unit vector is preserved and used to set the mid-line of subsequent new blocks
+Annealing the block resets the endpoint of the annealed line - i.e. washes out the previous endpoint. This will change the unit vector of the b0 block. In order to keep the "error cylinder" from drifting the initial unit vector is preserved and used to set the mid-line of subsequent new blocks.
