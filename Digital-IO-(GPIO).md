@@ -125,6 +125,11 @@ We have a few things we need to resolve:
     - Reads as boolean `True` or `False`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `False`.
+  - Inputs may have immediate actions that will occur as well as any assigned function.
+  - Input may be associated with a specific tool. The will then be accessed as a member of that tool.
+    - For example, if not associated with a tool but assigned function `1`, it can be accessed as `{in1:n}`
+    - If associated with tool 3, then it can be accessed as `{t3in1:n}`
+    - (*Question:* If we have switched to tool 3 (with `M6`), does `{in1:n}` act like `{t3in1:n}`?)
 
    Name | Description | Values
    ------|------------|---------
@@ -140,12 +145,13 @@ We have a few things we need to resolve:
     - Reads as a float value from `0.0` to `1.0`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `0.0`.
-
+  - Analog inputs may be associated with tools. See discussion on inputs above.
 
    Name | Description | Values
    ------|------------|---------
    `ai1mo` | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   `ai1fn` | function | 0=none, (see list below for more)
+   `ai1tn` | tool number | 0=none, 1=tool 1, etc.
+   `ai1fn` | function | 0=other/none, 1=in1, 2=in2, etc.
 
 
 - *Digital Output "Pin"*
@@ -160,37 +166,48 @@ We have a few things we need to resolve:
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
   - Disabled pins, when read, will always read `0` for "Inactive".
   - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
+  - Outputs may be associated with tools. See discussion on inputs above.
 
 
    Name | Description | Values
    ------|------------|---------
    `do1mo` | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
    `do1frq` | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
-   `do1fn` | function | 0=none, (see list below for more)
+   `do1tn` | tool number | 0=none, 1=tool 1, etc.
+   `do1fn` | function | 0=other/none, 1=out1, etc.
 
 
 
-**Functions** - the inputs and outputs would be assigned a function from this list:
+**Function Access** - the inputs and outputs would be assigned to a function as described in this list:
 - **Spindle**
   - Controlled by `M3`, `M4`, `M5`, and `M6`, along with feed hold and other functions.
   - _Tool specific:_ Y
-  - _Functions:_
-    - Speed (Output w/PWM)
-    - On/Off (Output)
-    - Direction (Output)
+
+    Function | Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Speed | `M3 Snnn` `M4 Snnn` | Output (w/PWM) | Other function: `{do1fn:0}`, Tool 1: `{do1tn:1}` | Tool 1 spindle "speed" is output 1: `{t1sps:1}`
+    On/Off | `M3`, `M4`, `M5` | Output |  Other function: `{do2fn:0}`, Tool 1: `{do2tn:1}` | Tool 1 spindle "on" is output 2: `{t1spon:2}`
+    Direction | `M3` or `M4` | Output |  Other function: `{do3fn:0}`, Tool 1: `{do3tn:1}` | Tool 1 spindle "direction" is output 3: `{t1sps:3}`
 
 - **Generic Output**
   - Controlled by JSON as `out`_N_, directly or with `M100`
   - _Tool specific:_ Optional
-  - _Functions:_
-    - Output
+
+    Function | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | ---
+    Output (no tool) | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
+    Output (part of tool) | Output |  Output as `t1out1`: `{do1fn:1}`, Tool 1: `{do1tn:1}` | _None_
+
 
 - **Generic Input**
   - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
   - `M101` waits can wait for these.
   - _Tool specific:_ Optional
-  - _Functions:_
-    - Input (Digital)
+
+    Function | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | ---
+    Input (no tool) | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
+    Input (part of tool) | Input |  Input as `t1in2`: `{di1fn:2}`, Tool 3: `{di1tn:3}` | _None_
 
 - **Analog Input**
   - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
