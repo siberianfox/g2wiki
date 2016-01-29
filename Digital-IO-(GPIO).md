@@ -219,7 +219,7 @@ We have a few things we need to resolve:
  ---- | ---------- | :-: | -------
  `t1` | "tool 1" group | RO | Tools start from 1 and go up
  `t1 sp` | "tool 1 spindle" group | RO | Tool 1 spindle group
- `t1 sp s` | "tool one spindle speed" | RW | Output number of a PWM-capable output
+ `t1 sp s` | "tool one spindle speed output" | RW | Output number of a PWM-capable output to control spindle speed controlled by `M3`, `M4`, and `M5`.
  `t1 sp csl` | "clockwise speed low" | RW | Minimum clockwise speed (matching the `S` word of an `M3`)
  `t1 sp cpl` | "clockwise phase low" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at min. speed
  `t1 sp csh` | "clockwise speed high" | RW | Maximum clockwise speed (matching the `S` word of an `M3`)
@@ -228,9 +228,16 @@ We have a few things we need to resolve:
  `t1 sp wpl` | "counter-clockwise phase low" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at min. speed
  `t1 sp wsh` | "counter-clockwise speed high" | RW | Maximum counter-clockwise speed (matching the `S` word of an `M4`)
  `t1 sp wph` | "counter-clockwise phase high" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at max. speed
- `t1 sp of` | "phase when off" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle when the spindle is off (via `M5`, among others)
+ `t1 sp of` | "phase when off" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle when the spindle is off   
+ `t1 sp on` | "tool 1 on/off output" | RW | Output number of a digital output that control spindle ON/OFF (but not speed). Active being ON. Set active high/low on the output (`do`) directly.
+ `t1 sp dir` | "tool 1 direction output" | RW | Output number of a digital output that control spindle direction. Active being clockwise. Set active high/low on the output (`do`) directly.
  `t1 out1` | "tool 1 output 1" group | RO | Tool 1 general output 1 group. See `out1` for subkeys.
  `t1 in1` | "tool 1 input" group | RO | Tool 1 general digital input 1 group. See `in1` for subkeys.
  `t1 ain1` | "tool 1 analog input" group | RO | Tool 1 general analog input 1 group. See `ain1` for subkeys.
  `t1 he1` | "tool 1 heater 1" group | RO | Tool 1 heater 1 group. See `he1` for subkeys.
  `t1 fan1` | "tool 1 fan 1" group | RO | Tool 1 fan 1 group. See `fan` for subkeys.
+ `out1` | "output 1" value | RW | Control the value of a given output. Read returns the last set value.
+ `in1` | "input 1" group | RO | Access the value of a given input. Return value is BOOL True or False.
+ `ain1` | "analog input 1" group | RO | Access the value of a given analog input. Return value is float between `0` and `1`.
+ `he1` | "heater 1" group | RO | Heater 1
+ `fan1` | "heater 1" group | RO | Fan 1
