@@ -142,11 +142,11 @@ We have a few things we need to resolve:
     - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured.
     - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
     - Reads back as the value it was set to as a float, which may not be the value given in the set.
-      - For example, if the pis was set to `0.75` but is not PWM capable, it will read back as `1.0`.
+      - For example, if the pis was set to `0.75` but is not PWM capable, it will read back as `1`.
       - If set with `true` it will return `1` and if set to `false` it will return `0`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
-  - Disabled pins, when read, will always read `False` or '0.0'.
-  - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, iven if the pin is set to "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as "1.0" to indicate "active", reflecting the value it was set as.
+  - Disabled pins, when read, will always read `False` or `0`.
+  - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
 
 
 
