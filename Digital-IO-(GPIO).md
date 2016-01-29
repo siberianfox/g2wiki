@@ -231,13 +231,13 @@ We have a few things we need to resolve:
  `t1 sp of` | "phase when off" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle when the spindle is off   
  `t1 sp on` | "tool 1 on/off output" | RW | Output number of a digital output that control spindle ON/OFF (but not speed). Active being ON. Set active high/low on the output (`do`) directly.
  `t1 sp dir` | "tool 1 direction output" | RW | Output number of a digital output that control spindle direction. Active being clockwise. Set active high/low on the output (`do`) directly.
- `t1 out1` | "tool 1 output 1" group | RO | Tool 1 general output 1 group. See `out1` for subkeys.
- `t1 in1` | "tool 1 input" group | RO | Tool 1 general digital input 1 group. See `in1` for subkeys.
- `t1 ain1` | "tool 1 analog input" group | RO | Tool 1 general analog input 1 group. See `ain1` for subkeys.
+ `t1 out1` | "tool 1 output 1 value" | RO | Tool 1 general output 1 group. See `out1` for subkeys.
+ `t1 in1` | "tool 1 input value" | RO | Tool 1 general digital input 1 group. See `in1` for subkeys.
+ `t1 ain1` | "tool 1 analog input value" | RO | Tool 1 general analog input 1 group. See `ain1` for subkeys.
  `t1 he1` | "tool 1 heater 1" group | RO | Tool 1 heater 1 group. See `he1` for subkeys.
  `t1 fan1` | "tool 1 fan 1" group | RO | Tool 1 fan 1 group. See `fan` for subkeys.
- `out1` | "output 1" value | RW | Control the value of a given output. Read returns the last set value.
- `in1` | "input 1" group | RO | Access the value of a given input. Return value is BOOL True or False.
- `ain1` | "analog input 1" group | RO | Access the value of a given analog input. Return value is float between `0` and `1`.
+ `out1` | "output 1 value" | RW | Control the value of a given output. Read returns the last set value.
+ `in1` | "input 1 value" | RO | Access the value of a given input. Return value is BOOL True or False.
+ `ain1` | "analog input 1 value" | RO | Access the value of a given analog input. Return value is float between `0` and `1`.
  `he1` | "heater 1" group | RO | Heater 1
  `fan1` | "heater 1" group | RO | Fan 1
