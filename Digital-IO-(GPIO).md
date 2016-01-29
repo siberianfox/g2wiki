@@ -164,9 +164,9 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   {do1mo: | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
-   {do1frq: | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
-   {do1fn: | function | 0=none, (see list below for more)
+   `do1mo` | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
+   `do1frq` | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
+   `do1fn` | function | 0=none, (see list below for more)
 
 
 
@@ -212,3 +212,20 @@ We have a few things we need to resolve:
   - _Tool specific:_ No, can be attached _to_ by a tool, however.
   - _Functions:_
     - Input (Analog Input)
+
+**Controls for the above functions**:
+
+ Name (spaces added) | Description | R/W | Values
+ ---- | ---------- | :-: | -------
+ `t1` | "tool 1" group | RO | Tools start from 1 and go up
+ `t1 sp` | "tool 1 spindle" group | RO | Tool 1 spindle group
+ `t1 sp s` | "tool one spindle speed" | RW | Output number of a PWM-capable output
+ `t1 sp csl` | "clockwise speed low" | RW | Minimum clockwise speed (matching the `S` word of an `M3`)
+ `t1 sp cpl` | "clockwise phase low" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at min. speed
+ `t1 sp csh` | "clockwise speed high" | RW | Maximum clockwise speed (matching the `S` word of an `M3`)
+ `t1 sp cph` | "clockwise phase high" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at max. speed
+ `t1 sp wsl` | "counter-clockwise speed low" | RW | Minimum counter-clockwise speed (matching the `S` word of an `M3`)
+ `t1 sp wpl` | "counter-clockwise phase low" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at min. speed
+ `t1 sp wsh` | "counter-clockwise speed high" | RW | Maximum counter-clockwise speed (matching the `S` word of an `M4`)
+ `t1 sp wph` | "counter-clockwise phase high" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at max. speed
+ `t1 sp of` | "phase when off" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle when the spindle is off (via `M5`, among others)
