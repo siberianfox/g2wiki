@@ -104,3 +104,23 @@ The state of IO can be read by separate variables. 0 = inactive, 1 = active (tri
 {out:n}		returns all outputs in a single JSON object
 
 It’s possible to register inputs (and outputs) in the status report (set to filtered, please) and detect switch state changes. If you only want switch state reports but have no other effect, select action=none and function=none. The switch closure will still be available to the switch read routines.
+
+
+# Discussion of future changes (pending review)
+
+We have a few things we need to resolve:
+- Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
+  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`.
+- We would like to be able to assign an arbitrary output to an arbitrary function.
+  - For example, we would like to say that "Spindle Speed" for "Tool 0" is actually using `do0`. Or we could assign it to `di1`.
+  - The pins need to have the capabilities necessary for those functions. Beyond the obvious of an input not being an output, we would also have some functions need PWM output capability.
+- Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant.
+
+High-level function, and the input and output they would need:
+- **Spindle**
+  - _Tool specific:_ Y
+  - _Attributes:_
+    - Speed (Output w/PWM)
+    - On/Off (Output)
+    - Direction (Output)
+
