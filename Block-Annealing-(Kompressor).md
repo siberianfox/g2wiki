@@ -1,7 +1,7 @@
 ###Algorithm Summary
 - Generate an imaginary cylinder surrounding the projection of the target block (b0, b0proj)
 - The radius of the cylinder is the tolerance for annealing the new block (b1)
-- Calculate if the b1 endpoint falls inside or outside of the cylinder
+- Calculate if b1's endpoint falls inside or outside of the cylinder
 - If b1 endpoint falls inside then combine b1 into b0. Do not change the projection of the original b0
 - If b1 endpoint falls outside then queue b0 and make b1 the new b0
 - If no new blocks arrive after the new-block-timeout queue b0 (typ 50 ms)
