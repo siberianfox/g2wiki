@@ -229,3 +229,8 @@ We have a few things we need to resolve:
  `t1 sp wsh` | "counter-clockwise speed high" | RW | Maximum counter-clockwise speed (matching the `S` word of an `M4`)
  `t1 sp wph` | "counter-clockwise phase high" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle at max. speed
  `t1 sp of` | "phase when off" | RW | Output value (from `0.0` to `1.0`) representing to duty cycle when the spindle is off (via `M5`, among others)
+ `t1 out1` | "tool 1 output 1" group | RO | Tool 1 general output 1 group. See `out1` for subkeys.
+ `t1 in1` | "tool 1 input" group | RO | Tool 1 general digital input 1 group. See `in1` for subkeys.
+ `t1 ain1` | "tool 1 analog input" group | RO | Tool 1 general analog input 1 group. See `ain1` for subkeys.
+ `t1 he1` | "tool 1 heater 1" group | RO | Tool 1 heater 1 group. See `he1` for subkeys.
+ `t1 fan1` | "tool 1 fan 1" group | RO | Tool 1 fan 1 group. See `fan` for subkeys.
