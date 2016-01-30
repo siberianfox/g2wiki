@@ -216,43 +216,47 @@ _Function Cheat Sheet - for now we need a way to collect all the functions we wa
    mist coolant on/off |
    flood coolant on/off |
 
+### Generic IO Functions
 
-### Generic Digital Input
-  - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
-  - `M101` waits can wait for these.
-  - _Tool specific:_ Optional
+#### Generic Digital Input
+- Read by JSON either directly as `in`_N_, {inN:n}
+- Can also be placed in status reports to monitor state changes (hopefully filtered!)
+- `M101` waits can wait for these
+- _Tool specific:_ Optional
 
     Function |  Control via | Type | DI/DO/AI Setting | Other Setting
     --- | --- | --- | --- | ---
     Input (no tool) | `M101 ({in2:t})` | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
     Input (part of tool) | `M6 T4` -> `M101 ({in3:t})` | Input |  Input as `in3`: `{di1fn:3}`, Tool 4: `{di1tn:4}` | _None_
 
-### Generic Analog Input
-  - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
-  - _Tool specific:_ No
+#### Generic Analog Input
+- Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0.
+- _Tool specific:_ No
 
     Function |  Control via | Type | DI/DO/AI Setting | Other Setting
     --- | --- | --- | --- | ---
     Analog Input | `{ain2:n}` | Analog Input | Input as `ain2`: `{ai1fn:2}` | _None_
 
-### Generic Digital Output
-  - Controlled by JSON as `out`_N_, directly or with `M100`
-  - _Tool specific:_ Optional
+## Generic Digital Output
+- Controlled by JSON as `out`_N_, directly or with `M100`
+- _Tool specific:_ Optional
 
     Function |  Control via | Type | DI/DO/AI Setting | Other Setting
     --- | --- | --- | --- | ---
     Output (no tool) | `M100 ({out1:t})` | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
     Output (part of tool) | `M6 T3` -> `M100 ({out2:t})` | Output |  Output as `out2`: `{do1fn:2}`, Tool 3: `{do1tn:3}` | _None_
 
-### Feedhold Input
+### System Functions
 
-### Limit Switch Input
+#### Feedhold Input
 
-### Homing Switch Input
+#### Limit Switch Input
 
-### Shutdown Input
+#### Homing Switch Input
 
-### Interlock Input
+#### Shutdown Input
+
+#### Interlock Input
 
 ### Spindle Functions
   - Controlled by `M3`, `M4`, and `M5`
