@@ -108,14 +108,17 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 
 # Discussion of future changes (pending review)
 
-The model:
-- "io" refers to the physical layer. it's further discussed as digital inputs (di), analog inputs (ai), and digital outputs (do). There can also be various "non-pin" or virtual signals at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
-- "function" refers to the logical layer. Functions are things like Spindle On, Limit Hit, etc.
+The model - from lowest layer to highest:
+
+- "io" refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
+
+- "function" refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also envisioned.
+
 - "tool" is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
 
 We have a few things we need to resolve:
 - Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
-  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel HOLD button.
+  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button.
 - We would like to be able to assign an arbitrary output to an arbitrary function.
   - For example, we would like to say that "Spindle Speed" for "Tool 0" is actually using `do0`. Or we could assign it to the physical input `di1` without changing the logical function.
   - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed.
@@ -128,13 +131,14 @@ We have a few things we need to resolve:
   - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `in`_N_.
     - Read-only.
     - Reads as boolean `True` or `False`.
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
-  - Disabled pins, when read, will always read `False`.
-  - Inputs may have immediate actions that will occur as well as any assigned function.
-  - Input may be associated with a specific tool. The will then be accessed as a member of that tool.
-    - For example, if not associated with a tool but assigned function `1`, it can be accessed as `{in1:n}`
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
+  - Disabled pins, when read, will always read `-1`. _(note: was `False`)_
+  - Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
+  - Inputs may be associated with a specific function. The will then be accessed as a member of that function.
+  - Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool.
+    - For example, if not associated with a tool but assigned function `in1`, it can be accessed as `{in1:n}`
     - If associated with tool 3, then it can be accessed as `{t3in1:n}`
-    - (*Question:* If we have switched to tool 3 (with `M6`), does `{in1:n}` act like `{t3in1:n}`?)
+    - _(*Question:* If we have switched to tool 3 (with `M6`), does `{in1:n}` act like `{t3in1:n}`?)_
   - Digital inputs can be waited on with `M101`.
 
    Name | Description | Values
