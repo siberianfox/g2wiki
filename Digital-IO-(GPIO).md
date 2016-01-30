@@ -68,8 +68,8 @@ Inputs operate differently during homing – sequence is:
 - At the end of homing limit override is removed.
 
 Notes and questions:
--	The above works for dedicated homing switches. It will also work for shared homing switches except for the initial backoff (off a homing switch), which will somehow need to be disabled.
--	Note – this does not address dual-axis homing such as squaring a dual-gantry Y. Do we need to discuss this?
+- The above works for dedicated homing switches. It will also work for shared homing switches except for the initial backoff (off a homing switch), which will somehow need to be disabled.
+- Note – this does not address dual-axis homing such as squaring a dual-gantry Y. Do we need to discuss this?
 
 ##Probing
 Probing is also an exception. Currently probing can only be performed on the Zmin input (di5 on the v9). Di5 should be set as Normally Open (Active Low).
@@ -92,9 +92,9 @@ Digital outputs have these attributes (using do1 as an example)
 	{do1st: | sense type | 0=active low, 1=active high
 <tbd>
 
-Reading IO
+###Reading IO
 The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense
-
+<pre>
 {in1:n}		input state
 {in2:n}		etc…
 {in:n}		returns all inputs in a single JSON object
@@ -102,6 +102,7 @@ The state of IO can be read by separate variables. 0 = inactive, 1 = active (tri
 {out1:n}	output state
 {out2:n}	etc…
 {out:n}		returns all outputs in a single JSON object
+</pre>
 
 It’s possible to register inputs (and outputs) in the status report (set to filtered, please) and detect switch state changes. If you only want switch state reports but have no other effect, select action=none and function=none. The switch closure will still be available to the switch read routines.
 
@@ -110,11 +111,11 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 
 The model - from lowest layer to highest:
 
-- "io" refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
+- **"io"** refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
 
-- "function" refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also envisioned.
+- **"function"** refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also envisioned.
 
-- "tool" is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
+- **"tool"** is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
 
 We have a few things we need to resolve:
 - Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
@@ -126,11 +127,11 @@ We have a few things we need to resolve:
 
 **Primitives** - types of inputs or outputs and some of their properties:
 - *Digital Input "Pin"*
-  - Controlled using JSON via `di`_N_.
-  - May be a physical pin, or the output from an internal "signal".
-  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `in`_N_.
-    - Read-only.
-    - Reads as boolean `True` or `False`.
+  - May be a physical pin, or the output from an internal "signal"
+  - The "pin" is configured in JSON via `di`_N_
+  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `in`_N_
+    - Reads as boolean `True` or `False`
+    - The value is read-only (`in`_N_ cannot be written)
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
   - Disabled pins, when read, will always read `-1`. _(note: was `False`)_
   - Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
@@ -143,9 +144,9 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   `di1mo` | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
-   `di1ac` | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-   `di1fn` | function | 0=none, (see list below for more)
+   {di1mo | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
+   {di1ac | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+   {di1fn | function | 0=none, (see list below for more)
 
 - *Analog Input "Pin"*
   - Accessible as JSON via `ai`_N_.
@@ -159,21 +160,21 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   `ai1mo` | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   `ai1fn` | function | 0=other/none, 1=ain1, 2=ain2, etc.
+   {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
+   {ai1fn | function | 0=other/none, 1=ain1, 2=ain2, etc.
 
 
 - *Digital Output "Pin"*
   - Accessible as JSON via `do`_N_.
   - May be a physical pin, or used as an internal "signal".
   - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
-    - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured.
+    - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
     - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
     - Reads back as the value it was set to as a float, which may not be the value given in the set.
-      - For example, if the pis was set to `0.75` but is not PWM capable, it will read back as `1`.
+      - For example, if the pin was set to `0.75` but is not PWM capable, it will read back as `1`.
       - If set with `true` it will return `1` and if set to `false` it will return `0`.
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
-  - Disabled pins, when read, will always read `0` for "Inactive".
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. _(Throw a warning? -- Yes, an error code. We may have a suitable one already, or it may need a new one)_
+  - Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 argument)_
   - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
   - Outputs may be associated with tools. See discussion on inputs above.
 
@@ -281,4 +282,3 @@ We have a few things we need to resolve:
  ... | TODO | TODO | TODO
  `temp1` | "temperature value 1" | RO | Temperature output 1
  ... | TODO | TODO | TODO
-
