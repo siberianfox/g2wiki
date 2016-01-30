@@ -151,7 +151,7 @@ Types of inputs or outputs and some of their properties:
    ------|------------|---------
    {di1mo | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
    {di1ac | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-   {di1fn | function | 0=none, (see list below for more)
+   {di1fn | function | 0=none, 1-in1, 2=in2... (see Function Access)
 
 ### Analog Input "Pin"
 - May be a physical pin, or the output from an internal signal
@@ -168,7 +168,7 @@ Types of inputs or outputs and some of their properties:
    Name | Description | Values
    ------|------------|---------
    {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   {ai1fn | function | 0=other/none, 1=adc1, 2=adc2, etc.
+   {ai1fn | function | 0=none, 1=adc1, 2=adc2... (see Function Access)
 
 ### Digital Output "Pin"
 - May be a physical pin, or the output may be virtual and used as an internal signal
@@ -191,10 +191,10 @@ Types of inputs or outputs and some of their properties:
    {do1mo | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
    {do1frq | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
    {do1tn | tool number | 0=none, 1=tool 1, etc.
-   {do1fn | function | 0=other/none, 1=out1, etc.
+   {do1fn | function | 0=none, 1=out1, 2-out2... (see Function Access)
 
 ## Function Access
-The inputs and outputs would be assigned to a function as described in this list:
+The IO level inputs and outputs can be assigned to functions. The ___fn configuration will assign diN, aiN, doN by numbers to the generics inN, adcN and outN, respectively. Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. In this case the ___fn value will be set to 0. Last one in wins.  
 
 Functions are bound to the pins using the following enumerations. Not all bindings are meaningful for all pins.
 
