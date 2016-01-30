@@ -200,9 +200,25 @@ The inputs and outputs would be assigned to a function as described in this list
 
 Functions are bound to the pins using the following enumerations. Not all bindings are meaningful for all pins.
 
-   Func# | Function | Notes
+   Func # | Function | Notes
    ------|------------|---------
-     0 | no function | pin is not bound to a function
+   0 | no function | pin is not bound to a function
+   1 | generic digital input | {`in`_N_
+   2 | generic analog input | {`adc`_N_
+   3 | generic digital output | {`out`_N_
+   4 | feedhold input |
+   5 | limit switch input |
+   6 | homing switch input | (This one may not be needed)
+   7 | shutdown input | used to support external emergency stop
+   8 | interlock input | 
+   9 | reserved
+   10 | spindle direction | 
+   11 | spindle on/off | 
+   12 | spindle speed | 
+   13 | spindle wait input |
+   20 | mist coolant on/off |
+   21 | flood coolant on/off |
+
 
 ### Generic Input Function
   - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
