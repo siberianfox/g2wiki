@@ -198,6 +198,12 @@ Types of inputs or outputs and some of their properties:
 ## Function Access
 The inputs and outputs would be assigned to a function as described in this list:
 
+Functions are bound to the pins using the following enumerations. Not all bindings are meaningful for all pins.
+
+   Func# | Function | Notes
+   ------|------------|---------
+     0 | no function | pin is not bound to a function
+
 ### Generic Input Function
   - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
   - `M101` waits can wait for these.
