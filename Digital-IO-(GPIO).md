@@ -109,7 +109,8 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 
 # Discussion of future changes (pending review)
 
-The model - from lowest layer to highest:
+##IO System Model
+Listed from lowest layer to highest:
 
 - **"io"** refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
 
@@ -117,6 +118,7 @@ The model - from lowest layer to highest:
 
 - **"tool"** is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
 
+### Open Issues
 We have a few things we need to resolve:
 - Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
   - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button.
@@ -125,23 +127,25 @@ We have a few things we need to resolve:
   - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed.
 - Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant.
 
-**IO Primitives** - types of inputs or outputs and some of their properties:
-- *Digital Input "Pin"*
-  - May be a physical pin, or the output from an internal "signal"
-  - The "pin" is configured in JSON via `di`_N_
-  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
-    - Reads as boolean `True` or `False`
-    - The value is read-only (`in`_N_ cannot be written)
-    - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
-  - Disabled pins, when read, will always read `-1`. _(note: was `False`)_
-  - Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
-  - Inputs may be associated with a specific function. The will then be accessed as a member of that function
-  - Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool
-    - For example, if not associated with a tool but assigned function `in1`, it can be accessed as `{in1:n}`
-    - If associated with tool 3, then it can be accessed as `{t3{in1:n}}`
-    - If the machine is currently loaded with tool 3 (with `M6`), `{in1:n}` acts like `{t3{in1:n}}`
-  - Digital inputs can be waited on with `M101`
+##IO Primitives
+Types of inputs or outputs and some of their properties:
+
+### Digital Input "Pin"
+- May be a physical pin, or the output from an internal signal
+- The "pin" is configured in JSON via `di`_N_
+- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
+  - Reads as boolean `True` or `False`
+  - The value is read-only (`in`_N_ cannot be written)
+  - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
+- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
+- Disabled pins, when read, will always read `-1`. _(note: was `False`)_
+- Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
+- Inputs may be associated with a specific function. The will then be accessed as a member of that function
+- Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool
+  - For example, if not associated with a tool but assigned function `in1`, it can be accessed as `{in1:n}`
+  - If associated with tool 3, then it can be accessed as `{t3{in1:n}}`
+  - If the machine is currently loaded with tool 3 (with `M6`), `{in1:n}` acts like `{t3{in1:n}}`
+- Digital inputs can be waited on with `M101`
 
    ***Configuration Values***
  
@@ -151,15 +155,15 @@ We have a few things we need to resolve:
    {di1ac | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
    {di1fn | function | 0=none, (see list below for more)
 
-- *Analog Input "Pin"*
-  - May be a physical pin, or the output from an internal "signal"
-  - The "pin" is configured in JSON via `ai`_N_
-  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
-    - Reads as a float value from `0.0` to `1.0`
-    - The value is read-only (`adc`_N_ cannot be written)
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Throw a warning?)
-  - Disabled pins, when read, will always read `0.0`
-  - Analog inputs cannot _directly_ be waited on by `M101`, nor can they be _directly_ associated with a tool. Tool functions may be associated with an analog pin, however, and that may indirectly provide boolean values than can be waited on. (For example, a Heater may use an analog input for the temperature sensor, and then a wait can be used for when the heater is at temperature.)
+### Analog Input "Pin"
+- May be a physical pin, or the output from an internal signal
+- The "pin" is configured in JSON via `ai`_N_
+- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
+  - Reads as a float value from `0.0` to `1.0`
+  - The value is read-only (`adc`_N_ cannot be written)
+- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Throw a warning?)
+- Disabled pins, when read, will always read `0.0`
+- Analog inputs cannot _directly_ be waited on by `M101`, nor can they be _directly_ associated with a tool. Tool functions may be associated with an analog pin, however, and that may indirectly provide boolean values than can be waited on. (For example, a Heater may use an analog input for the temperature sensor, and then a wait can be used for when the heater is at temperature.)
 
    ***Configuration Values***
 
@@ -168,19 +172,19 @@ We have a few things we need to resolve:
    {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
    {ai1fn | function | 0=other/none, 1=adc1, 2=adc2, etc.
 
-- *Digital Output "Pin"*
-  - May be a physical pin, or used as an internal "signal".
-  - The "pin" is configured in JSON  via `do`_N_.
-  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
-    - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
-    - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
-    - Reads back as the value it was set to as a float, which may not be the value given in the set.
-      - For example, if the pin was set to `0.75` but is not PWM capable, it will read back as `1`.
-      - If set with `true` it will return `1` and if set to `false` it will return `0`.
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. _(Throw a warning? -- Yes, an error code. We may have a suitable one already, or it may need a new one)_
-  - Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 discussion)_
-  - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
-  - Outputs may be associated with tools. See discussion on inputs above.
+### Digital Output "Pin"
+- May be a physical pin, or used as an internal signal.
+- The "pin" is configured in JSON  via `do`_N_.
+- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
+  - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
+  - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
+  - Reads back as the value it was set to as a float, which may not be the value given in the set.
+    - For example, if the pin was set to `0.75` but is not PWM capable, it will read back as `1`.
+    - If set with `true` it will return `1` and if set to `false` it will return `0`.
+- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. _(Throw a warning? -- Yes, an error code. We may have a suitable one already, or it may need a new one)_
+- Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 discussion)_
+- Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
+- Outputs may be associated with tools. See discussion on inputs above.
 
    ***Configuration Values***
 
@@ -191,29 +195,10 @@ We have a few things we need to resolve:
    {do1tn | tool number | 0=none, 1=tool 1, etc.
    {do1fn | function | 0=other/none, 1=out1, etc.
 
+## Function Access
+The inputs and outputs would be assigned to a function as described in this list:
 
-**Function Access** - the inputs and outputs would be assigned to a function as described in this list:
-- **Spindle**
-  - Controlled by `M3`, `M4`, `M5`, and `M6`, along with feed hold and other functions.
-  - _Tool specific:_ Y
-
-    Function | Control via | Type | DI/DO/AI Setting | Other Setting
-    --- | --- | --- | --- | ---
-    Speed | `M3 Snnn` `M4 Snnn` | Output (w/PWM) | Other function: `{do1fn:0}`, Tool 1: `{do1tn:1}` | Tool 1 spindle "speed" is output 1: `{t1sps:1}`
-    On/Off | `M3`, `M4`, `M5` | Output |  Other function: `{do2fn:0}`, Tool 1: `{do2tn:1}` | Tool 1 spindle "on" is output 2: `{t1spon:2}`
-    Direction | `M3` or `M4` | Output |  Other function: `{do3fn:0}`, Tool 1: `{do3tn:1}` | Tool 1 spindle "direction" is output 3: `{t1sps:3}`
-
-- **Generic Output**
-  - Controlled by JSON as `out`_N_, directly or with `M100`
-  - _Tool specific:_ Optional
-
-    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
-    --- | --- | --- | --- | ---
-    Output (no tool) | `M100 ({out1:t})` | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
-    Output (part of tool) | `M6 T3` -> `M100 ({out2:t})` | Output |  Output as `out2`: `{do1fn:2}`, Tool 3: `{do1tn:3}` | _None_
-
-
-- **Generic Input**
+### Generic Input Function
   - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
   - `M101` waits can wait for these.
   - _Tool specific:_ Optional
@@ -223,7 +208,7 @@ We have a few things we need to resolve:
     Input (no tool) | `M101 ({in2:t})` | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
     Input (part of tool) | `M6 T4` -> `M101 ({in3:t})` | Input |  Input as `in3`: `{di1fn:3}`, Tool 4: `{di1tn:4}` | _None_
 
-- **Analog Input**
+### Analog Input Function
   - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
   - _Tool specific:_ No
 
@@ -231,8 +216,29 @@ We have a few things we need to resolve:
     --- | --- | --- | --- | ---
     Analog Input | `{ain2:n}` | Analog Input | Input as `ain2`: `{ai1fn:2}` | _None_
 
+### Generic Output Function
+  - Controlled by JSON as `out`_N_, directly or with `M100`
+  - _Tool specific:_ Optional
 
-- **Heater**
+    Function |  Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Output (no tool) | `M100 ({out1:t})` | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
+    Output (part of tool) | `M6 T3` -> `M100 ({out2:t})` | Output |  Output as `out2`: `{do1fn:2}`, Tool 3: `{do1tn:3}` | _None_
+
+
+### Spindle Functions
+  - Controlled by `M3`, `M4`, and `M5`
+  - May be affected by feed hold behaviors and other functions
+  - Also may be affected by `M6` in machines with more than one spindle
+  - _Tool specific:_ Y
+
+    Function | Control via | Type | DI/DO/AI Setting | Other Setting
+    --- | --- | --- | --- | ---
+    Speed | `M3 Snnn` `M4 Snnn` | Output (w/PWM) | Other function: `{do1fn:0}`, Tool 1: `{do1tn:1}` | Tool 1 spindle "speed" is output 1: `{t1sps:1}`
+    On/Off | `M3`, `M4`, `M5` | Output |  Other function: `{do2fn:0}`, Tool 1: `{do2tn:1}` | Tool 1 spindle "on" is output 2: `{t1spon:2}`
+    Direction | `M3` or `M4` | Output |  Other function: `{do3fn:0}`, Tool 1: `{do3tn:1}` | Tool 1 spindle "direction" is output 3: `{t1sps:3}`
+
+### Heater Functions
   - Controlled by JSON as `out`_N_, directly or with `M100`
   - `M101` waits can wait for the `at` subvalue of a `he` object, like this: `M101 ({he1at:t})`
   - _Tool specific:_ Optional
@@ -243,7 +249,7 @@ We have a few things we need to resolve:
     Temperature Sensor | (same) | Temperature Sensor | Analog input 2 as 'other': `{ai2fn:0}` | Assign `ts4` to use `ai2`: `{ts4in:2}`, , Assign `ts4` function to `other`: `{ts4fn:0}`, Assign heater temp. sensor to `ts4`: `{he1ts:4}`
     Fan |  (same) | Output | Output 3 as 'other': `{do3fn:0}` | Assign heater temp. sensor to `out3`: `{he1fo:3}`
 
-- **Temperature Sensor**
+### Temperature Sensor Functions
   - Can be read like an analog input with JSON as `ts`_N_, but the floating point value is in degrees C.
   - _Tool specific:_ No, can be attached _to_ by a tool, however.
 
