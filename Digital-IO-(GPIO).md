@@ -220,7 +220,7 @@ Functions are bound to the pins using the following enumerations. Not all bindin
    21 | flood coolant on/off |
 
 
-### Generic Input Function
+### Generic Digital Input
   - Read by JSON either directly as `in`_N_ or placed in the SR filter list.
   - `M101` waits can wait for these.
   - _Tool specific:_ Optional
@@ -230,7 +230,7 @@ Functions are bound to the pins using the following enumerations. Not all bindin
     Input (no tool) | `M101 ({in2:t})` | Input | Input as `in2`: `{di1fn:2}`, No tool: `{di1tn:0}` | _None_
     Input (part of tool) | `M6 T4` -> `M101 ({in3:t})` | Input |  Input as `in3`: `{di1fn:3}`, Tool 4: `{di1tn:4}` | _None_
 
-### Analog Input Function
+### Generic Analog Input
   - Read by JSON either directly as `ain`_N_. Value is floating point from 0.0 to 1.0. (Configurable?)
   - _Tool specific:_ No
 
@@ -238,7 +238,7 @@ Functions are bound to the pins using the following enumerations. Not all bindin
     --- | --- | --- | --- | ---
     Analog Input | `{ain2:n}` | Analog Input | Input as `ain2`: `{ai1fn:2}` | _None_
 
-### Generic Output Function
+### Generic Digital Output
   - Controlled by JSON as `out`_N_, directly or with `M100`
   - _Tool specific:_ Optional
 
@@ -247,6 +247,15 @@ Functions are bound to the pins using the following enumerations. Not all bindin
     Output (no tool) | `M100 ({out1:t})` | Output | Output as `out1`: `{do1fn:1}`, No tool: `{do1tn:0}` | _None_
     Output (part of tool) | `M6 T3` -> `M100 ({out2:t})` | Output |  Output as `out2`: `{do1fn:2}`, Tool 3: `{do1tn:3}` | _None_
 
+### Feedhold Input
+
+### Limit Switch Input
+
+### Homing Switch Input
+
+### Shutdown Input
+
+### Interlock Input
 
 ### Spindle Functions
   - Controlled by `M3`, `M4`, and `M5`
