@@ -196,26 +196,25 @@ Types of inputs or outputs and some of their properties:
 ## Function Access
 The IO level inputs and outputs can be assigned to functions. The ___fn configuration will assign diN, aiN, doN by numbers to the generics inN, adcN and outN, respectively. Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. In this case the ___fn value will be set to 0. Last one in wins.  
 
-Functions are bound to the pins using the following enumerations. Not all bindings are meaningful for all pins.
+_Function Cheat Sheet - for now we need a way to collect all the functions we want to bind to the IO. As this page evolves the major sub-systems will be broken out into their own pages describing their functions._
 
-   Func # | Function | Notes
-   ------|------------|---------
-   0 | no function | pin is not bound to a function
-   1 | generic digital input | {`in`_N_
-   2 | generic analog input | {`adc`_N_
-   3 | generic digital output | {`out`_N_
-   4 | feedhold input |
-   5 | limit switch input |
-   6 | homing switch input | (This one may not be needed)
-   7 | shutdown input | used to support external emergency stop
-   8 | interlock input | 
-   9 | reserved
-   10 | spindle direction | 
-   11 | spindle on/off | 
-   12 | spindle speed | 
-   13 | spindle wait input |
-   20 | mist coolant on/off |
-   21 | flood coolant on/off |
+   Function | Notes
+   ------------|---------
+   no function | pin is not bound to a function
+   generic digital input | {`in`_N_
+   generic analog input | {`adc`_N_
+   generic digital output | {`out`_N_
+   feedhold input |
+   limit switch input |
+   homing switch input | (This one may not be needed)
+   shutdown input | used to support external emergency stop
+   interlock input | 
+   spindle direction | 
+   spindle on/off | 
+   spindle speed | 
+   spindle at speed |
+   mist coolant on/off |
+   flood coolant on/off |
 
 
 ### Generic Digital Input
