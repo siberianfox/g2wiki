@@ -109,7 +109,7 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 
 # Discussion of future changes (pending review)
 
-##IO System Model
+## IO System Model
 Listed from lowest layer to highest:
 
 - **"io"** refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
@@ -118,16 +118,15 @@ Listed from lowest layer to highest:
 
 - **"tool"** is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
 
-### Open Issues
-We have a few things we need to resolve:
+#### Discussion
 - Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
-  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button.
-- We would like to be able to assign an arbitrary output to an arbitrary function.
-  - For example, we would like to say that "Spindle Speed" for "Tool 0" is actually using `do0`. Or we could assign it to the physical input `di1` without changing the logical function.
-  - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed.
-- Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant.
+  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button
+- We would like to be able to assign an arbitrary IO to an arbitrary function
+  - For example, we would like to say that "Spindle Speed" for "Tool 0" is actually using `do0`. Or we could assign it to the physical input `di1` without changing the logical function
+  - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed
+- Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant
 
-##IO Primitives
+## IO Primitives
 Types of inputs or outputs and some of their properties:
 
 ### Digital Input "Pin"
@@ -137,14 +136,13 @@ Types of inputs or outputs and some of their properties:
   - Reads as boolean `True` or `False`
   - The value is read-only (`in`_N_ cannot be written)
   - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
-- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
-- Disabled pins, when read, will always read `-1`. _(note: was `False`)_
-- Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
-- Inputs may be associated with a specific function. The will then be accessed as a member of that function
-- Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool
-  - For example, if not associated with a tool but assigned function `in1`, it can be accessed as `{in1:n}`
-  - If associated with tool 3, then it can be accessed as `{t3{in1:n}}`
-  - If the machine is currently loaded with tool 3 (with `M6`), `{in1:n}` acts like `{t3{in1:n}}`
+- An input pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them. 
+  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled input pins, but should such a pin be readable it will return `null` as opposed to `true` or `false`. It may also return an ERROR status code, and/or an exception report.
+- Inputs may have immediate actions that will occur as well as any assigned function, i.e. actions that are bound to the actual pin firing interrupt. This is needed for some time-sensitive operations
+- Inputs may be associated with a specific function or a tool. The will then be accessed as a member of that function
+  - For example, if an input pin is assigned to function `in1` (but not in a tool) it can be read as `{in1:n}`
+  - If associated with some function in tool 3, then it can be accessed as `{t3{some-function-in-the-tool:n}}`
+  - If the machine is currently loaded with tool 3 (with `M6`), `{some-function-in-the-tool:n}` acts like `{t3{some-function-in-the-tool:n}}`
 - Digital inputs can be waited on with `M101`
 
    ***Configuration Values***
