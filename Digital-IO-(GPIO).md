@@ -129,19 +129,22 @@ We have a few things we need to resolve:
 - *Digital Input "Pin"*
   - May be a physical pin, or the output from an internal "signal"
   - The "pin" is configured in JSON via `di`_N_
-  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `in`_N_
+  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
     - Reads as boolean `True` or `False`
     - The value is read-only (`in`_N_ cannot be written)
+    - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Value of -1). _(Throw a warning? -- probably not)_
   - Disabled pins, when read, will always read `-1`. _(note: was `False`)_
   - Inputs may have immediate actions that will occur as well as any assigned function _(i.e. actions that are bound to the actual pin firing interrupt - this is needed for some time-sensitive operations)_
-  - Inputs may be associated with a specific function. The will then be accessed as a member of that function.
-  - Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool.
+  - Inputs may be associated with a specific function. The will then be accessed as a member of that function
+  - Inputs may alternately be associated with a specific tool. They will then be accessed as a member of that tool
     - For example, if not associated with a tool but assigned function `in1`, it can be accessed as `{in1:n}`
-    - If associated with tool 3, then it can be accessed as `{t3in1:n}`
-    - _(*Question:* If we have switched to tool 3 (with `M6`), does `{in1:n}` act like `{t3in1:n}`?)_
-  - Digital inputs can be waited on with `M101`.
+    - If associated with tool 3, then it can be accessed as `{t3{in1:n}}`
+    - If the machine is currently loaded with tool 3 (with `M6`), `{in1:n}` acts like `{t3{in1:n}}`
+  - Digital inputs can be waited on with `M101`
 
+   ***Configuration Values***
+ 
    Name | Description | Values
    ------|------------|---------
    {di1mo | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
@@ -149,35 +152,38 @@ We have a few things we need to resolve:
    {di1fn | function | 0=none, (see list below for more)
 
 - *Analog Input "Pin"*
-  - Accessible as JSON via `ai`_N_.
-  - May be a physical pin, or the output from an internal "signal".
-  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `ain`_N_.
-    - Read-only.
-    - Reads as a float value from `0.0` to `1.0`.
-  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. (Throw a warning?)
-  - Disabled pins, when read, will always read `0.0`.
+  - May be a physical pin, or the output from an internal "signal"
+  - The "pin" is configured in JSON via `ai`_N_
+  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
+    - Reads as a float value from `0.0` to `1.0`
+    - The value is read-only (`adc`_N_ cannot be written)
+  - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Throw a warning?)
+  - Disabled pins, when read, will always read `0.0`
   - Analog inputs cannot _directly_ be waited on by `M101`, nor can they be _directly_ associated with a tool. Tool functions may be associated with an analog pin, however, and that may indirectly provide boolean values than can be waited on. (For example, a Heater may use an analog input for the temperature sensor, and then a wait can be used for when the heater is at temperature.)
+
+   ***Configuration Values***
 
    Name | Description | Values
    ------|------------|---------
    {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   {ai1fn | function | 0=other/none, 1=ain1, 2=ain2, etc.
+   {ai1fn | function | 0=other/none, 1=adc1, 2=adc2, etc.
 
 
 - *Digital Output "Pin"*
-  - Accessible as JSON via `do`_N_.
   - May be a physical pin, or used as an internal "signal".
-  - The value is not directly accessible via JSON, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
+  - The "pin" is configured in JSON  via `do`_N_.
+  - The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
     - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
     - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
     - Reads back as the value it was set to as a float, which may not be the value given in the set.
       - For example, if the pin was set to `0.75` but is not PWM capable, it will read back as `1`.
       - If set with `true` it will return `1` and if set to `false` it will return `0`.
   - May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. _(Throw a warning? -- Yes, an error code. We may have a suitable one already, or it may need a new one)_
-  - Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 argument)_
+  - Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 discussion)_
   - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
   - Outputs may be associated with tools. See discussion on inputs above.
 
+   ***Configuration Values***
 
    Name | Description | Values
    ------|------------|---------
