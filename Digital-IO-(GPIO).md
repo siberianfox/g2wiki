@@ -125,7 +125,7 @@ We have a few things we need to resolve:
   - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed.
 - Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant.
 
-**Primitives** - types of inputs or outputs and some of their properties:
+**IO Primitives** - types of inputs or outputs and some of their properties:
 - *Digital Input "Pin"*
   - May be a physical pin, or the output from an internal "signal"
   - The "pin" is configured in JSON via `di`_N_
@@ -168,7 +168,6 @@ We have a few things we need to resolve:
    {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
    {ai1fn | function | 0=other/none, 1=adc1, 2=adc2, etc.
 
-
 - *Digital Output "Pin"*
   - May be a physical pin, or used as an internal "signal".
   - The "pin" is configured in JSON  via `do`_N_.
@@ -187,11 +186,10 @@ We have a few things we need to resolve:
 
    Name | Description | Values
    ------|------------|---------
-   `do1mo` | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
-   `do1frq` | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
-   `do1tn` | tool number | 0=none, 1=tool 1, etc.
-   `do1fn` | function | 0=other/none, 1=out1, etc.
-
+   {do1mo | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
+   {do1frq | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
+   {do1tn | tool number | 0=none, 1=tool 1, etc.
+   {do1fn | function | 0=other/none, 1=out1, etc.
 
 
 **Function Access** - the inputs and outputs would be assigned to a function as described in this list:
