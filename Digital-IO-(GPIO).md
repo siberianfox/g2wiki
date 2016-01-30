@@ -131,18 +131,18 @@ Types of inputs or outputs and some of their properties:
 
 ### Digital Input "Pin"
 - May be a physical pin, or the output from an internal signal
-- The "pin" is configured in JSON via `di`_N_
-- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
+- The "pin" can be configured in JSON via `di`_N_. See Configuration Values, below
+- The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
   - Reads as boolean `True` or `False`
   - The value is read-only (`in`_N_ cannot be written)
   - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
 - An input pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them. 
-  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled input pins, but should such a pin be readable it will return `null` as opposed to `true` or `false`. It may also return an ERROR status code, and/or an exception report.
+  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled input pins, but should such a pin be readable it will return `null` as opposed to `true` or `false`. It may also return an ERROR status code, and/or generate an exception report.
 - Inputs may have immediate actions that will occur as well as any assigned function, i.e. actions that are bound to the actual pin firing interrupt. This is needed for some time-sensitive operations
-- Inputs may be associated with a specific function or a tool. The will then be accessed as a member of that function
-  - For example, if an input pin is assigned to function `in1` (but not in a tool) it can be read as `{in1:n}`
-  - If associated with some function in tool 3, then it can be accessed as `{t3{some-function-in-the-tool:n}}`
-  - If the machine is currently loaded with tool 3 (with `M6`), `{some-function-in-the-tool:n}` acts like `{t3{some-function-in-the-tool:n}}`
+- Inputs may be associated with a specific function or a tool. The will then be accessed as a member of that function. For example:
+  - If an input pin is assigned to generic input `in1` it can be read as `{in1:n}`
+  - If assigned to a function like safety interlock input `safe` it can be read as `{safe:n}`
+  - If associated with some function in tool 3, then it can be read as `{t3{some-function-in-the-tool:n}}`. If the machine is currently loaded with tool 3 (with `M6`), `{some-function-in-the-tool:n}` acts like `{t3{some-function-in-the-tool:n}}`
 - Digital inputs can be waited on with `M101`
 
    ***Configuration Values***
@@ -155,12 +155,12 @@ Types of inputs or outputs and some of their properties:
 
 ### Analog Input "Pin"
 - May be a physical pin, or the output from an internal signal
-- The "pin" is configured in JSON via `ai`_N_
-- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
+- The "pin" can be configured in JSON via `ai`_N_. See Configuration Values, below
+- The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
   - Reads as a float value from `0.0` to `1.0`
   - The value is read-only (`adc`_N_ cannot be written)
-- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled (Throw a warning?)
-- Disabled pins, when read, will always read `0.0`
+- An input pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them. 
+  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled input pins, but should such a pin be readable it will return `null` as opposed to `true` or `false`. It may also return an ERROR status code, and/or generate an exception report.
 - Analog inputs cannot _directly_ be waited on by `M101`, nor can they be _directly_ associated with a tool. Tool functions may be associated with an analog pin, however, and that may indirectly provide boolean values than can be waited on. (For example, a Heater may use an analog input for the temperature sensor, and then a wait can be used for when the heater is at temperature.)
 
    ***Configuration Values***
@@ -171,16 +171,16 @@ Types of inputs or outputs and some of their properties:
    {ai1fn | function | 0=other/none, 1=adc1, 2=adc2, etc.
 
 ### Digital Output "Pin"
-- May be a physical pin, or used as an internal signal.
-- The "pin" is configured in JSON  via `do`_N_.
-- The value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
+- May be a physical pin, or the output may be virtual and used as an internal signal
+- The "pin" can be configured in JSON via `do`_N_. See Configuration Values, below
+- The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
   - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
   - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
-  - Reads back as the value it was set to as a float, which may not be the value given in the set.
+  - Reads back the value it was set to as a float, which may not be the value given in the set.
     - For example, if the pin was set to `0.75` but is not PWM capable, it will read back as `1`.
     - If set with `true` it will return `1` and if set to `false` it will return `0`.
-- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. _(Throw a warning? -- Yes, an error code. We may have a suitable one already, or it may need a new one)_
-- Disabled pins, when read, will always read `0` for "Inactive". _(again, the -1 discussion)_
+- May be disabled. Pins that don't exist will ignore attempts to enable them, and always report themselves as disabled. Attempting to enable a non-existent pin returns a status code (error). 
+  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled output pins, but should such a pin be readable it will return `null` as opposed to `true` or `false` or a floating point value. It may also return an ERROR status code, and/or generate an exception report.
 - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
 - Outputs may be associated with tools. See discussion on inputs above.
 
