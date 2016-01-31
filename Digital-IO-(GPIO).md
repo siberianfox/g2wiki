@@ -140,35 +140,35 @@ The following is necessary to explain the various ways of sending IO commands un
 - Note that some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant
 
 ## IO Primitives
-Types of inputs or outputs and some of their properties:
+The three IO primitives are digital input, analog input, and digital output. Analog output is not implemented separately, but practically speaking we always use pulse width modulation (PWM) for variable outputs, so PWM functionality is folded into the digital outputs. Types of inputs or outputs and some of their properties:
 
 ### Digital Input "Pin"
-- May be a physical pin, or the output from an internal signal
-- The "pin" can be configured in JSON via `di`_N_. See Configuration Values, below
-- The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
+- "Pin" may be a physical pin, or the output from an internal signal such as a timer timeout or a function that outputs true or false
+- A pin can be configured in JSON via `di`_N_. See Configuration Values, below
+- A pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `in`_N_
   - Reads as boolean `True` or `False`
   - The value is read-only (`in`_N_ cannot be written)
   - The value is conditioned - i.e. it's deglitched, debounced or whatever conditioning the board provides
-- An input pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them. 
-  - Disabled pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing non-existent or disabled input pins, but should such a pin be readable it will return `null` as opposed to `true` or `false`. It may also return an ERROR status code, and/or generate an exception report.
-- Inputs may have immediate actions that will occur as well as any assigned function, i.e. actions that are bound to the actual pin firing interrupt. This is needed for some time-sensitive operations
-- Inputs may be associated with a specific function or a tool. The will then be accessed as a member of that function. For example:
+- An input pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them and return an ERROR status code.
+  - Disabled or non-existent pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing disabled or non-existent pins, but should such a pin be readable it will return `null`. It will also return an ERROR status code, and may generate an exception report.
+- Inputs may have actions that will occur immediately as well as any assigned function, i.e. actions that are bound to the actual pin firing interrupt. This is needed for some time-sensitive operations like machine halts.
+- In lieu of being exposed as `in`_N_, an input may be associated with a specific function or a tool and exposed through that mechanism. The input will then be accessed as a member of that function. For example:
   - If an input pin is assigned to generic input `in1` it can be read as `{in1:n}`
   - If assigned to a function like safety interlock input `safe` it can be read as `{safe:n}`
-  - If associated with some function in tool 3, then it can be read as `{t3{some-function-in-the-tool:n}}`. If the machine is currently loaded with tool 3 (with `M6`), `{some-function-in-the-tool:n}` acts like `{t3{some-function-in-the-tool:n}}`
-- Digital inputs can be waited on with `M101`
+  - If associated with some function in tool 3, then it can be read as `{t3{some-function-in-tool:n}}`. If the machine is currently loaded with tool 3 (via `M6`), `{some-function-in-tool:n}` acts like `{t3{some-function-in-tool:n}}`
+- Digital inputs can be waited on using the `M101` command, thus being be part of the job tape and synchronized with the job. An example is waiting on a heater to achieve its set temperature.
 
    ***Configuration Values***
  
    Name | Description | Values
    ------|------------|---------
-   {di1mo | mode | -1=disabled, 0=active low (NO), 1=active high (NC)
+   {di1mo | mode | -1=disabled, 0=active low (Normally Open), 1=active high (Normally Closed)
    {di1ac | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-   {di1fn | function | 0=none, 1-in1, 2=in2... (see Function Access)
+   {di1fn | function | 0=none/other, 1-in1, 2=in2... (see Function Access)
 
 ### Analog Input "Pin"
-- May be a physical pin, or the output from an internal signal
-- The "pin" can be configured in JSON via `ai`_N_. See Configuration Values, below
+- "Pin" may be a physical pin, or the output from an internal signal such as a function the returns a floating point value
+- The pin can be configured in JSON via `ai`_N_. See Configuration Values, below
 - The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `adc`_N_
   - Reads as a float value from `0.0` to `1.0`
   - The value is read-only (`adc`_N_ cannot be written)
@@ -181,11 +181,11 @@ Types of inputs or outputs and some of their properties:
    Name | Description | Values
    ------|------------|---------
    {ai1mo | mode | -1=disabled, 0=normal (LOW is 0.0), 1=inverted (HIGH is 0.0)
-   {ai1fn | function | 0=none, 1=adc1, 2=adc2... (see Function Access)
+   {ai1fn | function | 0=none/other, 1=adc1, 2=adc2... (see Function Access)
 
 ### Digital Output "Pin"
-- May be a physical pin, or the output may be virtual and used as an internal signal
-- The "pin" can be configured in JSON via `do`_N_. See Configuration Values, below
+- "Pin" may be a physical pin, or the output may be virtual and used as an internal signal
+- The pin can be configured in JSON via `do`_N_. See Configuration Values, below
 - The pin value is not directly accessible, but may be assigned to a function that is exposed via JSON, such as `out`_N_.
   - Set as boolean `True` for "Active" or `False` for "Inactive", or as a float of `0.0` through `1.0` if it has PWM capability that has been configured - with the value being the "Active" time in the cycle, depending on polarity.
   - If the pin or internal signal is binary (not PWM capable or such), then floating point set values will interpreted as the result of the boolean expression `(bool)(value >= 0.5)`.
@@ -204,7 +204,7 @@ Types of inputs or outputs and some of their properties:
    {do1mo | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
    {do1frq | function | -1=not PWM capable, 0=PWM off, >0 = PWM frequency in Hz
    {do1tn | tool number | 0=none, 1=tool 1, etc.
-   {do1fn | function | 0=none, 1=out1, 2-out2... (see Function Access)
+   {do1fn | function | 0=none/other, 1=out1, 2-out2... (see Function Access)
 
 ## Function Access
 The IO level inputs and outputs can be assigned to functions. The ___fn configuration will assign diN, aiN, doN by numbers to the generics inN, adcN and outN, respectively. Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. In this case the ___fn value will be set to 0. Last one in wins.  
