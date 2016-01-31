@@ -206,9 +206,28 @@ Now the details for each type and their properties:
    {do1fn | function | 0=none/other, 1=out1, 2-out2... (see Function Access)
 
 ## Function Access
-The IO level inputs and outputs can be assigned to functions. The ___fn configuration will assign diN, aiN, doN by numbers to the generics inN, adcN and outN, respectively. Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. In this case the ___fn value will be set to 0. Last one in wins.  
+### Assigning IO to Functions (Binding)
+The IO primitive inputs and outputs can be assigned to functions. The __fn configuration will assign diN, aiN, doN by numbers to the generics inM, adcM and outM, respectively. 
 
-_Function Cheat Sheet - for now we need a way to collect all the functions we want to bind to the IO. As this page evolves the major sub-systems will be broken out into their own pages describing their functions._
+Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. The __fn value must be 0 or it is a configuration error. A pin cannot be assigned to a generic and a function at the same time.  
+
+### Accessing Functions via JSON
+Direct access via JSON is straightforward. Examples:
+- `{in1:n}` reads digital input 1
+- `{out3:n}` reads digital output 3
+- `{out3:t}` sets digital output 3 active
+- `{out3:1}` sets digital output 3 active
+- `{out3:0}` sets digital output 3 inactive
+- `{com:0}` disables mist coolant
+- `{htr...}` need a heater example here...
+
+### Accessing Functions in Status Reports
+Any function value can also be included in a status report. We highly recommend using filtered status reports if this is the case. Any time the value changes it will be reported in the status report.
+
+### Accessing Functions via Gode
+
+### Function Cheat Sheet
+For now we need a way to collect all the functions we want to bind to the IO. As this page evolves the major sub-systems will be broken out into their own pages describing their functions.
 
    Function | Notes
    ------------|---------
