@@ -254,7 +254,7 @@ For now we need a way to collect all the functions we want to bind to the IO. As
 ### Generic IO Functions
 
 #### Generic Digital Input
-- Read by JSON either directly as `in`_N_, {inN:n}
+- Read by JSON as {inN:n}
 - Can also be placed in status reports to monitor state changes (hopefully filtered!)
 - `M101` waits can wait for these
 - _Tool specific:_ Optional
