@@ -209,7 +209,7 @@ Now the details for each type and their properties:
 ### Assigning IO to Functions (Binding)
 The IO primitive inputs and outputs can be assigned to functions. The __fn configuration will assign diN, aiN, doN by numbers to the generics inM, adcM and outM, respectively. 
 
-Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. The __fn value must be 0 or it is a configuration error. A pin cannot be assigned to a generic and a function at the same time.  
+Named functions (non-generics) assign their functions "downward" to a pin by setting a configuration value in that function. The __fn value will be set to 0 in this case. A pin cannot be assigned to a generic and a function at the same time.
 
 ### Accessing Functions via JSON
 Direct access via JSON is straightforward. Examples:
@@ -222,7 +222,7 @@ Direct access via JSON is straightforward. Examples:
 - `{htr...}` need a heater example here...
 
 ### Accessing Functions in Status Reports
-Any function value can also be included in a status report. We highly recommend using filtered status reports if this is the case. Any time the value changes it will be reported in the status report.
+Any function value can also be included in a status report. Any time the value changes it will be reported in the status report. We highly recommend using filtered status reports if this is the case. 
 
 ### Accessing Functions via Gode
 Some IO commands and functions make sense to operate from within Gcode and thus be part of the job and synchronized with motion. We use JSON active comments, which is a Gcode comment that gets executed. In standard Gcode the string "MSG" occurring right after the open paren is an active comment that sends the comment to the console, e.g. `G0 X100 (MSG Hello World). JSON active comments rely on an open curly immediately after the open paren. 
