@@ -198,6 +198,7 @@ Now the details for each type and their properties:
 - Set and read values will always align, even if the sense of the pin makes the physical output inverted. IOW, if the pin is set to have the sense of "active low", and setting the pin to "true" causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value it was set as.
 - Outputs may be associated with tools. See discussion on inputs above.
 - ***Configuration Values*** Output pins can be configured in JSON via `do`_N_ as below:
+
    Name | Description | Values
    ------|------------|---------
    {do1mo | mode | -1=disabled, 0=normal (active HIGH), 1=inverted (active LOW)
@@ -296,7 +297,7 @@ For now we need a way to collect all the functions we want to bind to the IO. As
 ### Spindle Functions
   - Controlled by `M3`, `M4`, and `M5`
   - May be affected by feed hold behaviors and other functions
-  - Also may be affected by `M6` in machines with more than one spindle
+  - Also may be affected by `M6` in machines with more than one spindle - i.e. changing tool number may also change spindle
   - _Tool specific:_ Y
 
     Function | Control via | Type | DI/DO/AI Setting | Other Setting
