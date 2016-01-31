@@ -113,7 +113,7 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 ### Layers
 Listed from lowest layer to highest:
 
-- **"IO"** refers to the physical layer and consists of digital inputs (`di`_N_), analog inputs (`ai`_N_), and digital outputs (`do`_N_). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
+- **"IO Primitives"** refers to the physical layer and consists of digital inputs (`di`_N_), analog inputs (`ai`_N_), and digital outputs (`do`_N_). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
 
 - **"Function"** refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also defined.
 
@@ -129,12 +129,15 @@ The following is necessary to explain the various ways of sending IO commands un
 1. **"Runtime Commands"** are commands that are delivered during a job, but are not part of the tape. Examples are feedhold, limit switch hits, and other user or machine initiated events or controls that may affect the running job. These are delivered over the control channel and are raw JSON.
 
 ### Other Discussion
-- Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
-  - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button
-- We would like to be able to assign an arbitrary IO to an arbitrary function
-  - For example, we would like to say that "Spindle Speed" for "Tool 0" is actually using `do0`. Or we could assign it to the physical input `di1` without changing the logical function
-  - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as Spindle Speed
-- Some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant
+
+- One design goal is to provide a logical-to-physical mapping of IO ports to make control code (e.g. UIs) more portable and consistent across different board and machine configurations. Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
+  - For example, we could have several machines where `in0` is always valid and serves the same function (like a shutdown signal), but on one machine it's attached to `di0` but on another it's attached to `di5`.
+
+- Another design goal is to be able to assign an arbitrary IO to an arbitrary function
+  - For example, we would like to say that "heater PWM" for Tool 1 (extruder 1) is actually using `do0` whereas for Tool 2 it uses `do7`, and hide these details form the UI.
+  - The pins need to have the capabilities necessary to support those functions. Beyond the obvious of an input not being an output, we have some functions that need PWM output capability, such as heater PWM
+
+- Note that some functionality will simply NOT be reconfigurable. We cannot reassign motor pins, for example. All functions that are related to a "tool" should be reassignable, as well as some functions that are general, such as coolant
 
 ## IO Primitives
 Types of inputs or outputs and some of their properties:
