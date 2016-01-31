@@ -110,15 +110,25 @@ It’s possible to register inputs (and outputs) in the status report (set to fi
 # Discussion of future changes (pending review)
 
 ## IO System Model
+### Layers
 Listed from lowest layer to highest:
 
-- **"io"** refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
+- **IO** refers to the physical layer. it's further discussed as digital inputs (`di_`), analog inputs (`ai_`), and digital outputs (`do_`). There can also be various "non-pin" or virtual "signals" at the io level, such as a timer expiring or a communications operation to or from a remote device (e.g. a command to turn on a temperature controller sent over some serial bus).
 
-- **"function"** refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also envisioned.
+- **Function** refers to the logical layer. Functions are things like Spindle On, Limit Hit, Feedhold, etc. Primitive functions such as `in`N, `out`N and `adc`N are also envisioned.
 
-- **"tool"** is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
+- **Tool** is in keeping with the Gcode definition of a tool - which is something that is moved around in XYZ at the "controlled point" (refer to the NIST spec for this definition). For our purposes a tool may be any of: an end mill in a spindle, an extruder, a laser, a heated wire, etc. Gcode supports numbering tools (T words), assigning attributes to tools (Tool tables), and changing tools (M6). Some functions operate on tools. For example set-temperature-and-wait can be applied to an extruder; set-spindle-speed cana be applied to a spindle and its associated cutter.
 
-#### Discussion
+### Access and Visibility
+The following is necessary to explain the various ways of sending IO commands under various circumstances. There are three "flavors" of accessing the system:
+
+1. **Configuration Access** - Configuration sets machine parameters to setup the system so it can process a job. Configuration always occurs outside of a job; i.e. outside of a Gcode run. Configuration is uses raw JSON commands (or text mode), and never uses Gcode commands. Configuration commands flow over the "control" channel. In the case of dual-port connection the control channel is actually a separate USB port. In other cases it's a logical channel as both control and data channels share the same physical interface.
+
+1. **Runtime or Job Access** - Jobs are the actual Gcode to be run, aka the "tape". The only things that should be on the tape (in the Gcode) are actual Gcode commands that are to be sequenced during the job. This is considered the "data" channel. The IO system uses active comments to wrap JSON in the Gcode (M100 and M101), so IO commands can be inserted into the tape. Raw JSON is never used in the data channel, and is rejected if found. 
+
+1. **Runtime Commands** - Some commands are delivered during a job, but are not part of the tape. Examples are feedhold, limit switch hits, and other user or machine initiated events that may affect the running job. These are delivered over the control channel and are raw JSON.
+
+### Other Discussion
 - Instead of having a direct mapping between `di0` and `in0`, we would like to assign an arbitrary `di` to an arbitrary `in`.
   - For example, we could have several machines where `in0` is always valid and serves the same function, but on one machine it's attached to `di0` but on another it's attached to `di5`. For example, a front panel FEEDHOLD button
 - We would like to be able to assign an arbitrary IO to an arbitrary function
