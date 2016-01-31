@@ -225,6 +225,10 @@ Direct access via JSON is straightforward. Examples:
 Any function value can also be included in a status report. We highly recommend using filtered status reports if this is the case. Any time the value changes it will be reported in the status report.
 
 ### Accessing Functions via Gode
+Some IO commands and functions make sense to operate from within Gcode and thus be part of the job and synchronized with motion. We use JSON active comments, which is a Gcode comment that gets executed. In standard Gcode the string "MSG" occurring right after the open paren is an active comment that sends the comment to the console, e.g. `G0 X100 (MSG Hello World). JSON active comments rely on an open curly immediately after the open paren. 
+
+- M100 ({...}) - JSON command synchronized with motion. The JSON command, presumably an output, will be executed when the planner gets to it.
+- M101 ({...}) - Wait on event. The planner will hold until the JSON command, presumably an input, returns `true`.
 
 ### Function Cheat Sheet
 For now we need a way to collect all the functions we want to bind to the IO. As this page evolves the major sub-systems will be broken out into their own pages describing their functions.
