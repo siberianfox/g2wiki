@@ -150,9 +150,10 @@ The three IO primitives are **digital input**, **analog input**, and **digital o
 _(QUESTION: Is there a bound on M?)_
 
 - In lieu of being exposed as one of the generics a pin may be associated with a specific function or a tool and exposed and be accessed as a member of that function. For example:
-  - An input assigned to a function like safety interlock input `safe` can be read as `{safe:n}`
+  - An input assigned to a function like safety interlock input `safe` can be read as `{safe:n}`.
   - An output assigned to a function like mist coolant `com` can be written as `{com:t}`. See M100 for use from Gcode.
-  - If an io is assigned to some function in tool 3 then it can be read as `{t3{some-function-in-tool:n}}`. If the machine is currently loaded with tool 3 (via `M6`), `{some-function-in-tool:n}` acts like `{t3{some-function-in-tool:n}}`. Similar for outputs.
+  - If an io is assigned to some function in tool 3 then it can be read as `{t3:{some-function-in-tool:n}}`. If the machine is currently loaded with tool 3 (via `M6 T3`), `{some-function-in-tool:n}` acts like `{t3:{some-function-in-tool:n}}`. Similar for outputs.
+  - Not all functions expose the "raw" value of an input or output. For example, when an output is assigned to the "spindle speed" function, there is no way to read or write the raw PWM duty-cycle output value. It can only be set via gcode `S` words and read via the JSON `{sps:N}` command (or text-mode equivalent).
 
 - An input or output pin may be non-existent or may be explicitly disabled. Pins that don't exist will ignore attempts to enable them and return an ERROR status code. Disabled or non-existent pins, if read, will always read `null`. Attempts are made to prevent configuration from exposing disabled or non-existent pins, but should the pin be readable it will return `null` and an ERROR status code, and may also generate an exception report in some cases.
 
