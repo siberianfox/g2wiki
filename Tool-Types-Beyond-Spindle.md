@@ -22,4 +22,16 @@ There are other traditional CNC facilities, such as "coolant" that may be reappr
 
 # Proposal
 
-We change everything! (TBD)
+We change the term "spindle" to "toolhead" or just "tool." Then we say that there are different types of tools, one of which is a spindle. 
+
+Types of toolhead:
+- **Spindle**
+  - `M3`, `M4`, `M5` behavior: Turn on the spindle at the RPM specified by the S word.
+    - Motion will plan to a stop for `M3`, `M4`, and possibly S word changes, with a configurable delay to allow the RPM to be achieved.
+    - Some spindles will have a signal to indicate that they are at speed, in which case we could wait for that signal.
+- **Laser**
+  - `M3`, `M4`, `M5` behavior: Turn on a laser, with the power setting based on the S word, possibly with some coversion table between input and output.
+  - Motion will not have to be paused for laser enabling or power level changes.
+  - Power level applied is to be adjusted by the active velocity dynamically (on a segment-by-segment basis) to maintain consistent laser coverage even during acceleration and deceleration.
+- **Extruder**
+  - `M3`, `M4`, `M5` behavior:
