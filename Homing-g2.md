@@ -24,11 +24,11 @@ After initialization the following sequence is run:
 
 1. Mark the machine as unhomed: `{home:0}`
 1. Mark all axes as unhomed: `{homx:0}`, `{homy:0}`, `{homz:0}`...
-1. Disable limits. Shutdown and safety interlocks are not disabled
-1. Run a series of internal tests to detect input, axis or other mis-configuration
+1. Disable limits. Shutdown and safety interlocks are still enabled.
+1. Run a series of internal tests to detect input, axis or other misconfiguration
   1. Fail if misconfiguration detected - returns [status code](Status-Codes) 240 and up
 1. Run homing for each selected axis in ZXYABC sequence:
-  1. If a homing input is active on start, back off the input switch by latch backoff distance `_lb`
+  1. If a homing input is active on start, back off the switch by latch backoff distance `_lb`
     1. Fail homing if switch is closed and inputs are shared
   1. Search towards homing switch in the `_hd` direction at `_sv` search velocity until switch is hit. Stop motion using the `_jh` jerk setting (high jerk setting)
     1. Fail if the switch is not hit within the search distance (~`_tm` - `_tn`)
