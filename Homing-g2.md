@@ -2,7 +2,7 @@ _This page refers to g2 builds labeled as firmware version 0.98 and above. _
 
 *** **Note: In the middle of editing - Feb 14, 2016** ***
 
-This page describes the function of machine limits, homing cycles and related Gcode for version 0.95 and later versions. If you are new to this it's best to read these in the order listed:
+This page describes the function of machine limits, homing cycles and related Gcode for version 0.98 and later versions. If you are new to this it's best to read these in the order listed:
 
 * [Homing Commands and Operation](Homing-and-Limits-Description-and-Operation#homing-commands-and-operation)
 * [Homing and Limits Setup and Troubleshooting](Homing-and-Limits-Setup-and-Troubleshooting)
