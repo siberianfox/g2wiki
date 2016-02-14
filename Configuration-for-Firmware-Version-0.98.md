@@ -326,7 +326,7 @@ For example; if the A radius is set to 10 mm it means that a value of 62.8318531
 Note that the Travel per Revolution value (1tr) is used but unaffected in radius mode. The degrees per revolution still applies, it's just that the degrees were computed based on the radius and the Gcode axis values. See Travel per Revolution in the motor group. 
 
 ### Homing Settings
-Please see [G2 Homing](Homing-Operation) for details and more help on homing settings:
+Please see [G2 Homing](Homing-g2) for details and more help on homing settings:
 
 <pre>
 {xsv:_}  Homing Search Velocity
