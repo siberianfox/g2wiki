@@ -54,7 +54,7 @@ g2 homing uses these non-standard Gcode functions:
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
 	G28.2 | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis letter must be present. The value (number) must be provided but is ignored.
-	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.)
+	[G28.3](Homing-g2#g283---set-absolute-position) | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.)
 
 Constraints:
 * The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYABC, but skipping all axes that are not specified in the G28.2 command. Attempting to home an axis that is not configured will result in an error.
