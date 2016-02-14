@@ -32,7 +32,7 @@ After initialization the following sequence is run:
     1. Fail homing if switch is closed and inputs are shared
   1. Search towards homing switch in the `_hd` direction at `_sv` search velocity until switch is hit. Stop motion using the `_jh` jerk setting (high jerk setting)
     1. Fail if the switch is not hit within the search distance (~`_tm` - `_tn`)
-  1. Drive away from the homing switch at `_sv` search velocity for latch backoff distance `_lb`
+  1. Drive away from closed switch at `_sv` search velocity for latch backoff distance `_lb`
   1. Drive back towards homing switch at latch velocity `_lv` until switch is hit
   1. Back off switch by the zero backoff distance `_zb` and set zero for that axis
   1. Mark the axis as having been homed, e.g. `{homz:1}`
