@@ -61,10 +61,11 @@ Having wired the homing inputs, any other inputs may be wired as axis limit swit
 	Ymax | Y limit switch | at the back of the machine
 	Zmin | Z limit switch | at the bottom of the Z axis travel
 
-### Switch Configuration
-It is mandatory that the switch configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment.
+## Configuring Homing
+It is mandatory that the homing configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment. Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. 
 
-Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recapped here (using di1 as an example):
+### Configuring Digital Inputs
+Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recapped here (using di1 as an example):
 
 	Name | Description | Values
 	------|------------|---------
@@ -72,10 +73,43 @@ Homing is set up by first configuring the digital inputs, then configuring each 
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
 	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
-Setting up an axis for homing is done as so:
+For homing we recommend using "active high" (1) switches. Use "stop" (1) as the action, and "none" (0) as the function. 
+
+### Configuring Axes for Homing 
+Setting up an axis for homing is done as so (using the X axis as an example):
+
+	Name | Description | Values
+	------|------------|---------
+	{xjh: | high-speed | -1=disabled, 0=active low (NO), 1=active high (NC)
+	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
  
 
-For homing we recommend using "active high" (1) switches. Use "stop" (1) as the action, and "none" (0) as the function. Here an example of the JSON for setting up a Shapeoko2, dual Y axis
+	{ "x","xjh",_fipc, 0, cm_print_jh, get_flt,   cm_set_jh, (float *)&cm.a[AXIS_X].jerk_high,	    X_JERK_HIGH_SPEED },
+	{ "x","xjd",_fipc, 4, cm_print_jd, get_nul,   set_nul,   (float *)&cs.null, 0 },                // DEPRECATED
+	{ "x","xhi",_fip,  0, cm_print_hi, get_ui8,   cm_set_hi, (float *)&cm.a[AXIS_X].homing_input,   X_HOMING_INPUT },
+	{ "x","xhd",_fip,  0, cm_print_hd, get_ui8,   set_01,    (float *)&cm.a[AXIS_X].homing_dir,     X_HOMING_DIR },
+	{ "x","xsv",_fipc, 0, cm_print_sv, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].search_velocity,X_SEARCH_VELOCITY },
+	{ "x","xlv",_fipc, 2, cm_print_lv, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].latch_velocity,	X_LATCH_VELOCITY },
+	{ "x","xlb",_fipc, 3, cm_print_lb, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].latch_backoff,	X_LATCH_BACKOFF },
+	{ "x","xzb",_fipc, 3, cm_print_zb, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].zero_backoff,	X_ZERO_BACKOFF },
+
+
+The following per-axis settings are used by homing. Substitute any of XYZA for the 'x' in the table. The use of the settings is described in G28.2, below.
+
+	Setting | Description | Notes
+	--------|-------------|--------------
+	**$xTN** | Travel Minimum | Set the minimum travel for this axis (see Note)
+	**$xTM** | Travel Maximum | Set the maximum travel for this axis (see Note)
+	**$xJH** | Homing Jerk | Set this to stop quickly on switches. May need to be larger than the $xJM
+	**$xSV** | Homing Search Velocity | Velocity for initially finding the homing switch. Set a moderate pace, e.g. 1/4 to 1/2 your max velocity
+	**$xLV** | Homing Latch Velocity | Velocity for latching phase. Set this very low for best positional accuracy, e.g. 10 mm/min
+	**$xLB** | Homing Latch Backoff | Distance to back off switch during latch and for clears. Must be large enough to totally clear the switch or you will see frustrating errors.
+	**$xZB** | Homing Zero Backoff | Distance to back off switch before setting machine coordinate system zero. Usually no more than a few millimeters 
+
+**Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search  could stop before it reaches the intended switch, and the homing operation is canceled.
+
+Here an example of the JSON for setting up a Shapeoko2, dual Y axis
 
 //*** Input / output settings ***
 /*
@@ -152,30 +186,6 @@ For homing we recommend using "active high" (1) switches. Use "stop" (1) as the 
 {xzb:_}  Homing Zero Backoff
 </pre>
 
-	{ "di1","di1mo",_fip, 0, io_print_mo, get_int8,io_set_mo, (float *)&d_in[0].mode,     DI1_MODE },
-	{ "di1","di1ac",_fip, 0, io_print_ac, get_ui8, io_set_ac, (float *)&d_in[0].action,   DI1_ACTION },
-	{ "di1","di1fn",_fip, 0, io_print_fn, get_ui8, io_set_fn, (float *)&d_in[0].function, DI1_FUNCTION },
-
-
-The following switch settings are supported:
-* 0=Disabled - Switch closures will have no effect. All unused switch pins must be set to Disabled.
-* 1=Homing-only - Switch is active during homing but has no effect otherwise
-* 2=Limits-only - Switch is not active in homing but will act as a kill switch during normal operation.
-* 3=Homing-and-limits - Switch is active during homing and acts as kill switch during normal operation. 
-
-The following settings are used for switch configuration.
-
-	Setting | Description | Setting Example
-	--------|-------------|------------------
-	**$ST** | Switch Type | sets the type of switch used by the entire machine - 0=NO, 1=NC.
-	**$XSN** | X Minimum Switch Mode | 3=limit-and-homing (See Modes, below)
-	**$XSX** | X Maximum Switch Mode | 2=limit-only
-	**$YSN** | Y Minimum Switch Mode | 3=limit-and-homing
-	**$YSX** | Y Maximum Switch Mode | 2=limit-only
-	**$ZSN** | Z Minimum Switch Mode | 0=disabled
-	**$ZSX** | Z Maximum Switch Mode | 3=limit-and-homing
-	**$ASN** | A Minimum Switch Mode | 0=disabled
-	**$ASX** | A Maximum Switch Mode | 0=disabled
 
 **IMPORTANT**
 * It is important to configure all switch pins (all 8) even if you are not using them. Configure all unused switches as Disabled. Otherwise NC configurations will not work.
@@ -184,19 +194,7 @@ The following settings are used for switch configuration.
 
 ## Homing Configuration Settings
 
-The following per-axis settings are used by homing. Substitute any of XYZA for the 'x' in the table. The use of the settings is described in G28.2, below.
 
-	Setting | Description | Notes
-	--------|-------------|--------------
-	**$xTN** | Travel Minimum | Set the minimum travel for this axis (see Note)
-	**$xTM** | Travel Maximum | Set the maximum travel for this axis (see Note)
-	**$xJH** | Homing Jerk | Set this to stop quickly on switches. May need to be larger than the $xJM
-	**$xSV** | Homing Search Velocity | Velocity for initially finding the homing switch. Set a moderate pace, e.g. 1/4 to 1/2 your max velocity
-	**$xLV** | Homing Latch Velocity | Velocity for latching phase. Set this very low for best positional accuracy, e.g. 10 mm/min
-	**$xLB** | Homing Latch Backoff | Distance to back off switch during latch and for clears. Must be large enough to totally clear the switch or you will see frustrating errors.
-	**$xZB** | Homing Zero Backoff | Distance to back off switch before setting machine coordinate system zero. Usually no more than a few millimeters 
-
-**Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search  could stop before it reaches the intended switch, and the homing operation is canceled.
 
 ### Homing Operation
 ## G28.2 - Homing Sequence (Homing Cycle)
