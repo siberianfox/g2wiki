@@ -12,23 +12,30 @@ The absolute machine coordinate system (aka "absolute coordinate system", "machi
 
 Homing is invoked using a G28.2 command with one or more axes specified in the command: e.g. `g28.2 x0 y0 z0`. Homing is always run in the following order `Z,X,Y,A,B,C` for each axis present in the g28.2 command.
 
-To enable homing for an axis:
+To enable and configure homing for an axis:
 
-1. Each input must be configured properly. See [Configuring Digital Inputs for Homing](Configuring-Digital-Inputs-for-Homing)
-1. The homing input must be set for the axis `{xhi:_}` 
-1. The homing direction must be set for the axis `{xhd:_}` 
-1. The other axis configurations must be set up for homing. See [Configuring Axes for Homing](Configuring-Axes–for-Homing) 
+* Each input must be configured properly. See [Configuring Digital Inputs for Homing](Configuring-Digital-Inputs-for-Homing)
+* The homing input must be set for the axis `{xhi:_}` 
+* The homing direction must be set for the axis `{xhd:_}` 
+* The other axis configurations must be set up for homing. See [Configuring Axes for Homing](Configuring-Axes–for-Homing) 
 
-After initialization the following sequence is run for each axis to be homed:
+After initialization the following sequence is run:
 
-1. Limits are automatically disabled. Shutdown and safety interlocks are not.
-1. If a homing input is active on invocation, clear off the input (switch)
-1. Drive towards homing switch in the set direction until switch is activated
-1. Drive away from the homing switch at search velocity for latch distance
-1. Drive towards homing switch at latch velocity until switch is activated
-1. Back off switch by the zero backoff distance and set zero for that axis
-1. Once all moves for an axis are complete that axis is marked as homed, e.g. `{homz:1}`, and the next axis in the sequence is homed
-1. When a homing cycle is initiated the system homing state is set `false`, e.g. `{home:0}`. When homing completes successfully it is set true, e.g. `{home:1}`.
+1. Mark the machine as unhomed: `{home:0}`
+1. Mark all axes as unhomed: `{homx:0}`, `{homy:0}`, `{homz:0}`...
+1. Disable limits. Shutdown and safety interlocks are not disabled
+1. Run a series of internal tests to detect input, axis or other mis-configuration
+  1. Fail axis if misconfiguration detected - return error [status code](Status-Codes)
+1. Run homing for each selected axis in ZXYABC sequence:
+  1. If a homing input is active on start, back off the input switch
+  1. Drive towards homing switch in the `_hd` direction at `_sv` velocity until switch is activated 
+    1. Fail the axis (`_tm` - `_tn`) is exceed (max travel)
+  1. Drive away from the homing switch at search velocity for latch distance
+  1. Drive back towards homing switch at latch velocity until switch is activated
+  1. Back off switch by the zero backoff distance and set zero for that axis
+  1. Mark the axis as having been homed, e.g. `{homz:1}`
+1. Perform homing for the next enabled axis in the sequence
+1. If all exes comleted successfully mark the machine as homed: `{home:1}`.
 
 ###Homing Cycles
 Homing is typically performed by running a "homing cycle" that locates the Z **maximum**, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
