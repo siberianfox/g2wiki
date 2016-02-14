@@ -49,5 +49,3 @@ Now that the offsets are clear as mud, let's discuss G28 and G30. These are actu
 To 'save' a position just send `G28.1`. This saves the current position in absolute coordinates - regardless of the coordinate system the machine is in and the state of the G92 offsets. When you want to return to that position send `G28`. 
 
 If you send axis words along with the G28, say `G28 Z10` the tool will move to the intermediate position first, then move to the saved position. This is useful for clearing the work before moving. G28 is a good choice for tool changes and things like that.
-
-See also: https://github.com/synthetos/TinyG/wiki/Gcode-Support#g28-g281-g30-g301-go-to-predefined-position
