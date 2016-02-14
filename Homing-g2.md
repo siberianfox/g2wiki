@@ -62,6 +62,21 @@ Having wired the homing inputs, any other inputs may be wired as axis limit swit
 ### Switch Configuration
 It is mandatory that the switch configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment.
 
+Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. Digital inputs are explained on the (GPIO page)[Digital-IO-(GPIO)] but are recapped here (using di1 as an example):
+
+	Name | Description | Values
+	------|------------|---------
+	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
+	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
+
+Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
+
+Setting up an axis for homing is done as so:
+ 
+
+For homing we recommend using "active high" (1) switches. Use "stop" (1) as the action, and "none" (0) as the function. Here an example of the JSON for setting up a Shapeoko2, dual Y axis
+
 //*** Input / output settings ***
 /*
     IO_MODE_DISABLED
@@ -137,6 +152,9 @@ It is mandatory that the switch configuration settings match the physical switch
 {xzb:_}  Homing Zero Backoff
 </pre>
 
+	{ "di1","di1mo",_fip, 0, io_print_mo, get_int8,io_set_mo, (float *)&d_in[0].mode,     DI1_MODE },
+	{ "di1","di1ac",_fip, 0, io_print_ac, get_ui8, io_set_ac, (float *)&d_in[0].action,   DI1_ACTION },
+	{ "di1","di1fn",_fip, 0, io_print_fn, get_ui8, io_set_fn, (float *)&d_in[0].function, DI1_FUNCTION },
 
 
 The following switch settings are supported:
