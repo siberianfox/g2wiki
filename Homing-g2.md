@@ -33,7 +33,9 @@ Note: In high-end CNC machines there is often no user-accessible homing cycle as
 ### Switch Inputs
 A g2 firmware build has an arbitrary number of digital input pins that may be used for homing. On the v9 there are 9 digital inputs. Arduino Due based g2 builds may be configured to have many more. 
 
-In the v9 these inputs are de-glitched electrically with a resistor-capacitor pair 
+In the v9 these inputs are de-glitched electrically with a resistor-capacitor pair as so:
+![](images/digital_input.jpg)
+
 available on terminal blocks J7 and J8, along with two ground and two 3.3v terminals co-located on these terminal blocks. These are clearly labeled on the circuit board. (See [here](#tinyg-v7-switch-port) for v7 switch pinouts)
 
 	Signal  | Notes
