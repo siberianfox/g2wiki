@@ -27,15 +27,23 @@ After initialization the following sequence is run:
 1. Run a series of internal tests to detect input, axis or other mis-configuration
   1. Fail if misconfiguration detected - returns [status code](Status-Codes) 240 and up
 1. Run homing for each selected axis in ZXYABC sequence:
-  1. If a homing input is active on start, back off the input switch by `_lb` (does not work if inputs are shared)
-  1. Search towards homing switch in the `_hd` direction at `_sv` search velocity until switch is hit 
+  1. If a homing input is active on start, back off the input switch by latch backoff distance `_lb`
+    1. Fail homing if switch is closed and inputs are shared
+  1. Search towards homing switch in the `_hd` direction at `_sv` search velocity until switch is hit. Stop motion using the `_jh` jerk setting (high jerk setting)
     1. Fail if the switch is not hit within the search distance (~`_tm` - `_tn`)
   1. Drive away from the homing switch at `_sv` search velocity for latch backoff distance `_lb`
   1. Drive back towards homing switch at latch velocity `_lv` until switch is hit
   1. Back off switch by the zero backoff distance `_zb` and set zero for that axis
   1. Mark the axis as having been homed, e.g. `{homz:1}`
 1. Perform homing for the next enabled axis in the sequence
-1. If all exes comleted successfully mark the machine as homed: `{home:1}`.
+1. If all axes homed successfully mark the machine as homed: `{home:1}`
+
+Note: If you need to home unswitched axes using g28.3 do this after the g28.2 operation to set proper homing state. For example, a roll-feed Y axis on a paper cutter might be homed as:
+
+<pre>
+  G28.2 X0 Z0
+  G28.3 Y0
+</pre>
 
 ###Homing Cycles
 Homing is typically performed by running a "homing cycle" that locates the Z **maximum**, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
