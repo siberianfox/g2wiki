@@ -40,10 +40,9 @@ On the TinyG v9 and some other boards these inputs are de-glitched electrically 
 ![](images/digital_input.jpg)
 
 ### Switch Wiring
-To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Either NO or NC switches may be used. Each switch may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
+To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Each switch may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
 
-Wire a single switch to each axis that will be part of homing. Homing does not require each switch to be independent - i.e. you can use a single input for multiple axes, but homing works better if the switches are independent.
-The following configuration is typical for most milling machines and 3D printers:
+Wire a single switch to each axis that will be homed. Homing does not require each switch input to be independent - i.e. you can use a single input for multiple axes, but homing works better if the switches are independent. The following configuration is typical for most milling machines and 3D printers:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
@@ -52,7 +51,7 @@ The following configuration is typical for most milling machines and 3D printers
 	Zmax | Z homing switch | at the top of the Z axis travel
 
 ####Limit Switches
-Having wired the homing inputs, any other inputs may be wired as axis limit switches (kill) or left unused. If you wire limits you should connect the switch to its proper axis, and not connect multiple switches to an input. Adding limit switches would add these three switches to the example above:
+Having wired the homing inputs, any other inputs may be wired as axis limit switches (alarm) or left unused. Limit switches also share an input, but provide better alarm messages if they are independent. Adding limit switches would add these three switches to the example above:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
@@ -62,6 +61,83 @@ Having wired the homing inputs, any other inputs may be wired as axis limit swit
 
 ### Switch Configuration
 It is mandatory that the switch configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment.
+
+//*** Input / output settings ***
+/*
+    IO_MODE_DISABLED
+    IO_ACTIVE_LOW    aka NORMALLY_OPEN
+    IO_ACTIVE_HIGH   aka NORMALLY_CLOSED
+
+    INPUT_ACTION_NONE
+    INPUT_ACTION_STOP
+    INPUT_ACTION_FAST_STOP
+    INPUT_ACTION_HALT
+    INPUT_ACTION_RESET
+
+    INPUT_FUNCTION_NONE
+    INPUT_FUNCTION_LIMIT
+    INPUT_FUNCTION_INTERLOCK
+    INPUT_FUNCTION_SHUTDOWN
+    INPUT_FUNCTION_PANIC
+*/
+// Xmin on v9 board
+#define DI1_MODE                    NORMALLY_CLOSED
+//#define DI1_ACTION                  INPUT_ACTION_STOP
+#define DI1_ACTION                  INPUT_ACTION_NONE
+#define DI1_FUNCTION                INPUT_FUNCTION_LIMIT
+
+// Xmax
+#define DI2_MODE                    NORMALLY_CLOSED
+//#define DI2_ACTION                  INPUT_ACTION_STOP
+#define DI2_ACTION                  INPUT_ACTION_NONE
+#define DI2_FUNCTION                INPUT_FUNCTION_LIMIT
+
+// Ymin
+#define DI3_MODE                    NORMALLY_CLOSED
+//#define DI3_ACTION                  INPUT_ACTION_STOP
+#define DI3_ACTION                  INPUT_ACTION_NONE
+#define DI3_FUNCTION                INPUT_FUNCTION_LIMIT
+
+// Ymax
+#define DI4_MODE                    NORMALLY_CLOSED
+//#define DI4_ACTION                  INPUT_ACTION_STOP
+#define DI4_ACTION                  INPUT_ACTION_NONE
+#define DI4_FUNCTION                INPUT_FUNCTION_LIMIT
+
+// Zmin
+#define DI5_MODE                    IO_ACTIVE_HIGH   // Z probe
+#define DI5_ACTION                  INPUT_ACTION_NONE
+#define DI5_FUNCTION                INPUT_FUNCTION_NONE
+
+// Zmax
+#define DI6_MODE                    NORMALLY_CLOSED
+//#define DI6_ACTION                  INPUT_ACTION_STOP
+#define DI6_ACTION                  INPUT_ACTION_NONE
+#define DI6_FUNCTION                INPUT_FUNCTION_LIMIT
+
+// Amin
+#define DI7_MODE                    IO_MODE_DISABLED
+#define DI7_ACTION                  INPUT_ACTION_NONE
+#define DI7_FUNCTION                INPUT_FUNCTION_NONE
+
+// Amax
+#define DI8_MODE                    IO_MODE_DISABLED
+#define DI8_ACTION                  INPUT_ACTION_NONE
+#define DI8_FUNCTION                INPUT_FUNCTION_NONE
+
+// Hardware interlock input
+#define DI9_MODE                    IO_MODE_DISABLED
+#define DI9_ACTION                  INPUT_ACTION_NONE
+#define DI9_FUNCTION                INPUT_FUNCTION_NONE
+
+<pre>
+{xsv:_}  Homing Search Velocity
+{xlv:_}  Homing Latch Velocity
+{xlb:_}  Homing Latch Backoff
+{xzb:_}  Homing Zero Backoff
+</pre>
+
+
 
 The following switch settings are supported:
 * 0=Disabled - Switch closures will have no effect. All unused switch pins must be set to Disabled.
@@ -162,80 +238,7 @@ TinyG v7 has 8 switch pin pairs and a 3.3v pair take-off located on the J13 jump
 
 For each switch pair the pin closest to the board edge is the ground, the pin next to it is the switch input as labeled on the silkscreen. The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. The inputs are tied high - with strong pullups for v7 boards and on-chip weak pullups for earlier boards. 
 
-//*** Input / output settings ***
-/*
-    IO_MODE_DISABLED
-    IO_ACTIVE_LOW    aka NORMALLY_OPEN
-    IO_ACTIVE_HIGH   aka NORMALLY_CLOSED
 
-    INPUT_ACTION_NONE
-    INPUT_ACTION_STOP
-    INPUT_ACTION_FAST_STOP
-    INPUT_ACTION_HALT
-    INPUT_ACTION_RESET
-
-    INPUT_FUNCTION_NONE
-    INPUT_FUNCTION_LIMIT
-    INPUT_FUNCTION_INTERLOCK
-    INPUT_FUNCTION_SHUTDOWN
-    INPUT_FUNCTION_PANIC
-*/
-// Xmin on v9 board
-#define DI1_MODE                    NORMALLY_CLOSED
-//#define DI1_ACTION                  INPUT_ACTION_STOP
-#define DI1_ACTION                  INPUT_ACTION_NONE
-#define DI1_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Xmax
-#define DI2_MODE                    NORMALLY_CLOSED
-//#define DI2_ACTION                  INPUT_ACTION_STOP
-#define DI2_ACTION                  INPUT_ACTION_NONE
-#define DI2_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Ymin
-#define DI3_MODE                    NORMALLY_CLOSED
-//#define DI3_ACTION                  INPUT_ACTION_STOP
-#define DI3_ACTION                  INPUT_ACTION_NONE
-#define DI3_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Ymax
-#define DI4_MODE                    NORMALLY_CLOSED
-//#define DI4_ACTION                  INPUT_ACTION_STOP
-#define DI4_ACTION                  INPUT_ACTION_NONE
-#define DI4_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Zmin
-#define DI5_MODE                    IO_ACTIVE_HIGH   // Z probe
-#define DI5_ACTION                  INPUT_ACTION_NONE
-#define DI5_FUNCTION                INPUT_FUNCTION_NONE
-
-// Zmax
-#define DI6_MODE                    NORMALLY_CLOSED
-//#define DI6_ACTION                  INPUT_ACTION_STOP
-#define DI6_ACTION                  INPUT_ACTION_NONE
-#define DI6_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Amin
-#define DI7_MODE                    IO_MODE_DISABLED
-#define DI7_ACTION                  INPUT_ACTION_NONE
-#define DI7_FUNCTION                INPUT_FUNCTION_NONE
-
-// Amax
-#define DI8_MODE                    IO_MODE_DISABLED
-#define DI8_ACTION                  INPUT_ACTION_NONE
-#define DI8_FUNCTION                INPUT_FUNCTION_NONE
-
-// Hardware interlock input
-#define DI9_MODE                    IO_MODE_DISABLED
-#define DI9_ACTION                  INPUT_ACTION_NONE
-#define DI9_FUNCTION                INPUT_FUNCTION_NONE
-
-<pre>
-{xsv:_}  Homing Search Velocity
-{xlv:_}  Homing Latch Velocity
-{xlb:_}  Homing Latch Backoff
-{xzb:_}  Homing Zero Backoff
-</pre>
 
 By way of example, a Shapeoko2 can be set up this way:
 
