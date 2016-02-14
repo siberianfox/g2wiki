@@ -7,9 +7,9 @@ _This page describes the function of machine limits, homing cycles and related G
 The term "homing" in this context means setting the absolute machine coordinates to a known zero location, or _zeroing the machine_. The absolute machine coordinate system (aka "absolute coordinate system", "machine coordinate system", or "G53 coordinate system") is the reference coordinate system for the machine. Work coordinate systems G54, G55, G56, G57, G58, G59 can be defined on top of G53 as offsets to the machine coordinates, and G92 can be used to put offsets on the offsets. Yes. It gets confusing. The [coordinate systems](Coordinate-Systems) page may help.
 
 ###Homing Cycles
-Homing is typically performed by running a "homing cycle" that locates the Z maximum, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the bed being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
+Homing is typically performed by running a "homing cycle" that locates the Z maximum, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
 
-Z is done first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
+Z is homed first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
 
 In TinyG homing is performed by running a G28.2 X0 Y0 Z0 command (The 0's are not used, but the X Y and Z words must have some arbitrary value). 
 
@@ -20,16 +20,21 @@ TinyG homing uses these "non standard" Gcode functions:
 	G28.2 | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis letter must be present. The value (number) must be provided but is ignored.
 	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.) (See also G92 Offsets)
 
+
 Some limitations / constraints in TinyG homing as currently implemented:
-* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYA (but skipping all axes that are not specified in the G28.2 command)
-* Supports a single home position. I.e. it does not support multiple-homes such as used by dual pallet machines and other complex machining centers
+* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYA, but skipping all axes that are not specified in the G28.2 command.
+* Homing supports a single home position. I.e. it does not support multiple-homes such as used by dual pallet machines and other complex machining centers
+* **Homing operations (G28.2 and G28.3) must not be performed in the "middle" of a Gcode file. I.e. the machine must be idle (no queued commands) before performing either operation.**
 
 Note: In high-end CNC machines there is often no user-accessible homing cycle as machine zero is set at the factory and does not need to be set by the end user. See [Peter Smid's CNC Programming Handbook, version 2](http://books.google.com/books?id=JNnQ8r5merMC&lpg=PA444&ots=PYOFKP-WtL&dq=Smid%20version3&pg=PA447#v=onepage&q=Smid%20version3&f=false) for details. 
 
 
 ## Switches
 ### Switch Inputs
-TinyG v8 has 8 switch inputs pins available on terminal blocks J7 and J8, along with two ground and two 3.3v terminals co-located on these terminal blocks. These are clearly labeled on the circuit board. (See [here](#tinyg-v7-switch-port) for v7 switch pinouts)
+A g2 firmware build has an arbitrary number of digital input pins that may be used for homing. On the v9 there are 9 digital inputs. Arduino Due based g2 builds may be configured to have many more. 
+
+In the v9 these inputs are de-glitched electrically with a resistor-capacitor pair 
+available on terminal blocks J7 and J8, along with two ground and two 3.3v terminals co-located on these terminal blocks. These are clearly labeled on the circuit board. (See [here](#tinyg-v7-switch-port) for v7 switch pinouts)
 
 	Signal  | Notes
 	-----|-------------
