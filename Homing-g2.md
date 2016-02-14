@@ -69,38 +69,30 @@ Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recap
 
 	Name | Description | Values
 	------|------------|---------
-	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
-	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
+	{di1mo:_} | input mode |-1=disabled, 0=active low (NO), 1=active high (NC)
+	{di1ac:_} | input action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+	{di1fn:_} | input function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
 For homing we recommend using "active high" (1) switches. Use "stop" (1) as the action, and "none" (0) as the function. 
 
 ### Configuring Axes for Homing 
 Setting up an axis for homing is done as so (using the X axis as an example):
 
-	Name | Description | Values
-	------|------------|---------
-	{xjh: | high-speed | -1=disabled, 0=active low (NO), 1=active high (NC)
-	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
- 
-
-	{ "x","xjh",_fipc, 0, cm_print_jh, get_flt,   cm_set_jh, (float *)&cm.a[AXIS_X].jerk_high,	    X_JERK_HIGH_SPEED },
-	{ "x","xjd",_fipc, 4, cm_print_jd, get_nul,   set_nul,   (float *)&cs.null, 0 },                // DEPRECATED
-	{ "x","xhi",_fip,  0, cm_print_hi, get_ui8,   cm_set_hi, (float *)&cm.a[AXIS_X].homing_input,   X_HOMING_INPUT },
-	{ "x","xhd",_fip,  0, cm_print_hd, get_ui8,   set_01,    (float *)&cm.a[AXIS_X].homing_dir,     X_HOMING_DIR },
-	{ "x","xsv",_fipc, 0, cm_print_sv, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].search_velocity,X_SEARCH_VELOCITY },
-	{ "x","xlv",_fipc, 2, cm_print_lv, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].latch_velocity,	X_LATCH_VELOCITY },
-	{ "x","xlb",_fipc, 3, cm_print_lb, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].latch_backoff,	X_LATCH_BACKOFF },
-	{ "x","xzb",_fipc, 3, cm_print_zb, get_flt,   set_flu,   (float *)&cm.a[AXIS_X].zero_backoff,	X_ZERO_BACKOFF },
-
-
-The following per-axis settings are used by homing. Substitute any of XYZA for the 'x' in the table. The use of the settings is described in G28.2, below.
-
 	Setting | Description | Notes
 	--------|-------------|--------------
-	**$xTN** | Travel Minimum | Set the minimum travel for this axis (see Note)
-	**$xTM** | Travel Maximum | Set the maximum travel for this axis (see Note)
+	{xtn:_} | Travel Minimum | Minimum travel in absolute coordinates 
+	{xtm:_} | Travel Maximum | Maximum travel in absolute coordinates 
+	{xjh:_} | Jerk High | Jerk used during homing operations
+	{xhi:_} | Homing Input | Switch (input) to use for homing this axis
+	{xhd:_} | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
+	{xsv:_} | Search velocity | Homing speed during search phase (drive to switch)
+	{xlv:_} | Latch velocity | Homing speed during latch phase (drive off switch)
+	{xlb:_} | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
+	{xzb:_} | Zero backoff | Offset from switch for zero in absolute coordinates
+
+* xtn/xtm - Travel minimum and maximum. The distrance between the min and max travel (plus a small factor) is used to determine how far to search for the homing switch before giving up. This is to prevent the system from grinding away indefinitely if a homing swithc is not found or is mis-configured. 
+* xjh - Jerk High - Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
+
 	**$xJH** | Homing Jerk | Set this to stop quickly on switches. May need to be larger than the $xJM
 	**$xSV** | Homing Search Velocity | Velocity for initially finding the homing switch. Set a moderate pace, e.g. 1/4 to 1/2 your max velocity
 	**$xLV** | Homing Latch Velocity | Velocity for latching phase. Set this very low for best positional accuracy, e.g. 10 mm/min
