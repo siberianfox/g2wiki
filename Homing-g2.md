@@ -33,32 +33,19 @@ Note: In high-end CNC machines there is often no user-accessible homing cycle as
 ### Switch Inputs
 A g2 firmware build has an arbitrary number of digital input pins that may be used for homing. On the v9 there are 9 digital inputs. Arduino Due based g2 builds may be configured to have many more. 
 
-In the v9 these inputs are de-glitched electrically with a resistor-capacitor pair as so:
+We recommend using normally closed switch configuration - that is the input is pulled low for normal operation, and oly goes high when the switch is hit.
+
+The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. Optical inputs can also be used providing the swing between 0 and 3.3 volts.
+
+On the TinyG v9 and some other boards these inputs are de-glitched electrically with a resistor-capacitor pair and transient protected for electrostatic discharge. The RC circuit performs a pull-up of the signal and prevents a lot of spurious noise from getting into the line. If you are using a Due-based g2 or some other config we recommend using this circuit or something like it.
+
 ![](images/digital_input.jpg)
 
-available on terminal blocks J7 and J8, along with two ground and two 3.3v terminals co-located on these terminal blocks. These are clearly labeled on the circuit board. (See [here](#tinyg-v7-switch-port) for v7 switch pinouts)
-
-	Signal  | Notes
-	-----|-------------
-	Gnd | There is one ground for each terminal block
-	3.3v | There is one 3.3v take-off for each terminal block
-	Xmin | The Xmin switch is typically positioned at left-most travel of the machine
-	Xmax | ...typically at right-most travel
-	Ymin | ...typically at front of machine 
-	Ymax | ...typically at rear of machine 
-	Zmin | ...typically at minimum height of Z travel (work bed), or omitted
-	Zmax | ...typically at maximum height of Z travel
-	Amin | Most of the time A is infinite and not homed. This position can be used for a machine kill
-	Amax | Ditto
-
-The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. The inputs are de-glitch filtered with a resistor-capacitor circuit (RC circuit), and pulled up to 3.3v on the board via 2.7K ohm resistors (strong pullup).  
-
-Two 3.3v outputs are made available for opto-coupled and other powered switch options. if using active switches you will need to be careful not to exceed 3.3v on the inputs or you may damage the inputs. If you draw the 3.3v do not pull more than 30 ma.
-
 ### Switch Wiring
-To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Either NO or NC switches may be used, but all switches must be of the same type. We recommend using NC switches for better noise immunity to prevent false firings. 
+To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Either NO or NC switches may be used. Each switch may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
 
-Wire a single switch to each axis that will be part of homing. Homing requires each switch to be independent - i.e. you cannot run switches for multiple exes to a single switch input. The following configuration is typical for most milling machines and 3D printers:
+Wire a single switch to each axis that will be part of homing. Homing does not require each switch to be independent - i.e. you can use a single input for multiple axes, but homing works better if the switches are independent.
+The following configuration is typical for most milling machines and 3D printers:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
@@ -67,17 +54,13 @@ Wire a single switch to each axis that will be part of homing. Homing requires e
 	Zmax | Z homing switch | at the top of the Z axis travel
 
 ####Limit Switches
-Having wired the homing inputs, any other inputs may be wired as axis limit switches (kill) or left unused. If you wire limits you should connect the switch to its proper axis, and not connect multiple switches to an input. use the same switch sense (NC or NO) that you used for the homing switches. Adding limit switches would add these three switches to the example above:
+Having wired the homing inputs, any other inputs may be wired as axis limit switches (kill) or left unused. If you wire limits you should connect the switch to its proper axis, and not connect multiple switches to an input. Adding limit switches would add these three switches to the example above:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
 	Xmax | X limit switch | on the right of the machine
 	Ymax | Y limit switch | at the back of the machine
 	Zmin | Z limit switch | at the bottom of the Z axis travel
-
-The A inputs (if otherwise unused) can also be used as a limit.
-
-When a limit switch is tripped the board is reset and will not exit until either a manual reset is pushed or a hard reset is sent via the serial interface. A hard reset is the Control x character.
 
 ### Switch Configuration
 It is mandatory that the switch configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment.
