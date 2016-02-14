@@ -14,14 +14,13 @@ Homing is invoked using a G28.2 command with one or more axes specified in the c
 
 To enable homing for an axis:
 
-1. Each input must be configured for the proper switch type. See [Configuring Digital Inputs for Homing](Configuring-Digital-Inputs-for-Homing)
+1. Each input must be configured properly. See [Configuring Digital Inputs for Homing](Configuring-Digital-Inputs-for-Homing)
 1. The homing input must be set for the axis `{xhi:_}` 
 1. The homing direction must be set for the axis `{xhd:_}` 
 1. The other axis configurations must be set up for homing. See [Configuring Axes for Homing](Configuring-Axes–for-Homing) 
 
-
-
 After initialization the following sequence is run for each axis to be homed:
+
 1. Limits are automatically disabled. Shutdown and safety interlocks are not.
 1. If a homing input is active on invocation, clear off the input (switch)
 1. Drive towards homing switch in the set direction until switch is activated
