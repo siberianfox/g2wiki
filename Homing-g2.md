@@ -1,4 +1,3 @@
-*** **Note: In the middle of editing - Feb 14, 2016** ***
 _This page describes homing operation cycles for version 0.98 and later versions._
 
 #Homing Commands and Operation
