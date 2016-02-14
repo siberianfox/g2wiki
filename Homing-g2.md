@@ -147,95 +147,52 @@ Setting up an axis for homing is done as so (using the X axis as an example):
 **Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search could stop before it reaches the intended switch, and the homing operation is canceled.
 
 ### Configuration Example
-Here is an example of the JSON for setting up a Shapeoko2, dual Y axis, with a 375mm table. X is homed to minimum (right sode of machine), Y to minimum (front of machine). Z is homed to maximum (top of Z travel). X, Y and Z homing switches are  also used as limit switches, and X and Y have additional limit switches on their maximums.
+Here is an example of the JSON for setting up a Shapeoko2, dual Y axis, with a 375mm table. X is homed to minimum (right side of machine), Y to minimum (front of machine). Z is homed to maximum (top of Z travel). X, Y and Z homing switches are  also used as limit switches, and X and Y have additional limit switches on their maximums.
+
+It is important to configure all inputs even if you are not using them. Configure all unused inputs as Disabled. Otherwise NC configurations may not work.
+
+Comments are not allowed in JSON, but the are marked here with semicolons. <br>
+Note that the homing inputs are modal - they are used as homing during homing operation, as their assigned action and function at other times.
 
 <pre>
-  {di1
-	{di1mo:_} | input mode |-1=disabled, 0=active low (NO), 1=active high (NC)
-	{di1ac:_} | input action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
-	{di1fn:_} | input function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
+               ; Xmin on v9 board
+  {di1mo:1}    ; MODE: set to active hi (NC)
+  {di1ac:1}    ; ACTION: set to stop when hit (when used as a limit switch)
+  {di1fn:1}    ; FUNCTION: use as limit switch (when not in homing operation)
+
+  {di2mo:1}    ; Xmax
+  {di2ac:1}
+  {di2fn:1}
+
+  {di3mo:1}    ; Ymin
+  {di3ac:1}
+  {di3fn:1}
+
+  {di4mo:1}    ; Ymax
+  {di4ac:1}
+  {di4fn:1}
+
+  {di5mo:0}    ; Zmin - disabled
+  {di5ac:0}
+  {di5fn:0}
+
+  {di6mo:1}    ; Zmax
+  {di6ac:1}
+  {di6fn:1}
+
+  {di7mo:0}    ; Amin - disabled
+  {di7ac:0}
+  {di7fn:0}
+
+  {di8mo:0}    ; Amin - disabled
+  {di8ac:0}
+  {di8fn:0}
+
+  {di9mo:0}    ; Hardware interlock input on v9 board - disabled
+  {di9ac:0}
+  {di9fn:0}
 
 </pre>
-
-
-//*** Input / output settings ***
-/*
-    IO_MODE_DISABLED
-    IO_ACTIVE_LOW    aka NORMALLY_OPEN
-    IO_ACTIVE_HIGH   aka NORMALLY_CLOSED
-
-    INPUT_ACTION_NONE
-    INPUT_ACTION_STOP
-    INPUT_ACTION_FAST_STOP
-    INPUT_ACTION_HALT
-    INPUT_ACTION_RESET
-
-    INPUT_FUNCTION_NONE
-    INPUT_FUNCTION_LIMIT
-    INPUT_FUNCTION_INTERLOCK
-    INPUT_FUNCTION_SHUTDOWN
-    INPUT_FUNCTION_PANIC
-*/
-// Xmin on v9 board
-#define DI1_MODE                    NORMALLY_CLOSED
-//#define DI1_ACTION                  INPUT_ACTION_STOP
-#define DI1_ACTION                  INPUT_ACTION_NONE
-#define DI1_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Xmax
-#define DI2_MODE                    NORMALLY_CLOSED
-//#define DI2_ACTION                  INPUT_ACTION_STOP
-#define DI2_ACTION                  INPUT_ACTION_NONE
-#define DI2_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Ymin
-#define DI3_MODE                    NORMALLY_CLOSED
-//#define DI3_ACTION                  INPUT_ACTION_STOP
-#define DI3_ACTION                  INPUT_ACTION_NONE
-#define DI3_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Ymax
-#define DI4_MODE                    NORMALLY_CLOSED
-//#define DI4_ACTION                  INPUT_ACTION_STOP
-#define DI4_ACTION                  INPUT_ACTION_NONE
-#define DI4_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Zmin
-#define DI5_MODE                    IO_ACTIVE_HIGH   // Z probe
-#define DI5_ACTION                  INPUT_ACTION_NONE
-#define DI5_FUNCTION                INPUT_FUNCTION_NONE
-
-// Zmax
-#define DI6_MODE                    NORMALLY_CLOSED
-//#define DI6_ACTION                  INPUT_ACTION_STOP
-#define DI6_ACTION                  INPUT_ACTION_NONE
-#define DI6_FUNCTION                INPUT_FUNCTION_LIMIT
-
-// Amin
-#define DI7_MODE                    IO_MODE_DISABLED
-#define DI7_ACTION                  INPUT_ACTION_NONE
-#define DI7_FUNCTION                INPUT_FUNCTION_NONE
-
-// Amax
-#define DI8_MODE                    IO_MODE_DISABLED
-#define DI8_ACTION                  INPUT_ACTION_NONE
-#define DI8_FUNCTION                INPUT_FUNCTION_NONE
-
-// Hardware interlock input
-#define DI9_MODE                    IO_MODE_DISABLED
-#define DI9_ACTION                  INPUT_ACTION_NONE
-#define DI9_FUNCTION                INPUT_FUNCTION_NONE
-
-<pre>
-{xsv:_}  Homing Search Velocity
-{xlv:_}  Homing Latch Velocity
-{xlb:_}  Homing Latch Backoff
-{xzb:_}  Homing Zero Backoff
-</pre>
-
-
-**IMPORTANT**
-* It is important to configure all switch pins (all 8) even if you are not using them. Configure all unused switches as Disabled. Otherwise NC configurations will not work.
 
 * An axis should only be configured for one homing switch - it should not have two. The homing switch position (min or max) may be configured as homing-only or homing-and-limit. If there is a second switch on the opposite end it should be either disabled or configured as limit-only. If the switches are misconfigured homing will not run and you should see a [status code](TinyG-Status-Codes) indicating that switches re mis-configured.
 
