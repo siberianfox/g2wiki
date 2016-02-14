@@ -147,7 +147,7 @@ Setting up an axis for homing is done as so (using the X axis as an example):
 **Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search could stop before it reaches the intended switch, and the homing operation is canceled.
 
 ### Configuration Example
-Here is an example of the JSON for setting up a Shapeoko2, dual Y axis, with a 375mm table. X is homed to minimum (right side of machine), Y to minimum (front of machine). Z is homed to maximum (top of Z travel). X, Y and Z homing switches are  also used as limit switches, and X and Y have additional limit switches on their maximums.
+Here is an example of the JSON for setting up a Shapeoko2, dual Y axis, with a 500mm work surface. X is homed to minimum (right side of machine), Y to minimum (front of machine). Z is homed to maximum (top of Z travel). X, Y and Z homing switches are  also used as limit switches, and X and Y have additional limit switches on their maximums.
 
 It is important to configure all inputs even if you are not using them. Configure all unused inputs as Disabled. Otherwise NC configurations may not work.
 
@@ -191,6 +191,36 @@ Note that the homing inputs are modal - they are used as homing during homing op
   {di9mo:0}    ; Hardware interlock input on v9 board - disabled
   {di9ac:0}
   {di9fn:0}
+
+  {xtn:0}      ; X Travel Minimum - in mm
+  {xtm:420}    ; X Travel Maximum - in mm
+  {xjh:20000}  ; X Jerk High - 20,000,000,000 mm/min^3
+  {xhi:1}      ; X Homing Input - use input #1
+  {xhd:0}      ; X Homing Direction - Search towards negative (minimum)
+  {xsv:3000}   ; X Search Velocity - 3000 mm/min
+  {xlv:100}    ; X Latch Velocity
+  {xlb:4}      ; X Latch Backoff
+  {xzb:2}      ; X Zero Backoff
+
+  {ytn:0}
+  {ytm:420}
+  {yjh:20000}
+  {yhi:3}
+  {yhd:0}
+  {ysv:3000}
+  {ylv:100}
+  {ylb:4}
+  {yzb:2}
+
+  {ztn:-95}
+  {ztm:0}
+  {zjh:1000}
+  {zhi:6}
+  {zhd:1}
+  {zsv:800}
+  {zlv:250}
+  {zlb:4}
+  {zzb:2}
 
 </pre>
 
