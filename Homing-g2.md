@@ -4,7 +4,32 @@ _This page describes the function of machine limits, homing cycles and related G
 
 #Homing Commands and Operation
 ##Overview
-The term "homing" in this context means setting the absolute machine coordinates to a known zero location, or _zeroing the machine_. The absolute machine coordinate system (aka "absolute coordinate system", "machine coordinate system", or "G53 coordinate system") is the reference coordinate system for the machine. Work coordinate systems G54, G55, G56, G57, G58, G59 can be defined on top of G53 as offsets to the machine coordinates, and G92 can be used to put offsets on the offsets. Yes. It gets confusing. The [coordinate systems](Coordinate-Systems) page may help.
+The term "homing" in this context means setting the absolute machine coordinates to a known zero location, or _zeroing the machine_. 
+
+The absolute machine coordinate system (aka "absolute coordinate system", "machine coordinate system", or "G53 coordinate system") is the reference coordinate system for the machine. Work coordinate systems G54, G55, G56, G57, G58, G59 can be defined on top of G53 as offsets to the machine coordinates, and G92 can be used to put offsets on the offsets. Yes. It gets confusing. The [coordinate systems](Coordinate-Systems) page may help.
+
+**How does homing work?**
+
+Homing is invoked using a G28.2 command with one or more axes specified in the command: e.g. `g28.2 x0 y0 z0`. Homing is always run in the following order `Z,X,Y,A,B,C` for each axis present in the g28.2 command.
+
+To enable homing for an axis:
+
+1. Each input must be configured for the proper switch type. See [Configuring Digital Inputs for Homing](Configuring-Digital-Inputs-for-Homing)
+1. The homing input must be set for the axis `{xhi:_}` 
+1. The homing direction must be set for the axis `{xhd:_}` 
+1. The other axis configurations must be set up for homing. See [Configuring Axes for Homing](Configuring-Axes–for-Homing) 
+
+
+
+After initialization the following sequence is run for each axis to be homed:
+1. Limits are automatically disabled. Shutdown and safety interlocks are not.
+1. If a homing input is active on invocation, clear off the input (switch)
+1. Drive towards homing switch in the set direction until switch is activated
+1. Drive away from the homing switch at search velocity for latch distance
+1. Drive towards homing switch at latch velocity until switch is activated
+1. Back off switch by the zero backoff distance and set zero for that axis
+1. Once all moves for an axis are complete that axis is marked as homed, e.g. `{homz:1}`, and the next axis in the sequence is homed
+1. When a homing cycle is initiated the system homing state is set `false`, e.g. `{home:0}`. When homing completes successfully it is set true, e.g. `{home:1}`.
 
 ###Homing Cycles
 Homing is typically performed by running a "homing cycle" that locates the Z **maximum**, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
@@ -44,7 +69,9 @@ Additionally, on the TinyG v9 and some other boards these inputs are electricall
 ### Switch Wiring
 To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Each switch may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
 
-Wire a single switch to each axis that will be homed. Homing does not require each switch input to be independent - i.e. you can use a single input for multiple axes, but homing works better if the switches are independent. The following configuration is typical for most milling machines and 3D printers:
+Wire a single switch to each axis that will be homed. It is preferable to have a unique input for each homing axis but it is possible to share an input across two or more axes. In this case the homing routine cannot automatically back off a homing switch that is closed at the start of the homing cycle.
+
+The following configuration is typical for most milling machines and 3D printers:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
@@ -64,7 +91,7 @@ Having wired the homing inputs, any other inputs may be wired as axis limit swit
 ## Configuring Homing
 It is mandatory that the homing configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment. Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. 
 
-### Configuring Digital Inputs
+### Configuring Digital Inputs for Homing
 Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recapped here (using di1 as an example):
 
 	Name | Description | Values
