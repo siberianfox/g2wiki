@@ -35,7 +35,9 @@ A g2 firmware build has an arbitrary number of digital input pins that may be us
 
 The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. Optical inputs can also be used providing the swing between 0 and 3.3 volts.
 
-On the TinyG v9 and some other boards these inputs are de-glitched electrically with a resistor-capacitor pair and transient protected for electrostatic discharge. The RC circuit performs a pull-up of the signal and prevents a lot of spurious noise from getting into the line. If you are using a Due-based g2 or some other config we recommend using this circuit or something like it.
+In g2 inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
+
+Additionally, on the TinyG v9 and some other boards these inputs are electrically de-glitched with a resistor-capacitor pair and also transient protected for electrostatic discharge. The RC circuit performs a pull-up of the signal and prevents spurious noise from getting into the line. If you are using a Due-based g2 or some other config we recommend using this circuit or something like it:
 
 ![](images/digital_input.jpg)
 
@@ -69,8 +71,6 @@ Homing is set up by first configuring the digital inputs, then configuring each 
 	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
 	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
-
-Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
 
 Setting up an axis for homing is done as so:
  
