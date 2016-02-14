@@ -89,13 +89,15 @@ The following configuration is typical for most milling machines and 3D printers
 	Zmax | Z homing switch | at the top of the Z axis travel
 
 ####Limit Switches
-Having wired the homing inputs, any other inputs may be wired as axis limit switches (alarm) or left unused. Limit switches also share an input, but provide better alarm messages if they are independent. Adding limit switches would add these three switches to the example above:
+Having wired the homing inputs, those same switches can also be used as limit switches, as can any other inputs. Limit switches also share an input, but provide better alarm messages if they are independent. Adding limit switches would add these three switches to the example above:
 
 	Pin  | Function    | Position on machine
 	-----|-------------|-------------------------
-	Xmax | X limit switch | on the right of the machine
-	Ymax | Y limit switch | at the back of the machine
-	Zmin | Z limit switch | at the bottom of the Z axis travel
+	Xmin | X min limit switch | on the right of the machine
+	Xmax | X max limit switch | on the left of the machine
+	Ymin | Y min limit switch | at the front of the machine
+	Ymax | Y max limit switch | at the back of the machine
+	Zmax | Z max limit switch | at the top of Z axis travel
 
 ## Configuring Homing
 It is mandatory that the homing configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment. Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. 
@@ -126,7 +128,7 @@ Setting up an axis for homing is done as so (using the X axis as an example):
 	{xlb:_} | Latch Backoff | Maximum distance to back off switch during latch phase (drive off switch)
 	{xzb:_} | Zero Backoff | Offset from switch for zero in absolute coordinates
 
-* **xtn/xtm** - Travel Minimum and Travel Maximum. XTM - XTN is used to set the search distance before homing gives up. If these are set equal to each other it disables homing (e.g. 0, 0). This is to prevent the system from grinding away indefinitely if a homing switch is not found or is mis-configured. If the distance is too short to reach the switch homing will return a false result based on where the axis stopped.  Travel minimum and maximum must add to a non-zero total travel.
+* **xtn/xtm** - Travel Minimum and Travel Maximum. XTM - XTN is used to set the search distance before homing gives up. This is to prevent the machine from grinding away indefinitely if a homing switch is not found or is mis-configured. If the distance is too short to reach the switch homing will return a false result based on where the axis stopped. Travel minimum and maximum must add to a non-zero total travel or an error will be thrown.
 
 * **xjh** - Jerk High - Sets the jerk value used to stop movement when switches are hit or released. You generally want this as fast as you can get it without losing steps on the accelerations. It should be at least as large as `xjm`.
 
@@ -134,37 +136,27 @@ Setting up an axis for homing is done as so (using the X axis as an example):
 
 * **xhd** - Homing Direction - Set to 0 to search towards the minimum, 1 to search towards maximum. 
 
-* **xsv** - Search Velocity - Speed of search. Set this high enough that the search does not take excessively long, but not so high that the machine cannot decelerate within the throw of the switch. The deceleration distance will be a combination of the search velocity and the high jerk value (xjh). A higher jerk will decelerate to zero in less distance. Search velocity must be a positive, non-zero number.
+* **xsv** - Search Velocity - Speed of search. Set this high enough that the search does not take excessively long, but not so high that the machine cannot decelerate within the throw of the switch. The deceleration distance will be a combination of the search velocity and the high jerk value (xjh). A higher jerk will decelerate to zero in less distance. Set a moderate pace, e.g. 1/4 to 1/2 the max velocity. Search velocity must be a positive, non-zero number. 
 
-* **xlv** - Latch Velocity - Homing speed during latch phase (drive off switch). Set low enough to have repeatable switch closure, e.g. 100 mm/min. Movements at latch velocity can be kept short by setting latch backoff appropriately. Latch velocity must be a positive, non-zero number.
+* **xlv** - Latch Velocity - Homing speed during latch phase (drive off switch). Set low enough to have repeatable switch closure, e.g. 100 mm/min or lower. Movements at latch velocity can be kept short by setting latch backoff appropriately. Latch velocity must be a positive, non-zero number.
 
-* **xlb** - Latch Backoff - Maximum distance to back off switch during latch phase (drive off switch). This value must be set large enough to reliably clear any switch closure for this axis. Typically a couple of mm is OK, but more may be required for switches with long throws or some optical switches.  Latch backoff must be a positive number or zero.
+* **xlb** - Latch Backoff - Maximum distance to back off switch during latch phase (drive off switch). This value must be set large enough to reliably clear any switch closure for this axis or you will see frustrating errors. Typically a couple of mm is OK, but more may be required for switches with long throws or some optical switches.  Latch backoff must be a positive number or zero.
 
-* **xzb** - Zero backoff - Offset from switch for zero in absolute coordinates. This determines how far away from the switch the actual zero will be set. A typical value is a couple of mm.  
+* **xzb** - Zero backoff - Offset from switch for zero in absolute coordinates. This determines how far away from the switch the actual zero will be set. Usually no more than a few millimeters.
 
+**Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search could stop before it reaches the intended switch, and the homing operation is canceled.
 
- * Failure of any of these conditions will cancel the homing operation and return status code 240 and a message indicating the offending axis
-* The following is performed for each specified axis:
- * Homing begins by testing for pre-existing switch closure for the current axis. If a switch is tripped the axis will back off the switch by the Latch Backoff ($xLB) distance.
- * Once the switches are cleared a search move is executed. The search will travel at the Search Velocity ($xSV) for total travel distance ($xTN + $xTM) towards the homing switch. The search runs until the homing switch is hit or the maximum travel is performed. 
-    * If maximum travel is reached without hitting the homing switch the homing operation is canceled (check your $xTN and $xTM settings)
- * Once the switch is hit a Latch Backoff move is performed. This backs off the switch until the switch opens again. This is the repeatable zero location. 
-   * If the switch does not open the latch backoff distance may be reached. This should not happen - check your latch backoff setting if the switch does not open.
- * Once the latch backoff is complete the axis moves further off the switch by the Zero Backoff amount and sets zero for that axis. The axis is marked as HOMED in the homing state variable ($homx, where 'x' is any axis).
-* Once all axes are processed the affected axes will be at the absolute home location (machine zero). 
-  * At this point the global homing state ($home) will indicate that the machine has been homed. Homing state can be read for global, and for each axis ($homx, $homy...), or all together using the homing group: $hom. This returns 0 or 1 for each axis to indicate homing state for each axis and the global homing state.
+### Configuration Example
+Here is an example of the JSON for setting up a Shapeoko2, dual Y axis, with a 375mm table. X is homed to minimum (right sode of machine), Y to minimum (front of machine). Z is homed to maximum (top of Z travel). X, Y and Z homing switches are  also used as limit switches, and X and Y have additional limit switches on their maximums.
 
+<pre>
+  {di1
+	{di1mo:_} | input mode |-1=disabled, 0=active low (NO), 1=active high (NC)
+	{di1ac:_} | input action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+	{di1fn:_} | input function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
+</pre>
 
-	**$xJH** | Homing Jerk | Set this to stop quickly on switches. May need to be larger than the $xJM
-	**$xSV** | Homing Search Velocity | Velocity for initially finding the homing switch. Set a moderate pace, e.g. 1/4 to 1/2 your max velocity
-	**$xLV** | Homing Latch Velocity | Velocity for latching phase. Set this very low for best positional accuracy, e.g. 10 mm/min
-	**$xLB** | Homing Latch Backoff | Distance to back off switch during latch and for clears. Must be large enough to totally clear the switch or you will see frustrating errors.
-	**$xZB** | Homing Zero Backoff | Distance to back off switch before setting machine coordinate system zero. Usually no more than a few millimeters 
-
-**Note:** Min and max travel are used for two functions (1) setting [soft limit](Homing-and-Limits-Setup-and-Troubleshooting#soft-limits) boundaries, and (2) they are added together to determine the total travel that an axis can move in a homing operation. Typically min is set to zero and max is something (e.g. 280mm). For soft limits it can be useful to set set Z max = 0 and Zmin = -something. If these values are misconfigured the search  could stop before it reaches the intended switch, and the homing operation is canceled.
-
-Here an example of the JSON for setting up a Shapeoko2, dual Y axis
 
 //*** Input / output settings ***
 /*
