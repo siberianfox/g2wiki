@@ -1,6 +1,5 @@
 *** **Note: In the middle of editing - Feb 14, 2016** ***
-
-_This page describes the function of machine limits, homing cycles and related Gcode for version 0.98 and later versions._
+_This page describes homing operation cycles for version 0.98 and later versions._
 
 #Homing Commands and Operation
 ##Overview
@@ -8,9 +7,12 @@ The term "homing" in this context means setting the absolute machine coordinates
 
 The absolute machine coordinate system (aka "absolute coordinate system", "machine coordinate system", or "G53 coordinate system") is the reference coordinate system for the machine. Work coordinate systems G54, G55, G56, G57, G58, G59 can be defined on top of G53 as offsets to the machine coordinates, and G92 can be used to put offsets on the offsets. Yes. It gets confusing. The [coordinate systems](Coordinate-Systems) page may help.
 
-**How does homing work?**
+Homing is typically performed by running a "homing cycle" that locates the Z **maximum**, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
 
-Homing is invoked using a G28.2 command with one or more axes specified in the command: e.g. `g28.2 x0 y0 z0`. Homing is always run in the following order `Z,X,Y,A,B,C` for each axis present in the g28.2 command.
+Z is homed first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
+
+### How does homing work?
+Homing is invoked using a G28.2 command with one or more axes specified in the command: e.g. `g28.2 x0 y0 z0`. Homing is always run in the following order `Z,X,Y,A,B,C` for each axis present in the g28.2 command. Axes not present are ignored and their zero values are not changed.
 
 To enable and configure homing for an axis:
 
@@ -46,27 +48,20 @@ Note: If you need to home unswitched axes using g28.3 do this after the g28.2 op
 </pre>
 
 ###Homing Cycles
-Homing is typically performed by running a "homing cycle" that locates the Z **maximum**, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the work surface (bed) being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
+In TinyG homing is performed by running a `G28.2 X0 Y0 Z0` command (The 0's are not used and any number will do, but the X Y and Z words must have some arbitrary value). 
 
-Z is homed first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
-
-In TinyG homing is performed by running a `G28.2 X0 Y0 Z0` command (The 0's are not used, but the X Y and Z words must have some arbitrary value). 
-
-TinyG homing uses these "non standard" Gcode functions: 
+g2 homing uses these non-standard Gcode functions: 
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
 	G28.2 | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis letter must be present. The value (number) must be provided but is ignored.
 	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.)
 
-
-Some limitations / constraints in TinyG homing as currently implemented:
-* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYABC, but skipping all axes that are not specified in the G28.2 command.
-* Homing supports a single home position. I.e. it does not support multiple-homes such as used by dual pallet machines and other complex machining centers
-* **Homing operations (G28.2 and G28.3) must not be performed in the "middle" of a Gcode file. I.e. the machine must be idle (no queued commands) before performing either operation.**
+Constraints:
+* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYABC, but skipping all axes that are not specified in the G28.2 command. Attempting to home an axis that is not configured will result in an error.
+* **Homing operations (G28.2 and G28.3) must not be performed during Gcode jobs**. The machine must be idle, with no queued commands before performing either operation.
 
 Note: In high-end CNC machines there is often no user-accessible homing cycle as machine zero is set at the factory and does not need to be set by the end user. See [Peter Smid's CNC Programming Handbook, version 2](http://books.google.com/books?id=JNnQ8r5merMC&lpg=PA444&ots=PYOFKP-WtL&dq=Smid%20version3&pg=PA447#v=onepage&q=Smid%20version3&f=false) for details. 
-
 
 ## Switches
 ### Switch Inputs
@@ -74,16 +69,16 @@ A g2 firmware build has an arbitrary number of digital input pins that may be us
 
 The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. Optical inputs can also be used providing the swing between 0 and 3.3 volts.
 
-In g2 inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
+Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. As a de-glitching mechanism when an input triggers it enters a lockout state for a brief period (typically ~50 ms) where it will not trigger again.
 
 Additionally, on the TinyG v9 and some other boards these inputs are electrically de-glitched with a resistor-capacitor pair and also transient protected for electrostatic discharge. The RC circuit performs a pull-up of the signal and prevents spurious noise from getting into the line. If you are using a Due-based g2 or some other config we recommend using this circuit or something like it:
 
 ![](images/digital_input.jpg)
 
 ### Switch Wiring
-To connect a switch to an input pin simply wire the switch across the ground and the input. This applies to both normally open (NO) and normally closed (NC) switches. Each switch may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
+Mount a switch for each axis that will be homed and connect to an input. To connect a switch to an input pin simply wire the switch across the ground and the input. Each input may be selected for NO or NC independently. We recommend using NC switches for better noise immunity to prevent false firings. 
 
-Wire a single switch to each axis that will be homed. It is preferable to have a unique input for each homing axis but it is possible to share an input across two or more axes. In this case the homing routine cannot automatically back off a homing switch that is closed at the start of the homing cycle.
+While it is possible to share an input with two or more switches it is preferable to have a unique input for each homing axis. A shared input will not allow the homing routine to automatically back off a homing switch that is closed at the start of the homing cycle. If inputs are shared and a switch is closed at the start of a cycle homing will throw an error instead of just backing off the closed switch and continuing.
 
 The following configuration is typical for most milling machines and 3D printers:
 
@@ -114,7 +109,7 @@ Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recap
 	{di1ac:_} | input action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
 	{di1fn:_} | input function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
-For homing we recommend using "active high" (1) switches. Use "stop" (1) as the action, and "none" (0) as the function. 
+For homing we recommend using "active high" (1) switches. The action and function settings are not used for homing, and can be set to "none" (0).
 
 ### Configuring Axes for Homing 
 Setting up an axis for homing is done as so (using the X axis as an example):
@@ -123,16 +118,43 @@ Setting up an axis for homing is done as so (using the X axis as an example):
 	--------|-------------|--------------
 	{xtn:_} | Travel Minimum | Minimum travel in absolute coordinates 
 	{xtm:_} | Travel Maximum | Maximum travel in absolute coordinates 
-	{xjh:_} | Jerk High | Jerk used during homing operations
+	{xjh:_} | Jerk High | Jerk value used during homing operations
 	{xhi:_} | Homing Input | Switch (input) to use for homing this axis
 	{xhd:_} | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
-	{xsv:_} | Search velocity | Homing speed during search phase (drive to switch)
-	{xlv:_} | Latch velocity | Homing speed during latch phase (drive off switch)
-	{xlb:_} | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
-	{xzb:_} | Zero backoff | Offset from switch for zero in absolute coordinates
+	{xsv:_} | Search Velocity | Homing speed during search phase (drive to switch)
+	{xlv:_} | Latch Velocity | Homing speed during latch phase (drive off switch)
+	{xlb:_} | Latch Backoff | Maximum distance to back off switch during latch phase (drive off switch)
+	{xzb:_} | Zero Backoff | Offset from switch for zero in absolute coordinates
 
-* xtn/xtm - Travel minimum and maximum. The distrance between the min and max travel (plus a small factor) is used to determine how far to search for the homing switch before giving up. This is to prevent the system from grinding away indefinitely if a homing swithc is not found or is mis-configured. 
-* xjh - Jerk High - Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
+* **xtn/xtm** - Travel Minimum and Travel Maximum. XTM - XTN is used to set the search distance before homing gives up. If these are set equal to each other it disables homing (e.g. 0, 0). This is to prevent the system from grinding away indefinitely if a homing switch is not found or is mis-configured. If the distance is too short to reach the switch homing will return a false result based on where the axis stopped.  Travel minimum and maximum must add to a non-zero total travel.
+
+* **xjh** - Jerk High - Sets the jerk value used to stop movement when switches are hit or released. You generally want this as fast as you can get it without losing steps on the accelerations. It should be at least as large as `xjm`.
+
+* **xhi** - Homing Input - Selects which input is used to home this axis.
+
+* **xhd** - Homing Direction - Set to 0 to search towards the minimum, 1 to search towards maximum. 
+
+* **xsv** - Search Velocity - Speed of search. Set this high enough that the search does not take excessively long, but not so high that the machine cannot decelerate within the throw of the switch. The deceleration distance will be a combination of the search velocity and the high jerk value (xjh). A higher jerk will decelerate to zero in less distance. Search velocity must be a positive, non-zero number.
+
+* **xlv** - Latch Velocity - Homing speed during latch phase (drive off switch). Set low enough to have repeatable switch closure, e.g. 100 mm/min. Movements at latch velocity can be kept short by setting latch backoff appropriately. Latch velocity must be a positive, non-zero number.
+
+* **xlb** - Latch Backoff - Maximum distance to back off switch during latch phase (drive off switch). This value must be set large enough to reliably clear any switch closure for this axis. Typically a couple of mm is OK, but more may be required for switches with long throws or some optical switches.  Latch backoff must be a positive number or zero.
+
+* **xzb** - Zero backoff - Offset from switch for zero in absolute coordinates. This determines how far away from the switch the actual zero will be set. A typical value is a couple of mm.  
+
+
+ * Failure of any of these conditions will cancel the homing operation and return status code 240 and a message indicating the offending axis
+* The following is performed for each specified axis:
+ * Homing begins by testing for pre-existing switch closure for the current axis. If a switch is tripped the axis will back off the switch by the Latch Backoff ($xLB) distance.
+ * Once the switches are cleared a search move is executed. The search will travel at the Search Velocity ($xSV) for total travel distance ($xTN + $xTM) towards the homing switch. The search runs until the homing switch is hit or the maximum travel is performed. 
+    * If maximum travel is reached without hitting the homing switch the homing operation is canceled (check your $xTN and $xTM settings)
+ * Once the switch is hit a Latch Backoff move is performed. This backs off the switch until the switch opens again. This is the repeatable zero location. 
+   * If the switch does not open the latch backoff distance may be reached. This should not happen - check your latch backoff setting if the switch does not open.
+ * Once the latch backoff is complete the axis moves further off the switch by the Zero Backoff amount and sets zero for that axis. The axis is marked as HOMED in the homing state variable ($homx, where 'x' is any axis).
+* Once all axes are processed the affected axes will be at the absolute home location (machine zero). 
+  * At this point the global homing state ($home) will indicate that the machine has been homed. Homing state can be read for global, and for each axis ($homx, $homy...), or all together using the homing group: $hom. This returns 0 or 1 for each axis to indicate homing state for each axis and the global homing state.
+
+
 
 	**$xJH** | Homing Jerk | Set this to stop quickly on switches. May need to be larger than the $xJM
 	**$xSV** | Homing Search Velocity | Velocity for initially finding the homing switch. Set a moderate pace, e.g. 1/4 to 1/2 your max velocity
@@ -237,25 +259,6 @@ Axes not present are ignored and their zero values are not changed.
 
 For example. G28.2 X0 Y0 will home the X and Y axes only, in that order. The values provided for X and Y don't matter, but something must be present.
 
-* G28.2 homes all axes present in the command 
- * The homing sequence progresses through each axis provided in the G28.2 block in turn - i.e. it does not home on multiple axes simultaneously. 
- * Axes are always executed in order of ZXYABC. The order the axis words occur in the G28.2 block has no effect. 
-* Homing begins by checking the pre-conditions for homing
- * One and only one switch must be configured as the axis' homing switch
- * $xSV search velocity must be non-zero
- * $xLV latch velocity must be non-zero
- * $xLB latch backoff must be a positive number or zero
- * $xTN and $xTM - travel min and max must add to a non-zero total travel
- * Failure of any of these conditions will cancel the homing operation and return status code 240 and a message indicating the offending axis
-* The following is performed for each specified axis:
- * Homing begins by testing for pre-existing switch closure for the current axis. If a switch is tripped the axis will back off the switch by the Latch Backoff ($xLB) distance.
- * Once the switches are cleared a search move is executed. The search will travel at the Search Velocity ($xSV) for total travel distance ($xTN + $xTM) towards the homing switch. The search runs until the homing switch is hit or the maximum travel is performed. 
-    * If maximum travel is reached without hitting the homing switch the homing operation is canceled (check your $xTN and $xTM settings)
- * Once the switch is hit a Latch Backoff move is performed. This backs off the switch until the switch opens again. This is the repeatable zero location. 
-   * If the switch does not open the latch backoff distance may be reached. This should not happen - check your latch backoff setting if the switch does not open.
- * Once the latch backoff is complete the axis moves further off the switch by the Zero Backoff amount and sets zero for that axis. The axis is marked as HOMED in the homing state variable ($homx, where 'x' is any axis).
-* Once all axes are processed the affected axes will be at the absolute home location (machine zero). 
-  * At this point the global homing state ($home) will indicate that the machine has been homed. Homing state can be read for global, and for each axis ($homx, $homy...), or all together using the homing group: $hom. This returns 0 or 1 for each axis to indicate homing state for each axis and the global homing state.
 
 See also: 
 * [The top of this page](Homing-and-Limits-Description-and-Operation)
