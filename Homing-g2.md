@@ -1,22 +1,15 @@
-_This page refers to g2 builds labeled as firmware version 0.98 and above. _
-
 *** **Note: In the middle of editing - Feb 14, 2016** ***
 
-This page describes the function of machine limits, homing cycles and related Gcode for version 0.98 and later versions. If you are new to this it's best to read these in the order listed:
-
-* [Homing Commands and Operation](Homing-and-Limits-Description-and-Operation#homing-commands-and-operation)
-* [Homing and Limits Setup and Troubleshooting](Homing-and-Limits-Setup-and-Troubleshooting)
-
-The following are also useful references:
-* [How to Use Soft and Hard Limits](Homing-and-Limits-Setup-and-Troubleshooting#limit-behaviors---how-its-supposed-to-work)
-* [How Coordinate Systems Work](Coordinate-Systems)
+_This page describes the function of machine limits, homing cycles and related Gcode for version 0.98 and later versions._
 
 #Homing Commands and Operation
 ##Overview
 The term "homing" in this context means setting the absolute machine coordinates to a known zero location, or _zeroing the machine_. The absolute machine coordinate system (aka "absolute coordinate system", "machine coordinate system", or "G53 coordinate system") is the reference coordinate system for the machine. Work coordinate systems G54, G55, G56, G57, G58, G59 can be defined on top of G53 as offsets to the machine coordinates, and G92 can be used to put offsets on the offsets. Yes. It gets confusing. The [coordinate systems](Coordinate-Systems) page may help.
 
 ###Homing Cycles
-Homing is typically performed by running a "homing cycle" that locates the Z maximum, X minimum, and Y minimum limits - in that order. Z is done first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
+Homing is typically performed by running a "homing cycle" that locates the Z maximum, X minimum, and Y minimum limits - in that order. In CNC machines Z is often set to zero at the top of travel, with all moves towards the bed being negative. X zero is located in the left hand corner with positive travel to the right, and Y zero at the front of the machine with positive travel to the rear. Once machine zero is set work zero can be set to the middle of the table of any other location using the coordinate offsets. It's common practice to leave G54 in the homed machine coordinates and G55 used for a "centered" coordinate system.
+
+Z is done first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
 
 In TinyG homing is performed by running a G28.2 X0 Y0 Z0 command (The 0's are not used, but the X Y and Z words must have some arbitrary value). 
 
