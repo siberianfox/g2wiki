@@ -25,14 +25,14 @@ After initialization the following sequence is run:
 1. Mark all axes as unhomed: `{homx:0}`, `{homy:0}`, `{homz:0}`...
 1. Disable limits. Shutdown and safety interlocks are not disabled
 1. Run a series of internal tests to detect input, axis or other mis-configuration
-  1. Fail axis if misconfiguration detected - return error [status code](Status-Codes)
+  1. Fail if misconfiguration detected - returns [status code](Status-Codes) 240 and up
 1. Run homing for each selected axis in ZXYABC sequence:
-  1. If a homing input is active on start, back off the input switch
-  1. Drive towards homing switch in the `_hd` direction at `_sv` velocity until switch is activated 
-    1. Fail the axis (`_tm` - `_tn`) is exceed (max travel)
-  1. Drive away from the homing switch at search velocity for latch distance
-  1. Drive back towards homing switch at latch velocity until switch is activated
-  1. Back off switch by the zero backoff distance and set zero for that axis
+  1. If a homing input is active on start, back off the input switch by `_lb` (does not work if inputs are shared)
+  1. Search towards homing switch in the `_hd` direction at `_sv` search velocity until switch is hit 
+    1. Fail if the switch is not hit within the search distance (~`_tm` - `_tn`)
+  1. Drive away from the homing switch at `_sv` search velocity for latch backoff distance `_lb`
+  1. Drive back towards homing switch at latch velocity `_lv` until switch is hit
+  1. Back off switch by the zero backoff distance `_zb` and set zero for that axis
   1. Mark the axis as having been homed, e.g. `{homz:1}`
 1. Perform homing for the next enabled axis in the sequence
 1. If all exes comleted successfully mark the machine as homed: `{home:1}`.
