@@ -224,84 +224,10 @@ Note that the homing inputs are modal - they are used as homing during homing op
 
 </pre>
 
-* An axis should only be configured for one homing switch - it should not have two. The homing switch position (min or max) may be configured as homing-only or homing-and-limit. If there is a second switch on the opposite end it should be either disabled or configured as limit-only. If the switches are misconfigured homing will not run and you should see a [status code](TinyG-Status-Codes) indicating that switches re mis-configured.
-
-## Homing Configuration Settings
-
-
-
-### Homing Operation
-## G28.2 - Homing Sequence (Homing Cycle)
-G28.2 is used to home to physical home switches. G28.2 will find the home switch for an axis then set machine zero (absolute coordinate system zero) for that axis at an offset from the switch location. Format is: 
-<pre>G28.2 X0 Y0 Z0 A0 B0 C0</pre>
-Axes not present are ignored and their zero values are not changed.
-
-For example. G28.2 X0 Y0 will home the X and Y axes only, in that order. The values provided for X and Y don't matter, but something must be present.
-
-
-See also: 
-* [The top of this page](Homing-and-Limits-Description-and-Operation)
-* [Homing Setup and Troubleshooting page](Homing-and-Limits-Setup-and-Troubleshooting)
-
-
-## G28.3 - Set Absolute Position 
+# G28.3 - Set Absolute Position 
 G28.3 allows you to set a zero (or other value) for any axes. Some axes cannot be homed. They either don't have switches, are infinite axes like rollers on the Othercutter, or some other reason. Do the following to set a zero - for example:
 <pre>
 g28.3 y0
 </pre> 
 
 G28.3 also supports setting to non-zero values, if that's useful. G28.3 affects the $hom group - any axis set by g28.3 is considered set for $hom
-
-### TinyG v7 Switch Port
-TinyG v7 has 8 switch pin pairs and a 3.3v pair take-off located on the J13 jumper next to the reset button.  The switch pairs are labeled:
-
-	Pair  | Notes
-	-----|-------------
-	3.3v | This pair is located on the J13 connector closest to the corner of the board
-	Xmin | Corresponding switch is typically positioned at left-most travel of the machine
-	Xmax | Switch typically at right-most travel
-	Ymin | Switch typically at front of machine 
-	Ymax | Switch typically at rear of machine 
-	Zmin | Switch typically at minimum height of Z travel or omitted
-	Zmax | Switch typically at maximum height of Z travel
-	Amin | Most of the time A is infinite and not homed. This position can be used for a machine kill
-	Amax | Ditto
-
-For each switch pair the pin closest to the board edge is the ground, the pin next to it is the switch input as labeled on the silkscreen. The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. The inputs are tied high - with strong pullups for v7 boards and on-chip weak pullups for earlier boards. 
-
-
-
-By way of example, a Shapeoko2 can be set up this way:
-
-	Setting | Description | Example
-	--------|-------------|--------------
-	$ST | Switch Type | 1=NC
-	$XJH | X Homing Jerk | 10000000000 (10 billion)
-	$XSN | X Minimum Switch Mode | 3=limit-and-homing
-	$XSX | X Maximum Switch Mode | 2=limit-only
-	$XTM | X Travel Maximum | 180 mm
-	$XSV | X Homing Search Velocity | 3000 mm/min
-	$XLV | X Homing Latch Velocity | 100 mm/min
-	$XLB | X Homing Latch Backoff | 20 mm
-	$XZB | X Homing Zero Backoff | 3 mm
-	||
-	$YJH | Y Homing Jerk | 10000000000 (10 billion)
-	$YSN | Y Minimum Switch Mode | 3=limit-and-homing
-	$YSX | Y Maximum Switch Mode | 2=limit-only
-	$YTM | Y Travel Maximum |  180 mm
-	$YSV | Y Homing Search Velocity | 3000 mm/min
-	$YLV | Y Homing Latch Velocity | 100 mm/min
-	$YLB | Y Homing Latch Backoff | 20 mm
-	$YZB | Y Homing Zero Backoff | 3 mm
-	||
-	$ZJH | X Homing Jerk | 100000000 (100 million)
-	$ZSN | Z Minimum Switch Mode | 0=disabled (with NC switches it's important all unused switches are disabled)
-	$ZSX | Z Maximum Switch Mode | 3=limit-and-homing
-	$ZTM | Z Travel Maximum | 100 mm
-	$ZSV | Z Homing Search Velocity | 1000 mm/min
- 	$ZLV | Z Homing Latch Velocity | 100 mm/min
-	$ZLB | Z Homing Latch Backoff | 10 mm
-	$ZZB | Z Homing Zero Backoff | 5 mm
-	||
-	$ASN | A Minimum Switch Mode | 0=disabled 
-	$ASX | A Maximum Switch Mode | 0=disabled
