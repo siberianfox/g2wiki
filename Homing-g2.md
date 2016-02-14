@@ -11,18 +11,18 @@ Homing is typically performed by running a "homing cycle" that locates the Z **m
 
 Z is homed first so that X and Y moves will clear any obstacles that might be on the work surface. Other machine configurations may be set up for different min and max, may or may not include all axes, or may set an axis to an arbitrary coordinate location (see G28.3).
 
-In TinyG homing is performed by running a G28.2 X0 Y0 Z0 command (The 0's are not used, but the X Y and Z words must have some arbitrary value). 
+In TinyG homing is performed by running a `G28.2 X0 Y0 Z0` command (The 0's are not used, but the X Y and Z words must have some arbitrary value). 
 
 TinyG homing uses these "non standard" Gcode functions: 
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
 	G28.2 | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis letter must be present. The value (number) must be provided but is ignored.
-	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.) (See also G92 Offsets)
+	G28.3 | _axes_ | Set Position | Set machine origins for axes specified. In this case the values are meaningful. This command is useful for zeroing in cases where axes cannot otherwise be homed (e.g. no switches, infinite axis, etc.)
 
 
 Some limitations / constraints in TinyG homing as currently implemented:
-* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYA, but skipping all axes that are not specified in the G28.2 command.
+* The homing sequence is fixed and always starts with the Z axis (if requested). The sequence runs ZXYABC, but skipping all axes that are not specified in the G28.2 command.
 * Homing supports a single home position. I.e. it does not support multiple-homes such as used by dual pallet machines and other complex machining centers
 * **Homing operations (G28.2 and G28.3) must not be performed in the "middle" of a Gcode file. I.e. the machine must be idle (no queued commands) before performing either operation.**
 
@@ -32,8 +32,6 @@ Note: In high-end CNC machines there is often no user-accessible homing cycle as
 ## Switches
 ### Switch Inputs
 A g2 firmware build has an arbitrary number of digital input pins that may be used for homing. On the v9 there are 9 digital inputs. Arduino Due based g2 builds may be configured to have many more. 
-
-We recommend using normally closed switch configuration - that is the input is pulled low for normal operation, and oly goes high when the switch is hit.
 
 The inputs are 3.3v logic inputs and **must not have 5v applied to them or you will burn out the inputs**. Optical inputs can also be used providing the swing between 0 and 3.3 volts.
 
