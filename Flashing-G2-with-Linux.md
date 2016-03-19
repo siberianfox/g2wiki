@@ -57,6 +57,13 @@ CPU reset.
 
 You're done. If everything went right, RX orange led should be slowly blinking. To connect to the board through serial, you will need to attach the cable to "Native USB" port.
 
+If you're told that ```no device found on ttyACM0``` you may need to add yourself to the tty and dialout groups by doing this before:
+```
+sudo usermod -a -G tty nomUtilisateur
+sudo usermod -a -G dialout nomUtilisateur
+```
+Then do again steps 2 and 3.
+
 I found that the following script allows me to leave both the programming port and the native port both hooked up, and flashes over the native port, which is much faster than flashing over the programming port.
 I wrote a script called find_port.py which you can find here: https://github.com/dhylands/usb-ser-mon/blob/master/find_port.py
 
