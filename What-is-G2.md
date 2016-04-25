@@ -6,7 +6,7 @@ G2 has a number of advanced features including:
 * Full 6 axis motion control - XYX linear axes and ABC rotary axes
 * Step outputs available for 6 motors (motors are mappable to axes)
 * Jerk controlled motion for acceleration planning (S curve 3rd order motion planning)
-* Extremely stable and jitter-free 200 Khz step generation
+* Extremely stable and jitter-free 200 kHz step generation
 * RESTful interface using JSON over USB
 * USB is native on the ARM chip and runs 12 Mbps or 480 Mbps
 * Complete status and system state displays
