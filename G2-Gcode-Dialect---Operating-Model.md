@@ -1,11 +1,12 @@
-Operating Model		
-	The operating model is used to simplify and reduce the number of functions that must be handled from Gcode. 	
-	Gcode is used only for functions that must run at "Job" time. Setup, configuration and control functions are handled in JSON.	
-	However, in keeping with 50+ years of CNC practice, there are some exceptions that are noted.	
-		
-	The layers of the model are:	
-Use:		
-JSON	1)	Job control and high-level user interface functions
+##Operating Model
+The following operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, use Gcode only for functions that must run at "Job" time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON. 
+
+However, in keeping with 50+ years of CNC practice, Gcode has some exceptions to these (perhaps too neat) categories that are noted. When that occurs we follow Gcode practice and try not to invent anything new.
+
+##Model layers
+
+- Job control and high-level user interface functions
+
 		Job control functions - e.g. define job parameters, Start/stop job, report on job progress, display runtime messages to users
 		File handling functions - e.g. get a file, run a file, SD card functions, etc.
 		Web communications - e.g. HTML5, config pages, etc.
