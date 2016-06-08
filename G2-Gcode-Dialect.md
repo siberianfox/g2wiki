@@ -17,6 +17,7 @@ We want to use Gcode in a way that is as standard as possible but still supports
 - Machine-independent Gcode: be able to print a file on any machine w/o prior knowledge by the slicer, in other words, machine-independent, material-independent slicing. This is what Postscript does for 2d printing. Any postscript file can run on any printer.
 
 ##Summary of the Dialect
-- The g2 dialect uses "standard" Gcode, with minimal extensions for 3dp and other applications	
-- Extensibility is provided by using JSON commands directly, or as JSON carried in active comments within the Gcode	
-- Jobs are segmented
+- The g2 dialect uses "standard" Gcode, with minimal extensions for 3dp and other applications. "Standard" gcode is determined by examining multiple industry sources and adopting the rough consensus G and M code commands. See Industry Gcode and Industry Mcodes.
+- Use Gcode simply as a way to describe the job, not machine setup, configuration, job overrides and other functions. See Operating Model.
+- Use JSON for non-job functions. Provide job extensibility by embedding JSON into Gcode in a way that does not break existing parsers and conventions. See Gcode Active JSON.
+- Re-cast the Reprap Gcode and Mcodes using the above. See G2 3DP Dialect.
