@@ -1,4 +1,4 @@
-OK, There is no "standard" Gcode, despite multiple attempts to establish one. This attached spreadsheet contains a rough consensus for common Gcode and Mcode use derived from the following sources:
+OK, There is no "standard" Gcode, despite multiple attempts to establish one. This page collects common Gcode and Mcode uses derived from the following sources:
 
 - NIST
 - LinuxCNC
@@ -7,9 +7,10 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 - Tormach
 - CNC Cookbook
 
-##Consensus Gcode Usage
-The table below shows rough consensus for from the above sources. Incompatible Reprap, Machinekit and TinyG usage is provided in the next table, along with notes and some recommendations for alternatives.
+It also lists Reprap, Machinekit, TinyG and other usage that is incompatible with the common usage, and provides some notes and some recommendations for alternatives.
 
+##Consensus Gcode Usage
+The table below shows rough consensus for from the above sources. 
 	Gcode | Command | Usage / Notes
 	--------|-------------|-----------------------------
 	G0 | Coordinated Straight Motion Rapid Rate (Rapid Traverse) | 
