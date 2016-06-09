@@ -29,11 +29,11 @@ This table lists rough consensus usage from the above sources.
 	G8 | Radius Mode | Lathe usage
 	G9 | Exact Stop (non-modal) | Fanuc, Haas
 	G10 | Programmable Data Input | See G10 Lxx commands below
-	G10_L1 | Set Tool Table Entry |
+	G10 L1 | Set Tool Table Entry |
 	G10 L10 | Set Tool Table, Calculated, Workpiece |
 	G10 L11 | Set Tool Table, Calculated, Fixture |
 	G10 L2 | Coordinate System Origin Setting |
-	G10 L20 | Coordinate Origin Setting Calculated |
+	G10_L20 | Coordinate Origin Setting Calculated |
 	G11 | Not Used |
 	G12 | CW circular pocket | (Haas, Tormach)
 	G13 | CCW circular pocket | (Haas, Tormach) 
