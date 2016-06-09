@@ -1,4 +1,4 @@
-This page describes the layering of the [g2dialect](https://github.com/synthetos/g2/wiki/g2dialect)
+This page describes the layering of the [g2dialect](https://github.com/synthetos/g2/wiki/g2dialect) [g2dialect](g2dialect)
 
 ##Operating Model
 The following operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, use Gcode only for functions that must run at "Job" time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON. 
