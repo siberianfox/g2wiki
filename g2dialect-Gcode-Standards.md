@@ -67,23 +67,32 @@ The table below shows rough consensus for from the above sources. Incompatible R
 	G38.3 | Straight Probe To Workpiece |
 	G38.4 | Straight Probe Away From Workpiece, Report if failure |
 	G38.5 | Straight Probe Away From Workpiece |
+	G39 | Not used |
+	G40 | Cancel Cutter Compensation | Turn Compensation Off
+	G41 | Start Cutter Radius Compensation Left |
+	G41.1 | Dynamic Cutter Compensation |
+	G42 | Start Cutter Radius Compensation Right |
+	G42.1 | Dynamic Cutter Compensation |
+	G43 | Tool Length Offset | Use Tool Length Offset from Tool Table. 
+	G43 | Tool Length Compensation, Positive | (Fanuc, Haas)	
+	G43.1 | Dynamic Tool Length Offset |
+	G43.2 | Apply additional Tool Length Offset |	
+	G44 | Tool Length Compensation, Negative (Fanuc, Haas) |
+	G49 | Cancel Tool Length Compensation |
+	G50 | Reset Scale Factors to 1.0 | (Haas, Tormach)
+	G51 | Set Axis Data Input Scale Factors | (Haas, Tormach)
+	G52 | Local Work Shift | (Fanuc, Haas)
+	G53 | Motion In Machine Coordinate System | Non-Modal
+	G54 | Select Coordinate System 1 |
+	G55 | Select Coordinate System 2 |
+	G56 | Select Coordinate System 3 |
+	G57 | Select Coordinate System 4 |
+	G58 | Select Coordinate System 5 |
+	G59 | Select Coordinate System 6 |
+	G59.1 | Select Coordinate System 7 |
+	G59.2 | Select Coordinate System 8 |
+	G59.3 | Select Coordinate System 9 |
 
-
-G40	<reserved>	cnc		G40	Cancel Cutter Radius Compensation	G40	Cancel Cutter Compensation	G40	Compensation Off (CNC specific)
-G41	<reserved>	cnc		G41	Start Cutter Radius Compensation Left	G41	Cutter Compensation, Left		
-						G41.1	Dynamic Cutter Compensation		
-G42	<reserved>	cnc		G42	Start Cutter Radius Compensation Right	G42	Cutter Compensation, Right		
-						G42.1	Dynamic Cutter Compensation		
-G43	Tool Length Compensation	cnc		G43	Tool Length Offset (plus)	G43	Use Tool Length Offset from Tool Table		
-						G43.1	Dynamic Tool Length Offset		
-						G43.2	Apply additional Tool Length Offset		
-						G44	Tool Length Compensation, Negative (Fanuc, Haas)		
-G49	Cancel Tool Length Compensation	cnc		G49	Cancel Tool Length Offset	G49	Cancel Tool Length Compensation		
-G50	<reserved>	Haas				G50	Reset Scale Factors to 1.0 (Haas, Tormach)		
-G51	<reserved>	Haas				G51	Set Axis Data Input Scale Factors (Haas, Tormach)		
-G51	<reserved>	Haas				G52	Local Work Shift (Fanuc, Haas)		
-G53	Machine Coordinate System (Non-Modal)	cnc		G53	Motion In Machine Coordinate System	G53	Machine Coordinate System (Non-Modal)		
-G54	Select Coordinate System 1	cnc		G54	Use Preset Work Coordinate System 1	G54	Select Coordinate System 1	G54	Coordinate System Select (CNC specific)
 G55	Select Coordinate System 2	cnc		G55	Use Preset Work Coordinate System 2	G55	Select Coordinate System 2	G55	Coordinate System Select (CNC specific)
 G56	Select Coordinate System 3	cnc		G56	Use Preset Work Coordinate System 3	G56	Select Coordinate System 3	G56	Coordinate System Select (CNC specific)
 G57	Select Coordinate System 4	cnc		G57	Use Preset Work Coordinate System 4	G57	Select Coordinate System 4	G57	Coordinate System Select (CNC specific)
