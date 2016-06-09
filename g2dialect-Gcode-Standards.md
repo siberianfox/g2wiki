@@ -1,3 +1,5 @@
+This page provides reference information used by the [g2dialect](g2dialect).
+
 OK, There is no "standard" Gcode, despite multiple attempts to establish one. This page collects common Gcode and Mcode uses derived from the following sources:
 
 - NIST
