@@ -24,16 +24,16 @@ In the table below all the above use this command similarly. Reprap usage is pro
 	G6 | Not used |
 	G7 | Diameter Mode (lathe) |
 	G8 | Radius Mode (lathe) |
+	G9 | Exact Stop (non-modal) | Fanuc, Haas
+	G10 | Programmable Data Input | See G10 Lxx commands below
+	G10 L1 | Set Tool Table Entry 
+	G10 L1	Set Tool Table Entry		
+	G10 L10	Set Tool Table, Calculated, Workpiece		
+	G10 L11	Set Tool Table, Calculated, Fixture		
+	G10 L2	Coordinate System Origin Setting
+	G10 L20	Coordinate Origin Setting Calculated
 
-
-G9	<reserved>	Haas				G9	Exact Stop (non-modal) (Fanuc, Haas)		
-G10	Programmable Data Input		Refers to the set of G10 Lxx commands, below			G10	Programmable Data Input		
-G10 L1	Set Tool Table Entry	reprap~	JSON is the preferred way to configure extruders. Extruders are modeled as objects whose attributes may also ne accessible via the tool table.			G10 L1	Set Tool Table Entry		
-G10 L10	<reserved>	cnc				G10 L10	Set Tool Table, Calculated, Workpiece		
-G10 L11	<reserved>	cnc				G10 L11	Set Tool Table, Calculated, Fixture		
-G10 L2	Coordinate System Origin Setting	cnc		G10 L2	Coordinate System Origin Setting	G10 L2	Coordinate System Origin Setting		
-G10 L20	Coordinate Origin Setting Calculated	cnc				G10 L20	Coordinate System Origin Setting Calculated		
-G10	Tool Offset	reprap	Use G43 / G49 instead					G10	Tool Offset (RRF only)
+	G10	Tool Offset	reprap	Use G43 / G49 instead					G10	Tool Offset (RRF only)
 G10	Retract	reprap	Deprecate in favor fo firmware controlled retract					G10	Retract (Marlin, Repetier, Smoothie)
 G11	Unretract	reprap	Deprecate in favor fo firmware controlled retract					G11	Unretract (Marlin, Repetier, Smoothie)
 G12	<reserved>	Tormach				G12	CW circular pocket (Haas, Tormach)		
