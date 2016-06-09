@@ -5,19 +5,16 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 - Haas 
 - Fanuc
 - Tormach
+- CNC Cookbook
 
+In the table below all the above use this command similarly. Reprap usage is provided in the next table.
 
-GCODE	Dialect (see bottom for color code)	Compatibility	Notes / Differences from Reprap	GCODE	NIST (Table 5)	GCODE	LinuxCNC (+Fanuc, Haas, Tormach, CNC Cookbook)	GCODE	Reprap (Marlin, Repetier, Smoothie, RRap…)
-G0	Rapid Positioning (Traverse)	cnc+	"Feed rate is ignored for G0 moves.
-Endstop options are not part of the command (Snnn omitted) 
-G0 has no extrusion but may invoke retraction and recharge"	G0	Rapid Positioning	G0	"Coordinated Straight Motion Rapid Rate 
-(Rapid Traverse)"	G0	Move (With Implied Feed Rate)
-G1	Linear Interpolation	cnc+	"Feed rate is honored, as are abs/inv-time feed rate modes
-F is modal and may be set before or in the Gcode block
-Endstop is not part of command (Snnn omitted)
-E axis is supported
-We will want volumetric E specification, not just lineal. 
-Set similarly to a feedrate mode (i.e. modal)"	G1	Linear Interpolation	G1	Coordinated Straight Motion at Feed Rate	G1	Move (With Implied Feed Rate)
+	Gcode | Command | Usage / Notes
+	--------|-------------|-----------------------------
+	G0 | Coordinated Straight Motion Rapid Rate (Rapid Traverse) | 
+	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes. F is modal and may be set before or in the Gcode block
+
+Set similarly to a feedrate mode (i.e. modal)"	G1	Linear Interpolation	G1		G1	Move (With Implied Feed Rate)
 G2	CW Circular/Helical Interpolation	cnc+	"Motion features are identical to G1, above
 Note: LinuxCNC arcs have more features than Reprap arcs"	G2	CW Circular/Helical Interpolation	G2	Coordinated Helical Motion Feed Rate (CW)	G2	Controlled Arc Move
 G3	CCW Circular/Helical Interpolation	cnc+	Same as CW Arcs, above	G3	CCW Circular/Helical Interpolation	G3	Coordinated Helical Motion Feed Rate (CCW)	G3	Controlled Arc Move
