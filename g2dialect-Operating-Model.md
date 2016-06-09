@@ -44,7 +44,7 @@ Those job control control commands that require interaction with the CNC machine
   - Start/stop job
   - Report on job progress / display runtime messages to users
 
-### 4. Canned Job
+### 4. Job Execution
 
 JSON	2)	Configuration and job setup
 		Things that may happen before a job, but should never happen during a job, like:
