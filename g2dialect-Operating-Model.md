@@ -1,7 +1,7 @@
 This page describes the layering of the [g2dialect](g2dialect)
 
 ##Operating Model
-The following operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, use Gcode only for functions that must run at "Job" time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON. 
+The following operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, use Gcode only for functions that must run at Job Execution time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON. 
 
 However, in keeping with 50+ years of CNC practice, Gcode has some practical exceptions that are noted and respected. When these exceptions occur we follow Gcode practice and try not to invent anything new.
 
@@ -12,7 +12,7 @@ Summarized:
 1. **OS Functions** - such as files, communications and other things that don't touch the CNC
 1. **Machine Configuration** - one-time machine parameters and some in-job configuration
 1. **Job Control** - material and setup parameters, preparation steps, status reporting, runtime overrides
-1. **Canned Job** - static file that actually runs the job ("the tape")
+1. **Job Execution** - static file that actually runs the job (aka _the tape_)
 
 ### 1. Operating System Functions
 These functions are the domain of the host operating system and should not involve the CNC machine at all. They are mentioned here because they are the top-level framework in which the lower layers run. g2dialect also removes these from Mcodes, as many have crept in over time. These functions include:
