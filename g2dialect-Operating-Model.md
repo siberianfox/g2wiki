@@ -15,7 +15,7 @@ Summarized:
 1. **Job Execution** - static file that actually runs the job (aka _the tape_)
 
 ### 1. Operating System Functions
-These functions are the domain of the host operating system and should not involve the CNC machine at all. They are mentioned here because they are the top-level framework in which the lower layers run. g2dialect also removes these from Mcodes, as many have crept in over time. These functions include:
+These functions are the domain of the host operating system and should not involve the CNC machine at all. They are mentioned here because they are the top-level framework in which the lower layers run. These functions include:
 
 - File and Communications Functions
   - CAD/CAM aand other modeling and design
