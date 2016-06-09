@@ -29,7 +29,7 @@ This table lists rough consensus usage from the above sources.
 	G8 | Radius Mode | Lathe usage
 	G9 | Exact Stop (non-modal) | Fanuc, Haas
 	G10 | Programmable Data Input | See G10 Lxx commands below
-	G10 L1 | Set Tool Table Entry |
+	G10_L1 | Set Tool Table Entry |
 	G10 L10 | Set Tool Table, Calculated, Workpiece |
 	G10 L11 | Set Tool Table, Calculated, Fixture |
 	G10 L2 | Coordinate System Origin Setting |
