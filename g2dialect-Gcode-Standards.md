@@ -26,22 +26,18 @@ In the table below all the above use this command similarly. Reprap usage is pro
 	G8 | Radius Mode (lathe) |
 	G9 | Exact Stop (non-modal) | Fanuc, Haas
 	G10 | Programmable Data Input | See G10 Lxx commands below
-	G10 L1 | Set Tool Table Entry 
-	G10 L1	Set Tool Table Entry		
-	G10 L10	Set Tool Table, Calculated, Workpiece		
-	G10 L11	Set Tool Table, Calculated, Fixture		
-	G10 L2	Coordinate System Origin Setting
-	G10 L20	Coordinate Origin Setting Calculated
-
-	G10	Tool Offset	reprap	Use G43 / G49 instead					G10	Tool Offset (RRF only)
-G10	Retract	reprap	Deprecate in favor fo firmware controlled retract					G10	Retract (Marlin, Repetier, Smoothie)
-G11	Unretract	reprap	Deprecate in favor fo firmware controlled retract					G11	Unretract (Marlin, Repetier, Smoothie)
-G12	<reserved>	Tormach				G12	CW circular pocket (Haas, Tormach)		
-G13	<reserved>	Tormach				G13	CCW circular pocket (Haas, Tormach)		
-G15	<reserved>	Tormach				G15	Polar coordinates (Tormach, CNC Cookbook)		
-G16	<reserved>	Tormach				G16	Polar coordinates (Tormach, CNC Cookbook)		
-G17	Select XY Plane	cnc		G17	XY-Plane Selection	G17	Select XY Plane	G17	Plane Selection (CNC specific)
-						G17.1	Select UV Plane		
+	G10 L1 | Set Tool Table Entry |
+	G10 L10 | Set Tool Table, Calculated, Workpiece |
+	G10 L11 | Set Tool Table, Calculated, Fixture |
+	G10 L2 | Coordinate System Origin Setting |
+	G10 L20 | Coordinate Origin Setting Calculated |
+	G11 | Not Used |
+	G12 | CW circular pocket (Haas, Tormach) |
+	G13 | CCW circular pocket (Haas, Tormach) | 
+	G15 | Polar coordinates (Tormach, CNC Cookbook) | 
+	G16 | Polar coordinates (Tormach, CNC Cookbook) | 
+	G17 | Select XY Plane |
+	G17.1 | Select UV Plane | 
 G18	Select XZ Plane	cnc		G18	XZ-Plane Selection	G18	Select XZ Plane	G18	Plane Selection (CNC specific)
 						G18.1	Select WU Plane		
 G19	Select YZ Plane	cnc		G19	YZ-Plane Selection	G19	Select YZ Plane	G19	Plane Selection (CNC specific)
