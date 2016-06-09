@@ -13,19 +13,19 @@ In the table below all the above use this command similarly. Reprap usage is pro
 	--------|-------------|-----------------------------
 	G0 | Coordinated Straight Motion Rapid Rate (Rapid Traverse) | 
 	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes. F is modal and may be set before or in the Gcode block
+	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
+	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
+	G4 | Dwell | Dwell is always P in seconds (not milliseconds)
+	G5.x | Reserved for curve and spline  interpolation |
+	G5 |Cubic Spline | LinuxCNC
+	G5.1 |Quadratic B-Spline | LinuxCNC
+	G5.2 |NURBS, add control point | LinuxCNC
+	G5.3 |NURBS, execute | LinuxCNC
+	G6 | Not used |
+	G7 | Diameter Mode (lathe) |
+	G8 | Radius Mode (lathe) |
 
-Set similarly to a feedrate mode (i.e. modal)"	G1	Linear Interpolation	G1		G1	Move (With Implied Feed Rate)
-G2	CW Circular/Helical Interpolation	cnc+	"Motion features are identical to G1, above
-Note: LinuxCNC arcs have more features than Reprap arcs"	G2	CW Circular/Helical Interpolation	G2	Coordinated Helical Motion Feed Rate (CW)	G2	Controlled Arc Move
-G3	CCW Circular/Helical Interpolation	cnc+	Same as CW Arcs, above	G3	CCW Circular/Helical Interpolation	G3	Coordinated Helical Motion Feed Rate (CCW)	G3	Controlled Arc Move
-G4	Dwell	cnc	"Dwell is always P in seconds (not milliseconds)
-S is not supported (conflicts with Spindle RPM setting)"	G4	Dwell	G4	Dwell	G4	Dwell
-G5.x	<reserved>		Reserved for curve and spline  interpolation			G5	Cubic Spline		
-						G5.1	Quadratic B-Spline		
-						G5.2	NURBS, add control point		
-						G5.3	NURBS, execute		
-G7	<reserved>	cnc				G7	Diameter Mode (lathe)		
-G8	<reserved>	cnc				G8	Radius Mode (lathe)		
+
 G9	<reserved>	Haas				G9	Exact Stop (non-modal) (Fanuc, Haas)		
 G10	Programmable Data Input		Refers to the set of G10 Lxx commands, below			G10	Programmable Data Input		
 G10 L1	Set Tool Table Entry	reprap~	JSON is the preferred way to configure extruders. Extruders are modeled as objects whose attributes may also ne accessible via the tool table.			G10 L1	Set Tool Table Entry		
