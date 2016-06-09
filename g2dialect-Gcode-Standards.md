@@ -14,11 +14,11 @@ This table lists rough consensus usage from the above sources.
 
 	Gcode | Command | Usage / Notes
 	--------|-------------|-----------------------------
-	G0 | Coordinated Straight Motion Rapid Rate (Rapid Traverse) | 
-	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes. F is modal and may be set before or in the Gcode block
+	G0 | Coordinated Straight Motion at Rapid Rate | Rapid Traverse
+	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes
 	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
 	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
-	G4 | Dwell | Dwell is always P in seconds, not milliseconds
+	G4 | Dwell | P is in seconds, not milliseconds or other units
 	G5.x | Reserved for curve and spline  interpolation |
 	G5 | Cubic Spline | (LinuxCNC)
 	G5.1 |Quadratic B-Spline | (LinuxCNC)
