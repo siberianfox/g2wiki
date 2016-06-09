@@ -10,7 +10,8 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 It also lists Reprap, Machinekit, TinyG and other usage that is incompatible with the common usage, and provides some notes and some recommendations for alternatives.
 
 ##Consensus Gcode Usage
-The table below shows rough consensus for from the above sources. 
+This table lists rough consensus usage from the above sources. 
+
 	Gcode | Command | Usage / Notes
 	--------|-------------|-----------------------------
 	G0 | Coordinated Straight Motion Rapid Rate (Rapid Traverse) | 
