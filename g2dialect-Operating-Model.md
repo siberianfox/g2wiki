@@ -23,9 +23,17 @@ These functions are the domain of the host operating system and should not invol
   - Persistence and storage - such as disk, cloud, SD cards, etc.
   - Managing web connection and other communications
 
+The g2dialect does not implement these commands, and removes them from Mcodes and Gcodes where they are found.
 
 ### 2. Machine Configuration
-These are parameters and actions that set up the CNC machine regardless of the job that is to be run. This may include 
+These are parameters and actions that set up the CNC machine regardless of the job that is to be run. These may include the following.
+
+- **Deep Configuration** settings that define machine operation and are generally not changed per job or during a job. Examples include maximum velocity, work area sizes, axis count and configuration. These may or may not be exposed for end-user configuration.
+- **End-user Configuration** settings that are set to user requirements or preference and generally not changed on a per-job basis. Examples include communications settings, reporting levels, machine startup defaults.
+- **Machine Initialization** actions such as homing, axis tramming or automatic bed leveling that may be run on power up or periodically. These are also independent of any particular job.
+
+The g2dialect performs these actions using JSON where possible, but may also use some consensus Gcode commands such as probing where necessary.
+
 ### 3. Job Control
 
 Those job control control commands that require interaction with the CNC machine are performed using JSON. For example, Start and Stop Job may be performed using JSON.
