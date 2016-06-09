@@ -1,7 +1,7 @@
 This page describes the layering of the [g2dialect](g2dialect)
 
 ##Operating Model
-The following operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, use Gcode only for functions that must run at Job Execution time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON. 
+This operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, we want to use Gcode only for functions that must run at Job Execution time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON, or by the OS.
 
 However, in keeping with 50+ years of CNC practice, Gcode has some practical exceptions that are noted and respected. When these exceptions occur we follow Gcode practice and try not to invent anything new.
 
