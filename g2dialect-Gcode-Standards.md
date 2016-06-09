@@ -7,7 +7,7 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 - Tormach
 - CNC Cookbook
 
-In the table below all the above use this command similarly. Reprap usage is provided in the next table.
+The table below shows rough consensus for from the above sources. Incompatible Reprap, Machinekit and TinyG usage is provided in the next table, along with notes and some recommendations for alternatives.
 
 	Gcode | Command | Usage / Notes
 	--------|-------------|-----------------------------
@@ -15,15 +15,15 @@ In the table below all the above use this command similarly. Reprap usage is pro
 	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes. F is modal and may be set before or in the Gcode block
 	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
 	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
-	G4 | Dwell | Dwell is always P in seconds (not milliseconds)
+	G4 | Dwell | Dwell is always P in seconds, not milliseconds
 	G5.x | Reserved for curve and spline  interpolation |
-	G5 |Cubic Spline | LinuxCNC
-	G5.1 |Quadratic B-Spline | LinuxCNC
-	G5.2 |NURBS, add control point | LinuxCNC
-	G5.3 |NURBS, execute | LinuxCNC
+	G5 | Cubic Spline | (LinuxCNC)
+	G5.1 |Quadratic B-Spline | (LinuxCNC)
+	G5.2 |NURBS, add control point | (LinuxCNC)
+	G5.3 |NURBS, execute | (LinuxCNC)
 	G6 | Not used |
-	G7 | Diameter Mode (lathe) |
-	G8 | Radius Mode (lathe) |
+	G7 | Diameter Mode | Lathe usage
+	G8 | Radius Mode | Lathe usage
 	G9 | Exact Stop (non-modal) | Fanuc, Haas
 	G10 | Programmable Data Input | See G10 Lxx commands below
 	G10 L1 | Set Tool Table Entry |
@@ -32,48 +32,43 @@ In the table below all the above use this command similarly. Reprap usage is pro
 	G10 L2 | Coordinate System Origin Setting |
 	G10 L20 | Coordinate Origin Setting Calculated |
 	G11 | Not Used |
-	G12 | CW circular pocket (Haas, Tormach) |
-	G13 | CCW circular pocket (Haas, Tormach) | 
-	G15 | Polar coordinates (Tormach, CNC Cookbook) | 
-	G16 | Polar coordinates (Tormach, CNC Cookbook) | 
+	G12 | CW circular pocket | (Haas, Tormach)
+	G13 | CCW circular pocket | (Haas, Tormach) 
+	G15 | Polar coordinates | (Tormach, CNC Cookbook)
+	G16 | Polar coordinates | (Tormach, CNC Cookbook) 
 	G17 | Select XY Plane |
 	G17.1 | Select UV Plane | 
-G18	Select XZ Plane	cnc		G18	XZ-Plane Selection	G18	Select XZ Plane	G18	Plane Selection (CNC specific)
-						G18.1	Select WU Plane		
-G19	Select YZ Plane	cnc		G19	YZ-Plane Selection	G19	Select YZ Plane	G19	Plane Selection (CNC specific)
-						G19.1	Select VW Plane		
-G20	Inch Units (Imperial)	cnc	Units selection governs movement, displays, and settings	G20	Inch System Selection	G20	Inch Units	G20	Set Units to Inches
-G21	Millimeter Units (Metric)	cnc	Units selection governs movement, displays, and settings	G21	Millimeter System Selection	G21	Millimeter Units	G21	Set Units to Millimeters
-G22	Firmware Controlled Retract	MachineKit	Up for discussion					G22	Firmware Controlled Retract (MachineKit)
-G23	Firmware Controlled Precharge	MachineKit	Up for discussion					G23	Firmware Controlled Precharge (MachineKit)
-G27	<reserved>	Fanuc				G27	Reference Position Check (Fanuc)		
-G28	Go To Predefined Position Through Point (G28)	nist	Move to G28.1 stored position via optional intermediate point	G28	Return To Home	G28	Go To Predefined Position Through Point (G28)		
-G28.1	Set Predefined Position (G28)	cnc	Store current position. All axes are stored			G28.1	Set Predefined Position (G28)	G28	Move to Origin (Homing Cycle)
-G28.2	Homing Cycle	tinyg	Move to JSON as it should not be used in a cycle (deprecate)						
-G28.3	Set Axis as Homed	tinyg	Move to JSON as it should not be used in a cycle (eliminate)						
-G28.4 	Set Axis as Homed to Value	tinyg	Move to JSON as it should not be used in a cycle (eliminate)						
-G29	<reserved>	Haas				G29	Go to G29 Reference Point (Haas)		
-G29	Detailed Z-Probe	Ma, MK	Why are these moves in G29 and not G38? USE JSON INSTEAD					G29	Detailed Z-Probe (Marlin, MachineKit)
-G29.1	Set Z probe head offset	MachineKit	Try to find a way to extend G38.x for these specialized probes					G29.1	Set Z probe head offset (MachineKit)
-G29.2	Set Z probe head offset calculated from toolhead position	MachineKit						G29.2	Set Z probe head offset calculated from toolhead position (MK)
-G30	Single Z probe							G30	Single Z-Probe (Ma, Re, Sm, RRF)
-G30	Go To Predefined Position Through Point (G30)	nist	Move to G28.1 stored position via optional intermediate point	G30	Return To Secondary Home G38.2	G30	Go To Predefined Position Through Point (G30)		
-G30.1	Set Predefined Position (G30)	cnc	Store current position. All axes are stored			G30.1	Set Predefined Position (G30)		
-G31	<reserved>	Haas				G31	Straight Probe Until Skip (Haas, Tormach)		
-G31	Report Current Probe status	Sm, RRF	Try to find a way to extend G38.x for these specialized probes					G31	Report Current Probe Status (Sm, RRF)
-G32	Probe Z and calculate Z plane	Sm, RRF						G32	Probe Z and calculate Z plane (Sm, RRF)
-G31	Dock Z Probe sled	Marlin						G31	Dock Z Probe sled (Marlin)
-G32	Undock Z Probe sled	Marlin						G32	Undock Z Probe sled (Marlin)
-						G32	Thread Cutting (Fanuc)		
-						G33	Spindle Synchronized Motion		
-						G33.1	Rigid Tapping		
-G35	<reserved>	Haas				G35	Automatic Tool Diameter Measurement (Haas)		
-G36	<reserved>	Haas				G36	Automatic Work Offset Measurement (Haas)		
-G37	<reserved>	Haas				G37	Automatic Tool Length Measurement (Haas)		
-G38.2	Probe To Workpiece, Error If Failure	cnc		G38.2	Straight Probe	G38.2	Probe To Workpiece, Error If Failure	G38.2	probe toward workpiece
-G38.3	Probe To Workpiece, No Error If Failure	cnc				G38.3	Probe To Workpiece, No Error If Failure	G38.3	probe toward workpiece
-G38.4	Probe Away From Workpiece, Error If Failure	cnc				G38.4	Probe Away From Workpiece, Error If Failure	G38.4	probe away from workpiece
-G38.5	Probe Away From Workpiece, No Error If Failure	cnc				G38.5	Probe Away From Workpiece, No Error If Failure	G38.5	probe away from workpiece
+	G18 | Select XZ Plane |
+	G18.1 | Select UW Plane | 
+	G19 | Select YZ Plane |
+	G19.1 | Select VW Plane | 
+	G20 | Set Units to Inches (Imperial) | Units selection governs movement, displays, and settings
+	G21 | Set Units to Millimeters (Metric) | Units selection governs movement, displays, and settings
+	G22 | Not used |
+	G23 | Not used |
+	G24 | Not used |
+	G25 | Not used |
+	G26 | Not used |
+	G27 | Reference Position Check | (Fanuc)	
+	G28 | Go To Predefined Position Through Point (G28) | Move to G28.1 stored position via optional intermediate point
+	G28.1 | Set Predefined Position | Store current position for G28. All axes are stored.
+	G29 |  Go to G29 Reference Point | (Haas)
+	G30 | Go To Predefined Position Through Point (G30) | Move to G30.1 stored position via optional intermediate point
+	G30.1 | Set Predefined Position | Store current position for G30. All axes are stored.
+	G31 | Straight Probe Until Skip | (Haas, Tormach)
+	G32 | Thread Cutting | (Fanuc)
+	G33 | Spindle Synchronized Motion
+	G33.1 | Rigid Tapping
+	G34 | Not used
+	G35 | Automatic Tool Diameter Measurement | (Haas)
+	G36 | Automatic Work Offset Measurement | (Haas)
+	G37 | Automatic Tool Length Measurement | (Haas)
+	G38.2 | Straight Probe To Workpiece, Report if failure |
+	G38.3 | Straight Probe To Workpiece |
+	G38.4 | Straight Probe Away From Workpiece, Report if failure |
+	G38.5 | Straight Probe Away From Workpiece |
+
+
 G40	<reserved>	cnc		G40	Cancel Cutter Radius Compensation	G40	Cancel Cutter Compensation	G40	Compensation Off (CNC specific)
 G41	<reserved>	cnc		G41	Start Cutter Radius Compensation Left	G41	Cutter Compensation, Left		
 						G41.1	Dynamic Cutter Compensation		
