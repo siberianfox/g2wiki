@@ -7,6 +7,7 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 - Tormach
 - CNC Cookbook
 
+##Consensus Gcode Usage
 The table below shows rough consensus for from the above sources. Incompatible Reprap, Machinekit and TinyG usage is provided in the next table, along with notes and some recommendations for alternatives.
 
 	Gcode | Command | Usage / Notes
@@ -83,55 +84,47 @@ The table below shows rough consensus for from the above sources. Incompatible R
 	G51 | Set Axis Data Input Scale Factors | (Haas, Tormach)
 	G52 | Local Work Shift | (Fanuc, Haas)
 	G53 | Motion In Machine Coordinate System | Non-Modal
-	G54 | Select Coordinate System 1 |
-	G55 | Select Coordinate System 2 |
-	G56 | Select Coordinate System 3 |
-	G57 | Select Coordinate System 4 |
-	G58 | Select Coordinate System 5 |
-	G59 | Select Coordinate System 6 |
-	G59.1 | Select Coordinate System 7 |
-	G59.2 | Select Coordinate System 8 |
-	G59.3 | Select Coordinate System 9 |
+	G54 | Select Coordinate System 1 | Use Preset Work Coordinate System 1
+	G55 | Select Coordinate System 2 | Use Preset Work Coordinate System 2
+	G56 | Select Coordinate System 3 | Use Preset Work Coordinate System 3
+	G57 | Select Coordinate System 4 | Use Preset Work Coordinate System 4
+	G58 | Select Coordinate System 5 | Use Preset Work Coordinate System 5
+	G59 | Select Coordinate System 6 | Use Preset Work Coordinate System 6
+	G59.1 | Select Coordinate System 7 | Use Preset Work Coordinate System 7
+	G59.2 | Select Coordinate System 8 | Use Preset Work Coordinate System 8
+	G59.3 | Select Coordinate System 9 | Use Preset Work Coordinate System 9
+	G60 | Unidirectional Positioning | (Haas)
+	G61 | Exact Path Mode |
+	G61.1 | Exact Stop Mode	|
+	G62 | Automatic Corner Override | (CNC Cookbook)
+	G63 | Tapping Mode | (CNC Cookbook)
+	G64 | Continuous Mode | Path Blending Mode
+	G65 | Macro Subroutine Call | (Haas)
+	G68 | Coordinate System Rotation | 
+	G69 | Cancel Coordinate System Rotation |
+	G70 | Bolt Hole Circle | (Haas)
+	G71 | Bolt Hole Arc | (Haas)
+	G72 | Bolt Holes Along and Angle | (Haas)	
+	G73 | Drilling Cycle with Chip Breaking
+	G74 | Reverse Tap Canned Cycle | (Haas)
+	G76 | Multi-pass Threading Cycle | (Lathe)
+	G77 | Back Bore Canned Cycle | (Haas)
+	G80 | Cancel Motion Mode | including Canned Cycle
+	G81 | Drilling Cycle |
+	G82 | Drilling Cycle with Dwell |
+	G83 | Drilling Cycle with Peck |
+	G84 | Tapping Canned Cycle | (Haas)	
+	G85 | Boring Cycle, No Dwell, Feed Out
+	G86 | Boring Cycle, Stop, Rapid Out
+	G87 | Bore/Manual Retract Canned Cycle | (Haas)
+	G88 | Bore/Dwell Canned Cycle | (Haas)
+	G89 | Boring Cycle, Dwell, Feed Out |
+	G90 | Absolute Distance Mode |
+	G09.1 | Absolute Arc Distance Mode |
+	G91 | Incremental Distance Mode	| Set to Relative Positioning
+	G91.1 |Incremental Arc Distance Mode |
+	G91.x | Reset Coordinate System Offsets | 
 
-G55	Select Coordinate System 2	cnc		G55	Use Preset Work Coordinate System 2	G55	Select Coordinate System 2	G55	Coordinate System Select (CNC specific)
-G56	Select Coordinate System 3	cnc		G56	Use Preset Work Coordinate System 3	G56	Select Coordinate System 3	G56	Coordinate System Select (CNC specific)
-G57	Select Coordinate System 4	cnc		G57	Use Preset Work Coordinate System 4	G57	Select Coordinate System 4	G57	Coordinate System Select (CNC specific)
-G58	Select Coordinate System 5	cnc		G58	Use Preset Work Coordinate System 5	G58	Select Coordinate System 5	G58	Coordinate System Select (CNC specific)
-G59	Select Coordinate System 6	cnc		G59	Use Preset Work Coordinate System 6	G59	Select Coordinate System 6	G59	Coordinate System Select (CNC specific)
-G59.1	<reserved>	cnc		G59.1	Use Preset Work Coordinate System 7	G59.1	Select Coordinate System 7		
-G59.2	<reserved>	cnc		G59.2	Use Preset Work Coordinate System 8	G59.2	Select Coordinate System 8		
-G59.3	<reserved>	cnc		G59.3	Use Preset Work Coordinate System 9	G59.3	Select Coordinate System 9		
-						G60	Unidirectional Positioning (Haas)		
-G61	Exact Path Mode	nist		G61	Exact Path Mode	G61	Exact Path Mode		
-G61.1	Exact Stop Mode	nist		G61.1	Exact Stop Mode	G61.1	Exact Stop Mode		
-						G62	Automatic Corner Override (CNC Cookbook)		
-						G63	Tapping Mode (CNC Cookbook)		
-G64	Continuous Mode	nist		G64	Continuous Mode	G64	Path Blending Mode		
-						G65	Macro Subroutine Call (Haas)		
-G68	<reserved>	Fanuc				G68	Coordinate System Rotation (All Mfrs)		
-G69	<reserved>	Fanuc				G69	Cancel Coordinate System Rotation (All Mfrs)		
-						G70	Bolt Hole Circle (Haas)		
-						G71	Bolt Hole Arc (Haas)		
-						G72	Bolt Holes Along and Angle (Haas)		
-						G73	Drilling Cycle with Chip Breaking		
-						G74	Reverse Tap Canned Cycle (Haas)		
-						G76	Multi-pass Threading Cycle (Lathe)		
-						G77	Back Bore Canned Cycle (Haas)		
-G80	Cancel Motion Modes	nist		G80	Cancel Motion Mode (including Canned Cycle)	G80	Cancel Motion Modes	G80	Cancel Canned Cycle (CNC specific)
-G81	<reserved>	cnc		G81	Canned Cycle: drilling	G81	Drilling Cycle		
-G82	<reserved>	cnc		G82	Canned Cycle: drilling with dwell	G82	Drilling Cycle with Dwell		
-G83	<reserved>	cnc		G83	Canned Cycle: peck drilling	G83	Drilling Cycle with Peck		
-G84	<reserved>	cnc		G84	Canned Cycle: right hand tapping	G84	Tapping Canned Cycle (Haas)		
-G85	<reserved>	cnc		G85	Canned Cycle: boring	G85	Boring Cycle, No Dwell, Feed Out		
-G86	<reserved>	cnc		G86	Canned Cycle: boring	G86	Boring Cycle, Stop, Rapid Out		
-G87	<reserved>	cnc		G87	Canned Cycle: back boring	G87	Bore/Manual Retract Canned Cycle (Haas)		
-G88	<reserved>	cnc		G88	Canned Cycle: boring	G88	Bore/Dwell Canned Cycle (Haas)		
-G89	<reserved>	cnc		G89	Canned Cycle: boring	G89	Boring Cycle, Dwell, Feed Out		
-G90	Absolute Distance Mode	cnc		G90	Absolute Distance Mode	G90	Absolute Distance Mode	G90	Set to Absolute Positioning
-G09.1	Absolute Arc Distance Mode	cnc				G09.1	Absolute Arc Distance Mode		
-G91	Incremental Distance Mode	cnc		G91	Incremental Distance Mode	G91	Incremental Distance Mode	G91	Set to Relative Positioning
-G91.1	Incremental Arc Distance Mode	cnc				G91.1	Incremental Arc Distance Mode		
-								G91.x	Reset Coordinate System Offsets (CNC specific)
 G92	Offset Coordinate Systems & Set Parameters	nist		G92	Offset Coordinate Systems & Set Parameters	G92	Coordinate System Offset	G92	Set Position
 G92.1	Cancel Offset Coordinate Systems & Set Parameters	nist		G92.1	Cancel Offset Coordinate Systems & Set Parameters	G92.1	Cancel Coordinate System Offsets		
 G92.2	Cancel Offset Coordinate Systems, Do Not Reset Parameters	nist	Optional	G92.2	Cancel Offset Coordinate Systems, Do Not Reset Parameters	G92.2			
@@ -151,3 +144,5 @@ G132	Calibrate endstop offsets	Reptitier	Do not implement					G132	Calibrate end
 G133	Measure steps to top	Reptitier	Do not implement					G133	Measure steps to top
 G161	Home axes to minimum	Makerbot	Remove - Use G28 homing instead					G161	Home axes to minimum
 G162	Home axes to maximum	Makerbot	Remove - Use G28 homing instead					G162	Home axes to maximum
+
+##Exceptions to Consensus Gcode Usage
