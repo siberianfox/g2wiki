@@ -151,13 +151,13 @@ The following table lists incompatibilities **(bolded)** with consensus Gcode. I
 
 The implementation is noted in (Parens). When (Reprap) is noted it means that one or more of the major Reprap implementations do this, as there are variations. 
 
-	Gcode | Command | Non-Consensus Usage / Notes
+	Gcode | Consensus Usage | Non-Consensus Usage / Notes
 	--------|-------------|-----------------------------
 	G0 | Coordinated Straight Motion at Rapid Rate | **(Reprap) provides feed rate for G0. (Reprap) uses S to set endstop options during movement, (Reprap) defines E axes, which are not part of the Gcode axis set (XYZ ABC UVW). (Reprap) may invoke retraction and recharge on G0.**
 	G1 | Coordinated Straight Motion at Feed Rate | **(Reprap) uses S to set endstop options during movement, (Reprap) defines E axes, which are not part of the Gcode axis set (XYZ ABC UVW)**
 	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | **(Reprap) motion features similar to G1.** Note: circular/helical motion is rarely used in 3D printing.
 	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | **(Reprap) motion features similar to G1.** Note: circular/helical motion is rarely used in 3D printing.
-	G4 | Dwell | **(Reprap) dwell uses S to set dwell time in milliseconds (not seconds).** Note: S is a modal word who's usage here is incompatible as it conflicts with Spindle RPM setting
+	G4 | Dwell | **(Reprap) dwell may use S to set dwell time in milliseconds (not seconds). Uses P for seconds.** Note: S is a modal word who's usage here is incompatible as it conflicts with Spindle RPM setting
 	G5.x | Reserved for curve and spline  interpolation |
 	G5 | Cubic Spline |
 	G5.1 |Quadratic B-Spline |
@@ -186,22 +186,20 @@ The implementation is noted in (Parens). When (Reprap) is noted it means that on
 	G19.1 | Select VW Plane | 
 	G20 | Set Units to Inches (Imperial) |
 	G21 | Set Units to Millimeters (Metric) |
-	G22 | Not used | (MachineKit) Firmware Controlled Retract
-	G23 | Not used | (MachineKit) Firmware Controlled Precharge
+	G22 | Not used | **(MachineKit) Firmware Controlled Retract**
+	G23 | Not used | **(MachineKit) Firmware Controlled Precharge**
 	G24 | Not used |
 	G25 | Not used |
 	G26 | Not used |
 	G27 | Reference Position Check |	
 	G28 | Go To Predefined Position Through Point (G28) |
 	G28.1 | Set Predefined Position |
-	G28.2 | Homing Sequence | (TinyG) Home axes. Should be done in JSON
-	G28.3 | Set Absolute Axis to Defined Position | (TinyG) Set absolute coordinate for axis/axes. Should be done in JSON
-	G29 | Go to G29 Reference Point | (Marlin, MachineKit) Detailed Z-Probe
-	G29.1 | Go to G29 Reference Point | (MachineKit) Set Z probe head offset
-	G29.2 | Go to G29 Reference Point | (MachineKit) Set Z probe head offset calculated from toolhead position
-
-	G30 | Go To Predefined Position Through Point (G30) | 
-	G30 | Single Z-Probe (Ma, Re, Sm, RRF)
+	G28.2 | Not used | **(TinyG) Homing Sequence.**
+	G28.3 | Not used | **(TinyG) Set Absolute Axis to Defined Position**
+	G29 | Go to G29 Reference Point | **(Marlin, MachineKit) Detailed Z-Probe**
+	G29.1 | Not used | **(MachineKit) Set Z probe head offset**
+	G29.2 | Not used | **(MachineKit) Set Z probe head offset calculated from toolhead position**
+	G30 | Go To Predefined Position Through Point (G30) | **(Marlin, Reprap) Single Z-Probe **
 	G30.1 | Set Predefined Position | Store current position for G30. All axes are stored.
 	G31 | Straight Probe Until Skip | (Haas, Tormach)
 	G32 | Thread Cutting | (Fanuc)
