@@ -199,8 +199,8 @@ The implementation is noted in (Parens). When (Reprap) is noted it means that on
 	G29 | Go to G29 Reference Point | **(Marlin, MachineKit) Detailed Z-Probe**
 	G29.1 | Not used | **(MachineKit) Set Z probe head offset**
 	G29.2 | Not used | **(MachineKit) Set Z probe head offset calculated from toolhead position**
-	G30 | Go To Predefined Position Through Point (G30) | **(Marlin, Smoothie, Reprap) Single Z-Probe **
-	G30.1 | Set Predefined Position | Store current position for G30. All axes are stored.
+	G30 | Go To Predefined Position Through Point (G30) | **(Marlin, Smoothie, Reprap) Single Z-Probe**
+	G30.1 | Set Predefined Position | 
 	G31 | Straight Probe Until Skip | **(Marlin) Dock Z Probe Sled**
 	G31 | Straight Probe Until Skip | **(Smoothie) Report Current Probe Status**
 	G32 | Thread Cutting | **(Marlin) Undock Z Probe Sled**
@@ -274,7 +274,7 @@ The implementation is noted in (Parens). When (Reprap) is noted it means that on
 	G92 | Set Coordinate System Offsets |
 	G92.1 | Cancel Coordinate System Offsets |
 	G92.2 | Cancel Offset Coordinate Systems, Do Not Reset Parameters |
-	G92.3 | Apply Parameters to Offset Coordinate Systems | Restore Axis Offsets	
+	G92.3 | Apply Parameters to Offset Coordinate Systems | 
 	G93 | Inverse Time Feed Rate Mode | 
 	G94 | Units Per Minute Feed Rate Mode | 
 	G95 | Units Per Revolution Feed Rate Mode |
