@@ -142,58 +142,66 @@ This table lists rough consensus usage from the above sources.
 	G100+ | Haas Gcodes continue from G100 to G188 |
 
 ##Exceptions to Consensus Gcode Usage
-The following table lists incompatibilities to the above table due to:
-- Differences in implemenation from a consensus Gcode command
+The following table lists incompatibilities **(bolded)** with consensus Gcode. Incompatibilities may be due to:
+
+- Differences in implementation from a consensus Gcode command
 - Differences in parameter usage from a consensus Gcode command
 - Additional or incompatible dot extensions
 - Additional Gcode commands that are not in the consensus set
 
+The implementation is noted in (Parens). When (Reprap) is noted it means that one or more of the major Reprap implementations do this, as there are variations. 
 
-	Gcode | Command | Usage / Notes
+	Gcode | Command | Non-Consensus Usage / Notes
 	--------|-------------|-----------------------------
-	G0 | Coordinated Straight Motion at Rapid Rate | Rapid Traverse
-	G1 | Coordinated Straight Motion at Feed Rate | Feed rate is honored, as are abs/inv-time feed rate modes
-	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
-	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | Controlled Arc Move
-	G4 | Dwell | P is in seconds, not milliseconds or other units
+	G0 | Coordinated Straight Motion at Rapid Rate | **(Reprap) provides feed rate for G0. (Reprap) uses S to set endstop options during movement, (Reprap) defines E axes, which are not part of the Gcode axis set (XYZ ABC UVW). (Reprap) may invoke retraction and recharge on G0.**
+	G1 | Coordinated Straight Motion at Feed Rate | **(Reprap) uses S to set endstop options during movement, (Reprap) defines E axes, which are not part of the Gcode axis set (XYZ ABC UVW)**
+	G2 | Clockwise Circular/Helical Interpolation at Feed Rate | **(Reprap) motion features similar to G1.** Note: circular/helical motion is rarely used in 3D printing.
+	G3 | Counterclockwise Circular/Helical Interpolation at Feed Rate | **(Reprap) motion features similar to G1.** Note: circular/helical motion is rarely used in 3D printing.
+	G4 | Dwell | **(Reprap) dwell uses S to set dwell time in milliseconds (not seconds).** Note: S is a modal word who's usage here is incompatible as it conflicts with Spindle RPM setting
 	G5.x | Reserved for curve and spline  interpolation |
-	G5 | Cubic Spline | (LinuxCNC)
-	G5.1 |Quadratic B-Spline | (LinuxCNC)
-	G5.2 |NURBS, add control point | (LinuxCNC)
-	G5.3 |NURBS, execute | (LinuxCNC)
+	G5 | Cubic Spline |
+	G5.1 |Quadratic B-Spline |
+	G5.2 |NURBS, add control point |
+	G5.3 |NURBS, execute |
 	G6 | Not used |
-	G7 | Diameter Mode | Lathe usage
-	G8 | Radius Mode | Lathe usage
-	G9 | Exact Stop (non-modal) | Fanuc, Haas
-	G10 | Programmable Data Input | See G10 Lxx commands below
+	G7 | Diameter Mode |
+	G8 | Radius Mode |
+	G9 | Exact Stop (non-modal) |
+	G10 | Programmable Data Input |
 	G10 L1 | Set Tool Table Entry |
 	G10 L10 | Set Tool Table, Calculated, Workpiece |
 	G10 L11 | Set Tool Table, Calculated, Fixture |
 	G10 L2 | Coordinate System Origin Setting |
 	G10_L20 | Coordinate Origin Setting Calculated |
 	G11 | Not Used |
-	G12 | CW circular pocket | (Haas, Tormach)
-	G13 | CCW circular pocket | (Haas, Tormach) 
-	G15 | Polar coordinates | (Tormach, CNC Cookbook)
-	G16 | Polar coordinates | (Tormach, CNC Cookbook) 
+	G12 | CW circular pocket |
+	G13 | CCW circular pocket |
+	G15 | Polar coordinates |
+	G16 | Polar coordinates |
 	G17 | Select XY Plane |
 	G17.1 | Select UV Plane | 
 	G18 | Select XZ Plane |
 	G18.1 | Select UW Plane | 
 	G19 | Select YZ Plane |
 	G19.1 | Select VW Plane | 
-	G20 | Set Units to Inches (Imperial) | Units selection governs movement, displays, and settings
-	G21 | Set Units to Millimeters (Metric) | Units selection governs movement, displays, and settings
-	G22 | Not used |
-	G23 | Not used |
+	G20 | Set Units to Inches (Imperial) |
+	G21 | Set Units to Millimeters (Metric) |
+	G22 | Not used | (MachineKit) Firmware Controlled Retract
+	G23 | Not used | (MachineKit) Firmware Controlled Precharge
 	G24 | Not used |
 	G25 | Not used |
 	G26 | Not used |
-	G27 | Reference Position Check | (Fanuc)	
-	G28 | Go To Predefined Position Through Point (G28) | Move to G28.1 stored position via optional intermediate point
-	G28.1 | Set Predefined Position | Store current position for G28. All axes are stored.
-	G29 |  Go to G29 Reference Point | (Haas)
-	G30 | Go To Predefined Position Through Point (G30) | Move to G30.1 stored position via optional intermediate point
+	G27 | Reference Position Check |	
+	G28 | Go To Predefined Position Through Point (G28) |
+	G28.1 | Set Predefined Position |
+	G28.2 | Homing Sequence | (TinyG) Home axes. Should be done in JSON
+	G28.3 | Set Absolute Axis to Defined Position | (TinyG) Set absolute coordinate for axis/axes. Should be done in JSON
+	G29 | Go to G29 Reference Point | (Marlin, MachineKit) Detailed Z-Probe
+	G29.1 | Go to G29 Reference Point | (MachineKit) Set Z probe head offset
+	G29.2 | Go to G29 Reference Point | (MachineKit) Set Z probe head offset calculated from toolhead position
+
+	G30 | Go To Predefined Position Through Point (G30) | 
+	G30 | Single Z-Probe (Ma, Re, Sm, RRF)
 	G30.1 | Set Predefined Position | Store current position for G30. All axes are stored.
 	G31 | Straight Probe Until Skip | (Haas, Tormach)
 	G32 | Thread Cutting | (Fanuc)
