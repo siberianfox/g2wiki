@@ -1,5 +1,6 @@
 **Getting Started Pages**
 
+1. [ ] [Home](https://github.com/synthetos/g2/wiki)
 1. [ ] [What is G2?](What-is-G2)
 1. [ ] [Getting Started with G2](Getting-Started-with-G2)
 1. [ ] [Connecting to G2](Connecting-to-TinyG)
