@@ -10,6 +10,7 @@
 1. [ ] [G2 Communications](G2-Communications)
 1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [GPIO System](Digital-IO-(GPIO))
+1. [ ] [G2 3DP Dialect](g2dialect)
 1. [ ] [Alarm States & Processing](Alarm-Processing)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
