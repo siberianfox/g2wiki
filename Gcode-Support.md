@@ -27,10 +27,10 @@ This table summarizes Gcode supported. _axes_ means one or more of X,Y,Z,A,B,C.
 	[G28.3](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g283---set-absolute-position) | _axes_ | Set Absolute Position | Set axis to zero or other value. Use to zero axes that cannot otherwise be homed
 	[G30](#g28-g281-g30-g301-go-to-predefined-position) | _axes_ | Go to G30.1 position | Optional axes specify an intermediate point
 	[G30.1](#g28-g281-g30-g301-go-to-predefined-position) | | Set position for G30 | The current machine position is recorded (No parameters are provided)
-	G38.2 | Probe toward, do not report error | Supported in Build 082.xx
-	G38.3 | Probe toward, report if error | Supported in Build 100.xx
-	G38.4 | Probe away, do not report error | Supported in Build 100.xx 
-	G38.5 | Probe away, report if error | Supported in Build 100.xx
+	G38.2 | _axes_ | Probe toward, do not report error | Supported in Build 082.xx
+	G38.3 | _axes_ | Probe toward, report if error | Supported in Build 100.xx
+	G38.4 | _axes_ | Probe away, do not report error | Supported in Build 100.xx 
+	G38.5 | _axes_ | Probe away, report if error | Supported in Build 100.xx
 	G53 | | Select absolute coordinates | Non-Modal: Applies only to current block
 	G54 | | Select coord system 1 | G54 is typically used as the "normal" coordinate system and reflects the machine position
 	G55 | | Select coord system 2 |
