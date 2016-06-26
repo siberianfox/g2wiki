@@ -2,7 +2,7 @@
 
 1. [ ] [Getting Started with G2](Getting-Started-with-G2)
 1. [ ] [Connecting to G2](Connecting-to-TinyG)
-1. [ ] [Configuring G2](Configuring-G2)
+1. [ ] [Configuring G2](Configuring-TinyG)
 1. [ ] [Firmware Version 0.98 Config](Configuration-for-Firmware-Version-0.98)
 
 **TOPIC Discussion Pages**
