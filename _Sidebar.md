@@ -26,7 +26,5 @@
 1. [ ] [Project Structure & Motate](Project-Structure-and-Motate)
 1. [ ] [G2 & Motate in Git](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
-1. [ ] [Compiling on Linux or OS-X](Compiling-G2-on-Linux-and-OS-X-(command-line))
-1. [ ] [Compiling on OS-X with Xcode](Compiling-G2-on-OS-X-(with-Xcode))
-1. [ ] [Compiling on Windows AtmelStudio 6.2](Compiling-G2-on-Windows-(Atmel-Studio-6.2))
+1. [ ] [Compiling G2](Compiling-G2)
 1. [ ] [Debugging G2 on OSX](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
