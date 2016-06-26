@@ -6,3 +6,4 @@ This wiki serves as a user and programmer manual and documents progress on the p
 
 ![TinyG2 on an Arduino Due](http://farm4.staticflickr.com/3739/10301325295_31cb0dc6ab_h.jpg)
 
+https://github.com/synthetos/g2/blob/edge/README.md
