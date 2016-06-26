@@ -1,5 +1,7 @@
 This page is a log of items updated in the edge branch and in the feature development branches cleaved off the main edge branch. Edge is moving pretty fast, and a number of people are working on projects, so we'll do our best to keep up with the changes here.
 
+https://github.com/synthetos/g2/readme.md
+
 ###Edge branch, build 083.07
 These changes are primarily fixes applied after testing
 - Fixes to spindle speed settings (082.11)
