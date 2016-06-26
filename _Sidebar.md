@@ -3,19 +3,21 @@
 1. [ ] [Getting Started with G2](Getting-Started-with-G2)
 1. [ ] [Connecting to G2](Connecting-to-TinyG)
 1. [ ] [Configuring G2](Configuring-TinyG)
-1. [ ] [Firmware Version 0.98 Config](Configuration-for-Firmware-Version-0.98)
 
-**TOPIC Discussion Pages**
+**Reference Pages**
 
 1. [ ] [G2 Communications](G2-Communications)
-1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [GPIO System](Digital-IO-(GPIO))
-1. [ ] [G2 3DP Dialect](g2dialect)
-1. [ ] [Alarm States & Processing](Alarm-Processing)
-1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
+1. [ ] [Alarms & Exceptions](Alarm-Processing)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
-1. [ ] [Digital DRO](Digital-DRO)
 1. [ ] [Status Codes](Status-Codes)
+1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
+
+**Discussion Topics**
+
+1. [ ] [Gcode Parsing](GCode-Parsing)
+1. [ ] [G2 3DP Dialect](g2dialect)
+1. [ ] [Digital DRO](Digital-DRO)
 
 **Developer Pages**
 
