@@ -1,19 +1,10 @@
-:toc: macro
-:toclevels: 4
-:icons: font
-
-toc::[]
-
-// See http://asciidoctor.org/docs/user-manual/#basic-document-anatomy for ASCIIDOC documentation
-
 # G Code Parsing Notes
-
 ## Valid G Code format
 
 ### References
-- https://www.nist.gov/customcf/get_pdf.cfm?pub_id=823374[NIST specification]
-- http://linuxcnc.org/docs/html/gcode/overview.html#_g_code_overview[LinuxCNC G Code documentation]
-- http://www.tormach.com/machine_codes_gcodes.html[Tormach G Code documentation]
+- [NIST specification](https://www.nist.gov/customcf/get_pdf.cfm?pub_id=823374)
+- [LinuxCNC G Code documentation](http://linuxcnc.org/docs/html/gcode/overview.html#_g_code_overview)
+- [Tormach G Code documentation](http://www.tormach.com/machine_codes_gcodes.html)
 +
 NOTE: Tormach now uses LinuxCNC.
 
