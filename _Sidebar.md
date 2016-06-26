@@ -24,7 +24,7 @@
 **Developer Pages**
 
 1. [ ] [Project Structure & Motate](Project-Structure-and-Motate)
-1. [ ] [G2 & Motate in Git](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
-1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
 1. [ ] [Compiling G2](Compiling-G2)
 1. [ ] [Debugging G2 on OSX](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
+1. [ ] [Git Procedures](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
+1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
