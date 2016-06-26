@@ -15,6 +15,7 @@
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
 1. [ ] [Digital DRO](Digital-DRO)
+1. [ ] [Status Codes](Status-Codes)
 
 **Developer Pages**
 
