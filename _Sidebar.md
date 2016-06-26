@@ -1,5 +1,6 @@
 **Getting Started Pages**
 
+1  [ ] [What is G2?](What-is-G2)
 1. [ ] [Getting Started with G2](Getting-Started-with-G2)
 1. [ ] [Connecting to G2](Connecting-to-TinyG)
 1. [ ] [Configuring G2](Configuring-TinyG)
