@@ -13,6 +13,7 @@
 1. [ ] [Alarm States & Processing](Alarm-Processing)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
+1. [ ] [Digital DRO](Digital-DRO)
 
 **Developer Pages**
 
