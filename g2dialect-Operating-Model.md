@@ -42,46 +42,19 @@ Those job control control commands that require interaction with the CNC machine
   - Fetch and manipulate job files
   - Define job parameters 
   - Start/stop job
+  - Pause and resume job
+  - Job exception handling and recovery
   - Report on job progress / display runtime messages to users
 
-### 4. Job Exection
+### 4. Part File
+This layer actually runs the part file. It interprets all Gcode commands int the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
 
-Execution consists of running the part file, communicating 
-JSON	2)	Configuration and job setup
-		Things that may happen before a job, but should never happen during a job, like:
-		Configuring - machine parameters, extruders, motors, system variables, etc.
-		Machine functions that run in advance of a job, like homing or bed leveling
-
-Machine Configuration and Job Setup
-
-Gcode	3)	The job, aka "the tape"
-		Things that are pre-defined to execute in sequence as part of the job:
-		The job itself, consition of movement commands, cutting, extrusion 
-		Other items that rae synchronized with or gated by motion: temperature changes and waits, coolant, vacuums, cameras, etc.
-		Some in-cycle coordinated commands plan to a stop, some do not
-
-
-JSON	4)	Operator overrides that occur during the job
-		Things that occur asynchronously with the job such as speed overrides, pauses & restarts (feedholds & cycle starts)... 
-		
-		
-Gcode 		
-	A gcode file describes a static series of steps that are performed in sequence at runtime (a job)	
-	Gcode is primarily a job description language, and much less a job control language	
-	What Gcode does well (at the risk of getting too theoretical):	
-		Express exact details of pre-planned motion - i.e. Gcode is static
-		Initiate real-time state changes in peripherals (when these states are planned in advance)
-		Sequence and synchronize complex / coordinated sets of events
-	What Gcode does not do as well:	
-		Interject realtime changes into pre-planned motion (dynamic control)
-		Manage devices and perform configuration (setup)
-		Provide job management, beyond rudimentary start and end
-		
-JSON		
-	A JSON object holds a collection of related parameters and may also have action commands (methods)	
-		Considerations for using JSON: (+++to be completed)
-		+++cover namespaces and namespace isolation
-		+++cover using namespaces for extensibility & also backwards compatible design
-		+++cover methods and how to express and invoke them
-		+++cover distributed (chunked) parsing and object decomposition
-		+++cover object routing and routability and how this supports distributed systems
+Gcode is primarily a job description language, and much less a job control language. What Gcode does well (at the risk of getting too theoretical):	
+- Express exact details of pre-planned motion - i.e. Gcode is static
+- Initiate real-time state changes in peripherals (when these states are planned in advance)
+- Sequence and synchronize complex / coordinated sets of events
+	
+What Gcode does not do as well:	
+- Interject realtime changes into pre-planned motion (dynamic control)
+- Manage devices and perform configuration (setup)
+- Provide job management, beyond rudimentary start and end
