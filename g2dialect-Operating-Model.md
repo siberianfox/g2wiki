@@ -5,6 +5,18 @@ This operating model is used to simplify and reduce the number of functions that
 
 However, in keeping with 50+ years of CNC practice, Gcode has some practical exceptions that are noted and respected. When these exceptions occur we follow Gcode practice and try not to invent anything new.
 
+Gcode is primarily a job description language, and much less a job control language. What Gcode does well:
+- Express exact details of pre-planned motion - i.e. Gcode is static
+- Initiate real-time state changes in peripherals (when these states are planned in advance)
+- Sequence and synchronize complex / coordinated sets of events
+	
+What Gcode does not do as well:	
+- Interject realtime changes into pre-planned motion (dynamic control)
+- Manage devices and perform configuration (setup)
+- Provide job management, beyond rudimentary start and end
+
+JSON serves these other functions well.
+
 ## Model Layers
 
 The key to the operating model is to remove as many dependencies from the part file (the actual Gcode for the job) as possible, and therefore make it as agnostic and reusable as it can be. The layers of the model are summarized as:
@@ -48,13 +60,3 @@ Those job control control commands that require interaction with the CNC machine
 
 ### 4. Part File
 This layer actually runs the part file. It interprets all Gcode commands int the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
-
-Gcode is primarily a job description language, and much less a job control language. What Gcode does well (at the risk of getting too theoretical):	
-- Express exact details of pre-planned motion - i.e. Gcode is static
-- Initiate real-time state changes in peripherals (when these states are planned in advance)
-- Sequence and synchronize complex / coordinated sets of events
-	
-What Gcode does not do as well:	
-- Interject realtime changes into pre-planned motion (dynamic control)
-- Manage devices and perform configuration (setup)
-- Provide job management, beyond rudimentary start and end
