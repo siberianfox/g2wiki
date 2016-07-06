@@ -30,10 +30,10 @@ The key to the operating model is to remove as many dependencies from the Gcode 
 These functions are the domain of the host operating system and should not involve the CNC machine at all. They are mentioned here because they are the top-level framework in which the lower layers run. These functions include:
 
 - File and Communications Functions
-  - CAD/CAM aand other modeling and design
-  - File primitives such as get, view, edit, write
-  - Persistence and storage - such as disk, cloud, SD cards, etc.
-  - Managing web connection and other communications
+- File primitives such as get, view, edit, write
+- Persistence and storage - such as disk, cloud, SD cards, etc.
+- Managing web connection and other communications
+- CAD/CAM and other modeling and design
 
 The g2dialect does not implement these commands, and removes them from Mcodes and Gcodes where they are found.
 
