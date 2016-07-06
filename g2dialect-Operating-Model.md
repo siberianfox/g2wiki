@@ -19,7 +19,7 @@ JSON serves these other functions well.
 
 ## Model Layers
 
-The key to the operating model is to remove as many dependencies from the part file (the actual Gcode for the job) as possible, and therefore make it as agnostic and reusable as it can be. The layers of the model are summarized as:
+The key to the operating model is to remove as many dependencies from the Gcode part file as possible, and therefore make it as agnostic and reusable as it can be. The layers of the model are summarized as:
 
 1. **OS Functions** - such as files, communications and other things that don't touch the CNC
 1. **Configuration** - one-time machine parameters and some in-job configuration
