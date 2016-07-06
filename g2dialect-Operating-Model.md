@@ -10,7 +10,7 @@ However, in keeping with 50+ years of CNC practice, Gcode has some practical exc
 Summarized:
 
 1. **OS Functions** - such as files, communications and other things that don't touch the CNC
-1. **Machine Configuration** - one-time machine parameters and some in-job configuration
+1. **Configuration** - one-time machine parameters and some in-job configuration
 1. **Job Control** - material and setup parameters, preparation steps, status reporting, runtime overrides
 1. **Job Execution** - static file that actually runs the job (aka _the tape_)
 
@@ -25,7 +25,7 @@ These functions are the domain of the host operating system and should not invol
 
 The g2dialect does not implement these commands, and removes them from Mcodes and Gcodes where they are found.
 
-### 2. Machine Configuration
+### 2. Configuration
 These are parameters and actions that set up the CNC machine regardless of the job that is to be run. These may include the following.
 
 - **Deep Configuration** settings that define machine operation and are generally not changed per job or during a job. Examples include maximum velocity, work area sizes, axis count and configuration. These may or may not be exposed for end-user configuration.
@@ -44,8 +44,9 @@ Those job control control commands that require interaction with the CNC machine
   - Start/stop job
   - Report on job progress / display runtime messages to users
 
-### 4. Job Execution
+### 4. Job Exection
 
+Execution consists of running the part file, communicating 
 JSON	2)	Configuration and job setup
 		Things that may happen before a job, but should never happen during a job, like:
 		Configuring - machine parameters, extruders, motors, system variables, etc.
