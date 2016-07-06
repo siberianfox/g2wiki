@@ -7,12 +7,12 @@ However, in keeping with 50+ years of CNC practice, Gcode has some practical exc
 
 ## Model Layers
 
-Summarized:
+The key to the operating model is to remove as many dependencies from the part file (the actual Gcode for the job) as possible, and therefore make it as agnostic and reusable as it can be. The layers of the model are summarized as:
 
 1. **OS Functions** - such as files, communications and other things that don't touch the CNC
 1. **Configuration** - one-time machine parameters and some in-job configuration
 1. **Job Control** - material and setup parameters, preparation steps, status reporting, runtime overrides
-1. **Job Execution** - static file that actually runs the job (aka _the tape_)
+1. **Part File** - static file that actually runs the job
 
 ### 1. Operating System Functions
 These functions are the domain of the host operating system and should not involve the CNC machine at all. They are mentioned here because they are the top-level framework in which the lower layers run. These functions include:
