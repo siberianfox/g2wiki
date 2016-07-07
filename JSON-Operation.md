@@ -5,7 +5,7 @@ Related Pages:
 - [JSON Active Comments](JSON-Active-Comments)
 
 # JSON Cheat Sheet
-This table summarizes using JSON for [configuration and commands](Configuration-for-Firmware-Version-0.98). Details are provided in the subsequent sections. Note: Examples are shown in [relaxed JSON mode]() for brevity.
+This table summarizes using JSON for [configuration and commands](Configuration-for-Firmware-Version-0.98). Details are provided in the subsequent sections. Note: Examples are shown in [relaxed JSON mode](JSON-Operation#json-syntax-option---relaxed-or-strict) for brevity.
 
 	Request | Response | Description
 	---------|--------------|-------------
