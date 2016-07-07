@@ -34,17 +34,17 @@ In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validato
 	**NVpair** | A name and a value is a name:value pair or NV pair
 	**group** | A group is a collection of one or more NV pairs. Groups are used to specify all parameters for a motor, an axis, a PWM channel, or other logical grouping. A group is similar in concept to a RESTful resource or composite.
 
-- **name** A name is a JSON name (aka **token**) describing a single data value or a group of data values. 
-  - Examples of names include "xfr" referring to the X axis maximum feed rate, 
-  - or "x" referring to all values associated with the X axis (the X axis group). 
-  - Names are not case sensitive.
-- **value** A value is a number, a quoted string, true/false, or null (as per JSON spec).
-  - True and false values can be represented as `true` and `false` or `t` and `f` for short
-  - NULL values can be represented by the word `null` (case insensitive), or simply `n` for short
+- **name** is a JSON key (aka **token**) describing a single datum or group of data values 
+  - Example: `xfr` referring to the X axis maximum feed rate
+  - Example: `x` referring to all values associated with the X axis (the X axis group)
+  - Names are not case sensitive
+- **value** is a number, a quoted string, true/false, or null (as per JSON spec)
+  - True and false values can be `true` and `false` or `t` and `f` for short
+  - NULL values can be `null` (case insensitive), or simply `n` for short
   - Null values signal a GET, all others will set (PUT) the value, or in some cases invoke an action
   - A null value in a response indicates that the value in invalid (e.g trying to read a switch that is not configured)
-- **NVpair** A name and a value is a name:value pair or NV pair
-- **group** A group is a collection of one or more NV pairs
+- **NVpair** is a name:value pair or NV pair
+- **group** is a collection of one or more NV pairs
   - Groups are used to specify all parameters for a motor, an axis, a PWM channel, or other logical grouping
   - A group is similar in concept to a RESTful resource or composite.
 
