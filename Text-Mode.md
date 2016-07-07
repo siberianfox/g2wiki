@@ -76,7 +76,7 @@ To list a group type in the group prefix; for example:
 In addition the the operating groups above a series of diagnostic groups can be enabled at compile time See [Diagnostics](Diagnostics)
 
 ### Uber-Groups
-In text mode (but not JSON mode) the following groups of groups are also available for display:
+In text mode the following groups of groups are also available for display:
 
 	Uber-Group | Token | Notes
 	--------|----------|-------
@@ -87,6 +87,8 @@ In text mode (but not JSON mode) the following groups of groups are also availab
 
 For example type $q to list all axis groups. 
 The list of uber-groups can be seen by asking for the system help screen using $h.
+
+In JSON mode these groups will return 1 or more {r:} responses with one group in each response. This is not the correct way for G2 to handle this command. For example, a {q:n} should return a parent {q:} object with the groups as children. We plan to correct this in a future release.
 
 ## Displaying Settings and Groups
 When displaying or setting configs a '$' must be the first character of the line. Input is case insensitive.
