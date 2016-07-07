@@ -125,24 +125,4 @@ program END (M2, M30) performs the following actions:
 * Default INCHES or MM units mode is restored ($gun)
 
 ##Gcode Comments
- * Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
- * Comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment (described next)
- * JSON Active comments are comments with JSON immediately inside the parentheses: `({...})`
-   * If there's a space or anything else between the '(' and the '{' then it will be treated as a normal comment.
-   * Active comments carry content that GCode can't express, but is intrinsically part of the command on that line.
- * Gcode message active comments are comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
-   * The string enclosed by the trailing `g` and the closing paren will be returned in the next status report as a `"msg":"...."` tag
- * Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained.
- * Multiple active comments are allowed, and will be combined and treated as if they were separated by commas.
-   * Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
-
-| Valid comment cases       | Notes: |
-| --- | --- |
-| `G0X10`                      | command only - no comment |
-| `G0X10 (comment text)`       | command with comment |
-| `G0X10 (comment text`        | acceptable, but a warning may be issued for the comment not being terminated |
-| `G0X10 ;comment text`        | comment delimited by semicolon |
-| `(MSGSend this string)`      | will report back as `"msg":"Send this string"` |
-| `(comment text)`             | there is no command on this line |
-| `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
-| `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
+Gcode comments possess a number of features that extend their capabilities beyond classic Gcode. This is to support active comments and other developments. Please see [Gcode Comments](JSON-Active-Comments#gcode-comments)
