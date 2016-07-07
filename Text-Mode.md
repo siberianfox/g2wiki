@@ -1,7 +1,7 @@
-This page describes what you can do from the command line in G2. Basically, it's entering configuration values and commands, and sending lines of Gcode.
+This page describes the text mode command line in G2. Text mode is intended as a human readable way to access the system and perform simple tasks. For UI and machine-to-machine connections we recommend using JSON mode.
 
 ## Text Mode and JSON Mode
-TinyG can operate in either text mode (command line mode) or JSON mode. In text mode TinyG accepts $ config lines and normal Gcode blocks, and returns responses as human-friendly ASCII text. Example:
+G2 can operate in either text mode (command line mode) or JSON mode. In text mode G2 accepts $ config lines and normal Gcode blocks, and returns responses as human-friendly ASCII text. Example:
  
 	Command | Description
 	--------|--------------
@@ -9,22 +9,24 @@ TinyG can operate in either text mode (command line mode) or JSON mode. In text 
 	$xvm=16000 | Set X axis maximum velocity
 
 
-TinyG can also operate using JSON commands. This is the preferred way to drive TinyG from a UI or controller. Using JSON dramatically simplifies the UI as the board can be treated as a RESTful resource, and no parsers or special handlers need to be written. Example:
+G2 can also operate using JSON commands. This is the preferred way to drive TinyG from a UI or controller. Using JSON dramatically simplifies the UI as the board can be treated as a RESTful resource, and no parsers or special handlers need to be written. Example:
 
 	Command | Description
 	--------|--------------
 	{"xvm":""} | View X axis maximum velocity
 	{"xvm":16000} | Set X axis maximum velocity
 
-See [JSON Operation](https://github.com/synthetos/TinyG/wiki/JSON-Operation) and [JSON Details](https://github.com/synthetos/TinyG/wiki/JSON-Details).
+See [JSON Operation](JSON-Operation) and [JSON Details](JSON-Details).
 
 
 ### Startup Modes
-TinyG starts up in text mode if the $ej setting is set to text mode ($ej=0). TinyG will also enter text mode automatically if it receives a line with a leading $, ? or 'h'. (Note: The initial status messages returned on bootup will be in JSON format, regardless of the mode set). 
+G2 starts up in text mode if the $ej setting is set to text mode ($ej=0). G2 will also enter text mode automatically if it receives a line with a leading $, ? or 'h'. 
 
-TinyG starts up in JSON mode if the $ej setting is set to JSON mode ($ej=1). TinyG will also enter JSON mode automatically if it receives a line starting with an open curly '{'. While in JSON mode all commands are  expected in JSON format and responses are returned in JSON format....
+**Note: The initial status messages returned on bootup will be in JSON format, regardless of the mode set in order to not break JSON parsers during the startup sequence.**
 
-...the exception being Gcode blocks. Gcode blocks streamed to TinyG while in JSON mode can be sent with or without JSON wrappers - i.e. unwrapped Gcode will not return the system to text mode. Responses will always be returned in JSON format.
+G2 starts up in JSON mode if the $ej setting is set to JSON mode ($ej=1). G2 will also enter JSON mode automatically if it receives a line starting with an open curly '{'. While in JSON mode all commands are expected in JSON format and responses are returned in JSON format...
+
+...with the exception being Gcode blocks. Gcode blocks may be streamed to JSON mode with or without JSON wrappers - i.e. unwrapped Gcode will not return the system to text mode. Responses will always be returned in JSON format.
 
 **The rest of this page covers things that are common to both text and JSON operation.**
 
