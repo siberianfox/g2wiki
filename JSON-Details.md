@@ -56,37 +56,37 @@ To set a parameter pass an object with the value to be set. The value applied is
 	{x:{vm:15000}} | {"r":{"x":{"vm":15000},"f":[3,0,6]}} | alternate form to set X axis maximum velocity to 15000
 	{si:250} | {"r":{"si":250},"f":[3,0,6]} | Set status minimum interval to 250 ms. 
 	{si:10} | {"r":{"si":200},"f":[3,0,6]} | Try to set status interval to 10 ms, but minimum was 200
-	{fv:2.0} | {"r":{"fv":0.950},"f":[3,0,6]} | The version stays at 0.95 despite your wishes :(
+	{fv:2.0} | {"r":{"fv":0.950},"f":[3,0,6]} | Version stays 0.95 despite your wishes :(
 
 ### Groups
-The following groups can be read and set using JSON. The JSON strings provided below (i.e. the group with a null value ("")) will return all members of the group. 
-<pre>
-{"1":n}    return motor 1 settings
-{"2":n}
-{"3":n}
-{"4":n}
-{"x":n}    return X axis settings
-{"y":n}
-{"z":n}
-{"a":n}
-{"b":n}
-{"c":n}
-{"sys":n}  return system settings
-{"pos":n}  return work coordinate positions fox XYZABC axes. In mm or inches depending on G20/G21
-{"mpo":n}  return absolute machine positions fox XYZABC axes. Always in mm, regardless of G20/G21
-{"ofs":n}  return current offsets fox XYZABC axes. Sums coordinate system and G92 offsets. in mm.
-{"hom":n}  return homing state fox XYZABC axes, and 'e' for the entire machine. 1=homed, 0=not.
-{"p1":n}   return PWM channel 1 settings (currently there is only 1 PWM channel)
-{"g54":n}  return offsets for work coordinate system #1 (G54)
-{"g55":n}  #2
-{"g56":n}  #3
-{"g57":n}  #4
-{"g58":n}  #5
-{"g59":n}  #6
-{"g92":n}  return G92 offsets currently in effect
-{"g28":n}  return coordinate saved by G28 command
-{"g30":n}  return coordinate saved by G30 command
-</pre>
+## Groups
+A group is a collection of related tokens. Groups are used to specify all parameters for a motor, an axis, a heater, a PWM channel, or some other logical grouping. A group is similar in concept to a RESTful resource or composite. Groups simplify configuration management and reporting by collecting related values together. The following groups are defined.
+
+	Group | Tokens | Notes
+	--------|----------|-------
+	system | sys | system global parameters
+	axis | x y x a b c | all settings for that axis
+	motor | 1 2 3 4 5 6 | all settings for that motor
+	pwm | p1...pN | all settings for pulse width modulation channel
+	offsets | g54 g55 g56 g57 g58 g59 | offset settings xyzabc in named coordinate system. 
+	temporary offset | g92 | g92 offset settings. These are not persistent
+	return to home values | g28, g30 | return values in machine coordinates
+	pos | x y x a b c | current work position; with offsets in current units
+	mpo | x y x a b c | current machine position; no offsets, always in millimeters
+	ofs | x y x a b c | current offsets,  always in millimeters
+	hom | x y x a b c e | homing status by axis. 'e' reports homing status for Entire machine
+	prb | x y x a b c e | probe state by axis. 'e' reports success or failure
+	di | 1...N | digital input configuration
+	in | 1...N | digital input readouts (switch readers)
+	do | 1...N | digital output configuration
+	out | 1...N | digital output readouts
+	pid | 1 2 3 | PID configuration
+	he | 1 2 3 | heater configuration and readouts
+
+To list a group type in the group prefix; for example:
+* type `$x` to list the X group (or `{x:n}` in JSON)
+* type `$sys` to list the system group (or simply `$`, which is text shorthand, or `{sys:n}` )
+* type `$g55` to list the xyzabc offsets in the G55 coordinate system (or `{g55:n}` )
 
 Values within a group can be set by including that member in the set command. Examples:
 <pre>
@@ -96,6 +96,9 @@ Set velocity max and feed rate max only (other values are unchanged)
 Set all values in X
 {"x":{"am":1,"vm":1500,"fr":1500,"tm":150,"jm":600000000,"jh":400000000,"jd":0.0100,"sn":1,"sx":0,"sv":750,"lv":150,"lb":5.000,"zb":0.000}}
 </pre>
+
+**Diagnostic Groups**<br>
+In addition the the operating groups above a series of diagnostic groups can be enabled at compile time See [Diagnostics](Diagnostics)
 
 ### Status messages
 Status messages are end-user text associated with each status code, similar to those on the [Status Codes](https://github.com/synthetos/TinyG/wiki/TinyG-Status-Codes) page. JSON does not return these whereas text mode does. JSON parsers must therefore work to the status codes, and provide their own end-user messages.
