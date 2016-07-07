@@ -47,65 +47,74 @@ In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validato
 	---------------|--------------
 	**config** | A config is a static configuration setting for some aspect of the machine. These parameters are not changed by Gcode execution (but see the G10 exception). {`xfr:1000}` is an example of a config. So is `{1po:1}`. So is the X group: `{x:n}`.
 	**block** | Gcode blocks are lines of gcode consisting of one or more gcode words, optional comments and possibly gcode messages
-	**word** | Gcode words make up gcode commands. G1 is an example of a gcode word. So is x23.43
+	**word** | Gcode words make up gcode commands. `G1` is an example of a gcode word. So is `x23.43`
 	**comment** | A Gcode comment is denoted by parentheses - `(this is a gcode comment)`
 	**JSON active comment** | A [JSON active comment](JSON-Active-Comments) is a way to insert JSON in a Gcode stream
 	**message** | A **Gcode message** is a special form of active comment that is echoed to the machine operator. It's the part of the comment that follows a `(msg` preamble. For example: `(msgThis part is echoed to the user)`
 
 ## JSON Overview & TinyG Subset
 
-The concise JSON language definition is [here](http://json.org). A handy validator can be found [here](http://jsonlint.com).
+The concise JSON language definition is [here](http://json.org). [Jsonlint](http://jsonlint.com) is a handy JSON validator that you can use to check your requests or responses.
 
 TinyG implements a subset of JSON with the following limitations: 
 
 * Supports 7 bit ASCII characters only 
 * Supports decimal numbers only (no hexadecimal numbers or other non-decimals)
 * Arrays are returned but are not (yet) accepted as input
-* Names (tokens) are case-insensitive and cannot be more than 5 characters
+* Names (keys) are case-insensitive and cannot be more than 5 characters
 * Groups cannot contain more than 24 elements (name/value pairs)
 * JSON input objects cannot exceed 254 characters in total length. Outputs can be up to 512 chars.
-* Limited object nesting is supported (you won't see more than 3 levels)
+* Limited object nesting is supported (you won't typically see more than 3 levels)
 * All JSON input and output is on a single text line. There is only one `<LF>`, it's at the end of the line (broken lines are not supported)
 
 ##JSON Request and Response Formats
 JSON requests are used to perform the following actions {with examples}
 
-* Return the value of a single setting or state variable {"1mi":n}
-* Return the values of a group of settings or state variables (aka a Resource) {"1":n}
-* Set a single setting or state variable (note that most state variables are read-only) {"1mi":8}
-* Set a multiple settings or state variables in a group {"1":{"po":1,"mi":8}}
-* Submit a block (line) of Gcode to perform any supported Gcode command {"gc":"n20g1f350 x23.4 y43.2"}
+* Return the value of a single setting or state variable `{"1mi":n}`
+* Return the values of a group of settings or state variables (aka a Resource) `{"1":n}`
+* Set a single setting or state variable (note that many state variables are read-only) `{"1mi":8}`
+* Set a multiple settings or state variables in a group `{"1":{"po":1,"mi":8}}`
+* Submit a block (line) of Gcode to perform any supported Gcode command `{"gc":"n20g1f350 x23.4 y43.2"}`
 * Special functions and actions;
- * Request a status report {"sr":n} 
- * Set status report contents {"sr":{"line":true,"posx":true,posy":true,   ...}}
- * Run self tests {"test":1}
- * Reset parameters to defaults {"defa":true}
+ * Request a status report `{"sr":n}`
+ * Set status report contents `{"sr":{"line":true,"posx":true,posy":true,   ...}}`
+ * Run self tests `{"test":1}`
+ * Reset parameters to defaults `{"defa":true}`
 
 JSON responses to commands are in the following general form.
 <pre>
 {"xjm":n} returns:
-{"r":{"xjm":5000000000.000},"f":[1,0,11,6649]}
+{"r":{"xjm":5000000000.000},"f":[3,0,6]}
 
 {"2":n} returns:
-{"r":{"2":{"ma":1,"sa":1.800,"tr":36.540,"mi":8,"po":1,"pm":1}},"f":[1,0,9,2423]}
+{"r":{"2":{"ma":1,"sa":1.800,"tr":36.540,"mi":8,"po":1,"pm":1}},"f":[3,0,6]}
 </pre>
 
-The 'r' is the response envelope. The body of the response is the result returned. In the case of a single name it returns the value. In the case of a group it returns the entire group as a child object. The "f" is the footer which is an array consisting of (1) revision number, (2) status code, (3) the number of bytes pulled from RX buffer for this command (including the terminating LF), and (4) checksum (more details provided later).
+The `r` is the response envelope. The body of the response is the result returned. In the case of a single name it returns the value. In the case of a group it returns the entire group as a child object. The `f` is the footer which is an array consisting of (1) revision number, (2) status code, (3) the number of lines available in the line buffers.
 
-**Reports** are generated automatically by the system and are therefore asynchronous. JSON reports are in the following general form:
+###Status Reports
+Status reports are generated automatically by the system and are therefore asynchronous. JSON reports are in the following general form:
 <pre>
 {"sr":{"line":0,"posx":0.000,"posy":0.000,"posz":0.000,"posa":0.000,"vel":0.000,"momo":1,"stat":3}}
 </pre>
 
-It's similar to a response except there is no header or footer element. Since it's asynchronous the status code is irrelevant, as is the number of bytes pulled form the queue (0). Since they are informational a checksum is not provided. The exception is a report that is requested, which will return a footer. E.g. the the command {"sr":""} can be used to request the status report in the above example. Look here for details of the [status reports](https://github.com/synthetos/TinyG/wiki/Status-Reports)
+It's similar to a response except there is no header or footer element. Since it's asynchronous the status code is irrelevant, as is the number of lines available in the buffer (0). The exception is a status report that is requested, which will return a footer. E.g. the the command `{sr:n}` can be used to request the status report in the above example. Look here for details of the [status reports](Status-Reports)
 
-### JSON Syntax Option - Relaxed or Strict
-JSON can be processed with either relaxed or strict syntax. `$JS` or `{js:_}` sets relaxed or strict syntax for JSON messages.
+###Exception Reports
+Exception reports are generated by the system when something wrong is detected. 
+The information provided is:
+- `fb` firmware build number
+- `st` status code of the exception
+- `msg` a displaytable, human readbale message describing the exception
+
+Exception reports are in the following general form:
 <pre>
-$js=0, {js:0}   - Sets relaxed syntax
-$js=1  {js:1}   - Sets strict syntax
-$js    {js:n}   - Returns syntax mode
+{"er":{"fb":100.10,"st":29,"msg":"Generic exception report - bogus exception report"}}
 </pre>
+
+
+### JSON Syntax handling - Relaxed or Strict
+JSON can be processed with either relaxed or strict syntax. The system will always accept either, and will always return responses and reports in strict mode.
 
 * In strict syntax all rules follow from the [JSON spec](http://www.json.org/). All names and strings must be quoted. You can use [JSON lint](http://jsonlint.com/) to validate if your JSON expression is correctly formatted.
 * In relaxed syntax names do not require quotes. String values still do.
