@@ -7,24 +7,24 @@ G2 handles comments as so:
 
 - Classic Gcode comments that start with a `(` and end with a `)` are known as "inline comments" and will be removed, UNLESS they are an active comment
 
-- Gcode message comments are active comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
+- Gcode Message comments are active comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
   - The string enclosed by the trailing `g` and the closing paren will be returned in the next status report as a `"msg":"...."` tag
   - If there is a space or anything else between `(` and the `m` then it will be treated as a normal comment
-  - Only one message active comment is allowed per Gcode block
+  - Only one message comment is allowed per Gcode block
 
-- JSON Active Comments are comments with JSON immediately inside the parentheses: `({...})`
-  - Active comments carry content that GCode can't express, but is intrinsically part of the command on that line
+- JSON comments are active comments with JSON immediately inside the parentheses: `({...})`
+  - JSON comments carry content that GCode can't express, but is intrinsically part of the command in that Gcode block
   - If there's a space or anything else between the `(` and the `{` then it will be treated as a normal comment
 
-- Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained
+- Multiple inline comments `(...)` are allowed, and active comments (message and JSON) in between will be retained
 
 - Multiple active comments are allowed, and will be combined and treated as if they were separated by commas
   - Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
-  - Internally msg comments are converted to JSON comments, so these may also be mixed with JSON active comments
+  - Message comments are converted internally to JSON comments, so these may also be mixed with JSON comments
 
-- Comments that start with a semicolon `;` end the line -- everything including and after the `;` will be ignored. Some Gcode generators use semicolons as comments
+- Comments that start with a semicolon `;` end the line -- everything including and after the `;` will be ignored, including any active comments. Some Gcode generators use semicolons as comments
 
-- Comments that start with a percetn sign `%` (as some Inkscape Gcode generators do) are converted to semicolons and end the line -- everything including and after the `%` will be ignored. A percent sign received during a feedhold is treated as a queue flush
+- Comments that start with a percent sign `%` (as some Inkscape Gcode generators do) are converted to semicolons and end the line -- everything including and after the `%` will be ignored. A percent sign received during a feedhold is treated as a queue flush
 
 - Lines that start with a forward slash `/` in the first character are block delete lines. These lines are omitted in their entirety
 
