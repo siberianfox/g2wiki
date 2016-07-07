@@ -52,17 +52,19 @@ Formats: The g2dialect performs these actions using JSON where possible, but may
 
 Those job control control commands that require interaction with the CNC machine are performed using JSON. For example, Start and Stop Job may be performed using JSON.
 
-- Job Control
+- Before the job
   - Fetch and manipulate job files
   - Define job parameters 
   - Start/stop job
+- During the job
   - Pause and resume job
-  - Job exception handling and recovery
-  - Report on job progress / display runtime messages to users
+  - Job exception handling and job recovery
+  - Report on job progress
+  - Display runtime messages to users
 
 Format: JSON is primarily used at this layer. Some functions are called using OS level commands.
 
 ### 4. Part File
-This layer actually runs the part file. It interprets all Gcode commands int the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
+This layer actually runs the part file. It interprets all Gcode commands in the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
 
 Format: The part file is Gcode. Some commands in the Gcode use [JSON active comments](JSON-active-comments) embedded in the Gcode.
