@@ -1,7 +1,8 @@
 This page describes using Gcode comments to carry JSON commands such that they can extend existing Gcode functions or insert control functions that execute synchronously with the Gcode.
 
-
 ##Gcode Comments
+Gcode comments possess a number of features that extend their capabilities beyond classic Gcode. COmments are handled as so:
+
  * Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
  * Comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment (described next)
  * JSON Active comments are comments with JSON immediately inside the parentheses: `({...})`
