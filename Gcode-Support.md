@@ -130,8 +130,8 @@ program END (M2, M30) performs the following actions:
  * JSON Active comments are comments with JSON immediately inside the parentheses: `({...})`
    * If there's a space or anything else between the '(' and the '{' then it will be treated as a normal comment.
    * Active comments carry content that GCode can't express, but is intrinsically part of the command on that line.
- * Gcode message active comments are comments with the letters `msg` (case insensitive) immediately following the ope parenthesis: `(Msg....)
-   * The string enclosed by the trailing `g` and the closing parent will be returned in the next status report as a `msg:....` tag.
+ * Gcode message active comments are comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
+   * The string enclosed by the trailing `g` and the closing paren will be returned in the next status report as a `"msg":"...."` tag
  * Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained.
  * Multiple active comments are allowed, and will be combined and treated as if they were separated by commas.
    * Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
