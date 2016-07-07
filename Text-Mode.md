@@ -19,6 +19,7 @@ G2 can also operate using JSON commands. This is the preferred way to drive G2 f
 
 See [JSON Operation](JSON-Operation) and [JSON Details](JSON-Details).
 
+_Note: JSON examples in this page are in relaxed JSON mode to void typing all those quotes_
 
 ### Startup Modes
 G2 starts up in text mode if the $ej setting is set to text mode ($ej=0). G2 will also enter text mode automatically if it receives a line with a leading $, ? or 'h'. 
