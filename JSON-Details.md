@@ -20,8 +20,7 @@ The footer contains a 3 element array:
 	-------|-------------------------
 	array_ID/version | Initially set to 3 to indicate line mode communications. This number identifies the array and version for the parser. It will be incremented if protocol changes are made that would affect hosts/clients, or is 2 if in character mode communications
 	status_code | 0 means the command executed `OK`. All others are exceptions. See [Status Codes](Status-Codes) for details.
-	RX_received | Indicates how many characters were removed from the serial RX buffer to process this command. This allows the host to keep a running total of the bytes available in the TinyG RX buffer. The RX buffer starts with 254 bytes free. The terminating `<LF>` or `<CR>` counts as a byte.
-	checksum | A hashcode checksum for the line; typically 4 digits but may be anything from 1 to 4 digits. The checksum is generated for the JSON line up to but not including the comma preceding the checksum itself. I.e, the comma is where the nul termination would exist. The checksum is computed as a [Java hashcode](http://en.wikipedia.org/wiki/Java_hashCode(\)) from which a modulo 9999 is taken to limit the length to no more than 4 characters. See compute_checksum() in util.c for C code.
+	buffers_available | Indicates how many line buffers are available in the receive buffer pool. This allows the host to check if they are operating at the right level of queueing.
 
 ### Response Verbosity
 Character echo ($ee) is always an option; it's just not a good one for JSON. In JSON mode it should be turned off (  $ee=0, or {"ee":0}  ). It's a matter of preference for text mode.
