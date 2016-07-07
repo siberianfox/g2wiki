@@ -4,7 +4,7 @@
 1. [ ] [What is G2?](What-is-G2)
 1. [ ] [Getting Started with G2](Getting-Started-with-G2)
 1. [ ] [Connecting to G2](Connecting-to-TinyG)
-1. [ ] [Configuring G2](Configuring-TinyG)
+1. [ ] [Configuring G2](Configuration-for-Firmware-Version-0.98)
 1. [ ] [Flashing G2](Flashing-G2)
 
 **Reference Pages**
