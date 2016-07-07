@@ -24,8 +24,7 @@ This table summarizes using JSON for [configuration and commands](Configuration-
 
 X axis group response:
 <pre>
- {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,"tm":220.000,"jm":5000000000.000,"jd":0.010,"sn":3,"sx":2,"sv":3000.000,"lv":100.000,"lb":20.000,"zb":3.000}},"f":[1,0,9,9580]} 
-</pre>
+{"r":{"x":{"am":1,"vm":40000,"fr":40000,"tn":0,"tm":420,"jm":5000,"jh":20000,"jd":null,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":4,"zb":2}},"f":[1,0,6]}</pre>
 #JSON Summary
 ## General
 
