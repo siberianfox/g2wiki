@@ -22,11 +22,9 @@ See [JSON Operation](JSON-Operation) and [JSON Details](JSON-Details).
 ### Startup Modes
 G2 starts up in text mode if the $ej setting is set to text mode ($ej=0). G2 will also enter text mode automatically if it receives a line with a leading $, ? or 'h'. 
 
+G2 starts up in JSON mode if the $ej setting is set to JSON mode ($ej=1). G2 will also enter JSON mode automatically if it receives a line starting with an open curly '{'. While in JSON mode all commands are expected in JSON format and responses are returned in JSON format (except for special handling of [Gcode in JSON]()).
+
 **Note: The initial status messages returned on bootup will be in JSON format, regardless of the mode set in order to not break JSON parsers during the startup sequence.**
-
-G2 starts up in JSON mode if the $ej setting is set to JSON mode ($ej=1). G2 will also enter JSON mode automatically if it receives a line starting with an open curly '{'. While in JSON mode all commands are expected in JSON format and responses are returned in JSON format...
-
-...with the exception being Gcode blocks. Gcode blocks may be streamed to JSON mode with or without JSON wrappers - i.e. unwrapped Gcode will not return the system to text mode. Responses will always be returned in JSON format.
 
 **The rest of this page covers things that are common to both text and JSON operation.**
 
