@@ -3,16 +3,19 @@ This page describes using Gcode comments to carry JSON commands such that they c
 ##Gcode Comments
 Gcode comments possess a number of features that extend their capabilities beyond classic Gcode. Classic Gcode only defines parentheses comments `(...)` and message comments `(msg...)`. Additionally, a slash character `/` in the first character is a block delete, which can be considered a type of comment. G2 handles comments as so:
 
-- Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
-- Comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment (described next)
-- JSON Active comments are comments with JSON immediately inside the parentheses: `({...})`
-  - If there's a space or anything else between the '(' and the '{' then it will be treated as a normal comment.
-  - Active comments carry content that GCode can't express, but is intrinsically part of the command on that line.
+- Classic Gcode comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment
 - Gcode message active comments are comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
   - The string enclosed by the trailing `g` and the closing paren will be returned in the next status report as a `"msg":"...."` tag
-- Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained.
-- Multiple active comments are allowed, and will be combined and treated as if they were separated by commas.
+  - If there is a space or anything else between `(` and the `m` then it will be treated as a normal comment
+  - Only one message active comment is allowed per Gcode block
+- JSON Active Comments are comments with JSON immediately inside the parentheses: `({...})`
+  - Active comments carry content that GCode can't express, but is intrinsically part of the command on that line
+  - If there's a space or anything else between the `(` and the `{` then it will be treated as a normal comment
+- Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained
+- Multiple active comments are allowed, and will be combined and treated as if they were separated by commas
   - Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
+  - Internally msg comments are converted to JSON comments, so these may also be mixed with JSON active comments
+- Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
 
 | Valid comment cases       | Notes: |
 | --- | --- |
