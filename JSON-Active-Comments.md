@@ -40,13 +40,3 @@ G2 handles comments as so:
 | `(comment text)`             | there is no command on this line |
 | `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
 | `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
-
-Additional considerations:
-
-The % character is commonly used at the beginning and end of a gcode file to delimit the file.
-
-We don't need any special handling in these cases. M2 and M30 handle the "end-of-job" case, and should be used for that purpose.
-We do NOT plan on supporting running two Gcode files concatenated. Or, at least, we don't plan on adding any special handling for that case.
-The % character is used by some gcode generators (InkScape, for example) as a start-comment character.
-
-Using % as a "buffer flush" doesn't make any sense without a ! "feed hold" proceeding it.
