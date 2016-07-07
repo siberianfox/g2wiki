@@ -46,7 +46,7 @@ These are parameters and actions that set up the CNC machine regardless of the j
 - **End-user Configuration** settings that are set to user requirements or preference and generally not changed on a per-job basis. Examples include communications settings, reporting levels, machine startup defaults.
 - **Machine Initialization** actions such as homing, axis tramming or automatic bed leveling that may be run on power up or periodically. These are also independent of any particular job.
 
-Formats: The g2dialect performs these actions using JSON where possible, but may also use some consensus Gcode commands such as probing where necessary.
+Formats: The g2dialect performs these actions using JSON where possible, but may also use some consensus / historical Gcode commands such as coordinate system offsets and probing where necessary.
 
 ### 3. Job Control
 
