@@ -11,7 +11,7 @@
 
 1. [ ] [Gcode Support](Gcode-Support)
 1. [ ] [Text Mode](Text-Mode)
-1. [ ] [JSON Communications](JSON-Operations)
+1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [GPIO System](Digital-IO-(GPIO))
 1. [ ] [Alarms & Exceptions](Alarm-Processing)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
