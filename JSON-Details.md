@@ -47,7 +47,7 @@ To get a parameter pass an object with a null value. The value is returned in th
 	{x:{vm:n}} | {"r":{"x":{"vm":16000}},"f":[3,0,6]}<nl>| alternate form to get X axis maximum velocity
 	{x:n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group
 
-###Setting Configuration Parameters (like a POST)
+### Setting Configuration Parameters (like a POST)
 To set a parameter pass an object with the value to be set. The value applied is returned in the response. The response value may be different than the requested valued in some cases. For example, an attempt to set a status report interval less than the minimum will return the minimum interval. Trying to set a read-only value will return that value; for example, firmware version. In some other cases a value of `false` or `null` may be returned. The following are examples of valid set commands. All requests and responses are on a single line of text (even if the table below wraps on your display).
 
 	Request | Response | Description
@@ -59,7 +59,6 @@ To set a parameter pass an object with the value to be set. The value applied is
 	{fv:2.0} | {"r":{"fv":0.950},"f":[3,0,6]} | Version stays 0.95 despite your wishes :(
 
 ### Groups
-## Groups
 A group is a collection of related tokens. Groups are used to specify all parameters for a motor, an axis, a heater, a PWM channel, or some other logical grouping. A group is similar in concept to a RESTful resource or composite. Groups simplify configuration management and reporting by collecting related values together. The following groups are defined.
 
 	Group | Tokens | Notes
