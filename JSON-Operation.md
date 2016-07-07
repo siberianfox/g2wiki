@@ -125,14 +125,12 @@ $js    {js:n}   - Returns syntax mode
 * In relaxed syntax names do not require quotes. String values still do.
 * TinyG will accept JSON input in either relaxed or strict form regardless of the syntax setting. It will return responses in the syntax selected.
 * In either syntax the following shorthands apply:
-  - `n` suffices for a null value. So this is valid: `{"fv":n}` and this `{fv:n}`
+  - `n` suffices for a null value. So this is valid: `{"fv":null}` and this `{fv:n}`
   - `t` suffices for a true value
   - `f` suffices for a false value
- 
-We recommend using relaxed mode if your parser can accept it on the responses.
 
 ###More
-See [JSON Detail](https://github.com/synthetos/TinyG/wiki/JSON-Details) for more information
+See [JSON Detail](JSON-Details) for more information
 
 #Random Notes
 _NOTE 1: In text mode the differences in units are obvious in the responses. In JSON there is no inherent units indication - so best to issue {"gc":"g20"} or {"gc":"g21"} at the start of every config session._
