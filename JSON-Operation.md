@@ -47,7 +47,7 @@ In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validato
 	---------------|--------------
 	**config** | A **config** is a static configuration setting for some aspect of the machine. These parameters are not changed by Gcode execution (but see the G10 exception). Xfr is an example of a config. So is 1po. So is the X group.
 	**block** | **Gcode blocks** are lines of gcode consisting of one or more gcode words, optional comments and possibly gcode messages
-	**word** | **Gcode words** encode gcode commands. G1 is an example of a gcode word. So is x23.43. [Gcode supported by TinyG is listed here.](https://github.com/synthetos/TinyG/wiki/TinyG-Gcode-Support)  
+	**word** | **Gcode words** encode gcode commands. G1 is an example of a gcode word. So is x23.43.
 	**comment** | A **Gcode comment** is denoted by parentheses - (this is a gcode comment). 
 	**message** | A **Gcode message** is a special form of comment that is echoed to the machine operator. It's the part of the comment that follows a `(msg` preamble. For example: (msgThis part is echoed to the user). 
 
