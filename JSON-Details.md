@@ -43,20 +43,20 @@ To get a parameter pass an object with a null value. The value is returned in th
 
 	Request | Response | Description
 	---------|--------------|-------------
-	{"xvm":n} | {"r":{"xvm":16000},"f":[1,0,11,1301]}<nl>| get X axis maximum velocity
-	{"x":{"vm":n}} | {"r":{"x":{"vm":16000}},"f":[1,0,16,2128]}<nl>| alternate form to get X axis maximum velocity
-	{"x":n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group
+	{xvm:n} | {"r":{"xvm":16000},"f":[3,0,6]}<nl>| get X axis maximum velocity
+	{x:{vm:n}} | {"r":{"x":{"vm":16000}},"f":[3,0,6]}<nl>| alternate form to get X axis maximum velocity
+	{x:n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group
 
 ###Setting Configuration Parameters (like a POST)
-To set a parameter pass an object with the value to be set. The value applied is returned in the response. The response value may be different than the requested valued in some cases. For example, an attempt to set a status report interval less than the minimum will return the minimum interval. Trying to set a read-only value will return that value; for example, firmware version. In some other cases a value of 'false' will be returned. The following are examples of valid set commands. All requests and responses are on a single line of text (even if the table below wraps on your display).
+To set a parameter pass an object with the value to be set. The value applied is returned in the response. The response value may be different than the requested valued in some cases. For example, an attempt to set a status report interval less than the minimum will return the minimum interval. Trying to set a read-only value will return that value; for example, firmware version. In some other cases a value of `false` or `null` may be returned. The following are examples of valid set commands. All requests and responses are on a single line of text (even if the table below wraps on your display).
 
 	Request | Response | Description
 	---------|--------------|-------------
-	{"xvm":15000} | {"r":{"xvm":15000},"f":[1,0,14,9253]} | set X axis maximum velocity to 15000
-	{"x":{"vm":15000}} | {"r":{"x":{"vm":15000},"f":[1,0,19,2131]}} | alternate form to set X axis maximum velocity to 15000
-	{"si":250} | {"r":{"si":250.000},"f":[1,0,19,2131]} | Set status minimum interval to 250 ms. 
-	{"si":10} | {"r":{"si":50.000},"f":[1,0,19,2131]} | Try to set status interval to 10 ms, but minimum was 50
-	{"fv":2.0} | {"r":{"fv":0.950},"f":[1,0,19,2131]} | The version stays at 0.95 despite your wishes :(
+	{xvm:15000} | {"r":{"xvm":15000},"f":[3,0,6]} | set X axis maximum velocity to 15000
+	{x:{vm:15000}} | {"r":{"x":{"vm":15000},"f":[3,0,6]}} | alternate form to set X axis maximum velocity to 15000
+	{si:250} | {"r":{"si":250},"f":[3,0,6]} | Set status minimum interval to 250 ms. 
+	{si:10} | {"r":{"si":200},"f":[3,0,6]} | Try to set status interval to 10 ms, but minimum was 200
+	{fv:2.0} | {"r":{"fv":0.950},"f":[3,0,6]} | The version stays at 0.95 despite your wishes :(
 
 ### Groups
 The following groups can be read and set using JSON. The JSON strings provided below (i.e. the group with a null value ("")) will return all members of the group. 
