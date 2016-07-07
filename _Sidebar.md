@@ -10,8 +10,8 @@
 **Reference Pages**
 
 1. [ ] [Gcode Support](Gcode-Support)
-1. [ ] [Command Line](Command-Line)
-1. [ ] [JSON Support](JSON-Operations)
+1. [ ] [Text Mode](Text-Mode)
+1. [ ] [JSON Communications](JSON-Operations)
 1. [ ] [GPIO System](Digital-IO-(GPIO))
 1. [ ] [Alarms & Exceptions](Alarm-Processing)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
