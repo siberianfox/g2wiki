@@ -179,21 +179,18 @@ $sys  --- Show all system settings ---
 [gdi] default gcode distance mode 0 [0=G90,1=G91]
 </pre>
 
-Configuration is non-moded; that is, configuration lines and Gcode blocks can be used without changing modes. However, it is not recommended to intermingle configs with Gcode blocks, as the EEPROM writes can interfere with step generation and serial transmission (interrupts). Please note: in some future release config commands that arrive during a gcode cycle may be rejected.
-
-_CAVEAT: At the current time because of various limitations of the Xmega we recommend waiting for each config command to send a response before sending the next command. This gives allows the system to persist the data to EEPROM, because during that interval the board cannot reliably receive serial input._
-
+Configuration is non-moded; that is, configuration lines and Gcode blocks can be used without changing modes. However, it is not recommended to intermingle configs with Gcode blocks, as changing configuration during a job may have unpredictable results. See the [Operating Model](g2dialect-Operating-Model) for details. Please note: in some future release configuration commands that arrive during a gcode cycle (i.e. job) may be rejected.
 
 
 ## Updating Settings 
 To update a setting enter $token=value
 
-Tokens are a mnemonic plus a group prefix (system settings have no prefix). The setting is taken and the value is echoed in a descriptive text line. No spaces are allowed. Numeric values can contain embedded commas. The following are examples of valid and invalid inputs. 
+Tokens are a mnemonic plus a group prefix (system settings have no prefix). The setting is taken and the value is echoed in a descriptive text line. No spaces are allowed. The following are examples of valid and invalid inputs. 
 
 	Request | Response | Notes
 	--------|----------|-------
 	$yfr=800 | [yfr] y_feedrate_maximum        800.000 mm/min | Set Y axis feed rate maximum to 800 mm/min
-	$yfr=16,000 | [yfr] y_feedrate_maximum      16000.000 mm/min |  Set Y axis feed rate maximum to 16000 mm/min
+	$yfr=16000 | [yfr] y_feedrate_maximum      16000.000 mm/min |  Set Y axis feed rate maximum to 16000 mm/min
 	$2po=1 | [2po] m2_polarity                 1 [0,1] | Set motor 2 polarity
 	$ex=1 | [ex]  enable_xon_xoff             1 [0,1] | Enable XON/XOFF protocol
 	$ted=1 | error: Unrecognized command $ted | Example of an error
