@@ -5,7 +5,7 @@ Related Pages:
 - [JSON Active Comments](JSON-Active-Comments)
 
 # JSON Cheat Sheet
-This table summarizes using JSON for [configuration and commands](G2-Configuration). Details are provided in the subsequent sections.
+This table summarizes using JSON for [configuration and commands](Configuration-for-Firmware-Version-0.98). Details are provided in the subsequent sections.
 
 	Request | Response | Description
 	---------|--------------|-------------
