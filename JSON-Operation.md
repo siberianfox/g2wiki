@@ -5,33 +5,32 @@ Related Pages:
 - [JSON Active Comments](JSON-Active-Comments)
 - [JSON Cheat Sheet](JSON-Cheat-Sheet)
 
-#JSON Summary
 ## General
 
-TinyG can accept commands in [JSON](http://json.org/) (JavaScript Object Notation) mode or text mode. Using JSON simplifies writing host GUIs in languages such as Python, Ruby, JavaScript, Java, Processing and other languages that support dictionaries / hashmaps. 
+G2 can accept commands in [JSON](http://json.org/) (JavaScript Object Notation) mode or text mode. Using JSON simplifies writing host GUIs in languages such as Python, Ruby, JavaScript, Java, Processing and other languages that support dictionaries / hashmaps. 
 
 Most commands that are available in JSON are also available in text mode, but there are some differences. ASCII communications overhead is somewhat higher in JSON than text mode but is still quite efficient and manageable.
 
 ####Syntax Notes
-- The examples above are in strict JSON mode, as specified by json.org. TinyG will also accept input in relaxed JSON mode which omits the quotes on all fields except if the value field is a string.
+- The examples above are in strict JSON mode, as specified by json.org. TinyG will also accept input in relaxed JSON mode which omits the quotes on all fields except if the value field is a string. All responses are always in strict mode.
 - The following values can be used in full or by their abbreviations:
-  - 'null' or 'n'
-  - 'true' or 't'
-  - 'false' or f 
+  - `null` or `n`
+  - `true` or `t`
+  - `false` or `f`
 
 ### Is this RESTful?
-The JSON interface is modeled as a RESTful interface, albeit running over USB serial and not HTTP. Using JSON enables exposing system internals as [RESTful resources](http://en.wikipedia.org/wiki/Representational_state_transfer), which makes the embedded system much easier to manipulate using modern programming techniques. Data is treated as resources and state is transfered in and out. Unlike RESTful HTTP, methods are implied by convention as there is no request header in which to declare them. 
+The JSON interface is modeled as a RESTful interface, albeit running over USB or serial and not HTTP. Using JSON enables exposing system internals as [RESTful resources](http://en.wikipedia.org/wiki/Representational_state_transfer), which makes the embedded system much easier to manipulate using modern programming techniques. Data is treated as resources and state is transferred in and out. Unlike RESTful HTTP, methods are implied by convention as there is no request header in which to declare them. 
 
 ## Basic Concepts
-In JSON mode TinyG expects well structured JSON (if in doubt use the [JSON validator](http://jsonlint.com)). JSON requests are generally just curly braces and formatting around what would otherwise be a command line request. A JSON line can only contain a single request object. This may be a single value such as {"xvm":null}, or a complete group such as {"x":null} - but only one group. Note that groups with multiple *elements* are accepted. For example, this is OK: 
+In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validator](http://jsonlint.com)). JSON requests are generally just curly braces and formatting around what would otherwise be a command line request. This may be a single value such as {"xvm":null}, or a complete group such as {"x":null}. Only one parent JSON object is processed per line. Note that groups with multiple *elements* are accepted. For example, this is OK: 
 {"x":{"vm":16000,"fr":10000}}
 
 ### How things are encoded in JSON
 
 	Term | Description
 	---------------|--------------
-	**name** | A name is a JSON name (aka **token**) describing a single data value or a group of data values. Examples of names include "xfr" referring to the X axis maximum feed rate, or "x" referring to all values associated with the X axis (the X axis group).<br>Names are not case sensitive.
-	**value** | A value is a number, a quoted string, true/false, or null (as per JSON spec).<br>True and false values can be represented as `true` and `false` or `t` and `f` for short<br>NULL values can be represented by the word `null` (case insensitive), or simply `n` for short<br>Null values signal a GET, all others will set (PUT) the value, or in some cases invoke an action.
+	**name** | A name is a JSON name (aka **token**) describing a single data value or a group of data values. Examples of names include "xfr" referring to the X axis maximum feed rate, or "x" referring to all values associated with the X axis (the X axis group). Names are not case sensitive.
+	**value** | A value is a number, a quoted string, true/false, or null (as per JSON spec).<br>True and false values can be represented as `true` and `false` or `t` and `f` for short<br>NULL values can be represented by the word `null` (case insensitive), or simply `n` for short<br>Null values signal a GET, all others will set (PUT) the value, or in some cases invoke an action.<br>A null value in a response indicates that the value in invalid (e.g trying to read a switch that is not configured)
 	**NVpair** | A name and a value is a name:value pair or NV pair
 	**group** | A group is a collection of one or more NV pairs. Groups are used to specify all parameters for a motor, an axis, a PWM channel, or other logical grouping. A group is similar in concept to a RESTful resource or composite.
 
