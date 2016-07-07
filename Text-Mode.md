@@ -9,12 +9,13 @@ G2 can operate in either text mode (command line mode) or JSON mode. In text mod
 	$xvm=16000 | Set X axis maximum velocity
 
 
-G2 can also operate using JSON commands. This is the preferred way to drive TinyG from a UI or controller. Using JSON dramatically simplifies the UI as the board can be treated as a RESTful resource, and no parsers or special handlers need to be written. Example:
+G2 can also operate using JSON commands. This is the preferred way to drive G2 from a UI or controller. Using JSON dramatically simplifies the UI as the board can be treated as a RESTful resource, and no parsers or special handlers need to be written. Example:
 
 	Command | Description
 	--------|--------------
-	{"xvm":""} | View X axis maximum velocity
+	{"xvm":n} | View X axis maximum velocity
 	{"xvm":16000} | Set X axis maximum velocity
+	{xvm:16000} | Relaxed JSON mode equivalent to above
 
 See [JSON Operation](JSON-Operation) and [JSON Details](JSON-Details).
 
@@ -88,7 +89,7 @@ In text mode the following groups of groups are also available for display:
 For example type $q to list all axis groups. 
 The list of uber-groups can be seen by asking for the system help screen using $h.
 
-In JSON mode these groups will return 1 or more {r:} responses with one group in each response. This is not the correct way for G2 to handle this command. For example, a {q:n} should return a parent {q:} object with the groups as children. We plan to correct this in a future release.
+In JSON mode these groups will return 1 or more {r:} responses with one group in each response. This is not the correct way for G2 to handle this command. For example, {q:n} should return a response with a parent q like so: {r{q:...}} with the groups as children. We plan to correct this in a future release.
 
 ## Displaying Settings and Groups
 When displaying or setting configs a '$' must be the first character of the line. Input is case insensitive.
