@@ -26,6 +26,7 @@ Gcode comments possess a number of features that extend their capabilities beyon
 
 - Lines that start with a forward slash `/` in the first character are block delete lines. These lines are omitted in their entirety
 
+### Valid Comment Cases
 
 | Valid comment cases       | Notes: |
 | --- | --- |
