@@ -90,7 +90,7 @@ In text mode the following groups of groups are also available for display:
 For example type `$q` to list all axis groups. 
 The list of uber-groups can be seen by asking for the system help screen using `$h`.
 
-In JSON mode these groups will return 1 or more `{r:}` responses with one group in each response. This is not the correct way for G2 to handle this command. For example, `{q:n}` should return a response with a parent q like so: `{r{q:{1:{...}}}}` with the groups as children. We plan to correct this in a future release.
+In JSON mode these groups will return 1 or more `{r:}` responses with one group in each response. This is not the correct way for G2 to handle this command. For example, `{q:n}` should return a response with a parent q like so: `{r:{q:{1:{...}}}}` with the groups as children. We plan to correct this in a future release.
 
 ## Displaying Settings and Groups
 When displaying or setting configs a `$` must be the first character of the line. Input is case insensitive.
@@ -102,9 +102,9 @@ To display a setting type $<the-mnemonic-for-the=setting-you-want-to-display>. I
 
 	Request | Response | Notes
 	--------|----------|-------
-	$xvm | [xvm] x_velocity_maximum      16000.000 mm/min | Show X axis maximum velocity
-	$3po | [3po] m3_polarity                 0 [0,1] | Show motor 3 polarity
-	$ex | [ex]  enable_xon_xoff             1 [0,1] | Show XON/XOFF setting
+	$xvm | [xvm] x_velocity_maximum 16000.000 mm/min | Show X axis maximum velocity
+	$3po | [3po] m3_polarity 0 [0,1] | Show motor 3 polarity
+	$ex | [ex] enable_xon_xoff 1 [0,1] | Show XON/XOFF setting
 
 The following commands will display groups.
 <pre>
