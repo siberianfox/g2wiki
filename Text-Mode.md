@@ -70,9 +70,9 @@ A group is a collection of related tokens. Groups are used to specify all parame
 	he | 1 2 3 | heater configuration and readouts
 
 To list a group type in the group prefix; for example:
-* type $x to list the X group
-* type $sys to list the system group (or simply $, which is shorthand)
-* type $g55 to list the xyzabc offsets in the G55 coordinate system
+* type `$x` to list the X group (or `{x:n}` in JSON)
+* type `$sys` to list the system group (or simply `$`, which is text shorthand, or `{sys:n}` )
+* type `$g55` to list the xyzabc offsets in the G55 coordinate system (or `{g55:n}` )
 
 **Diagnostic Groups**<br>
 In addition the the operating groups above a series of diagnostic groups can be enabled at compile time See [Diagnostics](Diagnostics)
@@ -87,16 +87,16 @@ In text mode the following groups of groups are also available for display:
 	offsets | o | All offset settings including g92's
 	all | $ | All settings. Invoked as $$
 
-For example type $q to list all axis groups. 
-The list of uber-groups can be seen by asking for the system help screen using $h.
+For example type `$q` to list all axis groups. 
+The list of uber-groups can be seen by asking for the system help screen using `$h`.
 
-In JSON mode these groups will return 1 or more {r:} responses with one group in each response. This is not the correct way for G2 to handle this command. For example, {q:n} should return a response with a parent q like so: {r{q:...}} with the groups as children. We plan to correct this in a future release.
+In JSON mode these groups will return 1 or more `{r:}` responses with one group in each response. This is not the correct way for G2 to handle this command. For example, `{q:n}` should return a response with a parent q like so: `{r{q:{1:{...}}}}` with the groups as children. We plan to correct this in a future release.
 
 ## Displaying Settings and Groups
-When displaying or setting configs a '$' must be the first character of the line. Input is case insensitive.
+When displaying or setting configs a `$` must be the first character of the line. Input is case insensitive.
 
 _**A note about units**_
-_Settings can be displayed and entered in either inches or millimeters. All values entered and responses provided will be in the current Gcode UNITS setting: G20 for inches or G21 for mm. Most of the examples below are in mm, but could just as easily be input in inches._
+_Settings can be displayed and entered in either inches or millimeters. All values entered and responses provided will be in the current Gcode UNITS setting: `G20` for inches or `G21` for mm. Most of the examples below are in mm, but could just as easily be input in inches._
 
 To display a setting type $<the-mnemonic-for-the=setting-you-want-to-display>. It will respond with the value taken. For example:
 
