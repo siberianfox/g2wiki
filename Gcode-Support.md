@@ -142,7 +142,7 @@ program END (M2, M30) performs the following actions:
 | `G0X10 (comment text)`       | command with comment |
 | `G0X10 (comment text`        | acceptable, but a warning may be issued for the comment not being terminated |
 | `G0X10 ;comment text`        | comment delimited by semicolon (firmware build 378.05 and later) |
-| `(MSGSend this string)`      | will report back as `"msg":"Send this string" |
+| `(MSGSend this string)`      | will report back as `"msg":"Send this string"` |
 | `(comment text)`             | there is no command on this line |
 | `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
 | `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
