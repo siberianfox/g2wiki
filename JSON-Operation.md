@@ -5,22 +5,22 @@ Related Pages:
 - [JSON Active Comments](JSON-Active-Comments)
 
 # JSON Cheat Sheet
-This table summarizes using JSON for [configuration and commands](Configuration-for-Firmware-Version-0.98). Details are provided in the subsequent sections. Note: Examples are shown in [relaxed JSON mode](JSON-Operation#json-syntax-option---relaxed-or-strict) for brevity.
+This table summarizes using JSON for [configuration and commands](Configuration-for-Firmware-Version-0.98). Details are provided in the subsequent sections. _Note: Examples are shown in [relaxed JSON mode](JSON-Operation#json-syntax-option---relaxed-or-strict) for brevity._
 
 	Request | Response | Description
 	---------|--------------|-------------
-	{"xvm":n} | {"r":{"xvm":16000},"f":[1,0,11,1301]}<nl>| get X axis maximum velocity
-	{"xvm":15000} | {"r":{"xvm":15000},"f":[1,0,14,9253]}<nl>| set X axis maximum velocity to 15000
-	{xvm:15000} | {"r":{"xvm":15000},"f":[1,0,14,9253]}<nl>| set X axis maximum velocity to 15000
-	{"x":{"vm":n}} | {"r":{"x":{"vm":16000}},"f":[1,0,16,2128]}<nl>| alternate form to get X axis maximum velocity
-	{"x":{"vm":15000}} | {"r":{"x":{"vm":15000}},"f":[1,0,19,2131]}<nl>| alternate form to set X axis maximum velocity to 15000
-	{"x":n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group (see below for entire response)
-	{"gc":"g0x10"} | {"f":[1,0,11,1234]}<nl>| send Gcode with verbosity=1, 2 or 3
-	{"gc":"n20g0x20"} | {"r":{"n":20},"f":[1,0,9,5362]} | send Gcode with verbosity=4
-	{"gc":"n20g0x20"} | {"r":{"gc":"n20g0x20","n":20},"f":[1,0,9,7209]} | send Gcode with verbosity=5
-	{"gc":"g0x10"} | {"r":{"gc":"g0x10"},"f":[1,0,6,8628]}<nl>| send Gcode with verbosity=5
-	n20g0x20 | {"r":{"gc":"n20g0x20","n":20},"f":[1,0,9,7209]} | send unwrapped Gcode with verbosity=5
-	g0x10 | {"r":{"gc":"g0x10"},"f":[1,0,6,8628]}<nl>| send unwrapped Gcode with verbosity=5
+	{"xvm":n} | {"r":{"xvm":16000},"f":[3,0,4]}<nl>| get X axis maximum velocity
+	{"xvm":15000} | {"r":{"xvm":15000},"f":[3,0,4]}<nl>| set X axis maximum velocity to 15000
+	{xvm:15000} | {r:{xvm:15000},f:[3,0,4]}<nl>| the above shown as Relaxed JSON
+	{x:{vm:n}} | {r:{x:{vm:16000}},f:[3,0,4]}<nl>| alternate form to get X axis maximum velocity
+	{x:{vm:15000}} | {r:{x:{vm:15000}},f:[3,0,4]}<nl>| alternate form to set X axis maximum velocity to 15000
+	{x:n} | {r:{x:{am:1,vm:16000.000,fr:16000.000,.... | get entire X axis group (see below for entire response)
+	{gc:"g0x10"} | {f:[3,0,4]}<nl>| send Gcode with verbosity=1, 2 or 3
+	{gc:"n20g0x20"} | {r:{n:20},f:[3,0,4]} | send Gcode with verbosity=4
+	{gc:"n20g0x20"} | {r:{gc:"n20g0x20",n:20},f:[3,0,4]} | send Gcode with verbosity=5
+	{gc:"g0x10"} | {r:{gc:"g0x10"},f:[3,0,4]}<nl>| send Gcode with verbosity=5
+	n20g0x20 | {r:{gc:"n20g0x20",n:20},f:[3,0,4]} | send unwrapped Gcode with verbosity=5
+	g0x10 | {r:{gc:"g0x10"},f:[3,0,4]}<nl>| send unwrapped Gcode with verbosity=5
 
 X axis group response:
 <pre>
