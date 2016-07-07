@@ -174,15 +174,15 @@ $sys  --- Show all system settings ---
 [mt]  motor idle timeout          2.00 seconds
 [m48e] overrides enabled          1 [0=disable,1=enable]
 [mfoe] manual feed override enab  0 [0=disable,1=enable]
-[mfo]  manual feedrate override   1.000 [0.05 < mfo < 2.00]
+[mfo]  manual feedrate override   1.000 [0.05  mfo  2.00]
 [mtoe] manual traverse over enab  0 [0=disable,1=enable]
-[mto]  manual traverse override   1.000 [0.05 < mto < 2.00]
+[mto]  manual traverse override   1.000 [0.05  mto  2.00]
 [spep] spindle enable polarity    1 [0=active_low,1=active_high]
 [spdp] spindle direction polarity 0 [0=CW_low,1=CW_high]
 [spph] spindle pause on hold      1 [0=no,1=pause_on_hold]
 [spdw] spindle dwell time         1.0 seconds
 [ssoe] spindle speed override ena 0 [0=disable,1=enable]
-[sso] spindle speed override      1.000 [0.050 < sso < 2.000]
+[sso] spindle speed override      1.000 [0.050  sso  2.000]
 [cofp] coolant flood polarity     1 [0=low is ON,1=high is ON]
 [comp] coolant mist polarity      1 [0=low is ON,1=high is ON]
 [coph] coolant pause on hold      0 [0=no,1=pause_on_hold]
