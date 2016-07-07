@@ -1,9 +1,9 @@
 _updated 10/1/14 - ash_
 
-This page describes JSON operation in TinyG firmware version 0.95. This page provides a JSON cheat sheet and an overview of JSON operation. See [JSON Details](https://github.com/synthetos/TinyG/wiki/JSON-Details) for the real nuts and bolts.
+This page describes JSON operation in TinyG firmware version 0.95. This page provides a JSON cheat sheet and an overview of JSON operation. See [JSON Details](JSON-Details) for the real nuts and bolts.
 
 # JSON Cheat Sheet
-This table summarizes using JSON for [configuration and commands](https://github.com/synthetos/TinyG/wiki/TinyG-Configuration). Details are provided in the subsequent sections.
+This table summarizes using JSON for [configuration and commands](G2-Configuration). Details are provided in the subsequent sections.
 
 	Request | Response | Description
 	---------|--------------|-------------
