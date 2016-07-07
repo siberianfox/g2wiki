@@ -124,7 +124,10 @@ $js    {js:n}   - Returns syntax mode
 * In strict syntax all rules follow from the [JSON spec](http://www.json.org/). All names and strings must be quoted. You can use [JSON lint](http://jsonlint.com/) to validate if your JSON expression is correctly formatted.
 * In relaxed syntax names do not require quotes. String values still do.
 * TinyG will accept JSON input in either relaxed or strict form regardless of the syntax setting. It will return responses in the syntax selected.
-* In either syntax the shorthand `n` suffices for a null value. So this is valid: `{"fv":n}` and this `{fv:n}`
+* In either syntax the following shorthands apply:
+  - `n` suffices for a null value. So this is valid: `{"fv":n}` and this `{fv:n}`
+  - `t` suffices for a true value
+  - `f` suffices for a false value
  
 We recommend using relaxed mode if your parser can accept it on the responses.
 
