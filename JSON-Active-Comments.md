@@ -5,9 +5,9 @@ Gcode comments in G2 possess a number of features that extend their capabilities
 
 G2 handles comments as so:
 
-- Classic Gcode comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment
+- Classic Gcode comments that start with a `(` and end with a `)` are known as "inline comments" and will be removed, UNLESS they are an active comment
 
-- Gcode message active comments are comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
+- Gcode message comments are active comments with the letters `msg` (case insensitive) immediately following the open parenthesis: `(Msg....)`
   - The string enclosed by the trailing `g` and the closing paren will be returned in the next status report as a `"msg":"...."` tag
   - If there is a space or anything else between `(` and the `m` then it will be treated as a normal comment
   - Only one message active comment is allowed per Gcode block
