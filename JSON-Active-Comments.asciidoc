@@ -1,0 +1,232 @@
+This page describes using Gcode comments to carry JSON commands such that they can extend existing Gcode functions or insert control functions that execute synchronously with the Gcode.
+
+:toc: macro
+:toclevels: 4
+:icons: font
+
+toc::[]
+
+NOTE: The examples in this document contain comments after # characters, which is NOT valid JSON. (But is valid YAML, which is what is used for syntax highlighting.)
+
+## Nomenclature
+
+Object::
+In JSON (via JavaScript) an "object" is a hash-style structure that starts with `{` and ends with `}`, and contains key-value pairs (with a ':' between the key and value) that are separated by `,` characters. Objects can be nested arbitrarily buy using objects as values.
++
+[source,yaml]
+----
+{ # start of object
+  "key": "value", # key with a string value
+  "car" : { "fourDoor": true } # using an object as the value for key "car"
+} # end of object
+----
+
+- Objects must be transmitted (as bytes) with an order, but according to JSON and the hash rules of JavaScript (and many other languages) there is no implicit order as to how the keys are internally stored or transmitted.
+
+- Any time the internal representation of an object is serialized to bytes for transmission, there is *no* assumption as to what order the keys will be in.
+
+
+Array::
+Similar to an *object*, and array in a *ordered* list of *unnamed* values. Arrays are serialized staring with an `[` and ending with a `]`
++
+[source,yaml]
+----
+[ # <-- start of an array
+  "The quick brown fox...", # <-- Item 0, the first item, is a string
+  {"font: "helvetica"}      # <-- item 1, the second item, is an object
+} # <-- end of the array
+----
+
+* Each value in an array has an associated and immutable index. In other words, the third item of an array will always be the third item, and will be referred to with the index of `2`.
+
+* Arrays will always be serialized as bytes containing every value in the array in order.
+
+** We may use an exception to this rule: In order to display a single item of an array that's embedded in an object, we may use the index after the key in `[]` brackets. For example: `{"item[2]":{...}}` may be used to display just the third item of the `item` array (which happens to be an object, in this example).
+
+
+Key::
+A hash-style key, which must have a corresponding *value* after a colon (`:`).
+
+
+Value:: the contents of a key of an object, or an unnamed but numerically indexed item in an array.
++
+Value types (from the perspective of the serialized data) are:
+
+Number::: Numbers are floating point (including integer values) and signed.
+Boolean::: The value `true` and `false`, also values `0` and `1`. (We may accept non-zero as `true` if we choose.)
+String::: Values wrapped in double-quotes.
+
+* Strings must be single line.
+* Strings may contain double-quotes if following a backslash `\` character.
+* Strings may contain the sequence `\n` to represent a newline, `\r` for carriage return, and `\\` to represent an actual backslash.
+* We may wish to accept other common values as well, such as `\t` for tab.
+
+Object and Array::: containers of these types may be used to nest data to an arbitrary level.
+
+Container::: A super-type for our internal uses only. Indicates that the value is opaque and is to be parsed (following the normal JSON parsing rules) into a byte-array for later parsing.
++
+.Example:
+If the `camera` key of the `others` object were to be marked as a "container," then any value in the place of `...` will be parsed as JSON but keys and values will only be checked for syntactic validity, and the stored intact as a byte-array (a.k.a. "string").
++
+// ^
++
+[source,yaml]
+----
+{"others":{"camera":...}} # ... could be an object, array, number, string, boolean, or null
+----
+
+Binding:: as a noun, it's the structure that contains a key or index and a representation of the value of that key. As a verb, it's the act of joining the key and the associated structure or variable.
+
+* If the binding is a representation of a JSON object, then the representation is a special object that contains a list of bindings.
+
+* If the binding is a representation of a JSON array, it will have the same representation type as that of an object, but the keys used are indexes (starting at zero) and the JSON serialization is different.
+
+* If the binding is to an internal variable, then it is a leaf node on the JSON tree, and is called a "parameter."
+
+* Bindings not also contain the key name and the value represented, but also understand how to "write" the value as a string, and how to serialize that string as part of JSON structure.
+
+** The write function may be implicitly determined (such as a `float` will use the functions to write `float`s), or it may be explicitly selected at the time of binding.
+
+** Internal binding types such as those for objects and arrays have write functions already provided.
+
+*** At the time of binding, the binding itself and/or it's selected write function may require additional information, which must be provided at the time of binding. (Example: `float` s require an integer precision value.)
+
+** The binding interface is intentionally simple, and new binding types may be added by the client code at any point before binding. For example, a custom composite object type (such as a `Thermocouple` object) may also act as a binding or provide a binding object that would allow placing the thermocouple object in the JSON hierarchy directly. This binding could represent an entire subtree of objects in the JSON.
+
+Parameter:: a binding of a JSON key with an internal value. The internal value is usually a variable in C++.
++
+A parameter may hold a reference to an actual variable, or it may hold a reference to a synthetic variable, making it a "synthetic parameter."
+
+Synthetic Parameter::: a parameter that is *not* a direct representation of an internal variable. Doing a "get" (JSON with the parameter key and a `null` value) on a synthetic parameter returns the result of an internal "get" function. A "set" (JSON with the parameter key and a value) calls a "set" function with the given value.
+
+"Set" or Action:: JSON that's sent with a key and non-null value will set the internal parameter to the given value, which may have a side-effect of causing a function to be executed with the given value.
++
+[source, c++]
+----
+// Given this structure and setup:
+struct Car_t {
+  bool four_wheels;
+};
+
+Car_t car;
+
+// It can be setup so that this JSON string being parsed:
+// {"car":true}
+// Does the equivalent of this "set":
+car = true;
+
+// OR, it can be setup so that the same JSON does this:
+setCar(true);
+----
+
+"Get" or Request:: A JSON object sent with a `null` value is treated as a "get" or a request to have the value of the given key returned. Ideally these requests will not execute any actions or have side-effects. (There will be exceptions, such as `{"clr":null}`.)
+
+Instruction:: The internal representation of a parsed key/value pair. (More info below).
+
+Instruction List:: A structure containing a fixed number of static instructions that will be reused for each parsing pass. (More info below.) The instruction list is "executed" with the aid of an "Instruction Stack".
+
+Instruction Stack:: A structure that is used in the process of executing (or writing) an instruction list that keeps internal pointers to the parent objects as it walks the tree. (More info below.)
+
+Keywords::  These are JSON keywords, including: `null`, `true`, and `false`.
+
+## Parsing process
+
+NOTE: Explained is the JSON parsing as it stands. The internal representation of the parser results is intentionally decoupled from the parser itself so that other parsers can be made, without having to rewrite execution phases to support or be aware of them.
+
+### Parser Goals
+
+* Efficiency in parsing time. The speed to get from an unparsed string to an instruction list is vital.
+* Flexibility to parse against various different structures in different contexts.
+* Efficiency in expression of JSON structure in code. It shouldn't take much more than than the JSON itself and some meta information to represent the JSON structure.
+  * Separate the parsing itself, execution concepts (setters and getters), and persistence from the JSON description.
+* Efficiency in internal representation, and avoid boilerplate and duplication of code.
+  * Example: Printing of floats should all be handled with the same code. Common setters and getters (such as translation to and from "global units") should be sharable and easily used.
+* Reusability. Parsing of mixed GCODE and JSON, or "text mode", should be able to use the same basic constructs as the JSON representation. We wish to impart as little "assumption" of JSON-ness as possible to the internal parsed representation.
+
+### Additional notes
+
+* All keys and keywords (`true`, `null`, etc.) are case insensitive, and when represented internally they will be made all lowercase. When parsing, they will either be made lowercase (in the case of keys) or will be accepted (in the case of keywords).
+* Parsing and output (explained elsewhere) support "relaxed mode". In the case of output, it must be configured (and defaults to "strict mode"), where on input "relaxed mode" is always accepted intermixed with "strict mode". Some cases may require strict-mode handling, such as keys that contain characters that would otherwise be difficult to parse in relaxed mode: `{x:n, "x:x":n}` is the diabolical case where we have a key with a ':' in it.
+
+.To be addressed:
+****
+- [ ] We should accept non-zero as TRUE
+- [ ] "text mode" -- input and serialization; including setting up formats, etc.
+- [ ] precision display
+- [ ] Persistence - how is a parameter persisted / which are persisted and which are not.
+* [ ] Dealing with parameter initialization (how does a parameter get set to a starting value / which parameters are set and which are not)
+- [ ] Groups and flattened representation
+- [ ] Uber groups
+****
+
+### Steps of parsing
+
+There are two types of parsing. **Blind Parsing** and **Guided Parsing**. They can be used intermixed.
+
+1. The text is "tokenized" into key/value pairs, from beginning to end, into an instruction list.
+
+1. As keys are located, they are placed into the instructions list keys.
+
+  1. The type is determined from the value found.
+
+  1. If *guided parsing* is in effect, then a `instruction_stack` is also used to walk along a bound JSON structure in tandem with the parsing.
+
+    1. If the type found while parsing matches the type found in the bound structure, then it will be stored in the instruction list and parsing will continue.
+
+    1. If the type found in the bound JSON structure is a "container" (as opposed to an "object"), then all parsing of this value (including JSON sub-structures) will continue in *blind parsing mode* and will be stored as a string value in the instruction list.
+
+    1. If the type found while parsing does not match that in the bound JSON structure, then it is an error. The exception being that `null` matches any type.
+
+  1. If *blind parsing* is in effect, and we are *not* parsing a container's value, then objects will be placed in the instruction list with their apparent value.
+
+  1. If *blind parsing* is in effect, and we *are* parsing a container's value, then the length of the stored string will be increased until the apparent end of the value.
+
+#### Blind Parsing (low-level)
+
+Provided to the lower-level parser (which may be wrapped with an easier-to-use interface):
+
+* An `instruction_list_t` reference we'll call `instruction_list`. This is where the parsed structure will be stored.
+* A `char *` buffer containing the raw JSON string.
+
+.Variables reused during this process
+****
+`depth`:: in an integer that keeps track of the current object depth. Starting value: `-1` (The first character located should be a `{` of the anonymous top-level object, and the `depth` would then be set to `0` without additional exceptions.
+`instruction_list.getCurrent()`:: will keep track of the current instruction. `instruction_list.next()` is used to skip to the next token. The `instruction_list` internally holds a representation of the "current" instruction. (It's just an integer into an array, but could be changed to a pointer in a linked-list without changing the usage interface.)
+****
+
+
+### Steps
+
+. Step through the buffer provided that contains the JSON, character by character. Ignore whitespace. (*To be implemented.*)
+
+. If a `{` is encountered, increase the `depth` value by one, and mark the current instruction as a `parent` type.
+
+. If a `{` or a `,` is encountered, skip to the next instruction, and set the depth of the new current instruction to the current value of `depth`. (Note how the `depth` will have changed if the caracter was a `{` but would not have changed if it were a `,`.)
+
+.. Find the end of the next key, paying attention to quotes if they're present.
+
+... While locating the end of the key, we lowercase the key and unescape characters as we encounter them.
+
+.. If the first non-whitespace (*todo: whitespace handling here*) character is `:` then we set it to the `null` byte and set the current instruction's key to point to the first character of the key.
+
+. If a `n` in encountered (optionally followed by `ull` and the uppercase variants of all of those characters) then the current instruction is marked as having a `null` value.
+
+. If a number-character (`-+0123456789.` - *todo: support `+`*) is located then parse the number using atof and store the float value in the instruction, marking it as a `number`.
+
+. If a `}` in located, decrease the `depth` by one.
+
+. Skip whitespace.
+
+. Anything else found here is an error. Otherwise loop until a `null` byte is found or we have reached the provided buffer length.
+
+
+.ToDo:
+****
+- [ ] Parsing of arrays. This will be relatively simple.
+- [ ] Guided parsing. This will be the same routine, but with the addition of a `binder` object and a `instruction_stack` to use to walk the binder's tree.
+- [ ] Storing of "container type" values as strings.
+****
+
+## Steps of Guided Parsing (low-level)
+
+*To be implemented*
