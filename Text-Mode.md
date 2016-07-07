@@ -48,6 +48,7 @@ A group is a collection of related tokens. Groups are used to specify all parame
 
 	Group | Tokens | Notes
 	--------|----------|-------
+	system | sys | system global parameters
 	axis | x y x a b c | all settings for that axis
 	motor | 1 2 3 4 5 6 | all settings for that motor
 	pwm | p1...pN | all settings for pulse width modulation channel
@@ -59,16 +60,20 @@ A group is a collection of related tokens. Groups are used to specify all parame
 	ofs | x y x a b c | current offsets,  always in millimeters
 	hom | x y x a b c e | homing status by axis. 'e' reports homing status for Entire machine
 	prb | x y x a b c e | probe state by axis. 'e' reports success or failure
-	di | di1...diN | digital input configuration
-	in | in1...inN | digital input state readers (switch readers)
-	do | do1...doN | digital output configuration
-	out | out1...outN | digital output state readers
-	system | sys | Contain system parameters
+	di | 1...N | digital input configuration
+	in | 1...N | digital input readouts (switch readers)
+	do | 1...N | digital output configuration
+	out | 1...N | digital output readouts
+	pid | 1 2 3 | PID configuration
+	he | 1 2 3 | heater configuration and readouts
 
 To list a group type in the group prefix; for example:
 * type $x to list the X group
 * type $sys to list the system group (or simply $, which is shorthand)
 * type $g55 to list the xyzabc offsets in the G55 coordinate system
+
+**Diagnostic Groups**<br>
+In addition the the operating groups above a series of diagnostic groups can be enabled at compile time See [Diagnostics](Diagnostics)
 
 ### Uber-Groups
 In text mode (but not JSON mode) the following groups of groups are also available for display:
