@@ -37,6 +37,8 @@ These functions are the domain of the host operating system and should not invol
 
 The g2dialect does not implement these commands, and removes them from Mcodes and Gcodes where they are found.
 
+Format: Native OS commands and dialogs are used.
+
 ### 2. Configuration
 These are parameters and actions that set up the CNC machine regardless of the job that is to be run. These may include the following.
 
@@ -44,7 +46,7 @@ These are parameters and actions that set up the CNC machine regardless of the j
 - **End-user Configuration** settings that are set to user requirements or preference and generally not changed on a per-job basis. Examples include communications settings, reporting levels, machine startup defaults.
 - **Machine Initialization** actions such as homing, axis tramming or automatic bed leveling that may be run on power up or periodically. These are also independent of any particular job.
 
-The g2dialect performs these actions using JSON where possible, but may also use some consensus Gcode commands such as probing where necessary.
+Formats: The g2dialect performs these actions using JSON where possible, but may also use some consensus Gcode commands such as probing where necessary.
 
 ### 3. Job Control
 
@@ -58,5 +60,9 @@ Those job control control commands that require interaction with the CNC machine
   - Job exception handling and recovery
   - Report on job progress / display runtime messages to users
 
+Format: JSON is primarily used at this layer. Some functions are called using OS level commands.
+
 ### 4. Part File
 This layer actually runs the part file. It interprets all Gcode commands int the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
+
+Format: The part file is Gcode. Some commands in the Gcode use [JSON active comments](JSON-active-comments) embedded in the Gcode.
