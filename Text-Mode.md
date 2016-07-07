@@ -110,73 +110,94 @@ The following commands will display groups.
 <pre>
 $x    --- Show all X axis settings ---
 [xam] x axis mode                 1 [standard]
-[xvm] x velocity maximum      16000.000 mm/min
-[xfr] x feedrate maximum      16000.000 mm/min
-[xtm] x travel maximum          300.000 mm
-[xjm] x jerk maximum     5000000000 mm/min^3
-[xjh] x jerk homing     10000000000 mm/min^3
-[xjd] x junction deviation        0.0100 mm (larger is faster)
-[xsn] x switch min                1 [0=off,1=homing,2=limit,3=limit+homing]
-[xsx] x switch max                0 [0=off,1=homing,2=limit,3=limit+homing]
-[xsv] x search velocity        3000.000 mm/min
-[xlv] x latch velocity          100.000 mm/min
-[xlb] x latch backoff            20.000 mm
-[xzb] x zero backoff              3.000 mm
+[xvm] x velocity maximum      40000 mm/min
+[xfr] x feedrate maximum      40000 mm/min
+[xtn] x travel minimum            0.000 mm
+[xtm] x travel maximum          420.000 mm
+[xjm] x jerk maximum           5000 mm/min^3 * 1 million
+[xjh] x jerk homing           20000 mm/min^3 * 1 million
+[xjd] x junction deviation        0.0000 mm (larger is faster)
+[xhi] x homing input              1 [input 1-N or 0 to disable homing this axis]
+[xhd] x homing direction          0 [0=search-to-negative, 1=search-to-positive]
+[xsv] x search velocity        3000 mm/min
+[xlv] x latch velocity       100.00 mm/min
+[xlb] x latch backoff             4.000 mm
+[xzb] x zero backoff              2.000 mm
 tinyg [mm] ok> 
 </pre>
 
 <pre>
 $x    --- Show all X axis settings in inches mode (issue g20 beforehand) ---
 [xam] x axis mode                 1 [standard]
-[xvm] x velocity maximum        629.921 in/min
-[xfr] x feedrate maximum        629.921 in/min
-[xtm] x travel maximum           11.811 in
-[xjm] x jerk maximum      196850400 in/min^3
-[xjh] x jerk homing       393700800 in/min^3
-[xjd] x junction deviation        0.0004 in (larger is faster)
-[xsn] x switch min                1 [0=off,1=homing,2=limit,3=limit+homing]
-[xsx] x switch max                0 [0=off,1=homing,2=limit,3=limit+homing]
-[xsv] x search velocity         118.110 in/min
-[xlv] x latch velocity            3.937 in/min
-[xlb] x latch backoff             0.787 in
-[xzb] x zero backoff              0.118 in
+[xvm] x velocity maximum       1575 in/min
+[xfr] x feedrate maximum       1575 in/min
+[xtn] x travel minimum            0.000 in
+[xtm] x travel maximum           16.535 in
+[xjm] x jerk maximum            197 in/min^3 * 1 million
+[xjh] x jerk homing             787 in/min^3 * 1 million
+[xjd] x junction deviation        0.0000 in (larger is faster)
+[xhi] x homing input              1 [input 1-N or 0 to disable homing this axis]
+[xhd] x homing direction          0 [0=search-to-negative, 1=search-to-positive]
+[xsv] x search velocity         118 in/min
+[xlv] x latch velocity         3.94 in/min
+[xlb] x latch backoff             0.157 in
+[xzb] x zero backoff              0.079 in
+tinyg [inch] ok> 
 </pre>
 
 <pre>
 $3    --- Show all motor 3 settings ---
 [3ma] m3 map to axis              2 [0=X,1=Y,2=Z...]
 [3sa] m3 step angle               1.800 deg
-[3tr] m3 travel per revolution    1.250 mm
-[3mi] m3 microsteps               4 [1,2,4,8]
-[3po] m3 polarity                 1 [0=normal,1=reverse]
-[3pm] m3 power management         1 [0=off,1=on]
+[3tr] m3 travel per revolution    1.2500 mm
+[3mi] m3 microsteps               8 [1,2,4,8,16,32]
+[3po] m3 polarity                 0 [0=normal,1=reverse]
+[3pm] m3 power management         2 [0=disabled,1=always on,2=in cycle,3=when moving]
+[3pl] m3 motor power level        0.450 [0.000=minimum, 1.000=maximum]
+tinyg [mm] ok> 
 </pre>
 
 <pre>
 $sys  --- Show all system settings ---
-[fb]  firmware build            377.08
-[fv]  firmware version            0.95
-[hv]  hardware version            7.00
-[id]  TinyG ID                    2X2660-FHZ
-[ja]  junction acceleration 2000000 mm
-[ct]  chordal tolerance           0.001 mm
-[st]  switch type                 1 [0=NO,1=NC]
+[fb]  firmware build            100.10
+[fbs] firmware build "           100.09-10-g4477-dirty"
+[fbc] firmware config "settings_makeblock.h"
+[fv]  firmware version            0.98
+[hp]  hardware platform           3.00
+[hv]  hardware version            0.00
+[id]  TinyG ID   0084-7bd6-29c6-4ad
+[ja]  junction aggression         0.75
+[ct]  chordal tolerance           0.1000 mm
+[sl]  soft limit enable           0 [0=disable,1=enable]
+[lim] limit switch enable         0 [0=disable,1=enable]
+[saf] safety interlock enable     1 [0=disable,1=enable]
+[mt]  motor idle timeout          2.00 seconds
+[m48e] overrides enabled          1 [0=disable,1=enable]
+[mfoe] manual feed override enab  0 [0=disable,1=enable]
+[mfo]  manual feedrate override   1.000 [0.05 < mfo < 2.00]
+[mtoe] manual traverse over enab  0 [0=disable,1=enable]
+[mto]  manual traverse override   1.000 [0.05 < mto < 2.00]
+[spep] spindle enable polarity    1 [0=active_low,1=active_high]
+[spdp] spindle direction polarity 0 [0=CW_low,1=CW_high]
+[spph] spindle pause on hold      1 [0=no,1=pause_on_hold]
+[spdw] spindle dwell time         1.0 seconds
+[ssoe] spindle speed override ena 0 [0=disable,1=enable]
+[sso] spindle speed override      1.000 [0.050 < sso < 2.000]
+[cofp] coolant flood polarity     1 [0=low is ON,1=high is ON]
+[comp] coolant mist polarity      1 [0=low is ON,1=high is ON]
+[coph] coolant pause on hold      0 [0=no,1=pause_on_hold]
+[tv]  text verbosity              1 [0=silent,1=verbose]
 [ej]  enable json mode            0 [0=text,1=JSON]
 [jv]  json verbosity              2 [0=silent,1=footer,2=messages,3=configs,4=linenum,5=verbose]
-[tv]  text verbosity              1 [0=silent,1=verbose]
-[qv]  queue report verbosity      0 [0=off,1=filtered,2=verbose]
+[js]  json serialize style        1 [0=relaxed,1=strict]
+[qv]  queue report verbosity      0 [0=off,1=single,2=triple]
 [sv]  status report verbosity     1 [0=off,1=filtered,2=verbose]
 [si]  status interval           250 ms
-[ic]  ignore CR or LF on RX       0 [0=off,1=CR,2=LF]
-[ec]  expand LF to CRLF on TX     0 [0=off,1=on]
-[ee]  enable echo                 0 [0=off,1=on]
-[ex]  enable xon xoff             1 [0=off,1=on]
-[baud] USB baud rate              5 [1=9600,2=19200,3=38400,4=57600,5=115200,6=230400]
 [gpl] default gcode plane         0 [0=G17,1=G18,2=G19]
 [gun] default gcode units mode    1 [0=G20,1=G21]
 [gco] default gcode coord system  1 [1-6 (G54-G59)]
 [gpa] default gcode path control  2 [0=G61,1=G61.1,2=G64]
-[gdi] default gcode distance mode 0 [0=G90,1=G91]
+tinyg [mm] ok> 
 </pre>
 
 Configuration is non-moded; that is, configuration lines and Gcode blocks can be used without changing modes. However, it is not recommended to intermingle configs with Gcode blocks, as changing configuration during a job may have unpredictable results. See the [Operating Model](g2dialect-Operating-Model) for details. Please note: in some future release configuration commands that arrive during a gcode cycle (i.e. job) may be rejected.
