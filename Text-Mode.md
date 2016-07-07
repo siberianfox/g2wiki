@@ -26,12 +26,14 @@ G2 starts up in JSON mode if the $ej setting is set to JSON mode ($ej=1). G2 wil
 
 **Note: The initial status messages returned on bootup will be in JSON format, regardless of the mode set in order to not break JSON parsers during the startup sequence.**
 
+
+***
 **The rest of this page covers things that are common to both text and JSON operation.**
 
 ## Names and Tokens 
 Names are short mnemonic tokens that can be 1 to 5 characters in length. Axis and motor tokens are typically 3 characters including their axis or motor prefix; Non-axis and non-motor (general) tokens are 2 to 5 characters. 
 
-Tokens are case insensitive and can only contain alphanumeric characters. See [TinyG Configuration](https://github.com/synthetos/TinyG/wiki/TinyG-Configuration) for a complete list of the tokens used for settings. Some examples are provided below: 
+Tokens are case insensitive and can only contain alphanumeric characters. See [G2 Configuration](Configuration-for-Firmware-Version-0.98) for a complete list of the tokens used for settings. Some examples are provided below: 
 
 	Token | as Text | as JSON | Description
 	------|---------|---------|--------------
@@ -42,7 +44,7 @@ Tokens are case insensitive and can only contain alphanumeric characters. See [T
 	x | $x | {"x":""} | X axis group. In text mode a group can only be queried (get). In JSON mode a group can be queried and can also be used to set any or all values in the group
 
 ## Groups
-A group is a collection of related tokens. Groups are used to specify all parameters for a motor, an axis, a PWM channel, or other logical grouping. A group is similar in concept to a RESTful resource or composite. Groups simplify configuration management and reporting by collecting related values together. The following groups are defined. All parameters within the groups are persistent (stored in EEPROM) unless noted.
+A group is a collection of related tokens. Groups are used to specify all parameters for a motor, an axis, a heater, a PWM channel, or some other logical grouping. A group is similar in concept to a RESTful resource or composite. Groups simplify configuration management and reporting by collecting related values together. The following groups are defined.
 
 	Group | Tokens | Notes
 	--------|----------|-------
