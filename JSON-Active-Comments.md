@@ -30,7 +30,7 @@ G2 handles comments as so:
 
 ### Valid Comment Cases
 
-| Valid comment cases       | Notes: |
+| Valid comment cases | Notes |
 | --- | --- |
 | `G0X10`                      | command only - no comment |
 | `G0X10 (comment text)`       | command with comment |
@@ -40,3 +40,12 @@ G2 handles comments as so:
 | `(comment text)`             | there is no command on this line |
 | `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
 | `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
+
+## JSON Active Comments
+The following Gcode/Mcode commands use JSON active comments
+
+| Code  | Definition | Notes |
+| --- | --- | --- |
+| M100 | Execute from Planner | Execute JSON when the planner reaches it
+| M101 | Wait on Event | Pause execution until condition in JSON is true
+
