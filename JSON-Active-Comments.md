@@ -15,7 +15,8 @@ Gcode comments possess a number of features that extend their capabilities beyon
 - Multiple active comments are allowed, and will be combined and treated as if they were separated by commas
   - Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
   - Internally msg comments are converted to JSON comments, so these may also be mixed with JSON active comments
-- Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
+- Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored. SOMe Gcode generators use semicolons as comments.
+
 
 | Valid comment cases       | Notes: |
 | --- | --- |
@@ -28,3 +29,12 @@ Gcode comments possess a number of features that extend their capabilities beyon
 | `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
 | `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
 
+Additional considerations:
+
+The % character is commonly used at the beginning and end of a gcode file to delimit the file.
+
+We don't need any special handling in these cases. M2 and M30 handle the "end-of-job" case, and should be used for that purpose.
+We do NOT plan on supporting running two Gcode files concatenated. Or, at least, we don't plan on adding any special handling for that case.
+The % character is used by some gcode generators (InkScape, for example) as a start-comment character.
+
+Using % as a "buffer flush" doesn't make any sense without a ! "feed hold" proceeding it.
