@@ -67,4 +67,4 @@ Format: JSON is primarily used at this layer. Some functions are called using OS
 ### 4. Part File
 This layer actually runs the part file. It interprets all Gcode commands in the file and executes the job as a sequence of time-coordinated steps. It may execute movement, heating, extrusion, cutting, laser, vacuum, or other controls for devices 
 
-Format: The part file is Gcode. Some commands in the Gcode use [JSON active comments](JSON-active-comments) embedded in the Gcode.
+Format: The part file is Gcode. Some commands in the Gcode use [JSON active comments](JSON-Active-Comments) embedded in the Gcode.
