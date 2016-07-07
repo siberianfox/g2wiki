@@ -125,20 +125,21 @@ program END (M2, M30) performs the following actions:
 * Default INCHES or MM units mode is restored ($gun)
 
 ##Gcode Comments
- * Comments start with a '(' char or alternately a semicolon ';' 
- * Comments always terminate the block - i.e. leading or embedded comments are not supported
-<pre>
-Valid comment cases       Notes:
-G0X10                      - command only - no comment
-G0X10 (comment text)       - comment with comment
-G0X10 (comment text        - it's OK to drop the trailing paren
-G0X10 ;comment text        - comment delimited by semicolon (firmware build 378.05 and later) 
-(comment text)             - there is no command on this line
-</pre>
-<pre>
-Invalid comment cases     Notes:
-G0X10 comment text         - comment with no separator
-N10 (comment) G0X10        - embedded comment. G0X10 will be ignored
-(comment) G0X10            - leading comment. G0X10 will be ignored
-G0X10 #comment             - invalid comment separator
-</pre>
+ * Comments that start with a semicolon ';' end the line -- everything including and after the ';' will be ignored
+ * Comments that start with a '(' and end with a ')', known as "inline comments", will be removed, UNLESS they are an active comment (described next)
+ * Active comments are comments with JSON immediately inside the parentheses: `({...})`
+   * If there's a space or anything else between the '(' and the '{' then it will be treated as a normal comment.
+   * Active comments carry content that GCode can't express, but is intrinsically part of the command on that line.
+ * Multiple inline comments `(...)` are allowed, and gcode and active comments in between will be retained.
+ * Multiple active comments are allowed, and will be combined and treated as if they were separated by commas.
+   * Ex: `M100 ({he1st:200}) ({he2st:210})` will be treated the same as `M100 ({he1st:200, he2st:210})`
+
+| Valid comment cases       | Notes: |
+| --- | --- |
+| `G0X10`                      | command only - no comment |
+| `G0X10 (comment text)`       | command with comment |
+| `G0X10 (comment text`        | acceptable, but a warning may be issued for the comment not being terminated |
+| `G0X10 ;comment text`        | comment delimited by semicolon (firmware build 378.05 and later) |
+| `(comment text)`             | there is no command on this line |
+| `G0 (traverse) X10 (to X ten) Y12 (and Y twelve)` | Command `G0X10Y12` with multiple inline comments |
+| `M100 (set heater temp to 210:) ({he1st:210})` | Command with inline comment and active comment |
