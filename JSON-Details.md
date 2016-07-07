@@ -5,8 +5,8 @@ This page describes JSON operations in G2. This page is really a continuation of
 Commands in JSON mode are sent as JSON objects. Some request and response examples:
 
     {xfr:n}         {"r":{"xfr":12000.000},"f":[3,0,6]}   get the X axis max feed rate
-    {xfr:12000}     {"r":{"xfr":12000.000},"f":[3,0,6]}   set the X maximum feed rate to 12000 mm/min (assuming the system is in G21 mode)
-    {x:n}           {"r":{"x":{"am":1,"vm":16000.000,....       get all configuration settings for the X axis
+    {xfr:12000}     {"r":{"xfr":12000.000},"f":[3,0,6]}   set the X maximum feed rate to 12000 mm/min (assuming G21 mode)
+    {x:n}           {"r":{"x":{"am":1,"vm":16000.000,.... get all configuration settings for the X axis
     {gc:"g0 x100"}  {"r":{"gc":"g0x100"},"f":[3,0,6]}     execute the Gcode block "G0 X100"
 
     where  "f":[3,0,6]  
