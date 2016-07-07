@@ -1,4 +1,4 @@
-**NOTE: This page describes JSON operations in G2. This page is really a continuation of [this page](JSON-Operation)**
+This page describes JSON operations in G2. This page is really a continuation of [this page](JSON-Operation)
 
 ##JSON Mode Protocol
 ### Commands and Responses
