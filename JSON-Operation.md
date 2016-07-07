@@ -41,7 +41,7 @@ In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validato
 - **value** is a number, a quoted string, true/false, or null (as per JSON spec)
   - True and false values can be `true` and `false` or `t` and `f` for short
   - NULL values can be `null` (case insensitive), or simply `n` for short
-  - Null values signal a GET, all others will set (PUT) the value, or in some cases invoke an action
+  - Null values are GETs, all others will set the value, or in some cases invoke an action
   - A null value in a response indicates that the value in invalid (e.g trying to read a switch that is not configured)
 - **NVpair** is a name:value pair or NV pair
 - **group** is a collection of one or more NV pairs
