@@ -8,14 +8,14 @@ Related Pages:
 ##Configuring Inputs
 Digital inputs are controlled using a set of digital input objects referenced as:
 <pre>
-{di1:n}
+{di1:n}  Group of parameters for digital input 1
 {di2:n}
 ...
 {diN:n}
-{d1:n}   Group of all digital inputs
+{d1:n}   Uber-group of all digital input groups
 </pre>
 
-The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense. Disabled inputs are returned as -1.
+The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense. Disabled inputs are returned as -1 (note: This will become `null` in a future release).
 <pre>
 {in1:n}
 {in2:n}
