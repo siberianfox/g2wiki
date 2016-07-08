@@ -50,4 +50,14 @@ The following Gcode/Mcode commands use JSON active comments
 | M101 | Wait on Event | Pause execution until condition in JSON is true
 
 
-Example: `m100 ({he1:220}) (set heater 1 to 220 degrees)`
+**Examples**
+
+Set heater 1 temperature to 220 degrees
+<pre>
+m100 ({he1st:220})
+</pre>
+
+Pause movement until heater 1 is at temperature, then continue
+<pre>
+m101 ({he1at:t})
+</pre>
