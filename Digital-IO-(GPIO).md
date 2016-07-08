@@ -5,7 +5,7 @@ Related Pages:
 * [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 * [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
 
-##Configuring Inputs
+##Digital Inputs
 Digital inputs are controlled using a set of digital input objects referenced as:
 <pre>
 {di1:n}  Group of parameters for digital input 1
@@ -15,7 +15,7 @@ Digital inputs are controlled using a set of digital input objects referenced as
 {d1:n}   Uber-group of all digital input groups
 </pre>
 
-The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense. Disabled inputs are returned as -1 (note: This will become `null` in a future release).
+The state of IO can be read by separate variables. 0 = inactive, 1 = active (tripped). Note that these are corrected for input sense.
 <pre>
 {in1:n}
 {in2:n}
@@ -28,8 +28,8 @@ Digital inputs have these attributes (using di1 as an example)
 
 	Name | Description | Values
 	------|------------|---------
-	{di1mo: | mode |-1=disabled, 0=active low (NO), 1=active high (NC)
-	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=reset
+	{di1mo: | mode | 0=active low (NO), 1=active high (NC)
+	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=panic, 5=reset
 	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=panic
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
@@ -37,6 +37,7 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 - STOP is a deceleration to zero at the axes normal jerk value {xjm}
 - FAST_STOP is a high speed stop at the high-speed jerk value {xjh}. High speed jerk may be too high to start the motor, but can be used to stop it without losing position
 - HALT stops immediately without regard to deceleration. Position may be lost.
+- PANIC stops all motors and devices immediately and puts the machin in a PANIC state. (THis will move to Function in later release)
 - RESET resets the board if the input triggers
 
 The function is the default function for that input. These functions set flags that are executed by the callbacks in the main loop. The function will be called unless an override for that function is in effect (e.g. limit override). Please see [Alarm Processing](Alarm-Processing) for more details. Functions include:
@@ -44,7 +45,8 @@ The function is the default function for that input. These functions set flags t
 - LIMIT acts as a limit switch which goes into an ALARM state. Enter {clear:n} to clear
 - INTERLOCK pauses all movement until the interlock input is restored
 - SHUTDOWN puts the machine into a shutdown state. It must be recovered with a reset or power cycle
-- PANIC puts the machine into a panic state. It must be recovered with a reset or power cycle
+- ALARM (will be added in later release)
+- PANIC (will be added in later release)
 
 Internal state for inputs may include:
 
@@ -71,13 +73,12 @@ Inputs operate differently during homing – sequence is:
 
 Notes and questions:
 - The above works for dedicated homing switches. It will also work for shared homing switches except for the initial backoff (off a homing switch), which will somehow need to be disabled.
-- Note – this does not address dual-axis homing such as squaring a dual-gantry Y. Do we need to discuss this?
+- Note – this does not address dual-axis homing such as squaring a dual-gantry Y
 
 ##Probing
 Probing is also an exception. Currently probing can only be performed on the Zmin input (di5 on the v9). Di5 should be set as Normally Open (Active Low).
 
-#Configuring Outputs
-(Not yet implemented)
+#Digital Outputs
 Digital outputs are controlled using a set of digital output objects referenced as:
 <pre>
 {do1:n}
