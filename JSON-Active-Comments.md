@@ -47,7 +47,7 @@ The following Gcode/Mcode commands use JSON active comments
 | Code  | Definition | Notes |
 | --- | --- | --- |
 | M100 | Execute from Planner | Execute JSON when the planner reaches it
-| M101 | Wait on Event | Pause execution until condition in JSON is true
+| M101 | Wait on Event | Pause execution until condition in JSON is met
 
 
 **Examples**
