@@ -42,3 +42,7 @@ These problems are annoyances and can be worked around.
 
 ### Tips
 - When starting a new VM image from a W7 disk, name the VM as W10, as you will be upgrading to W10. The internal package files are named after the parent VM name. I'm not sure if this can be changed later. This is not critical - just a clarification.
+
+- Once you have the OS where you want it - VMware tools installed, disk cleaned, etc., but before you start installing additional software, make a BASELINE snapshot for recovery purposes.
+
+- Some OEM W7 disks will not activate for W10 installation. You will find this out after you have spent the time installing W7 from that disk.
