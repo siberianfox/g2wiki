@@ -48,3 +48,26 @@ These problems are annoyances and can be worked around.
 - Once you have the OS where you want it - VMware tools installed, disk cleaned, etc., but before you start installing additional software, make a BASELINE snapshot for recovery purposes.
 
 - Some OEM W7 disks will not activate for W10 installation. You will find this out after you have spent the time installing W7 from that disk.
+
+## Update from VMware Fusion Support
+I received this email after talking with support. They also tell me that there will be a fix in the next release of Fusion which should be sometime mid August 2016 or later. 
+
+From Vmware Fusion Support:
+
+As discussed, kindly find the alternate instructions to get the Z drive mounted in File Explorer in Windows 10 VM in Fusion. 
+
+- Step-1: Uninstall VMware Tools manually from Programs & Features and restart the VM. 
+
+- Step-2: Mount VMware Tools ISO. But. do not start the installation. Open Command prompt as an admin and change the directory to D Drive where VMware Tools is mounted.
+
+- Step-3: Find the installation file in command prompt and add the extension /C. Ex: setupx64.exe /C. 
+This will help you remove all left out files of VMware Tools. 
+
+- Step-4: Go to C / Program Files and delete VMware Tools. You need to stop VMware processes if found from Task manager and give full permissions to delete the folder. Disable Shared folders from Virtual Machine > Settings. 
+
+- Step-5: Enable hidden admin account by typing the below command in command prompt. 
+`net user administrator /active:yes`
+
+- Step-6: Restart the VM from Windows start menu and login to the local admin account. Initiate the installation of VMware Tools as an administrator and complete the process. Restart the VM after the installation from Windows start menu.  
+
+Enable shared folders after the restart and log off your account and log back in. Your Shared folders should be mounted inside Windows now.
