@@ -18,7 +18,7 @@ These problems make it impossible to use Atmel Studio 7.
 - No or bad credentials for the host operating system (try connect with different credentials)
 - Windows firewall rules prevent connection (but the default firewall settings should work)
 
-**Solution**: I think the root cause is that VMware tools installations do not "stick" if you accept the `Restart` option at the end of the Vmware tools installation dialog. If you accept the `Restart` option (YES) it seems to discard any changes. See also this [Update]() from a ticket I opened with VMware Fusion Support
+**Solution**: I think the root cause is that VMware tools installations do not "stick" if you accept the `Restart` option at the end of the Vmware tools installation dialog. If you accept the `Restart` option (YES) it seems to discard any changes. See also this [Update](Windows-10-VMware-Fusion-8-Issues#update-from-vmware-fusion-support) from a ticket I opened with VMware Fusion Support.
 
 The most reliable way I've found to re-install vmware tools is to completely uninstall and re-install it with manual shutdowns and restarts after each step. (`Restart` from the Windows `Power` button may also work - I'm not sure).
 - Be sure Sharing is enabled in the VMware Settings for this VM
