@@ -6,7 +6,7 @@ _This page is for compiling the G2 project on Windows 10 with Atmel Studio 6.2. 
 
 To compile G2 on Windows with Atmel Studio you will need the last available Atmel Studio 6.2 (build 1548) Installer – with .NET. We recommend a clean machine or VM.
 
-To flash the compiled software via Atmel Studio, you will want an Atmel Sam-Ice programmer/debugger (http://www.digikey.com/product-detail/en/AT91SAM-ICE/AT91SAM-ICE-ND/1008639). This will allow you to load and hardware debug the compiled code.
+To flash the compiled software via Atmel Studio, you will want an Atmel-Ice Basic programmer/debugger (http://www.mouser.com/search/ProductDetail.aspx?R=0virtualkey0virtualkeyATATMEL-ICE-BASIC). This will allow you to load and hardware debug the compiled code.
 
 * Go to Atmel and download the [Atmel Studio 6.2 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
   * The current build is build 1548. Do not use an earlier build - e.g. 1153 - as it has serious bugs in the debugger (how ironic).
