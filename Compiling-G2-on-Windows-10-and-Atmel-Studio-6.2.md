@@ -1,6 +1,10 @@
 _This page is for compiling the G2 project on Windows 10 with Atmel Studio 6.2. Please see [Compiling G2](Compiling-G2) for information about hardware and compiling on other platforms._
 
-**THIS PAGE IS STILL UNDER CONSTRUCTION**
+Important Information
+- **THIS PAGE IS STILL UNDER CONSTRUCTION**
+- This page assumes the new project format in which TinyG2 is the main project and Motate is a submodule under TinyG2 
+
+https://desktop.github.com/
 
 ## What's needed
 
