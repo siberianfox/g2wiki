@@ -1,5 +1,7 @@
 _This page is for compiling the G2 project on Windows 10 with Atmel Studio 6.2. Please see [Compiling G2](Compiling-G2) for information about hardware and compiling on other platforms._
 
+**This page is still under revision until we can test all this. **
+
 ## What's needed
 
 To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 (build 1548) Installer – with .NET. We recommend a clean machine or VM. We have tried this with Windows 7. Win 8 has problems with driver signing that we'd prefer to avoid.
