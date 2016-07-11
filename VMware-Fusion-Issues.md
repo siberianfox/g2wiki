@@ -38,5 +38,7 @@ These problems are annoyances and can be worked around.
 
 - Some VM's will occasionally "beachball" forever and need to be killed from above.
 
+- Many dialog windows pop under existing windows instead of on top. This might be a W10 problem. But if you get stuck be sure to look under windows to see if there;'s something you are supposed to click.
+
 
 
