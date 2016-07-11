@@ -17,6 +17,6 @@ The most reliable way to re-up vmware tools is to completely uninstall and re-in
 Additional optional steps
 
 - Run Disk Cleanup once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these.
-- I found that on some VMs the cursor kept getting stuck in the VMware window. Use Control - Command (cloverleaf) to release the cursor.
+- I found that on some VMs the cursor kept getting stuck in the VMware window. Use Control - Command (cloverleaf) to release the cursor. Or just change windows using the Command-Tab window navigator.
 
 
