@@ -6,7 +6,7 @@ Revisions Used:
 - OSX 10.10.5
 - Atmel Studio 7 - 1009
 
-### Showstopper - VMware Tools Installation Failures
+### Showstopper Bug - VMware Tools Installation Failures
 These problems make it impossible to use Atmel Studio 7.
 
 **Symptom**: Screen resolution cannot be set above 1440x920, 1600x1200 or in some cases 1143x876 (can't remember the exact setting). This is the so-called `svga bug` which has been fixed, but only if VMware tools is successfully installed.
@@ -29,7 +29,7 @@ Additional optional steps once this works
 - Run `Windows Update` and install new ones, then...
 - Run `Disk Cleanup` once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these. The VM should drop to about 11 to 14 Gb. You will not be able to restore to W7 on this VM if you do this.
 
-### Annoyances
+### Annoyance Bugs
 These problems are annoyances and can be worked around.
 
 - `Custom Scaling` settings cannot be changed to reduce the size of Windows screen objects. Attempt: Turn off `Custom Scaling` by right clicking the main display and selecting `Turn Off Custom Scaling and Logout`. Once logged in again VMware tools wants a reset. Cancel this and perform the shutdown/restart manually. The you can select you own text scaling factor from the `Display Settings` dialog. Sometimes this doesn't even work. Display settings still revert.
@@ -40,5 +40,5 @@ These problems are annoyances and can be worked around.
 
 - Many dialog windows pop under existing windows instead of on top. This might be a W10 problem. But if you get stuck be sure to look under windows to see if there;'s something you are supposed to click.
 
-
-
+### Tips
+- When starting a new VM image from a W7 disk, name the VM as W10, as you will be upgrading to W10. The internal package files are named after the parent VM name. I'm not sure if this can be changed later. This is not critical - just a clarification.
