@@ -1,4 +1,6 @@
-We use Atmel Studio 7 on Windows 10 from OSX for a lot of g2 development. This page discusses some VMware Fusion issues we've had and some fixes trying to get an upgraded Windows 7 --> Windows 10 to work correctly on VMware. Our approach has been to build a fresh Windows 7 install from DVD, Skip installing W7 updates (not necessary and takes many hours), go to MS and request the free Windows 10 upgrade (pre-July29, 2016).
+We use Atmel Studio 7 on Windows 10 from OSX for a lot of g2 development. This page discusses some VMware Fusion issues we've had and some fixes trying to get an upgraded Windows 7 --> Windows 10 to work correctly on VMware. 
+
+Our approach has been to build a fresh Windows 7 install from DVD, Skip installing W7 updates (not necessary and takes many hours), go to MS and request the free Windows 10 upgrade (pre-July29, 2016).
 
 Revisions Used:
 - Windows 10 downloaded early July, 2016
