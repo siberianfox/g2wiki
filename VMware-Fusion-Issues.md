@@ -27,7 +27,7 @@ The most reliable way to re-up vmware tools is to completely uninstall and re-in
 
 Additional optional steps once this works
 - Run `Windows Update` and install new ones, then...
-- Run `Disk Cleanup` once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these.
+- Run `Disk Cleanup` once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these. The VM should drop to about 11 to 14 Gb. You will not be able to restore to W7 on this VM if you do this.
 
 ### Annoyances
 These problems are annoyances and can be worked around.
