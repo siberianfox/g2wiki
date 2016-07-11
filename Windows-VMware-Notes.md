@@ -2,5 +2,7 @@ This is a notes page for things I found when installing and using the Windows de
 
 Notes:
 
-- If you switch to AS6 from a branch that was in AS7 you need to delete the .atsuo files in both the g2 and Motate directories, or the project will not load into AS6
+- If you switch to AS6 from a branch that was in AS7 you need to do the following:
+  - Delete the .atsuo files in both the TinyG directory
+  - Rename Motate.cppproj to Motate_AS7.cppproj. Copy and rename Motate_6_2.cppproj to Motate.cppproj
 
