@@ -1,6 +1,6 @@
 _This page is for compiling the G2 project on Windows 10 with Atmel Studio 6.2. Please see [Compiling G2](Compiling-G2) for information about hardware and compiling on other platforms._
 
-**This page is still under revision until we can test all this. **
+**THIS PAGE IS STILL UNDER CONSTRUCTION**
 
 ## What's needed
 
