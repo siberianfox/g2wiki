@@ -18,16 +18,16 @@ These problems make it impossible to use Atmel Studio 7.
 - No or bad credentials for the host operating system (try connect with different credentials)
 - Windows firewall rules prevent connection (but the default ON settings should work)
 
-**Solution**: I think the root cause is that VMware tools installations do not "stick if you accet the `Restart` option at the end of the dialog. If you accept the "Restart" option (YES) it seems to discard any changes. WHAT? 
+**Solution**: I think the root cause is that VMware tools installations do not "stick if you accept the `Restart` option at the end of the Vmware tools installation dialog. If you accept the `Restart` option (YES) it seems to discard any changes. WHAT?
 
-The most reliable way to re-up vmware tools is to completely uninstall and re-install it with manual shutdowns. 
+The most reliable way I've found to re-install vmware tools is to completely uninstall and re-install it with manual shutdowns and restarts after each step. (`Restart` from the Windows `Power` button may also work - I'm not sure).
 - Be sure Sharing is enabled in the VMware Settings for this VM
-- Use `Reinstall Vmware Tools` to remove vmware tools completely. You must use the Reinstall VMware Tools option in the VMware Virtual Machine tab as VMware tools as not accessible from within the VM itself. Click on the D: Drive dialog bar to select the Setup action. Select Remove VMware tools. Do not accept the Restart option when complete.
-- Shut down. Reboot.
-- Now `Install VMware Tools`. Repeat the above steps by select `Complete` from the Vmware tools installation menu (`Typical` may also work). Do not accept the "Restart" menu option. Verify that you have proper screen resolution, and that the Z drive appears in the This Computer menu. Do a full shutdown and restart on your own. 
-- On reboot you may be presented with a dialog about VMware tools having changed settings for sharing. Don't accept the reboot option. Instead, do the same manual shutdown and restart as above. You can verify that the Z drive is present beforehand, and once you have rebooted.
+- Invoke `Reinstall Vmware Tools` from the VMware Virtual Machine tab to remove vmware tools completely. (VMware tools installation is not accessible from within the VM itself). Click on the `D: Drive` dialog bar to select the `Setup` action or the installation will not run (Autorun appears to be broken). Select `Remove` VMware tools. Do not accept the `Restart` option when complete.
+- Shut down from the Windows `Power` display. Reboot the VM.
+- Now `Install VMware Tools`. Repeat the above steps by select `Complete` from the Vmware tools installation menu (`Typical` may also work - I'm not sure). As above, do not accept the `Restart` menu option. Use the `This Computer` display to verify that the Z drive appears w/o a red X, and that you have proper screen resolution. Do a full shutdown and reboot manually. 
+- On reboot you may be presented with a dialog about VMware tools having changed settings for sharing. Don't accept the `Restart` option. Instead, do the same manual shutdown and reboot as above. You can verify that the Z drive is present beforehand, and once you have rebooted.
 
-Additional optional steps once this works
+Additional optional steps once this works:
 - Run `Windows Update` and install new ones, then...
 - Run `Disk Cleanup` once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these. The VM should drop to about 11 to 14 Gb. You will not be able to restore to W7 on this VM if you do this.
 
