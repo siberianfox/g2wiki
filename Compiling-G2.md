@@ -4,13 +4,14 @@ To learn how to compile the g2 codebase for your specific platform please follow
 
 ### OSX with Xcode:
 If you want to compile the g2 codebase on OSX using Mac's Xcode IDE then follow this link to get setup. hardware debugging is also covered.
-* [Compiling G2 on OS X (with Xcode)](Compiling-G2-on-OS-X-(with-Xcode))
-* [Debugging G2 on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
+- [Compiling G2 on OS X (with Xcode)](Compiling-G2-on-OS-X-(with-Xcode))
+- [Debugging G2 on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
 ### Linux & OSX from command line:
 If you want to compile the g2 codebase on Linux or OSX using a terminal then follow this link.
-* [Compiling G2 on Linux and OS X (command-line)](Compiling-G2-on-Linux-and-OS-X-(command-line))
+- [Compiling G2 on Linux and OS X (command-line)](Compiling-G2-on-Linux-and-OS-X-(command-line))
 
 ### Windows with Atmel Studio:
 Currently, the only supported method of compiling the g2 codebase from Windows is using Atmel Studio.  Follow the link below to get started.
-* [Compiling G2 on Windows 7 and Atmel Studio 6.2](Compiling-G2-on-Windows-7-and-Atmel-Studio-6.2)
+- [Compiling G2 on Windows 7 and Atmel Studio 6.2](Compiling-G2-on-Windows-7-and-Atmel-Studio-6.2)
+- [Compiling G2 on Windows 10 and Atmel Studio 6.2](Compiling-G2-on-Windows-10-and-Atmel-Studio-6.2)
