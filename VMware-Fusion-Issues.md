@@ -31,6 +31,7 @@ The most reliable way to re-up vmware tools is to completely uninstall and re-in
 - On reboot you may be presented with a dialog about VMware tools having changed settings for sharing. Don't accept the reboot option. Instead, do the same manual shutdown and restart as above. You can verify that the Z drive is present beforehand, and once you have rebooted.
 
 Additional optional steps once this works
+- Turn off `Custom Scaling` by right clicking the main display and selecting `Turn Off Custom Scaling and Logout`. Once logged in again VMware tools wants a reset. Cancel this and perform the shutdown/restart manually. The you can seleect you own text scaling factor from the screen dialog.
 - Run `Windows Update` and install new ones, then...
 - Run `Disk Cleanup` once things are set up. Use the `Clean up system files` to find the old Windows 7 directories, and the Windows 10 temporary installation files. You can shave as much as 20 Gb off the size of the VM by deleting these.
 
