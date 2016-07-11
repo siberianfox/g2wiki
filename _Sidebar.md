@@ -33,4 +33,4 @@
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
 1. [ ] [Diagnostics](Diagnostics)
 1. [ ] [Git Procedures](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
-1. [ ] [Windows 10 / VMware Fusion 8 Issues](Windows-10-VMware-Fusion-8-Issues)
+1. [ ] [Windows 10 / VMware 8 Issues](Windows-10-VMware-Fusion-8-Issues)
