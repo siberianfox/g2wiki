@@ -16,7 +16,7 @@ These problems make it impossible to use Atmel Studio 7.
 **Symptom**: The Z: drive that the `This Computer` display is supposed to give you (\\vmware-host\Shared Folders) appears, but is broken with a big red X. The `Network` Display does not show `vmware-host`  and `Shared Folders` like it's supposed to. The desktop shortcut to the same files, however, works. If the desktop shortcut does not work you may have other problems such as:
 - Sharing was not enabled from within VMware
 - No or bad credentials for the host operating system (try connect with different credentials)
-- Windows firewall rules prevent connection (but the default ON settings should work)
+- Windows firewall rules prevent connection (but the default firewall settings should work)
 
 **Solution**: I think the root cause is that VMware tools installations do not "stick if you accept the `Restart` option at the end of the Vmware tools installation dialog. If you accept the `Restart` option (YES) it seems to discard any changes. WHAT?
 
