@@ -25,7 +25,7 @@ Digital inputs are configured using a set of digital input objects referenced as
 {d1:n}   Uber-group of all digital input groups
 </pre>
 
-_Note: Currently the readout `{inN:n}` is the same number as the configurator `{diN__:}`. In future releases these will be mappable._
+_Note: Currently the readout `{inN:n}` is the same number as the configurator `{diN__:}`._ _In future releases these will be mappable._
 
 Digital inputs have these attributes (using di1 as an example)
 
