@@ -8,7 +8,7 @@ Related Pages:
 
 ##Digital Inputs
 ### Reading Digital Inputs
-The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present. Note that the 0/1 return states are corrected for input sense. 1 is active. Digital inputs are read-only.
+The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present (large numbers may return status code 100). Note that the 0/1 return states are corrected for input sense. 1 is active. Digital inputs are read-only.
 <pre>
 {in1:n}  Read digital input 1, Returns 0, 1, or null
 {in2:n}
