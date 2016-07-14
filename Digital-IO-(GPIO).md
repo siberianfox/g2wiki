@@ -1,4 +1,4 @@
-**Note: This page is in process. SOMe of the digital output functions may not yet be available. all the input functions should work as stated.**
+**Note: This page is in process. Some of the digital output functions may not yet be available (like the ability to write directly to an output). all the input functions should work as stated.**
 
 This page describes how digital inputs work in firmware version 0.98, firmware build 100+. To report the version use `{fv:n}`. To report build number use `{fb:n}`
 
