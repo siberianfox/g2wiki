@@ -1,4 +1,4 @@
-This page describes system diagnostics that are avaailabole in G2
+This page describes system diagnostics that are available in G2
 
 ###Diagnostic Groups
 The following diagnostic groups can be enabled at compile time. The main use of these groups is to include them in status reports for planner diagnostics.
