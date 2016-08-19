@@ -75,7 +75,7 @@ the GitHub Windows app is an easy way on Windows.
 #### Compiling and uploading with Atmel ICE
 _Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
 
-In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio 6.2 is installed, open the solution file `TinyG2.atsln`. (Atmel studio will also open the project file `TinyG2.cppproj` automatically.)
+In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio is installed, open the solution file `g2core.atsln`. (Atmel studio will also open the  `g2core.cppproj` and `motate.cppproj` in the sub-directories automatically.)
 
 _Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
@@ -109,7 +109,6 @@ To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a tar
 
 The following tags are used. They can apply to the problem, and also the possible solutions:
   - [w32], [w64]: This problem affects Windows32 / Windows64 configurations
-  - [w7], [w8]: This problem affects Windows7 / Windows8 configurations
   - [all]: This problem affects all configurations (that we know of)
 
 These are things we have seen fail. Please feel free to add to this list if you find issues that have solutions.
