@@ -12,6 +12,8 @@ These instructions apply if you are running a VMware virtual machine on OSX or L
   * Enable network sharing in order to mount an OSX drive. See Networks under Control Panel
 * There are some [issues with Windows 10 and VMware 8](Windows-10-VMware-Fusion-8-Issues) that may or may not have been resolved. In any case, you need to get VMware tools recognizing the Z: drive or AS7 will not compile - as it cannot use UNC paths.
 
+#### Disk Space
+The project downloads the entire tool chain (under g2/Motate/Tools) so it's pretty big. It's currently almost 800Mb total, so you need a Gb free before attempting this 
 
 #### Atmel Studio 7
 To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
