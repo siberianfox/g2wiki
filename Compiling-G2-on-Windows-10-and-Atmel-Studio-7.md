@@ -20,11 +20,15 @@ To flash the compiled software via Atmel Studio, you will want an [Atmel-Ice Bas
 
 **Note: do NOT use an ASF project (like the Arduino Due board) when setting up you project! It's best not to even download ASF. When asked to update it, don't do it** 
 
-## Cloning the git repository.
+## Git and Cloning the Git Repository
+The compile has a dependency on git in Windows, so you ned to install git on Windows even if you are not using the Windows git to manage the project (For example, in a W10 virtual machine on OSX we use git and gitx on OSX for the actual file management function). 
 
-The easiest way on Windows to clone the git repo is probably to use the GitHub Windows app.
+So step 1 below is mandatory. The remaining steps are needed only if you intend to manage Git from Windows
 
-1. Download and install the [GitHub app](https://windows.github.com/).
+1. Download and install the [GitHub app](https://windows.github.com/) for Windows.
+
+Now clone the g2 project 
+
 2. Log into the GitHub web site -- register if needed, it's free.
 3. Browse to the [g2 project page](https://github.com/synthetos/g2) and then click on the `Clone in Desktop` button.
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
