@@ -14,5 +14,3 @@ If you want to compile the g2 codebase on Linux or OSX using a terminal then fol
 ### Windows with Atmel Studio:
 The only supported method of compiling the g2 codebase from Windows is using Atmel Studio. As of firmware build 101 we are supporting Windows 10 and Atmel Studio 7 only.
 - [Compiling G2 on Windows 10 and Atmel Studio 7](Compiling-G2-on-Windows-10-and-Atmel-Studio-7)
-- DEPRECATED: [Compiling G2 on Windows 10 and Atmel Studio 6.2](Compiling-G2-on-Windows-10-and-Atmel-Studio-6.2)
-- DEPRECATED: [Compiling G2 on Windows 7 and Atmel Studio 6.2](Compiling-G2-on-Windows-7-and-Atmel-Studio-6.2)
