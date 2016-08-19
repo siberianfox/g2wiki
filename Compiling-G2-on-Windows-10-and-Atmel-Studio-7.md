@@ -13,7 +13,7 @@ These instructions apply if you are running a VMware virtual machine on OSX or L
 * There are some [issues with Windows 10 and VMware 8](Windows-10-VMware-Fusion-8-Issues) that may or may not have been resolved. In any case, you need to get VMware tools recognizing the Z: drive or AS7 will not compile - as it cannot use UNC paths.
 
 #### Disk Space
-The project downloads the entire tool chain (under g2/Motate/Tools) so it's pretty big. It's currently almost 800Mb total, so you need a Gb free before attempting this 
+Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2 project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on your Z: drive if you are installing it there.
 
 #### Atmel Studio 7
 To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
