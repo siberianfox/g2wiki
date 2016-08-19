@@ -6,12 +6,12 @@ https://desktop.github.com/
 
 ## What's needed
 
-To compile g2 on Windows with Atmel Studio you will need the last available Atmel Studio 7 (build ____) Installer – with .NET. We recommend a clean machine or VM.
+To compile g2 on Windows with Atmel Studio you will need the last available Atmel Studio 7 (build 1006) Installer – with .NET. We recommend a clean machine or VM.
 
 To flash the compiled software via Atmel Studio, you will want an [Atmel-Ice Basic](http://www.mouser.com/search/ProductDetail.aspx?R=0virtualkey0virtualkeyATATMEL-ICE-BASIC) programmer/debugger. This will allow you to load and hardware debug the compiled code.
 
 * Go to Atmel and download the [Atmel Studio 7 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
-  * The current build is build 1548. Do not use an earlier build - e.g. 1153 - as it has serious bugs in the debugger (how ironic).
+  * The current build is build 1006. Do not use an earlier build.
   * Be sure to get the one **including the .NET part**. It's about 800 Mbytes.
   * They require you to either register or fill out a "guest" form. Otherwise it's free.
 * Walk through the entire installation process. 
@@ -26,7 +26,7 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 
 1. Download and install the [GitHub app](https://windows.github.com/).
 2. Log into the GitHub web site -- register if needed, it's free.
-3. Browse to the [G2 project page](https://github.com/synthetos/g2) and then click on the `Clone in Desktop` button.
+3. Browse to the [g2 project page](https://github.com/synthetos/g2) and then click on the `Clone in Desktop` button.
   * The GitHub application should open up, and ask where to save the new repository. The default location will probably be sufficient.
 4. In the GitHub app, click on the unnamed menu in the top-left and then click on `edge` to checkout the edge branch.<br/>
 ![Choose edge from the unnamed menu near the top-left of the GitHub window](images/Windows-GitHub-Edge-Branch.png)
@@ -37,7 +37,7 @@ The easiest way on Windows to clone the git repo is probably to use the GitHub W
 
 _Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
 
-In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio 6.2 is installed, open the solution file `TinyG2.atsln`. (Atmel studio will also open the project file `TinyG2.cppproj` automatically.)
+In the project directory all of the source files and the Atmel project files for Studio 7 are inside the `TinyG2` directory. Once Atmel Studio is installed, open the solution file `g2core.atsln`. (Atmel studio will also open the project file in the g2core subdirectory `g2core.cppproj` automatically.)
 
 _Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
