@@ -13,17 +13,17 @@ These instructions apply if you are running a VMware virtual machine on OSX or L
 * There are some [issues with Windows 10 and VMware 8](Windows-10-VMware-Fusion-8-Issues) that may or may not have been resolved. In any case, you need to get VMware tools recognizing the Z: drive or AS7 will not compile - as it cannot use UNC paths.
 
 
-#### Atmel Studio 6.2
-To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 build 1548 (or greater), Service Pack 2 Installer – with .NET. We recommend a clean machine or VM. We have tried this with Windows 7. Win 8 has problems with driver signing that we'd prefer to avoid.
+#### Atmel Studio 7
+To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
 
-* Go to Atmel and download the [Atmel Studio 6.2 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
-  * The current build is AStudio6_2sp2_1548net.exe. Be sure to get the one with the **.NET part** (about 800 Mbytes) unless you are sure you already have the .net revision that AS needs (Framework 4). Do not use an earlier build - e.g. 1153 - as it has serious bugs in the debugger (how ironic). 
+* Go to Atmel and download the [Atmel Studio 7 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
+  * Be sure to get the one with the **.NET part** (about 800 Mbytes) unless you are sure you already have the .net revision that AS needs (Framework 4).
   * There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
   * They require you to either register or fill out a "guest" form. Otherwise it's free.
 
 * Walk through the entire installation process. 
   * It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
-  * Fire up AS6 for the first time 
+  * Fire up AS7 for the first time 
     * You **do not** want the Atmel Solutions Framework (ASF) when asked. So don't update it and turn of notifications. Do NOT use an ASF project (like the Arduino Due board) if you are playing with AS6 or you will have a lot of stuff to back out.
     * You **will** need the USB drivers when asked.
 
