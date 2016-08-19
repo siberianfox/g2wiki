@@ -1,4 +1,4 @@
-_This page is for compiling the G2 project on Windows with Atmel Studio 6.2. Please see [Getting Started with G2](Getting-Started-with-G2) for information about hardware and compiling on other platforms._
+_This page is for compiling the g2 project on Windows 10 with Atmel Studio 7_
 
 ## What's needed
 
@@ -6,10 +6,12 @@ _This page is for compiling the G2 project on Windows with Atmel Studio 6.2. Ple
 These instructions apply if you are running a VMware virtual machine on OSX or Linux. If you are on a native Windows system or running another VM you can skip these
 * Set up the virtual machine with at least 4 GBytes of RAM and 30+ GB of hard drive allocated in 2 Gb chunks
 * When asked for integrated / isolated it's best to chose integrated so you can share files across filesystems. This way you can use native OSX or linux tools for git and other functions.
-* It's advisable to snapshot the VM before installing so you can reciver from errors w/o burning through Windows activations. You can delete the snapshot later to recover that space.
+* It's advisable to snapshot the VM before installing so you can recover from errors w/o burning through Windows activations. You can delete the snapshot later to recover that space.
 * Some VMware voodoo that can be useful
   * https://communities.vmware.com/thread/419693
   * Enable network sharing in order to mount an OSX drive. See Networks under Control Panel
+* There are some issues with Windows 10 and VMware 8 that may or may not have been resolved. In any case, you need to get VMware tools recognizing the Z: drive or AS7 will not compile - as it cannot use UNC paths.
+
 
 #### Atmel Studio 6.2
 To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 6.2 build 1548 (or greater), Service Pack 2 Installer – with .NET. We recommend a clean machine or VM. We have tried this with Windows 7. Win 8 has problems with driver signing that we'd prefer to avoid.
