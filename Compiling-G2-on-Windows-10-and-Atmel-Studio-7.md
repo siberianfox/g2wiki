@@ -71,8 +71,8 @@ the GitHub Windows app is an easy way on Windows.
   6. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.<br/>
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
 
-# Compiling and uploading with Atmel ICE
-_Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
+# Compiling and Uploading
+_Note:_ These instructions are for the Atmel-ICE debugger. Many of these instructions will work with the Atmel SAM-ICE as well. It's also possible to upload directly through the USB or serial ports, but there is no real-time debugger in that case.
 
 ### Loading the Project
 - The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate.
