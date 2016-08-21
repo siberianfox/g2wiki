@@ -89,25 +89,27 @@ To compile the project:
 
 ![](images/Windows-Choose-Build-And-Processor.png)
 
-1. Choose the platform you are building for (for the Due with gShield pinout, choose `gShield`).
+1. Choose the platform you are building for (for the Due with gShield pinout, choose `gShield`)
 2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
-  * This will create a file named `TinyG2.elf` and another named `TinyG2.bin`, both in the `TinyG2` folder.
-  * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually.
-3. Configure the Device and Atmel-ICE Tool in the TinyG project Properties window, which can be found by right clicking the TinyG2 root directory in the Solution Explorer pane.
-  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due
-  * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number.
-  * The Interface must be `SWD`. JTAG doesn't work.
+  * This will create a file named `g2core.elf` and in the /bin directory for the board you are building
+  * This will also create a `g2core.elf` file in the `g2core` directory
+  * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually
+  * The first time it compiles the projcet it will download the entire toolchain and install it in the Motate Tools directory. This can take a while (~200 Mbytes). You will want a good Internet connection.
+3. Configure the Device and Atmel-ICE Tool in the g2core project Properties window, which can be found by right clicking the g2core root directory in the Solution Explorer pane
+  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board 
+  * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number
+  * The Interface should be `SWD`. JTAG doesn't always work
   * You can now program and debug the buttons labeled '5' in the picture, as per step 5, below.
 4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window: 
   * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
-  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due
-  * The Interface must be `SWD`. JTAG doesn't work.
+  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board
+  * The Interface should be `SWD`. JTAG doesn't always work
   * Hit Apply
   * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab
-  * Program from the Memories tab. Make sure the file selected is the TinyG2.elf in the main TinyG2 directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it).
+  * Program from the Memories tab. Make sure the file selected is the g2core.elf in the main g2core directory or the correct /bin directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it)
 5. To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
 
-# Uploading G2 to a target board (without a Atmel ICE)
+## Uploading G2 to a target board (without a Atmel ICE)
 
 To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
 
