@@ -72,13 +72,20 @@ the GitHub Windows app is an easy way on Windows.
   6. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.<br/>
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
 
-#### Compiling and uploading with Atmel ICE
+## Compiling and uploading with Atmel ICE
 _Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
 
-In the project directory all of the source files and the Atmel project files for Studio 6 are inside the `TinyG2` directory. Once Atmel Studio is installed, open the solution file `g2core.atsln`. (Atmel studio will also open the  `g2core.cppproj` and `motate.cppproj` in the sub-directories automatically.)
+#### Loading the Project
+- The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate.
+
+- If you have changed your git branch you should run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case. 
+
+- Open AS7 by double clicking on `g2core.atsln` in the parent g2 directory. AS7 should fire up - tell it to trust us. AS7 has a bug so you might get this warning which can be ignored:
+`[warning] Error updating project settings:Object reference not set to an instance of an object`
 
 _Note:_ Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
+#### Compiling the Project
 To compile the project:
 
 ![](images/Windows-Choose-Build-And-Processor.png)
