@@ -1,8 +1,7 @@
-_This page is for compiling the g2 project on Windows 10 with Atmel Studio 7_
+_This page is for setting up and compiling the g2 project on Windows 10 with Atmel Studio 7_
 
-## What's needed
-
-#### VMWare Virtual Machine on OSX or Linux
+# Setup
+### VMWare Virtual Machine on OSX or Linux
 These instructions apply if you are running a VMware virtual machine on OSX or Linux. If you are on a native Windows system or running another VM you can skip these
 * Set up the virtual machine with at least 4 GBytes of RAM and 30+ GB of hard drive allocated in 2 Gb chunks
 * When asked for integrated / isolated it's best to chose integrated so you can share files across filesystems. This way you can use native OSX or linux tools for git and other functions.
@@ -12,10 +11,10 @@ These instructions apply if you are running a VMware virtual machine on OSX or L
   * Enable sharing in order to mount an OSX drive. This is usually your Home directory and shows up as Z:
 * There are some [issues with Windows 10 and VMware 8](Windows-10-VMware-Fusion-8-Issues) that may or may not have been resolved. In any case, you need to get VMware tools recognizing the Z: drive or AS7 will not compile - as it cannot use UNC paths.
 
-#### Disk Space
+### Disk Space
 Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2 project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on your Z: drive if you are installing it there.
 
-#### Atmel Studio 7
+### Atmel Studio 7
 To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
 
 * Go to Atmel and download the [Atmel Studio 7 Installer – with .NET](http://www.atmel.com/tools/atmelstudio.aspx) install package.
@@ -29,7 +28,7 @@ To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 buil
     * You **do not** want the Atmel Solutions Framework (ASF) when asked. So don't update it and turn of notifications. Do NOT use an ASF project (like the Arduino Due board) if you are playing with AS6 or you will have a lot of stuff to back out.
     * You **will** need the USB drivers when asked.
 
-#### Git for Windows
+### Git for Windows
 The project Makefiles rely on Git for Windows, so even if you use Git on your native OS for all your other activities it needs to be installed in your Windows environment.
 * Go to the [official Git site](http://git-scm.com/downloads) and download and install the Git for Windows. Get the right one for your VM - 32 bit or 64 bit (version 2.9.3 at the time of this writing).
   * Option Dialog 1: Chose BASH (default, but any should work)
@@ -38,12 +37,12 @@ The project Makefiles rely on Git for Windows, so even if you use Git on your na
   * Option Dialog 4: Both boxes checked ON, but turn OFF if windows weirdness (works for us)
   * when it asks you if you want icons on your desktop you might want this to get Git Bash so you can debug the Windows environment (should it come to that)
 
-#### Cloning the Git Repository
+### Cloning the Git Repository
 There is more than one way to clone the Git repository. 
 - Direct clone in a terminal window
 - Use Github Windows app
 
-##### Cloning the Git Repository - Direct Clone
+#### Cloning the Git Repository - Direct Clone
 If you already have Git on your host machine (i.e. you are on Windows and already have git credentials or are running a VMWare Windows instance and have git credentials on the host) you can simply do a git clone. We use the ssh form as in our experience it's more troublefree than the http form. Open a terminal window and navigate to the parent directory in which you want to install the `g2` github repo. Type:
 
       git clone git@github.com:synthetos/g2.git
@@ -52,7 +51,7 @@ If you already have Git on your host machine (i.e. you are on Windows and alread
 
 That should do it.
 
-##### Cloning the Git Repository - Github Windows App
+#### Cloning the Git Repository - Github Windows App
 the GitHub Windows app is an easy way on Windows.
 
   1. Download and install the [GitHub app](https://windows.github.com/).
@@ -72,10 +71,10 @@ the GitHub Windows app is an easy way on Windows.
   6. (Convenience) From the gear menu in the top-right of the Github window choose "Open in Explorer" to show the location of the newly checked-out repo.<br/>
 ![From the gear menu in the top-right of the Github window choose "Open in Explorer"](images/Windows-Github-Open-in-Explorer.png)
 
-## Compiling and uploading with Atmel ICE
+# Compiling and uploading with Atmel ICE
 _Note:_ Many of these instructions will work with the Atmel SAM-ICE as well.
 
-#### Loading the Project
+### Loading the Project
 - The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate.
 
 - If you have changed your git branch you should run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case. 
@@ -108,11 +107,11 @@ To compile the project:
   * Program from the Memories tab. Make sure the file selected is the TinyG2.elf in the main TinyG2 directory. You can also use this option to program _any_ binary (particularly useful if you didn't compile it).
 5. To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
 
-## Uploading G2 to a target board (without a Atmel ICE)
+# Uploading G2 to a target board (without a Atmel ICE)
 
 To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
 
-##Troubleshooting Windows Configurations
+#Troubleshooting Windows Configurations
 
 The following tags are used. They can apply to the problem, and also the possible solutions:
   - [w32], [w64]: This problem affects Windows32 / Windows64 configurations
@@ -120,7 +119,7 @@ The following tags are used. They can apply to the problem, and also the possibl
 
 These are things we have seen fail. Please feel free to add to this list if you find issues that have solutions.
 
-#### **Problem**: Zips don't extract [w32]
+### **Problem**: Zips don't extract [w32]
 
   - You get this error:
 
@@ -135,6 +134,6 @@ These are things we have seen fail. Please feel free to add to this list if you 
 
 It's actually really easy to get more than one instance of AS6 running. When you click on it sometimes there is no feedback that the click was received. Then some 15 - 30 seconds later you might see some indication. But usually by that time you have clicked it again, thinking that you must of mis-clicked the first time. Voila. 2 instances.
 
-#### **Problem**: Git is not found [w32] [w64]
+### **Problem**: Git is not found [w32] [w64]
 
    - Git is not installed in your windows instance. Instructions for installation is above in the [What's Needed](https://github.com/synthetos/g2_private/wiki/MIRRORED:Compiling-G2-on-Windows-(Atmel-Studio-6.2)#whats-needed).
