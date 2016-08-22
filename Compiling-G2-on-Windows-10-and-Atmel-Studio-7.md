@@ -25,15 +25,15 @@ To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 buil
 * Walk through the entire installation process. 
   * It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
   * Fire up AS7 for the first time 
-    * You **do not** want the Atmel Solutions Framework (ASF) when asked. So don't update it and turn of notifications. Do NOT use an ASF project (like the Arduino Due board) if you are playing with AS6 or you will have a lot of stuff to back out.
+    * You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with G2 Core or you will have a lot of stuff to back out. (We provide projects for you to use.)
     * You **will** need the USB drivers when asked.
 
 ### Git for Windows
 The project Makefiles rely on Git for Windows, so even if you use Git on your native OS for all your other activities it needs to be installed in your Windows environment.
 * Go to the [official Git site](http://git-scm.com/downloads) and download and install the Git for Windows. Get the right one for your VM - 32 bit or 64 bit (version 2.9.3 at the time of this writing).
-  * Option Dialog 1: Chose BASH (default, but any should work)
-  * Option Dialog 2: Chose option 2, Checkout as-is, Unix style line endings 
-  * Option Dialog 3: Chose MinTTY (default, but  doesn't matter for our uses)
+  * Option Dialog 1: Choose BASH (default, but any should work)
+  * Option Dialog 2: Choose option 2, Checkout as-is, Unix style line endings 
+  * Option Dialog 3: Choose MinTTY (default, but  doesn't matter for our uses)
   * Option Dialog 4: Both boxes checked ON, but turn OFF if windows weirdness (works for us)
   * when it asks you if you want icons on your desktop you might want this to get Git Bash so you can debug the Windows environment (should it come to that)
 
