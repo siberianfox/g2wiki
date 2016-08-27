@@ -1,0 +1,133 @@
+// NOTE: This is AsciiDoc (mostly for the TOC), see: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+// NO EMPTY LINES UNTIL THE END OF THE HEADER
+// Quickly: bold and italics are the same
+// Checkmarks: [ ] or [x]
+// Lists: instead of spaces at the beginning (which are allowed), it's number of marks:
+// * first level unnumbered
+// ** second level unnumbered
+// . first level numbered
+// .. second level numbered
+// Links: http://url[Descriptive Text That's Visible]
+// WikiLinks: link:other-page[Other Page]
+// Header links (in-document): <<header-anchor-name>>
+// Images: image:path/to/image[]
+// Note that because of the :imagesdir: below images/ will be prepended if there's no /
+// Settings:
+:idprefix:
+:idseparator: -
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+:toc: macro
+:toclevels: 3
+endif::[]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:toc-title: pass:q[**Table of Contents**]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :notebook:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: images
+// END OF THE HEADER -- You may resume having empty lines
+
+This page explains how to create or change Configurations to one of the two supported IDEs: Xcode and Atmel Studio 7.
+
+. link:Adding-and-Revising-Boards[Adding and Revising Boards] _(please read this first)_
+. link:Adding-and-Revising-Configurations-and-Settings[Adding and Revising Configurations and Settings]
+. link:Adding-and-Revising-Motate-Pinouts[Adding and Revising Motate Pinouts]
+. Adding Configurations to an IDE _(this page)_
+
+// So far there are only two topics, and the first is real short
+// So we don't need a Table of Contents.
+//toc::[]
+
+# Adding a new Target and Scheme to Xcode
+
+First, create the new files for the board and config as described in link:Adding-and-Revising-Boards[Adding and Revising Boards] and related pages. Then go to link:Compiling-g2core-on-OS-X-(with-Xcode)#creating-a-new-target[Creating a new target].
+
+# Adding a new Profile to Atmel Studio 7
+
+First, create the new files for the board and config as described in link:Adding-and-Revising-Boards[Adding and Revising Boards] and related pages.
+
+Once you have everything you need to build a new config or board then follow these steps, being very careful to follow them carefully. Atmel Studio 7 project and solution files can be broken pretty easily!
+
+[INFO]
+====
+Atmel Studio has two levels of settings: *Solution*, and *Project*.
+
+A *solution* may configure many projects.
+
+The *project* holds the actual configuration for the build.
+
+You cannot have a project that is outside of a solution. When building you choose a solution, which then chooses the project(s).
+
+So, we will make a solution that has no other job than to hold a project _that has the same name_, then we will configure that project.
+
+Once that's done you will likely forget the difference between a solution and a project.
+====
+
+* Make sure you have to solution open in Atmel Studio 7, and the projects `g2core` and `Motate` both opened successfully.
++
+TIP: If you don't have Atmel Studio 7, please visit link:Compiling-g2core-on-Windows-10-and-Atmel-Studio-7[Compiling g2core on Windows 10 and Atmel Studio 7]
++
+TIP: If the Motate project shows as unable to load, you may not have the Motate submodule loaded. See link:Troubleshooting#problem-the-motate-directory-is-empty-the-motate-project-is-missing["Problem: The Motate directory is empty. The Motate project is missing."] on our Troubleshooting page.
+
+* Under the *Build* menu, choose "Configuration Manager..."
+
+* Under the "Active solution configuration" menu (see image) choose "<New...>"
++
+image:AS7-New-Solution.png[AS7: Choose New under "Active solution configuration",605,448]
++
+WARNING: There are a few other menus in this windows that look very similar and have the same options at the bottom. Make sure you get the right one!
+
+* A "New Solution Configuration" dialog should appear. _Double-check the dialog name to make sure you didn't accidentally choose "New..." from the wrong menu._
++
+image:AS7-New-Solution-Config.png[AS7: Configure the new Solution,369,234]
+
+** Enter the Name of your new solution configuration. It should consist of only letters, numbers, dashes (`-`), underscores (`_)`, and dots (`.`). It's probably best to keep it all lowercase if you can.
++
+TIP: We generally try to name these in the style of __machine__-__board__, where __machine__ matches the `SETTINGS_FILE` (without the `_settings.h` suffix) name, and board matches the `BOARD` value.
+
+** 🔥 Be sure that the "Create new project configuration" is *not checked*.
+
+** Choose another solution with a similar board (most any will likely do) from the "Copy settings from:" menu.
+
+** Click "OK".
+
+** Verify that the "Active solution configuration" is the solution you just created.
+
+* In the `g2core` row (*not* the `Motate` row!), in the Configuration column, click and choose "<New...>" from the bottom of the menu. (See image for clarification.)
++
+image:AS7-New-Configuration.png[AS7: Chose new from the g2core->Configuration cell,608,526]
++
+IMPORTANT: Be very careful not to choose the wrong cell! Several of them have a "<New..>" at the bottom of the menu!
+
+* A "New Project Configuration" dialog should appear. _Double-check the dialog name._
++
+image:AS7-New-Project-Configuration.png[AS7: New Project Configuration Dialog,372,232]
+
+** Add the name for your new project. You should make this the same as the new solution you just created.
+
+** 🔥 Be sure that the "Create new project configuration" is *not checked*.
+
+** Choose another project with a similar board (most any will likely do) from the "Copy settings from:" menu.
+
+** Click "OK".
+
+** Verify that the `g2core`/Configuration is showing your new configuration.
+
+** Click "Close" on the Configuration Manager.
+
+* Right click on `g2core` in the Solution Explorer and choose Properties...
+
+** In the properties window, choose the "Build" tab on the left (yes, those are tabs), and then modify the Build command line and Clean command line to match your new config/board/settings.
++
+image:AS7-Build-Config.png[AS7: Setup your build configuration,613,376]
++
+TIP: The clean command must have the same `CONFIG`/`BOARD` as the make line in order to delete the correct files. See link:Adding-and-Revising-Boards#cleaning-up[Cleaning Up] for more info.
+
+* Under File, choose "Save All" to make sure your changes are committed to disk.
+
+** You may also want to commit the Atmel Studio project file changes in git as well.

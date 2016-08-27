@@ -1,0 +1,309 @@
+// NOTE: This is AsciiDoc (mostly for the TOC), see: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+// NO EMPTY LINES UNTIL THE END OF THE HEADER
+// Quickly: bold and italics are the same
+// Checkmarks: [ ] or [x]
+// Lists: instead of spaces at the beginning (which are allowed), it's number of marks:
+// * first level unnumbered
+// ** second level unnumbered
+// . first level numbered
+// .. second level numbered
+// Links: http://url[Descriptive Text That's Visible]
+// WikiLinks: link:other-page[Other Page]
+// Header links (in-document): <<header-anchor-name>>
+// Images: image:path/to/image[]
+// Note that because of the :imagesdir: below images/ will be prepended if there's no /
+// Settings:
+:idprefix:
+:idseparator: -
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+:toc: macro
+:toclevels: 3
+endif::[]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:toc-title: pass:q[**Table of Contents**]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :notebook:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: images
+// END OF THE HEADER -- You may resume having empty lines
+
+This is the start page for how to add a new board or machine profile to g2core. Please read this page first, then move on to whichever following pages are relevant:
+
+. Adding and Revising Boards _(this page)_
+. link:Adding-and-Revising-Configurations-and-Settings[Adding and Revising Configurations and Settings]
+. link:Adding-and-Revising-Motate-Pinouts[Adding and Revising Motate Pinouts]
+. link:Adding-Configurations-to-an-IDE[Adding Configurations to an IDE]
+
+toc::[]
+
+# Using Boards
+
+Before we go into making a new board, we'll cover how to *use* a board.
+
+You need to know this so the other pages make sense. The makefile command line recognizes the following arguments in this hierarchy:
+
+* **`CONFIG`** - configuration for a specific machine
+** a "machine" means a `BOARD` and a `SETTINGS_FILE` for that machine
+** `CONFIGs` are located in the file `boards.mk` where it specifies:
+*** the default `SETTINGS_FILE` for that machine
+*** the default `BOARD` for that machine
+
+* **`BOARD`** - top-most hardware and revision
+** specifies the board type and board revision, e.g. `g2v9k` is a v9, revision k
+** `BOARDs` are located in the files board/_board_file_.mk 
+*** Note: The board file should not contain the revision in the filename. Example `board/g2v9.mk` not `board/g2v9k.mk`  
+*** All board revisions are located in the same _board_file_ for that board type.
+** `BASE_BOARD` is a sub-argument that is used internally and describes the underlying hardware platform. `BASE_BOARD` handles the boilerplate for configuring the compiler flags and paths for a range of devices.
+*** For example, in the case of a Due or other motherboard/daughterboard the `BASE_BOARD` is the motherboard, and the `BOARD` is the daughter board (the actual shield). You should not specify the `BASE_BOARD` in the command line, but it can be edited in the board file.
+*** For example `board/g2v9.mk` will contain definitions for `BOARD=g2v9k` and `BOARD=g2v9l`. Both of those `BOARD`s specify `BASE_BOARD=g2v9`, which handles the boilerplate setup for all of those boards.
++
+NOTE: Name all `BOARD` and .mk files in lower case from here on.
+
+* **`SETTINGS_FILE`** - specifies the default settings that are applied at compile time
+** example: `SETTINGS_FILE="settings_shapeoko2.h"` will tell `settings.h` to include the file `settings/settings_shapeoko2.h`.
+** If `SETTINGS_FILE` is not specified directly on the command line or in a `CONFIG`, then `settings_default.h` is used. `settings_default.h` runs after the settings file, and provides a default value for every settings #define. This way the `settings_xxxxx.h` file does not ahve to contain every possible define. The values in the default file will compile a functional board (i.e. it will communicate), but will disable most devices. 
+** Note that the `CONFIG` sets the `SETTINGS_FILE` option, overriding what is on the command line
+
+NOTE: **`PLATFORM`** has been deprecated and is no longer a make flag.
+
+Example make lines:
+
+```bash
+# Compile for a PrintrbotPlus:
+make CONFIG=PrintrbotPlus
+# Looking into board/g2_configs.mk you will see that that's roughly equivalent to:
+# make BOARD=pboard-a SETTINGS_FILE="settings_printrbot_plus.h"
+
+# Compile for a PrintrbotPlus, but using an Achim instead:
+make CONFIG=PrintrbotPlus BOARD=Archim
+```
+
+If `CONFIG` is specified (`BOARD` is then implicitly or explicitly set) the object files will be in `build/$(CONFIG)-$(BOARD)/` and the results files in `bin/$(CONFIG)-$(BOARD)/`.
+
+If `CONFIG` is _not_ specified (`BOARD` then must be explicitly set) the object files will be in `build/$(BOARD)/` and the results files in `bin/$(BOARD)/`.
+
+The `make clean` command line should have the same `CONFIG` and/or `BUILD` arguments as the `make` line so that the correct files are removed.
+
+## Output Files
+
+The final output files are located in directories based on the `CONFIG` and `BOARD` parameters. The `SETTINGS_FILE` and other options have _no bearing_ on output file locations.
+
+If `CONFIG` is defined, then the final output is placed in `g2core/build/$(CONFIG)-$(BOARD)/` and the intermediate files (`.o` "object files", makefile "dependency files", etc) required to build the final output files are stored in `g2core/bin/$(CONFIG)-$(BOARD)/`.
+
+## Command Line Compiler Parameters
+
+_Note: See <<other-make-options>> below for important options to add to a make command line stored in a GUI such as Xcode or Atmel Studio._
+
+The `BOARD` setting is _required_, however a default value is provided if you provide a `CONFIG` value.
+
+The `make` command line _should_ specify a `CONFIG`, which provides at least a default `BOARD` and a default `SETTINGS_FILE`. Even if `CONFIG` is specified you can override the default `BOARD` and `SETTINGS_FILE`.
+
+All of these are case sensitive. Example: 
+
+* For a Shapeoko dual-Y-motor configuration using a `g2v9k` call `make` with `CONFIG=ShapeokoDualY`:
+
+```bash
+make CONFIG=ShapeokoDualY
+```
+
+* For a Shapeoko dual-Y-motor configuration using a custom board called `CustomBoard`:
+
+```bash
+make CONFIG=ShapeokoDualY BOARD=CustomBoard
+```
+
+## Invoking the Debugger (typical for OS X or Linux)
+
+1. To enter the debugger, add `debug`
+
+```bash
+make BOARD=gShield debug
+# Or, to use the python-enabled gdb
+make BOARD=gShield debuggy
+```
+
+## Cleaning Up
+
+To save time the makefile will only compile the files needed when something changes. Sometimes you need to clean out all the old compiled intermediate files. There are two ways to do this:
+
+1. *The nice way:* Add `clean` to the end of your command line (replacing `debug` or `debuggy` if it was there).
++
+NOTE: `make ... clean` must have the same `BOARD`/`CONFIG` options as the `make` did in order to locate the files. See <<output-files>> for more explanation as to how it finds those files. `SETTINGS_FILE` can be omitted from the `clean` line.
+
+1. *The not so nice way:🔨* Delete the directories `g2core/bin` and `g2core/build` from your repo.
++
+WARNING: Make sure you don't accidentally throw away `board`!
+
+* This removes all of the build files and intermediates for all configurations.
+
+// We explicitly provide the anchor here because of a bug involving the backticks
+[[other-make-options]]
+## Other `make` options
+
+There are a few other command line `make` options to be aware of:
+
+* **`VERBOSE`** - set this to `0` (for "quiet," which is the default), `1` (to show commands executed in full), or `2` (the same as `1` plus additional Makefile debug reporting).
++
+IMPORTANT: For all make command lines stored in GUIs (Atmel Studio, Xcode), you should use `VERBOSE=1`
+
+* **`COLOR`** - set this to `1` (the default) or `0` (to not use terminal escape sequences to make the voluminous output more readable)
++
+IMPORTANT: For all make command lines stored in GUIs (Atmel Studio, Xcode), you should use `COLOR=0`
+
+* **`OPTIMIZATION`** - set this to the `-O` value for gcc. Generally we use `OPTIMIZATION=3` as the default, but may use `OPTIMIZATION=s` if we want to save flash space.
++
+WARNING: This should NOT be hard coded into a GUI make command unless it's deemed necessary -- use the default.
++
+[WARNING]
+====
+Generally, if you set it to below `2` the code will be huge and cannot fit on any of the target processors.
+
+Said again, more directly: *this cannot be set to `0` or the code will not fit on the processor*. We rely on the optimizer to make the code perform reasonably and be a reasonable size. This has a minor negative impact on debugging, but it's manageable.
+====
+
+[[making-a-new-board]]
+# Making a New `BOARD`
+
+## Makefile Hierarchy
+Compilation is managed by this makefile hierarchy:
+
+* `./g2core/Makefile` Main project makefile invokes:
+** `./Motate/Motate.mk` invokes MotateUtilities.mk and kicks off the Board makefiles:
+*** `./g2core/board/xxxxxx.mk` is the makefile for a specific board, and may also include a baseboard makefile
+
+## New Board
+In the g2core project structure (covered link:Project-Structure-and-Motate[here]) there is a `boards.mk` file and several files and directories under `board/` for each board type.
+
+* *`boards.mk`* - This file is what is included by the Motate Makefile. It's contents are primarily handling link:Adding-and-Revising-Configurations-and-Settings#adding-a-new-configuration[``CONFIG``s]. At the end it has this important line:
+```makefile
+# Note: STAR=* -- a workaround for a Makefile glitch.
+include $(wildcard ./board/$(STAR).mk)
+```
+
+** This line imports (in relatively random order) any file that ends with `.mk` that's directly inside the `board/` directory.
+
+* **`board/*.mk`** - Each `.mk` file inside `board/` has the opportunity to define what happens when a `BOARD` has a specific value. We'll cover how to do that shortly.
+
+* **`board/*.gdb`** - This is the GDB startup file for each board.
+** It is located from inside Motate as `"${BOARD_PATH}.gdb"`.
+
+// Here we name the anchor to workaround the backtick bug
+[[defining-a-board]]
+## Defining a `BOARD`
+
+Each `BOARD` sets a few important values:
+
+* **`BASE_BOARD`** - This is used later to know which settings to use for a range of boards. We show how to create that next.
++
+TIP: Even if you only have one board revision, it's still good practice to break `BASE_BOAD` and `BOARD` out so you can revise later.
+
+* **`DEVICE_DEFINES`** - This is where you pass defines directly into the code (as if they were ``#define``d).
++
+IMPORTANT: You want to make sure you use `+=` to add to `DEVICE_DEFINES`, *not* just `=` or `=:`. There are other places to add to `DEVICE_DEFINES` as well, and some are called before `boards.mk` is.
+
+** You need to define at least two values: `MOTATE_BOARD` and `SETTINGS_FILE`
+
+*** **`MOTATE_BOARD`** (in `DEVICE_DEFINES`) - This is used in locating the pinout file, in the form of ``**${MOTATE_BOARD}**-pinout.h``. This is generally equal to `BOARD`, but may be different.
++
+IMPORTANT: On case sensitive operating systems, such as linux, ``**${MOTATE_BOARD}**-pinout.h`` must match the pinout file name *exactly*. On OS X, which is usually not case sensitive, this will match with different case. Please be sure to check the case of this and the file. Better yet, just always use lowercase for both.
+
+*** **`SETTINGS_FILE`** (in `DEVICE_DEFINES`) - this is usually just passed through:
+```makefile
+DEVICE_DEFINES += SETTINGS_FILE=${SETTINGS_FILE}
+```
+
+[[a-complete-board-definition-example]]
+### A complete `BOARD` definition example
+
+```makefile
+ifeq ("$(BOARD)","g2v9k")
+    BASE_BOARD=g2v9
+    DEVICE_DEFINES += MOTATE_BOARD="G2v9k"
+    DEVICE_DEFINES += SETTINGS_FILE=${SETTINGS_FILE}
+endif
+```
+
+[NOTE]
+====
+* We broke the rule about `MOTATE_BOARD` not being the same as `BOARD`. So we have to ensure the pinout file is called _exactly_ ``**G2v9k**-pinout.h``.
+* We check for `BOARD` to exactly match `"g2v9k"`.
+* We pass the `SETTINGS_FILE` value (in make-land) to the `DEVICE_DEFINES` so that the code can see it.
+====
+
+// Here we name the anchor to workaround the backtick bug
+[[defining-a-base_board]]
+## Defining a `BASE_BOARD`
+
+Each `BASE_BOARD` sets a few important values:
+
+* **`_BOARD_FOUND`** - Just set it to `1`: `_BOARD_FOUND = 1` - this tells the calling Makefile that the board is configured.
+
+* **`FIRST_LINK_SOURCES`** - Without spending too much time talking about linking order and such -- and that *is* important, this value tells the compiler which files to link first, and it is in order.
++
+IMPORTANT: Make sure to only add to this value with `+=`! Normally `main.cpp` will already be on that list and will be first.
++
+TIP: Use one of the other `.mk` files as an example. Generally this only refers to files in Motate, and will be the same for all processors of the same type.
+
+* **`CHIP`** - This sets the main processor used by the board. This must be supported by Motate.
++
+IMPORTANT: `CHIP` must be made available to the shell environment after it's set with an `export CHIP`.
++
+TIP: Again, use one of the other `.mk` files as an example. If Motate supports it there's likely already another board with the `CHIP` you are using.
+
+* **`CHIP_LOWERCASE`** - This is the same as `CHIP` but lowercase. This is used by Motate to locate some vendor files. `CHIP_LOWERCASE` does not need to be exported.
+
+* **`BOARD_PATH`** - This setting sets where the project will locate the gdb file (as `"${BOARD_PATH}.gdb"`), and is used to find files such as `hardware.h` when this board is being used.
++
+IMPORTANT: The `BOARD_PATH` will not be added to the include search path until it is added to `SOURCE_DIRS`!
++
+TIP: Often `BOARD_PATH` is equivalent to `./board/${BASE_BOARD}` -- but it doesn't have to be.
+
+* **`SOURCE_DIRS`** - This setting tells Motate where to find files to compile (`*.c`, `*.cpp`, and `*.s` will be compiled and linked in), as well as where to search for included header files.
++
+IMPORTANT: Make sure to only add to this value with `+=`! This is used to generate the list of all files to be compiled, and there are several other places that add to this list.
++
+TIP: This is the place where you add the directories of devices under the `device/` directory to be included in the compile.
+
+* **`PLATFORM_BASE`** - The `PLATFORM_BASE` value is the path (without the `.mk`) to the platform definition file provided by Motate to configure compilation for this processor.
++
+[IMPORTANT]
+====
+The last line of the `BASE_BOARD` definition *must* be:
+```makefile
+include $(PLATFORM_BASE).mk
+```
+====
+
+[[a-complete-base_board-definition-example]]
+### A complete `BASE_BOARD` definition example
+```makefile
+ifeq ("$(BASE_BOARD)","g2v9")
+    _BOARD_FOUND = 1
+
+    FIRST_LINK_SOURCES += $(sort $(wildcard ${MOTATE_PATH}/Atmel_sam_common/*.cpp)) $(sort $(wildcard ${MOTATE_PATH}/Atmel_sam3x/*.cpp))
+
+    # Set CHIP and export it for GDB to see
+    CHIP = SAM3X8C
+    export CHIP
+    CHIP_LOWERCASE = sam3x8c
+
+    BOARD_PATH = ./board/g2v9
+    SOURCE_DIRS += ${BOARD_PATH} device/step_dir_driver
+
+    PLATFORM_BASE = ${MOTATE_PATH}/platform/atmel_sam
+
+    include $(PLATFORM_BASE).mk
+endif
+```
+
+[NOTE]
+====
+* The `FIRST_LINK_SOURCES` use https://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html[`$(wildcard ...)`] to get the files. These are wrapped in https://www.gnu.org/software/make/manual/html_node/Text-Functions.html#Text-Functions[`$(sort ...)`] since some platforms sort files differently. This makes the order of them more predictable, which is important for linking.
+* We use `device/step_dir_driver` so it's added to `SOURCE_DIRS` *after* `${BOARD_PATH}`.
+* We let Motate configure the rest of the compile with `include $(PLATFORM_BASE).mk` at the end.
+====

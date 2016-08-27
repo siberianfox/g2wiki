@@ -1,0 +1,241 @@
+// NOTE: This is AsciiDoc (mostly for the TOC), see: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+// NO EMPTY LINES UNTIL THE END OF THE HEADER
+// Quickly: bold and italics are the same
+// Checkmarks: [ ] or [x]
+// Lists: instead of spaces at the beginning (which are allowed), it's number of marks:
+// * first level unnumbered
+// ** second level unnumbered
+// . first level numbered
+// .. second level numbered
+// Links: http://url[Descriptive Text That's Visible]
+// WikiLinks: link:other-page[Other Page]
+// Images: image:path/to/image[]
+// Note that because of the :imagesdir: below images/ will be prepended if there's no /
+// Settings:
+:idprefix:
+:idseparator: -
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+:toc: macro
+:toclevels: 1
+endif::[]
+ifdef::env-github[]
+:branch: master
+:status:
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :notebook:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: images
+// END OF THE HEADER -- You may resume having empty lines
+
+toc::[]
+
+# VMWare Setup
+
+## VMWare Virtual Machine on OSX or Linux
+
+These instructions apply if you are running Windows 10 in a VMware virtual machine on OSX or Linux. If you are on a native Windows system or running another VM some of these may not apply.
+
+## General VMWare Settings
+
+* Set up the virtual machine with at least 4 GBytes of RAM and 30+ GB of hard drive allocated in 2 Gb chunks
+* When asked for integrated / isolated it's best to chose integrated so you can share files across filesystems. This way you can use native OSX or linux tools for git and other functions.
+* It's advisable to snapshot the VM before installing so you can recover from errors w/o burning through Windows activations. You can delete the snapshot later to recover that space.
+
+## VMWare Issues We've Seen
+
+* Some VMware voodoo that can be useful
+ ** https://communities.vmware.com/thread/419693
+ ** There are some link:https://github.com/synthetos/g2/wiki/Windows-10-VMware-Fusion-8-Issues[issues with Windows 10 and VMware 8] that may or may not have been resolved. In any case, you need to get VMware tools installed and functioning if you wish to share files between the host and Windows (explained next).
+ ** Compiling using VMware shared folders is significantly slower than compiling natively on either the Host OS or on the C: drive of the Windows guest OS. This is an issue that has been discussed on the link:https://communities.vmware.com/thread/520731?start=0&tstart=0[VMware forum more than once]
+
+## Setup sharing for sharing a repo with the host
+
+* If you wish to do most of the code editing in the host (OS X or Linux), but wish to use Atmel Studio in the Windows VM for flashing or debugging (because we haven't found a decent UI solution to debugging on OS X and Linux yet), then you will wish to enable VMWare sharing and share the OS X folder that contains the g2core repo.
+  * Due to some issue with Atmel Studio, it cannot see files that are in UNC paths like the `\\vmware-host\Shared Folders` directly, and you *must* assign a drive letter and open the Atmel Studio solution through via drive letter. We generally use `Z:`.
+  * Note that doing this is *painfully slow to compile*. If you are going to do all coding in Windows, then it is much faster to clone the repo directly in the VM and work from there.
+
+
+# Issues with compiling on Windows
+
+The following tags are used. They can apply to the problem, and also the possible solutions:
+
+  * [w32], [w64]: This problem affects Windows32 / Windows64 configurations
+
+  * [all]: This problem affects all configurations (that we know of)
+
+These are things we have seen fail. Please feel free to add to this list if you find issues that have solutions.
+
+// Note: contractions like don't in headings make broken links in the TOC
+## Problem: Zips do not extract [w32]
+Symptoms::
+If you see this error:
+```bash
+mkdir -p win32 && \
+cd win32 && \
+../7za/7za x -ogcc-arm-none-eabi "gcc-arm-none-eabi-4_9-2015q2-20150609-win32.zip"
+/usr/bin/sh: ../7za/7za: Invalid argument
+```
+
+Solution:: Only one copy of Atmel Studio can be open. Close all copies of Atmel Studio, then open ONE, and run the build again.
++
+It's actually really easy to get more than one instance of Atmel Studio running. When you click on it sometimes there is no feedback that the click was received. Then some 15 - 30 seconds later you might see some indication. But usually by that time you have clicked it again, thinking that you must of mis-clicked the first time. Voila. 2 instances.
+
+## Problem: Git is not found [w32] [w64]
+
+Solution:: Git is not installed. Even if the GitHub app is installed, you need git installed as well. See link:Compiling-G2-on-Windows-10-and-Atmel-Studio-7#git-for-windows[Git for Windows] section of Compiling G2 on Windows.
+
+
+# Git Usage
+
+[TIP]
+====
+Some of the below git usage cannot be done in a GUI, unfortunately. If you are using GitHub Desktop you can quickly open a Terminal (OS X) or Git Shell (Windows) by right-click on the repo in the repo list on the left and choosing "Open in Terminal" or "Open in Git Shell".
+
+image:Windows-Open-in-Git-Shell.png[GitHub Desktop Windows: Open in Git Shell,242,187]
+====
+
+## Problem: The Motate directory is empty. The Motate project is missing.
+
+Explanation::
+The `Motate/` directory isn't *just* a directory, it's a https://git-scm.com/book/en/v2/Git-Tools-Submodules[submodule]. This means that it's *contents* are actually contained in a different git repo (located at https://github.com/synthetos/Motate) and you cannot simply commit changes to _that repo_ in _this repo_. All this repo contains is a reference (http://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html[SHA1]) to the commit in the Motate repo.
+
+Solution::
+After the first checkout, or after switching to an older branch from before Motate was a submodule you will need to run this command (from the G2Core repo clone directory, *not* the Motate directory):
+```bash
+git submodule update --init
+```
+
+Further usage notes::
+After pulling in new code, the Motate submodule should update as well. If it doesn't, then you simply need to make sure the Motate submodule stays updated when you update the G2Core repo. (You may also make sure you have the latest `git` available, since older git versions are generally terrible with submodules.) This is as simple as running this command if the `Motate` directory shows as changed:
+```bash
+git submodule update
+```
+
+## Problem: The Motate directory is showing as modified, but I didn't change anything in there (that I know of)!
+
+Explanation::
+There are two main ways that this can happen (and, rarely, it's both):
+. *The G2 repo Motate reference now points to a different commit in Motate.* This often occurs after a pull in the G2Core repo. You can tell that this is the case when `git status Motate` shows `modified:   Motate (untracked content)`, and by the SHA1 of Motate showing as changed. For example:
++
+```bash
+$ git status ./Motate
+On branch edge
+Your branch is up-to-date with 'origin/edge'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+	modified:   Motate (untracked content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git diff ./Motate
+diff --git a/Motate b/Motate
+index cbb034d..08c130d 160000
+--- a/Motate
++++ b/Motate
+@@ -1 +1 @@
+-Subproject commit cbb034d0796e5b43ae4c0bdd3f735ac74a98c795
++Subproject commit 08c130d167fe20f81c46b703fc6ad136dd76021e
+```
+
+. *Something actually changed inside the Motate directory.* You can tell this because you'll see a `-dirty` at the end of the SHA1 in the diff. For example:
++
+```bash
+$ git status ./Motate
+On branch edge
+Your branch is up-to-date with 'origin/edge'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+	modified:   Motate (new commits)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git diff ./Motate
+diff --git a/Motate b/Motate
+--- a/Motate
++++ b/Motate
+@@ -1 +1 @@
+-Subproject commit cbb034d0796e5b43ae4c0bdd3f735ac74a98c795
++Subproject commit cbb034d0796e5b43ae4c0bdd3f735ac74a98c795-dirty
+```
+
+Solution::
+If you just did a pull and the SHA1 changed, then that means the repo is referring to a different commit in the Motate repo. This is fixed by a simple `git submodule update`.
++
+See the solution to the link:#problem-i-have-changes-in-the-motate-directory-that-i-strong-don-t-strong-wish-to-keep[following problem] if you have changes in the Motate submodule (IOW, it's `-dirty`) that you *don't wish to keep*.
++
+*However*, if there are actual changes in the submodule that you wish to *keep*, then you need to:
++
+. `cd Motate`
+. `git status` - look for "`HEAD detached at ...`. If you see that, go directly to link:#problem-my-head-is-detached[Problem: My HEAD is Detached!?] below. Once that's cleared up, come back here.
+. `git add ...` and `git commit ...` the changes to the Motate repo (just like any other repo).
+. `git push` the changes to the Motate repo -- remember though that these are going to a different repo. _See note below about forked copies of G2Core._
+. `cd ..` to go back to the G2Core repo.
+. `git add Motate` and `git commit ...` the change to refer to a new Motate commit.
+  * We normally try to commit the Motate reference in a commit by itself. This makes merges easier later.
+
+[IMPORTANT]
+====
+If you are working on a fork of the G2Core repo, and you wish to make a change to the Motate code, then you will also need to fork the Motate repo on GitHub, and then https://help.github.com/articles/configuring-a-remote-for-a-fork/[add your Motate fork as a remote] *in the Motate submodule directory*. Then you can commit and push to Motate and _then_ commit and push to G2Core.
+====
+
+## Problem: I have changes in the Motate directory that I *don't* wish to keep.
+
+Solution::
+Make sure you don't actually have changes in there that you want to keep!
++
+Run the following commands (from within the G2Core repo, *not* in the Motate directory):
++
+WARNING: These commands will throw away any uncommitted changes in the Motate submodule. Make sure that's what you want to do before running them.
++
+```bash
+git submodule foreach git reset --hard
+git submodule update
+```
++
+After that `git status Motate` should show (among other things) "`nothing to commit, working directory clean`".
+
+## Problem: My HEAD is Detached!?
+
+Symptoms:: A call to `git status` (or a display in a GUI) will show "HEAD detached" instead of listing a branch or commit SHA1. This will happen most often in the Motate submodule, since by default submodules are not on a branch.
+
+What's it mean?:: Well, you could always read the https://git-scm.com/docs/git-checkout#_detached_head[offical docs] which explains it very well. TL;DR: It means you didn't have a *branch* checked out but instead just had a specific commit checked out.
+
+Solution:: First, it's important to know that if the submodule Motate is what's in a detached HEAD state, you need to fix it (with the following directions) by `cd`ing into the Motate directory first! You cannot fix it from outside the Motate directory.
++
+Second, it's important to know if you want to keep any changes that were since the last branch.
++
+* If you wish to keep any changes that show up in `git status`:
+** `git checkout -b temporary-branch` - creates a new branch called "temporary-branch", and attached HEAD to it.
+*** We now no longer have a detached HEAD! _Phew!_
+** `git add ...` any changes you wish to keep, then `git commit ...` them.
+** Now locate the branch you thought you were on, and check it out.
+*** Assuming it was "master":
+```bash
+git checkout master
+```
+** Now we'll merge the changes of "temporary-branch" onto this branch:
+```bash
+git merge temporary-branch
+```
+** If that goes smoothly (it should) you can delete "temporary-branch":
+```bash
+git branch -d temporary-branch
+```
+* If you *don't wish to keep any changes*, then wipe them out and checkout the branch you thought you were on. Assuming you were supposed to be on master:
++
+WARNING: These commands will throw away any uncommitted changes in the repo that you are in! Make sure that's what you want to do and that you are in the directory you want to be in before running them!
++
+```bash
+git reset --hard
+git checkout master
+```

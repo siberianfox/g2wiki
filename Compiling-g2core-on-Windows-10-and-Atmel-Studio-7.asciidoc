@@ -1,0 +1,135 @@
+// NOTE: This is AsciiDoc (mostly for the TOC), see: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+// NO EMPTY LINES UNTIL THE END OF THE HEADER
+// Quickly: bold and italics are the same
+// Checkmarks: [ ] or [x]
+// Lists: instead of spaces at the beginning (which are allowed), it's number of marks:
+// * first level unnumbered
+// ** second level unnumbered
+// . first level numbered
+// .. second level numbered
+// Links: http://url[Descriptive Text That's Visible]
+// WikiLinks: link:other-page[Other Page]
+// Header links (in-document): <<header-anchor-name>>
+// Images: image:path/to/image[]
+// Note that because of the :imagesdir: below images/ will be prepended if there's no /
+// Settings:
+:idprefix:
+:idseparator: -
+ifndef::env-github[:icons: font]
+ifdef::env-github,env-browser[]
+:toc: macro
+:toclevels: 3
+endif::[]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:toc-title: pass:q[**Table of Contents**]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :notebook:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: images
+// END OF THE HEADER -- You may resume having empty lines
+
+toc::[]
+
+_This page is for compiling the G2core project on Windows 10 with Atmel Studio 10. Please see link:Getting-Started-with-G2core[Getting Started with G2core] for information about hardware and compiling on other platforms._
+
+# Setup
+
+NOTE: If you are using Windows inside VMWare, please see the link:Troubleshooting#vmware-setup[VMWare Setup section of our Troubleshooting page].
+
+## Disk Space
+Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2gore project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on the drive where the repo is, which _might not be `C:`_.
+
+## Atmel Studio 7
+To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
+
+* Go to Atmel and download the http://www.atmel.com/tools/atmelstudio.aspx[Atmel Studio 7 Installer – with .NET] install package.
+
+** Be sure to get the one with the **.NET part** (about 800 Mbytes) unless you are sure you already have the .net revision that AS needs (Framework 4). (If you don't know, go ahead and get it. It won't hurt anything other than the size of the installer will be bigger.)
+
+** There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
+
+** They require you to either register or fill out a "guest" form. Otherwise it's free.
+
+* Walk through the entire installation process. 
+
+** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
+
+** Fire up AS7 for the first time 
+
+*** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. (We provide projects for you to use.)
+
+*** You **will** need the USB drivers when asked.
+
+## Git for Windows
+The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
+
+* Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 32 bit or 64 bit (version 2.9.3 at the time of this writing).
+
+** Option Dialog 1: Choose BASH (default, but any should work)
+
+** Option Dialog 2: Choose option 2, Checkout as-is, Unix style line endings
+
+** Option Dialog 3: Choose MinTTY (default, but  doesn't matter for our uses)
+
+** Option Dialog 4: Both boxes checked ON, but turn OFF if windows weirdness (works for us)
+
+** When it asks you if you want icons on your desktop you might want this to get Git Bash so you can debug the Windows environment (should it come to that).
+
+NOTE: The Makefiles also rely on the `curl` command that comes along with Git for Windows. If it weren't from that chicken-and-egg, then we could `curl` to get the "portable" zip-install of Git for Windows and you wouldn't have to do anything.
+
+## Cloning the git repository
+
+See link:Getting-Started-with-G2core#cloning-the-repo[Getting Started with G2core → Cloning the Repo] if you haven't already.
+
+# Compiling and Uploading
+
+NOTE: These instructions are for the Atmel-ICE debugger. Many of these instructions will work with the Atmel SAM-ICE as well. It's also possible to upload directly through the USB or serial ports, but there is no real-time debugger in that case.
+
+### Loading the Project
+- The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate.
+
+- If you have changed your git branch you should run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case. 
+
+- Open AS7 by double clicking on `g2core.atsln` in the parent g2 directory. AS7 should fire up - tell it to trust us. AS7 has a bug so you might get this warning which can be ignored:
+`[warning] Error updating project settings:Object reference not set to an instance of an object`
+
+NOTE: Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
+
+#### Compiling the Project
+To compile the project:
+
+image:Windows-Choose-Build-And-Processor.png[Windows: Choose build and processor]
+
+1. Choose the platform you are building for (for the Due with gShield pinout, choose `gShield`)
+2. Click either the "Build Project" or "Build Solution" buttons -- they are the same in this case. (These can also be found in the Build menu.)
+  * This will create a file named `g2core.elf` and in the `bin/$(CONFIG)-$(BOARD)/` directory for the board you are building
+  * This will also create a `g2core.elf` file in the `g2core` directory (see note below)
+  * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually
+  * The first time it compiles the project it will download the entire toolchain and install it in the Motate Tools directory. This can take a while (~200 Mbytes). You will want a good Internet connection.
+3. Configure the Device and Atmel-ICE Tool in the g2core project Properties window, which can be found by right clicking the g2core root directory in the Solution Explorer pane
+  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board 
+  * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number
+  * The Interface should be `SWD`. JTAG doesn't always work
+  * You can now program and debug the buttons labeled '5' in the picture, as per step 5, below.
+4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window: 
+  * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
+  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board
+  * The Interface should be `SWD`. JTAG doesn't always work
+  * Hit Apply
+  * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab
+  * Program from the Memories tab. Make sure the file selected is the `g2core.elf` in the the correct `bin/$(CONFIG)-$(BOARD)/` directory. (See link:Adding-and-Revising-Boards[Adding and Revising Boards] for an explanation of `CONFIG` and `BOARD`.) You can also use this option to program _any_ valid binary (particularly useful if you didn't compile it).
+5. To compile and upload without debugging (left) or with debugging (right) click one of these two buttons. These are also available from the Debug menu.
+
+NOTE: The build will copy `g2core.elf`, and `g2core.map` to the top directory after build _only in Atmel Studio_. This is because Atmel Studio requires those files to be in that exact location with those exact names in order to consider building successful and to know what file to flash. Be warned that this file will always contain the result of the _last profile built_ if you build several profiles.
+
+## Uploading g2core to a target board (without a Atmel ICE)
+
+To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-g2core-with-Windows[Flashing g2core with Windows] page.
+
+# Troubleshooting Windows Configurations
+
+See the link:Troubleshooting#issues-with-compiling-on-windows[Issues with compiling on Windows] section of the Troubleshooting page.
