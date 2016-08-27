@@ -1,3 +1,5 @@
+_Note: This page applies to firmware build 100.00 and greater (see Edge branch)_
+ 
 # Project Structure (High-level)
 
 The g2core project consists of two code bases: **g2Core**, and **Motate**.
