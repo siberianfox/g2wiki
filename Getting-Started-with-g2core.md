@@ -1,0 +1,97 @@
+// NOTE: This is AsciiDoc (mostly for the TOC), see: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+// Quickly: bold and italics are the same
+// Checkmarks: [ ] or [x]
+// Lists: instead of spaces at the beginning (which are allowed), it's number of marks:
+// * first level unnumbered
+// ** second level unnumbered
+// . first level numbered
+// .. second level numbered
+// Links: http://url[Descriptive Text That's Visible]
+// WikiLinks: link:other-page[Other Page]
+// Images: image:path/to/image[]
+// Note that because of the :imagesdir: below images/ will be prepended if there's no /
+
+:toc: macro
+:imagesdir: images
+toc::[]
+
+# Background
+
+This page is intended for developers interesting in contributing to the g2core project. If you haven't already, read through the link:Project-Structure-and-Motate[Project Structure] page.
+
+# Prerequisites
+
+There are things you will need to know, and things you'll need to have.
+
+## Things you need to know
+
+- [ ] A basic understanding of modern coding practices and C++.
+
+** The g2core project is written primarily in C++ with some C-style code mixed in.
+
+** We've done our best to make it approachable, and for changes that aren't deep in the motion control you should be able to get by with just having *some* programming experience.
+
+** *However*, in some areas the code is just plain *dense,* and there's not a lot we can do about it. We're covering some pretty complicated problems here, and we're writing the code all the way down to the silicon. We generally try to have readable code, and be complete with our comments for things that are complicated to understand. We also explain higher-level stuff here on the wiki.
+
+- [ ] A basic understanding of git and GitHub.
+
+** Project documentation covers the absolute git basics, and may cover some of the common pitfalls, but you'll still be better off with a basic understanding how to use git. (The https://git-scm.com/doc[Git Docs] are really well written and a great place to start.)
+
+** If you wish to contribute, then you'll also need understanding https://help.github.com/articles/creating-a-pull-request/[pull requests], and it would be really appreciated if you understand how to https://help.github.com/articles/about-git-rebase/[rebase the branch you wish to pull] so it only reflects the code you wish to be pulled, and https://github.com/blog/1943-how-to-write-the-perfect-pull-request[write a good description for you pull requests].
+
+## Things you need (for any platform)
+
+- [ ] A somewhat modern computer running a modern OS.
+
+** A computer with an OS for the last 5 years or so should do. The Synthetos team mostly run OS X and test with Windows 10 and Linux running inside VMWare VMs.
+
+** We support compiling and debugging on OS X (El Capitan, aka 10.11), Windows 10, and popular Linux distros when possible.
+
+- [ ] The project, all told, requires just under 750MB of hard drive space.
+
+** The clone-size of the project is much smaller, but we install the toolchain necessary to compile and that requires roughly 500MB installed.
+
+** On Windows you also may wish to install Atmel Studio, which is quite large on it's own. We have seen it require 2GB of hard drive space installed.
+
+- [ ] To contribute you'll need a GitHub account
+
+- [ ] It will help if you have http://synthetos.com[some hardware] that is capable of running g2core, and further helpful (but not completely necessary) to have a hardware debugger. These will be explained in more detail in other sections.
+
+# Cloning the Repo
+
+The G2 Core primary repo is located at https://github.com/synthetos/g2
+
+* If you have the https://desktop.github.com/[GitHub Desktop app] installed (Mac or Windows) then you can simply click on the "Clone or download" button at the top right of the repo page and then choose "Open in Desktop" from the menu that appears.
++
+image:Clone-in-GHDesktop.png[Clone in GitHub Desktop]
+
+** There is one additional step that is _only_ necessary if the `Motate/` directory appears to be empty:
+
+*** Right click on the repo on the left and choose "Open in Terminal" (OS X) or "Open in Git Shell" (Windows), as shown for Windows:
++
+image:Windows-Open-in-Git-Shell.png[GitHub Desktop Windows: Open in Git Shell,242,187]
+*** Now type (or Copy/Paste) the following command:
+```bash
+git submodule update --init
+```
++
+NOTE: You may need to run the above command (without the `--init`) after you pull in new code in the future. You'll know if the `Motate` folder shows as changed after a pull. See the link:Troubleshooting#git-usage[Git Usage] section of our Troubleshooting page for more detail.
+
+* *Or*, on the command line (Linux, OS X, or Windows) -- requires a working git install (see below in the link:compiling-the-code[compiling section] for how to install git):
++
+```bash
+git clone https://github.com/synthetos/g2.git --recursive
+```
+
+** Since we use submodules, we need the `--recursive` option.
+
+Now you should have a local clone of the g2 repository.
+
+# Compiling the code
+
+Each OS requires different setup, so you'll need to look at the compiling setup for each OS separately:
+
+* OS X - link:Compiling-g2core-on-Linux-and-OS-X-(command-line)[Command-Line] or https://github.com/synthetos/g2_private/wiki/Compiling-g2core-on-OS-X-(with-Xcode)[Xcode]
+* link:Compiling-g2core-on-Linux-and-OS-X-(command-line)[Linux]
+* link:Compiling-g2core-on-Windows-10-and-Atmel-Studio-7[Windows 10]
+** (NOTE: If you have updated to http://go.microsoft.com/fwlink/p/?LinkId=822545[Windows 10 Anniversary Edition] and are familiar with Bash then you should enable the https://msdn.microsoft.com/commandline/wsl/install_guide[Windows Subsystem for Linux] and follow the Linux instructions from here on.)
