@@ -28,7 +28,7 @@ The following variables can be reported in a status report
 	g92e | g92 enabled | 1=temporary offsets in effect 
 
 
-The following are available for all axes, XYZABC. Only *posX* is shown for all axes for illustration. The rest are implied.
+The following are available for all axes, XYZABC. Only *posX* is shown for illustration. The rest are implied.
 
 	Request | Response | Description
 	---------|--------------|-------------
