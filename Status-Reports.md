@@ -32,7 +32,7 @@ The following are available for all axes, XYZABC. Only *posX* is shown for illus
 
 	Request | Response | Description
 	---------|--------------|-------------
-	posx | x work position | X work position in prevailing units (mm or inch) (posy, posz...)
+	posx | x work position | X work position in current units (mm/inch) (posy, posz...)
 	mpox | x absolute position | X machine position in absolute coordinate system (mm or inch).
 	g92x | offset | G92 origin offset for X axis
 	g54x | coord 1 offset | X axis G54 coordinate system offset
