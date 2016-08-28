@@ -1,6 +1,15 @@
-This page documents the system state parameter `stat`, and the `status codess returned in the response footer.
+This page documents the system state parameter `stat`, and the status codes returned in the response footer.
 
 ## `stat`
+`stat` is the **machine state** variable that can be queried directly or set to return in a status report.
+```
+    {stat:n}  queries this value
+    
+    {sr:"line", "posx", "posy", "posz", "feed", "vel", "momo", "stat"}
+
+```
+ 
+
 ```
 // ### LAYER 8 CRITICAL REGION ###
 // ### DO NOT CHANGE THESE ENUMERATIONS WITHOUT COMMUNITY INPUT ###
@@ -25,6 +34,8 @@ typedef enum {                  // check alignment with messages in config.c / m
 ```
 
 ## Status Codes
+
+{"r":{"xjm":5000000000.000},"f":[3,0,6]}
 
 The following status codes are supported as of firmware build 100.xx. See error.h for the source:
 ```
