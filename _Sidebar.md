@@ -4,7 +4,7 @@
 1. [ ] [What is g2core?](What-is-g2core)
 1. [ ] [Getting Started with g2core](Getting-Started-with-g2core)
 1. [ ] [Connecting to g2core](Connecting-to-g2core)
-1. [ ] [Configuring g2core](Configuration-for-Firmware-Version-0.99)
+1. [ ] [Configuring g2core](Configuring-Version-0.99)
 1. [ ] [Flashing g2core](Flashing-G2)
 
 **Reference Pages**
