@@ -9,7 +9,7 @@ If you have an older firmware version:
 - [System Configuration Group](Configuration 0.99 System Group)
 - [Motor Configuration](Configuration 0.99 Motor Group)
 - [Axis Configuration](Configuration 0.99 Axis Group)
-- [Other Groups](Configuration 0.99 Other Groups)
+- [Other Configuration Groups](Configuration 0.99 Other Groups)
 - [Actions and Reports](Configuration 0.99 Actions and Reports)
 - [3DP Extensions Configuration](Configuration 0.99 3DP Extensions)
 
