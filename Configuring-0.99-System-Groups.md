@@ -4,6 +4,7 @@ _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 The system group contains the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
 
 - [Identification Parameters](#identification-parameters)
+- [Global Machining Parameters](Global-Machining-Parameters)
 
 ###Identification parameters
 These are reported on the startup strings and should be included in any support discussions.
@@ -18,7 +19,7 @@ These are reported on the startup strings and should be included in any support 
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 	[{hv:_}](#hv---hardware-version) | Hardware Version | **V8 only** Set to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards. Defaults to 8. 
 
-**Global System Settings**
+###Global Machining Parameters
 
 	Setting | Description | Notes
 	--------|-------------|-------
