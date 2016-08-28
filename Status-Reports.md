@@ -90,7 +90,6 @@ Filtered status reports `{sv:1}` return only variables that have changed since t
 </pre> 
 
 ##Setting Status Report Fields
-#### Set Status Report Fields - Firmware Build 440.21 and earlier
 In addition to on-demand and automatic status reports, JSON mode also supports setting the fields to be displayed in status reports. Although this command is only supported in JSON mode, the fields set in JSON apply to both JSON and text mode reports.
 
 Variables to be included in a status reports are selected by setting values to 'true'. These variables will be returned on subsequent SR requests in the order they were provided in the SET command. For example, the string below could be used to set up the status report in the example above. It will eliminate any previously recorded settings. Note that the `t` is not in quotes - it is actually an abbreviated JSON value for `true`, not a string that says "true". Example:
@@ -98,37 +97,10 @@ Variables to be included in a status reports are selected by setting values to '
 {sr:{line:t,posx:t,posy:t,posz:t,vel:t,unit:t,stat:t}}
 </pre> 
 
-In firmware build 440.21 and below there is no incremental setting of variables - all variables are reset and must be specified in a single SET command. _See Incremental Status Report Setting (below) for further details_
+All variables are reset and must be specified in a single SET command.
 
-#### Set Status Report Fields - Firmware Build 440.22 and later
-Incremental status report setup is supported as of build 440.22. Everything above still applies except that sending a status report setup string will add to the existing settings. Behaviors are:
-
- * `{sr:f}` removes all status reports (clears)
- * `{sr:t}` restores status reports to default settings for the stored profile
- * `{sr:{<key1>:t,...<keyN>:t}}` adds key1 through keyN to the status report list
- * `{sr:{<key1>:f,...<keyN>:f}}` removes key1 through keyN from the status report list
- 
-
-  - Lines may have a mix of t and f pairs
-  - List ordering is not guaranteed in the case of mixed removes and adds in the same command
- 
-Error conditions:
-  - All failures leave original status report list untouched
-  - A key that is not recognized fails with STAT_UNRECOGNIZED_NAME (stat=100)
-  - A value other than 't', or 'f' fails with STAT_INPUT_VALUE_RANGE_ERROR (stat=110)
-  - An attempt to add an element that exceeds list max fails with STAT_INPUT_EXCEEDS_MAX_LENGTH (stat=107)
-  - Malformed JSON (bad syntax) fails as usual (stat=111)
-
-## `stat`
-`stat` is the **machine state** variable that can be queried directly or set to return in a status report.
-```
-    {stat:n}  queries this value
-    
-    {sr:"line", "posx", "posy", "posz", "feed", "vel", "momo", "stat"}
-
-```
- 
 ## Stat Values
+`stat` is the **machine state** variable that can be queried directly or set to return in a status report. Values are:
 
 	# | Value | Description
 	---------|--------------|-------------
