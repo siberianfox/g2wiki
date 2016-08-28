@@ -15,7 +15,7 @@ Homing is invoked using a G28.2 command with one or more axes specified in the c
 
 To enable and configure homing for an axis:
 
-* Each input must be configured properly. See [Configuring Digital Inputs for Homing](Homing-g2#configuring-digital-inputs-for-homing)
+* Each input must be configured properly. See [Configuring Digital Inputs for Homing](#configuring-digital-inputs-for-homing)
 * The homing input must be set for the axis `{xhi:_}` 
 * The homing direction must be set for the axis `{xhd:_}` 
 * The other axis configurations must be set up for homing. See [Configuring Axes for Homing](Homing-g2#configuring-axes-for-homing)
