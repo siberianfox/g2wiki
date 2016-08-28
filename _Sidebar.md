@@ -1,11 +1,11 @@
 **Getting Started Pages**
 
 1. [ ] [Home](https://github.com/synthetos/g2/wiki)
-1. [ ] [What is G2?](What-is-G2)
-1. [ ] [Getting Started with G2](Getting-Started-with-G2)
-1. [ ] [Connecting to G2](Connecting-to-TinyG)
-1. [ ] [Configuring G2](Configuration-for-Firmware-Version-0.98)
-1. [ ] [Flashing G2](Flashing-G2)
+1. [ ] [What is g2core?](What-is-g2core)
+1. [ ] [Getting Started with g2core](Getting-Started-with-G2)
+1. [ ] [Connecting to g2core](Connecting-to-TinyG)
+1. [ ] [Configuring g2core](Configuration-for-Firmware-Version-0.98)
+1. [ ] [Flashing g2core](Flashing-G2)
 
 **Reference Pages**
 
