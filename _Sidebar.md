@@ -3,7 +3,7 @@
 1. [ ] [Home](https://github.com/synthetos/g2/wiki)
 1. [ ] [What is g2core?](What-is-g2core)
 1. [ ] [Getting Started with g2core](Getting-Started-with-g2core)
-1. [ ] [Connecting to g2core](Connecting-to-TinyG)
+1. [ ] [Connecting to g2core](Connecting-to-g2core)
 1. [ ] [Configuring g2core](Configuration-for-Firmware-Version-0.98)
 1. [ ] [Flashing g2core](Flashing-G2)
 
