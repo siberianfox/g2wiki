@@ -1,4 +1,4 @@
-Caution: tinyG2 and Ardunio DUE enable significant flexibility in Pin-out assignments. There is no definitive pin-out, as pin assignments are a compile time option in the build process. These diagrams should be considered  as a template for your use in documenting your personalized build of tinyG2.
+Caution: g2core and Ardunio DUE enable significant flexibility in Pin-out assignments. There is no definitive pin-out, as pin assignments are a compile time option in the build process. These diagrams should be considered  as a template for your use in documenting your personalized build of g2core.
 
 # Pinout Template #
 This diagram , derived from the "unofficial" Arduino DUE Pinout Diagram, provides a template for user documentation of tinyG2 functionality.
