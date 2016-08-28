@@ -9,6 +9,7 @@ If you have an older firmware version:
 - [Configuring Motors](Configuring 0.99 Motors)
 - [Configuring Axes](Configuring 0.99 Axes)
 - [Configuring System Groups](Configuring 0.99 System Groups)
+- [Configuring General Purpose IO](Configuring 0.99 GPIO)
 - [Configuring Other Groups](Configuring 0.99 Other Groups)
 - [Configuring Actions and Reports](Configuring 0.99 Actions and Reports)
 - [Configuring 3DP Extensions](Configuring 0.99 3DP Extensions)
