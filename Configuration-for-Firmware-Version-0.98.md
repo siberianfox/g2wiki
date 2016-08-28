@@ -1,5 +1,5 @@
 **The settings on this page are for firmware version 0.98**
-The version number can be found as the fv variable in the startup JSON message, or by entering {fv:n} or $fv. Version 0.98 starts with g2 build 082.06.
+The version number can be found as the fv variable in the startup JSON message, or by entering {fv:n} or $fv. Version 0.98 spans g2core builds 082.06 - 099.xx
 
 ###Conventions Used on this Page
 - Examples show relaxed JSON mode (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
