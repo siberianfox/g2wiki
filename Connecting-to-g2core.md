@@ -12,6 +12,7 @@ Windows users need download an INF file in order to use g2core. Use this [G2 Win
 
 Here is a video tutorial explaining how to install the g2core drivers on windows 7.<br>
 [G2 Windows 7 Driver Installation Video](www.youtube.com/watch?v=UCF4FoVghsI)
+www.youtube.com/watch?v=UCF4FoVghsI
 
 ## Connecting
 
