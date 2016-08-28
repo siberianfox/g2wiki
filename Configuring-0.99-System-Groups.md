@@ -33,6 +33,7 @@ Indicates the build of firmware and changes frequently. Please provide this numb
 
 ### $FBS - Firmware Build String
 Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`<br>
+The format is "TAG-NN-sha1" with optional "-dirty", wher NN is how many commits past the tag, and sha1 being the exact unique sha1 prefix. "-dirty" should not be seen unless you're doing development, and means there are uncommitted changes in the repo when it's built.
 
 ### $FBC - Firmware Build Config
 Filename of the settings file (config) complied for the build. Example `"fbc":"settings_makeblock.h"`
