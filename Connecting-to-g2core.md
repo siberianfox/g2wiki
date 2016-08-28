@@ -1,16 +1,16 @@
 This page is mostly a placeholder for now, but there are a few important pieces of information
 
-We use Coolterm to connect to G2 for testing. 
+We use Coolterm to connect to g2core for testing. 
 
-## Drivers for g2
+## Drivers for g2core
 
 ### OSX
 OSX you have everything you need.  The drivers will install automatically.
 
 ###Windows
-Windows users need download an INF file in order to use g2.  Use this [G2 Windows Driver](https://raw.githubusercontent.com/synthetos/g2/edge/TinyGv2.inf) to download the inf file.  **Besure to "right click save as** when downloading.
+Windows users need download an INF file in order to use g2core.  Use this [G2 Windows Driver](https://raw.githubusercontent.com/synthetos/g2/edge/TinyGv2.inf) to download the inf file.  **Besure to "right click save as** when downloading.
 
-Here is a video tutorial explaining how to install the g2 drivers on windows 7.<br>
+Here is a video tutorial explaining how to install the g2core drivers on windows 7.<br>
 [G2 Windows 7 Driver Installation Video](www.youtube.com/watch?v=UCF4FoVghsI)
 
 ## Connecting
