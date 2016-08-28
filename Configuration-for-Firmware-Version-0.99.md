@@ -46,6 +46,7 @@ The footer is an array of 3 elements:
 - [System Configuration Group](Configuration 0.99 System Group)
 - [Motor Configuration](Configuration 0.99 Motor Group)
 - [Axis Configuration](Configuration 0.99 Axis Group)
+- [Actions and Reports](Configuration 0.99 Actions and Reports)
 - [3DP Extensions Configuration](Configuration 0.99 3DP Extensions)
 
 ##Motor Groups
