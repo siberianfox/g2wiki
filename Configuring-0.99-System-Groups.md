@@ -21,8 +21,6 @@ These are reported in the startup strings and should be included in any support 
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 
-###Identification Settings
-
 ### $FV - Firmware Version
 Read-only value. Example `"fv":0.99`<br>
 Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
@@ -80,7 +78,6 @@ $mt=1000000  - Keep motors energized for 1 million seconds after last movement c
 
 See also [Power Management](Power-Management)
 
-
 ##Communications Parameters
 Set communications speeds and modes. 
 
@@ -93,7 +90,6 @@ Set communications speeds and modes.
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
-
 
 ### $EJ - Enable JSON Mode on Power Up
 This sets the startup mode. JSON mode can be invoked at any time by sending a line starting with an open curly '{'. JSON mode is exited any time by sending a line starting with '$', '?' or 'h'
@@ -165,7 +161,7 @@ $ex=2      - Enable RTS/CTS flow control protocol
 
 
 ##Gcode Initialization Defaults
-Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
+Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. Being as how g2core does not have any native persistence these commands are only set at compile time and will not have an effect is written.
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -174,8 +170,8 @@ Gcode settings loaded on power up and reset. Changing these does NOT change the 
 	[{gco:_}](#gco---gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
 	[{gpa:_}](#gpa---gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
 	[{gdi:_}](#gdi---gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
-####Gcode Default Parameters
-These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. <br><br>
+
+These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. 
 For example, entering $gun=0 will cause the system to start up from reset or power up in inches mode, but will **not** change the system to inches mode when it is entered. A G20 or G21 received in the Gcode stream will change the units to inches or MM mode, respectively. On reset or restart they will change back to the $gun setting.
 
 These parameters are reported as part of the "sys" group.
