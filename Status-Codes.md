@@ -1,4 +1,4 @@
-This page documents the status codes returned in the response footer. If you are looking for the machine state variable `stat` go here instead: [`stat`](Status-Reports)
+This page documents the status codes returned in the response footer. If you are looking for the machine state variable `stat` go here instead: [`stat`](Status-Reports#stat-values)
 
 ## Status Codes
 The status code reports how a command was processed. It is the second number in the footer array for a response: 
