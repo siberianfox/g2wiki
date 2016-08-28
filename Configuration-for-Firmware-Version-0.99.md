@@ -1,4 +1,4 @@
-**The settings on this page are for firmware version 0.99.** 
+**The configuration and settings documentation on this page is for firmware version 0.99.** 
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.99 encompasses builds 100.00 and later.
 
 If you have an older firmware version:
