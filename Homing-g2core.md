@@ -1,4 +1,4 @@
-_This page describes homing operation cycles for version 0.98 and later versions._
+_This page describes homing operation cycles for version 0.99 and later._
 
 #Homing Commands and Operation
 ##Overview
