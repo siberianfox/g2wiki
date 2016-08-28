@@ -1,8 +1,8 @@
-**The settings on this page are for firmware version 0.98, firmware build 100.xx and above**
-- The version number can be found as the fv variable in the startup JSON message, or by entering {fv:n} or $fv 
-- The build number can be found as the fb variable in the startup JSON message, or by entering {fb:n} or $fb 
+**The settings on this page are for firmware version 0.99** The version number can be found as the fv variable in the startup JSON message, or by entering {fv:n} or $fv
 
-https://github.com/synthetos/g2/wiki/Configuration-for-Firmware-Version-0.98-Build-089
+- Configuration for earlier versions can be found here:
+  - [] version 0.9builds < 100 can be found here:
+  - https://github.com/synthetos/g2/wiki/Configuration-for-Firmware-Version-0.98-Build-089
 
 ###Conventions Used on this Page
 - Examples show relaxed JSON mode (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
