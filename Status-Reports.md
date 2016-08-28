@@ -1,9 +1,11 @@
 ## Status Reports
-Status reports provide a real-time view of what's going on inside g2core by reporting the dynamic model. IOW they can tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other things as well. 
+Status reports provide a real-time view of what's going on inside g2core by reporting the dynamic model. IOW they can tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other things as well. They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
 
-They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
+Any variable that can be independently queried can be included in a status report. For example `fv` would return the firmware version, but this would never change and would be boring.
 
-The following variables can be reported in a status report
+A group variable such as `pos` or `G55` is also allowed, but only in their individual form: e.g. `posx` or `g55y`. For example `posx`, `posy`, `posz` is allowed, but `pos` is not.
+
+The variables listed below are commonly used in status reports, as they represent the dynamic model state:
 
 	Request | Response | Description
 	---------|--------------|-------------
@@ -27,8 +29,7 @@ The following variables can be reported in a status report
 	tool | active tool | tool number currently active
 	g92e | g92 enabled | 1=temporary offsets in effect 
 
-
-The following are available for all axes, XYZABC. Only *posX* is shown for illustration. The rest are implied.
+The following are available for all axes, XYZABC. Only the X axis values are shown for illustration. The other axes are implied.
 
 	Request | Response | Description
 	---------|--------------|-------------
@@ -43,10 +44,6 @@ The following are available for all axes, XYZABC. Only *posX* is shown for illus
 	g59x | coord 6 offset | X axis G59 coordinate system offset
 	g28x | G28 position | X axis G28 saved position
 	g30x | G30 position | X axis G30 saved position
-
-It's worth noting that any gettable variable can be put in a status report - the above variables are listed as they represent the Gcode model state. For example `fv` would return the firmware version, but this would not change.
-
-It's also worth noting that any variable can be independently queried as an individual variable, and axis variables (e.g. pos, G55) can be queried as a group, e.g. `pos`, or `g55`
 
 ## Text Mode Status Reports
 ### Text Mode On-Demand Status Reports
