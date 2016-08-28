@@ -1,6 +1,6 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-## System Groups
+# System Groups
 The system groups contain the following global machine and communication settings. The system groups can be listed by requesting {sys:n} or $sys
 
 - [Identification Parameters](#identification-parameters)
@@ -8,7 +8,7 @@ The system groups contain the following global machine and communication setting
 - [Communications Parameters](#communications-parameters)
 - [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
-###Identification Parameters
+##Identification Parameters
 These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless othewrwise noted.
 
 	Setting | Description | Notes
@@ -52,7 +52,7 @@ Unused in g2core. Read-write value in TInyG. Used to set behaviors inside the fi
 Read-only value derived from factor configuration settings in the ARM chip
 
 
-###Global Machining Parameters
+##Global Machining Parameters
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -81,7 +81,7 @@ $mt=1000000  - Keep motors energized for 1 million seconds after last movement c
 See also [Power Management](Power-Management)
 
 
-###Communications Parameters
+##Communications Parameters
 Set communications speeds and modes. 
 
 	Setting | Description | Notes
@@ -164,7 +164,7 @@ $ex=2      - Enable RTS/CTS flow control protocol
 </pre>
 
 
-###Gcode Initialization Defaults
+##Gcode Initialization Defaults
 Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
 
 	Setting | Description | Notes
