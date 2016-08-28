@@ -1,7 +1,7 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-## System Group
-The system group contains the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
+## System Groups
+The system groups contain the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
 
 - [Identification Parameters](#identification-parameters)
 - [Global Machining Parameters](#global-machining-parameters)
