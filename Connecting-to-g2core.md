@@ -13,6 +13,9 @@ Windows users need download an INF file in order to use g2core. Use this [G2 Win
 Here is a video tutorial explaining how to install the g2core drivers on windows 7.<br>
 www.youtube.com/watch?v=UCF4FoVghsI
 
+Windows 10 does not need this procedure and should work out-of-the-box.
+
+
 ## Connecting
 
 * For OSX please use Coolterm version 1.4.3. There is a bug in the latest version and 1.4.3 is the latest we have tested that works well. (A bug has been opened with the author who has supported us extremely well throughout this project). Look on this page for this file: [CoolTermMac143](http://freeware.the-meiers.org/previous/)
