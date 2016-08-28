@@ -48,6 +48,10 @@ You can also use JSON to read an entire object - examples for motor and axis:
 {"r":{"x":{"am":1,"vm":40000,"fr":40000,"tn":0,"tm":420,"jm":5000,"jh":20000,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":4,"zb":2}},"f":[1,0,6]}
 </pre>
 
+A command in JSON mode returns a response like the one below. The {} object contains the result, which in this case is a blank JSON object because we sent a Gcode command `G0 X10` and have set JSON verbosity to not report back in this case (`{jv:3}`, for example): 
+```
+{"r":{},"f":[1,0,7]}
+```
 The footer is an array of 3 elements:
 - (1) Footer revision
 - (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
