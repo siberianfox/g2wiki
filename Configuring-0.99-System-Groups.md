@@ -36,7 +36,8 @@ Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"
 The format is "TAG-NN-sha1" with optional "-dirty", where NN is how many commits past the tag, and sha1 being the exact unique sha1 prefix. "-dirty" should not be seen unless you're doing development, and means there are uncommitted changes in the repo when it's built.
 
 ### $FBC - Firmware Build Config
-Filename of the settings file (config) complied for the build. Example `"fbc":"settings_makeblock.h"`
+Filename of the settings file (config) complied for the build.<br>
+Example `"fbc":"settings_makeblock.h"`
 
 ### $HP - Hardware Platform
 Read-only value. Returns:
@@ -45,10 +46,11 @@ Read-only value. Returns:
 * 3 for TinyG v9 G2 (ARM)
 
 ### $HV - Hardware Version
-Read-write value. Used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.
+Unused in g2core. Read-write value in TInyG. Used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.
 
 ### $ID - Unique Board Identifier
-Read-only value.
+Read-only value derived from factor configuration settings in the ARM chip
+
 
 ###Global Machining Parameters
 
@@ -58,13 +60,8 @@ Read-only value.
 	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
 	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
-### $JA - Junction Acceleration 
-In conjunction with the global $jd setting sets the cornering speed. See $jd for explanation
-
-<pre>
-$ja=50000   - 50,000 mm/min^2 - a reasonable value for a modest performance machine
-$ja=200000  - 200,000 mm/min^2 - a reasonable value for a higher performance machine
-</pre> 
+### $JT - Junction Integration Time 
+Sets the cornering speed. The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
 
 ### $CT - Chordal Tolerance
 Arcs are generated as sets of very short straight lines that approximate a curve. Each line is a "chord" that spans the endpoints of that segment of the arc. Chordal tolerance sets the maximum allowable deviation between the true arc and straight line that approximates it - which will be the value of the deviation in the middle of the line / arc.
@@ -73,15 +70,6 @@ Setting chordal tolerance high will make curves "rougher", but they can execute 
 <pre>
 $ct=0.01   - Normally a good value (in mm)
 </pre> 
-
-### $ST - Switch Type
-Sets the type of switch used for homing and/or limits. All switches must be of the same type (mixes are not supported).
-<pre>
-$st=0   - Normally Open switches (NO)
-$st=1   - Normally Closed switches (NC)
-</pre> 
-
-Note that probing cycles (G38.2) will work regardless of the switch setting. Probing (currently) assumes a normally open switch in the Z minimum position. During the probe cycle switches are set to NO (and ignored). They are restored to their actual $st setting when probing is complete.
 
 ### $MT - Motor Power Timeout
 Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands, further down this page.
@@ -106,13 +94,6 @@ Set communications speeds and modes.
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
 
-
-
-
-
-
-
-###Communications Settings
 
 ### $EJ - Enable JSON Mode on Power Up
 This sets the startup mode. JSON mode can be invoked at any time by sending a line starting with an open curly '{'. JSON mode is exited any time by sending a line starting with '$', '?' or 'h'
@@ -174,8 +155,6 @@ The minimum is 100 ms. Trying to set a value below the minimum will set the mini
 <pre>
 $si=250    - Status interval in milliseconds
 </pre>
-
-
 
 ### $EX - Enable Flow Control 
 <pre>
