@@ -4,7 +4,16 @@ The version number can be found as the fv variable in the startup JSON message, 
 If you have an older firmware version:
 * [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 
-###Conventions Used for Config Documentation
+## Configuration Pages
+
+- [System Configuration Group](Configuration 0.99 System Group)
+- [Motor Configuration](Configuration 0.99 Motor Group)
+- [Axis Configuration](Configuration 0.99 Axis Group)
+- [Other Groups](Configuration 0.99 Other Groups)
+- [Actions and Reports](Configuration 0.99 Actions and Reports)
+- [3DP Extensions Configuration](Configuration 0.99 3DP Extensions)
+
+##Conventions Used for Config Documentation
 - Examples show relaxed JSON input (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
 - CMD means some command - aka the "name" of the name/value pair. CMDs are case insensitive.
 - Underscore "_" means some numeric value
@@ -40,12 +49,3 @@ The footer is an array of 3 elements:
 - (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
 - (3) RX buffer info (explained later)
 - Note: The checksum that used to be in the footer has been removed as no-one was using it.
-
-# Configuration Pages
-
-- [System Configuration Group](Configuration 0.99 System Group)
-- [Motor Configuration](Configuration 0.99 Motor Group)
-- [Axis Configuration](Configuration 0.99 Axis Group)
-- [Other Groups](Configuration 0.99 Other Groups)
-- [Actions and Reports](Configuration 0.99 Actions and Reports)
-- [3DP Extensions Configuration](Configuration 0.99 3DP Extensions)
