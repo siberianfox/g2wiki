@@ -1,14 +1,15 @@
 ## Status Reports
-Status reports provide a view of what's going on in the controller. They report "dynamic gcode model" state. In plain English, they tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other stuff as well. They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
+Status reports provide a real-time view of what's going on inside g2core by reporting the dynamic model. IOW they can tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other things as well. They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
 
 The following variables can be reported in a status report
 
 	Request | Response | Description
 	---------|--------------|-------------
-	n | line_number | Gcode line number (N word)
+	stat | machine_state      | 1=reset, 2=alarm, 3=stop, 4=end, 5=run, 6=hold, 7=probe, 9=homing 
+	n | model line_number | Gcode line number `N` currently being read
+	line | runtime line_number | Runtime line number currently being executed
 	vel | velocity | actual velocity - may be different than programmed feed rate 
 	feed | feed_rate          | gcode programmed feed rate (F word) 
-	stat | machine_state      | 1=reset, 2=alarm, 3=stop, 4=end, 5=run, 6=hold, 7=probe, 9=homing 
 	unit | units_mode         | 0=inch, 1=mm
 	coor | coordinate_system  | 0=g53, 1=g54, 2=g55, 3=g56, 4=g57, 5=g58, 6=g59
 	momo | motion_mode        | 0=traverse, 1=straight feed, 2=cw arc, 3=ccw arc
