@@ -225,6 +225,9 @@ G2 can also drive external stepper drivers using the breakout headers. Some driv
 
 _Note about Microsteps: It is a misconception that higher microstep values are better - beyond a certain point they degrade motor performance. In a typical setup the total power delivered to the motor (and hence torque) will go down as you increase the microsteps, especially at higher speeds. Also, using microsteps to set the finest machine resolution is source of error as the shaft angle isn't necessarily going to be at the theoretical point. Don't just assume that 1/32 microstepping is the right setting for your application. Try out different settings to balance smoothness and power._
 
+### 1su - Steps per Unit
+This is a decimal number...
+
 ### 1po - Polarity
 Set to one of the following: 
 
