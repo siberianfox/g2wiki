@@ -30,13 +30,15 @@ If you have an older firmware version:
 
 ### JSON Cheat Sheet
 All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
-<pre>
-{"CMD":n} == $CMD            Read value for command "CMD" in strict JSON mode
-{CMD} == $CMD                Read value in relaxed JSON mode
-{"CMD":123.4} == $CMD=123.4  Set value to 123.4 in strict JSON mode
-{CMD:123.4} == $CMD=123.4    Set value in relaxed JSON mode
-{xvm:50000}                  Set X max velocity to 50000 as an example
-</pre>
+
+| JSON | Text | Description |
+| :--: | :--: | :-- |
+| `{"CMD":n}` | `$CMD`   |        Read value for command "CMD" in strict JSON mode |
+| `{CMD}` | `$CMD` |               Read value in relaxed JSON mode |
+| `{"CMD":123.4}` | `$CMD=123.4` | Set value to 123.4 in strict JSON mode |
+| `{CMD:123.4}` | `$CMD=123.4` | Set value in relaxed JSON mode |
+| `{xvm:50000}` | `$xvm=50000` | Set X max velocity to 50000 as an example |
+
 You can also use JSON to read an entire object - examples for motor and axis:
 <pre>
 {1:n}
