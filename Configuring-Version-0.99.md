@@ -42,11 +42,12 @@ All configuration commands are available using [JSON mode](JSON-Operation), whic
 You can also use JSON to read an entire object - examples for motor and axis:
 <pre>
 {1:n}
-{"r":{"1":{"ma":0,"sa":1.800,"tr":40.0000,"mi":8,"po":0,"pm":2,"pl":0.375}},"f":[1,0,5]}
+{"r":{"1":{"ma":0,"sa":1.8,"tr":36.576,"mi":8,"su":43.74453,"po":0,"pm":0,"pl":0.45}},"f":[1,0,6]}
 
 {x:n}
-{"r":{"x":{"am":1,"vm":50000,"fr":50000,"tn":0.000,"tm":420.000,"jm":10000,"jh":20000,"jd":0.1000,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":20.000,"zb":3.000}},"f":[1,0,5]}
+{"r":{"x":{"am":1,"vm":40000,"fr":40000,"tn":0,"tm":420,"jm":5000,"jh":20000,"hi":1,"hd":0,"sv":3000,"lv":100,"lb":4,"zb":2}},"f":[1,0,6]}
 </pre>
+
 The footer is an array of 3 elements:
 - (1) Footer revision
 - (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
