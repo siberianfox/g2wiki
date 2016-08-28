@@ -131,25 +131,21 @@ Error conditions:
 ```
  
 ## Stat Values
-```
-typedef enum {
-    COMBINED_INITIALIZING = 0,  // [0] machine is initializing
-    COMBINED_READY,             // [1] machine is ready for use
-    COMBINED_ALARM,             // [2] machine in alarm state
-    COMBINED_PROGRAM_STOP,      // [3] program stop/no more blocks
-    COMBINED_PROGRAM_END,       // [4] program end
-    COMBINED_RUN,               // [5] machine is running
-    COMBINED_HOLD,              // [6] machine is holding
-    COMBINED_PROBE,             // [7] probe cycle active
-    COMBINED_CYCLE,             // [8] reserved for canned cycles < not used >
-    COMBINED_HOMING,            // [9] homing cycle active
-    COMBINED_JOG,               // [10] jogging cycle active
-    COMBINED_INTERLOCK,         // [11] machine in safety interlock hold
-    COMBINED_SHUTDOWN,          // [12] machine in shutdown state
-    COMBINED_PANIC              // [13] machine in panic state
-} cmCombinedState;
 
-	Number | Value | Description
+	# | Value | Description
 	---------|--------------|-------------
-	0 | initializing |Machine is initializing
+	0 | INITIALIZING | Machine is initializing
+	1 | READY | Machine is ready for use
+	2 | ALARM | Machine is in alarm state
+	3 | PROGRAM_STOP | Machine has encountered program stop
+	4 | PROGRAM_END| Machine has encountered program end
+	5 | RUN | Machine is running
+	6 | HOLD | Machine is holding
+	7 | PROBE | Machine is in probing operation
+	8 | CYCLE | reserved for canned cycles (not used) 
+	9 | HOMING | Machine is in a homing cycle
+	10 | JOG | Machine is in a jogging cycle
+	11 | INTERLOCK | Machine is in safety interlock hold
+	12 | SHUTDOWN | Machine is in shutdown state. Will not process commands
+	13 | PANIC | Machine is in panic state. Needs to be physically reset
 
