@@ -16,7 +16,7 @@
 1. [ ] [Alarms & Exceptions](Alarm-Processing)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
 1. [ ] [Status Reports](Status-Reports)
-1. [ ] [Status Response Codes](Status-Codes)
+1. [ ] [Status Codes](Status-Codes)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-tinyG2)
 1. [ ] [G2 Communications](G2-Communications)
 
