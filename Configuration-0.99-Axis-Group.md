@@ -1,6 +1,10 @@
 _[<<< Back to Configuration for Version 0.99 Main Page](Configuration-for-Firmware-Version-0.99)_
 
-## Axis Groups
+# Axis Groups
+
+This page documents motor settings. Each motor object ("group") has a collection of parameters for that motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled here
+
+## Summary
 Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
 
 	Setting | Description | Notes
