@@ -89,20 +89,6 @@ The jerk term in mm is measured in mm/min^3. In inches mode it's units are inche
 ### xjh - Jerk High
 Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
 
-### xjd - Junction Deviation
-This one is somewhat complicated. Junction deviation - in combination with Junction Acceleration ($JA) from the system group - sets the velocity reduction used during cornering through the junction of two lines. The reduction is based on controlling the centripetal acceleration through the junction to the value set in JA with the junction deviation being the "tightness" of the controlling cornering circle. An explanation of what's happening here can be found on [Sonny Jeon's blog: Improving grbl cornering algorithm] (http://onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/ onehossshay.wordpress.com/2011/09/24/improving_grbl_cornering_algorithm/). 
-
-It's important to realize that the tool head does not actually follow the controlling circle - the circle is just used to set the speed of the tool through the defined path. In other words, the tool does go through the sharp corner, just not as fast. This is a Gcode G61 - Exact Path Mode operation, not a Gcode G64 - Continuous Path Mode (aka corner rounding, or splining) operation. 
-
-While JA is set globally and applies to all axes, JD is set per axis and can vary depending on the characteristics of the axis. An axis that moves more slowly should have a JD that is less than an axis that can move more quickly, as the larger the JD the faster the machine will move through the junction (i.e. a bigger controlling circle). The following example has some representative values for a Probotix Fireball V90 machine. The V90 has 5 TPI X and Y screws, and 12 TPI Z. All values in MM. 
-
-<pre>
-{ja:200000}  Units are mm/min^2
-{xjd:0.05}   Units are mm
-{yjd:0.05}
-{zjd:0.02}   Setting Z to a smaller value means that moves with a change in the Z component will move proportionately slower depending on the contribution in Z. 
-</pre>
-
 ### ara - Radius value
 The radius value is used by rotational axes only (A, B and C) to convert linear units to degrees when in radius mode. 
 
@@ -110,8 +96,8 @@ For example; if the A radius is set to 10 mm it means that a value of 62.8318531
 
 Note that the Travel per Revolution value (1tr) is used but unaffected in radius mode. The degrees per revolution still applies, it's just that the degrees were computed based on the radius and the Gcode axis values. See Travel per Revolution in the motor group. 
 
-### Homing Settings
-Please see [G2 Homing](Homing-g2) for details and more help on homing settings:
+# Homing Settings
+Please see [g2core Homing](Homing-g2core) for details and more help on homing settings:
 
 <pre>
 {xsv:_}  Homing Search Velocity
