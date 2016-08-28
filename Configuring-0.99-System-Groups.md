@@ -5,8 +5,8 @@ The system group contains the following global machine and communication setting
 
 - [Identification Parameters](#identification-parameters)
 - [Global Machining Parameters](#global-machining-parameters)
-- [Communications Parameters](communications-parameters)
-- [Gcode Initialization Defaults](gcode-initialization-defaults)
+- [Communications Parameters](#communications-parameters)
+- [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
 ###Identification Parameters
 These are reported on the startup strings and should be included in any support discussions.
@@ -21,53 +21,6 @@ These are reported on the startup strings and should be included in any support 
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 	[{hv:_}](#hv---hardware-version) | Hardware Version | **V8 only** Set to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards. Defaults to 8. 
 
-###Global Machining Parameters
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{jt:_}](#ja---junction-integration-time) | Junction Integration Time | Global cornering acceleration value
-	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
-	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
-
-###Communications Parameters
-Set communications speeds and modes. 
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
-	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
-	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
-	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
-	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
-	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
-	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
-
-V8-Only Communications Settings (not available on g2)
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{ec:_}](#ec---expand-lf-to-crlf-on-tx-data) | Enable CR on TX | 0=send LF line termination on TX, 1= send both LF and CR termination
-	[{ee:_}](#ee---enable-character-echo) | Enable_character_Echo | 0=off, 1=enabled
-	[{ex:_}](#ex---enable-flow-control) | Enable flow control | 0=off, 1=XON/XOFF enabled, 2=RTS/CTS enabled
-	[{baud:_}](#baud---set-usb-baud-rate) | Baud rate | 1=9600, 2=19200, 3=38400, 4=57600, 5=115200, 6=230400 -- 115200 is default
-
-
-###Gcode Initialization Defaults
-Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{gpl:_}](#gpl---gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
-	[{gun:_}](#gun---gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
-	[{gco:_}](#gco---gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
-	[{gpa:_}](#gpa---gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
-	[{gdi:_}](#gdi---gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
-
-
-
-## System Group Settings
-These are general system-wide parameters and are part of the "sys" group.
-<br>
 ###Identification Settings
 
 ### $FV - Firmware Version
@@ -98,7 +51,13 @@ Read-write value. Used to set behaviors inside the firmware. Defaults to 8 for v
 ### $ID - Unique Board Identifier
 Read-only value.
 
-###Global System Settings
+###Global Machining Parameters
+
+	Setting | Description | Notes
+	--------|-------------|-------
+	[{jt:_}](#ja---junction-integration-time) | Junction Integration Time | Global cornering acceleration value
+	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
 ### $JA - Junction Acceleration 
 In conjunction with the global $jd setting sets the cornering speed. See $jd for explanation
@@ -133,6 +92,27 @@ $mt=1000000  - Keep motors energized for 1 million seconds after last movement c
 </pre> 
 
 See also [Power Management](Power-Management)
+
+
+###Communications Parameters
+Set communications speeds and modes. 
+
+	Setting | Description | Notes
+	--------|-------------|-------
+	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
+	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
+	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
+	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
+	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
+	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
+	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
+
+
+
+
+
+
+
 ###Communications Settings
 
 ### $EJ - Enable JSON Mode on Power Up
@@ -196,22 +176,7 @@ The minimum is 100 ms. Trying to set a value below the minimum will set the mini
 $si=250    - Status interval in milliseconds
 </pre>
 
-### $IC - Ignore CR or LF on RX 
-_Note: IC was removed in 0.97. Lines may be terminated with any combination of <CR>, <LF>, <CR<LF>, <LF<CR>. It doesn't matter anymore._
 
-### $EC - Expand LF to CRLF on TX data
-If this setting is OFF returned lines have a single <LF>. If on they are terminated with <CR><LF> (2 characters).
-<pre>
-$ec=0      - off
-$ec=1      - on
-</pre> 
-
-### $EE - Enable Character Echo 
-This should be disabled for JSON mode. In text mode it's optional either way.
-<pre>
-$ee=0      - Disable character echo
-$ee=1      - Enable character echo
-</pre> 
 
 ### $EX - Enable Flow Control 
 <pre>
@@ -220,18 +185,17 @@ $ex=1      - Enable XON/XOFF flow control protocol
 $ex=2      - Enable RTS/CTS flow control protocol 
 </pre>
 
-### $BAUD - Set USB Baud Rate
-The default baud rate for the USB port is 115,200 baud. The following additional baud rates may be set. The sequence for changing the baud rate is: (1) Issue the $baud command, (2) wait for a response verifying the command, (3) change to the new baud rate.
-<pre>
-$baud=0     - Illegal baud rate setting. Returns an error
-$baud=1     - 9600
-$baud=2     - 19200
-$baud=3     - 38400
-$baud=4     - 57600
-$baud=5     - 115200
-$baud=6     - 230400
-</pre>
 
+###Gcode Initialization Defaults
+Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
+
+	Setting | Description | Notes
+	--------|-------------|-------
+	[{gpl:_}](#gpl---gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
+	[{gun:_}](#gun---gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
+	[{gco:_}](#gco---gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
+	[{gpa:_}](#gpa---gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
+	[{gdi:_}](#gdi---gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
 ####Gcode Default Parameters
 These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. <br><br>
 For example, entering $gun=0 will cause the system to start up from reset or power up in inches mode, but will **not** change the system to inches mode when it is entered. A G20 or G21 received in the Gcode stream will change the units to inches or MM mode, respectively. On reset or restart they will change back to the $gun setting.
