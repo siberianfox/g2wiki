@@ -9,35 +9,33 @@ The system groups contain the following global machine and communication setting
 - [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
 ###Identification Parameters
-These are reported in the startup strings and should be included in any support discussions.
+These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless othewrwise noted.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.99
-	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 100.00
-	[{fbs:n}](#fb---firmware-build-string) | Firmware Build String | Read-only string
-	[{fbc:n}](#fb---firmware-build-config) | Firmware Build Config | Read-only filename
-	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
+	[{fv:n}](#fv---firmware-version) | Firmware Version | Version number, e.g. 0.99
+	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Build number, e.g. 100.00
+	[{fbs:n}](#fb---firmware-build-string) | Firmware Build String | Git string
+	[{fbc:n}](#fb---firmware-build-config) | Firmware Build Config | Name of settings file 
+	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
-	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0
+	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 
 ###Identification Settings
 
 ### $FV - Firmware Version
-Read-only value. Example `$fv=0.99`<br>
-Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.97 versions.
+Read-only value. Example `"fv":0.99`<br>
+Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
 
 ### $FB - Firmware Build number
-Read-only value. Example `$fb=345.06`<br>
+Read-only value. Example `"fb":100.00`<br>
 Indicates the build of firmware and changes frequently. Please provide this number in any communication about an issue.
 
 ### $FBS - Firmware Build String
-Read-only value. Example `$fb=345.06`<br>
-Provides the git string for the build
+Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`<br>
 
 ### $FBC - Firmware Build Config
-Read-only value. Example `$fb=345.06`<br>
-Provides the filename of the settings file (config) complied for the build
+Filename of the settings file (config) complied for the build. Example `"fbc":"settings_makeblock.h"`
 
 ### $HP - Hardware Platform
 Read-only value. Returns:
