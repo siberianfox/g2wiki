@@ -20,7 +20,7 @@ If you have an older firmware version:
 
 # Summary / Cheat Sheet
 ### JSON Cheat Sheet
-All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode-Operation). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
+All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
 {"CMD":n} == $CMD            Read value for command "CMD" in strict JSON mode
 {CMD} == $CMD                Read value in relaxed JSON mode
