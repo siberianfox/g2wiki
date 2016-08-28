@@ -17,7 +17,7 @@ The following is a list of the minimum you will need strictly for g2core, regard
 * You _can_ program the Due and the TinyG v9 boards without a debugger, but you cannot debug them.
 
 **Compatible Target Board** - [Arduino Due](http://arduino.cc/en/Main/arduinoBoardDue) ($50) ([Adafruit](http://www.adafruit.com/products/1076), [Maker Shed](http://www.makershed.com/Arduino_Due_p/mksp16.htm), [Sparkfun](https://www.sparkfun.com/products/11589), [Digi-Key](https://www.digikey.com/product-highlights/us/en/arduino-arduino-due-board/2831), [Mouser](http://www.mouser.com/new/arduino/arduino-due/), [Newark](http://www.newark.com/arduino/a000062/dev-brd-sam3x8e-arm-cortex-m3/dp/47W2961))
-* Currently the only publicly-available board G2 works on is the Arduino Due.
+* Currently the only publicly-available board g2core works on is the Arduino Due.
 
 **Adapter Cabling/Shield** - gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
 * Depending on the project and your level of expertise, you may be able to wire stepper drivers you already have (as long as they have STEP/DIRECTION/ENABLE pinouts) to the Due or roll your own shield.
