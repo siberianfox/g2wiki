@@ -1,4 +1,4 @@
-_[<<< Back to Configuration for Version 0.99 Main Page](Configuration-for-Firmware-Version-0.99)_
+_[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
 #Motor Groups
 This page documents motor settings. Each motor object ("group") has a collection of parameters for that motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled [here](Arduino-DUE-Pinout-for-g2core)
