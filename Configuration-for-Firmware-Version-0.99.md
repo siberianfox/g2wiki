@@ -4,8 +4,8 @@ The version number can be found as the fv variable in the startup JSON message, 
 If you have an older firmware version:
 * [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 
-###Conventions Used on this Page
-- Examples show relaxed JSON mode (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
+###Conventions Used for Config Documentation
+- Examples show relaxed JSON input (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
 - CMD means some command - aka the "name" of the name/value pair. CMDs are case insensitive.
 - Underscore "_" means some numeric value
 - "abcd" means some string value
@@ -13,12 +13,11 @@ If you have an older firmware version:
 - Axis examples use X axis, but any axis is OK unless otherwise noted
 - All examples are in millimeter units
 
-**A note about units:**
+**A note about units**
 - All data entry and display occurs in the prevailing units set in the Gcode mode. Set G20 for inches, G21 for mm. Query {unit:n} or $unit to find out where you are (G20=0, G21=1)
 - Units entered in one system are correctly preserved and do not need to be re-entered or adjusted if the Gcode units mode changes.
 - The Gcode default units setting `{gun:_}` sets the units the system "comes up in" during power-on or reset. So changing GUN will not change your units until you reset. Note: PROGRAM END (M2, M30) does not change the units. 
 
-# Summary / Cheat Sheet
 ### JSON Cheat Sheet
 All configuration commands are available using [JSON mode](JSON-Operation), which is the preferred access method if you are writing a UI or controller. Most commands are also available in [Text Mode](Text-Mode). The few commands that are available from only one or the other are noted, as are any commands the behave differently depending on the mode. The rough equivalence is:
 <pre>
@@ -41,6 +40,13 @@ The footer is an array of 3 elements:
 - (2) [Status code](Status-Codes) - Short version: status=0 is OK, everything else is an exception.
 - (3) RX buffer info (explained later)
 - Note: The checksum that used to be in the footer has been removed as no-one was using it.
+
+# Configuration Pages
+
+- [System Configuration Group](Configuration 0.99 System Group)
+- [Motor Configuration](Configuration 0.99 Motor Group)
+- [Axis Configuration](Configuration 0.99 Axis Group)
+- [3DP Extensions Configuration](Configuration 0.99 3DP Extensions)
 
 ##Motor Groups
 Settings specific to a given motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled [here](Arduino-DUE-Pinout-for-tinyG2).<br><br>
