@@ -170,7 +170,7 @@ Note: Status report parameters is settable in JSON only - see JSON mode for deta
 <br>
 # Settings Details
 ## Motor Settings
-Motor travel settings can be done one of two ways. You can enter the steps per unit `{su:...}`, which sets the number of steps the code will emit to travel one complete unit - millimeter, inch, or degree. the SU value is accurate to roughly 7 decimal places, with 5 places available to the left right of the decimal point.
+Motor travel settings can be done one of two ways. You can enter the steps per unit `{su:...}`, which sets the number of steps the code will emit to travel one complete unit - millimeter, inch, or degree. the SU value is accurate to roughly 7 decimal places, with 5 places available to the right of the decimal point.
 
 Or you can enter the parameters that compute the steps per unit, which are Step Angle: `{1sa:...}`, Travel per Revolution: `{1tr:...}` and Microsteps: `{1mi:...}`. For example, if you want run motor #1 with a 200 step per revolution motor, a 3mm GT2 timing belt with a 20 tooth pulley, and 8 microsteps you enter: 
 
@@ -180,7 +180,6 @@ Or you can enter the parameters that compute the steps per unit, which are Step 
 
 ...and it will compute and set the SU value. If the SU is set directly the TR value is changed to agree with the SU value. The values entered for step angle and microsteps are not changed.
 
-are independent of each other.
 ### 1ma - Map Motor to Axis
 Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor4. 
 
