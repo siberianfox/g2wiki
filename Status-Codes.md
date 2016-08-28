@@ -44,7 +44,6 @@ The following status codes are supported as of firmware build 100.xx. See error.
 #define STAT_FAILED_GET_PLANNER_BUFFER 36
 
 // Assertion failures - build down from 99 until they meet the system internal errors
-
 #define STAT_BUFFER_FREE_ASSERTION_FAILURE 88
 #define STAT_STATE_MANAGEMENT_ASSERTION_FAILURE 89
 #define STAT_CONFIG_ASSERTION_FAILURE 90
@@ -61,7 +60,6 @@ The following status codes are supported as of firmware build 100.xx. See error.
 // Application and data input errors
 
 // Generic data input errors
-
 #define STAT_UNRECOGNIZED_NAME 100              // parser didn't recognize the name
 #define STAT_INVALID_OR_MALFORMED_COMMAND 101   // malformed line to parser
 #define STAT_BAD_NUMBER_FORMAT 102              // number format error
@@ -82,8 +80,6 @@ The following status codes are supported as of firmware build 100.xx. See error.
 #define STAT_VALUE_TYPE_ERROR 116               // JSON value does not agree with variable type
 
 // Gcode errors and warnings (Most originate from NIST - by concept, not number)
-// Fascinating: http://www.cncalarms.com/
-
 #define STAT_GCODE_GENERIC_INPUT_ERROR 130      // generic error for gcode input
 #define STAT_GCODE_COMMAND_UNSUPPORTED 131      // G command is not supported
 #define STAT_MCODE_COMMAND_UNSUPPORTED 132      // M command is not supported
@@ -143,7 +139,6 @@ The following status codes are supported as of firmware build 100.xx. See error.
 #define STAT_T_WORD_IS_INVALID 181
 
 // g2core errors and warnings
-
 #define STAT_GENERIC_ERROR 200
 #define STAT_MINIMUM_LENGTH_MOVE 201            // move is less than minimum length
 #define STAT_MINIMUM_TIME_MOVE 202              // move is less than minimum time
