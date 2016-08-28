@@ -6,12 +6,12 @@ If you have an older firmware version:
 
 ## Configuration Pages
 
-- [System Configuration Group](Configuring 0.99 System Groups)
-- [Motor Configuration](Configuring 0.99 Motors)
-- [Axis Configuration](Configuring 0.99 Axes)
-- [Other Configuration Groups](Configuring 0.99 Other Groups)
-- [Actions and Reports](Configuring 0.99 Actions and Reports)
-- [3DP Extensions Configuration](Configuring 0.99 3DP Extensions)
+- [Configuring Motors](Configuring 0.99 Motors)
+- [Configuring Axes](Configuring 0.99 Axes)
+- [Configuring System Groups](Configuring 0.99 System Groups)
+- [Configuring Other Groups](Configuring 0.99 Other Groups)
+- [Configuring Actions and Reports](Configuring 0.99 Actions and Reports)
+- [Configuring 3DP Extensions](Configuring 0.99 3DP Extensions)
 
 ##Conventions Used for Config Documentation
 - Examples show relaxed JSON input (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
