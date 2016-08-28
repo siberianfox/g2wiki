@@ -2,10 +2,11 @@ _[<<< Back to Configuration for Version 0.99 Main Page](Configuration-for-Firmwa
 
 # Axis Groups
 
-This page documents motor settings. Each motor object ("group") has a collection of parameters for that motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled here
+This page documents axis settings. Each axis object ("group") has a collection of parameters for that axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
+
+- Axis examples use X axis, but any axis is OK unless otherwise noted
 
 ## Summary
-Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -34,7 +35,7 @@ Sets the function of the axis.
 - {xam:3}  Radius mode. (Rotary axes only) In radius mode gcode values are interpreted as linear units; either inches or mm depending on the prevailing G20/G21 setting. The conversion of linear units to degrees is accomplished using the radius setting for that axis. See $aRA for details. 
 
 ### xvm - Velocity Maximum
-(aka traverse rate or seek rate). Sets the maximum velocity the axis will move during a G0 traverse move. This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
+(aka traverse rate). Sets the maximum velocity the axis will move during a G0 traverse move. This is set in length units per minute for linear axes, degrees per minute for rotary axes. 
 
 Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will actually occur at the fastest speed the combined set of axes and the geometry will allow, and may be faster than the individual axis max velocities. For example, max velocity for X and Y are set to 1000 mm/min. For a 45 degree traverse in X and Y the toolhead would travel at 1414.21 mm/min. 
 
@@ -45,7 +46,7 @@ Note that the max velocity is *per-axis*. Diagonal / multi-axis traverses will a
 </pre>
  
 ### xfr - Feed Rate Maximum
-Sets the maximum velocity the axis will move during a feed in a G1, G2, or G3 move. This works similarly to maximum velocity, but instead of actually setting the speed, it only serves to establish a "do not exceed" for Gcode F words. Put another way, the maximum feed rate setting is NOT used to set the Gcode's F value; it is only a maximum that may be used to limit the F value provided in a gcode file.
+Sets the maximum velocity the axis will be allowed to move during a feed in a G1, G2, or G3 move. This works similarly to maximum velocity, but instead of actually setting the speed, it only serves to establish a "do not exceed" for Gcode F words. Put another way, the maximum feed rate setting is NOT used to set the Gcode's F value; it is only a maximum that may be used to limit the F value provided in a gcode file.
 
 Axis feed rates should be equal to or less than the maximum velocity. See [G2 Tuning](G2-Tuning) for more details. 
 
