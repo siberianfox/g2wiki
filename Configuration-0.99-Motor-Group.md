@@ -3,6 +3,8 @@ _[<<< Back to Configuration for Version 0.99 Main Page](Configuration-for-Firmwa
 #Motor Groups
 This page documents motor settings. Each motor object ("group") has a collection of parameters for that motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled [here](Arduino-DUE-Pinout-for-g2core)
 
+- Motor examples use Motor 1, but any motor active for your platform is OK
+
 ## Summary
 
 	Setting | Description | Notes
