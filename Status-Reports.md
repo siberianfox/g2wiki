@@ -5,7 +5,7 @@ The following variables can be reported in a status report
 
 	Request | Response | Description
 	---------|--------------|-------------
-	stat | machine_state      | 1=reset, 2=alarm, 3=stop, 4=end, 5=run, 6=hold, 7=probe, 9=homing 
+	stat | machine_state      | See [here](#stat-values)
 	n | model line_number | Gcode line number `N` currently being read
 	line | runtime_line_number | Runtime line number currently being executed
 	vel | velocity | actual velocity - may be different than programmed feed rate 
