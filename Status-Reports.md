@@ -1,5 +1,7 @@
 ## Status Reports
-Status reports provide a real-time view of what's going on inside g2core by reporting the dynamic model. IOW they can tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other things as well. They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
+Status reports provide a real-time view of what's going on inside g2core by reporting the dynamic model. IOW they can tell you where you are (position), if the machine is moving, how fast, what it's doing, when a move is done, and other things as well. 
+
+They can be returned on-demand, or can be automatically generated during movement so you can see move progress. They are delivered in JSON so the UI can use it, or can be delivered in plain text for a command-line user.  
 
 The following variables can be reported in a status report
 
@@ -16,11 +18,15 @@ The following variables can be reported in a status report
 	plan | plane_select       | 0=XY plane, 1=XZ plane, 2=YZ plane
 	path | path_control_mode  | 0=exact stop, 1=exact path, 2=continuous
 	dist | distance_mode      | 0=absolute distance mode, 1=incremental distance mode
+	admo | arc distance_mode      | 0=absolute distance mode, 1=incremental distance mode
 	frmo | feed_rate_mode     | 0=units-per-minute-mode, 1=inverse-time-mode
 	macs | machine state | internal state for deeper inspection
 	cycs | cycle state | internal state for deeper inspection
 	mots | motion state | internal state for deeper inspection
 	hold | hold state | internal state for deeper inspection
+	tool | active tool | tool number currently active
+	g92e | g92 enabled | 1=temporary offsets in effect 
+
 
 The following are available for all axes, XYZABC. Only *posX* is shown for all axes for illustration. The rest are implied.
 
