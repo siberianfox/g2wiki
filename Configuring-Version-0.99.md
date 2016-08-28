@@ -6,13 +6,13 @@ If you have an older firmware version:
 
 ## Configuration Pages
 
-- [Configuring Motors](Configuring 0.99 Motors)
-- [Configuring Axes](Configuring 0.99 Axes)
-- [Configuring System Groups](Configuring 0.99 System Groups)
-- [Configuring General Purpose IO](Configuring 0.99 GPIO)
-- [Configuring Other Groups](Configuring 0.99 Other Groups)
-- [Configuring Actions and Reports](Configuring 0.99 Actions and Reports)
-- [Configuring 3DP Extensions](Configuring 0.99 3DP Extensions)
+- [Configuring Motors](Configuring-0.99-Motors)
+- [Configuring Axes](Configuring-0.99-Axes)
+- [Configuring System Groups](Configuring-0.99-System-Groups)
+- [Configuring General Purpose IO](Configuring-0.99-GPIO)
+- [Configuring Other Groups](Configuring-0.99-Other-Groups)
+- [Configuring Actions and Reports](Configuring-0.99-Actions-and-Reports)
+- [Configuring 3D Printing Extensions](Configuring-0.99-3D-Printing-Extensions)
 
 ##Conventions Used for Config Documentation
 - Examples show relaxed JSON input (e.g. `{fv:n}`). Strict JSON is also accepted in all cases (e.g. `{"fv":null}`)
