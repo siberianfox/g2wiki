@@ -4,7 +4,7 @@ _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 The system group contains the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
 
 - [Identification Parameters](#identification-parameters)
-- [Global Machining Parameters](Global-Machining-Parameters)
+- [Global Machining Parameters](#Global-Machining-Parameters)
 
 ###Identification parameters
 These are reported on the startup strings and should be included in any support discussions.
