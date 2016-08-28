@@ -28,6 +28,7 @@
 
 **Developer Pages**
 
+1. [ ] [Getting Started with g2core Development](Getting-Started-with-g2core-Development)
 1. [ ] [Project Structure & Motate](Project-Structure-and-Motate)
 1. [ ] [Compiling G2](Compiling-G2)
 1. [ ] [Debugging G2 on OSX](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
