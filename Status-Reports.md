@@ -5,7 +5,7 @@ The following variables can be reported in a status report
 
 	Request | Response | Description
 	---------|--------------|-------------
-	stat | machine_state      | See [here](#stat-values)
+	stat | machine_state      | See [`stat` values](#stat-values)
 	n | model line_number | Gcode line number `N` currently being read
 	line | runtime_line_number | Runtime line number currently being executed
 	vel | velocity | actual velocity - may be different than programmed feed rate 
