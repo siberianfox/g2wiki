@@ -103,8 +103,10 @@ These are reported on the startup strings and should be included in any support 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 82.06
-	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.98
+	[{fv:n}](#fv---firmware-version) | Firmware Version | Read-only value, e.g. 0.99
+	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Read-only value, e.g. 100.00
+	[{fbs:n}](#fb---firmware-build-string) | Firmware Build String | Read-only string
+	[{fbc:n}](#fb---firmware-build-config) | Firmware Build Config | Read-only filename
 	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 	[{hv:_}](#hv---hardware-version) | Hardware Version | **V8 only** Set to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards. Defaults to 8. 
@@ -390,13 +392,21 @@ These are general system-wide parameters and are part of the "sys" group.
 <br>
 ###Identification Settings
 
+### $FV - Firmware Version
+Read-only value. Example `$fv=0.97`<br>
+Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.97 versions.
+
 ### $FB - Firmware Build number
 Read-only value. Example `$fb=345.06`<br>
 Indicates the build of firmware and changes frequently. Please provide this number in any communication about an issue.
 
-### $FV - Firmware Version
-Read-only value. Example `$fv=0.97`<br>
-Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.97 versions.
+### $FBS - Firmware Build String
+Read-only value. Example `$fb=345.06`<br>
+Provides the git string for the build
+
+### $FBC - Firmware Build Config
+Read-only value. Example `$fb=345.06`<br>
+Provides the filename of the settings file (config) complied for the build
 
 ### $HP - Hardware Platform
 Read-only value. Returns:
