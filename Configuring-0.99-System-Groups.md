@@ -1,7 +1,7 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
 ## System Groups
-The system groups contain the following global machine and communication settings. The system group can be listed by requesting {sys:n} or $sys
+The system groups contain the following global machine and communication settings. The system groups can be listed by requesting {sys:n} or $sys
 
 - [Identification Parameters](#identification-parameters)
 - [Global Machining Parameters](#global-machining-parameters)
@@ -9,7 +9,7 @@ The system groups contain the following global machine and communication setting
 - [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
 ###Identification Parameters
-These are reported on the startup strings and should be included in any support discussions.
+These are reported in the startup strings and should be included in any support discussions.
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -19,12 +19,12 @@ These are reported on the startup strings and should be included in any support 
 	[{fbc:n}](#fb---firmware-build-config) | Firmware Build Config | Read-only filename
 	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | Read-only value, 1=Xmega, 2=Due, 3=v9(ARM)
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
-	[{hv:_}](#hv---hardware-version) | Hardware Version | **V8 only** Set to 6 for v6 and earlier boards, 7 or 8 for v7 and v8 boards. Defaults to 8. 
+	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0
 
 ###Identification Settings
 
 ### $FV - Firmware Version
-Read-only value. Example `$fv=0.97`<br>
+Read-only value. Example `$fv=0.99`<br>
 Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.97 versions.
 
 ### $FB - Firmware Build number
