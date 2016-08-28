@@ -5,8 +5,10 @@ The system group contains the following global machine and communication setting
 
 - [Identification Parameters](#identification-parameters)
 - [Global Machining Parameters](#global-machining-parameters)
+- [Communications Parameters](communications-parameters)
+- [Gcode Initialization Defaults](gcode-initialization-defaults)
 
-###Identification parameters
+###Identification Parameters
 These are reported on the startup strings and should be included in any support discussions.
 
 	Setting | Description | Notes
@@ -27,7 +29,7 @@ These are reported on the startup strings and should be included in any support 
 	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
 	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
 
-**Communications Settings**
+###Communications Parameters
 Set communications speeds and modes. 
 
 	Setting | Description | Notes
@@ -50,7 +52,7 @@ V8-Only Communications Settings (not available on g2)
 	[{baud:_}](#baud---set-usb-baud-rate) | Baud rate | 1=9600, 2=19200, 3=38400, 4=57600, 5=115200, 6=230400 -- 115200 is default
 
 
-**Gcode Initialization Defaults**
+###Gcode Initialization Defaults
 Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. 
 
 	Setting | Description | Notes
