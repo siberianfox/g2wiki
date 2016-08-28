@@ -70,7 +70,6 @@ Settings specific to a given axis. There are 6 axis groups, X,Y,Z linear axes, a
 	[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
 	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management
 	[{xjh:_}](#xjh---jerk-high) | Jerk High | Jerk used during homing operations
-	[{xjd:_}](#xjd---junction-deviation) | Junction deviation | Sets the imaginary radius For cornering. Larger values yield faster cornering but more corner jerk.
 	[{ara:_}](#ara---radius-value) | Radius setting | Artificial radius to convert linear values to degrees. ABC axes only.
 	[{xhi:_}](#homing-settings) | Homing Input | Switch (input) to use for homing this axis
 	[{xhd:_}](#homing-settings) | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
@@ -115,10 +114,9 @@ These are reported on the startup strings and should be included in any support 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{ja:_}](#ja---junction-acceleration) | Junction Acceleration | Global cornering acceleration value
+	[{jt:_}](#ja---junction-integration-time) | Junction Integration Time | Global cornering acceleration value
 	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
 	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
-
 
 **Communications Settings**
 Set communications speeds and modes. 
