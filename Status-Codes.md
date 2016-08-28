@@ -1,4 +1,4 @@
-The following status codes are supported as of build 100.06. See error.h for the source:
+The following status codes are supported as of firmware build 100.xx. See error.h for the source:
 ```
 // OS, communications and low-level status (must align with XIO_xxxx codes in xio.h)
 #define	STAT_OK 0				// function completed OK
