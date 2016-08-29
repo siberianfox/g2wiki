@@ -35,7 +35,7 @@ All configuration commands are available using [JSON mode](JSON-Operation), whic
 | JSON | Text | Description |
 | :--: | :--: | :-- |
 | `{"cmd":null}` | `$cmd`   | Read value for command "CMD" in strict JSON mode |
-| `{cmd}` | `$cmd` | Read value in relaxed JSON mode |
+| `{cmd:n}` | `$cmd` | Read value in relaxed JSON mode |
 | `{"cmd":123.4}` | `$cmd=123.4` | Set value to 123.4 in strict JSON mode |
 | `{cmd:123.4}` | `$cmd=123.4` | Set value in relaxed JSON mode |
 | `{xvm:50000}` | `$xvm=50000` | Set X max velocity to 50000 as an example |
