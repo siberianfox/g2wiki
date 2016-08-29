@@ -1,6 +1,6 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-#Motor Groups
+# Motor Groups
 This page documents motor settings. Each motor object ("group") has a collection of parameters for that motor. There are 6 motor groups, numbered 1,2,3,4,5,6. These are labeled on the v9 board, which breaks out motor1 - motor4. Other platforms may make more or fewer motors available, e.g. the Due has outputs for all 6 motors, which are labeled [here](Arduino-DUE-Pinout-for-g2core)
 
 - Motor examples use Motor 1, but any motor active for your platform is OK
@@ -100,4 +100,6 @@ Travel in X and Y is dependent on the conventions for your particular machine an
 Power management is used to keep the steppers on when you need them and turn them off when you don't. See [Power Management](Power-Management) page.
 
 ### 1pl - Power Level
-Power level is used to set the stepper driver current. 0 is off, 1.000 is maximum, which is about 2.5 amps for the DRV8825 drivers used on most G2 boards. Set the current carefully, as overdriving the motor typically yields motor performance that's actually worse than a more moderate power setting. The motor "runs rough", heats up excessively and may even burn out. If there is too much current the drivers may also go into thermal shutdown to protect themselves.
+Power level is used to set the stepper driver current. `0` is off, `1.000` is maximum, which is about 2.5 amps for the DRV8825 drivers used on most G2 boards.
+
+Set the current carefully, since the value can be too high or too low. Is short: a higher power level does *not* necessarily mean a higher torque. Underdriving the motor can yield skipped steps and too low of torque. Overdriving the motor typically yields motor performance that's actually worse than a more moderate power setting. When overdriving the motor "runs rough" (often caused by it skipping over microsteps to full-step positions), heats up excessively, and may even cause damage to the motors over time. If there is too much current the drivers may also heat up until they go into thermal shutdown to protect themselves.
