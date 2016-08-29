@@ -10,7 +10,7 @@ This page documents motor settings. Each motor object ("group") has a collection
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
 	[{1ma:_}](#1ma---map-motor-to-axis) | Map to Axis | Configure axis to which this motor is connected (for Cartesian machines) E.g. {1ma:0}, {2ma:1}, {3ma:2}, {4ma:3} to map motors 1-4 to X,Y,Z,A, respectively
-	[{1sa:_}](#1sa---step-angle-for-the-motor) | Step Angle | Motor parameter indicating the angle traveled per whole step. Typical setting is {1sa:1.8} for 1.8 degrees per step (200 steps per revolution)
+	[{1sa:_}](#1sa---step-angle) | Step Angle | Motor parameter indicating the angle traveled per whole step. Typical setting is {1sa:1.8} for 1.8 degrees per step (200 steps per revolution)
 	[{1tr:_}](#1tr---travel-per-revolution) | Travel_per_Rev | How far the mapped axis moves per motor revolution. E.g. {1tr:2.54} (millimeters) for a 10 TPI screw axis
 	[{1mi:_}](#1mi---microsteps) | MIcrosteps | Microsteps per whole step. G2 uses 1,2,4,8,16,32. Other values are accepted but warned
 	[{1su:_}](#1su---steps-per-unit) | Steps per Unit | Direct input and reading of steps per unit - about 7 digits decimal accuracy
