@@ -85,13 +85,13 @@ Set communications speeds and modes.
 	--------|-------------|-------
 	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
 	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
-	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict
+	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict (DEPRECATED)
 	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
 
-### $EJ - Enable JSON Mode on Power Up
+### $EJ - Enable JSON Mode
 This sets the startup mode. JSON mode can be invoked at any time by sending a line starting with an open curly '{'. JSON mode is exited any time by sending a line starting with '$', '?' or 'h'
 
 _Note: The two startup lines on reset will always be in JSON format regardless of setting in order to allow UIs to sync with an unknown board._
@@ -100,6 +100,17 @@ _Note: The two startup lines on reset will always be in JSON format regardless o
 $ej=0      - Disable JSON mode on power-up and reset
 $ej=1      - Enable JSON mode on power-up and reset
 </pre>
+
+**New Behavior as of build 100.000 (not implemented yet**
+Enable JSON mode sets the g2core response mode:
+<pre>
+$ej=0      - Responses provided as Text
+$ej=1      - Responses provided as JSON
+</pre>
+
+Inputs are accepted as either Text or JSON regardless of EJ setting. EJ is "sticky" sending characters or open curlies will no longer change the mode.
+
+DEPRECATED BEHAVIOUR<br>
 
 ### $JV - Set JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
