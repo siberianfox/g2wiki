@@ -85,11 +85,12 @@ Set communications speeds and modes.
 	--------|-------------|-------
 	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
 	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
-	[{js:_}](#js---set-json-syntax) | JSON syntax | 0=relaxed, 1=strict (DEPRECATED)
 	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
+
+Note: JSON syntax (JS) has been removed. All responses are strict. Accepts strict or relaxed JSON on input.
 
 ### $EJ - Enable JSON Mode
 This sets the startup mode. JSON mode can be invoked at any time by sending a line starting with an open curly '{'. JSON mode is exited any time by sending a line starting with '$', '?' or 'h'
@@ -120,9 +121,6 @@ $jv=3      - Configs  - Returns footer, messages, config command body
 $jv=4      - Linenum  - Returns footer, messages, config command body, and gcode line numbers if present
 $jv=5      - Verbose  - Returns footer, messages, config command body, and gcode blocks
 </pre>
-
-### $JS - Set JSON syntax
-Sets relaxed or strict syntax for JSON messages. See [JSON Syntax](JSON-Operation#json-syntax-option---relaxed-or-strict) for details.
 
 ### $TV - Set Text mode verbosity
 Sets how much information is returned in text mode. We recommend using Verbose, except for very special cases.
