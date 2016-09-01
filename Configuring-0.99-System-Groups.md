@@ -110,8 +110,6 @@ $ej=1      - Responses provided as JSON
 
 Inputs are accepted as either Text or JSON regardless of EJ setting. EJ is "sticky" sending characters or open curlies will no longer change the mode.
 
-DEPRECATED BEHAVIOUR<br>
-
 ### $JV - Set JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
 <pre>
