@@ -93,7 +93,7 @@ Set communications speeds and modes.
 _Note: As of 0.99 JSON syntax (JS) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
 ### $EJ - Enable JSON Mode
-_Note: The behavior of EJ has changed in 0.99_
+_Note: The behavior of EJ has changed in 0.99_<br><br>
 Enable JSON mode sets the g2core response mode:
 <pre>
 $ej=0  - TEXT: Responses provided as Text (input commands are accepted in either format)
