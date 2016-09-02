@@ -83,7 +83,7 @@ Set communications speeds and modes.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode
+	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode, 2=auto mode
 	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
 	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
 	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
@@ -93,23 +93,19 @@ Set communications speeds and modes.
 Note: JSON syntax (JS) has been removed. All responses are strict. Accepts strict or relaxed JSON on input.
 
 ### $EJ - Enable JSON Mode
-This sets the startup mode. JSON mode can be invoked at any time by sending a line starting with an open curly '{'. JSON mode is exited any time by sending a line starting with '$', '?' or 'h'
-
-_Note: The two startup lines on reset will always be in JSON format regardless of setting in order to allow UIs to sync with an unknown board._
-
-<pre>
-$ej=0      - Disable JSON mode on power-up and reset
-$ej=1      - Enable JSON mode on power-up and reset
-</pre>
-
-**New Behavior as of build 100.000 (not implemented yet**
+_Note: The behavior of EJ has changed in 0.99_
 Enable JSON mode sets the g2core response mode:
 <pre>
-$ej=0      - Responses provided as Text
-$ej=1      - Responses provided as JSON
+$ej=0  - TEXT: Responses provided as Text (input commands are accepted in either format)
+$ej=1  - JSON: Responses provided as JSON (input commands are accepted in either format)
+$ej=2  - AUTO: Responses provided in the format of the request
 </pre>
 
-Inputs are accepted as either Text or JSON regardless of EJ setting. EJ is "sticky" sending characters or open curlies will no longer change the mode.
+By selecting TEXT or JSON the setting is "sticky". Commands are accepted in either text or JSON mode, but responses are delivered in the selected mode. 
+
+By selecting AUTO g2core will send responses in the same format as the command (it auto-configures according to the input). JSON mode is set by sending a line starting with an open curly '{'. TEXT mode is set by sending a line starting with '$', '?' or 'h'. Gcode commands do not change the auto mode. Responses to Gcode are returned in the current mode
+
+_Note: The two startup lines on reset will always be in JSON format regardless of setting in order to allow UIs to sync with an unknown board._
 
 ### $JV - Set JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
