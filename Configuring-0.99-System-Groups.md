@@ -90,7 +90,7 @@ Set communications speeds and modes.
 	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
 
-_Note: JSON syntax (JS) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
+_Note: As of 0.99 JSON syntax (JS) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
 ### $EJ - Enable JSON Mode
 _Note: The behavior of EJ has changed in 0.99_
