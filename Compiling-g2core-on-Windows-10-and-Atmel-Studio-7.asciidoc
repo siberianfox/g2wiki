@@ -65,7 +65,7 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 *** You **will** need the USB drivers when asked.
 
 * Configuring Atmel Studio 7
-There are a few things you need to do once you have it installed
+There are a few things you need to do make sure of once you have it installed
 
 ** Verify GDB is the selected debugger
 *** Bring up the g2core Properties window by right clicking the `g2core` project symbol in the Solution Explorer window and selecting `Properties` (at the bottom)
