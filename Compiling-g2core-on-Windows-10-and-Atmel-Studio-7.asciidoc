@@ -54,7 +54,7 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 
 ** They require you to either register or fill out a "guest" form. Otherwise it's free.
 
-* Walk through the entire installation process. 
+* Walk through the entire installation process 
 
 ** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
 
@@ -63,6 +63,14 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 *** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. (We provide projects for you to use.)
 
 *** You **will** need the USB drivers when asked.
+
+* Configuring Atmel Studio 7
+There are a few things you need to do once you have it installed
+
+** Verify GDB is the selected debugger
+*** Bring up the g2core Properties window by right clicking the `g2core` project symbol in the Solution Explorer window and selecting `Properties` (at the bottom)
+*** Select the `Advanced` tab
+*** Make sure `Use GDB` is checked, and `Override Current GDB Path` is not
 
 ## Git for Windows
 The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
