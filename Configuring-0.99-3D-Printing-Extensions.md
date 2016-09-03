@@ -13,20 +13,16 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
 	[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
 	[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
-	[{_he1:{st:...}}](#_he1st---set-temperature) | Set setpoint temperature | write-only
-	[{_he1:{t:...}}](#_he1t---get-temperature) | Current temperature | read-only
-	[{_he1:{op:...}}](#_he1op---heater-output) | Heater PWM ouput level | read-only
-	[{_he1:{tr:...}}](#_he1tr---thermistor-resistance) | Thermistor resistance | read-only
+	[{_he1:{st:...}}](#_he1st-set-setpoint-temperature) | Set setpoint temperature | write-only
+	[{_he1:{t:...}}](#_he1t-get-temperature) | Current temperature | read-only
 	[{_he1:{at:...}}](#_he1at-heater-at-temperature-flag) | "At temperature" flag | read-only
+	[{_he1:{op:...}}](#_he1op-pwm-output) | PWM output level | read-only
+	[{_he1:{tr:...}}](#_he1tr-thermistor-resistance) | Thermistor resistance | read-only
 	[{_he1:{an:...}}](#_he1an-heater-adc-reading) | Heater ADC reading | read-only
 	[{_he1:{fp:...}}](#_he1fp-fm-fl-fh-fan-controls) | Fan power | read/write
 	[{_he1:{fm:...}}](#_he1fp-fm-fl-fh-fan-controls) | Fan minimum power | read/write
 	[{_he1:{fl:...}}](#_he1fp-fm-fl-fh-fan-controls) | Fan low temperature | read/write
 	[{_he1:{fh:...}}](#_he1fp-fm-fl-fh-fan-controls) | Fan high temperature | read/write
-
-### {_he1:{at:...}} Heater At-Temperature Flag
-
-### {_he1:{an:...}} Heater ADC Reading
 
 ### {_he1:{e:...}} Heater Enable
 
@@ -44,6 +40,18 @@ For a heated bed:
   DEFAULT_I    0.12
   DEFAULT_D    400.0
 ```
+
+### {_he1:{st:...}} Set Setpoint Temperature
+
+### {_he1:{t:...}} Get Temperature
+
+### {_he1:{at:...}} Heater At-Temperature Flag
+
+### {_he1:{op:...}} PWM Output
+
+### {_he1:{tr:...}} Thermistor Resistance
+
+### {_he1:{an:...}} Heater ADC Reading
 
 ### {_he1:{fp:..., fm:..., fl:..., fh:...}} Fan Controls
 
