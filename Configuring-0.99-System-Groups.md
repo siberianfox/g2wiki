@@ -13,13 +13,13 @@ These are reported in the startup strings and should be included in any support 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{fv:n}](#fv---firmware-version) | Firmware Version | Version number, e.g. 0.99
-	[{fb:n}](#fb---firmware-build-number) | Firmware Build | Build number, e.g. 100.00
-	[{fbs:n}](#fbs---firmware-build-string) | Firmware Build String | Git string
-	[{fbc:n}](#fbc---firmware-build-config) | Firmware Build Config | Name of settings file 
-	[{hp:n}](#hp---hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
-	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
-	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
+	[{fv:n}](#fv-firmware-version) | Firmware Version | Version number, e.g. 0.99
+	[{fb:n}](#fb-firmware-build-number) | Firmware Build | Build number, e.g. 100.00
+	[{fbs:n}](#fbs-firmware-build-string) | Firmware Build String | Git string
+	[{fbc:n}](#fbc-firmware-build-config) | Firmware Build Config | Name of settings file 
+	[{hp:n}](#hp-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
+	[{hv:_}](#hv-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
+	[{id:n}](#id-unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 ### {fv:n} Firmware Version
 Read-only value. Example `"fv":0.99`<br>
