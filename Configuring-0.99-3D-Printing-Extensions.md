@@ -13,7 +13,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
 	[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
 	[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
-	[{_he1:{st:...}}](#_he1st-set-setpoint-temperature) | Set setpoint temperature | write-only
+	[{_he1:{st:...}}](#_he1st-set-setpoint-temperature) | Setpoint temperature | write-only
 	[{_he1:{t:...}}](#_he1t-get-temperature) | Current temperature | read-only
 	[{_he1:{at:...}}](#_he1at-heater-at-temperature-flag) | "At temperature" flag | read-only
 	[{_he1:{op:...}}](#_he1op-pwm-output) | PWM output level | read-only
