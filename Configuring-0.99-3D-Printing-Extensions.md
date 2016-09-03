@@ -14,9 +14,9 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	Setting | Description | Notes
 	--------|-------------|-------
 	[{_he1e:...}](#_he1e---heater-enable) | Heater Enable | 0=off, 1=on 
-	[{_he1p:...}](#_he1p---heater-p) | Heater P (PID) | read/write 
-	[{_he1i:...}](#_he1i---heater-i) | Heater I (PID) | read/write 
-	[{_he1d:...}](#_he1d---heater-d) | Heater D (PID) | read/write 
+	[{_he1p:...}](#_he1p-i-d---heater-pid-values) | Heater P (PID) | read/write 
+	[{_he1i:...}](#_he1p-i-d---heater-pid-values) | Heater I (PID) | read/write 
+	[{_he1d:...}](#_he1p-i-d---heater-pid-values) | Heater D (PID) | read/write 
 	[{_he1st:...}](#_he1st---set-temperature) | Set setpoint temperature | write-only
 	[{_he1t:...}](#_he1t---get-temperature) | Current temperature | read-only
 	[{_he1op:...}](#_he1op---heater-output) | Heater PWM level | read-only
