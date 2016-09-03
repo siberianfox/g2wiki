@@ -9,26 +9,30 @@ This page documents axis settings. Each axis object ("group") has a collection o
 - Axis examples use X axis, but any axis is OK unless otherwise noted
 
 ## Summary
+There are 3 heater groups. The examples below show heater group 1 - `{he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
-	[{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
-	[{xfr:_}](#xfr---feed-rate-maximum) | Feed_rate_maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
-	[{xtn:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
-	[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
-	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management
-	[{xjh:_}](#xjh---jerk-high) | Jerk High | Jerk used during homing operations
-	[{ara:_}](#ara---radius-value) | Radius setting | Artificial radius to convert linear values to degrees. ABC axes only.
-	[{xhi:_}](#homing-settings) | Homing Input | Switch (input) to use for homing this axis
-	[{xhd:_}](#homing-settings) | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
-	[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch)
-	[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch)
-	[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
-	[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates
-## Axis Settings
+	[{he1e:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
 
-### xam - Axis Mode
+    // NOTICE: If you change these heater group keys, you MUST change the get/set functions too!!
+    { "he1","he1e", _fip, 0, tx_print_nul, cm_get_heater_enable,   cm_set_heater_enable,   (float *)&cs.null, H1_DEFAULT_ENABLE },
+    { "he1","he1p", _fi,  3, tx_print_nul, cm_get_heater_p,        cm_set_heater_p,        (float *)&cs.null, H1_DEFAULT_P },
+    { "he1","he1i", _fi,  5, tx_print_nul, cm_get_heater_i,        cm_set_heater_i,        (float *)&cs.null, H1_DEFAULT_I },
+    { "he1","he1d", _fi,  5, tx_print_nul, cm_get_heater_d,        cm_set_heater_d,        (float *)&cs.null, H1_DEFAULT_D },
+    { "he1","he1st",_f0,  1, tx_print_nul, cm_get_set_temperature, cm_set_set_temperature, (float *)&cs.null, 0 },
+    { "he1","he1t", _f0,  1, tx_print_nul, cm_get_temperature,     set_nul,                (float *)&cs.null, 0 },
+    { "he1","he1op",_f0,  3, tx_print_nul, cm_get_heater_output,   set_nul,                (float *)&cs.null, 0 },
+    { "he1","he1tr",_f0,  3, tx_print_nul, cm_get_thermistor_resistance,   set_nul,        (float *)&cs.null, 0 },
+    { "he1","he1at",_f0,  0, tx_print_nul, cm_get_at_temperature,  set_nul,                (float *)&cs.null, 0 },
+    { "he1","he1an",_f0,  0, tx_print_nul, cm_get_heater_adc,      set_nul,                (float *)&cs.null, 0 },
+    { "he1","he1fp",_f0,  1, tx_print_nul, cm_get_fan_power,       cm_set_fan_power,       (float *)&cs.null, 0 },
+    { "he1","he1fm",_f0,  1, tx_print_nul, cm_get_fan_min_power,   cm_set_fan_min_power,   (float *)&cs.null, 0 },
+    { "he1","he1fl",_f0,  1, tx_print_nul, cm_get_fan_low_temp,    cm_set_fan_low_temp,    (float *)&cs.null, 0 },
+    { "he1","he1fh",_f0,  1, tx_print_nul, cm_get_fan_high_temp,   cm_set_fan_high_temp,   (float *)&cs.null, 0 },
+
+
+### {he1:{e:...}} - Heater Enable
 Sets the function of the axis.
 
 - {xam:0}  Disable. All input to that axis will be ignored and the axis will not move. 
