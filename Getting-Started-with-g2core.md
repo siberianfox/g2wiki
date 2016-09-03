@@ -11,8 +11,7 @@ You will also need software to generate GCode.
 
 The following is a list of the minimum you will need strictly for g2core, regardless of what project you'll be using it for.
 
-**Debugger/Programmer** (Not _strictly_ necessary, but very helpful) - [Atmel-ICE](http://www.atmel.com/tools/atatmel-ice.aspx).
-* There are three ways they sell the Atmel-ICE: [Standard ($85)](http://store.atmel.com/PartDetail.aspx?q=p:10500375#tc:description), [Basic ($49)](http://store.atmel.com/PartDetail.aspx?q=p:10500377#tc:description) ([Digi-Key has them for $55](http://www.digikey.com/product-search/en?x=0&y=0&lang=en&site=us&KeyWords=atmel-ice-basic)), and [PCBA ($32)](http://store.atmel.com/PartDetail.aspx?q=p:10500376#tc:description). The standard comes with an adapter that you won't need for this project, and the PCBA is missing the $14 cable you _will_ need for the project, so the Basic is just right.
+**Debugger/Programmer** (Not _strictly_ necessary, but very helpful) - [Atmel-ICE](http://www.mouser.com/ProductDetail/Atmel/ATATMEL-ICE-BASIC/?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d).
 * This is not the Atmel _SAM-ICE_ or the Atmel _JTAG-ICE_, but just the _Atmel-ICE_. The Atmel SAM-ICE will work as well, but is older and more expensive, but has the advantage of being a (Atmel-limited) Segger J-Link. We will document here how to use the Atmel-ICE.
 * You _can_ program the Due and the TinyG v9 boards without a debugger, but you cannot debug them.
 
