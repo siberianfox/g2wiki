@@ -1,6 +1,6 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-**!!!! TAKE NOTE: The 3D printer extensions documented on this page are pre-release and experimental. These settings will NOT be present in the release ultimate 3D printing releases. Please expect any UIs or code written to these specifications to change. The settings on this page will be removed and will not be backwards compatible. !!!!**
+**!!!! TAKE NOTE: The 3D printer extensions documented on this page are pre-release and experimental. These settings will NOT be present in the release ultimate 3D printing releases. Please expect any UIs or code written to these specifications to require changes. The settings on this page will be removed and will not be backwards compatible. !!!!**
 
 # Axis Groups
 
