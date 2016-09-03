@@ -55,3 +55,28 @@ For a heated bed:
 
 ### {_he1:{fp:..., fm:..., fl:..., fh:...}} Fan Controls
 
+# PID Groups
+There are 3 PID groups. The examples below show PID group 1 - `{_pid1:n}`
+
+## Summary
+
+	Setting | Description | Notes
+	--------|-------------|-------
+	[{_pid1:{p:...}}](#_pid1p-i-d-pid-values) | Raw P Value | read-only 
+	[{_pid1:{i:...}}](#_pid1p-i-d-pid-values) | Raw I Value | read-only 
+	[{_pid1:{d:...}}](#_pid1p-i-d-pid-values) | Raw D Value | read-only 
+
+### {_pid1:{p:..., i:..., d:...}} Raw PID Values
+These are Read-Only values from the live PID. THer are not scaled to temperature
+
+# Auto Bed Leveling Parameters
+There are 3 PID groups. The examples below show PID group 1 - `{_pid1:n}`
+
+## Summary
+
+	Setting | Description | Notes
+	--------|-------------|-------
+	[{tram:t](#tramt-tram-command) | Tram Command | Set and enable tramming matrix 
+
+### {tram:t} Tram Command
+Setting Tram will use the last three Probe values to define the plane of the Z axis. For operation, probe the bed (Z axis) at three disparate points, then invoke Tram.
