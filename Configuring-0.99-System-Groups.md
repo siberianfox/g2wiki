@@ -9,7 +9,7 @@ The system groups contain the following global machine and communication setting
 - [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
 ##Identification Parameters
-These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless othewrwise noted.
+These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless otherwise noted.
 
 	Setting | Description | Notes
 	--------|-------------|-------
@@ -21,32 +21,32 @@ These are reported in the startup strings and should be included in any support 
 	[{id:n}](#id---unique-board-identifier) | board ID | Each board has a read-only unique ID
 	[{hv:_}](#hv---hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 
-### $FV - Firmware Version
+### {fv:n} Firmware Version
 Read-only value. Example `"fv":0.99`<br>
 Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
 
-### $FB - Firmware Build number
+### {fb:n} Firmware Build number
 Read-only value. Example `"fb":100.00`<br>
 Indicates the build of firmware and changes frequently. Please provide this number in any communication about an issue.
 
-### $FBS - Firmware Build String
+### {fbs:n} Firmware Build String
 Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`<br>
 The format is "TAG-NN-sha1" with optional "-dirty", where NN is how many commits past the tag, and sha1 being the exact unique sha1 prefix. "-dirty" should not be seen unless you're doing development, and means there are uncommitted changes in the repo when it's built.
 
-### $FBC - Firmware Build Config
+### {fbc:n} Firmware Build Config File
 Filename of the settings file (config) complied for the build.<br>
 Example `"fbc":"settings_makeblock.h"`
 
-### $HP - Hardware Platform
+### {hp:n} Hardware Platform
 Read-only value. Returns:
 * 1 = TinyG Xmega series
 * 2 for Arduino Due G2 (ARM)
 * 3 for TinyG v9 G2 (ARM)
 
-### $HV - Hardware Version
+### {hv:n} Hardware Version
 Unused in g2core. Read-write value in TInyG. Used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.
 
-### $ID - Unique Board Identifier
+### {id:n} Unique Board Identifier
 Read-only value derived from factor configuration settings in the ARM chip
 
 
