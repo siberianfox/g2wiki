@@ -163,6 +163,8 @@ Prior to 0.99 `ex` was used to select XON/XOFF, RTS/CTS or no flow control. In 0
 
 
 ##Gcode Initialization Defaults
+**NOTE: g2core currently does not support local persistence (i.e. on-board EEPROM or equivalent), so these Gcode initialization settings are effectively read-only. They can be set during compile time to change them, but a reset or power-on will always load the compiled values. Any changes that have been made to the values through the settings API are not applied.**  
+
 Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. Being as how g2core does not have any native persistence these commands are only set at compile time and will not have an effect is written.
 
 	Setting | Description | Notes
