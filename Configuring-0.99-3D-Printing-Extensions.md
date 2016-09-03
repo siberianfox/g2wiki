@@ -3,13 +3,9 @@ _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 **!!!! TAKE NOTE: The 3D printer extensions documented on this page are pre-release and experimental (hence the leading underscore). These settings will NOT be present in the release ultimate 3D printing releases. Please expect any UIs or code written to these specifications to require changes. The settings on this page will be removed and will not be backwards compatible. !!!!**
 
 # Heater Groups
-
-This page documents axis settings. Each axis object ("group") has a collection of parameters for that axis. There are 6 axis groups, X,Y,Z linear axes, and A,B,C rotary axes. Not all axes have all parameters.
-
-- Axis examples use X axis, but any axis is OK unless otherwise noted
+There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 ## Summary
-There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
