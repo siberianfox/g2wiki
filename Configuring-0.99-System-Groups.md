@@ -18,7 +18,7 @@ These are reported in the startup strings and should be included in any support 
 	[{fbs:n}](#fbsn-firmware-build-string) | Firmware Build String | Git string
 	[{fbc:n}](#fbcn-firmware-build-config) | Firmware Build Config | Name of settings file 
 	[{hp:n}](#hpn-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
-	[{hv:_}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
+	[{hv:n}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 	[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 ### {fv:n} Firmware Version
@@ -44,7 +44,7 @@ Read-only value. Returns:
 * 3 for TinyG v9 G2 (ARM)
 
 ### {hv:n} Hardware Version
-Unused in g2core. Read-write value in TInyG. Used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.
+Unused in g2core. (This value is writable in TinyG and is used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.)
 
 ### {id:n} Unique Board Identifier
 Read-only value derived from factor configuration settings in the ARM chip
