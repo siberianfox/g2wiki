@@ -9,7 +9,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{_he1:{e:...}}](#_he1e-heater-enable) | Heater Enable | 0=off, 1=on 
+	[{_he1:{e:__}}](#_he1e-heater-enable) | Heater Enable | 0=off, 1=on 
 	[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
 	[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
 	[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
@@ -30,7 +30,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 ### {_he1:{e:...}} Heater Enable
 
-### {_he1:{p:..., i:..., d:...}} Heater PID Values
+### {_he1:{p:__, i:__, d:__}} Heater PID Values
 
 PID settings for heater feedback loop. Typical default values are:
 ```
