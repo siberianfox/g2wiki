@@ -30,9 +30,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 ### {_he1:{e:...}} - Heater Enable
 
-### {_he1:{p:...}} - Heater P
-### {_he1:{i:...}} - Heater I
-### {_he1:{d:...}} - Heater D
+### {_he1:{p:..., i:..., d:...}} - Heater PID Values
 
 PID settings for heater feedback loop. Typical default values are:
 ```
