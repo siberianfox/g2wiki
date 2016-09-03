@@ -18,7 +18,7 @@ If you have an older firmware version:
 
 ##Conventions Used for Config Documentation
 - Examples show relaxed JSON input. e.g. `{fv:n}`. Strict JSON is also accepted in all cases, e.g. `{"fv":null}`
-- Multi-level JSON is shown in its parent/child form, e.g. {x:{vm:...}}. The flat forms are also supported: `{xvm:...}`
+- Multi-level JSON is shown in its parent/child form, e.g. `{x:{vm:...}}`. The flat forms are also supported: `{xvm:...}`
 - CMD means some command - aka the "name" of the name/value pair. CMDs are case insensitive.
 - Underscore "_" means some numeric value
 - "abcd" means some string value
