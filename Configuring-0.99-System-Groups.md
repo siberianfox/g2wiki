@@ -59,7 +59,15 @@ Read-only value derived from factor configuration settings in the ARM chip
 	[{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
 
 ### {jt:...} Junction Integration Time 
-Sets the cornering speed. The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
+The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
+
+<pre>
+  {jt:0.01}  - Lower limit - probably will fail
+  {jt:0.75}  - Good value for slower machines
+  {jt:1.00}  - Nominal value
+  {jt:1.20}  - Good value for fast machines
+  {jt:5.00}  - Upper limit. Absolutely will fail
+</pre>
 
 ### {ct:...} Chordal Tolerance
 Arcs are generated as sets of very short straight lines that approximate a curve. Each line is a "chord" that spans the endpoints of that segment of the arc. Chordal tolerance sets the maximum allowable deviation between the true arc and straight line that approximates it - which will be the value of the deviation in the middle of the line / arc.
@@ -187,13 +195,13 @@ $gpl=1      - G18 (XZ plane)
 $gpl=2      - G19 (YZ plane)
 </pre> 
 
-###$GUN - Gcode Default Units
+### {gun:...} Gcode Default Units
 <pre>
 $gun=0      - G20 (inches)
 $gun=1      - G21 (millimeters)
 </pre> 
 
-###$GCO - Gcode Default Coordinate System
+### {gco:...} Gcode Default Coordinate System
 <pre>
 $gco=1      - G54 (coordinate system 1)
 $gco=2      - G55 (coordinate system 2)
@@ -203,14 +211,14 @@ $gco=5      - G58 (coordinate system 5)
 $gco=6      - G59 (coordinate system 6)
 </pre> 
 
-###$GPA - Gcode Default Path Control
+### {gpa:...} Gcode Default Path Control
 <pre>
 $gpa=0      - G61 (exact path mode)
 $gpa=1      - G61.1 (exact stop mode)
 $gpa=2      - G64 (continuous mode)
 </pre> 
 
-### $GDI - Gcode Distance Mode
+### {gdi:...} Gcode Distance Mode
 <pre>
 $gdi=0      - G90 (absolute mode)
 $gdi=1      - G91 (incremental mode)
