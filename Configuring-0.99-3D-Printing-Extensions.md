@@ -1,6 +1,6 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-**!!!! TAKE NOTE: The 3D printer extensions documented on this page are pre-release and experimental. These settings will NOT be present in the release ultimate 3D printing releases. Please expect any UIs or code written to these specifications to require changes. The settings on this page will be removed and will not be backwards compatible. !!!!**
+**!!!! TAKE NOTE: The 3D printer extensions documented on this page are pre-release and experimental (hence the leading underscore). These settings will NOT be present in the release ultimate 3D printing releases. Please expect any UIs or code written to these specifications to require changes. The settings on this page will be removed and will not be backwards compatible. !!!!**
 
 # Heater Groups
 
@@ -13,23 +13,20 @@ There are 3 heater groups. The examples below show heater group 1 - `{he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{he1e:...}](#he1e---heater-enable) | Heater Enable | 0=off, 1=on 
-	[{he1p:...}](#he1p---heater-p) | Heater P (PID) | floating point value 
-	[{he1i:...}](#he1i---heater-i) | Heater I (PID) | floating point value 
-	[{he1d:...}](#he1d---heater-d) | Heater D (PID) | floating point value 
-	[{he1st:...}](#he1st---heater-set-temperature) | Set Temperature | 
-	[{he1t:...}](#he1t---heater-get-temperature) | Get Temperature | 
-	[{he1op:...}](#he1op---get-heater-output) | Get Temperature | 
-
-    { "he1","he1op",_f0,  3, tx_print_nul, cm_get_heater_output,   set_nul,                (float *)&cs.null, 0 },
-    { "he1","he1tr",_f0,  3, tx_print_nul, cm_get_thermistor_resistance,   set_nul,        (float *)&cs.null, 0 },
-    { "he1","he1at",_f0,  0, tx_print_nul, cm_get_at_temperature,  set_nul,                (float *)&cs.null, 0 },
-    { "he1","he1an",_f0,  0, tx_print_nul, cm_get_heater_adc,      set_nul,                (float *)&cs.null, 0 },
-    { "he1","he1fp",_f0,  1, tx_print_nul, cm_get_fan_power,       cm_set_fan_power,       (float *)&cs.null, 0 },
-    { "he1","he1fm",_f0,  1, tx_print_nul, cm_get_fan_min_power,   cm_set_fan_min_power,   (float *)&cs.null, 0 },
-    { "he1","he1fl",_f0,  1, tx_print_nul, cm_get_fan_low_temp,    cm_set_fan_low_temp,    (float *)&cs.null, 0 },
-    { "he1","he1fh",_f0,  1, tx_print_nul, cm_get_fan_high_temp,   cm_set_fan_high_temp,   (float *)&cs.null, 0 },
-
+	[{_he1e:...}](#_he1e---heater-enable) | Heater Enable | 0=off, 1=on 
+	[{_he1p:...}](#_he1p---heater-p) | Heater P (PID) | read/write 
+	[{_he1i:...}](#_he1i---heater-i) | Heater I (PID) | read/write 
+	[{_he1d:...}](#_he1d---heater-d) | Heater D (PID) | read/write 
+	[{_he1st:...}](#_he1st---set-temperature) | Set setpoint temperature | write-only
+	[{_he1t:...}](#_he1t---get-temperature) | Current temperature | read-only
+	[{_he1op:...}](#_he1op---heater-output) | Heater PWM level | read-only
+	[{_he1tr:...}](#_he1tr---thermistor-resistance) | Thermistor resistance | read-only
+	[{_he1at:...}](#_he1at---at-temperature) | "At temperature" flag | read-only 
+	[{_he1an:...}](#_he1an---heater-adc) | Heater ADC reading | read-only
+	[{_he1fp:...}](#_he1fp---fan-power) | Fan power | read/write
+	[{_he1fm:...}](#_he1fm---fan-min-power) | Fan min power | read/write
+	[{_he1fl:...}](#_he1fl---fan-low-temperature) | Fan low temperature | read/write
+	[{_he1fh:...}](#_he1fh---fan-high-temperature) | Fan high temperature | read/write
 
 ### {he1:{e:...}} - Heater Enable
 Sets the function of the axis.
