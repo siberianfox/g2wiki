@@ -22,13 +22,13 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1op:...}](#_he1op---heater-output) | Heater PWM level | read-only
 	[{_he1tr:...}](#_he1tr---thermistor-resistance) | Thermistor resistance | read-only
 	[{_he1at:...}](#_he1at---at-temperature) | "At temperature" flag | read-only 
-	[{_he1an:...}](#_he1an---heater-adc) | Heater ADC reading | read-only
+	[{_he1an:...}](#_he1an---heater-adc-reading) | Heater ADC reading | read-only
 	[{_he1fp:...}](#_he1fp-fm-fl-fh-fan-controls) | Fan power | read/write
 	[{_he1fm:...}](#_he1fp-fm-fl-fh-fan-controls) | Fan minimum power | read/write
 	[{_he1fl:...}](#_he1fp-fm-fl-fh-fan-controls) | Fan low temperature | read/write
 	[{_he1fh:...}](#_he1fp-fm-fl-fh-fan-controls) | Fan high temperature | read/write
 
-### {_he1:{fp:..., fm:..., fl:..., fh:...}} Fan Controls
+### {_he1:{an:...}} Heater ADC Reading
 
 ### {_he1:{e:...}} Heater Enable
 
@@ -46,3 +46,6 @@ For a heated bed:
   DEFAULT_I    0.12
   DEFAULT_D    400.0
 ```
+
+### {_he1:{fp:..., fm:..., fl:..., fh:...}} Fan Controls
+
