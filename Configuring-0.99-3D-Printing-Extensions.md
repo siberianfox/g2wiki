@@ -31,8 +31,18 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 ### {_he1:{e:...}} - Heater Enable
 
 ### {_he1:{p:...}} - Heater P
-
 ### {_he1:{i:...}} - Heater I
-
 ### {_he1:{d:...}} - Heater D
 
+PID settings for heater feedback loop. Typical default values are:
+```
+For an extruder heater, 12volt:
+  DEFAULT_P    7.0
+  DEFAULT_I    0.05
+  DEFAULT_D    150.0
+
+For a heated bed:
+  DEFAULT_P    9.0
+  DEFAULT_I    0.12
+  DEFAULT_D    400.0
+```
