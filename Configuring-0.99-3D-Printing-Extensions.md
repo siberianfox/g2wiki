@@ -13,10 +13,10 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{_he1e:...}](#_he1e---heater-enable) | Heater Enable | 0=off, 1=on 
-	[{_he1p:...}](#_he1p-i-d---heater-pid-values) | Heater P (PID) | read/write 
-	[{_he1i:...}](#_he1p-i-d---heater-pid-values) | Heater I (PID) | read/write 
-	[{_he1d:...}](#_he1p-i-d---heater-pid-values) | Heater D (PID) | read/write 
+	[{_he1e:...}](#_he1e-heater-enable) | Heater Enable | 0=off, 1=on 
+	[{_he1p:...}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
+	[{_he1i:...}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
+	[{_he1d:...}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
 	[{_he1st:...}](#_he1st---set-temperature) | Set setpoint temperature | write-only
 	[{_he1t:...}](#_he1t---get-temperature) | Current temperature | read-only
 	[{_he1op:...}](#_he1op---heater-output) | Heater PWM level | read-only
@@ -28,11 +28,11 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1fl:...}](#_he1fl---fan-low-temperature) | Fan low temperature | read/write
 	[{_he1fh:...}](#_he1fh---fan-high-temperature) | Fan high temperature | read/write
 
-### {_he1:{fp:..., fm:..., fl:..., fh:...}} - Fan Controls
+### {_he1:{fp:..., fm:..., fl:..., fh:...}} Fan Controls
 
-### {_he1:{e:...}} - Heater Enable
+### {_he1:{e:...}} Heater Enable
 
-### {_he1:{p:..., i:..., d:...}} - Heater PID Values
+### {_he1:{p:..., i:..., d:...}} Heater PID Values
 
 PID settings for heater feedback loop. Typical default values are:
 ```
