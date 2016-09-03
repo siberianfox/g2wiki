@@ -89,6 +89,7 @@ Set communications speeds and modes.
 	[{qv:...}](#qv-queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 	[{sv:...}](#sv-status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 	[{si:...}](#si-status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
+	[{ex:...}](#ex-flow-control) | Enable flow control | no function in 0.99 but remains for future use
 
 _Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
@@ -155,12 +156,10 @@ The minimum is 100 ms. Trying to set a value below the minimum will set the mini
 $si=250    - Status interval in milliseconds
 </pre>
 
-### $EX - Enable Flow Control 
-<pre>
-$ex=0      - Disable flow control 
-$ex=1      - Enable XON/XOFF flow control protocol 
-$ex=2      - Enable RTS/CTS flow control protocol 
-</pre>
+### {ex:...} Enable Flow Control
+This setting has no effect, but will not return an error if used.
+
+Prior to 0.99 `ex` was used to select XON/XOFF, RTS/CTS or no flow control. In 0.99 there are two ways to communication o the board. (1) USB, which does its own flow control and therefore needs no configuration, and (2) UART serial which assumes (and currently requires) hardware RTS/CTS flow control. In the future we anticipate adding XON/XOFF software flow control back into the firmware, so this variable has not been removed. 
 
 
 ##Gcode Initialization Defaults
