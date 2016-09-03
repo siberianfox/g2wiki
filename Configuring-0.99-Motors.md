@@ -23,9 +23,9 @@ _Note: Setting power level to every high values will not necessarily get more po
 ## Motor Settings
 Motor travel settings can be done one of two ways. You can enter the steps per unit `{su:...}`, which sets the number of steps the code will emit to travel one complete unit - millimeter, inch, or degree. the SU value is accurate to roughly 7 decimal places, with 5 places available to the right of the decimal point.
 
-Or you can enter the parameters that compute the steps per unit, which are Step Angle: `{1sa:...}`, Travel per Revolution: `{1tr:...}` and Microsteps: `{1mi:...}`. For example, if you want run motor #1 with a 200 step per revolution motor, a 3mm GT2 timing belt with a 20 tooth pulley, and 8 microsteps you enter: 
+Or you can enter the parameters that compute the steps per unit, which are Step Angle: `{1:{sa:...}}`, Travel per Revolution: `{1:{tr:...}}` and Microsteps: `{1:{mi:...}}`. For example, if you want run motor #1 with a 200 step per revolution motor, a 3mm GT2 timing belt with a 20 tooth pulley, and 8 microsteps you enter: 
 
-- Step angle: `{1sa:1.8}`
+- Step angle: `{1:{sa:1.8}}` or `{1sa:1.8}`
 - Travel per revolution: `{1tr:20}`  
 - Microsteps: `{1mi:8}`
 
@@ -41,14 +41,14 @@ Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you migh
 {4:{ma:2}}  Map motor 4 to Z axis
 </pre> 
 
-### 1sa - Step Angle
+### {1:{sa:...}} - Step Angle
 This is a decimal number which is often 1.8 degrees per step, but should reflect the motor in use. You might also find 0.9, 3.6, 7.5 or other values. You can usually read this off the motor label. If a motor is indicated in steps per revolution just divide 360 by that number. A 200 step-per-rev motor is 1.8 degrees, a 400 step-per-rev motor has 0.9 degrees per step.
 
 <pre>
 {1:{sa:1.8}} This is a typical value for many motors 
 </pre> 
 
-### 1tr - Travel per Revolution
+### {1:{tr:...}} - Travel per Revolution
 TR needs to be set to the distance the mapped axis will move for one revolution of the motor. - e.g. if motor 1 is mapped to the X axis, then 1tr applies to the Xaxis. If the machine is in mm mode (G21) the TR value for XYZ axes should be entered in mm. If in inches mode (G20) XYZ should be entered in inches. ABC axes are always entered in degrees.
 
 <pre>
