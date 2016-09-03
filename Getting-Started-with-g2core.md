@@ -11,7 +11,7 @@ You will also need software to generate GCode.
 
 The following is a list of the minimum you will need strictly for g2core, regardless of what project you'll be using it for.
 
-**Compatible Target Board** - [Arduino Due](http://arduino.cc/en/Main/arduinoBoardDue) ($50) ([Adafruit](http://www.adafruit.com/products/1076), [Maker Shed](http://www.makershed.com/Arduino_Due_p/mksp16.htm), [Sparkfun](https://www.sparkfun.com/products/11589), [Digi-Key](https://www.digikey.com/product-highlights/us/en/arduino-arduino-due-board/2831), [Mouser](http://www.mouser.com/new/arduino/arduino-due/), [Newark](http://www.newark.com/arduino/a000062/dev-brd-sam3x8e-arm-cortex-m3/dp/47W2961))
+**Compatible Target Board** - [Arduino Due](http://arduino.cc/en/Main/arduinoBoardDue) (~$50) ([Digi-Key](https://www.digikey.com/product-highlights/us/en/arduino-arduino-due-board/2831), [Newark](http://www.newark.com/arduino/a000062/dev-brd-sam3x8e-arm-cortex-m3/dp/47W2961), [Sparkfun](https://www.sparkfun.com/products/11589), [Maker Shed](http://www.makershed.com/Arduino_Due_p/mksp16.htm))
 * Currently the only publicly-available board g2core works on is the Arduino Due.
 
 **Adapter Cabling/Shield** - gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
