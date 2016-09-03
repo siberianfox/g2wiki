@@ -24,9 +24,11 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1at:...}](#_he1at---at-temperature) | "At temperature" flag | read-only 
 	[{_he1an:...}](#_he1an---heater-adc) | Heater ADC reading | read-only
 	[{_he1fp:...}](#_he1fp---fan-power) | Fan power | read/write
-	[{_he1fm:...}](#_he1fm---fan-min-power) | Fan min power | read/write
+	[{_he1fm:...}](#_he1fm---fan-minimum-power) | Fan minimum power | read/write
 	[{_he1fl:...}](#_he1fl---fan-low-temperature) | Fan low temperature | read/write
 	[{_he1fh:...}](#_he1fh---fan-high-temperature) | Fan high temperature | read/write
+
+### {_he1:{fp:..., fm:..., fl:..., fh:...}} - Fan Controls
 
 ### {_he1:{e:...}} - Heater Enable
 
