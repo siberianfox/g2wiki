@@ -62,11 +62,11 @@ Read-only value derived from factor configuration settings in the ARM chip
 The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
 
 <pre>
-  {jt:0.01}  - Lower limit - probably will fail
-  {jt:0.75}  - Good value for slower machines
-  {jt:1.00}  - Nominal value
-  {jt:1.20}  - Good value for fast machines
-  {jt:5.00}  - Upper limit. Absolutely will fail
+  {jt:0.01}  Lower limit - probably will fail
+  {jt:0.75}  Good value for slower machines
+  {jt:1.00}  Nominal value
+  {jt:1.20}  Good value for fast machines
+  {jt:5.00}  Upper limit. Absolutely will fail
 </pre>
 
 ### {ct:...} Chordal Tolerance
@@ -74,14 +74,14 @@ Arcs are generated as sets of very short straight lines that approximate a curve
 
 Setting chordal tolerance high will make curves "rougher", but they can execute faster. Setting them smaller will make for smoother arcs that may take longer to execute. The lower-limit of $ct is set by the minimum arc segment length, which really should not be changed (See hidden parameters).
 <pre>
-$ct=0.01   - Normally a good value (in mm)
-</pre> 
+  {ct:0.01}  Normally a good value (in mm)
+</pre>
 
 ### {mt:...} Global Motor Power Timeout
 Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands, further down this page.
 <pre>
-$mt=5        - Keep motors energized for 5 seconds after last movement command
-$mt=1000000  - Keep motors energized for 1 million seconds after last movement command (11.57 days)
+  {mt:5}        Keep motors energized for 5 seconds after last movement command
+  {mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
 </pre> 
 
 See also [Power Management](Power-Management)
@@ -105,9 +105,9 @@ _Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are str
 _Note: The behavior of EJ has changed in 0.99_<br><br>
 Enable JSON mode sets the g2core response mode:
 <pre>
-$ej=0  - TEXT: Responses provided as Text (input commands are accepted in either format)
-$ej=1  - JSON: Responses provided as JSON (input commands are accepted in either format)
-$ej=2  - AUTO: Responses provided in the format of the request
+  {ej:0}  TEXT: Responses provided as Text (input commands are accepted in either format)
+  {ej:1}  JSON: Responses provided as JSON (input commands are accepted in either format)
+  {ej:2}  AUTO: Responses provided in the format of the request
 </pre>
 
 By selecting TEXT or JSON the setting is "sticky". Commands are accepted in either text or JSON mode, but responses are delivered in the selected mode. 
@@ -119,19 +119,19 @@ _Note: The two startup lines on reset will always be in JSON format regardless o
 ### {jv:...} JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
 <pre>
-$jv=0      - Silent   - No response is provided for any command
-$jv=1      - Footer   - Returns footer only - no command echo, gcode blocks or messages
-$jv=2      - Messages - Returns footers, exception messages and gcode comment messages
-$jv=3      - Configs  - Returns footer, messages, config command body
-$jv=4      - Linenum  - Returns footer, messages, config command body, and gcode line numbers if present
-$jv=5      - Verbose  - Returns footer, messages, config command body, and gcode blocks
+  {jv:0}  Silent   - No response is provided for any command
+  {jv:1}  Footer   - Returns footer only - no command echo, gcode blocks or messages
+  {jv:2}  Messages - Returns footers, exception messages and gcode comment messages
+  {jv:3}  Configs  - Returns footer, messages, config command body
+  {jv:4}  Linenum  - Returns footer, messages, config command body, and gcode line numbers if present
+  {jv:5}  Verbose  - Returns footer, messages, config command body, and gcode blocks
 </pre>
 
 ### {tv:...} Text Verbosity
 Sets how much information is returned in text mode. We recommend using Verbose, except for very special cases.
 <pre>
-$tv=0      - Silent - no response is provided
-$tv=1      - Verbose - returns OK and error responses
+  {tv:0}  Silent - no response is provided
+  {tv:1}  Verbose - returns OK and error responses
 </pre>
 
 ### {qv:...} Queue Report Verbosity
