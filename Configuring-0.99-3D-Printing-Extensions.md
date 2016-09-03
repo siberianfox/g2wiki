@@ -15,7 +15,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
 	[{_he1:{st:...}}](#_he1st---set-temperature) | Set setpoint temperature | write-only
 	[{_he1:{t:...}}](#_he1t---get-temperature) | Current temperature | read-only
-	[{_he1:{op:...}}](#_he1op---heater-output) | Heater PWM level | read-only
+	[{_he1:{op:...}}](#_he1op---heater-output) | Heater PWM ouput level | read-only
 	[{_he1:{tr:...}}](#_he1tr---thermistor-resistance) | Thermistor resistance | read-only
 	[{_he1:{at:...}}](#_he1at-heater-at-temperature-flag) | "At temperature" flag | read-only
 	[{_he1:{an:...}}](#_he1an-heater-adc-reading) | Heater ADC reading | read-only
