@@ -1,4 +1,4 @@
-**The configuration and settings documentation on this page is for firmware version 0.99. FV 0.99 is currently in edge-100 branch undergoing testing. It will be promoted to the edge branch. After a soak time it will be promoted to the master branch**
+**The configuration and settings documentation on this page is for firmware version 0.99. FV 0.99 is currently in edge-100 branch undergoing testing. We are pretty comfortable with it's functionality and stability, but have a few more functions to install and test before it's promoted to the edge branch. After a soak time in edge it will be promoted to the master branch**
 
 The version number can be found as the fv variable in the startup JSON message, or by typing $fv. Version 0.99 encompasses builds 100.00 and later.
 
