@@ -22,5 +22,7 @@ Windows 10 does not need this procedure and should work out-of-the-box.
   * usbmodem14311
   * usbmodem14313
 
-These are the 2 endpoints for the dual endpoint USB connection. You can connect to either and it will work. The first port opened will become a control and data port. If you open the second port it will become a data port, and the first will become control-only. Send Gcode to the data port, and everything else to the control port. All responses, status reports and exception reports will be returned to the control port - no text will be sent to the data port. This way you can queue a lengthy gcode file to the data port, while still having access to controls.
+These are the 2 endpoints for the dual endpoint USB connection. You can connect to either and it will work. For most purposes that's all you need.
+
+If you want to run dual port mode, the first port opened will become a control and data port. If you open the second port it will become a data port, and the first will become control-only. Send Gcode to the data port, and everything else to the control port. All responses, status reports and exception reports will be returned to the control port - no text will be sent to the data port. This way you can queue a lengthy gcode file to the data port, while still having access to controls.
 
