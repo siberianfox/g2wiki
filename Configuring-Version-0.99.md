@@ -7,10 +7,10 @@ If you have an older firmware version:
 
 ## Configuration Pages
 
+- [Configuring System Groups](Configuring-0.99-System-Groups)
 - [Configuring Motors](Configuring-0.99-Motors)
   - [Power Management](Power-Management)
 - [Configuring Axes](Configuring-0.99-Axes)
-- [Configuring System Groups](Configuring-0.99-System-Groups)
 - [Configuring General Purpose IO](Configuring-0.99-GPIO)
 - [Configuring Other Groups](Configuring-0.99-Other-Groups)
 - [Configuring Actions and Reports](Configuring-0.99-Actions-and-Reports)
