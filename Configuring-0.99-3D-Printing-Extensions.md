@@ -67,10 +67,9 @@ There are 3 PID groups. The examples below show PID group 1 - `{_pid1:n}`
 	[{_pid1:{d:...}}](#_pid1p-i-d-pid-values) | Raw D Value | read-only 
 
 ### {_pid1:{p:..., i:..., d:...}} Raw PID Values
-These are Read-Only values from the live PID. THer are not scaled to temperature
+These are Read-Only values from the live PID. They are not scaled to temperature
 
 # Auto Bed Leveling Parameters
-There are 3 PID groups. The examples below show PID group 1 - `{_pid1:n}`
 
 ## Summary
 
