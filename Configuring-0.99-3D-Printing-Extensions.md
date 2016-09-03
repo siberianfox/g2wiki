@@ -13,15 +13,14 @@ There are 3 heater groups. The examples below show heater group 1 - `{he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{he1e:_}](#he1e---heater-enable) | Heater Enable | 0=off, 1=on 
+	[{he1e:...}](#he1e---heater-enable) | Heater Enable | 0=off, 1=on 
+	[{he1p:...}](#he1p---heater-p) | Heater P (PID) | floating point value 
+	[{he1i:...}](#he1i---heater-i) | Heater I (PID) | floating point value 
+	[{he1d:...}](#he1d---heater-d) | Heater D (PID) | floating point value 
+	[{he1st:...}](#he1st---heater-set-temperature) | Set Temperature | 
+	[{he1t:...}](#he1t---heater-get-temperature) | Get Temperature | 
+	[{he1op:...}](#he1op---get-heater-output) | Get Temperature | 
 
-    // NOTICE: If you change these heater group keys, you MUST change the get/set functions too!!
-    { "he1","he1e", _fip, 0, tx_print_nul, cm_get_heater_enable,   cm_set_heater_enable,   (float *)&cs.null, H1_DEFAULT_ENABLE },
-    { "he1","he1p", _fi,  3, tx_print_nul, cm_get_heater_p,        cm_set_heater_p,        (float *)&cs.null, H1_DEFAULT_P },
-    { "he1","he1i", _fi,  5, tx_print_nul, cm_get_heater_i,        cm_set_heater_i,        (float *)&cs.null, H1_DEFAULT_I },
-    { "he1","he1d", _fi,  5, tx_print_nul, cm_get_heater_d,        cm_set_heater_d,        (float *)&cs.null, H1_DEFAULT_D },
-    { "he1","he1st",_f0,  1, tx_print_nul, cm_get_set_temperature, cm_set_set_temperature, (float *)&cs.null, 0 },
-    { "he1","he1t", _f0,  1, tx_print_nul, cm_get_temperature,     set_nul,                (float *)&cs.null, 0 },
     { "he1","he1op",_f0,  3, tx_print_nul, cm_get_heater_output,   set_nul,                (float *)&cs.null, 0 },
     { "he1","he1tr",_f0,  3, tx_print_nul, cm_get_thermistor_resistance,   set_nul,        (float *)&cs.null, 0 },
     { "he1","he1at",_f0,  0, tx_print_nul, cm_get_at_temperature,  set_nul,                (float *)&cs.null, 0 },
