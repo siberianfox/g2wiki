@@ -1,4 +1,4 @@
-To connect to g2core you must have the correct USB drivers on your host computer. We use for testing we use Coolterm to connect to g2core. 
+To connect to g2core you must have the correct USB drivers on your host computer. We use Coolterm for testing g2core. [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr) is a good option for a CNC controller.
 
 ## Drivers for g2core
 
