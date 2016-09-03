@@ -6,6 +6,7 @@
 1. [ ] [Connecting to g2core](Connecting-to-g2core)
 1. [ ] [Configuring g2core](Configuring-Version-0.99)
 1. [ ] [Flashing g2core](Flashing-G2)
+1. [ ] [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr)
 
 **Reference Pages**
 
