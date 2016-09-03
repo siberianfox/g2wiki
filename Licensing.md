@@ -7,40 +7,40 @@ The g2core **project** is a motion control **application** built on a set of und
 
 G2core licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using component files without invoking GPL copyleft. To this end, all files in the project are licensed under GPLv2. Those files that are considered "components" carry the BeRTOS exception, that allows their use without opening source code that they come in contact with. 
 
-G2core also includes [Motate](https://github.com/giseburt/Motate) hardware abstraction components that are licensed under the same scheme. 
+G2core also includes [Motate](https://github.com/synthetos/Motate) hardware abstraction components that are licensed under the same scheme. 
 
 Most of what follows is shamelessly cribbed from the BeRTOS site.
 
 ## Info
 ###You are free to...
-* Include tinyg2 components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
-* Modify tinyg2 components as you want under the following conditions:
- * Attribution - You must declare in a written statement in documentation and source code that you are using tinyg2 components in your application and offer to provide the (possibly modified) tinyg2 source code
- * Share-alike - If you modify tinyg2 components, you may distribute them only under the original license
- * Contribution - If you modify tinyg2 components, you must contribute the modifications back to the tinyg2 project
+* Include g2core components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
+* Modify g2core components as you want under the following conditions:
+ * Attribution - You must declare in a written statement in documentation and source code that you are using g2core components in your application and offer to provide the (possibly modified) g2core source code
+ * Share-alike - If you modify g2core components, you may distribute them only under the original license
+ * Contribution - If you modify g2core components, you must contribute the modifications back to the g2core project
 
-###What you can do with tinyg2 components...
+###What you can do with g2core components...
 If you are a company or individual doing commercial embedded products, you can:
-* Download and use tinyg2 components as you want
-* Sell products based on tinyg2 components without paying royalties or other fees
-* Sell products based on tinyg2 components without opening or giving away your other application source code
+* Download and use g2core components as you want
+* Sell products based on g2core components without paying royalties or other fees
+* Sell products based on g2core components without opening or giving away your other application source code
 
-###What you must do with tinyg2 components...
-If you sell or otherwise distribute code/products that use tinyg2 components you must:
-* Provide attribution that you are using tinyg2 components in the documentation and source code. Text like this is sufficient:
+###What you must do with g2core components...
+If you sell or otherwise distribute code/products that use g2core components you must:
+* Provide attribution that you are using g2core components in the documentation and source code. Text like this is sufficient:
 <pre>
-"This product uses tinyg2 components (http://www.synthetos.com), Copyright 2013"
+"This product uses g2core components (http://www.synthetos.com), Copyright 2013 - 2016"
 </pre>
-* If you modified tinyg2 components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the tinyg2 project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
+* If you modified g2core components offer the modified versions for download from your website. Alternately, you can contribute your modifications to the g2core project, where they may be integrated in whole or in part, and/or hosted independently under the project if not integrated.
 
 ##Text
 <pre>
 /*
- * tinyg2.h - tinyg2 main header - Application GLOBALS 
- * Part of TinyG2 project
+ * g2core.h - g2core main header - Application GLOBALS 
+ * Part of g2core project
  *
- * Copyright (c) 2013 Alden S. Hart Jr. 
- * Copyright (c) 2013 Robert Giseburt
+ * Copyright (c) 2013 - 2106 Alden S. Hart Jr. 
+ * Copyright (c) 2013 - 2016 Robert Giseburt
  *
  * This file ("the software") is free software: you can redistribute it and/or modify 
  * it under the terms of the GNU General Public License, version 2 as published by the 
