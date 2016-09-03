@@ -62,11 +62,11 @@ Read-only value derived from factor configuration settings in the ARM chip
 The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
 
 <pre>
-  {jt:0.01}  Lower limit - probably will fail
-  {jt:0.75}  Good value for slower machines
-  {jt:1.00}  Nominal value
-  {jt:1.20}  Good value for fast machines
-  {jt:5.00}  Upper limit. Absolutely will fail
+{jt:0.01}  Lower limit - probably will fail
+{jt:0.75}  Good value for slower machines
+{jt:1.00}  Nominal value
+{jt:1.20}  Good value for fast machines
+{jt:5.00}  Upper limit. Absolutely will fail
 </pre>
 
 ### {ct:...} Chordal Tolerance
@@ -74,14 +74,14 @@ Arcs are generated as sets of very short straight lines that approximate a curve
 
 Setting chordal tolerance high will make curves "rougher", but they can execute faster. Setting them smaller will make for smoother arcs that may take longer to execute. The lower-limit of $ct is set by the minimum arc segment length, which really should not be changed (See hidden parameters).
 <pre>
-  {ct:0.01}  Normally a good value (in mm)
+{ct:0.01}  Normally a good value (in mm)
 </pre>
 
 ### {mt:...} Global Motor Power Timeout
 Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands, further down this page.
 <pre>
-  {mt:5}        Keep motors energized for 5 seconds after last movement command
-  {mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
+{mt:5}        Keep motors energized for 5 seconds after last movement command
+{mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
 </pre> 
 
 See also [Power Management](Power-Management)
@@ -105,9 +105,9 @@ _Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are str
 _Note: The behavior of EJ has changed in 0.99_<br><br>
 Enable JSON mode sets the g2core response mode:
 <pre>
-  {ej:0}  TEXT: Responses provided as Text (input commands are accepted in either format)
-  {ej:1}  JSON: Responses provided as JSON (input commands are accepted in either format)
-  {ej:2}  AUTO: Responses provided in the format of the request
+{ej:0}  TEXT: Responses provided as Text (input commands are accepted in either format)
+{ej:1}  JSON: Responses provided as JSON (input commands are accepted in either format)
+{ej:2}  AUTO: Responses provided in the format of the request
 </pre>
 
 By selecting TEXT or JSON the setting is "sticky". Commands are accepted in either text or JSON mode, but responses are delivered in the selected mode. 
@@ -119,19 +119,19 @@ _Note: The two startup lines on reset will always be in JSON format regardless o
 ### {jv:...} JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
 <pre>
-  {jv:0}  Silent   - No response is provided for any command
-  {jv:1}  Footer   - Returns footer only - no command echo, gcode blocks or messages
-  {jv:2}  Messages - Returns footers, exception messages and gcode comment messages
-  {jv:3}  Configs  - Returns footer, messages, config command body
-  {jv:4}  Linenum  - Returns footer, messages, config command body, and gcode line numbers if present
-  {jv:5}  Verbose  - Returns footer, messages, config command body, and gcode blocks
+{jv:0}  Silent   - No response is provided for any command
+{jv:1}  Footer   - Returns footer only - no command echo, gcode blocks or messages
+{jv:2}  Messages - Returns footers, exception messages and gcode comment messages
+{jv:3}  Configs  - Returns footer, messages, config command body
+{jv:4}  Linenum  - Returns footer, messages, config command body, and gcode line numbers if present
+{jv:5}  Verbose  - Returns footer, messages, config command body, and gcode blocks
 </pre>
 
 ### {tv:...} Text Verbosity
 Sets how much information is returned in text mode. We recommend using Verbose, except for very special cases.
 <pre>
-  {tv:0}  Silent - no response is provided
-  {tv:1}  Verbose - returns OK and error responses
+{tv:0}  Silent - no response is provided
+{tv:1}  Verbose - returns OK and error responses
 </pre>
 
 ### {qv:...} Queue Report Verbosity
@@ -141,9 +141,9 @@ Using the planner queue depth as a way to manage flow control when sending a Gco
 
 Verbosity settings are:
 <pre>
-$qv=0      - Silent - queue reports are off
-$qv=1      - Single - returns reports when depth changes and is above hi water mark or below low water mark
-$qv=2      - Triple - returns queue reports for every block queued to the planner buffer
+{qv:0}  Silent - queue reports are off
+{qv:1}  Single - returns reports when depth changes and is above hi water mark or below low water mark
+{qv:2}  Triple - returns queue reports for every block queued to the planner buffer
 </pre>
 
 You can also get a manual queue report by sending [$qr](https://github.com/synthetos/TinyG/wiki/TinyG-Configuration-for-Firmware-Version-0.97#qr---queue-report)
@@ -153,15 +153,15 @@ _Note: In general you don't want to fill up the buffer with more than 24 command
 ### {sv:...} Status Report Verbosity
 Please see [Status Reports](https://github.com/synthetos/TinyG/wiki/Status-Reports) for a discussion of $sv and $si status report settings.
 <pre>
-$sv=0      - Silent   - status reports are off
-$sv=1      - Filtered - returns only changed values in status reports
-$sv=2      - Verbose  - returns all values in status reports
+{sv:0}  Silent   - status reports are off
+{sv:1}  Filtered - returns only changed values in status reports
+{sv:2}  Verbose  - returns all values in status reports
 </pre>
 
 ### {si:...} Status Interval 
 The minimum is 100 ms. Trying to set a value below the minimum will set the minimum value. 
 <pre>
-$si=250    - Status interval in milliseconds
+{si:250}  Status interval in milliseconds
 </pre>
 
 ### {ex:...} Enable Flow Control
@@ -190,36 +190,36 @@ These parameters are reported as part of the "sys" group.
 
 ### {gpl:...} Gcode Default Plane Selection
 <pre>
-$gpl=0      - G17 (XY plane)
-$gpl=1      - G18 (XZ plane)
-$gpl=2      - G19 (YZ plane)
+{gpl:0}  G17 (XY plane)
+{gpl:1}  G18 (XZ plane)
+{gpl:2}  G19 (YZ plane)
 </pre> 
 
 ### {gun:...} Gcode Default Units
 <pre>
-$gun=0      - G20 (inches)
-$gun=1      - G21 (millimeters)
+{gun:0}  G20 (inches)
+{gun:1}  G21 (millimeters)
 </pre> 
 
 ### {gco:...} Gcode Default Coordinate System
 <pre>
-$gco=1      - G54 (coordinate system 1)
-$gco=2      - G55 (coordinate system 2)
-$gco=3      - G56 (coordinate system 3)
-$gco=4      - G57 (coordinate system 4)
-$gco=5      - G58 (coordinate system 5)
-$gco=6      - G59 (coordinate system 6)
+{gco:1}  G54 (coordinate system 1)
+{gco:2}  G55 (coordinate system 2)
+{gco:3}  G56 (coordinate system 3)
+{gco:4}  G57 (coordinate system 4)
+{gco:5}  G58 (coordinate system 5)
+{gco:6}  G59 (coordinate system 6)
 </pre> 
 
 ### {gpa:...} Gcode Default Path Control
 <pre>
-$gpa=0      - G61 (exact path mode)
-$gpa=1      - G61.1 (exact stop mode)
-$gpa=2      - G64 (continuous mode)
+{gpa:0}  G61 (exact path mode)
+{gpa:1}  G61.1 (exact stop mode)
+{gpa:2}  G64 (continuous mode)
 </pre> 
 
 ### {gdi:...} Gcode Distance Mode
 <pre>
-$gdi=0      - G90 (absolute mode)
-$gdi=1      - G91 (incremental mode)
+{gdi:0}  G90 (absolute mode)
+{gdi:1}  G91 (incremental mode)
 </pre> 
