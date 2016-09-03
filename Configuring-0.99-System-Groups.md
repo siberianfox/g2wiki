@@ -22,15 +22,14 @@ These are reported in the startup strings and should be included in any support 
 	[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 ### {fv:n} Firmware Version
-Read-only value. Example `"fv":0.99`<br>
-Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
+Read-only value. Example `"fv":0.99. Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
 
 ### {fb:n} Firmware Build number
-Read-only value. Example `"fb":100.00`<br>
+Read-only value. Example `"fb":100.00`. 
 Indicates the build of firmware and changes frequently. Please provide this number in any communication about an issue.
 
 ### {fbs:n} Firmware Build String
-Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`<br>
+Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`. 
 The format is "TAG-NN-sha1" with optional "-dirty", where NN is how many commits past the tag, and sha1 being the exact unique sha1 prefix. "-dirty" should not be seen unless you're doing development, and means there are uncommitted changes in the repo when it's built.
 
 ### {fbc:n} Firmware Build Config File
