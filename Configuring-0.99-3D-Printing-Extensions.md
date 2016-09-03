@@ -13,9 +13,9 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
 	[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
 	[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
-	[{_he1:{st:...}}](#_he1st-set-setpoint-temperature) | Setpoint temperature | write-only
-	[{_he1:{t:...}}](#_he1t-get-temperature) | Current temperature | read-only
-	[{_he1:{at:...}}](#_he1at-heater-at-temperature-flag) | "At temperature" flag | read-only
+	[{_he1:{st:...}}](#_he1st-setpoint-temperature) | Setpoint temperature | write-only
+	[{_he1:{t:...}}](#_he1t-current-temperature) | Current temperature | read-only
+	[{_he1:{at:...}}](#_he1at-at-temperature-flag) | "At temperature" flag | read-only
 	[{_he1:{op:...}}](#_he1op-pwm-output) | PWM output level | read-only
 	[{_he1:{tr:...}}](#_he1tr-thermistor-resistance) | Thermistor resistance | read-only
 	[{_he1:{an:...}}](#_he1an-heater-adc-reading) | Heater ADC reading | read-only
@@ -41,11 +41,11 @@ For a heated bed:
   DEFAULT_D    400.0
 ```
 
-### {_he1:{st:...}} Set Setpoint Temperature
+### {_he1:{st:...}} Setpoint Temperature
 
-### {_he1:{t:...}} Get Temperature
+### {_he1:{t:...}} Current Temperature
 
-### {_he1:{at:...}} Heater At-Temperature Flag
+### {_he1:{at:...}} At-Temperature Flag
 
 ### {_he1:{op:...}} PWM Output
 
