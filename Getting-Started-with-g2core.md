@@ -11,16 +11,16 @@ You will also need software to generate GCode.
 
 The following is a list of the minimum you will need strictly for g2core, regardless of what project you'll be using it for.
 
-**Debugger/Programmer** (Not _strictly_ necessary, but very helpful) - [Atmel-ICE](http://www.mouser.com/ProductDetail/Atmel/ATATMEL-ICE-BASIC/?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d).
-* This is not the Atmel _SAM-ICE_ or the Atmel _JTAG-ICE_, but just the _Atmel-ICE_. The Atmel SAM-ICE will work as well, but is older and more expensive, but has the advantage of being a (Atmel-limited) Segger J-Link. We will document here how to use the Atmel-ICE.
-* You _can_ program the Due and the TinyG v9 boards without a debugger, but you cannot debug them.
-
 **Compatible Target Board** - [Arduino Due](http://arduino.cc/en/Main/arduinoBoardDue) ($50) ([Adafruit](http://www.adafruit.com/products/1076), [Maker Shed](http://www.makershed.com/Arduino_Due_p/mksp16.htm), [Sparkfun](https://www.sparkfun.com/products/11589), [Digi-Key](https://www.digikey.com/product-highlights/us/en/arduino-arduino-due-board/2831), [Mouser](http://www.mouser.com/new/arduino/arduino-due/), [Newark](http://www.newark.com/arduino/a000062/dev-brd-sam3x8e-arm-cortex-m3/dp/47W2961))
 * Currently the only publicly-available board g2core works on is the Arduino Due.
 
 **Adapter Cabling/Shield** - gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
 * Depending on the project and your level of expertise, you may be able to wire stepper drivers you already have (as long as they have STEP/DIRECTION/ENABLE pinouts) to the Due or roll your own shield.
 • The gShield provides three stepper drivers and pinouts for spindle controls and limit switches.
+
+**Debugger/Programmer** - Atmel-ICE debugger on [Mouser](http://www.mouser.com/ProductDetail/Atmel/ATATMEL-ICE-BASIC/?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d) and  [Digikey](http://www.digikey.com/product-detail/en/atmel/ATATMEL-ICE-BASIC/ATATMEL-ICE-BASIC-ND/4753381). 
+* You _can_ program the Due and the TinyG v9 boards without a debugger, but to do realtime debugging you need an ICE of some sort. 
+* Note that the Atmel-ICE is not the Atmel _SAM-ICE_ or the Atmel _JTAG-ICE_. The Atmel SAM-ICE will work as well, but is older and more expensive. All the examples on this site use the Atmel-ICE.
 
 ## Software Needed To Use g2core
 
