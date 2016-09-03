@@ -13,7 +13,7 @@ There are 3 heater groups. The examples below show heater group 1 - `{he1:n}`
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{he1e:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
+	[{he1e:_}](#he1e---heater-enable) | Heater Enable | 0=off, 1=on 
 
     // NOTICE: If you change these heater group keys, you MUST change the get/set functions too!!
     { "he1","he1e", _fip, 0, tx_print_nul, cm_get_heater_enable,   cm_set_heater_enable,   (float *)&cs.null, H1_DEFAULT_ENABLE },
