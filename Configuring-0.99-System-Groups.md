@@ -39,9 +39,11 @@ Example `"fbc":"settings_makeblock.h"`
 
 ### {hp:n} Hardware Platform
 Read-only value. Returns:
-* 1 = TinyG Xmega series
-* 2 for Arduino Due G2 (ARM)
-* 3 for TinyG v9 G2 (ARM)
+<pre>
+{hv:1}  TinyG Xmega series
+{hv:2}  Arduino Due G2 (ARM)
+{hv:3}  TinyG v9 G2 (ARM)
+</pre>
 
 ### {hv:n} Hardware Version
 Unused in g2core. (This value is writable in TinyG and is used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.)
