@@ -28,11 +28,11 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 	[{_he1fl:...}](#_he1fl---fan-low-temperature) | Fan low temperature | read/write
 	[{_he1fh:...}](#_he1fh---fan-high-temperature) | Fan high temperature | read/write
 
-### {he1:{e:...}} - Heater Enable
+### {_he1:{e:...}} - Heater Enable
 
-### {he1:{p:...}} - Heater P
+### {_he1:{p:...}} - Heater P
 
-### {he1:{i:...}} - Heater I
+### {_he1:{i:...}} - Heater I
 
-### {he1:{d:...}} - Heater D
+### {_he1:{d:...}} - Heater D
 
