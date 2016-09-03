@@ -22,7 +22,7 @@ These are reported in the startup strings and should be included in any support 
 	[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 ### {fv:n} Firmware Version
-Read-only value. Example `"fv":0.99. Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
+Read-only value. Example `fv:0.99`. Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
 
 ### {fb:n} Firmware Build number
 Read-only value. Example `"fb":100.00`. 
