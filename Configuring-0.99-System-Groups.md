@@ -83,16 +83,16 @@ Set communications speeds and modes.
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{ej:_}](#ej---enable-json-mode-on-power-up) | Enable JSON mode | 0=text mode, 1=JSON mode, 2=auto mode
-	[{jv:_}](#jv---set-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
-	[{tv:_}](#tv---set-text-mode-verbosity) | Text mode verbosity | 0=silent, 1=verbose
-	[{qv:_}](#qv---queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
-	[{sv:_}](#sv---status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
-	[{si:_}](#si---status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
+	[{ej:...}](#ej-enable-json-mode) | Enable JSON mode | 0=text mode, 1=JSON mode, 2=auto mode
+	[{jv:...}](#jv-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
+	[{tv:...}](#tv-text-verbosity) | Text mode verbosity | 0=silent, 1=verbose
+	[{qv:...}](#qv-queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
+	[{sv:...}](#sv-status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
+	[{si:...}](#si-status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
 
-_Note: As of 0.99 JSON syntax (JS) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
+_Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
-### $EJ - Enable JSON Mode
+### {ej:...} Enable JSON Mode
 _Note: The behavior of EJ has changed in 0.99_<br><br>
 Enable JSON mode sets the g2core response mode:
 <pre>
@@ -107,7 +107,7 @@ By selecting AUTO g2core will send responses in the same format as the command (
 
 _Note: The two startup lines on reset will always be in JSON format regardless of setting in order to allow UIs to sync with an unknown board._
 
-### $JV - Set JSON verbosity
+### {jv:...} JSON verbosity
 Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
 <pre>
 $jv=0      - Silent   - No response is provided for any command
@@ -118,14 +118,14 @@ $jv=4      - Linenum  - Returns footer, messages, config command body, and gcode
 $jv=5      - Verbose  - Returns footer, messages, config command body, and gcode blocks
 </pre>
 
-### $TV - Set Text mode verbosity
+### {tv:...} Text Verbosity
 Sets how much information is returned in text mode. We recommend using Verbose, except for very special cases.
 <pre>
 $tv=0      - Silent - no response is provided
 $tv=1      - Verbose - returns OK and error responses
 </pre>
 
-### $QV - Queue Report Verbosity
+### {qv:...} Queue Report Verbosity
 Queue reports return the number of available buffers in the planner queue. The planner queue has 28 buffers and therefore can have as many as 28 Gcode blocks queued for execution. An empty queue will report 28 available buffers. A full one will report 0. 
 
 Using the planner queue depth as a way to manage flow control when sending a Gcode file is actually a much better way than managing the serial input buffer. If you keep the planner full to about 2 blocks available it will run really smoothly. You also want to make sure the queue doesn't starve, say - more than 20 blocks available.
@@ -141,7 +141,7 @@ You can also get a manual queue report by sending [$qr](https://github.com/synth
 
 _Note: In general you don't want to fill up the buffer with more than 24 commands as some Gcode blocks can occupy multiple planner buffer slots (4 are allowed)._
 
-### $SV - Status Report Verbosity
+### {sv:...} Status Report Verbosity
 Please see [Status Reports](https://github.com/synthetos/TinyG/wiki/Status-Reports) for a discussion of $sv and $si status report settings.
 <pre>
 $sv=0      - Silent   - status reports are off
@@ -149,7 +149,7 @@ $sv=1      - Filtered - returns only changed values in status reports
 $sv=2      - Verbose  - returns all values in status reports
 </pre>
 
-### $SI - Status Interval 
+### {si:...} Status Interval 
 The minimum is 100 ms. Trying to set a value below the minimum will set the minimum value. 
 <pre>
 $si=250    - Status interval in milliseconds
@@ -168,18 +168,18 @@ Gcode settings loaded on power up and reset. Changing these does NOT change the 
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{gpl:_}](#gpl---gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
-	[{gun:_}](#gun---gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
-	[{gco:_}](#gco---gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
-	[{gpa:_}](#gpa---gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
-	[{gdi:_}](#gdi---gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
+	[{gpl:_}](#gpl-gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
+	[{gun:_}](#gun-gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
+	[{gco:_}](#gco-gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
+	[{gpa:_}](#gpa-gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
+	[{gdi:_}](#gdi-gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
 
 These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. 
 For example, entering $gun=0 will cause the system to start up from reset or power up in inches mode, but will **not** change the system to inches mode when it is entered. A G20 or G21 received in the Gcode stream will change the units to inches or MM mode, respectively. On reset or restart they will change back to the $gun setting.
 
 These parameters are reported as part of the "sys" group.
 
-### $GPL - Gcode Default Plane Selection
+### {gpl:...} Gcode Default Plane Selection
 <pre>
 $gpl=0      - G17 (XY plane)
 $gpl=1      - G18 (XZ plane)
