@@ -16,7 +16,7 @@ This page documents motor settings. Each motor object ("group") has a collection
 	[{1:{su:...}}](#1su---steps-per-unit) | **S**teps per **U**nit | Direct input and reading of steps per unit - about 7 digits decimal accuracy
 	[{1:{po:..}}](#1po---polarity) | **PO**larity | Set polarity for proper movement of the axis. 0=clockwise rotation, 1=counterclockwise - although these are dependent on your motor wiring, and axis movement is dependent on the mechanical system.
 	[{1:{pm:...}}](Power-Management) | **P**ower **M**ode | 0=motor disabled, 1=motor always on, 2=motor on when in cycle, 3=motor on only when moving
-	[{1pl:...}}](#1pl---power-level) | **P**ower **L**evel | 0.000=no power to steppers, 1.000=max power to steppers
+	[{1:{pl:...}}](#1pl---power-level) | **P**ower **L**evel | 0.000=no power to steppers, 1.000=max power to steppers
 
 _Note: Setting power level to every high values will not necessarily get more power to the motors. At some point you may  saturate the coils, get worse motor performance, draw more current, and risk burning out the motors by overheating._
 
@@ -31,21 +31,21 @@ Or you can enter the parameters that compute the steps per unit, which are Step 
 
 ...and it will compute and set the SU value. If the SU is set directly the TR value is changed to agree with the SU value. The values entered for step angle and microsteps are not changed.
 
-### 1ma - Map Motor to Axis
+### {1:{ma:...}} Map Motor to Axis
 Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor4. 
 
 <pre>
-{1ma:0}    Map motor 1 to X axis
-{2ma:1}    Map motor 2 to Y1 axis
-{3ma:1}    Map motor 3 to Y2 axis
-{4ma:2}    Map motor 4 to Z axis
+{1:{ma:0}}  Map motor 1 to X axis
+{2:{ma:1}}  Map motor 2 to Y1 axis
+{3:{ma:1}}  Map motor 3 to Y2 axis
+{4:{ma:2}}  Map motor 4 to Z axis
 </pre> 
 
 ### 1sa - Step Angle
 This is a decimal number which is often 1.8 degrees per step, but should reflect the motor in use. You might also find 0.9, 3.6, 7.5 or other values. You can usually read this off the motor label. If a motor is indicated in steps per revolution just divide 360 by that number. A 200 step-per-rev motor is 1.8 degrees, a 400 step-per-rev motor has 0.9 degrees per step.
 
 <pre>
-{1sa:1.8}  This is a typical value for many motors 
+{1:{sa:1.8}} This is a typical value for many motors 
 </pre> 
 
 ### 1tr - Travel per Revolution
