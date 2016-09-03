@@ -16,7 +16,7 @@ These are reported in the startup strings and should be included in any support 
 	[{fv:n}](#fvn-firmware-version) | Firmware Version | Version number, e.g. 0.99
 	[{fb:n}](#fbn-firmware-build-number) | Firmware Build | Build number, e.g. 100.00
 	[{fbs:n}](#fbsn-firmware-build-string) | Firmware Build String | Git string
-	[{fbc:n}](#fbcn-firmware-build-config) | Firmware Build Config | Name of settings file 
+	[{fbc:n}](#fbcn-firmware-build-config-file) | Firmware Build Config | Name of settings file 
 	[{hp:n}](#hpn-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
 	[{hv:n}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 	[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
