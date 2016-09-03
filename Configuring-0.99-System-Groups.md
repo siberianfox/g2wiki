@@ -54,14 +54,14 @@ Read-only value derived from factor configuration settings in the ARM chip
 
 	Setting | Description | Notes
 	--------|-------------|-------
-	[{jt:_}](#ja---junction-integration-time) | Junction Integration Time | Global cornering acceleration value
-	[{ct:_}](#ct---chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
-	[{mt:_}](#mt---motor-power-timeout) | Motor_disable_Timeout | Number of seconds before motor power is automatically released. Maximum value is 40 million.
+	[{jt:...}](#jt-junction-integration-time) | Junction Integration Time | Global cornering acceleration value
+	[{ct:...}](#ct-chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+	[{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
 
-### $JT - Junction Integration Time 
+### {jt:...} Junction Integration Time 
 Sets the cornering speed. The`{jt:...}` parameter is the way to set cornering velocity limits. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
 
-### $CT - Chordal Tolerance
+### {ct:...} Chordal Tolerance
 Arcs are generated as sets of very short straight lines that approximate a curve. Each line is a "chord" that spans the endpoints of that segment of the arc. Chordal tolerance sets the maximum allowable deviation between the true arc and straight line that approximates it - which will be the value of the deviation in the middle of the line / arc.
 
 Setting chordal tolerance high will make curves "rougher", but they can execute faster. Setting them smaller will make for smoother arcs that may take longer to execute. The lower-limit of $ct is set by the minimum arc segment length, which really should not be changed (See hidden parameters).
@@ -69,7 +69,7 @@ Setting chordal tolerance high will make curves "rougher", but they can execute 
 $ct=0.01   - Normally a good value (in mm)
 </pre> 
 
-### $MT - Motor Power Timeout
+### {mt:...} Global Motor Power Timeout
 Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands, further down this page.
 <pre>
 $mt=5        - Keep motors energized for 5 seconds after last movement command
