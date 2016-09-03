@@ -16,8 +16,8 @@ The following is a list of the minimum you will need strictly for g2core, regard
 * We plan to release the gQuadratic and gQuintic boards in fall 2016 that will also run g2core.
 
 **Adapter Cabling/Shield** - gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
+* The gShield provides three stepper drivers and pinouts for spindle controls and limit switches.
 * Depending on the project and your level of expertise, you may be able to wire stepper drivers you already have (as long as they have STEP/DIRECTION/ENABLE pinouts) to the Due or roll your own shield.
-• The gShield provides three stepper drivers and pinouts for spindle controls and limit switches.
 
 **Debugger/Programmer** - Atmel-ICE debugger on [Mouser](http://www.mouser.com/ProductDetail/Atmel/ATATMEL-ICE-BASIC/?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d) and  [Digikey](http://www.digikey.com/product-detail/en/atmel/ATATMEL-ICE-BASIC/ATATMEL-ICE-BASIC-ND/4753381). 
 * You _can_ program the Due and the TinyG v9 boards without a debugger, but to do realtime debugging you need an ICE of some sort. 
