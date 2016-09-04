@@ -84,7 +84,7 @@ _Note about Microsteps: It is a misconception that higher microstep values are b
 ### {1:{su:...}} Steps per Unit
 This is a floating point number that sets the number of steps the code will emit to travel one complete unit - millimeter, inch, or degree. the SU value is accurate to roughly 7 decimal places, with 5 places available to the right of the decimal point.
 
-### {1:{po:...}} - Polarity
+### {1:{po:...}} Polarity
 Set to one of the following: 
 
 <pre>
