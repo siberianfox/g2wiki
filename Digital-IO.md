@@ -45,7 +45,7 @@ The current state of an input can be read using JSON objects. `{inN:n}` will ret
 {in:n}   Read a all digital inputs as a single JSON object
 </pre>
 
-**Digital Input Properties**
+###Digital Input Properties
 - An input is exposed via JSON `in`_N_ 
 - The input value reads as `0` (off) or `1` (on)
 - The value is sense-corrected according to the polarity of the Mode setting
@@ -130,17 +130,32 @@ Notes:
 
 
 #Digital Outputs
-### Reading Digital Outputs
 The current state of an output can be read or written using JSON objects. `{outN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the output is disabled or not present. Note that the 0/1 values are corrected for output sense - 1 is active.
 
 <pre>
 {out1:n}	output state
 {out2:n}	etc…
+
 {out:n}		returns all outputs in a single JSON object
 </pre>
 
-It’s possible to register outputs in the status report (set to filtered, please) and detect output state changes.
+### Digital Output Properties
 
+**Binary Digital Outputs (0/1 Outputs)**
+- The output may be exposed-as `out`_M_ to be visible via JSON 
+- Output values are written as `0` (off) and `1` (on)
+- A boolean value (`false`, `true`) may be written and will be converted to `0` and `1`
+- A floating point value may be written and will be interpreted as `(bool)(value >= 0.5)`.
+- The actual output is polarity corrected based on the polarity setting (normal or inverted)
+- The exposed value reads back the value it was set to as a float, which may not be the value provided. For example, if a binary output was set to `0.75` it will read back as `1`
+- Set and read values will always align, even in Inverted mode. IOW, if IO mode is inverted setting the output to 1 causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value set.
+- Attempting to read or write a value of a disabled or unavailable `out` will return a `null` value. A status code may also return an error if the request was an unavailable or non-existent output.
+
+**PWM Digital Outputs (0.000/1.000 Outputs)**
+- The output is exposed as `out`_M_ via JSON 
+- Output values are written as 0.000 to 1.000
+- In Normal mode 0.000 is a 0% duty cycle and 1.000 is 100%. In inverted mode these are reversed.
+- The readout will report the written value, not the inverted value (set and read values always align)
 _Note: Currently the readout `{outN:n}` is the same number as the configurator `{doN..:}`. In future releases these will be mappable._
 
 ### Configuring Digital Outputs
@@ -153,8 +168,51 @@ Digital outputs are controlled using a set of digital output objects referenced 
 {do:n}     Group of all digital outputs
 </pre>
 
+
+
+
+
+
 Digital outputs have these attributes (using do1 as an example)
 
 	Name | Description | Values
 	------|------------|---------
 	{do1mo: | mode | 0=active low, 1=active high
+
+A digital output "pin" may be a physical pin or the output may be an internal signal. For example...
+
+
+
+**Configuration Values** Output pins can be configured in JSON via `do`_N_ as below:
+
+   Name | Description | Values
+   ------|------------|---------
+   `{do1mo:` | mode | 0=disabled, 1=enabled
+   `{do1po:` | polarity | 0=normal (active high), 1=inverted (active low)
+   `{do1out:` | exposed-as | 0=not-exposed, 1-M = bound to `out1` through `outM`
+   `{do1frq:` | frequency | 0=PWM off, >0 = PWM frequency in Hz
+   `{do1dcl:` | duty cycle low | set duty cycle lower bound 0.000 - 1.000
+   `{do1dch:` | duty cycle high | set duty cycle upper bound 0.000 - 1.000. Must be > dl
+
+Notes:
+- Mode
+  - Mode will return NULL if an output is queried that is not available due to hardware or configuration
+- Exposed-As
+  - A digital output can only be exposed as a single `out` function (multiple expose points are not supported)
+  - `M` is limited to 32 and will return a range error if exceeded
+- Frequency
+  - Can be set to any supported value but may be limited to a system-wide max
+  - PWM channels that share frequencies (common timers) may also be limited
+  - If the IO does not support PWM `frq` will return `null` and an error status code
+- Duty Cycle settings
+  - Duty cycles may be limited to a defined range less than 0% to 100%. Requesting a value outside this range will set and return the min or max value that was exceeded
+  - High must be > low or an error is returned
+  - If the IO does not support PWM `dcl` and `dch` will return `null` and an error status code
+- Attempting to configure a non-existent `do` will return a `null` value and an error status code
+
+Notes: 
+- Should we consider making the floating point threshold configurable? Does this solve some cases?<br>
+- The PWM configuration stated above does not have a few of the settings we currently have in v8 and g2:
+  - PWM OFF level - used for RC power controllers. Setting the right OFF value should be the responsibility of the toolhead functions.
+  - Asymmetric CW and CCW settings (independent). We may not need these. Never have so far.
+  - Linearity mapping (we don't currently do this)
