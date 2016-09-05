@@ -115,36 +115,38 @@ Digital outputs have these attributes (using do1 as an example)
 	{do1mo: | mode | 0=active low, 1=active high
 
 
-==v9 Digital Inputs
+##v9 Digital Inputs
 
-.Digital Input Mapping to v9 Connectors
-|===
+###Digital Input Mapping to v9 Connectors
+
 | Input | Label | Input Mode | Action | Function | Notes 
-| DI1 | Xmin | Normally Closed | Stop | Limit |
-| DI2 | Xmax | Normally Closed | Stop | Limit |
-| DI3 | Ymin | Normally Closed | Stop | Limit |
-| DI4 | Ymax | Normally Closed | Stop | Limit |
-| DI5 | Zmin | Active High | None | None | Also used as Z probe
-| DI6 | Zmax | Disabled | Stop | Limit |
-| DI7 | Amin | Disabled | Stop | Limit | Only on J15 2x13 header
-| DI8 | Amax | Disabled | Stop | Limit | Only on J15 2x13 header
-| DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
-|===
 
-.Parameter Values
-|===
-| Parameter | Value | Value Label | Notes 
-| Input Mode | -1 | Disabled |
-| | 0 | Active Low | aka Normally Open
-| | 1 | Active High | aka Normally Closed
-| Action | 0 | None |
-| | 1 | Stop | Stop without losing position, observe jerk
-| | 2 | Fast Stop | Stop without losing position, fast jerk
-| | 3 | Halt | Stop immediately, may lose position
-| | 4 | Reset | Reset system
-| Function | 0 | None |
-| | 1 | Limit | Limit has been hit, unrecoverable
-| | 2 | Interlock | Interlock open, recoverable
-| | 3 | Shutdown | Enter shutdown
-| | 4 | Panic | Cause system panic
-|===
+	Input | Label | Input Mode | Action | Function | Notes
+	------|-------|------------|--------|----------|-------
+	DI1 | Xmin | Normally Closed | Stop | Limit |
+	DI2 | Xmax | Normally Closed | Stop | Limit |
+	DI3 | Ymin | Normally Closed | Stop | Limit |
+	DI4 | Ymax | Normally Closed | Stop | Limit |
+	DI5 | Zmin | Active High | None | None | Also used as Z probe
+	DI6 | Zmax | Disabled | Stop | Limit |
+	DI7 | Amin | Disabled | Stop | Limit | Only on J15 2x13 header
+	DI8 | Amax | Disabled | Stop | Limit | Only on J15 2x13 header
+	DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
+
+###Parameter Values
+
+	Parameter | Value | Value Label | Notes 
+	----------|-------|-------------|------
+	Input Mode | -1 | Disabled |
+	 | 0 | Active Low | aka Normally Open
+	 | 1 | Active High | aka Normally Closed
+	Action | 0 | None |
+	 | 1 | Stop | Stop without losing position, observe jerk
+	 | 2 | Fast Stop | Stop without losing position, fast jerk
+	 | 3 | Halt | Stop immediately, may lose position
+	 | 4 | Reset | Reset system
+	Function | 0 | None |
+	 | 1 | Limit | Limit has been hit, unrecoverable
+	 | 2 | Interlock | Interlock open, recoverable
+	 | 3 | Shutdown | Enter shutdown
+	 | 4 | Panic | Cause system panic
