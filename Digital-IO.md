@@ -128,21 +128,30 @@ Notes:
 - The `in` object associated with the `di` will be assignable (mapped) 
 - Function bindings such as Limit or Interlock will be performed as a parameter of the function, not the DI.
 
-
 #Digital Outputs
 The current state of an output can be read or written using JSON objects. `{outN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the output is disabled or not present. Note that the 0/1 values are corrected for output sense - 1 is active.
 
 <pre>
-{out1:n}	output state
-{out2:n}	etc…
+{out1:n}	Read digital output. Returns 0 (off), 1 (on), or null
+{out2:n}
+...
+{outN:n}
 
-{out:n}		returns all outputs in a single JSON object
+{out:n}	        Read all digital outputs in a single JSON object
+</pre>
+<pre>
+{out1:1}	Write digital output to ON state
+{out2:1}
+...
+{outN:1}
+
+{out:{1:1,4:1}}  Illustrates multiple outputs written in a single command 
 </pre>
 
 ### Digital Output Properties
 
 **Binary Digital Outputs (0/1 Outputs)**
-- The output may be exposed-as `out`_M_ to be visible via JSON 
+- An output is exposed- via JSON as `outN`
 - Output values are written as `0` (off) and `1` (on)
 - A boolean value (`false`, `true`) may be written and will be converted to `0` and `1`
 - A floating point value may be written and will be interpreted as `(bool)(value >= 0.5)`.
