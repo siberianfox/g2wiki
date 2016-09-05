@@ -3,6 +3,7 @@
 This page describes how digital inputs work in firmware version 0.98, firmware build 100+. To report the version use `{fv:n}`. To report build number use `{fb:n}`
 
 Related Pages:
+- [Digital IO for Firmware Version 0.98](Digital-IO-0.98)
 - [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 - [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
 
