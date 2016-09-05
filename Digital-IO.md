@@ -5,10 +5,9 @@ Related Pages:
 - [Digital IO for Firmware Version 0.98](Digital-IO-0.98)
 
 ##Overview
-Digital IO on 0.99 currently supports generalized digital inputs and generalized digital outputs. 0.99 represents a step along the way towards a fully general digital IO system that supports the creation of arbitrary devices and mapping IO to the function in those devices. Please expect the functionality to change in future releases, as well as some of the setup parameters.
+Digital IO on 0.99 currently supports generalized digital inputs and generalized digital outputs. 0.99 represents a step along the way towards a fully general digital IO system that supports the creation of arbitrary devices and mapping IO to the functions in those devices. Please expect IO functionality to change in future releases, as well as some of the setup parameters.
 
-Currently 
-
+Currently the digital inputs still accept the "old style" Mode parameter - i.e. the input enable and polarity are set by the Mode parameter (mo). In the near future 0.99 will be updated to split Mode (mo) and Polarity (po) into separate configuration variables. The documentation below has it listed both ways, with appropriate warnings.
 
 ##Digital Inputs
 ### Reading Digital Inputs
