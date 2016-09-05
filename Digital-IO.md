@@ -23,7 +23,7 @@ Currently the digital inputs accept an "old style" Mode parameter - i.e. the inp
 A **Component** is a collection of one or more functions that does something. In some cases the component is very simple and only has one function. Like a component to read an input and report it out as, say, a person-is-at-the-door signal. In other cases a component may be more complex, encapsulating multiple functions. A heater is a good example, as it has PWM outputs, temperature inputs, output signals and a variety of settings. A heater is a component consisting of PWM, temperature sensors, PID processing, timeout functions, and maybe more. Components may be part of other components - the heater component may be part of an extruder component.
 
 ### IO Primitives
-The three IO primitives are **digital input**, **digital output**, and **analog input** (analog input is not implemented in 0.99).
+IO primitives are used to configure IOs. The three IO primitives are **digital input**, **digital output**, and **analog input** (analog input is not implemented in 0.99).
 
 **Analog output** is not implemented, but practically speaking we always use pulse width modulation (PWM) for variable outputs, and PWM functionality is folded into the digital outputs.
 
