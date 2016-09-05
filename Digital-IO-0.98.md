@@ -4,7 +4,6 @@ To read the firmware version type `{fv:n}`. To read build number type `{fb:n}`
 
 Related Pages:
 - [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
-- [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
 
 ##Digital Inputs
 ### Reading Digital Inputs
