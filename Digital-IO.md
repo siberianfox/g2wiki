@@ -1,11 +1,12 @@
-**Note: This page is in process. Some of the digital output functions may not yet be available (like the ability to write directly to an output). all the input functions should work as stated.**
-
-This page describes how digital inputs work in firmware version 0.98, firmware build 100+. To report the version use `{fv:n}`. To report build number use `{fb:n}`
+_This page describes how digital inputs work **provisionally** in firmware version 0.99, firmware builds 100+. To read the firmware version type `{fv:n}`. To read build number type `{fb:n}`_
 
 Related Pages:
 - [Digital IO for Firmware Version 0.98](Digital-IO-0.98)
-- [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
+- [Configuration for Firmware Version 0.99](Configuration-for-Firmware-Version-0.98)
 - [Configuring Digital Inputs on TinyGv9 Boards](TinyGv9-Page)
+
+##Digital IO on 0.99
+
 
 ##Digital Inputs
 ### Reading Digital Inputs
