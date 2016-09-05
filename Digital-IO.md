@@ -31,8 +31,8 @@ The IO primitives `di` and `do` are used to configure IO but not to read or writ
 
 ### Exposing IO
 IO primitives are exposed for read and write as:
-- `in`_N_ exposes `di`_N_ for reading, e.g. `{in1:n}`
-- `out`_N_ exposes `do`_N_ for reading and writing, e.g. read as `{out1:n}`, write as `{out1:1}`
+- `inN` exposes `diN` for reading, e.g. `{in1:n}`
+- `outN` exposes `doN` for reading and writing, e.g. read as `{out1:n}`, write as `{out1:1}`
 
 # Digital Inputs
 The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present (and may also return non-zero status codes). Digital inputs are read-only.
@@ -46,7 +46,7 @@ The current state of an input can be read using JSON objects. `{inN:n}` will ret
 </pre>
 
 ###Digital Input Properties
-- An input is exposed via JSON `in`_N_ 
+- An input is exposed via JSON as `inN` 
 - The input value reads as `0` (off) or `1` (on)
 - The value is sense-corrected according to the polarity of the Mode setting
 - The value is conditioned - it's deglitched, debounced or otherwise conditioned
@@ -125,7 +125,7 @@ The following changes t the DI settings are planned
    `{di1in:` | exposed-as | 0=not-exposed, 1-M = bound to `in1` through `inM`
 
 Notes:
-- The `in` object associated with the `di` will be assignable (mapped) 
+- The `inN` object associated with the `diN` will be assignable (mapped) 
 - Function bindings such as Limit or Interlock will be performed as a parameter of the function, not the DI.
 
 #Digital Outputs
@@ -151,20 +151,21 @@ The current state of an output can be read or written using JSON objects. `{outN
 ### Digital Output Properties
 
 **Binary Digital Outputs (0/1 Outputs)**
-- An output is exposed- via JSON as `outN`
+- An binary output is exposed- via JSON as `outN`
 - Output values are written as `0` (off) and `1` (on)
-- A boolean value (`false`, `true`) may be written and will be converted to `0` and `1`
+- A boolean value (`true`, `false`) may be written and will be converted to `1` and `0`
 - A floating point value may be written and will be interpreted as `(bool)(value >= 0.5)`.
-- The actual output is polarity corrected based on the polarity setting (normal or inverted)
+- The actual output is polarity corrected based on the polarity setting in the Mode parameter
 - The exposed value reads back the value it was set to as a float, which may not be the value provided. For example, if a binary output was set to `0.75` it will read back as `1`
-- Set and read values will always align, even in Inverted mode. IOW, if IO mode is inverted setting the output to 1 causes a "LOW" voltage on a physical pin, it will still read back as `1` to indicate "active", reflecting the value set.
 - Attempting to read or write a value of a disabled or unavailable `out` will return a `null` value. A status code may also return an error if the request was an unavailable or non-existent output.
+- Digital outputs may be set during Gcode execution by using the M100 active JSON command. For example `M100 ({out1:1})`
+- Digital output state may be reported in status reports by including the `outN`.
 
 **PWM Digital Outputs (0.000/1.000 Outputs)**
-- The output is exposed as `out`_M_ via JSON 
-- Output values are written as 0.000 to 1.000
-- In Normal mode 0.000 is a 0% duty cycle and 1.000 is 100%. In inverted mode these are reversed.
-- The readout will report the written value, not the inverted value (set and read values always align)
+- An PWM'd output is exposed via JSON as `outN`
+- Output PWM values are written as 0.000 to 1.000
+- In Active-High mode 0.000 is a 0% duty cycle and 1.000 is 100%. In Active-Low mode these are reversed.
+- The outN readout will report the written value, not the inverted value (set and read values always align)
 _Note: Currently the readout `{outN:n}` is the same number as the configurator `{doN..:}`. In future releases these will be mappable._
 
 ### Configuring Digital Outputs
@@ -174,25 +175,22 @@ Digital outputs are controlled using a set of digital output objects referenced 
 {do2:n}
 …
 {doN:n}
+
 {do:n}     Group of all digital outputs
 </pre>
-
-
-
-
-
 
 Digital outputs have these attributes (using do1 as an example)
 
 	Name | Description | Values
 	------|------------|---------
-	{do1mo: | mode | 0=active low, 1=active high
+	{do1mo: | mode | 0=active low, 1=active high, 2=disabled
 
-A digital output "pin" may be a physical pin or the output may be an internal signal. For example...
+Notes:
+- Mode
+  - Mode will return NULL if an output is queried that is not available due to hardware of configuration
+  - _Note: Mode settings will [change in furtture releases](#future-digital-output-settings)_
 
-
-
-**Configuration Values** Output pins can be configured in JSON via `do`_N_ as below:
+### Future Digital Output Settings
 
    Name | Description | Values
    ------|------------|---------
@@ -218,10 +216,3 @@ Notes:
   - High must be > low or an error is returned
   - If the IO does not support PWM `dcl` and `dch` will return `null` and an error status code
 - Attempting to configure a non-existent `do` will return a `null` value and an error status code
-
-Notes: 
-- Should we consider making the floating point threshold configurable? Does this solve some cases?<br>
-- The PWM configuration stated above does not have a few of the settings we currently have in v8 and g2:
-  - PWM OFF level - used for RC power controllers. Setting the right OFF value should be the responsibility of the toolhead functions.
-  - Asymmetric CW and CCW settings (independent). We may not need these. Never have so far.
-  - Linearity mapping (we don't currently do this)
