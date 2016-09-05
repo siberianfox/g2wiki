@@ -23,7 +23,7 @@ Currently the digital inputs accept an "old style" Mode parameter - i.e. the inp
 A **Component** is a collection of one or more functions that does something. In some cases the component is very simple and only has one function. Like a component to read an input and report it out as, say, a person-is-at-the-door signal. In other cases a component may be more complex, encapsulating multiple functions. A heater is a good example, as it has PWM outputs, temperature inputs, output signals and a variety of settings. A heater is a component consisting of PWM, temperature sensors, PID processing, timeout functions, and maybe more. Components may be part of other components - the heater component may be part of an extruder component.
 
 ### IO Primitives
-IO primitives are used to configure IOs. The three IO primitives are **digital input**, **digital output**, and **analog input** (analog input is not implemented in 0.99).
+IO primitives are used to configure IOs. The three IO primitives are **digital input**, **digital output**, and **analog input**. _(Note: analog input is not implemented in 0.99)_
 
 **Analog output** is not implemented, but practically speaking we always use pulse width modulation (PWM) for variable outputs, and PWM functionality is folded into the digital outputs.
 
@@ -31,15 +31,11 @@ The IO primitives `di` and `do` are used to configure IO but not to read or writ
 
 ### Exposing IO
 IO primitives are exposed for read and write as:
-- `di`_N_ is exposed as `in`_N_ for reading an input
-- `do`_N_ is exposed as `out`_N_ for reading and writing an output
-
-Examples:
-- `{di1:...}` is used to configure digital input 1. Read as `{in1:n}`
-- `{do1:...}` is used to configure digital output 1.  Read as `{out1:n}`, rand ite as `{out1:1}`
+- `in`_N_ exposes `di`_N_ for reading, e.g. `{in1:n}`
+- `out`_N_ exposes `do`_N_ for reading and writing, e.g. read as `{out1:n}`, write as `{out1:1}`
 
 # Digital Inputs
-The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present (and may also return non-zero status codes. Digital inputs are read-only.
+The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present (and may also return non-zero status codes). Digital inputs are read-only.
 <pre>
 {in1:n}  Read digital input 1, Returns 0, 1, or null
 {in2:n}
@@ -50,17 +46,16 @@ The current state of an input can be read using JSON objects. `{inN:n}` will ret
 </pre>
 
 **Digital Input Properties**
-- The input is exposed via JSON `in`_N_ 
-- The digital input value reads as `0` (off) or `1` (on)
-- The value is sense-corrected according to the Polarity selected in the Mode setting
+- An input is exposed via JSON `in`_N_ 
+- The input value reads as `0` (off) or `1` (on)
+- The value is sense-corrected according to the polarity of the Mode setting
 - The value is conditioned - it's deglitched, debounced or otherwise conditioned
 - The exposed value is read-only - `in`_N_ cannot be written and is an error
 - Attempting to read a value of a disabled (or unavailable) `in` will return a `null` value. A status code may also return an error if an unavailable or non-existent input was queried.
-- Digital inputs can be waited on using the `M101` command, thus be part of the job tape and synchronized with the job. An example is waiting on an input to become active before continuing the job.
+- Digital inputs can be waited on using the `M101` command, thus be part of a Gcode file and synchronized with the job. An example is waiting on an input to become active before continuing the job, e.g. `M101 ({in4:1})`
+- Digital input state may be reported in status reports by including `inN`. If you only want switch state reports but want the switch to have no other effect select action=none and function=none.
 
 _Note: Currently the readout `{inN:n}` is the same number as the configurator `{diN..:}`. In future releases these will be mappable._
-
-It’s also possible to include inputs in the status report to report switch state changes (set to filtered, please!). If you only want switch state reports but want the switch to have no other effect select action=none and function=none.
 
 ### Configuring Digital Inputs
 Digital inputs are configured using a set of digital input objects referenced as:
@@ -81,32 +76,25 @@ Digital inputs have these attributes (using di1 as an example)
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
 	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown
 
-Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
+Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms. Some functions (Interlock) also use the trailing edge for "coming off" the function.
 
 Notes:
 - Mode
   - Mode will return NULL if an input is queried that is not available due to hardware or configuration
-  - _Note: the Mode value will change in future releases_
-- Action - occurs immediately on input firing
+  - _Note: Mode settings will [change in future releases](#Future-Digital-Input-Settings)_
+- Action - occurs immediately when input fires
   - `Stop` is a controlled feedhold that preserves position
   - `Fast_Stop` is a controlled feedhold at high jerk that preserves position
   - `Halt` ceases steps immediately and does not preserve position
-  - `Cycle_start` starts or resumes motion after a feedhold or stop
+  - `Cycle_start` starts or resumes motion after a feedhold or stop (RESERVED - not yet implemented)
   - `Alarm` places the system in an alarm state (and may initiate further system actions)
   - `Shutdown` initiates a system shutdown
   - `Panic` initiates a system panic
   - `Reset` performs a hard reset of the controller
-- Function - called from main loop on firing
+- Function - called from main loop after input fires
   - `limit` acts as a limit switch which goes into an ALARM state. Enter {clear:n} to clear
   - `interlock` pauses all movement until the interlock input is restored
 - Attempting to configure a non-existent `di` will return a `null` value and an error status code
-
-Internal state for inputs may include:
-
-	Name | Description 
-	------|------------
-	lockout_timer | time in ticks (ms) to remove lockout
-	homing_mode | set true if the switch is the homing switch now
 
 ### Digital Inputs During Homing
 Homing is an exception as an input can be configured as a homing input and a limit input. To configure homing these new parameters are added to the axis config (example showing X axis):
@@ -124,9 +112,9 @@ Inputs operate differently during homing – sequence is:
 - At the end of homing limit override is removed
 
 ### Digital Inputs During Probing
-Probing is also an exception. Currently probing can only be performed on the Zmin input (di5 on the v9). Di5 should be set as Normally Open (Active Low).
+Probing is also an exception that disables limit functionality.
 
-### Future DI Settings
+### Future Digital Input Settings
 The following changes t the DI settings are planned
  
    Name | Description | Values
@@ -136,6 +124,7 @@ The following changes t the DI settings are planned
    `{di1ac:` | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
    `{di1in:` | exposed-as | 0=not-exposed, 1-M = bound to `in1` through `inM`
 
+Notes:
 - The `in` object associated with the `di` will be assignable (mapped) 
 - Function bindings such as Limit or Interlock will be performed as a parameter of the function, not the DI.
 
