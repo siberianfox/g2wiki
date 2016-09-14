@@ -8,8 +8,8 @@ You also generally want to use power management to de-power the machine if it's 
 
 The power management commands let you set up the right set of actions for your machine and use.
 
-## Global Power Management Commands
-These commands affect all motors.
+## Global Power Management Settings
+These settings affect all motors.
  
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
@@ -20,19 +20,20 @@ These commands affect all motors.
 	$pwr1 | Report enable state | PWRn returns a single motor state
 
 <pre>
-Text mode examples:
-$me=180    Lock all motors for 3 minutes for a tooling operation 
-$md        Disable all motors
-$mt=300    Set timeout to 5 minutes
-$pwr       Query power enabled for all motors
-$pwr2      Query power enabled for motor 2
+JSON mode examples:
+{me:180}      Lock all motors for 3 minutes for a tooling operation 
+{me:n}        Disable all motors
+{mt:300}      Set timeout to 5 minutes
+{pwr:n}       Query motor power state for all motors
+{pwr2:n}      Query motor power state for motor 2
 
-JSON mode equivalents:
-{me:180}
-{me:n}
-{mt:300}
-{pwr:n}
-{pwr2:n}
+Text mode equivalents:
+$me=180
+$md
+$mt=300
+$pwr
+$pwr2
+
 </pre>
 
 ###{me:...} Motor Enable
@@ -42,7 +43,7 @@ This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{m
 Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
-Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by the per-motor setting:
+Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
 
 - `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
 - `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
@@ -51,7 +52,7 @@ Sets the number of seconds before a motor will shut off automatically. When the 
 
 Motor timeouts are suspended during feedholds - i.e. they will not time out during a feedhold. This allows changing or adjusting tools without loss of position.
 
-##Per-Motor Commands
+##Per-Motor Settings
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
