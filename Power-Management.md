@@ -35,25 +35,25 @@ $4pm=3     Motor 4 only powered when it is moving
 These commands affect all motors and take effect as soon as they are issued.
 
 ###{1:{pm:0}} Motor Disabled
-This will turn off motor power and prevent the motor from turning on. Disabling the motor will prevent that axis from participating in any move. The motor will not be affected by $me or $md commands. This setting takes effect immediately.
+This will turn off motor power and prevent the motor from turning on. Disabling the motor will prevent that axis from participating in any move. The motor will not be affected by `{me:N}` or `{md:t}` commands. This setting takes effect immediately.
 
 ###{1:{pm:1}} Motor Always Powered
-This will turn on motor power and leave it on until the board is shut down. The motor will not be affected by $me or $md commands. You generally do not want to use this mode as it will leave the motors on for extended periods of time if you do not power down the machine. Better to set a long motor power timeout and use Powered In Cycle (2)
+This will turn on motor power and leave it on until the board is shut down. The motor will not be affected by `{me:N}` or `{md:t}` commands. You generally do not want to use this mode as it will leave the motors on for extended periods of time if you do not power down the machine. Better to set a long motor power timeout and use Powered In Cycle (2)
 
 ###{1:{pm:2}} Motor Powered In Cycle
-This will turn on the motor power at the start of any move on any axis (a "cycle"), and will de-energize the motors $mt seconds after the cycle is complete (all motion stops). The timeout interval is set by the $mt value (see Global Power Management Commands).
+This will turn on the motor power at the start of any move on any axis (a "cycle"), and will de-energize the motors `{mt:N}` seconds after the cycle is complete (i.e. all motion stops). The timeout interval is set by the `{mt:N}` value (see [Global Power Management Commands](#global-power-management-commands)).
 
 ###{1:{pm:3}} Motor Powered When Moving
-This will turn on the motor power only when that axis is moving, and will remove power $mt seconds after that axis stops moving.
+This will turn on the motor power only when that axis is moving, and will remove power `{mt:N}` seconds after that axis stops moving.
 
 ## Global Power Management Commands
 These commands affect all motors.
  
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	$md(=N) | Disable motors | $md will disable all motors. Set N = 1-4 to disable motor N only
-	$me(=N) | Enable motors | $me will enable all motors. Set N = 1-4 to enable motor N only
-	$mt | Set motor enable timeout | In seconds, up to 1 million seconds
+	{md:N} | Disable motors | {md:0} will disable all motors. Set N = 1-6 to disable motor N only
+	{me:N} | Enable motors | {md:0} will enable all motors. Set N = 1-6 to enable motor N only
+	{mt:N} | Set motor enable timeout | In seconds, up to 1 million seconds
 	$pwr | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
 	$pwr1 | Report enable state | PWRn returns a single motor state
 
