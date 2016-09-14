@@ -8,44 +8,6 @@ You also generally want to use power management to de-power the machine if it's 
 
 The power management commands let you set up the right set of actions for your machine and use.
 
-##Per-Motor Commands
-
-	Setting | Description | Notes
-	--------|-------------|-----------------------------
-	{1:{pm:n}} | Display power mode | Returns one of the power modes below
-	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
-	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
-	[{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
-	[{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
-
-<pre>
-JSON mode examples:
-{1pm:0}  or {1:{pm:0}}
-{2pm:1}  or {2:{pm:1}}
-{1pm:2}  or {1:{pm:2}}
-{4pm:3}  or {4:{pm:3}}
-
-Text mode equivalents:
-$1pm=0     Motor 1 disabled
-$2pm=1     Motor 2 always powered
-$1pm=2     Motor 1 powered during a machining cycle (any motor moving)
-$4pm=3     Motor 4 only powered when it is moving
-</pre>
-
-These commands affect all motors and take effect as soon as they are issued.
-
-###{1:{pm:0}} Motor Disabled
-This will turn off motor power and prevent the motor from turning on. Disabling the motor will prevent that axis from participating in any move. The motor will not be affected by `{me:N}` or `{md:t}` commands. This setting takes effect immediately.
-
-###{1:{pm:1}} Motor Always Powered
-This will turn on motor power and leave it on until the board is shut down. The motor will not be affected by `{me:N}` or `{md:t}` commands. You generally do not want to use this mode as it will leave the motors on for extended periods of time if you do not power down the machine. Better to set a long motor power timeout and use Powered In Cycle (2)
-
-###{1:{pm:2}} Motor Powered In Cycle
-This will turn on the motor power at the start of any move on any axis (a "cycle"), and will de-energize the motors `{mt:N}` seconds after the cycle is complete (i.e. all motion stops). The timeout interval is set by the `{mt:N}` value (see [Global Power Management Commands](#global-power-management-commands)).
-
-###{1:{pm:3}} Motor Powered When Moving
-This will turn on the motor power only when that axis is moving, and will remove power `{mt:N}` seconds after that axis stops moving.
-
 ## Global Power Management Commands
 These commands affect all motors.
  
@@ -88,3 +50,42 @@ $1pm=2 Motors that are powered-in-cycle begin timeout at the end of the cycle, w
 $1pm=3 Motors that are powered-while-moving begin timeout at the end of their movement
 
 Motor timeouts are suspended during feedholds. This allows changing or adjusting tools without loss of position.
+
+##Per-Motor Commands
+
+	Setting | Description | Notes
+	--------|-------------|-----------------------------
+	{1:{pm:n}} | Display power mode | Returns one of the power modes below
+	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
+	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
+	[{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
+	[{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
+
+<pre>
+JSON mode examples:
+{1pm:0}  or {1:{pm:0}}
+{2pm:1}  or {2:{pm:1}}
+{1pm:2}  or {1:{pm:2}}
+{4pm:3}  or {4:{pm:3}}
+
+Text mode equivalents:
+$1pm=0     Motor 1 disabled
+$2pm=1     Motor 2 always powered
+$1pm=2     Motor 1 powered during a machining cycle (any motor moving)
+$4pm=3     Motor 4 only powered when it is moving
+</pre>
+
+These commands affect all motors and take effect as soon as they are issued.
+
+###{1:{pm:0}} Motor Disabled
+This will turn off motor power and prevent the motor from turning on. Disabling the motor will prevent that axis from participating in any move. The motor will not be affected by `{me:N}` or `{md:t}` commands. This setting takes effect immediately.
+
+###{1:{pm:1}} Motor Always Powered
+This will turn on motor power and leave it on until the board is shut down. The motor will not be affected by `{me:N}` or `{md:t}` commands. You generally do not want to use this mode as it will leave the motors on for extended periods of time if you do not power down the machine. Better to set a long motor power timeout and use Powered In Cycle (2)
+
+###{1:{pm:2}} Motor Powered In Cycle
+This will turn on the motor power at the start of any move on any axis (a "cycle"), and will de-energize the motors `{mt:N}` seconds after the cycle is complete (i.e. all motion stops). The timeout interval is set by the `{mt:N}` value (see [Global Power Management Commands](#global-power-management-commands)).
+
+###{1:{pm:3}} Motor Powered When Moving
+This will turn on the motor power only when that axis is moving, and will remove power `{mt:N}` seconds after that axis stops moving.
+
