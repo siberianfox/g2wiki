@@ -13,10 +13,10 @@ The power management commands let you set up the right set of actions for your m
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
 	{1:{pm:n}} | Display power mode | Returns one of the power modes below
-	[{1:{pm:0}}](#1pm0-motor-disabled) | Always disabled | Motor will not be enabled by $me 
-	{1:{pm:1}} | Always enabled | Motor will not be disabled by $md 
-	{1:{pm:2}} | Enabled in cycle | Motor is powered during machining cycle (any axis is moving) and for $mt seconds afterwards
-	{1:{pm:3}} | Enabled while moving | Motor is powered when it is moving and for $mt seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
+	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
+	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
+	[{1:{pm:2}}]({#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
+	[{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
 
 <pre>
 JSON mode examples:
