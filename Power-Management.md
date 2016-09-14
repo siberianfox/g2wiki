@@ -43,7 +43,7 @@ This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{m
 Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
-Sets the number of seconds before a motor will shut off automatically. Maximum 4 million seconds, or about 6 weeks. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
+Sets the number of seconds before a motor will shut off automatically. Maximum about 4.2 million seconds, or about 7 weeks. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
 
 - `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
 - `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
