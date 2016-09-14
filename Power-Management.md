@@ -42,14 +42,14 @@ This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{m
 Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
-Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by context:
+Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by the per-motor setting:
 
-$1pm=0 Disabled motors are always off. They do not time out
-$1pm=1 Always-on motors are always on. They do not time out, either
-$1pm=2 Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving.
-$1pm=3 Motors that are powered-while-moving begin timeout at the end of their movement
+- `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
+- `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
+- `{1pm:2}` Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving. A new cycle before timeout occurs will re-enable the motors restart the timeout at the end of the cycle. 
+- `{1pm:3}` Motors that are powered-while-moving begin timeout at the end of their movement. New movement before timeout occurs will re-enable the motors restart the timeout at the end of the movement.
 
-Motor timeouts are suspended during feedholds. This allows changing or adjusting tools without loss of position.
+Motor timeouts are suspended during feedholds - i.e. they will not time out during a feedhold. This allows changing or adjusting tools without loss of position.
 
 ##Per-Motor Commands
 
