@@ -36,10 +36,10 @@ JSON mode equivalents:
 </pre>
 
 ###{me:...} Motor Enable
-This will turn on any motor that is not disabled, i.e. not `{1pm:0}`. Providing `{me:n}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not energize before the operation is complete. `{md:n}` can be used to disable the motors once the operation is complete.
+This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{me:n}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not de-energize before the operation is complete. `{md:n}` can be used to disable the motors once the operation is complete.
 
 ###{md:...} Motor Disable
-This will turn off any motor that is not permanently enabled ($1pm=1). If provided a valid motor number it will disable that motor only.
+Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
 Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by context:
