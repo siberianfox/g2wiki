@@ -15,7 +15,7 @@ These settings affect all motors.
 	--------|-------------|-----------------------------
 	[{me:...}](#me-motor-enable) | Enable motors | {md:n} will enable all motors for default timeout (mt). Set value to seconds to override default timeout value
 	[{md:...}](#md-motor-disable) | Disable motors | {md:n} will disable all motors. Set 1-6 to disable motor N only
-	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | In seconds, up to 1 million seconds
+	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | Default timeout in seconds
 	$pwr | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
 	$pwr1 | Report enable state | PWRn returns a single motor state
 
@@ -43,7 +43,7 @@ This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{m
 Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
-Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
+Sets the number of seconds before a motor will shut off automatically. Maximum 4 million seconds. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
 
 - `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
 - `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
