@@ -13,9 +13,9 @@ These commands affect all motors.
  
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	[{me:...}](#me-motor-enable) | Enable motors | {md:0} will enable all motors. Set N = 1-6 to enable motor N only
-	[{md:...}](#md-motor-disable) | Disable motors | {md:0} will disable all motors. Set N = 1-6 to disable motor N only
-	[{mt:...}](#mt_motor_timeout) | Set motor enable timeout | In seconds, up to 1 million seconds
+	[{me:...}](#me-motor-enable) | Enable motors | {md:n} will enable all motors for default timeout (mt). Set value to seconds to override default timeout value
+	[{md:...}](#md-motor-disable) | Disable motors | {md:n} will disable all motors. Set 1-6 to disable motor N only
+	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | In seconds, up to 1 million seconds
 	$pwr | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
 	$pwr1 | Report enable state | PWRn returns a single motor state
 
