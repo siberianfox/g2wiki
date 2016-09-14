@@ -13,8 +13,8 @@ These commands affect all motors.
  
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	{md:N} | Disable motors | {md:0} will disable all motors. Set N = 1-6 to disable motor N only
 	[{me:N}](#me-motor-enable) | Enable motors | {md:0} will enable all motors. Set N = 1-6 to enable motor N only
+	[{md:N}](#me-motor-disable) | Disable motors | {md:0} will disable all motors. Set N = 1-6 to disable motor N only
 	{mt:N} | Set motor enable timeout | In seconds, up to 1 million seconds
 	$pwr | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
 	$pwr1 | Report enable state | PWRn returns a single motor state
