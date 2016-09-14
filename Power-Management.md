@@ -12,24 +12,24 @@ The power management commands let you set up the right set of actions for your m
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	$1pm | Display power mode | Returns one of the power modes below
-	$1pm=0 | Always disabled | Motor will not be enabled by $me 
-	$1pm=1 | Always enabled | Motor will not be disabled by $md 
-	$1pm=2 | Enabled in cycle | Motor is powered during machining cycle (any axis is moving) and for $mt seconds afterwards
-	$1pm=3 | Enabled while moving | Motor is powered when it is moving and for $mt seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
+	{1:{pm:n}} | Display power mode | Returns one of the power modes below
+	{1:{pm:0}} | Always disabled | Motor will not be enabled by $me 
+	{1:{pm:1}} | Always enabled | Motor will not be disabled by $md 
+	{1:{pm:2}} | Enabled in cycle | Motor is powered during machining cycle (any axis is moving) and for $mt seconds afterwards
+	{1:{pm:3}} | Enabled while moving | Motor is powered when it is moving and for $mt seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
 
 <pre>
-Text mode examples:
-$1pm=0     Motor 1 disabled
-$2pm=1     Motor 2 always powered
-$1pm=2     Motor 1 powered during a machining cycle (any motor moving)
-$4pm=3     Motor 4 only powered when it is moving
-
-JSON mode equivalents:
+JSON mode examples:
 {1pm:0}  or {1:{pm:0}}
 {2pm:1}  or {2:{pm:1}}
 {1pm:2}  or {1:{pm:2}}
 {4pm:3}  or {4:{pm:3}}
+
+Text mode equivalents:
+$1pm=0     Motor 1 disabled
+$2pm=1     Motor 2 always powered
+$1pm=2     Motor 1 powered during a machining cycle (any motor moving)
+$4pm=3     Motor 4 only powered when it is moving
 </pre>
 
 These commands affect all motors and take effect as soon as they are issued.
