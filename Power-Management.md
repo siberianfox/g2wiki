@@ -36,7 +36,7 @@ JSON mode equivalents:
 </pre>
 
 ###{me:...} Motor Enable
-This will turn on any motor that is not disabled ($1pm=0). If provided a valid motor number it will enable that motor only. 
+This will turn on any motor that is not disabled, i.e. not `{1pm:0}`. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not energize before the operation is complete. `{md:n}` can be used to disable the motors once the operation is complete.
 
 ###{md:...} Motor Disable
 This will turn off any motor that is not permanently enabled ($1pm=1). If provided a valid motor number it will disable that motor only.
