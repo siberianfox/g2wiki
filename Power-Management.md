@@ -38,11 +38,11 @@ JSON mode equivalents:
 ###{me:...} Motor Enable
 This will turn on any motor that is not disabled ($1pm=0). If provided a valid motor number it will enable that motor only. 
 
-###Motor Disable (md)
+###{md:...} Motor Disable
 This will turn off any motor that is not permanently enabled ($1pm=1). If provided a valid motor number it will disable that motor only.
 
-###Motor Timeout (mt)
-Sets the number of seconds before a motor will shut off automatically. When the timeout starts is se by context:
+###{mt:...} Motor Timeout
+Sets the number of seconds before a motor will shut off automatically. When the timeout starts is set by context:
 
 $1pm=0 Disabled motors are always off. They do not time out
 $1pm=1 Always-on motors are always on. They do not time out, either
