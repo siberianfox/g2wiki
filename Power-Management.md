@@ -13,7 +13,7 @@ The power management commands let you set up the right set of actions for your m
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
 	{1:{pm:n}} | Display power mode | Returns one of the power modes below
-	{1:{pm:0}} | Always disabled | Motor will not be enabled by $me 
+	[{1:{pm:0}}](#1pm0-motor-disabled) | Always disabled | Motor will not be enabled by $me 
 	{1:{pm:1}} | Always enabled | Motor will not be disabled by $md 
 	{1:{pm:2}} | Enabled in cycle | Motor is powered during machining cycle (any axis is moving) and for $mt seconds afterwards
 	{1:{pm:3}} | Enabled while moving | Motor is powered when it is moving and for $mt seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
