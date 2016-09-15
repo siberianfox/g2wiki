@@ -9,6 +9,7 @@ This page documents motor settings. Each motor object ("group") has a collection
 
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
+	____________|______________|
 	[{1:{ma:...}}](#1ma-map-motor-to-axis) | **M**ap to **A**xis | Configure axis to which this motor is connected (for Cartesian machines) E.g. {1ma:0}, {2ma:1}, {3ma:2}, {4ma:3} to map motors 1-4 to X,Y,Z,A, respectively
 	[{1:{sa:...}}](#1sa-step-angle) | **S**tep **A**ngle | Motor parameter indicating the angle traveled per whole step. Typical setting is {1sa:1.8} for 1.8 degrees per step (200 steps per revolution)
 	[{1:{tr:..}}](#1tr-travel-per-revolution) | **T**ravel per **R**evolution | How far the mapped axis moves per motor revolution. E.g. {1tr:2.54} (millimeters) for a 10 TPI screw axis
