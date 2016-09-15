@@ -62,7 +62,8 @@ Returns the power levels for all motors
 ##Per-Motor Settings
 
 	Setting | Description | Notes
-	--------|-------------|-----------------------------
+	------------------|-------------|-----------------------------
+	___________| | 
 	{1:{pm:n}} | Display power mode | Returns one of the power modes below
 	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
 	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
