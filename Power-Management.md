@@ -16,8 +16,8 @@ These settings affect all motors.
 	[{me:...}](#me-motor-enable) | Enable motors | {md:n} will enable all motors for default timeout (mt). Set value to seconds to override default timeout value
 	[{md:...}](#md-motor-disable) | Disable motors | {md:n} will disable all motors. Set 1-6 to disable motor N only
 	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | Default timeout in seconds
-	$pwr | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
-	$pwr1 | Report enable state | PWRn returns a single motor state
+	[{pwr1:n}](#pwr1n-power-level-readout) | Report enable state | PWRn returns a single motor state
+	[{pwr:n}](#pwrn-power-level-group) | Report enable states | PWR returns all motor enables states. This is like a virtual motor LED that returns 1 if motor N is enabled (LED is lit), 0 if not
 
 <pre>
 JSON mode examples:
@@ -51,6 +51,12 @@ Sets the number of seconds before a motor will shut off automatically. Maximum a
 - `{1pm:3}` Motors that are powered-while-moving begin timeout at the end of their movement. New movement before timeout occurs will re-enable the motors restart the timeout at the end of the movement.
 
 Motor timeouts are suspended during feedholds - i.e. they will not time out during a feedhold. This allows changing or adjusting tools without loss of position.
+
+###{pwr1:n} Power Level Readout
+
+###{pwr:n} Power Level Group
+
+
 
 ##Per-Motor Settings
 
