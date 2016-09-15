@@ -15,6 +15,7 @@
 1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [Digital IO (GPIO)](Digital-IO)
 1. [ ] [Alarms & Exceptions](Alarm-Processing)
+1. [ ] [Power Management](Power-Management)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
 1. [ ] [Status Reports](Status-Reports)
 1. [ ] [Status Codes](Status-Codes)
