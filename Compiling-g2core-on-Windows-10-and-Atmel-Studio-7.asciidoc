@@ -40,6 +40,8 @@ _This page is for compiling the G2core project on Windows 10 with Atmel Studio 1
 
 NOTE: If you are using Windows inside VMWare, please see the link:Troubleshooting#vmware-setup[VMWare Setup section of our Troubleshooting page].
 
+NOTE: At this point we have given up on VMware and switched to Parallels 12 Desktop for Mac. Parallels compiles much faster due to better file system handling and has fewer problems. (For VMware the camel's back was waking up one morning and having found Windows did an overnight update (I thought I turned that off) which doubled the size of the VM and broke the Z: drive connection. Can't get it back.)
+
 ## Disk Space
 Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2gore project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on the drive where the repo is, which _might not be `C:`_.
 
