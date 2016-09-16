@@ -58,7 +58,7 @@ Returns the power levels for all motors
 	Setting | Description | Notes
 	------------------|-------------|-----------------------------
 	___________| | 
-	{1:{pm:n}} | Display power mode | Returns one of the power modes below
+	[{1:{pm:n}}](#1pm-motor-power-modes) | Display power mode | Returns one of the power modes below
 	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
 	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
 	[{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
@@ -74,15 +74,17 @@ JSON mode and text mode examples:
 
 These commands affect all motors and take effect as soon as they are issued.
 
-###{1:{pm:0}} Motor Disabled
+###{1:{pm:...}} Motor Power Modes
+
+####{1:{pm:0}} Motor Disabled
 This will turn off motor power and prevent the motor from turning on. Disabling the motor will prevent that axis from participating in any move. The motor will not be affected by `{me:N}` or `{md:t}` commands. This setting takes effect immediately.
 
-###{1:{pm:1}} Motor Always Powered
+####{1:{pm:1}} Motor Always Powered
 This will turn on motor power and leave it on until the board is shut down. The motor will not be affected by `{me:N}` or `{md:t}` commands. You generally do not want to use this mode as it will leave the motors on for extended periods of time if you do not power down the machine. Better to set a long motor power timeout and use Powered In Cycle (2)
 
-###{1:{pm:2}} Motor Powered In Cycle
+####{1:{pm:2}} Motor Powered In Cycle
 This will turn on the motor power at the start of any move on any axis (a "cycle"), and will de-energize the motors `{mt:N}` seconds after the cycle is complete (i.e. all motion stops). The timeout interval is set by the `{mt:N}` value (see [Global Power Management Commands](#global-power-management-commands)).
 
-###{1:{pm:3}} Motor Powered When Moving
+####{1:{pm:3}} Motor Powered When Moving
 This will turn on the motor power only when that axis is moving, and will remove power `{mt:N}` seconds after that axis stops moving.
 
