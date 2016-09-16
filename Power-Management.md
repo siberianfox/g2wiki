@@ -1,3 +1,5 @@
+_**Please Note: As of 9/16/16 this page is in flux and does not completely agree with the code available in edge-100. THis message will be removed when that is no longer true**_
+
 Power management is used to keep the steppers on when you need them and turn them off when you don't. 
 
 Stepper motors consume maximum power when idle. They hold torque and get hot. If you shut off power the motor has (almost) no holding torque. Most lead screw or geared machines will hold position if you shut off the power when the motor is not moving, but belt machines generally do not. 
@@ -13,8 +15,8 @@ These settings affect all motors.
  
 	Setting | Description | Notes
 	--------|-------------|-----------------------------
-	[{me:...}](#me-motor-enable) | Enable motors | {md:n} will enable all motors for default timeout (mt). Set value to seconds to override default timeout value
-	[{md:...}](#md-motor-disable) | Disable motors | {md:n} will disable all motors. Set 1-6 to disable motor N only
+	[{me:...}](#me-motor-enable) | Enable motors | {md:0} to enable all motors for default timeout (mt). Set non-zero value in seconds to override default timeout
+	[{md:...}](#md-motor-disable) | Disable motors | {md:0} to disable all motors. Set 1-6 to disable motor N only
 	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | Default timeout in seconds
 	[{pwr1:n}](#pwr1n-power-level-readout) | Power level readout | {pwr1:n} returns the current power level for motor 1
 	[{pwr:n}](#pwrn-power-level-group) | Power level readout group | {pwr:n}  returns all power readouts 
