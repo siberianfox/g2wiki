@@ -18,31 +18,23 @@ These settings affect all motors.
 	[{me:...}](#me-motor-enable) | Enable motors | {md:0} to enable all motors for default timeout (mt). Set non-zero value in seconds to override default timeout
 	[{md:...}](#md-motor-disable) | Disable motors | {md:0} to disable all motors. Set 1-6 to disable motor N only
 	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | Default timeout in seconds
-	[{pwr1:n}](#pwr1n-power-level-readout) | Power level readout | {pwr1:n} returns the current power level for motor 1
-	[{pwr:n}](#pwrn-power-level-group) | Power level readout group | {pwr:n}  returns all power readouts 
+	[{pwr1:n}](#pwr1n-power-level-readout) | Power level readout | Return current power level for motor
+	[{pwr:n}](#pwrn-power-level-group) | Power level readout group | Return power levels for all motors 
 
+JSON mode and Text mode examples:
 <pre>
-JSON mode examples:
-{me:180}      Lock all motors for 3 minutes for a tooling operation 
-{me:n}        Disable all motors
-{mt:300}      Set timeout to 5 minutes
-{pwr:n}       Query motor power level for all motors
-{pwr2:n}      Query motor power level for motor 2
-
-Text mode equivalents:
-$me=180
-$md
-$mt=300
-$pwr
-$pwr2
-
+{me:180}      $me=180     Lock all motors for 3 minutes for a tooling operation 
+{md:n}        $md         Disable all motors
+{mt:900}      $mt=900     Set global timeout to 15 minutes
+{pwr:n}       $pwr        Query motor power level for all motors
+{pwr2:n}      $pwr2       Query motor power level for motor 2
 </pre>
 
 ###{me:...} Motor Enable
-This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{me:n}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not de-energize before the operation is complete. `{md:n}` can be used to disable the motors once the operation is complete.
+This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{me:0}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not de-energize before the operation is complete. `{md:0}` can be used to disable the motors once the operation is complete.
 
 ###{md:...} Motor Disable
-Providing `{md:n}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
+Providing `{md:0}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
 
 ###{mt:...} Motor Timeout
 Sets the number of seconds before a motor will shut off automatically. Maximum about 4.2 million seconds, or about 7 weeks. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
@@ -72,18 +64,12 @@ Returns the power levels for all motors
 	[{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
 	[{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
 
+JSON mode and text mode examples:
 <pre>
-JSON mode examples:
-{1pm:0}  or {1:{pm:0}}
-{2pm:1}  or {2:{pm:1}}
-{1pm:2}  or {1:{pm:2}}
-{4pm:3}  or {4:{pm:3}}
-
-Text mode equivalents:
-$1pm=0     Motor 1 disabled
-$2pm=1     Motor 2 always powered
-$1pm=2     Motor 1 powered during a machining cycle (any motor moving)
-$4pm=3     Motor 4 only powered when it is moving
+{1pm:0}     {1:{pm:0}}    $1pm=0     Motor 1 disabled
+{2pm:1}     {2:{pm:1}}    $2pm=1     Motor 2 always powered
+{1pm:2}     {1:{pm:2}}    $1pm=2     Motor 1 powered during a machining cycle (any motor moving)
+{4pm:3}     {4:{pm:3}}    $4pm=3     Motor 4 only powered when it is moving
 </pre>
 
 These commands affect all motors and take effect as soon as they are issued.
