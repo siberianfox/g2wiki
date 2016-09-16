@@ -56,7 +56,7 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 
 * Walk through the entire installation process 
 
-** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
+** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio. We allow it to install all 3 Architectures (8 bit, 32 bit ARM, Smart Arm) even though the g2core project downloads its complete toolchain. If you are tight on space you can probably omit these (but we have not tested this).
 
 ** Fire up AS7 for the first time 
 
