@@ -32,7 +32,7 @@
 
 1. [ ] [Getting Started with g2core Development](Getting-Started-with-g2core-Development)
 1. [ ] [Project Structure & Motate](Project-Structure-and-Motate)
-1. [ ] [Compiling G2](Compiling-G2)
+1. [ ] [Compiling G2](Getting-Started-with-g2core-Development#compiling-the-code)
 1. [ ] [Debugging G2 on OSX](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
 1. [ ] [Diagnostics](Diagnostics)
