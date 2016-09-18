@@ -17,9 +17,9 @@ These settings affect all motors.
 	--------|-------------|-----------------------------
 	[{me:...}](#me-motor-enable) | Enable motors | {md:0} to enable all motors for default timeout (mt). Set non-zero value in seconds to override default timeout
 	[{md:...}](#md-motor-disable) | Disable motors | {md:0} to disable all motors. Set 1-6 to disable motor N only
-	[{mt:...}](#mt-motor-timeout) | Set motor enable timeout | Default timeout in seconds
-	[{pwr1:n}](#pwr1n-power-level-readout) | Power level readout | Return current power level for motor
-	[{pwr:n}](#pwrn-power-level-group) | Power level readout group | Return power levels for all motors 
+	[{mt:...}](#mt-motor-timeout) | Motor timeout | Default timeout in seconds
+	[{pwr1:n}](#pwr1n-power-level-readout) | Power level | Current power level for motor (read-only)
+	[{pwr:n}](#pwrn-power-level-group) | Power level group | Power levels for all motors (read-only)
 
 JSON mode and Text mode examples:
 <pre>
@@ -31,26 +31,26 @@ JSON mode and Text mode examples:
 </pre>
 
 ###{me:...} Motor Enable
-This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{me:0}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not de-energize before the operation is complete. `{md:0}` can be used to disable the motors once the operation is complete.
+This will turn on any motor that is not disabled (i.e. `{1pm:0}`). Providing `{me:0}` will enable the motors for the timeout specified in the `mt` value. If a non-zero value is provided it will enable the motors for that many seconds. This is useful when attempting manual operations such as tool changes to ensure that the motors do not de-energize before the operation is complete. `{md:0}` can be used to disable the motors once the operation is complete. This value is "write-only" and returns an error if read (`{me:n}`).
 
 ###{md:...} Motor Disable
-Providing `{md:0}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If provided a valid motor number it will disable that motor only, excepting permanently enabled motors as well.
+Providing `{md:0}` will disable all motors that are not permanently enabled (i.e. `{1pm:1}`). If a valid motor number is provided instead of zero it will disable that motor only (excepting permanently enabled motors). This value is "write-only" and returns an error if read (`{md:n}`).
 
 ###{mt:...} Motor Timeout
-Sets the number of seconds before a motor will shut off automatically. Maximum about 4.2 million seconds, or about 7 weeks. When the timeout starts is set by the [per-motor setting](#per-motor-settings):
+Sets the number of seconds before a motor will shut off automatically. Maximum about 4.2 million seconds, or about 7 weeks (1 dog-year). When the timeout starts is set by the [per-motor setting](#per-motor-settings):
 
 - `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
 - `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
-- `{1pm:2}` Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving. A new cycle before timeout occurs will re-enable the motors restart the timeout at the end of the cycle. 
-- `{1pm:3}` Motors that are powered-while-moving begin timeout at the end of their movement. New movement before timeout occurs will re-enable the motors restart the timeout at the end of the movement.
+- `{1pm:2}` Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving. A new cycle before timeout occurs will re-enable the motors restart the timeout at the end of the new cycle. 
+- `{1pm:3}` Motors that are powered-while-moving begin timeout at the end of their movement. New movement before timeout occurs will re-enable the motors and restart the timeout at the end of the movement.
 
 Motor timeouts are suspended during feedholds - i.e. they will not time out during a feedhold. This allows changing or adjusting tools without loss of position.
 
 ###{pwr1:n} Power Level Readout
-Returns the power level from 0.0 to 1.0 that is currently being appied to the motor. If the motor is not energized it will be 0, otherwise it should the power level set for that motor.
+Returns the power level from 0.0 to 1.0 that is currently being applied to the motor. If the motor is not energized it will be 0, otherwise it should the power level set for that motor. Read-only.
 
 ###{pwr:n} Power Level Group
-Returns the power levels for all motors
+Returns the power levels for all motors. Read-only.
 
 
 ##Per-Motor Settings
@@ -60,7 +60,7 @@ Returns the power levels for all motors
 	___________| | 
 	[{1:{pm:n}}](#1pm-motor-power-modes) | Display power mode | Returns one of the power modes below
 	[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
-	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:t}` 
+	[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:N}` 
 	[{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
 	[{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
 
