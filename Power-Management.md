@@ -1,4 +1,4 @@
-_**Please Note: These notes apply to fb 100.11 pushed to edge-100 on 9/18/16**_
+_**Applies to fb 100.11 and above, which was pushed on 9/18/16**_
 
 Power management is used to keep the steppers on when you need them and turn them off when you don't. 
 
