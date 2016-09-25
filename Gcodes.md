@@ -28,18 +28,18 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	G17 | | Select XY plane | G17, G18 and G19 set the plane in which the G2/G3 arcs are drawn
 	G18 | | Select XZ plane |
 	G19 | | Select YZ plane |
-	[G20](#g20-g21-select-units-mode) | | Select inches units mode | All Gcode from this point on will be interpreted in inches
-	[G21](#g20-g21-select-units-mode) | | Select mm units mode | All Gcode from this point on will be interpreted in millimeters
-	[G28](#g28-g30-go-to-predefined-position) | _axes_ | Go to G28.1 position | Optional axes specify an intermediate point
-	[G28.1](#g28-g30-go-to-predefined-position) | | Set position for G28 | The current machine position is recorded (No parameters are provided)
+	[G20](#g20-g21-select-units-mode) | | Select inches mode | All Gcode from this point on will be interpreted in inches
+	[G21](#g20-g21-select-units-mode) | | Select mm mode | All Gcode from this point on will be interpreted in millimeters
+	[G28](#g28-g30-go-to-predefined-position) | _axes_ | Goto G28 position | Optional axes specify an intermediate point
+	[G28.1](#g28-g30-go-to-predefined-position) | | Set G28 position | The current machine position is recorded (No parameters are provided)
 	[G28.2](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g282---homing-sequence-homing-cycle) | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis must be specified
 	[G28.3](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g283---set-absolute-position) | _axes_ | Set Absolute Position | Set axis to zero or other value. Use to zero axes that cannot otherwise be homed
-	[G30](#g28-g30-go-to-predefined-position) | _axes_ | Go to G30.1 position | Optional axes specify an intermediate point
-	[G30.1](#g28-g30-go-to-predefined-position) | | Set position for G30 | The current machine position is recorded (No parameters are provided)
-	G38.2 | _axes_ | Probe toward, do not report error | Supported in Build 082.xx
-	G38.3 | _axes_ | Probe toward, report if error | Supported in Build 100.xx
-	G38.4 | _axes_ | Probe away, do not report error | Supported in Build 100.xx 
-	G38.5 | _axes_ | Probe away, report if error | Supported in Build 100.xx
+	[G30](#g28-g30-go-to-predefined-position) | _axes_ | Goto G30 position | Optional axes specify an intermediate point
+	[G30.1](#g28-g30-go-to-predefined-position) | | Set G30 position | The current machine position is recorded (No parameters are provided)
+	G38.2 | _axes_ | Probe toward, do not report error 
+	G38.3 | _axes_ | Probe toward, report if error 
+	G38.4 | _axes_ | Probe away, do not report error 
+	G38.5 | _axes_ | Probe away, report if error 
 	G53 | | Select absolute coordinates | Non-Modal: Applies only to current block
 	G54 | | Select coord system 1 | G54 is typically used as the "normal" coordinate system and reflects the machine position
 	G55 | | Select coord system 2 |
