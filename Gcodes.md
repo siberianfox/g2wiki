@@ -35,10 +35,10 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[G28.3](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g283---set-absolute-position) | _axes_ | Set Absolute Position | Set axis to zero or other value. Use to zero axes that cannot otherwise be homed
 	[G30](#g28-g30-go-to-predefined-position) | _axes_ | Goto G30 position | Optional axes specify an intermediate point
 	[G30.1](#g28-g30-go-to-predefined-position) | | Set G30 position | The current machine position is recorded (No parameters are provided)
-	G38.2 | _axes_ | Probe toward, do not report error 
-	G38.3 | _axes_ | Probe toward, report if error 
-	G38.4 | _axes_ | Probe away, do not report error 
-	G38.5 | _axes_ | Probe away, report if error 
+	[G38.2](Gcode-Probes#g38x-probe) | _axes_ | Probe | Probe toward, do not report error 
+	[G38.3](Gcode-Probes#g38x-probe) | _axes_ | Probe | Probe toward, report if error 
+	[G38.4](Gcode-Probes#g38x-probe) | _axes_ | Probe | Probe away, do not report error 
+	[G38.5](Gcode-Probes#g38x-probe) | _axes_ | Probe | Probe away, report if error 
 	[G53](Gcode-Coordinate-Offsets) | | Select absolute coordinates | Non-Modal: Applies only to current block
 	[G54](Gcode-Coordinate-Offsets) | | Select coord system 1 | G54 is typically used as the "normal" coordinate system and reflects the machine position
 	[G55](Gcode-Coordinate-Offsets) | | Select coord system 2 |
