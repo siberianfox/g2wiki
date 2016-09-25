@@ -51,9 +51,9 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[G64](#g61-g64-path-control-modes) | | Continuous path mode | Same as exact path mode 
 	[G80](#g80-cancel-motion-mode) | | Cancel motion mode |
 	[G90](#g90-g91-set-distance-mode) | | Set absolute distance mode |
-	[G90.1](#g90-g91-set-distance-mode) | | Set absolute arc distance mode |
+	[G90.1](Gcode-Circular-Arcs#g901-g911-arc-distance-mode) | | Set absolute arc distance mode |
 	[G91](#g90-g91-set-distance-mode) | | Set incremental distance mode |
-	[G91.1](#g90-g91-set-distance-mode) | | Set incremental arc distance mode |
+	[G91.1](Gcode-Circular-Arcs#g901-g911-arc-distance-mode) | | Set incremental arc distance mode | default arc mode
 	[G92](Gcode-Coordinate-Offsets) | _axes_ | Set origin offsets |
 	[G92.1](Gcode-Coordinate-Offsets) | | Reset origin offsets |
 	[G92.2](Gcode-Coordinate-Offsets) | | Suspend origin offsets |
