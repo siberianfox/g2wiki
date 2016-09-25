@@ -23,11 +23,11 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
-	[G10 L2](Gcode-Offset-Commands#g10-l2-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
-	[G10 L20](Gcode-Offset-Commands#g10-l20-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
-	G17 | | Select XY plane | G17, G18 and G19 set the plane in which the G2/G3 arcs are drawn
-	G18 | | Select XZ plane |
-	G19 | | Select YZ plane |
+	[G10 L2](Gcode-Offset-Commands#g10-l2-set-parameters-offsets) | _axes_, P | Set offsets 
+	[G10 L20](Gcode-Offset-Commands#g10-l20-set-parameters-offsets) | _axes_, P | Set offsets 
+	G17 | | Select XY plane | for G2/G3 arcs
+	G18 | | Select XZ plane | for G2/G3 arcs
+	G19 | | Select YZ plane | for G2/G3 arcs
 	[G20](#g20-g21-select-units-mode) | | Select inches mode | All Gcode from this point on will be interpreted in inches
 	[G21](#g20-g21-select-units-mode) | | Select mm mode | All Gcode from this point on will be interpreted in millimeters
 	[G28](#g28-g30-go-to-predefined-position) | _axes_ | Goto G28 position | Optional axes specify an intermediate point
