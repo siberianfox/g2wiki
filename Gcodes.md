@@ -22,8 +22,8 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
-	[G10 L2](#g10-l2-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
-	[G10 L20](#g10-l20-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
+	[G10 L2](Gcode-Offset-Commands#g10-l2-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
+	[G10 L20](Gcode-Offset-Commands#g10-l20-set-parameters-offsets) | _axes_, P | Set offset parameters | P selects coordinate system 1-6
 	G17 | | Select XY plane | G17, G18 and G19 set the plane in which the G2/G3 arcs are drawn
 	G18 | | Select XZ plane |
 	G19 | | Select YZ plane |
