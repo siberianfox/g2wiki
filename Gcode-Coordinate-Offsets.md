@@ -1,5 +1,7 @@
 _Applies to firmware build 100.xx and above_
 
+https://github.com/synthetos/g2/wiki/Gcodes
+
 ##G10 Ln Set Parameters
 
 ###G10 L2 Set Parameters (Offsets)
