@@ -17,6 +17,7 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
+	_______| | |
 	[G0](#g0-straight-traverse-rapid-move) | _axes_ | Straight traverse | Traverse at maximum velocity
 	[G1](#g1-straight-feed-cutting-move) | _axes_, F | Straight feed | Move at feed rate F
 	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
