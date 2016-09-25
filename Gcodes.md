@@ -24,7 +24,7 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counterclockwise arc feed | Arc at feed rate F
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
 	[G10 L2](Gcode-Coordinate-Offsets#g10-ln-set-parameters) [G10 L20](Gcode-Coordinate-Offsets#g10-ln-set-parameters)  | _axes_, P | Set coord offsets
-	[G17](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) [G18](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) [G19](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select arc plane |
+	[G17](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane)   [G18](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane)   [G19](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select arc plane |
 	[G20](#g20-g21-select-units-mode) | | Select inches mode | All Gcode from this point on will be interpreted in inches
 	[G21](#g20-g21-select-units-mode) | | Select mm mode | All Gcode from this point on will be interpreted in millimeters
 	[G28](#g28-g30-go-to-predefined-position) | _axes_ | Goto G28 position | Optional axes specify an intermediate point
