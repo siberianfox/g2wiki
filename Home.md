@@ -7,4 +7,6 @@ This wiki serves as a user and programmer manual and documents progress on the p
 ![TinyG2 on an Arduino Due](http://farm4.staticflickr.com/3739/10301325295_31cb0dc6ab_h.jpg)
 
 ###Current State of g2core
-_The current best place to work from for g2core is the edge-100 branch, firmware version 0.99. FV 0.99 is currently undergoing testing. We are pretty comfortable with its functionality and stability, but have a few more functions to install and test before it's promoted to the edge branch. After a soak time in edge it will be promoted to the master branch_
+The [Master](https://github.com/synthetos/g2/tree/master) branch contains the current stable code. New feature development takes place in various feature branches which are then promoted to the [Edge](https://github.com/synthetos/g2/tree/edge) branch to make them available and for beta testing.
+
+Currently the [Master](https://github.com/synthetos/g2/tree/master) branch has the 100.xx firmware builds. The firmware version is 0.99. The firmware version indicates the configuration and UI compatibility. Please note the changes in the Readme.md for the respective branch.
