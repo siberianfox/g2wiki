@@ -10,7 +10,7 @@
 
 **Reference Pages**
 
-1. [ ] [Gcode Support](Gcode-Support)
+1. [ ] [Gcode Support](Gcodes)
 1. [ ] [Text Mode](Text-Mode)
 1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [Digital IO (GPIO)](Digital-IO)
