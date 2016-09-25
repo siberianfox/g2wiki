@@ -20,8 +20,8 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	__________|___________|_____________________|
 	[G0](#g0-straight-traverse-rapid-move) | _axes_ | Straight traverse | Traverse at maximum velocity
 	[G1](#g1-straight-feed-cutting-move) | _axes_, F | Straight feed | Move at feed rate F
-	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
-	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counter clockwise arc feed | Arc at feed rate F. Offset mode IJK or radius mode R
+	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F
+	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counterclockwise arc feed | Arc at feed rate F
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
 	[G10 L2](Gcode-Offset-Commands#g10-l2-set-parameters-offsets) | _axes_, P | Set offsets 
 	[G10 L20](Gcode-Offset-Commands#g10-l20-set-parameters-offsets) | _axes_, P | Set offsets 
