@@ -69,16 +69,12 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[;](#gcode-comments) | comment | alternate comment | A semicolon is an alternate way to delimit a comment. This is not Gcode "standard", but is used by Mach and some Reprap codes. (available as of build 378.05)
 	(msg....) | message | gcode message | Gcode messages are comments that begin with the characters `msg` (case insensitive). These will be echoed to the operator 
 
-
-
-
-
 ##Gcode Comments
 Gcode comments possess a number of features that extend their capabilities beyond classic Gcode. This is to support active comments and other developments. Please see [Gcode Comments](JSON-Active-Comments#gcode-comments)
 
-
 ##G0 Straight Traverse (Rapid Move)
-`G0 'axes'` causes straight traverse motion at maximum velocity
+`G0 'axes'`<br>
+Straight traverse motion at maximum velocity
 
 - All axis words are optional but must have a value if present. A traverse with no axes words will set motion mode to G0 but cause no movement
 - `G0` is optional if the current motion mode is G0
