@@ -18,9 +18,9 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	------|------------|---------|-------------
 	__________|___________|_____________________|
 	[G0](#g0-straight-traverse-rapid-move) | _axes_ | Straight traverse | Traverse at maximum velocity
-	[G1](#g1-straight-feed-cutting-move) | _axes_, F | Straight feed | Move at feed rate F
-	[G2](#g2-g3-arc-at-feed-rate) | _axes_, F,P, I,J,K or R | Clockwise arc feed | Arc at feed rate F
-	[G3](#g2-g3-arc-at-feed-rate) | _axes_, F,P, I,J,K or R | Counterclockwise arc feed | Arc at feed rate F
+	[G1](#g1-straight-feed-cutting-move) | _axes_ F | Straight feed | Move at feed rate F
+	[G2](#g2-g3-arc-at-feed-rate) | _axes_ F P  IJK or R | Clockwise arc feed | Arc at feed rate F
+	[G3](#g2-g3-arc-at-feed-rate) | _axes_ F P  IJK or R | Counterclockwise arc feed | Arc at feed rate F
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
 	[G10 L2](Gcode-Coordinate-Offsets#g10-ln-set-parameters) [G10 L20](Gcode-Coordinate-Offsets#g10-ln-set-parameters)  | _axes_, P | Set coord offsets
 	[G17](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select XY arc plane |
