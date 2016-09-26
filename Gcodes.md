@@ -91,9 +91,9 @@ the achievable velocity may also be limited by the jerk settings `xJM` for each 
 - `F` is optional if a feed rate is in effect. It is an error if no feed rate is in effect and none is specified.
 
 ##G2, G3 Arc At Feed Rate
-`G2 or G3 'axes' 'offsets' Fnnn` center format arc<br>
+`G2 or G3 'axes' 'offsets' Pn Fnnn` center format arc<br>
 `G2 or G3 'offsets' Pn Fnnn` center format full circle arc<br>
-`G2 or G3 'axes' Rnnn Fnnn` radius format arc<br>
+`G2 or G3 'axes' Rnnn Pn Fnnn` radius format arc<br>
 `G2 or G3 Rnnn Pn Fnnn` radius format full circle arc<br>
 
 - 'axes' are any of XYXABC
