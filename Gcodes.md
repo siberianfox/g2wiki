@@ -19,8 +19,8 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	__________|___________|_____________________|
 	[G0](#g0-straight-traverse-rapid-move) | _axes_ | Straight traverse | Traverse at maximum velocity
 	[G1](#g1-straight-feed-cutting-move) | _axes_, F | Straight feed | Move at feed rate F
-	[G2](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F
-	[G3](Gcode-Circular-Arcs) | _axes_, F, I,J,K or R | Counterclockwise arc feed | Arc at feed rate F
+	[G2](#g2-g3-arc-at-feed-rate) | _axes_, F, I,J,K or R | Clockwise arc feed | Arc at feed rate F
+	[G3](#g2-g3-arc-at-feed-rate) | _axes_, F, I,J,K or R | Counterclockwise arc feed | Arc at feed rate F
 	[G4](#g4-dwell) | P | Dwell | Pause for P seconds
 	[G10 L2](Gcode-Coordinate-Offsets#g10-ln-set-parameters) [G10 L20](Gcode-Coordinate-Offsets#g10-ln-set-parameters)  | _axes_, P | Set coord offsets
 	[G17](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select XY arc plane |
@@ -90,10 +90,6 @@ the achievable velocity may also be limited by the jerk settings `xJM` for each 
 - `G1` is optional if the current motion mode is G1
 - `F` is optional if a feed rate is in effect. It is an error if no feed rate is in effect and none is specified.
 
-##[G2, G3 Circular Arcs](Gcode-Circular-Arcs)
-
-This page describes circular arc motion in g2core. Much of this page has been copied from [Linux CNC Gcode, G2-G3](http://linuxcnc.org/docs/html/gcode/g-code.html#gcode:g2-g3) but they are not identical as some differences exist.
-
 ##G2, G3 Arc At Feed Rate
 `G2 or G3 'axes' 'offsets' Fnnn` center format arc<br>
 `G2 or G3 'offsets' Pn Fnnn` center format full circle arc<br>
@@ -102,6 +98,8 @@ This page describes circular arc motion in g2core. Much of this page has been co
 
 - 'axes' are any of XYXABC
 - 'offsets' are any of IJK
+
+_Note: Much of this specification has been copied from [Linux CNC Gcode, G2-G3](http://linuxcnc.org/docs/html/gcode/g-code.html#gcode:g2-g3), but they are not identical as some differences exist._
 
 A circular or helical arc is specified using either G2 (clockwise arc) or G3 (counterclockwise arc) at the current feed rate `F`. The direction (CW, CCW) is as viewed from the positive end of the axis about which the circular motion occurs.
 
