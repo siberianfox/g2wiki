@@ -72,6 +72,13 @@ The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a nor
 
 If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run a large arc, such as the following sequence: 
 
+<pre>
+G17 G21 G90 G91.1 G94
+G10 L20 P2 X100 Y100 Z0
+G55
+G2 I50 F2000
+</pre>
+
 _Note: JT replaces the JA and xJD parameters in earlier builds. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine._
 
 ### {ct:...} Chordal Tolerance
