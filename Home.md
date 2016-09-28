@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/wiki/synthetos/g2/images/g2core.png" width="300" height="129" alt="g2core">
+
 Welcome to the g2 wiki!
 
 This wiki documents the TinyG ARM port, which we are calling g2core. 
