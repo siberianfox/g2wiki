@@ -60,7 +60,7 @@ Read-only value derived from factor configuration settings in the ARM chip
 	[{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
 
 ### {jt:...} Junction Integration Time 
-The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering. This parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}`.
+The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering.
 
 <pre>
 {jt:0.01}  Lower limit - probably will fail
@@ -79,7 +79,7 @@ G55
 G2 I50 F2000
 </pre>
 
-_Note: JT replaces the JA and xJD parameters in earlier builds. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine._
+_Note: The JT parameter replaces Junction Acceleration `{ja:...}` and the axis Junction Deviation commands - e.g. `{xjd:0.01}` found in earlier builds. Cornering now obeys full jerk limitation instead of the centripetal acceleration heuristic, making it much more accurate and more true to the jerk limits set for the machine._
 
 ### {ct:...} Chordal Tolerance
 Arcs are generated as sets of very short straight lines that approximate a curve. Each line is a "chord" that spans the endpoints of that segment of the arc. Chordal tolerance sets the maximum allowable deviation between the true arc and straight line that approximates it - which will be the value of the deviation in the middle of the line / arc.
