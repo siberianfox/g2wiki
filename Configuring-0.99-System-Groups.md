@@ -45,10 +45,10 @@ Read-only value. Returns:
 </pre>
 
 ### {hv:n} Hardware Version
-Unused in g2core. (This value is writable in TinyG and is used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.)
+Unused in g2core. This value is writable in TinyG and is used to set behaviors inside the firmware. Defaults to 8 for v8. If you have a TinyG v6 or earlier you must set this value to 6.
 
 ### {id:n} Unique Board Identifier
-Read-only value derived from factor configuration settings in the ARM chip
+Read-only value derived from factory settings in the ARM chip
 
 
 ##Global Machining Parameters
