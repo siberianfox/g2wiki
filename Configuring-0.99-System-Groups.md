@@ -70,7 +70,7 @@ The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a nor
 {jt:5.00}  Upper limit. Absolutely will fail
 </pre>
 
-If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run a large arc, such as the following sequence: 
+If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run a large arc, such as the following sequence. Reducing the radius from I50 will test tighter and tighter corners. 
 
 <pre>
 G17 G21 G90 G91.1 G94
