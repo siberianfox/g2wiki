@@ -90,13 +90,11 @@ Setting chordal tolerance high will make curves "rougher", but they can execute 
 </pre>
 
 ### {mt:...} Global Motor Power Timeout
-Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands, further down this page.
+Sets the number of seconds motors will remain powered after the last 'event'. E.g. set to 60 to keep motors powered for 1 minute after a move completes. Only applies to motors with power management modes that actually time out the motors (modes 2 and 3). See also $ME and $MD commands and other [Power Management](Power-Management) commands.
 <pre>
 {mt:5}        Keep motors energized for 5 seconds after last movement command
 {mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
 </pre> 
-
-See also [Power Management](Power-Management)
 
 ##Communications Parameters
 Set communications speeds and modes. 
