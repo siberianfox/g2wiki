@@ -84,7 +84,7 @@ _Note: The JT parameter replaces Junction Acceleration `{ja:...}` and the axis J
 ### {ct:...} Chordal Tolerance
 Arcs are generated as sets of very short straight lines that approximate a curve. Each line is a "chord" that spans the endpoints of that segment of the arc. Chordal tolerance sets the maximum allowable deviation between the true arc and straight line that approximates it - which will be the value of the deviation in the middle of the line / arc.
 
-Setting chordal tolerance high will make curves "rougher", but they can execute faster. Setting them smaller will make for smoother arcs that may take longer to execute. The lower-limit of $ct is set by the minimum arc segment length, which really should not be changed (See hidden parameters).
+Setting chordal tolerance high will make curves "rougher", but they can execute faster. Setting them smaller will make for smoother arcs that may take longer to execute. The lower-limit of $ct is set by the minimum arc segment length, which is set in the firmware and really should not be changed.
 <pre>
 {ct:0.01}  Normally a good value (in mm)
 </pre>
