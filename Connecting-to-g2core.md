@@ -1,5 +1,7 @@
 To connect to g2core you must have the correct USB drivers on your host computer. We use the [g2core-api](https://github.com/synthetos/node-g2core-api) NodeJS module or [Coolterm v1.4.3](http://freeware.the-meiers.org/previous/) for testing g2core. [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr) is a good option for a CNC controller.
 
+See the [g2core Communications](g2core-Communications) page if you need details of the communications protocol. If you are using one of the above communications tools you do not need the page.
+
 ## Drivers for g2core
 
 ### OSX
