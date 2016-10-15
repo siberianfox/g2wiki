@@ -1,37 +1,26 @@
-_This page is for uploading an already compiled G2 binary to a target board without a debugger from Windows. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
+_This page is for uploading an already compiled G2 binary to a target board without a debugger from Windows. Please see [Getting Started with g2core Development](Getting-Started-with-g2core-Development) for information about other options._
 
 ###Step 1 - Get the TinyG2.bin file
 
-**Option 1** - Compile your own using the instruction in [[Compiling G2 on Windows (Atmel Studio 6.2)]]
+**Option 1** - Compile your own using the instruction in [Compiling the Code](Getting-Started-with-g2core-Development#compiling-the-code)
 
 **Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
 
-###Step 2 - Install the Arduino Due environment
+###Step 2 - Download the `arduino-flash-tools`
 
-_If you already have the Arduino Due environment installed you can skip this step_
+The [arduino-flash-tools](https://github.com/facchinm/arduino-flash-tools/tree/master) repo contains the `bossac` utility. You can download the [zip file here](https://github.com/facchinm/arduino-flash-tools/archive/master.zip).
 
-Download the Arduino 1.6.x from http://arduino.cc/en/Main/Software for Windows.
+Expand the zip file in a location where you know the path, and note that path.
 
-Get the "installer" and run installer executable.
-
-###Step 3a - Program TinyG2 onto the Due Using Arduino Tools
+###Step 3 - Program g2core using `bossac.exe`
 
 Hold down the Windows Key and press r then type cmd.exe and hit enter:
 
-If you are on Windows x64 then run this command.
-* `cd %ProgramFiles% (x86)\Arduino\hardware\tools`
+* `cd ` *path to expanded zip file contents* <br>
+* `cd tools_windows\bossac\bin` <br>
 
-If you are on Windows x32 then run this command.
-* `cd %ProgramFiles%\Arduino\hardware\tools`<br>
-After that go ahead and run these commands.  You should be good to go.
-* `mode COM6 BAUD=1200`
-* `bossac.exe --port=COM6 -e -w -v -b %HOMEPATH%\Downloads\TinyG2_Due_rob_usbtest.bin -R`
+Run the `mode` command by itself and it should return a `COM`x.  Note your port number for x to use as `COMx` in the following commands.
 
-Note that COM4 is the port that my ArduinoDUE showed up as.  You can run the `mode` command by itself and it should return a COMx.  Just use your port number.
-
-###Step 3b - Program TinyG2 onto the Due Using Atmel-ICE
-This requires Atmel Studio6.2 (or later) and an Atmel-ICE programmer. I've omitted a lot of steps, but there are some things to watch for
-
-* Make sure the ribbon cable is plugged into the SAM port, not the AVR port
-* Select SWD, not JTAG
-* Program the fuses to boot from FLASH, not ROM
+After that go ahead and run these commands, replacing `COMx` with your port, like this: `COM4`.
+* `mode COMx BAUD=1200`
+* `bossac.exe --port=COMx -e -w -v -b %HOMEPATH%\Downloads\TinyG2_Due_rob_usbtest.bin -R`
