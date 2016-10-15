@@ -19,7 +19,7 @@ Windows 10 does not need this procedure and should work out-of-the-box.
 ### Option 1: g2core-api
 Use the [g2core-api](https://github.com/synthetos/node-g2core-api) NodeJS module to connect to g2core, run command lines, and send files. The Readme at the above link explains how to install and use. 
 
-### Option 2: Collterm 1.4.3
+### Option 2: Coolterm 1.4.3
 For OSX you can also use Coolterm version 1.4.3. There is a bug in the latest version and 1.4.3 is the latest we have tested that works well. (A bug has been opened with the author who has supported us extremely well throughout this project). Look on this page for this file: [CoolTermMac143](http://freeware.the-meiers.org/previous/)
 
 * In Coolterm the usb will show up as 2 devices labeled something like:
