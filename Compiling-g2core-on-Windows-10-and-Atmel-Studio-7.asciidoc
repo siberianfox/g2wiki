@@ -40,7 +40,7 @@ _This page is for compiling the G2core project on Windows 10 with Atmel Studio 1
 
 NOTE: At this point we have given up on VMware and switched to Parallels 12 Desktop for Mac. Parallels compiles much faster due to better file system handling and has fewer problems. (For VMware the camel's back was waking up one morning and finding Windows did an overnight update (I thought I turned that off) which doubled the size of the VM and broke the Z: drive connection. Can't get it back.)
 
-Windows 10 and VMware are like an old married couple. She (W10) has had a face lift but that did not change her  underlying nature, and he's 50 lb overweight and refuses to go on a diet. But they still live together and continue to argue.
+NOTE: Windows 10 and VMware are like an old married couple. She (W10) has had a face lift but that did not change her  underlying nature, and he's 50 lb overweight and refuses to go on a diet. But they still live together and continue to argue.
 
 NOTE: If you are using Windows inside VMWare, please see the link:Troubleshooting#vmware-setup[VMWare Setup section of our Troubleshooting page].
 
