@@ -1,4 +1,8 @@
-_This page describes the g2core communications options and protocol. It is intended for GUI developers and other low-level access. **We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles the communications**. This page is useful if for some reason you need to write your own communications handler, or just want to know how it works._
+_This page describes the g2core communications options and protocol. It is intended for GUI developers and other low-level access_
+
+**We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles all these communications details**. 
+
+_This page is useful if for some reason you need to write your own communications handler, or just want to know how it works._
 
 ##Overview of Communications Model
 
