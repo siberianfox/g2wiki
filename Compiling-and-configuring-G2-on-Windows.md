@@ -3,16 +3,20 @@
 ### GNU build system
 
 Download and install _**MinGW**_, installation is covered here: [Getting Started](http://www.mingw.org/wiki/getting_started)  
-Cygwin is another option to using MinGW, but is not currently covered here.  
-This provides you with the GNU build system that is required to compile many cross platform and embedded open source projects.
+Cygwin is another option to using MinGW, but is not currently covered here.
+
+This provides you with the GNU build system that is required to compile many cross platform, embedded and open source projects. It also provides compilers for native code and much more.
 
 ### GNU tools for ARM
 
-You also need a copy of _**GNU tools for ARM embedded**_, which can be obtained here: [GNU ARM Embedded](https://launchpad.net/gcc-arm-embedded/+download)  
+You also need a copy of _**GNU tools for ARM embedded**_, which can be obtained here: [GNU ARM Embedded](https://launchpad.net/gcc-arm-embedded/+download)
+  
 This provides you with the C and C++ cross compilers required to compile ARM code on your Windows machine.  
-I strongly recommend you install this a low-level folder **without spaces** to avoid problems.
+I strongly recommend you install this in a low-level folder **without spaces** to avoid problems.
 
 **Note:** I will be using _C:\GTAE54\_ for all further illustrations.
+
+Clarification: There is a bug in this toolsuite that under some circumstances (advanced optimization) which will fail with an error unless the folder name is short and has no spaces or other characters that will need to be escaped when parameter passed between programs. The G2 project will not trigger this bug regardless of where you choose to install, but heeding the warning may save you headaches in the future.
 
 # Getting the source
 
