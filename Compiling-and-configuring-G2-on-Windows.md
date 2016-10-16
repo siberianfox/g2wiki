@@ -103,4 +103,4 @@ Looking at the existing boards, choose your template and make a copy of it.
 Name your board by: ```ifeq ("$(BOARD)","MyCustomBoard")```  
 Change pinout file by: ```DEVICE_DEFINES += MOTATE_BOARD="MyCustomBoard"```
 
-You may now make a copy of the original pinout file in_c:\cnc\g2\g2core\board\ArduinoDue_ and modify that according to your custom board.
+You may now make a copy of the original pinout file in _c:\cnc\g2\g2core\board\ArduinoDue_ and modify that according to your custom board.
