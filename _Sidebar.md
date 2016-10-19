@@ -11,6 +11,7 @@
 **Reference Pages**
 
 1. [ ] [Gcodes](Gcodes)
+1. [ ] [Feedhold, Resume, etc.](Feedhold,-Resume,-and-Other-Simple-Commands)
 1. [ ] [Text Mode](Text-Mode)
 1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [Digital IO (GPIO)](Digital-IO)
