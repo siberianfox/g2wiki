@@ -4,9 +4,9 @@ Character | Command | AKA | Description
 ~ | Cycle Start | Resume | Resume movement from stopping point
 % | Queue Flush | | Empty planner buffer. Used for jogging and other cycles
 
-To pause motion send a feedhold character ('!') character during motion. Movement will decelerate to a stop while maintaining positional accuracy. To resume motion send a cycle start tilde character ('~').
+To pause motion send a feedhold character (`!`) character during motion. Movement will decelerate to a stop while maintaining positional accuracy. To resume motion send a cycle start tilde character (`~`).
 
-If you wish to not perform the remainder of the move after the feedhold send a queue flush character ('%') after the feedhold character. Motion will start with the next Gcode command entered. A cycle start is not necessary after a queue flush.
+If you wish to not perform the remainder of the move after the feedhold send a queue flush character (`%`) after the feedhold character. Motion will start with the next Gcode command entered. A cycle start is not necessary after a queue flush.
 
 ## Jogging Using Feedhold and Queue Flush
 To jog using feedhold and queue flush do the following:
