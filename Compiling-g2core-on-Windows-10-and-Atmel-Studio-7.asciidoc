@@ -116,7 +116,7 @@ NOTE: These instructions are for the Atmel-ICE debugger. Many of these instructi
 
 NOTE: Git is configured to ignore the changes to some of the project's dependent files so that they don't cause havoc. This means that to commit changes to those files, they need to specifically be added to the commit by name.
 
-NOTE: If the g2core project is present but the Motate project is missing when you fire up AS& check out this troubleshooting item: https://github.com/synthetos/g2/wiki/Troubleshooting#problem-the-motate-directory-is-empty-the-motate-project-is-missing 
+NOTE: If the g2core project is present but the Motate project is missing in AS7 check out this troubleshooting item: https://github.com/synthetos/g2/wiki/Troubleshooting#problem-the-motate-directory-is-empty-the-motate-project-is-missing 
 
 #### Compiling the Project
 To compile the project:
