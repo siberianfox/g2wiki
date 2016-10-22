@@ -55,7 +55,7 @@ Includes commands that are used to prepare the machine for a specific job. These
 - Preview/check job file
 - Define job parameters - e.g. filament type and size
 
-### 4. Job Control
+### 4. Job Runtime
 Those things that happen while the job is running - including staring and stopping the job.
 - Start/stop job (run the Gcode)
 - Pause and resume job
