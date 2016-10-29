@@ -29,3 +29,7 @@ Cancels the current tool offset.
 ## JSON Commands
 
 The tool table can be examined (and set) using the following commands:
+
+	JSON | Command | Description
+	-----|---------|-------------
+	{tt1:n} | Tool table slot 1 | Use 'n' to read, floating point number to set
