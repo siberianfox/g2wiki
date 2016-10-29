@@ -41,6 +41,10 @@ The tool table can be examined using the following commands:
 These will return the tool table entry, as so:<br>
 `{"r":{"tt1":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0}},"f":[1,0,8]}`
 
+There is no command to read all too table entries (no uber-group)
+
+Tool table 0 is reserved, cannot be set, and is always all zeros
+
 ### Set Tool Table
 It is also possible to set tool table values directly using JSON. We recommend using the standard Gcodes to set tool values during a job, and using JSON to pre-load the table or set values in advance of a job (job setup).
 
