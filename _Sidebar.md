@@ -22,6 +22,7 @@
 1. [ ] [Status Codes](Status-Codes)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [G2 Communications](g2core-Communications)
+1. [ ] [Tool Length Offset](tool-length-offset)
 
 **Discussion Topics**
 
