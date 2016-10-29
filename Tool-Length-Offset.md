@@ -28,11 +28,25 @@ Cancels the current tool offset.
 
 ## JSON Commands
 
-The tool table can be examined (and set) using the following commands:
+### Read Tool Table
+The tool table can be examined using the following commands:
 
 	JSON | Command | Description
 	-----|---------|-------------
-	{tt1:n} | Tool table slot 1 | Use 'n' to read, floating point number to set
+	{tt1:n} | Tool table slot 1 | Returns tool table values
 	{tt2:n} | Tool table slot 2 | As above
 	... | ... | ...
 	{tt16:n} | Tool table slot 2 | As above
+
+These will return the tool table entry, as so:<br>
+`{"r":{"tt1":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0}},"f":[1,0,8]}`
+
+### Set Tool Table
+It is also possible to set tool table values directly using JSON. We recommend using the standard Gcodes to set tool values during a job, and using JSON to pre-load the table or set values in advance of a job (job setup).
+
+One or more values can be set in a JSON command. Values that are not specified are not changed. Examples
+
+- {"tt2":{"x":0.998,"y":0.998,"z":1.223,"a":0,"b":0,"c":0}}}` - Sets all 6 axis values as indicated
+- {"tt2":{"x":0.998,"y":0.998,"z":1.223}}}` - Sets XYZ only - ABC unaffected
+- {"tt2":{"x":0.998,"z":1.223}}}` - Sets X and Z only - YABC unaffected
+
