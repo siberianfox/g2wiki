@@ -46,7 +46,7 @@ It is also possible to set tool table values directly using JSON. We recommend u
 
 One or more values can be set in a JSON command. Values that are not specified are not changed. Examples
 
-- {"tt2":{"x":0.998,"y":0.998,"z":1.223,"a":0,"b":0,"c":0}}}` - Set all 6 axis values
-- {"tt2":{"x":0.998,"y":0.998,"z":1.223}}}` - Set XYZ only - ABC unaffected
-- {"tt2":{"x":0.998,"z":1.223}}}` - Set X and Z only - YABC unaffected
+- `{"tt2":{"x":0.998,"y":0.998,"z":1.223,"a":0,"b":0,"c":0}}}` - Set all 6 axis values
+- `{"tt2":{"x":0.998,"y":0.998,"z":1.223}}}` - Set XYZ only - ABC unaffected
+- `{"tt2":{"x":0.998,"z":1.223}}}` - Set X and Z only - YABC unaffected
 
