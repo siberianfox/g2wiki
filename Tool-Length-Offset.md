@@ -25,3 +25,7 @@ Applies a second, third or Nth offset to the current offset. This can be used to
 ### G49 Cancel Tool Length Offset
 
 Cancels the current tool offset.
+
+## JSON Commands
+
+The tool table can be examined (and set) using the following commands:
