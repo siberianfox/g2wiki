@@ -33,3 +33,6 @@ The tool table can be examined (and set) using the following commands:
 	JSON | Command | Description
 	-----|---------|-------------
 	{tt1:n} | Tool table slot 1 | Use 'n' to read, floating point number to set
+	{tt2:n} | Tool table slot 2 | As above
+	... | ... | ...
+	{tt16:n} | Tool table slot 2 | As above
