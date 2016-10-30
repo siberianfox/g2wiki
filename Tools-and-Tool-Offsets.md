@@ -1,28 +1,69 @@
-References:
-http://www.tormach.com/g43_g44_g49.html
+This page is based on, but not identical to, the following references: 
 
+- [LinuxCNC Gcode reference](http://linuxcnc.org/docs/devel/html/gcode/g-code.html)
+- [Tormach G43 Page](http://www.tormach.com/g43_g44_g49.html)
 
-Details:
-To use a tool length offset, program: G43 H~, where the H number is the desired index in the tool table. It is expected that all entries in this table will be positive. The H number should be, but does not have to be, the same as the slot number of the tool currently in the spindle. The H number may be zero; an offset value of zero will be used. 
+## Tool Selection and Tool Offsets
+g2Core implements tool selection and tool changes using standard Gcodes and M codes. In addition, the tool table can be queried and set using [JSON commands](#json-commands) and current offsets and current tool can be queried using JSON.
 
+The tool table can hold offsets for up to 16 tools, 1-16. Tool zero is not used. Use the Tn command to select a tool. Selecting a tool will not use that tool - it just stages it. To use the tool program M6. These can be performed on the same Gcode line. Examples:
+
+`T12 M6`<br>
+`M6 T12`  (order is unimportant)
+
+Each tool can have offset values programmed in the tool table. Typically offsets are for the Z axis to compensate for different tool lengths. This function is sometimes referred to as Cutter Length Compensation. However, offsets can be applied in any of the 6 dimensions XYZABC. This supports using tool offset for applications such as changing between multiple extruders on the same carriage. For this reason use the term 'tool offset' instead of 'tool length offset'.
+
+To use a tool length offset, program: G43 Hn, where the H number is the desired tool number in the tool table. It is expected that all entries in this table will be positive. The H number may be zero, or the H word may be missing altogether; in either case an offset value of zero will be used. 
+
+## Gcode Commands
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
-	[G43](#G43-Set-Tool-Length-Offset) | Hn | Set tool length offset | 
-	[G43.2](#G43.2-Set-Additional-Tool-Length-Offset) | Hn | Set additional tool length offset | 
-	[G49](#G49-Cancel-Tool-Length-Offset) | --none-- | Cancel tool length offset | 
+	[T](#t-select-tool) | n | Select tool | `n` is tool number, 1 - 16
+	[M6](#m6-change-tool) |  | Change to selected tool |
+	[G10 L1](#g10-l1-set-tool-table-as-absolute-value) | Pn axes | Set tool offset as absolute value | `n` is tool number, 1 - 16
+	[G10 L10](#g10-l10-set-tool-table-as-computed-value) | Pn axes | Set tool offset as computed value | `n` is tool number, 1 - 16
+	[G43](#g43-set-tool-offset) | Hn | Set tool offset | `n` is tool number, 1 - 16
+	[G43.2](#g43.2-set-additional-tool-offset) | Hn | Set additional tool offset | `n` is tool number, 1 - 16
+	[G49](#g49-cancel-tool-offset) | | Cancel tool offset | 
 
-### G43 Set Tool Length Offset
+### T Select Tool
+Select the tool using Tn, where `n` is an index into the tool table, from 1 to 16. Selecting a tool out-of-range will result in a T_WORD_IS_INVALID error.
+
+### M6 Change Tool
+M6 moves the selected tool to be the tool in use. M6 does set the tool offset to the current tool G43 Pn is required.
+
+_NOTE: At the current time M6 does not perform a manual tool change. Its only function is to make the selected tool the current tool._
+
+### G10 L1 Set Tool Table as Absolute Value
+G10 L1 sets the tool table for the P tool number to the values of the axis words. Axes that are not specified in the G10 L1 command will not be changed. 
+
+It is an error if:
+- Cutter Compensation is on
+- The P number is unspecified
+- The P number is not a valid tool number from the tool table
+- The P number is 0
+
+### G10 L10 Set Tool Table as Computed Value
+G10 L10 changes the tool table entry for tool P so that if the tool offset is reloaded, with the machine in its current position and with the current G5x and G92 offsets active, the current coordinates for the given axes will become the given values. Axes that are not specified in the G10 L10 command will not be changed. This could be useful with a probe move as described in the G38 section.
+
+It is an error if:
+- Cutter Compensation is on
+- The P number is unspecified
+- The P number is not a valid tool number from the tool table
+- The P number is 0
+
+### G43 Set Tool Offset
 
 Select a tool offset from the tool table indexed by the H word. H must be followed by an integer between 0 and N, where N is the maximum tool number (currently 16). Omitting the H word has the same effect as H0.
 
 This command causes no motion to occur. The next motion will take the new offset into account. Tool offsets are assumed to be positive numbers, but no restriction is placed on negative numbers. It is recommended that the tool offset be applied in the same line as the M6 Tn selection, but this is not required.
 
-### G43.2 Set Additional Tool Length Offset
+### G43.2 Set Additional Tool Offset
 
 Applies a second, third or Nth offset to the current offset. This can be used to apply wear offsets or other summations. Otherwise this command obeys the behaviors of G43, above.
 
-### G49 Cancel Tool Length Offset
+### G49 Cancel Tool Offset
 
 Cancels the current tool offset.
 
