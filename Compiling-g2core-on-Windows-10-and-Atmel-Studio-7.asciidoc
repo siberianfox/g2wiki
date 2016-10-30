@@ -50,6 +50,8 @@ Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on you
 ## Atmel Studio 7
 To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 build 1006 (or greater), Service Pack 1 Installer – with .NET. We recommend a clean machine or VM.
 
+#### Download AS7
+
 * Go to Atmel and download the http://www.atmel.com/tools/atmelstudio.aspx[Atmel Studio 7 Installer – with .NET] install package.
 
 ** Be sure to get the one with the **.NET part** (about 800 Mbytes) unless you are sure you already have the .net revision that AS needs (Framework 4). (If you don't know, go ahead and get it. It won't hurt anything other than the size of the installer will be bigger.)
@@ -57,6 +59,8 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 ** There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
 
 ** They require you to either register or fill out a "guest" form. Otherwise it's free.
+
+#### Install AS7
 
 * Walk through the entire installation process 
 
@@ -71,6 +75,8 @@ To compile g2core on Windows with Atmel Studio you will need the Atmel Studio 7 
 *** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. (We provide projects for you to use.)
 
 *** You **will** need the USB drivers when asked.
+
+#### Configure AS7
 
 * Configuring Atmel Studio 7
 There are a few things you need to do make sure of once you have it installed
