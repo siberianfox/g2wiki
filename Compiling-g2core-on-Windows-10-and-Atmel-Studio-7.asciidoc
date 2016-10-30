@@ -85,11 +85,12 @@ There are a few things you need to do make sure of once you have it installed
 *** Bring up the g2core Properties window by right clicking the `g2core` project symbol in the Solution Explorer window and selecting `Properties` (at the bottom)
 *** Select the `Advanced` tab
 *** Make sure `Use GDB` is checked, and `Override Current GDB Path` is not
+** Make sure project dependencies and ordering are correct
 *** Right click the `Solution g2core` icon at the top of the Solution Explorer. 
 **** Unselect Motate in `Project Dependencies`
 **** Ensure `Project Build Order` has g2core before Motate
 **** Set `Startup Project` to SIngle Starup Project, and make it g2core
-*** Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Menu path is: Tools / Options / Text Editor / All Languages / Tabs. Chose the Insert Spaces option. Leave the tab spacing at 4.
+** Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Menu path is: Tools / Options / Text Editor / All Languages / Tabs. Chose the Insert Spaces option. Leave the tab spacing at 4.
 
 ## Git for Windows
 The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
