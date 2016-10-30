@@ -31,7 +31,7 @@ To use a tool length offset, program: G43 Hn, where the H number is the desired 
 Select the tool using Tn, where `n` is an index into the tool table, from 1 to 16. Selecting a tool out-of-range will result in a T_WORD_IS_INVALID error.
 
 ### M6 Change Tool
-M6 moves the selected tool to be the tool in use. M6 does set the tool offset to the current tool G43 Pn is required.
+M6 moves the selected tool to be the tool in use. M6 does set the tool offset to the current tool G43 Pn is required (this is how Gcode works, so we did it this way, too).
 
 _NOTE: At the current time M6 does not perform a manual tool change. Its only function is to make the selected tool the current tool._
 
