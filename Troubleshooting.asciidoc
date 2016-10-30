@@ -90,6 +90,11 @@ It's actually really easy to get more than one instance of Atmel Studio running.
 
 Solution:: Git is not installed. Even if the GitHub app is installed, you need git installed as well. See link:Compiling-G2-on-Windows-10-and-Atmel-Studio-7#git-for-windows[Git for Windows] section of Compiling G2 on Windows.
 
+## Problem: AS7 debugger will mot start [w32] [w64]
+It says it's missing Motate.elf
+
+Solution:
+Go [here](Compiling-g2core-on-Windows-10-and-Atmel-Studio-7/_edit#configure-as7) and make sure the AS7 configuration steps are complete
 
 # Git Usage
 
