@@ -94,7 +94,9 @@ Solution:: Git is not installed. Even if the GitHub app is installed, you need g
 It says it's missing Motate.elf
 
 Solution:
-Go link:https://github.com/synthetos/g2/wiki/Compiling-g2core-on-Windows-10-and-Atmel-Studio-7#configure-as7[here] and make sure the AS7 configuration steps are complete
+Go to link:https://github.com/synthetos/g2/wiki/Compiling-g2core-on-Windows-10-and-Atmel-Studio-7#configure-as7[Configure AS7] and make sure the AS7 configuration steps are complete
+
+Go to link:Compiling-g2core-on-Windows-10-and-Atmel-Studio-7#configure-as7[Configure AS7] and make sure the AS7 configuration steps are complete
 
 # Git Usage
 
