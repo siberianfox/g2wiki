@@ -87,9 +87,9 @@ There are a few things you need to do make sure of once you have it installed
 *** Make sure `Use GDB` is checked, and `Override Current GDB Path` is not
 ** Make sure project dependencies and ordering are correct
 *** Right click the `Solution g2core` icon at the top of the Solution Explorer. 
+**** Set `Startup Project` to Single Startup Project: `g2core`
 **** Unselect Motate in `Project Dependencies`
-**** Ensure `Project Build Order` has g2core before Motate
-**** Set `Startup Project` to SIngle Starup Project, and make it g2core
+**** Confirm or set `Project Build Order` to be g2core before Motate
 ** Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Menu path is: Tools / Options / Text Editor / All Languages / Tabs. Chose the Insert Spaces option. Leave the tab spacing at 4.
 
 ## Git for Windows
