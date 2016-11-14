@@ -120,11 +120,12 @@ The following changes t the DI settings are planned
    Name | Description | Values
    ------|------------|---------
    `{di1mo:` | mode | 0=disabled, 1=enabled
-   `{di1po:` | polarity | 0=normal (active high), 1=inverted (active low)
+   `{di1po:` | polarity | 0=normal (active high), 1=inverted (active low) **SEE NOTE**
    `{di1ac:` | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
    `{di1in:` | exposed-as | 0=not-exposed, 1-M = bound to `in1` through `inM`
 
 Notes:
+- The polarity sense changes. 0=active high, 1=active low
 - The `inN` object associated with the `diN` will be assignable (mapped) 
 - Function bindings such as Limit or Interlock will be performed as a parameter of the function, not the DI.
 
