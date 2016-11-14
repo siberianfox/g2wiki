@@ -81,7 +81,7 @@ Inputs are sensitive to the leading edge of the transition – so falling edge f
 Notes:
 - Mode
   - Mode will return NULL if an input is queried that is not available due to hardware or configuration
-  - _Note: Mode settings will [change in future releases](#Future-Digital-Input-Settings)_
+  - _Note: Mode settings will [change in future releases](#future-digital-input-settings)_
 - Action - occurs immediately when input fires
   - `Stop` is a controlled feedhold that preserves position
   - `Fast_Stop` is a controlled feedhold at high jerk that preserves position
