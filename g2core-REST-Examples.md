@@ -284,8 +284,9 @@ RESPONSE:
 ```
 
 ## Operations
-Enums:
 [Operations](#operation-resource) are started by specifying the operation type and the commands for the operation in the body of the POST. once running, they can be monitored and updated using GETs and PUTs.
+
+Enums:
 
 - Operation types (optype)
   - run - run arbitrary Gcode, JSON or a mix
@@ -297,9 +298,9 @@ Enums:
   - ERROR
 
 ### `POST /operation`
-Start a new RUN operation to execute multiple Gcode lines<br>
+Start a new `run` operation to run one or more Gcode lines<br>
 
-Example of single line command to invoke an operation:
+Example of single line operation:
 ```http
 REQUEST:
   POST /operation HTTP/1.1
@@ -310,7 +311,7 @@ RESPONSE:
   Content-Type: application/json; charset=UTF-8
   42
 ```
-Example of multi-line command to invoke an operation:
+Example of multi-line operation:
 ```http
 REQUEST:
   POST /operation HTTP/1.1
@@ -323,7 +324,7 @@ RESPONSE:
 ```
 
 ### `GET /operation/{id}`
-Get a current operation
+Get return values from a current operation. Mostly what you want is the operation state - is it running, is it done, has it erred out? Some optypes may have specific information returned by a GET call. Note: In most cases a [status_report](#status_report-resource) is sufficient for monitoring additional information about an operation. 
 
 ```http
 REQUEST:
@@ -333,7 +334,7 @@ RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
   {"opstate":"run"},
-  {"value":"??? What does it really return?"}
+  {"value":"stat:5","status_code":0}
 ```
 
 ### `PUT /operation/{id}`
