@@ -39,7 +39,7 @@ _Note: To send Gcode or to invoke long-running JSON commands that require asynch
 Return machine objects and/or attributes by a JSON specification in the request body. The following calling styles are supported:
 
 ```
-(body omitted)              no body provided. Return entire machine
+(body omitted)              no body provided. Return entire machine or nodes if nodes_only
 { }                         key is empty object. Return entire machine
 {"stat":null}               key is freestanding; not part of an object (system state)
 {"x":null}                  key is an object (X axis)
