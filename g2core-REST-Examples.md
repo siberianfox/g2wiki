@@ -194,7 +194,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200",code":0,"description":"OK"}
+  {"value":1200","code":0,"description":"OK"}
 ```
 
 Same as above using flattened notation `xjm`
@@ -205,7 +205,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200,code":0,"description":"OK"}
+  {"value":1200,"code":0,"description":"OK"}
 ```
 
 Get the value of a single object `{key}` using the `pos` object as an example.
