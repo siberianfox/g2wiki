@@ -36,10 +36,10 @@ The machine REST endpoint is used to query machine state and to query and set ma
 _Note: To send Gcode or to invoke long-running JSON commands that require asynchronous handling see [operation](#operations)._
 
 ### `GET /machine`
-Return machine objects and/or attributes by a JSON specification in the request body. The following calling styles are supported:
+Return machine objects and/or attributes by a JSON specification in the request body. The following calling styles are supported. ANy can return all object data, or nodes only if `?nodes_only=true` is used:
 
 ```
-(body omitted)              no body provided. Return entire machine or nodes if nodes_only
+(body omitted)              no body provided. Return entire machine
 { }                         key is empty object. Return entire machine
 {"stat":null}               key is freestanding; not part of an object (system state)
 {"x":null}                  key is an object (X axis)
