@@ -285,47 +285,37 @@ RESPONSE:
 
 ## Operations
 Enums:
+[Operations](#operation-resource) are started by specifying the operation type and the commands for the operation in the body of the POST. once running, they can be monitored and updated using GETs and PUTs.
 
 - Operation types (optype)
   - run - run arbitrary Gcode, JSON or a mix
   - sendfile - send a file
 - Operation states (opstate)
-  - pend
-  - run
-  - done
-  - error
+  - PEND
+  - RUN
+  - DONE
+  - ERROR
 
 ### `POST /operation`
 Start a new RUN operation to execute multiple Gcode lines<br>
 
-Operations are started by specifying the 
-
-Option 1 - pipe delimited string
+Example of single line command to invoke an operation:
 ```http
 REQUEST:
   POST /operation HTTP/1.1
-  {"optype":"run","value":"G28.2 z0 | G28.2 x0 y0"}
-  {"optype":"run", "value":["G28.2 z0","G28.2 x0 y0"]}
-```
+  {"optype":"run","value":"G28.2 z0"}
 
-Option 2 - array type
+RESPONSE:
+  HTTP/1.x 201 RESOURCE HAS BEEN CREATED
+  Content-Type: application/json; charset=UTF-8
+  42
+```
+Example of multi-line command to invoke an operation:
 ```http
 REQUEST:
   POST /operation HTTP/1.1
-  {"optype":"run"},
-  {"value":["G28.2 z0","G28.2 x0 y0"]}
-```
+  {"optype":"run","value":["G28.2 z0","G28.2 x0 y0"]}
 
-Option 3 - multiple Value keys. Can you even do this? Do they remain ordered?)
-```http
-REQUEST:
-  POST /operation HTTP/1.1
-  {"optype":"run"},
-  {"value":"G28.2 z0"
-  {"value":"G28.2 x0 y0"} 
-```
-
-```http
 RESPONSE:
   HTTP/1.x 201 RESOURCE HAS BEEN CREATED
   Content-Type: application/json; charset=UTF-8
