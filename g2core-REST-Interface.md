@@ -1,9 +1,12 @@
-**PRELIMINARY**<br>
-This page is used for discussion of the g2core REST interface. <br>
-Please also see the companion page [g2core REST Resources](g2core-REST-Resources).
-_This is a design page; we expect that we will use Swagger to ultimately document the REST API._
+**PRELIMINARY - FOR DISCUSSION**<br><br>
+These preliminary design pages are for discussion of the g2core REST interface: <br>
 
-The g2core REST API, which is the top layer of the three nested APIs:
+- [g2core REST Interface](g2core-REST-Interface)
+- [g2core REST Resources](g2core-REST-Resources)
+- [g2core REST Swagger](g2core-REST-Swagger)
+
+---
+The g2core REST API is the top layer of the three nested APIs:
 
 - g2core REST API - exposed via node-g2core-server module
 - g2core NodeJS API - exposed via node-g2core-api module
