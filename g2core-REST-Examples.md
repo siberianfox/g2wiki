@@ -216,7 +216,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"pos":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
+  {"value":{"pos":{"x":0,"y":0,"z":0,"a":0,"b":0}},"code":0,"description":"OK"}
 ```
 
 ### `PUT /machine/{key}`
@@ -224,24 +224,24 @@ Using a `{key}` of `xjm` as an example, which is a numeric type.
 ```http
 REQUEST:
   GET /machine/xjm HTTP/1.1
-  {"value":1200,code":0,"description":"OK"}
+  {"value":1200,"code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200,code":0,"description":"OK"}
+  {"value":1200,"code":0,"description":"OK"}
 ```
 
 Using a `{key}` of `g54` as an example, which is an object type.
 ```http
 REQUEST:
   GET /machine/pos HTTP/1.1
-  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
+  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},"code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
+  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},"code":0,"description":"OK"}
 ```
 
 ## Status Reports
@@ -258,31 +258,31 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"line":101,"posx":10,"posy":20,"posz":-1,"posa":0,"posb":0,"posc":0,"feed":1000,"vel":1000,"momo":0,"stat":5},,code":0,"description":"OK"}
+  {"value":{"line":101,"posx":10,"posy":20,"posz":-1,"posa":0,"posb":0,"posc":0,"feed":1000,"vel":1000,"momo":0,"stat":5},"code":0,"description":"OK"}
 ```
 
 Use a status report filter with null values to select which keys to return
 ```http
 REQUEST:
   GET /status_report HTTP/1.1
-  {"value":{"posx":null,"posy":null,"posz":null,"vel":null,"stat":null},code":0,"description":"OK"}
+  {"value":{"posx":null,"posy":null,"posz":null,"vel":null,"stat":null},"code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}},,code":0,"description":"OK"}
+  {"value":{"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5},"code":0,"description":"OK"}
 ```
 
 Use a status report filter with non-null values to return only keys that have different values (have changed) 
 ```http
 REQUEST:
   GET /status_report HTTP/1.1
-  {"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}
+  {"value":{"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5},"code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"posx":10.2}
+  {"value":{"posx":10.2},"code":0,"description":"OK"}
 ```
 
 ## Operations
@@ -335,8 +335,13 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"opstate":"run"},
-  {"value":"stat:5","status_code":0}
+  {"opstate":"run","code":0,"description":"OK"}
+
+---or possibly something that looks like this---
+RESPONSE:
+  HTTP/1.x 200 OK
+  Content-Type: application/json; charset=UTF-8
+  {"opstate":"done","value":{"stat":3,"hom":{"e":true,"x":true,"y":true,"z":true,"a":false,"b":false,"c":false}},"code":0,"description":"OK"}
 ```
 
 ### `PUT /operation/{id}`
