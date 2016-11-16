@@ -26,8 +26,9 @@
 
 **Discussion Topics**
 
-1. [ ] [g2core REST Interface](g2core-REST-Interface) 
-1. [ ] [g2core REST Resources](g2core-REST-Resources) 
+1. [ ] [g2core REST Interface](g2core-REST-Interface)
+1. [ ] [g2core REST Resources](g2core-REST-Resources)
+1. [ ] [g2core REST Swagger](g2core-REST-Swagger)
 1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [G2 3DP Dialect](g2dialect)
 1. [ ] [Digital DRO](Digital-DRO)
