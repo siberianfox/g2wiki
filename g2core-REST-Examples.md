@@ -25,7 +25,7 @@ RESPONSE:
 
 ```
 ## Machine
-The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most queries and configuration settings do. 
+The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most configuration gets and sets do. 
 
 - The API can handle single values, JSON objects, or composite JSON documents consisting of multiple values and/or objects. It will accept as arguments pretty much anything supported in the [configuration for the board's firmware version](Configuring-Version-0.99). Examples are provided for some common cases.
 
