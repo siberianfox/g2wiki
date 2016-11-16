@@ -298,9 +298,7 @@ Enums:
 ### `POST /operation`
 Start a new RUN operation to execute multiple Gcode lines<br>
 
-The following are all valid ways to invoke a RUN operation:
-
-- ``
+Operations are started by specifying the 
 
 Option 1 - pipe delimited string
 ```http
