@@ -28,6 +28,8 @@ RESPONSE:
 ## Machine
 The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most queries and configuration settings do. The API can handle single values, JSON objects, or composite JSON documents consisting of multiple values and/or objects. It will accept as arguments pretty much anything supported in the [configuration for the board's firmware version](Configuring-Version-0.99). Examples are provided for some common cases.
 
+In addition, the `nodes_only` query parameter may be set to return only nodes, no leaves. This is useful for resource discovery.
+
 _Note: To send Gcode or to invoke long-running JSON commands that require asynchronous handling see [operation](#operations)._
 
 ### `GET /machine`
@@ -103,7 +105,7 @@ RESPONSE:
 Return top level objects in a machine
 ```http
 REQUEST:
-  GET /info?shallow=true HTTP/1.1
+  GET /?nodes_only=true HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
