@@ -48,15 +48,15 @@ produces:
   - application/json
 paths:
 
-  /info:
+  /version:
     get:
-      description: Return machine identification and other information
-      operationId: getInfo
+      description: Return API and machine identification, version and other information
+      operationId: getVersion
       produces:
         - application/json
       responses:
         '200':
-          description: getInfo response
+          description: getVersion response
           schema:
             required:
               - fv
@@ -369,5 +369,6 @@ definitions:
 #        type: string
 #      status:
 #        $ref: '#/definitions/responseStatus'
+
 
 ```
