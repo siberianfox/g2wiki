@@ -11,7 +11,7 @@ These preliminary design pages are for discussion of the g2core REST interface: 
 Until we have a proper repo for this:
 
 - You can see the yaml via this [gist](https://gist.github.com/aldenhart/a6bbabd99848ca1d5b034bf948fa423d)
-- Launch it in the [swagger editor](http://editor.swagger.io/#/?import=https://gist.github.com/aldenhart/a6bbabd99848ca1d5b034bf948fa423d)
+- Launch it in the [swagger editor](http://editor.swagger.io/#/?import=https://gist.github.com/aldenhart/a6bbabd99848ca1d5b034bf948fa423d/raw/3fe8205c711c120d508e9ae7ef7d18e3ecb3d8ae/g2core-REST-Swagger.yaml)
 - Cut and paste this into the [Swagger Editor](http://editor.swagger.io/)
 
 ```yaml
