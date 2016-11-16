@@ -100,8 +100,8 @@ RESPONSE:
 "g59":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0},
 "g92":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0},
 "g28":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0},
-"g30":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0},
-}
+"g30":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0}
+},"code":0,"description":"OK"
 }
 ```
 
@@ -113,55 +113,57 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"sys":true,"x":true,"y":true,"z":true,"a":true,"b":true,"c":true,"1":true,"2":true,"3":true,"4":true,"do1":true,"do2":true,"do3":true,"do4":true,"do5":true,"do6":true,"do7":true,"do8":true,"do9":true,"di1":true,"di2":true,"di3":true,"di4":true,"di5":true,"di6":true,"di7":true,"di8":true,"di9":true,"he1":true,"he2":true,"he3":true,"g54":true,"g55":true,"g56":true,"g57":true,"g58":true,"g59":true,"g92":true,"g28":true,"g30":true}}
+  {"value":{"sys":true,"x":true,"y":true,"z":true,"a":true,"b":true,"c":true,"1":true,"2":true,"3":true,"4":true,"do1":true,"do2":true,"do3":true,"do4":true,"do5":true,"do6":true,"do7":true,"do8":true,"do9":true,"di1":true,"di2":true,"di3":true,"di4":true,"di5":true,"di6":true,"di7":true,"di8":true,"di9":true,"he1":true,"he2":true,"he3":true,"g54":true,"g55":true,"g56":true,"g57":true,"g58":true,"g59":true,"g92":true,"g28":true,"g30":true},"code":0,"description":"OK"}
 ```
 Response prettified:
-```
+```json
 {
-	"value": {
-		"sys": true,
-		"x": true,
-		"y": true,
-		"z": true,
-		"a": true,
-		"b": true,
-		"c": true,
-		"1": true,
-		"2": true,
-		"3": true,
-		"4": true,
-		"do1": true,
-		"do2": true,
-		"do3": true,
-		"do4": true,
-		"do5": true,
-		"do6": true,
-		"do7": true,
-		"do8": true,
-		"do9": true,
-		"di1": true,
-		"di2": true,
-		"di3": true,
-		"di4": true,
-		"di5": true,
-		"di6": true,
-		"di7": true,
-		"di8": true,
-		"di9": true,
-		"he1": true,
-		"he2": true,
-		"he3": true,
-		"g54": true,
-		"g55": true,
-		"g56": true,
-		"g57": true,
-		"g58": true,
-		"g59": true,
-		"g92": true,
-		"g28": true,
-		"g30": true
-	}
-}
+  	"value": {
+  		"sys": true,
+  		"x": true,
+  		"y": true,
+  		"z": true,
+  		"a": true,
+  		"b": true,
+  		"c": true,
+  		"1": true,
+  		"2": true,
+  		"3": true,
+  		"4": true,
+  		"do1": true,
+  		"do2": true,
+  		"do3": true,
+  		"do4": true,
+  		"do5": true,
+  		"do6": true,
+  		"do7": true,
+  		"do8": true,
+  		"do9": true,
+  		"di1": true,
+  		"di2": true,
+  		"di3": true,
+  		"di4": true,
+  		"di5": true,
+  		"di6": true,
+  		"di7": true,
+  		"di8": true,
+  		"di9": true,
+  		"he1": true,
+  		"he2": true,
+  		"he3": true,
+  		"g54": true,
+  		"g55": true,
+  		"g56": true,
+  		"g57": true,
+  		"g58": true,
+  		"g59": true,
+  		"g92": true,
+  		"g28": true,
+  		"g30": true
+  	},
+  	"code": 0,
+  	"description": "OK"
+  }
 ```
 
 ### `GET /machine/{key}`
@@ -181,7 +183,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":0.01}
+  {"value":0.01,"code":0,"description":"OK"}
 ```
 
 Get the value of a single `{key}` `x/jm` (max jerk in the X axis), which is a numeric type.
@@ -192,7 +194,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200}
+  {"value":1200",code":0,"description":"OK"}
 ```
 
 Same as above using flattened notation `xjm`
@@ -203,7 +205,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200}
+  {"value":1200,code":0,"description":"OK"}
 ```
 
 Get the value of a single object `{key}` using the `pos` object as an example.
@@ -214,7 +216,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"pos":{"x":0,"y":0,"z":0,"a":0,"b":0}}}
+  {"value":{"pos":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
 ```
 
 ### `PUT /machine/{key}`
@@ -222,24 +224,24 @@ Using a `{key}` of `xjm` as an example, which is a numeric type.
 ```http
 REQUEST:
   GET /machine/xjm HTTP/1.1
-  {"value":1200}
+  {"value":1200,code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":1200}
+  {"value":1200,code":0,"description":"OK"}
 ```
 
 Using a `{key}` of `g54` as an example, which is an object type.
 ```http
 REQUEST:
   GET /machine/pos HTTP/1.1
-  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}}}
+  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}}}
+  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}},code":0,"description":"OK"}
 ```
 
 ## Status Reports
@@ -256,19 +258,19 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"line":101,"posx":10,"posy":20,"posz":-1,"posa":0,"posb":0,"posc":0,"feed":1000,"vel":1000,"momo":0,"stat":5}
+  {"value":{"line":101,"posx":10,"posy":20,"posz":-1,"posa":0,"posb":0,"posc":0,"feed":1000,"vel":1000,"momo":0,"stat":5},,code":0,"description":"OK"}
 ```
 
 Use a status report filter with null values to select which keys to return
 ```http
 REQUEST:
   GET /status_report HTTP/1.1
-  {"posx":null,"posy":null,"posz":null,"vel":null,"stat":null}
+  {"value":{"posx":null,"posy":null,"posz":null,"vel":null,"stat":null},code":0,"description":"OK"}
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}}
+  {"value":{"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}},,code":0,"description":"OK"}
 ```
 
 Use a status report filter with non-null values to return only keys that have different values (have changed) 
@@ -341,13 +343,15 @@ RESPONSE:
 
 
 ## Jobs
+TBD
+
 ### `POST /job`
 
 ### `GET /job/{id}`
 
 ### `PUT /job/{id}`
 
-## Error Responses
+# Error Responses
 All error responses look like this:
 
 ```http
@@ -356,17 +360,17 @@ Content-Type: application/json; charset=UTF-8
 {"status":{"code":100,"description":"Unrecognized command or config name","additional_description":"xyzzy is not supported at the current time"}}
 ```
 
-### Commonly Used HTTP Response Codes
+## Commonly Used HTTP Response Codes
 Defines the use of HTTP response codes and the mapping from g2core stat codes to HTTP codes
 
-#### Success Codes
+### Success Codes
 
 - 200 OK
   - STAT_OK 0
 - 201 Created
 - 202 Accepted
 
-#### Exception Codes
+### Exception Codes
 
 - 400 Bad Request
   - Syntax errors 101-103, 111-116, 200-203, 207-209
