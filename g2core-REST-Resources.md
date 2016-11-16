@@ -3,6 +3,7 @@ These preliminary design pages are for discussion of the g2core REST interface: 
 
 - [g2core REST Interface](g2core-REST-Interface)
 - [g2core REST Resources](g2core-REST-Resources)
+- [g2core REST Examples](g2core-REST-Examples)
 - [g2core REST Swagger](g2core-REST-Swagger)
 
 ---
