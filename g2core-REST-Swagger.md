@@ -8,6 +8,9 @@ These preliminary design pages are for discussion of the g2core REST interface: 
 ---
 
 # Example Swagger
+Until we have a proper repo for this you can see the yaml via this gist<br>
+https://gist.github.com/aldenhart/a6bbabd99848ca1d5b034bf948fa423d
+
 Cut and paste this into the [Swagger Editor](http://editor.swagger.io/) to see it in interactive form.
 
 ```yaml
