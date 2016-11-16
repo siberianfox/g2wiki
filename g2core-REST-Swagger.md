@@ -8,7 +8,7 @@ These preliminary design pages are for discussion of the g2core REST interface: 
 ---
 
 # Example Swagger
-Plug this into the [Swagger Editor](http://editor.swagger.io/) to see it in interactive form.
+Cut and paste this into the [Swagger Editor](http://editor.swagger.io/) to see it in interactive form.
 
 ```yaml
 #
