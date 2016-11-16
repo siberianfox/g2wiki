@@ -1,5 +1,11 @@
-This page describes g2core resource model and details. Please also see the companion page [g2core REST Interface](g2core-REST-Interface)
+**PRELIMINARY - FOR DISCUSSION**<br><br>
+These preliminary design pages are for discussion of the g2core REST interface: <br>
 
+- [g2core REST Interface](g2core-REST-Interface)
+- [g2core REST Resources](g2core-REST-Resources)
+- [g2core REST Swagger](g2core-REST-Swagger)
+
+---
 # Resource Model Overview
 Top level resources include:
 
