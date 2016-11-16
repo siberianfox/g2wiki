@@ -24,11 +24,14 @@ RESPONSE:
   {"fv":0.99,"fb":100.12,"fbs":"100.12-14-g375c-dirty","fbc":"settings_makeblock.h","hp":3,"hv":0,"id":"0084-7bd6-29c6-8ce","msg":"SYSTEM READY"}
 
 ```
-
 ## Machine
-The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most queries and configuration settings do. The API can handle single values, JSON objects, or composite JSON documents consisting of multiple values and/or objects. It will accept as arguments pretty much anything supported in the [configuration for the board's firmware version](Configuring-Version-0.99). Examples are provided for some common cases.
+The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most queries and configuration settings do. 
 
-In addition, the `nodes_only` query parameter may be set to return only nodes, no leaves. This is useful for resource discovery.
+- The API can handle single values, JSON objects, or composite JSON documents consisting of multiple values and/or objects. It will accept as arguments pretty much anything supported in the [configuration for the board's firmware version](Configuring-Version-0.99). Examples are provided for some common cases.
+
+- The machine resource can be called [with](#get-machine) or [without](#get-machinekey) a URI resource path.
+
+- In addition, the `nodes_only` query parameter may be set to return only nodes, no leaves. This is useful for resource discovery.
 
 _Note: To send Gcode or to invoke long-running JSON commands that require asynchronous handling see [operation](#operations)._
 
