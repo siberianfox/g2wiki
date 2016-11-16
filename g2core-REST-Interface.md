@@ -12,7 +12,7 @@ The g2core REST API is the top layer of the three nested APIs:
 - g2core NodeJS API - exposed via node-g2core-api module
 - g2core firmware API - exposed via serial and USB from the g2core firmware
 
-#Background
+#Overview
 The g2core REST API is a RESTful API that allows control of a CNC machine and associated "print jobs". The conceptual model  has these layers:
 
 1. **Host Functions** - e.g communications setup, managing files, other non-CNC things
@@ -33,26 +33,26 @@ Additional host functions are not the domain of this API, may include:
 ### 2. Machine Setup
 Machine setup reads and writes parameters and initiates actions to configure the CNC machine independently of any given job. They may be done once and once only, periodically, or before or after a job. These may include:
 
-- **Machine Configuration** exposes machines settings generally not changed on a per-job basis. E.g. communications settings, reporting levels, machine startup defaults. All settings exist at the same level, so it's up the the UI to determine which to show to users, which are "expert", and which should be hidden (if any). Machine configuration is implemented as synchronous REST calls to various [machine resources](g2core-REST-Resources#machine-resource).
+- **Machine Settings** exposes machines settings generally not changed on a per-job basis. E.g. communications settings, reporting levels, machine startup defaults. All settings exist at the same level, so it's up the the UI to determine which to show to users, which are "expert", and which should be hidden (if any). Machine configuration is implemented as synchronous REST calls to [machine resources](g2core-REST-Resources#machine-resource).
 
-- **Machine Operations** includes actions such as homing, axis tramming or automatic bed leveling that may be run on power up, periodically, or before a job is run. Machine operations are implemented as long-running asynchronous REST calls bundled in an [operation resource](g2core-REST-Resources#operation-resource) that provides a control context for the duration of the operation.
+- **Machine Operations** includes actions such as homing, axis tramming or automatic bed leveling that may be run on power up, periodically, or before a job is run. Machine operations are implemented as long-running asynchronous REST calls bundled in an [operation resource](g2core-REST-Resources#operation-resource) that provides a monitoring and control context for the duration of the operation.
 
 ### 3. Job Setup and Management
-Job setup and management handles commands to prepare a job for runtime. It operates on [job resources](g2core-REST-Resources#job-resource), and the job queue (job list), which orders the jobs to be run.
+Job setup and management handles commands to prepare a job for runtime. It may operate on machine resources, perform operations, and on [job resources](g2core-REST-Resources#job-resource) and the job queue (job list), which orders the jobs to be run.
 
 The model for job management is borrowed from commercial printing operations. A 'job jacket' is a container for a job. It includes one or more 'print files', a 'master' JSON doc with job metadata and a declarative control specification, and any other files that make up the job bundle such as multi-file prints, runtime logs, etc. (In implementation the jacket can be a directory containing a bunch of files).
 
-The API implements:
+The Job API implements:
 
 - Fetch and manipulate job files
+- Define job parameters - e.g. filament type and size
 - Preview/check job file
 - Queue and order jobs for execution
-- Define job parameters - e.g. filament type and size
 
 ### 4. Job Runtime
-Job runtime scopes those things that happen while the job is running. It is differentiated from job setup because there are commands that can only be executing during job runtime (e.g. feedholds), and other commands that should not be executed during runtime (e.g. machine configuration). The REST interface implements the following runtime state changes:
+Job runtime scopes those things that happen while the job is running. It is differentiated from job setup because there are commands that can only be executed during job runtime (e.g. feedholds), and other commands that should not be executed during runtime (e.g. machine configuration). The REST interface implements the following runtime state changes:
 
-- Start/stop job (including running the Gcode)
+- Start/stop job (running the Gcode)
 - Pause and resume job (feedhold / cycle start)
 - In-job manual operations (tool change, filament restock)
 - Report job progress
@@ -62,12 +62,13 @@ _A Note on Formats: Most of the functions above are accessed using REST/JSON, wi
 
 #Examples
 
-##Info
-### `GET /info`
+##Version
+Provides an endpoint for system and API version information that is independent of the machine or any other resource
+### `GET /version`
 
 ```http
 REQUEST:
-  GET /info HTTP/1.1
+  GET /version HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
