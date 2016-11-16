@@ -1,4 +1,13 @@
-**PRELIMINARY - FOR DISCUSSION**
+**PRELIMINARY - FOR DISCUSSION**<br><br>
+These preliminary design pages are for discussion of the g2core REST interface: <br>
+
+- [g2core REST Interface](g2core-REST-Interface)
+- [g2core REST Resources](g2core-REST-Resources)
+- [g2core REST Swagger](g2core-REST-Swagger)
+
+---
+
+# Example Swagger. Plug this into the [Swagger Editor](http://editor.swagger.io/) to see it in interactive form.
 
 ```yaml
 #
