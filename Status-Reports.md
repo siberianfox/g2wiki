@@ -119,3 +119,6 @@ All variables are reset and must be specified in a single SET command.
 	12 | SHUTDOWN | Machine is in shutdown state. Will not process commands
 	13 | PANIC | Machine is in panic state. Needs to be physically reset
 
+####Run State Transitions
+![System States](images/SystemStates.jpg)
+
