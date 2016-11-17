@@ -6,7 +6,7 @@ The status code reports how a command was processed. It is the second number in 
 {"r":{"xjm":5000000000.000},"f":[3,**0**,6]}
 
 Zero (`0`, STAT_OK) means the command was processed. Anything else is an error. The following status codes are supported as of firmware build 100.xx. See error.h for the source:
-```c++
+```c
 // OS, communications and low-level status (must align with XIO_xxxx codes in xio.h)
 #define STAT_OK 0                       // function completed OK
 #define STAT_ERROR 1                    // generic error return (EPERM)
