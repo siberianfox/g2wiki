@@ -26,7 +26,7 @@ SOURCE_DIRS += ${BOARD_PATH} device/step_dir_driver
 endif
 ```
 
-NOTE: Name boards except the Due + Shield combination use the same scheme, as described on this page. [Be sure to read this section]() If you are doing a pinout for a Due and a shield.
+_NOTE: Name boards except the Due + Shield combination use the same scheme, as described on this page. [Be sure to read this section](#notes-for-base-board--shield-configuration-boards) If you are doing a pinout for a Due and a shield._
 
 ### Making a New Pin Assignment
 
