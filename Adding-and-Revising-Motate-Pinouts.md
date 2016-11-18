@@ -26,6 +26,8 @@ SOURCE_DIRS += ${BOARD_PATH} device/step_dir_driver
 endif
 ```
 
+NOTE: Name boards except the Due + Shield combination use the same scheme, as described on this page. [Be sure to read this section]() If you are doing a pinout for a Due and a shield.
+
 ### Making a New Pin Assignment
 
 The `motate_pin_assignments.h` file _eventually_ provides two things:
