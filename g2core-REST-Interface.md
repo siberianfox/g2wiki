@@ -101,7 +101,7 @@ Return machine objects and/or attributes by a JSON specification in the request 
 
 ```http
 REQUEST:
-  GET /info HTTP/1.1
+  GET /machine HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
@@ -156,7 +156,7 @@ RESPONSE:
 Return top level objects in a machine
 ```http
 REQUEST:
-  GET /info?shallow=true HTTP/1.1
+  GET /machine?shallow=true HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
@@ -212,6 +212,8 @@ Response prettified:
 }
 ```
 
+_Question: Should these be `null` values instead of `true`? With `null` we can pass it back as a request, and is not a valid value type (IOW, it's non-settable). `true` is a value value type, meaning that key, if queried, might actually have the value of `true`._
+
 ### `GET /machine/{key}`
 A `{key}` can be any of the following. The examples illustrate these cases.
 
@@ -262,7 +264,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"pos":{"x":0,"y":0,"z":0,"a":0,"b":0}}}
+  {"value":{"x":0,"y":0,"z":0,"a":0,"b":0}}
 ```
 
 ### `PUT /machine/{key}`
@@ -270,7 +272,7 @@ Using a `{key}` of `xjm` as an example, which is a numeric type.
 ```http
 REQUEST:
   GET /machine/xjm HTTP/1.1
-  {"value":1200}
+  1200
 
 RESPONSE:
   HTTP/1.x 200 OK
@@ -282,7 +284,7 @@ Using a `{key}` of `g54` as an example, which is an object type.
 ```http
 REQUEST:
   GET /machine/pos HTTP/1.1
-  {"value":{"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}}}
+  {"g54":{"x":0,"y":0,"z":0,"a":0,"b":0}}
 
 RESPONSE:
   HTTP/1.x 200 OK
@@ -295,6 +297,7 @@ RESPONSE:
 See [status report resource](g2core-REST-Resources#status_report-resource) for operation.
 
 _Question: Is it useful for status_report to report back the operation ID and/or job ID it is reporting on?_
+_Answer (Rob): I think we leave status_report == `{"sr":null}` as much as possible. We can put job and operation info in other endpoints._
 
 Use a status report with no filter to return all keys configured in the status report
 ```http
@@ -316,7 +319,7 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}}
+  {"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5}
 ```
 
 Use a status report filter with non-null values to return only keys that have different values (have changed) 
@@ -335,8 +338,8 @@ RESPONSE:
 Enums:
 
 - Operation types (optype)
-  - run - run arbitrary Gcode, JSON or a mix
-  - sendfile - send a file
+  - `run` - run arbitrary Gcode, JSON or a mix
+  - `sendfile` - send a file
 - Operation states (opstate)
   - pend
   - run
@@ -350,29 +353,18 @@ The following are all valid ways to invoke a RUN operation:
 
 - ``
 
-Option 1 - pipe delimited string
+Option 1 - array type (`'\n'` new-lines are optional)
 ```http
 REQUEST:
   POST /operation HTTP/1.1
-  {"optype":"run","value":"G28.2 z0 | G28.2 x0 y0"}
-  {"optype":"run", "value":["G28.2 z0","G28.2 x0 y0"]}
+  {"optype":"run","value":["G28.2 z0","G28.2 x0 y0"]}
 ```
 
-Option 2 - array type
+Option 2 - Single string with embedded newlines (the natural result of reading a small file)
 ```http
 REQUEST:
   POST /operation HTTP/1.1
-  {"optype":"run"},
-  {"value":["G28.2 z0","G28.2 x0 y0"]}
-```
-
-Option 3 - multiple Value keys. Can you even do this? Do they remain ordered?)
-```http
-REQUEST:
-  POST /operation HTTP/1.1
-  {"optype":"run"},
-  {"value":"G28.2 z0"
-  {"value":"G28.2 x0 y0"} 
+  {"optype":"run","value":"G28.2 z0\nG28.2 x0 y0\n"}
 ```
 
 ```http
@@ -392,12 +384,12 @@ REQUEST:
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"opstate":"run"},
-  {"value":"??? What does it really return?"}
+  {"opstate":"run", "value":"??? What does it really return?"}
 ```
 
 ### `PUT /operation/{id}`
 
+_TODO: show changing the "opstate" to pause or kill the operation_
 
 ## Jobs
 ### `POST /job`
