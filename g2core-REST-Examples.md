@@ -53,7 +53,7 @@ Return machine objects and/or attributes by a JSON specification in the request 
 
 ```http
 REQUEST:
-  GET /info HTTP/1.1
+  GET /machine HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
@@ -108,58 +108,58 @@ RESPONSE:
 Return top level objects in a machine
 ```http
 REQUEST:
-  GET /?nodes_only=true HTTP/1.1
+  GET /machine?nodes_only=true HTTP/1.1
 
 RESPONSE:
   HTTP/1.x 200 OK
   Content-Type: application/json; charset=UTF-8
-  {"value":{"sys":true,"x":true,"y":true,"z":true,"a":true,"b":true,"c":true,"1":true,"2":true,"3":true,"4":true,"do1":true,"do2":true,"do3":true,"do4":true,"do5":true,"do6":true,"do7":true,"do8":true,"do9":true,"di1":true,"di2":true,"di3":true,"di4":true,"di5":true,"di6":true,"di7":true,"di8":true,"di9":true,"he1":true,"he2":true,"he3":true,"g54":true,"g55":true,"g56":true,"g57":true,"g58":true,"g59":true,"g92":true,"g28":true,"g30":true},"code":0,"description":"OK"}
+  {"value":{"sys":null,"x":null,"y":null,"z":null,"a":null,"b":null,"c":null,"1":null,"2":null,"3":null,"4":null,"do1":null,"do2":null,"do3":null,"do4":null,"do5":null,"do6":null,"do7":null,"do8":null,"do9":null,"di1":null,"di2":null,"di3":null,"di4":null,"di5":null,"di6":null,"di7":null,"di8":null,"di9":null,"he1":null,"he2":null,"he3":null,"g54":null,"g55":null,"g56":null,"g57":null,"g58":null,"g59":null,"g92":null,"g28":null,"g30":null},"code":0,"description":"OK"}
 ```
 Response prettified:
 ```json
 {
   	"value": {
-  		"sys": true,
-  		"x": true,
-  		"y": true,
-  		"z": true,
-  		"a": true,
-  		"b": true,
-  		"c": true,
-  		"1": true,
-  		"2": true,
-  		"3": true,
-  		"4": true,
-  		"do1": true,
-  		"do2": true,
-  		"do3": true,
-  		"do4": true,
-  		"do5": true,
-  		"do6": true,
-  		"do7": true,
-  		"do8": true,
-  		"do9": true,
-  		"di1": true,
-  		"di2": true,
-  		"di3": true,
-  		"di4": true,
-  		"di5": true,
-  		"di6": true,
-  		"di7": true,
-  		"di8": true,
-  		"di9": true,
-  		"he1": true,
-  		"he2": true,
-  		"he3": true,
-  		"g54": true,
-  		"g55": true,
-  		"g56": true,
-  		"g57": true,
-  		"g58": true,
-  		"g59": true,
-  		"g92": true,
-  		"g28": true,
-  		"g30": true
+  		"sys": null,
+  		"x": null,
+  		"y": null,
+  		"z": null,
+  		"a": null,
+  		"b": null,
+  		"c": null,
+  		"1": null,
+  		"2": null,
+  		"3": null,
+  		"4": null,
+  		"do1": null,
+  		"do2": null,
+  		"do3": null,
+  		"do4": null,
+  		"do5": null,
+  		"do6": null,
+  		"do7": null,
+  		"do8": null,
+  		"do9": null,
+  		"di1": null,
+  		"di2": null,
+  		"di3": null,
+  		"di4": null,
+  		"di5": null,
+  		"di6": null,
+  		"di7": null,
+  		"di8": null,
+  		"di9": null,
+  		"he1": null,
+  		"he2": null,
+  		"he3": null,
+  		"g54": null,
+  		"g55": null,
+  		"g56": null,
+  		"g57": null,
+  		"g58": null,
+  		"g59": null,
+  		"g92": null,
+  		"g28": null,
+  		"g30": null
   	},
   	"code": 0,
   	"description": "OK"
