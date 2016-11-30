@@ -156,6 +156,8 @@ image:Windows-Choose-Build-And-Processor.png[Windows: Choose build and processor
 
 NOTE: The build will copy `g2core.elf`, and `g2core.map` to the top directory after build _only in Atmel Studio_. This is because Atmel Studio requires those files to be in that exact location with those exact names in order to consider building successful and to know what file to flash. Be warned that this file will always contain the result of the _last profile built_ if you build several profiles.
 
+NOTE: We try to eliminate all compiler errors and warnings from the project. However, there is (we believe) a GCC linker bug that will sometimes reports that the base address (BSS) has been moved by 8 or 12 bytes. This can be ignored.
+
 ## Uploading g2core to a target board (without a Atmel ICE)
 
 To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-g2core-with-Windows[Flashing g2core with Windows] page.
