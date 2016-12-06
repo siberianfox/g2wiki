@@ -50,9 +50,7 @@ Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on you
 ## Atmel Studio 7 - Download
 To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.0.1188 (or greater). We recommend a clean machine or VM.
 
-* Go to Atmel and download the http://www.atmel.com/tools/atmelstudio.aspx[Atmel Studio 7 Installer] install package. Either Web or Online should work.
-
-** Be sure to get the one with the **.NET part** (about 800 Mbytes) unless you are sure you already have the .net revision that AS needs (Framework 4). (If you don't know, go ahead and get it. It won't hurt anything other than the size of the installer will be bigger.)
+* Go to Atmel and download the http://www.atmel.com/tools/atmelstudio.aspx[Atmel Studio 7 Installer] install package. Either Web or Online versions should work.
 
 ** There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
 
@@ -64,9 +62,9 @@ To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.
 
 ** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio.
 
-*** Install the 2 ARM architectures (32 bit ARM, Smart Arm) but not the AVR8 bit architecture (unless you are doing 8 bit development like the TinyG project separately from g2core). This is required even though the g2core project downloads its complete toolchain.
+*** Install the Smart ARM 32 architecture. You do not need tha 32 bit AVR architecture. If you want to also use this package to work on TinyG v8 you will need the  AVR8 bit architecture. The 32 bit toolchain is required even though the g2core project downloads its complete toolchain.
 
-*** We do not install the Atmel Studio Framework code or examples. You do NOT want this.
+*** We do not install the Atmel Studio Framework Code or Examples. You do NOT want this, as we don;t use it, and it takes up a lot of space.
 
 ** Fire up AS7 for the first time 
 
