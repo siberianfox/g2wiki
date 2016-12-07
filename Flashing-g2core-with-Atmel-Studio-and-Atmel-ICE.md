@@ -1,8 +1,10 @@
-_This page is for uploading an already compiled G2 binary to a target board using Atmel Studio 6.2 (or greater) and the Atmel ICE programmer/debugger. This requires Windows or a VM for AS6. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
+_This page is for uploading an already compiled G2 binary to a target board using Atmel Studio 7 (or greater) and the Atmel ICE programmer/debugger. This requires Windows or a VM for AS6. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
+
+**Note: This page needs updating**
 
 ###Step 1 - Get the TinyG2.bin file
 
-**Option 1** - Compile your own using the instruction in [[Compiling G2 on Windows (Atmel Studio 6.2)]]
+**Option 1** - Compile your own using the instruction in [[Compiling G2 on Windows (Atmel Studio 7)]]
 
 **Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
 
