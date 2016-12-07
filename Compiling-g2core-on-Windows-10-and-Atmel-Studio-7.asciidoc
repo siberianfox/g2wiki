@@ -156,7 +156,7 @@ NOTE: We try to eliminate all compiler errors and warnings from the project. How
 
 ## Uploading g2core to a target board (without a Atmel ICE)
 
-To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-g2core-with-Windows[Flashing g2core with Windows] page.
+To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-G2-with-Windows[Flashing g2core with Windows] page.
 
 # Troubleshooting Windows Configurations
 
