@@ -67,27 +67,32 @@ or
 </pre> 
 
 ### xjm - Jerk Maximum
+
+_Note: The behavior of JM has changed in 0.99. All values are multiplied by 1,000,000 by default_
+
 Sets the maximum jerk value for that axis. Jerk is settable independently for each axis to support machines with different dynamics per axis - such as Shapeoko2 with belts for X and Y, screws for Z, Probotix with 5 pitch X and Y screws and 12 pitch Z screws, and any machine with both linear and rotary axes.
 
-Jerk is in units per minutes^3, so the numbers are quite large (but see note below). Some common values are shown in *millimeters* in the examples below. 
-
-To manage these large numbers better the complete number can be entered, or the number divided by a million. Any number less than 1M will be automatically multiplied by 1M internally. Jerk values are displayed in divide-by-million form.
+Jerk is in units per minutes cubed, so the numbers tend to be quite large - typically in the many millions or even billions of  mm/min^3. So all entries are considered to be in millions. e.g. a value of 500 is actually 500,000,000 mm/min^3. See examples below. Jerk values are also displayed in this divide-by-million form.
 
 <pre>
-{xjm:50000000}  Set X jerk to 50 million MM per min^3. This is a good value for a moderate speed machine
-{xjm:50}        Same as above
+{xjm:50}  Set X jerk to 50 million MM per min^3. This is a good value for a slow machine
 {xjm:5000}      X jerk for Shapeoko. Yes, that's 5 billion
 </pre> 
 
 The jerk term in mm is measured in mm/min^3. In inches mode it's units are inches/min^3. So the conversion from mm to inches is 1/(25.4). The same values as above are shown in inches are: 
 <pre>
-50,000,000 mm/min^3      is 1,968,504 in/min^3 2,000,000 would suffice
-25,000,000 mm/min^3      is 984,251 in/min^3 1,000,000 would suffice
-5,000,000,000 mm/min^3   is 196,850,400 in/min^3 200,000,000 would suffice
+50 M mm/min^3     is 1.968504 M in/min^3, so 2.0 would suffice
+25 M mm/min^3     is 984,251 M in/min^3, so 1.0 would suffice
+5000 M mm/min^3   is 196.8504 M in/min^3, so 200 would suffice
 </pre> 
 
 ### xjh - Jerk High
-Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be larger than the xJM value, as this determines how fast the axis will stop once it hits the switch. You generally want this as fast as you can get it without losing steps on the accelerations.
+
+_Note: The behavior of JH has changed in 0.99. All values are multiplied by 1,000,000 by default_
+
+Sets the jerk value used for homing to stop movement when switches are hit or released. You generally want this value to be somewhat larger than the xJM value, as this determines how fast the axis will stop once it hits a limit or homing switch. You generally want this as fast as you can get it without losing steps on the accelerations.
+
+The JM discussion above applies. 
 
 ### ara - Radius value
 The radius value is used by rotational axes only (A, B and C) to convert linear units to degrees when in radius mode. 
