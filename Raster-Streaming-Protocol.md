@@ -93,7 +93,7 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Example JSON 253 bytes total (including LF) carrying 192 pixels of image data - about 32% expansion over binary
     ```json
-{"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G<+EV:2F!,O<DJ+*.@<*K0@<6L(Df\0Ec5e;DffZ(EZee.Bl.9pF0AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<r@:F%a+D5'~>"}
+{"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G<+EV:2F!,O<DJ+*.@<*K0@<6L(Dfc0Ec5e;DffZ(EZee.Bl.9pF0AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<r@:F%a+D5'~>"}
     ```
 
 1. **Render Complete** - A command that indicates that the render is complete
