@@ -10,7 +10,7 @@ The above assumes dot encoding efficiency of 8 bits per pixel, or 255 grey level
 ##Design Goals
 Here for discussion and listed in no particular order:
 
-- Support Laser/CNC controllers with limited image memory, and therefore require a streaming protocol.
+- Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This therefore suggests a streaming protocol.
 
 - Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities ac controller may have, and potentially for a capabilities discovery mechanism to allow the CAM to optimally utilize the capabilities of the controller.
 
