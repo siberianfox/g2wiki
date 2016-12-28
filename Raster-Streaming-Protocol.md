@@ -12,15 +12,15 @@ Here for discussion and listed in no particular order:
 
 - Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
 
-- Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and optimally utilize the capabilities of a given controller (capabilities negotiation).
+- Support a baseline protocol that is as simple as possible (`MVP` aka minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
 
-- Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if the setup supports it.
+- Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if binary capabilities are available.
 
-- Support interjection of runtime machine controls such as feedhold and resume.
-
-- Ideally we could stream a [BMP](https://en.wikipedia.org/wiki/BMP_file_format) or [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image files directly to the controller, taking advantage of compression methods already used in those files.
+- Support interjection of runtime machine controls such as feed rate override, feedhold and resume in the MVP protocol.
 
 - Require as little translation from common image formats to streaming protocol formats as possible. Specifically, we are looking at [BMP](https://en.wikipedia.org/wiki/BMP_file_format) and [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image file formats.
+
+- Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
 
 Some vocabulary - mostly taken from the BMP and PNG formats
 
