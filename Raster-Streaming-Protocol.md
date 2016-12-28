@@ -55,7 +55,10 @@ The protocol consists of three parts that are sent as different data elements in
   - Vertical resolution (Y) in pixels/meter (Multiply DPI by 39.3701)
 
 1. Pixel Array - Image contents
+  - Sent one line at a time, or as partial lines in line lengths or memory constraints dictate
 
+1. Render Complete - A command that indicates that the render is complete
+  - TBD
 
 Notes:
 
