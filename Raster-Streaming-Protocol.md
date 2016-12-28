@@ -12,6 +12,8 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
 
+- Consider [lw.rasterizer](https://github.com/lautr3k/lw.rasterizer) as a starting point for protocol generation (is this right?)
+
 - Support a baseline MVP protocol that is as simple as possible (minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
 
 - Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if binary capabilities are available.
