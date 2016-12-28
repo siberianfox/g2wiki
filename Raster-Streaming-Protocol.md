@@ -25,15 +25,16 @@ Here for discussion and listed in no particular order:
 ##Protocol Design
 Some vocabulary - mostly taken from the BMP and PNG formats
 
-- `Image` - the image data itself
-- `Image header` - metadata describing the image, but not the rendering operation
+- `Image Header` - metadata describing the image, but not the rendering operation
+- `Pixel Array` - the image data itself
+- `Render Header` - metadata to set up the rendering operation
 - `Render` or rendering operation - a single raster image lasered onto some surface
-- `Render header` - metadata to set up the rendering operation
 
 ### MVP Protocol
 The MVP protocol is limited to the following assumptions
 
-- The image will be rendered in a perfect X/Y grid without skew or rotation. No Z movement is possible.
+- The image will be rendered in a perfect X/Y grid without skew or rotation. No Z movement is possible
+- Only supports BMP files, and only those not using pixel array compression
 
 The protocol consists of three parts that are sent as different data elements in the following order
 
@@ -48,9 +49,18 @@ The protocol consists of three parts that are sent as different data elements in
   - Width of the bitmap in pixels (X dimension)
   - Height of the bitmap in pixels (Y dimension)
   - Number of bits per pixel - typically 8, but may be 16 for increased resolution [1]
- 
+  - Compression - MVP uses BI_BITFIELDS only, no pixel array compression supported 
+  - Size of the raw bitmap data (including padding) [2]
+  - Horizontal resolution (X) in pixels/meter (Multiply DPI by 39.3701)
+  - Vertical resolution (Y) in pixels/meter (Multiply DPI by 39.3701)
+
+1. Pixel Array - Image contents
+
 
 Notes:
-  [1] We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
+
+- [1] We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
+- [2] We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
+- 
 
 ###Full Protocol
