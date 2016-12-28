@@ -75,6 +75,12 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Size of the raw bitmap data (including padding). We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
 
+  - Example JSON representation:
+    ```json
+{"ihdr":{"dimx":1000,"dimy":0,"bpp":8,"comp":0,"resx":11811,"resy":11811,"size":424242}}
+    ```
+
+
 1. **Pixel Array** - Image contents
   - Sent one line at a time, or as partial lines if line lengths or memory constraints dictate
 
