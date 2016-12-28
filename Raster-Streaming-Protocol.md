@@ -88,7 +88,7 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Example JSON representation:
     ```json
-{"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!~>"}
+{"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!O<DJ+*.@~>"}
     ```
 
 1. **Render Complete** - A command that indicates that the render is complete
