@@ -8,9 +8,24 @@ Commercial laser engravers raster at speeds in excess of 200 inches/second (5080
 The above assumes dot encoding efficiency of 8 bits per pixel, or 255 grey levels (bit depth). Factors can that can improve bit encoding efficiency are lossless run-length encoding (RLE) and delta run length encoding (DRLE), with or without Huffman encoding. Factors that degrade pixel encoding efficiency include greater bit depth or "color channels", non-binary representations such as base64, ASCII85 or asciified numbers, interspersed command and control characters, and other padding or non-image data. Common Gcode representations degrade by a factor of 10:1 or worse. 
 
 ##Design Goals
+Here for discussion and listed in no particular order:
 
-We refer to a 'render' as a single image rastered onto some surface by a laser cutter operating in engraving mode. A render has 2 phases:
+- Support Laser/CNC controllers with limited image memory, and therefore require a streaming protocol
 
-Render setup - set 'header' parameters used by the rending process
-Render image - the actual image engraving process
-These two specifications may be together in the same file, or may be delivered separately. Obviously the setup must precede the image specification.
+- Ideally we could stream a BMP or PNG or other losslessly encodes file directly to the controller, taking advantage of compression methods already used in those files
+
+- Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities ac controller may have, and potentially for a capabilities discovery mechanism to allow the CAM to optimally utilize the capabilities of the controller.
+
+- Support communications in ASCII only (7 bit) formats as some communication channels are not frienly to raw binary communication.
+
+- Support interjection of runtime machine controls such as feedhold and resume.
+
+- Require as little translation from common image formats to streaming protocol formats as possible. Specifically, we are looking at [BMP](https://en.wikipedia.org/wiki/BMP_file_format) and [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image file formats.
+
+Some vocabulary - mostly taken from the BMP and PNG formats
+
+- `Image` - the image data itself
+- `Image header` - metadata describing the image, but not the rendering operation
+- `Render` or rendering operation - a single raster image lasered onto some surface
+- `Render header` - metadata describing the rendering operation, but not the image
+
