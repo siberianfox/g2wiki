@@ -43,7 +43,8 @@ The protocol consists of three parts that are sent as different data elements in
   - Unit vector setting horizontal (X) and vertical (Y) directions from start (values must be +1 or -1)
   - Direction - unidirectional or bidirectional (unidirectional to eliminate machine backlash at high bit resolutions)
   - Overscan amount - mm in X
-  - Maximum velocities - `F word` for X and Y movement. Controller may run slower to adjust for comm or other limitations 
+  - Maximum velocities - Separate `F words` for X and Y movement. Controller may run slower to adjust for comm or other limitations 
+  - Maximum image line characters. [3]
 
 1. Image Header - Image metadata. Should come from file header and be immutable:
   - Width of the bitmap in pixels (X dimension)
@@ -63,7 +64,10 @@ The protocol consists of three parts that are sent as different data elements in
 Notes:
 
 - [1] We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
+
 - [2] We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
+
+- [3] The CAM tells the controller the maximum number of ASCII characters it will send in an image line. If the controller cannot handle this amount it should send an error and the number it can handle.
  
 
 ###Full Protocol
