@@ -54,6 +54,11 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Maximum image line characters. This parameter allows the CAM to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this amount it should send an error and the number of characters it can handle.
 
+Example JSON representation
+```json
+{"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"overs":5.0,"vel":10000,"chars":254}}
+```
+
 1. **Image Header** - Image metadata. Should come from file header and be immutable:
 
   - Width of the bitmap in pixels (X dimension)
@@ -76,18 +81,4 @@ The protocol consists of four parts that are sent as different data elements in 
 1. **Render Complete** - A command that indicates that the render is complete
   - TBD - something like a Gcode G80 to end a canned cycle
  
-####JSON Representation
-
-1. Render Header - defines the setup parameters for the render, including:
-  - Origin location of the image (image corner)
-  - Unit vector setting horizontal (X) and vertical (Y) directions from start (values must be +1 or -1)
-  - Scan - unidirectional or bidirectional (unidirectional to eliminate machine backlash at high bit resolutions)
-  - Overscan amount - mm in X
-  - Maximum velocities - in mm/min - separate `F words` for X and Y movement. [3]
-  - Maximum image line characters. [4]
-
-```json
-{"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"ovscan":5.0,"vel"}
-```
-
-###Full Protocol
+###Protocol Extensions
