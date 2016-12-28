@@ -97,6 +97,6 @@ The protocol consists of four parts that are sent as different data elements in 
     ```
 
 1. **Render Complete** - A command that indicates that the render is complete
-  - TBD - something like a Gcode G80 to end a canned cycle
+  - Something like JSON tag `{"iend":true}` or a Gcode G80 to end a canned cycle (TBD)
  
 ###Protocol Extensions
