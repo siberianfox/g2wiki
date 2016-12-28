@@ -61,6 +61,6 @@ Notes:
 
 - [1] We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
 - [2] We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
-- 
+ 
 
 ###Full Protocol
