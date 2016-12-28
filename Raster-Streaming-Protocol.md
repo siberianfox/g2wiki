@@ -28,7 +28,7 @@ Some vocabulary - mostly taken from the BMP and PNG formats
 - `Image` - the image data itself
 - `Image header` - metadata describing the image, but not the rendering operation
 - `Render` or rendering operation - a single raster image lasered onto some surface
-- `Render header` - metadata describing the rendering operation, but not the image
+- `Render header` - metadata to set up the rendering operation
 
 ### MVP Protocol
 The MVP protocol is limited to the following assumptions
@@ -37,9 +37,20 @@ The MVP protocol is limited to the following assumptions
 
 The protocol consists of three parts that are sent as different data elements in the following order
 
-1. Render Header - defines the parameters for the render, including:
+1. Render Header - defines the setup parameters for the render, including:
   - Starting location of the image (image corner)
   - Unit vector setting horizontal (X) and vertical (Y) directions from start (values must be +1 or -1)
-  - 
+  - Direction - unidirectional or bidirectional (unidirectional to eliminate machine backlash at high bit resolutions)
+  - Overscan amount - mm in X
+  - Maximum velocities - `F word` for X and Y movement. Controller may run slower to adjust for comm or other limitations 
+
+1. Image Header - Image metadata. Should come from file header and be immutable:
+  - Width of the bitmap in pixels (X dimension)
+  - Height of the bitmap in pixels (Y dimension)
+  - Number of bits per pixel - typically 8, but may be 16 for increased resolution [1]
+ 
+
+Notes:
+  [1] We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
 
 ###Full Protocol
