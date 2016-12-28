@@ -84,9 +84,14 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Send one line at a time, or as partial lines if line lengths or memory constraints dictate
 
-  - Image data is encoded in ASCII using ASCII85 transform. ASCII85 expands binary data 25% (5 bytes per 4) and is used predominantly in PDF and other renders, as opposed to base64 which expands 33% (3 into 4). 
+  - Image data is encoded in ASCII using the [ZeroMQ version (Z85) of the base-85 transform (aka ascii85)](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (5 bytes per 4) and is used predominantly in PDF and other renders, as opposed to base64 which expands 33% (3 into 4). The ZeroMQ base-85 encoding algorithm is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters, it can be safely carried as a JSON string value.
 
-  - Example JSON representation:
+  - Example JSON representation of 64 pixels of image data. 92 bytes (including LF) is about 70% packing efficiency
+    ```json
+{"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!O<DJ+*.@~>"}
+    ```
+
+  - Example JSON representation of 200 pixels of image data. 92 bytes (including LF) is about 70% packing efficiency
     ```json
 {"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!O<DJ+*.@~>"}
     ```
