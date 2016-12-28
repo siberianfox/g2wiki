@@ -12,7 +12,7 @@ Here for discussion and listed in no particular order:
 
 - Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
 
-- Support a baseline protocol that is as simple as possible (`MVP` aka minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
+- Support a baseline MVP protocol that is as simple as possible (minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
 
 - Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if binary capabilities are available.
 
