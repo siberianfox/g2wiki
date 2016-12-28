@@ -26,6 +26,7 @@
 
 **Discussion Topics**
 
+1. [ ] [Raster Streaming Prototol](Raster-Streaming-Protocol)
 1. [ ] [g2core REST Interface](g2core-REST-Interface)
 1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [G2 3DP Dialect](g2dialect)
