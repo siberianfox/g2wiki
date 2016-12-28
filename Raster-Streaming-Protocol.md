@@ -10,11 +10,11 @@ The above assumes dot encoding efficiency of 8 bits per pixel, or 255 grey level
 ##Design Goals
 Here for discussion and listed in no particular order:
 
-- Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This therefore suggests a streaming protocol.
+- Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
 
-- Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities ac controller may have, and potentially for a capabilities discovery mechanism to allow the CAM to optimally utilize the capabilities of the controller.
+- Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities a controller may have. Also allow for an inspection mechanism to allow the CAM to query and optimally utilize the capabilities of a given controller (capabilities negotiation).
 
-- Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication.
+- Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if the setup supports it.
 
 - Support interjection of runtime machine controls such as feedhold and resume.
 
