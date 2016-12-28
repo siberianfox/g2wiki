@@ -67,7 +67,7 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Number of bits per pixel - typically 8, but may be 16 for increased resolution. We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
 
-  - Compression - MVP uses BI_BITFIELDS only, no pixel array compression supported 
+  - Compression - MVP uses uncompressed bitfield (BI_BITFIELDS == 0) only, no pixel array compression is supported 
 
   - Horizontal resolution (X) in pixels/meter (Multiply DPI by 39.3701)
 
@@ -77,12 +77,19 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Example JSON representation:
     ```json
-{"ihdr":{"dimx":1000,"dimy":0,"bpp":8,"comp":0,"resx":11811,"resy":11811,"size":424242}}
+{"ihdr":{"dimx":1000,"dimy":1000,"bpp":8,"comp":0,"resx":11811,"resy":11811,"size":424242}}
     ```
 
-
 1. **Pixel Array** - Image contents
-  - Sent one line at a time, or as partial lines if line lengths or memory constraints dictate
+
+  - Send one line at a time, or as partial lines if line lengths or memory constraints dictate
+
+  - Image data is encoded in ASCII using ASCII85 transform. ASCII85 expands binary data 25% (5 bytes per 4) and is used predominantly in PDF and other renders, as opposed to base64 which expands 33% (3 into 4). 
+
+  - Example JSON representation:
+    ```json
+{"i":"asdaskj329c8h498h93ha9ch"}
+    ```
 
 1. **Render Complete** - A command that indicates that the render is complete
   - TBD - something like a Gcode G80 to end a canned cycle
