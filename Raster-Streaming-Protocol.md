@@ -7,7 +7,7 @@ Commercial laser engravers raster at speeds in excess of 200 inches/second (5080
 
 The above assumes dot encoding efficiency of 8 bits per pixel, or 255 grey levels (bit depth). Factors can that can improve bit encoding efficiency are lossless run-length encoding (RLE) and delta run length encoding (DRLE), with or without Huffman encoding. Factors that degrade pixel encoding efficiency include greater bit depth or "color channels", non-binary representations such as base64, ASCII85 or asciified numbers, interspersed command and control characters, and other padding or non-image data. Common Gcode representations degrade by a factor of 10:1 or worse. 
 
-##Design Goals
+###Design Goals
 Here for discussion and listed in no particular order:
 
 - Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
@@ -22,6 +22,7 @@ Here for discussion and listed in no particular order:
 
 - Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
 
+##Protocol Design
 Some vocabulary - mostly taken from the BMP and PNG formats
 
 - `Image` - the image data itself
@@ -29,3 +30,16 @@ Some vocabulary - mostly taken from the BMP and PNG formats
 - `Render` or rendering operation - a single raster image lasered onto some surface
 - `Render header` - metadata describing the rendering operation, but not the image
 
+### MVP Protocol
+The MVP protocol is limited to the following assumptions
+
+- The image will be rendered in a perfect X/Y grid without skew or rotation. No Z movement is possible.
+
+The protocol consists of three parts that are sent as different data elements in the following order
+
+1. Render Header - defines the parameters for the render, including:
+  - Starting location of the image (image corner)
+  - Unit vector setting horizontal (X) and vertical (Y) directions from start (values must be +1 or -1)
+  - 
+
+###Full Protocol
