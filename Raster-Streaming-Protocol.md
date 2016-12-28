@@ -18,14 +18,14 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - Support interjection of runtime machine controls such as feed rate override, feedhold and resume in the MVP protocol.
 
-- Require as little translation from common image formats to streaming protocol formats as possible. Specifically, we are looking at [BMP](https://en.wikipedia.org/wiki/BMP_file_format) and [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image file formats.
+- Require minimal translation from common image formats to the streaming format. Specifically, we are concerned with images sources as raw, in-memory bitmaps, [PNG image files](https://en.wikipedia.org/wiki/Portable_Network_Graphics), and [BMP image files](https://en.wikipedia.org/wiki/BMP_file_format), to a lesser extent.
 
-- Get as close to the bit utilization in the raw BMP or PNG file as possible. Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
+- Approach the bit utilization in raw PNG or BMP files, and support simple run-length encoding of raw pixel image lines.
 
-- it may be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
+- It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
 ##Protocol Design
-Some vocabulary - mostly taken from the BMP and PNG formats
+Some vocabulary:
 
 - `Image Header` - metadata describing the image, but not the rendering operation
 - `Pixel Array` - the image data itself
@@ -33,10 +33,10 @@ Some vocabulary - mostly taken from the BMP and PNG formats
 - `Render` or rendering operation - a single raster image lasered onto some surface
 
 ### MVP Protocol
-The MVP protocol is limited to the following assumptions
+The MVP protocol is limited to the following assumptions:
 
 - The image will be rendered in a perfect X/Y grid without skew or rotation. No Z movement is possible
-- Only supports BMP files, and only those not using pixel array compression
+- A number of settings that could be expanded on are fixed - see protocol Extensions for a discussion of some of these
 
 The protocol consists of four parts that are sent as different data elements in order. This could be packaged as a canned cycle, or a "gcodeless" option like a REST API.
 
@@ -46,43 +46,45 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Unit vector setting horizontal (X) and vertical (Y) directions from start (values must be +1 or -1)
 
-  - Scan - unidirectional (1) or bidirectional (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high bit resolutions.
+  - Scan - unidirectional (1) or bidirectional-CAM (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high bit resolutions. Bidirectional-CAM will scan in two directions. The CAM program is responsible for reversing the pixel ordering the 'return' lines. [See also note 1].
 
   - Overscan amount - mm in X that the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
 
   - Maximum velocities - Separate `F words` for X and Y movement in mm/minute. The controller will attempt to hit these speeds but may run slower to adjust for communications throttling or other machine limitations.
 
-  - Maximum image line characters. This parameter allows the CAM to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this amount it should send an error and the number of characters it can handle.
+  - Maximum characters. This parameter allows the CAM to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
 
   - Example JSON representation:
     ```json
 {"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"overs":5.0,"velx":10000,"vely":1000,"chars":254}}
     ```
 
-1. **Image Header** - Image metadata. Should come from file header and be immutable:
+[Note 1]: Beyond MVP, Bidirectional-CNC would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
+
+1. **Image Header** - contains metadata about the image itself:
 
   - Width of the bitmap in pixels (X dimension)
 
   - Height of the bitmap in pixels (Y dimension)
 
-  - Number of bits per pixel - typically 8, but may be 16 for increased resolution. We wanted to keep to BMP and PNG standard bit depths, which are 1, 2, 4, 8, 16, and 32 
+  - Horizontal resolution (X) in pixels per inch (DPI)
 
-  - Compression - MVP uses uncompressed bitfield (BI_BITFIELDS == 0) only, no pixel array compression is supported 
+  - Vertical resolution (Y) in pixels per inch (DPI)
 
-  - Horizontal resolution (X) in pixels/meter (Multiply DPI by 39.3701)
+  - Bit depth: Number of bits per pixel - typically 8, but may be 16 for increased monochrome resolution. We suggest keeping to PNG and BMP standard bit depths, which are 1, 2, 4, 8, 16, and 32.
 
-  - Vertical resolution (Y) in pixels/meter (Multiply DPI by 39.3701)
+  - Compression - MVP uses (0) for uncompressed bitfield, (1) for run-length encoding compression (no Huffman in MVP). It might also be useful to consider (2) for X-A delta run-length encoding as per PNG.
 
-  - Size of the raw bitmap data (including padding). We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
+  - Size of the raw bitmap data in binary bytes, after encoding is applied. (This might not be necessary for MVP.)
 
   - Example JSON representation:
     ```json
-{"ihdr":{"dimx":1000,"dimy":1000,"bpp":8,"comp":0,"resx":11811,"resy":11811,"size":424242}}
+{"ihdr":{"dimx":1000,"dimy":1000,"resx":300,"resy":300,"bits":8,"comp":0,"size":424242}}
     ```
 
 1. **Pixel Array** - Image contents
 
-  - Send one line at a time, or as partial lines if line lengths or memory constraints dictate
+  - Send as many bytes as fit conveniently in a single transmission. Image content lines to not need to correspond to raster lines (and most likely won;t if the image source is PNG, which works in 'chunks'). 
 
   - Image data is encoded in ASCII using the [ZeroMQ version (Z85) of the base-85 transform (aka ascii85)](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renders, as opposed to base64 which expands 33% (3 into 4). The ZeroMQ base-85 encoding algorithm is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters, it can be safely carried as a JSON string value.
 
