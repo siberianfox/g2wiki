@@ -10,15 +10,15 @@ The above assumes dot encoding efficiency of 8 bits per pixel, or 255 grey level
 ##Design Goals
 Here for discussion and listed in no particular order:
 
-- Support Laser/CNC controllers with limited image memory, and therefore require a streaming protocol
-
-- Ideally we could stream a BMP or PNG or other losslessly encodes file directly to the controller, taking advantage of compression methods already used in those files
+- Support Laser/CNC controllers with limited image memory, and therefore require a streaming protocol.
 
 - Support a protocol that is as simple as possible (MVP, or minimum viable protocol?), but allow for extensibility for additional capabilities ac controller may have, and potentially for a capabilities discovery mechanism to allow the CAM to optimally utilize the capabilities of the controller.
 
-- Support communications in ASCII only (7 bit) formats as some communication channels are not frienly to raw binary communication.
+- Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication.
 
 - Support interjection of runtime machine controls such as feedhold and resume.
+
+- Ideally we could stream a [BMP](https://en.wikipedia.org/wiki/BMP_file_format) or [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image files directly to the controller, taking advantage of compression methods already used in those files.
 
 - Require as little translation from common image formats to streaming protocol formats as possible. Specifically, we are looking at [BMP](https://en.wikipedia.org/wiki/BMP_file_format) and [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image file formats.
 
