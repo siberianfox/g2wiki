@@ -54,10 +54,10 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Maximum image line characters. This parameter allows the CAM to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this amount it should send an error and the number of characters it can handle.
 
-Example JSON representation
-```json
+  - Example JSON representation:
+    ```json
 {"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"overs":5.0,"vel":10000,"chars":254}}
-```
+    ```
 
 1. **Image Header** - Image metadata. Should come from file header and be immutable:
 
