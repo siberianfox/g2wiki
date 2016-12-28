@@ -38,7 +38,7 @@ The MVP protocol is limited to the following assumptions
 - The image will be rendered in a perfect X/Y grid without skew or rotation. No Z movement is possible
 - Only supports BMP files, and only those not using pixel array compression
 
-The protocol consists of three parts that are sent as different data elements in the following order
+The protocol consists of four parts that are sent as different data elements in order. This could be packaged as a canned cycle, or a "gcodeless" option like a REST API.
 
 1. Render Header - defines the setup parameters for the render, including:
   - Starting location of the image (image corner)
@@ -58,10 +58,10 @@ The protocol consists of three parts that are sent as different data elements in
   - Vertical resolution (Y) in pixels/meter (Multiply DPI by 39.3701)
 
 1. Pixel Array - Image contents
-  - Sent one line at a time, or as partial lines in line lengths or memory constraints dictate
+  - Sent one line at a time, or as partial lines if line lengths or memory constraints dictate
 
 1. Render Complete - A command that indicates that the render is complete
-  - TBD
+  - TBD - something like a Gcode G80 to end a canned cycle
 
 Notes:
 
