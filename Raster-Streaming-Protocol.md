@@ -20,7 +20,7 @@ Here for discussion and listed in no particular order:
 
 - Require as little translation from common image formats to streaming protocol formats as possible. Specifically, we are looking at [BMP](https://en.wikipedia.org/wiki/BMP_file_format) and [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) image file formats.
 
-- Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
+- Get as close to the bit utilization in the raw BMP or PNG file as possible. Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
 
 ##Protocol Design
 Some vocabulary - mostly taken from the BMP and PNG formats
