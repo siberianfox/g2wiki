@@ -56,7 +56,7 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Example JSON representation:
     ```json
-{"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"overs":5.0,"vel":10000,"chars":254}}
+{"rhdr":{"orgx":0,"orgy":0,"dirx":1,"diry":-1,"scan":1,"overs":5.0,"velx":10000,"vely":1000,"chars":254}}
     ```
 
 1. **Image Header** - Image metadata. Should come from file header and be immutable:
