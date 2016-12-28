@@ -40,7 +40,7 @@ The MVP protocol is limited to the following assumptions
 
 The protocol consists of four parts that are sent as different data elements in order. This could be packaged as a canned cycle, or a "gcodeless" option like a REST API.
 
-1. Render Header - defines the setup parameters for the render, including:
+1. **Render Header** - defines the setup parameters for the render, including:
 
   - Origin location of the image (image corner, assumes machine already homed and coordinate system is selected)
 
@@ -54,7 +54,7 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Maximum image line characters. This parameter allows the CAM to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this amount it should send an error and the number of characters it can handle.
 
-1. Image Header - Image metadata. Should come from file header and be immutable:
+1. **Image Header** - Image metadata. Should come from file header and be immutable:
 
   - Width of the bitmap in pixels (X dimension)
 
@@ -70,10 +70,10 @@ The protocol consists of four parts that are sent as different data elements in 
 
   - Size of the raw bitmap data (including padding). We're not sure we need the size of the raw bitmap data, but it's available in BMP and could be useful
 
-1. Pixel Array - Image contents
+1. **Pixel Array** - Image contents
   - Sent one line at a time, or as partial lines if line lengths or memory constraints dictate
 
-1. Render Complete - A command that indicates that the render is complete
+1. **Render Complete** - A command that indicates that the render is complete
   - TBD - something like a Gcode G80 to end a canned cycle
  
 ####JSON Representation
