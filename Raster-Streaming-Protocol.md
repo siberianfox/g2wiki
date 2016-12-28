@@ -22,6 +22,8 @@ Here for discussion and listed in no particular order:
 
 - Get as close to the bit utilization in the raw BMP or PNG file as possible. Ideally we could stream BMP or PNG image files directly to the controller, taking advantage of compression methods already used in those files.
 
+- it may be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
+
 ##Protocol Design
 Some vocabulary - mostly taken from the BMP and PNG formats
 
