@@ -93,34 +93,36 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
-##Protocol Extensions
+#Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
 ### On-board Upsampling 
-Currently the LW rasterizer performs pixel upsampling - i.e. run N laser passes to get a pixel of the right size given the beam width of the laser. This requires redundant transmission that can be eliminated by moving upsampling operatins to the controller.
+Currently the LW rasterizer performs pixel upsampling - i.e. run N laser passes to get a pixel of the right size given the beam width of the laser. This requires redundant transmission that can be eliminated by moving upsampling operations to the controller.
 
 ### Transformation Matrix
-Provide full matrix capability for image translation, scaling, rotation and flip. This is an extension of the rudimentary matrix provided in MVP. See: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
+Provide full transformation matrix capability for image translation, scaling, rotation and flip. This is an extension of the optional, rudimentary matrix provided in MVP. See: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
 
 ### Arbitrary Scan Lines 
 The MVP protocol only handles horizontal scan lines. This item adds diagonal and arbitrary (curves) scan lines.
 
-### Support for Native Dot Resolution
+### Support Native Dot Resolution
 Support a special value for native dot resolution as an option for vres and hres to better support direct rasterization of dithering and special grey scale patterns. A 'dot' is a the smallest resolvable step of the CNC machine.
 
 ### Bidirectional Scanning
-Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily long for large machines and high resolutions. 
+Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily large for large machines and high resolutions. 
 
-### Huffman Encoding
-Introduce Huffman encoding for better compression.
+### DRLE and Huffman Encoding
+Introduce 1D (PNG X-A) delta run length encoding and Huffman encoding for run-length for better image compression.
 
 ### 2D Compression Algorithms
 Introduce 2d compression such as PNG Up, Average, and Paeth. The latter requires additional buffer storage similar to the scanning and upsampling items.
 
 ### Note on Items That May Require Larger Image Buffers
-There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. In ordinary circumstances the machine would not need an entire line, but here are some situations where that is not true:
+There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. Most images cases, however, should fit in a reasonable (4K, 8K, 16K) buffer without tiling the image.
 
-- Bi-directional scanning - the pixel in the return scan must be played out from "right to left"
+For most operations the controller would not need an entire line, but here are some situations where that is not true:
+
 - Pixel-to-dot upsampling, where multiple passes of the laser are required to achieve a pixel of sufficient size
+- Bi-directional scanning - where the pixel in the return scan must be played out from "right to left"
 - 2D compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
  
