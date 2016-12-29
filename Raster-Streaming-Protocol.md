@@ -4,17 +4,17 @@ _This page is for discussion of an efficient laser raster streaming protocol for
 The protocol uses a canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. In the example below the JSON is split across multiple lines for readability. In practice all JSON is on unbroken line(s). JSON may also be delivered as multiple unbroken lines if necessary to observe line length constraints.
 
 ```c++
-G81.1 ({"matr":{"x":1,"y":1},
+G81.1 ({"horiz":3000},
+       {"vert":2500},
+       {"hres":300},
+       {"vres":300},
+       {"feed":10000},
        {"scan":1},
        {"over":5.0},
-       {"feed":10000},
-       {"chars":254},
-       {"wide":3000},
-       {"high":2500},
-       {"hppi":300},
-       {"vppi":300},
        {"bits":8},
        {"comp":0},
+       {"matr":{"x":1,"y":1},
+       {"chars":254},
        })
 <~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
 <~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
@@ -25,27 +25,24 @@ G80 (optional)
 
 Parameters:
 
-- `matr` - The transformation matrix to be applied to the image. In MVP this is merely a unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
+- `horiz` - Horizontal width of the bitmap in pixels (X dimension)
+- `vert` - Vertical height of the bitmap in pixels (Y dimension)
+- `hres` - Horizontal pixel resolution (X) in pixels per inch (PPI)
+- `vres` - Vertical pixel resolution (Y) in pixels per inch (PPI)
+- `feed` - Maximum velocity is an `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
 
 - `scan` - Unidirectional (1) or bidirectional-reversed (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. [See also note 2].
 
 - `over` - Overscan in the width dimension, as millimeters. Distance the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
 
-- `feed` - Maximum velocity is an `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
-
-- `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
-
-- `wide` - Width of the bitmap in pixels (X dimension)
-
-- `high` - Height of the bitmap in pixels (Y dimension)
-
-- `hppi` - Horizontal pixel resolution (X) in pixels per inch (PPI)
-
-- `vppi` - Vertical pixel resolution (Y) in pixels per inch (PPI)
-
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
 
 - `comp` - Compression - MVP uses (0) for uncompressed bitfield, (1) for run-length encoding compression without Huffman encoding. (for MVP). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding as per PNG for further encoding efficiency.
+
+- `matr` - The transformation matrix to be applied to the image. In MVP this is merely a unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
+
+- `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
+
 
 Notes:
 
