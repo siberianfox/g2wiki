@@ -33,7 +33,7 @@ Parameters:
 - `vres` - Vertical pixel resolution (Y) in pixels per millimeter (PPM)
 - `feed` - Maximum velocity (F word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps and traverses will run at machine maximum (G0) and are not specified in this header.
 
-- `over` - Millimeters of overscan in the width dimension. Distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
+- `over` - Millimeters of horizontal overscan. This is the distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
 
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
 
