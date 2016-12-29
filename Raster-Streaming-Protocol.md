@@ -59,7 +59,7 @@ The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#Zero
 
 1. The MVP assumes all measurements are in metric units, and does not observe G20/G21 settings. If this is a problem the protocol can observe the units setting, but we felt this would cause more problems that it would solve.
 
-1. There are no controls for laser power int he header settings. It is assumed that 0 is off and the maximum level of the bit depth is full ON. If this is an oversimplification laser power settings can be added to the setup header.
+1. There are no controls for laser power in the header settings. It is assumed that 0 is off and the maximum level of the bit depth is full ON. If this is an oversimplification laser power settings can be added to the setup header.
 
 # Details
 Some vocabulary:
