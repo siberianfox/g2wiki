@@ -37,7 +37,7 @@ Parameters:
 
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
 
-- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per PNG for further encoding efficiency.
+- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency.
 
 - `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left. Ref: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3
 
