@@ -47,6 +47,7 @@ The protocol consists of four parts that are sent as different data elements in 
 1. **Render End** - a command to end the rendering operation
 
 #### Render Header
+Elements:
 
   - Unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
 
@@ -68,18 +69,13 @@ The protocol consists of four parts that are sent as different data elements in 
 [Note 2]: Beyond MVP, Bidirectional-straight would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
 
 #### Image Header
-Contains metadata about the image itself:
+Elements:
 
   - Width of the bitmap in pixels (X dimension)
-
   - Height of the bitmap in pixels (Y dimension)
-
   - Horizontal resolution (X) in pixels per inch (PPI)
-
   - Vertical resolution (Y) in pixels per inch (PPI)
-
   - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
-
   - Compression - MVP uses (0) for uncompressed bitfield, (1) for run-length encoding compression without Huffman encoding. (for MVP). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding as per PNG for further encoding efficiency.
 
   - Example JSON representation:
@@ -88,10 +84,9 @@ Contains metadata about the image itself:
     ```
 
 #### Pixel Array
+Send as many bytes as fit conveniently in a single transmission (ASCII line). Image content lines do not need to correspond to raster lines - i.e. pixels for adjacent lines can be carried in the same transmission.
 
-  - Send as many bytes as fit conveniently in a single transmission (ASCII line). Image content lines do not need to correspond to raster lines - i.e. pixels for adjacent lines can be carried in the same transmission.
-
-  - Image data is encoded in ASCII using the [ZeroMQ version (Z85) of the base-85 transform (aka ascii85)](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). The ZeroMQ base-85 encoding algorithm is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters, it can be safely carried as a JSON string value.
+  - Image data is encoded in ASCII using the [ZeroMQ (Z85) version of base-85 (aka ascii85)](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). The ZeroMQ base-85 encoding algorithm is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters, it can be safely carried as a JSON string value.
 
   - Example JSON 93 bytes total (including LF) carrying 64 pixels of image data - about 45% expansion over binary
     ```json
