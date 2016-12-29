@@ -8,8 +8,8 @@ In the example below the JSON is split across multiple lines for readability. In
 ```c++
 G81.1 ({"horiz":3000},
        {"vert":2500},
-       {"hres":300},
-       {"vres":300},
+       {"hres":11.811},
+       {"vres":11.811},
        {"feed":10000},
        {"scan":1},
        {"over":5.0},
@@ -30,8 +30,8 @@ Parameters:
 
 - `horiz` - Horizontal width of the bitmap in pixels (X dimension)
 - `vert` - Vertical height of the bitmap in pixels (Y dimension)
-- `hres` - Horizontal pixel resolution (X) in pixels per inch (PPI)
-- `vres` - Vertical pixel resolution (Y) in pixels per inch (PPI)
+- `hres` - Horizontal pixel resolution (X) in pixels per millimeter (PPM)
+- `vres` - Vertical pixel resolution (Y) in pixels per millimeter (PPM)
 - `feed` - Maximum velocity (f word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in this header.
 
 - `scan` - Unidirectional scan (1) or bidirectional-reversed scan (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. Default if omitted is unidirectional. See Details for further discussion.
