@@ -1,7 +1,9 @@
 _This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters._
 
 ##Summary
-The protocol uses a canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. In the example below the JSON is split across multiple lines for readability. In practice all JSON is on unbroken line(s). JSON may also be delivered as multiple unbroken lines if necessary to observe line length constraints.
+The protocol uses a Gcode canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. An example of a MVP (minimum viable protocol?) is provided below. The control header is designed to be extensible to accommodate more sophisticated CNC controllers and capabilities. Some options are discussed in the Protocol Extensions below, but are left out of the MVP discussion.
+
+In the example below the JSON is split across multiple lines for readability. In practice all JSON is on unbroken line(s). JSON may also be delivered as multiple unbroken lines if necessary to observe line length constraints by using a G81.2 as a parameter continuation line.
 
 ```c++
 G81.1 ({"horiz":3000},
@@ -30,33 +32,33 @@ Parameters:
 - `vert` - Vertical height of the bitmap in pixels (Y dimension)
 - `hres` - Horizontal pixel resolution (X) in pixels per inch (PPI)
 - `vres` - Vertical pixel resolution (Y) in pixels per inch (PPI)
-- `feed` - Maximum velocity is an `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
+- `feed` - Maximum velocity (f word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in this header.
 
-- `scan` - Unidirectional (1) or bidirectional-reversed (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. [See also note 2].
+- `scan` - Unidirectional scan (1) or bidirectional-reversed scan (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines.
 
-- `over` - Overscan in the width dimension, as millimeters. Distance the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
+- `over` - Overscan in the width dimension, in millimeters. Distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
 
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
 
-- `comp` - Compression - MVP uses (0) for uncompressed bitfield, (1) for run-length encoding compression without Huffman encoding. (for MVP). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding as per PNG for further encoding efficiency.
+- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per PNG for further encoding efficiency.
 
-- `matr` - The transformation matrix to be applied to the image. In MVP this is merely a unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
+- `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left.
 
-- `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
+- `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
 
-`pixel array` - These lines send as many bytes as fit conveniently in a single transmission (ASCII line) as stated in the chars parameter. The text lines do not correspond to raster lines, and they can carry image data that spans multiple lines. Image line breaks are handled by the controller counting pixels, not by looking for line ends.
+`pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters. 
 
-The pixel array image data is ASCII encoded using [ascii85]((https://en.wikipedia.org/wiki/Ascii85)). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per the encoding standard, all lines begin with `<~` and end with `~>`, so no additional line delimiter characters are required.
+There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for line ends.
 
-The ZeroMQ (Z85) version of ascii85 is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters, it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
+The pixel array data is ASCII encoded using [ascii85]((https://en.wikipedia.org/wiki/Ascii85)). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, all lines begin with `<~` and end with `~>`, so no additional line delimiter characters are required.
 
-`cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete. If a G80 or any other Gcode modal group 1 commnad (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
+The ZeroMQ (Z85) version of ascii85 is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
 
-####Notes:
+`cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
 
-1. The origin of the render is at the current location of the tool, and is not specified in the cycle parameters 
+#### Notes
 
-1. Beyond MVP, Bidirectional-straight would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
+1. The origin of the image is at the current location of the tool, and is not specified in the cycle parameters 
 
 # Details
 ##Discussion
@@ -73,7 +75,7 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - Consider [lw.rasterizer](https://github.com/lautr3k/lw.rasterizer) as a starting point for protocol generation (Q: is this right, or is there some other program we should be considering?)
 
-- Support a baseline MVP protocol that is as simple as possible (minimum viable protocol?), but allow for extensibility for higher efficiencies and controller capabilities. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
+- Support a baseline MVP protocol that is as simple as possible, but allow for extensibility for higher efficiencies and controller capabilities. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
 
 - Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if binary capabilities are available.
 
@@ -87,7 +89,6 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
-##Protocol Design
 Some vocabulary:
 
 - `Pixel` - a dot in the image - the smallest resolution of the image; e.g. 300 PPI
@@ -95,14 +96,13 @@ Some vocabulary:
 - `Pixel Array` - the image data itself
 - `Render` or rendering operation - a single raster image lasered onto some surface
 
-### MVP Protocol
-The MVP protocol should cover most common use cases. See Protocol Extensions for a discussion of additional features that may become useful.
-
-
-
 ###Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
 - Provide a full matrix definition for image translation, scaling, rotation and flip. This is an extension of the XY unit vector into 3 dimensions
 
 - Provide more flexibility in the definition of the scan line. Move in Z, curves.
+
+- Support a special value for native dot resolution as an option for vres and hres. A single step of the CNC machine.
+
+- Beyond MVP, Bidirectional-straight scan would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
