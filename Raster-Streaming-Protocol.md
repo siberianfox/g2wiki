@@ -27,11 +27,11 @@ Parameters:
 
 - `matr` - The transformation matrix to be applied to the image. In MVP this is merely a unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
 
-  - `scan` - Unidirectional (1) or bidirectional-reversed (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. [See also note 2].
+- `scan` - Unidirectional (1) or bidirectional-reversed (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. [See also note 2].
 
-  - `over` - Overscan in the width dimension, as millimeters. Distance the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
+- `over` - Overscan in the width dimension, as millimeters. Distance the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
 
-  - `feed` - Maximum velocity is an `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
+- `feed` - Maximum velocity is an `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
 
 - `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
 
