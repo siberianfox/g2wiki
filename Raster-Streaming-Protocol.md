@@ -29,22 +29,24 @@ The goal of the raster protocol is to support laser raster operations as fast as
 ##Protocol Design
 Some vocabulary:
 
-- `Pixel` - a dot in the image - the smallest resolution of the image - e.g. 300 PPI
-- `Dot` - a step on the machine - the smallest resolution of the laser engraver machine - e.g. 1200 DPI
+- `Pixel` - a dot in the image - the smallest resolution of the image; e.g. 300 PPI
+- `Dot` - a step on the machine - the smallest resolution of the laser engraver machine; e.g. 1200 DPI
 - `Image Header` - metadata describing the image, but not the rendering operation
 - `Pixel Array` - the image data itself
 - `Render Header` - metadata to set up the rendering operation
 - `Render` or rendering operation - a single raster image lasered onto some surface
 
 ### MVP Protocol
-The MVP protocol is limited to the following assumptions:
+The MVP protocol should cover most common use cases. See Protocol Extensions for a discussion of additional features that may become useful.
 
-- The image will be rendered in an X/Y grid - no Z movement is possible
-- A number of settings that could be expanded are fixed - see Protocol Extensions for discussion
+The protocol consists of four parts that are sent as different data elements in order.
 
-The protocol consists of four parts that are sent as different data elements in order. This could be packaged as a canned cycle, or a "gcodeless" option like a REST API.
+1. **Render Header** - defines the setup parameters for the rendering operation
+1. **Image Header** - contains metadata about the image itself
+1. **Pixel Array** - contains the image contents
+1. **Render End** - a command to end the rendering operation
 
-1. **Render Header** - defines the setup parameters for the render, including:
+#### Render Header
 
   - Unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
 
@@ -65,7 +67,8 @@ The protocol consists of four parts that are sent as different data elements in 
 
 [Note 2]: Beyond MVP, Bidirectional-straight would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
 
-1. **Image Header** - contains metadata about the image itself:
+#### Image Header
+Contains metadata about the image itself:
 
   - Width of the bitmap in pixels (X dimension)
 
@@ -84,7 +87,7 @@ The protocol consists of four parts that are sent as different data elements in 
 {"ihdr":{"dimx":1000,"dimy":1000,"resx":300,"resy":300,"bits":8,"comp":0,"size":424242}}
     ```
 
-1. **Pixel Array** - Image contents
+#### Pixel Array
 
   - Send as many bytes as fit conveniently in a single transmission (ASCII line). Image content lines do not need to correspond to raster lines - i.e. pixels for adjacent lines can be carried in the same transmission.
 
@@ -100,21 +103,14 @@ The protocol consists of four parts that are sent as different data elements in 
 {"i":"<~9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G<+EV:2F!,O<DJ+*.@<*K0@<6L(Dfc0Ec5e;DffZ(EZee.Bl.9pF0AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKYi(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIal(DId<j@<r@:F%a+D5'~>"}
     ```
 
-1. **Render End** - A command that indicates that the render is complete
+#### Render End
+A command to end the render. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete. If the REND is encountered during the render the render will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced.
+
   - Something like JSON tag `{"rend":true}` or a Gcode G80 to end a canned cycle (TBD)
-  - In most cases this command should not be needed as the controller counts pixels based on the image dimensions, and terminates the render when complete. If the REND is encountered during the render the render will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced.
 
 ###Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
-0. **General Extensions**
+- Provide a full matrix definition for image translation, scaling, rotation and flip. This is an extension of the XY unit vector into 3 dimensions
 
-1. **Render Header Extensions**
-
-1. **Image Header Extensions**
-
-  - Size of the raw bitmap data in binary bytes, after encoding is applied.
-
-1. **Pixel Array Extensions** 
-
-
+- Provide more flexibility in the definition of the scan line. Move in Z, curves.
