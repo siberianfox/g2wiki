@@ -1,8 +1,61 @@
 _This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters._
 
 ##Summary
-The protocol uses a canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation.
+The protocol uses a canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. In the example below the JSON is split across multiple lines for readability. In practice all JSON is on unbroken line(s). JSON may also be delivered as multiple unbroken lines if necessary to observe line length constraints.
 
+```json
+G81.1 ({"matrix":{"x":1,"y":1},
+       {"scan":1},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       {"":},
+       })
+<~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
+<~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
+<~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
+<~;sdkjwiuiweiwcbhc[82h94hrpwivubepch29whveruivpisdh~>
+G80 (optional)
+```
+Parameters:
+
+- `matrix`. The transformation matrix to be applied to the image. In MVP this is merely a unit vector setting horizontal (X) and vertical (Y) directions from origin (See Note 1). Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2)
+
+  - `scan` - unidirectional (1) or bidirectional-reversed (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. [See also note 2].
+
+  - Overscan amount - mm in X that the head will travel beyond the print area to allow for acceleration / deceleration to not require compensation.
+
+  - Maximum velocities - An `F word` for X and Y movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in the render header.
+
+  - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle.
+
+  - Example JSON representation:
+    ```json
+{"rhdr":{"unitx":1,"unity":-1,"scan":1,"overs":5.0,"velx":10000,"vely":1000,"chars":254}}
+    ```
+
+[Note 1]: The origin of the render is at the current location of the tool, and is not specified in the render header.
+
+[Note 2]: Beyond MVP, Bidirectional-straight would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
+
+#### Image Header
+Elements:
+
+  - Width of the bitmap in pixels (X dimension)
+  - Height of the bitmap in pixels (Y dimension)
+  - Horizontal resolution (X) in pixels per inch (PPI)
+  - Vertical resolution (Y) in pixels per inch (PPI)
+  - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
+  - Compression - MVP uses (0) for uncompressed bitfield, (1) for run-length encoding compression without Huffman encoding. (for MVP). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding as per PNG for further encoding efficiency.
+
+  - Example JSON representation:
+    ```json
+{"ihdr":{"dimx":1000,"dimy":1000,"resx":300,"resy":300,"bits":8,"comp":0,"size":424242}}
 
 
 
@@ -23,6 +76,8 @@ The goal of the raster protocol is to support laser raster operations as fast as
 - Support a baseline MVP protocol that is as simple as possible (minimum viable protocol?), but allow for extensibility for higher efficiencies and controller capabilities. Also allow for an inspection mechanism to allow the CAM to query and utilize capabilities of a given controller (capabilities negotiation).
 
 - Support communications in ASCII only (7 bit) formats as some communication channels are not friendly to raw binary communication. Allow for binary transfer if binary capabilities are available.
+
+- Deal with the case that many image lines will contain more pixel information than can be consumed in a serial line sent to the CNC controller.
 
 - Support interjection of runtime machine controls such as feed rate override, feedhold and resume in the MVP protocol.
 
