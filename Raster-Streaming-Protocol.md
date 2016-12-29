@@ -42,7 +42,8 @@ Parameters:
 
 - `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per PNG for further encoding efficiency.
 
-- `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left.
+- `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left. Ref: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3
+
 
 - `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
 
