@@ -1,4 +1,4 @@
-_This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters._
+_This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters. See [LaserWeb Issue #99](https://github.com/LaserWeb/LaserWeb4/issues/99)__
 
 ##Summary
 The protocol uses a Gcode canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. An example of a MVP (minimum viable protocol?) is provided below. The control header is designed to be extensible to accommodate more sophisticated CNC controllers and capabilities. Some options are discussed in the Protocol Extensions below, but are left out of the MVP discussion.
@@ -31,27 +31,27 @@ Parameters:
 - `vert` - Vertical height of the bitmap in pixels (Y dimension)
 - `hres` - Horizontal pixel resolution (X) in pixels per millimeter (PPM)
 - `vres` - Vertical pixel resolution (Y) in pixels per millimeter (PPM)
-- `feed` - Maximum velocity (f word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in this header.
+- `feed` - Maximum velocity (F word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps and traverses will run at machine maximum (G0) and are not specified in this header.
 
-- `over` - Overscan in the width dimension, in millimeters. Distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
+- `over` - Millimeters of overscan in the width dimension. Distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
 
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
 
-- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency.
+- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other, more advanced encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency.
 
-- `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left. Ref: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3
+- `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY setting horizontal (X) and vertical (Y) directions from origin. An array value of [1,0,0,1,0,0] sets a raster with a lower left origin. A value of [1,0,0,-1,0,0] flips Y for an upper left origin. If this parameter is omitted the default is[1,0,0,1,0,0] (lower left). Beyond MVP the matrix can be used to perform scaling, rotations, and translation. See  https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
 
-- `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
+- `chars` - Maximum ASCII characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
 
 `pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters. 
 
 There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for line ends.
 
-The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, all lines begin with `<~` and end with `~>`, so no additional line delimiter characters are required.
+The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, The first line begins with `<~` and the last line ends with `~>`. All lines start with a semicolon comment character `;` for parsing purposes.
 
 The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#ZeroMQ_Version_.28Z85.29) is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
 
-`cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
+`cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete, and has a "file end" as part of the ascii85 encoding. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
 
 #### Notes
 
@@ -93,31 +93,34 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
-## Details
-
-
-
 ##Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
-- Provide a full matrix definition for image translation, scaling, rotation and flip. This is an extension of the XY unit vector into 3 dimensions
+### On-board Upsampling 
+Currently the LW rasterizer performs pixel upsampling - i.e. run N laser passes to get a pixel of the right size given the beam width of the laser. This requires redundant transmission that can be eliminated by moving upsampling operatins to the controller.
 
-- Provide more flexibility in the definition of the scan line. Move in Z, curves.
+### Transformation Matrix
+Provide full matrix capability for image translation, scaling, rotation and flip. This is an extension of the rudimentary matrix provided in MVP. See: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
 
-- Support a special value for native dot resolution as an option for vres and hres. A single step of the CNC machine.
+### Arbitrary Scan Lines 
+The MVP protocol only handles horizontal scan lines. This item adds diagonal and arbitrary (curves) scan lines.
 
-- Beyond MVP, Bidirectional-straight scan would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
+### Support for Native Dot Resolution
+Support a special value for native dot resolution as an option for vres and hres to better support direct rasterization of dithering and special grey scale patterns. A 'dot' is a the smallest resolvable step of the CNC machine.
 
+### Bidirectional Scanning
+Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily long for large machines and high resolutions. 
 
-       {"scan":1},
+### Huffman Encoding
+Introduce Huffman encoding for better compression.
 
-- `scan` - Unidirectional scan (1) or bidirectional-reversed scan (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. Default if omitted is unidirectional. See Details for further discussion.
+### 2D Compression Algorithms
+Introduce 2d compression such as PNG Up, Average, and Paeth. The latter requires additional buffer storage similar to the scanning and upsampling items.
 
-### Scan Parameter and Memory Constraints
+### Note on Items That May Require Larger Image Buffers
 There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. In ordinary circumstances the machine would not need an entire line, but here are some situations where that is not true:
 
 - Bi-directional scanning - the pixel in the return scan must be played out from "right to left"
-- Pixel-to-dot scaling, where multiple passes of the laser are required to achieve a pixel of sufficient size
-- Advanced compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
+- Pixel-to-dot upsampling, where multiple passes of the laser are required to achieve a pixel of sufficient size
+- 2D compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
  
-It is possible to achieve bi-directional rastering without storing lines (case 2) if the rasterizer reverses the image byte order for the return line such that it can be played out in the right-to-left move.
