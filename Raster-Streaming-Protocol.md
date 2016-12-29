@@ -50,9 +50,9 @@ Parameters:
 
 There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for line ends.
 
-The pixel array data is ASCII encoded using [ascii85]((https://en.wikipedia.org/wiki/Ascii85)). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, all lines begin with `<~` and end with `~>`, so no additional line delimiter characters are required.
+The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, all lines begin with `<~` and end with `~>`, so no additional line delimiter characters are required.
 
-The ZeroMQ (Z85) version of ascii85 is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
+The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#ZeroMQ_Version_.28Z85.29) is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
 
 `cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
 
