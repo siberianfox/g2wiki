@@ -35,9 +35,9 @@ Parameters:
 
 - `over` - Millimeters of horizontal overscan. This is the distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
 
-- `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
+- `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may larger for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPMs may also be set at the dot limit of the laser, typically on the order of 50 to 100 DPM (~1200 - 2400 DPI).
 
-- `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other, more advanced encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency.
+- `comp` - Optional: Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding, X-A delta run-length encoding. and other more advanced encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency. See Protocol Extensions. Defaults to uncompressed if omitted.
 
 - `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY setting horizontal (X) and vertical (Y) directions from origin. An array value of [1,0,0,1,0,0] sets a raster with a lower left origin. A value of [1,0,0,-1,0,0] flips Y for an upper left origin. If this parameter is omitted the default is[1,0,0,1,0,0] (lower left). Beyond MVP the matrix can be used to perform scaling, rotations, and translation. See  https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
 
@@ -45,13 +45,13 @@ Parameters:
 
 `pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters. 
 
-There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for line ends.
+There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for ASCII line ends.
 
-The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). ASCII85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, The first line begins with `<~` and the last line ends with `~>`. All lines start with a semicolon comment character `;` for parsing purposes.
+The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). Ascii85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, The first line begins with `<~` and the last line ends with `~>`. In this protocol we additionally require that all pixel array lines start with a semicolon comment character `;` for parsing purposes.
 
 The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#ZeroMQ_Version_.28Z85.29) is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
 
-`cycle end` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete, and has a "file end" as part of the ascii85 encoding. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
+`cancel cycle` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete, and has a "file end" as part of the ascii85 encoding. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
 
 #### Notes
 
