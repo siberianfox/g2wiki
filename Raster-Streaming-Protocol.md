@@ -11,7 +11,6 @@ G81.1 ({"horiz":3000},
        {"hres":11.811},
        {"vres":11.811},
        {"feed":10000},
-       {"scan":1},
        {"over":5.0},
        {"bits":8},
        {"comp":0},
@@ -34,8 +33,6 @@ Parameters:
 - `vres` - Vertical pixel resolution (Y) in pixels per millimeter (PPM)
 - `feed` - Maximum velocity (f word) for laser movement in mm/minute. The controller will attempt to hit this speed but may run slower to adjust for communications throttling or other machine or runtime limitations. Horizontal scan line steps will run at machine maximum (G0) and are not specified in this header.
 
-- `scan` - Unidirectional scan (1) or bidirectional-reversed scan (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. Default if omitted is unidirectional. See Details for further discussion.
-
 - `over` - Overscan in the width dimension, in millimeters. Distance the head will travel beyond the horizontal print area to allow for acceleration / deceleration to not require compensation.
 
 - `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may be 16 for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPI may also be set at the dot limit of the laser, typically about 1200 DPI. FYI: PNG and BMP standard bit depths are 1, 2, 4, 8, 16, and 32 (and 64 in some cases).
@@ -43,7 +40,6 @@ Parameters:
 - `comp` - Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding and X-A delta run-length encoding and other encodings as per PNG for further encoding efficiency.
 
 - `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY unit vector setting horizontal (X) and vertical (Y) directions from origin. Values of 1 or -1 specify straight lines and may be used to accomplish vertical or horizontal flips. Non-integer values are used to specify diagonal scan lines. The unit vector must obey this equality: 1 = sqrt(x^2 + y^2). If this parameter is omitted the default is 1,1, resulting in a raster with a lower left origin. Use 1,-1 for upper left. Ref: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3
-
 
 - `chars` - Maximum characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
 
@@ -99,14 +95,7 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 ## Details
 
-### Scan Parameter and Memory Constraints
-There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. In ordinary circumstances the machine would not need an entire line, but here are some situations where that is not true:
 
-- Bi-directional scanning - the pixel in the return scan must be played out from "right to left"
-- Pixel-to-dot scaling, where multiple passes of the laser are required to achieve a pixel of sufficient size
-- Advanced compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
- 
-It is possible to achieve bi-directional rastering without storing lines (case 2) if the rasterizer reverses the image byte order for the return line such that it can be played out in the right-to-left move.
 
 ##Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
@@ -118,3 +107,17 @@ This section is a parking lot for additional things that may be considered beyon
 - Support a special value for native dot resolution as an option for vres and hres. A single step of the CNC machine.
 
 - Beyond MVP, Bidirectional-straight scan would be another scan mode where the CNC controller is responsible for reversing the return line. This is only possible if the controller has sufficient memory to store two or more arbitrarily long scan lines. This mode is useful for unpacking PNG Up, Average, and Paeth compression filters.
+
+
+       {"scan":1},
+
+- `scan` - Unidirectional scan (1) or bidirectional-reversed scan (2). Unidirectional mode can be used to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional-reversed will scan in two directions. The rasterizer program is responsible for reversing the pixel ordering in the 'return' lines. Default if omitted is unidirectional. See Details for further discussion.
+
+### Scan Parameter and Memory Constraints
+There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. In ordinary circumstances the machine would not need an entire line, but here are some situations where that is not true:
+
+- Bi-directional scanning - the pixel in the return scan must be played out from "right to left"
+- Pixel-to-dot scaling, where multiple passes of the laser are required to achieve a pixel of sufficient size
+- Advanced compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
+ 
+It is possible to achieve bi-directional rastering without storing lines (case 2) if the rasterizer reverses the image byte order for the return line such that it can be played out in the right-to-left move.
