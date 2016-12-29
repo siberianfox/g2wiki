@@ -1,5 +1,11 @@
 _This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters._
 
+##Summary
+The protocol uses a canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation.
+
+
+
+
 ##Discussion
 The challenge is to efficiently transmit a bitmapped image to a CNC controller with limited memory and processing capabilities. If the CNC controller were unconstrained the problem would reduce to look like a regular 2d printer, where all or most of the image fits in memory and can be processed at memory access speeds. So the raster protocol needs to support 'printing' while only holding a very small, partial image - in many cases not even one complete raster line.
 
