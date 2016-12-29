@@ -1,4 +1,4 @@
-_This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters. See [LaserWeb Issue #99](https://github.com/LaserWeb/LaserWeb4/issues/99)__
+_This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters. See [LaserWeb Issue #99](https://github.com/LaserWeb/LaserWeb4/issues/99)_
 
 ##Summary
 The protocol uses a Gcode canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. An example of a MVP (minimum viable protocol?) is provided below. The control header is designed to be extensible to accommodate more sophisticated CNC controllers and capabilities. Some options are discussed in the Protocol Extensions below, but are left out of the MVP discussion.
