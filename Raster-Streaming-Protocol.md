@@ -89,7 +89,7 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - Require minimal translation from common image formats to the streaming format. Specifically, we are concerned with images sources as raw, in-memory bitmaps, [PNG image files](https://en.wikipedia.org/wiki/Portable_Network_Graphics), and [BMP image files](https://en.wikipedia.org/wiki/BMP_file_format), to a lesser extent.
 
-- Approach the bit utilizations found in raw PNG, BMP or other lossless files, and support simple run-length encoding of raw pixel image lines.
+- Approach the bit efficiencies found in raw PNG, BMP or other lossless files, and support simple run-length encoding of raw pixel image lines.
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
