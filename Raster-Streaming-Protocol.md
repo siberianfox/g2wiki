@@ -35,7 +35,7 @@ Parameters:
 
 - `over` - Millimeters of horizontal overscan. This is the maximum distance the head will be allowed to travel beyond the horizontal print area to allow for acceleration / deceleration.
 
-- `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may larger for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPMs may also be set at the dot limit of the laser, typically on the order of 50 to 100 DPM (~1200 - 2400 DPI).
+- `bits` - Bit depth: Number of bits per pixel - typically 8, for 255 grey levels, but may larger for increased monochrome resolution. A bit-depth of 1 may also be used to allow the rasterizer to perform dithering or other half-toning algorithms. In this case the PPMs may also be set at the dot limit of the laser, typically on the order of 50 to 200 DPM (~1200 - 4800 DPI).
 
 - `comp` - Optional: Compression - Uncompressed bitfield (0) or run-length encoding without Huffman encoding (1). Beyond MVP it may be useful to consider Huffman encoding, X-A delta run-length encoding. and other more advanced encodings as per [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for further encoding efficiency. See Protocol Extensions. Defaults to uncompressed if omitted.
 
