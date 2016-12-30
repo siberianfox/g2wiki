@@ -11,9 +11,9 @@ The tool table can hold offsets for up to 32 tools, 1-32. Tool zero is not used.
 `T12 M6`<br>
 `M6 T12`  (order is unimportant)
 
-Each tool can have offset values programmed in the tool table. Typically offsets are for the Z axis to compensate for different tool lengths. This function is sometimes referred to as Cutter Length Compensation. However, offsets can be applied in any of the 6 dimensions XYZABC. This supports using tool offset for applications such as changing between multiple extruders on the same carriage. For this reason use the term 'tool offset' instead of 'tool length offset'.
+Each tool can have offset values programmed in the tool table. Typically offsets are for the Z axis to compensate for different tool lengths or positions. This function is sometimes referred to as Cutter Length Compensation. However, offsets can be applied in any of the 6 dimensions XYZABC. This supports using tool offset for applications such as changing between multiple extruders on the same carriage. The term 'tool offset' is therefore used instead of 'tool length offset'.
 
-To use a tool length offset, program: G43 Hn, where the H number is the desired tool number in the tool table. It is expected that all entries in this table will be positive. The H number may be zero, or the H word may be missing altogether; in either case an offset value of zero will be used. 
+To use a tool offset program: G43 Hn, where the H number is the desired tool number in the tool table. It is expected that all entries in this table will be positive. The H number may be zero, or the H word may be missing altogether; in either case an offset value of zero will be used. 
 
 ## Gcode Commands
 
@@ -28,7 +28,7 @@ To use a tool length offset, program: G43 Hn, where the H number is the desired 
 	[G49](#g49-cancel-tool-offset) | | Cancel tool offset | 
 
 ### T Select Tool
-Select the tool using Tn, where `n` is an index into the tool table, from 1 to 16. Selecting a tool out-of-range will result in a T_WORD_IS_INVALID error.
+Select the tool using Tn, where `n` is an index into the tool table, from 1 to 32. Selecting a tool out-of-range will result in a T_WORD_IS_INVALID error (181).
 
 ### M6 Change Tool
 M6 moves the selected tool to be the tool in use. M6 does set the tool offset to the current tool G43 Pn is required (this is how Gcode works, so we did it this way, too).
@@ -80,7 +80,7 @@ The tool table can be examined using the following commands:
 These will return the tool table entry, as so:<br>
 `{"r":{"tt1":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0}},"f":[1,0,8]}`
 
-There is no command to read all too table entries (no uber-group)
+There is no command to read all tool table entries (no uber-group)
 
 Tool table 0 is reserved, cannot be set, and is always all zeros
 
