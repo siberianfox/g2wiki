@@ -41,15 +41,15 @@ Parameters:
 
 - `matr` - Optional: The transformation matrix to be applied to the image. In MVP this is merely an XY setting horizontal (X) and vertical (Y) directions from origin. An array value of [1,0,0,1,0,0] sets a raster with a lower left origin. A value of [1,0,0,-1,0,0] flips Y for an upper left origin. Beyond MVP the matrix can be used to perform scaling, rotations, and translation. See [Postscript Language Reference Manual](https://www.adobe.com/products/postscript/pdfs/PLRM.pdf), section 4.3.3 for details. Defaults to lower left origin ([1,0,0,1,0,0]) if omitted.
 
-- `chars` - Maximum ASCII characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length is TBD).
+- `chars` - Maximum ASCII characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length in case of error is TBD).
 
 `pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters. 
 
 There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for ASCII line ends.
 
-The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). Ascii85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). As per ascii85, The first line begins with `<~` and the last line ends with `~>`. In this protocol we additionally require that all pixel array lines start with a semicolon comment character `;` for parsing purposes.
+The pixel array data is ASCII encoded using [ascii85](https://en.wikipedia.org/wiki/Ascii85). Ascii85 expands binary data 25% (4 binary bytes into 5 ascii bytes) and is used predominantly in PDF and other renderers, as opposed to base64 which expands 33% (3 into 4). In ascii85 the first line begins with `<~` and the last line ends with `~>`. The raster streaming protocol additionally requires that all pixel array lines start with a semicolon comment character `;` for parsing purposes.
 
-The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#ZeroMQ_Version_.28Z85.29) is recommended, as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
+The protocol uses the [ZeroMQ (Z85) version of ascii85](https://rfc.zeromq.org/spec:32/Z85/) ([see also](https://en.wikipedia.org/wiki/Ascii85#ZeroMQ_Version_.28Z85.29)), as it is a string-safe variant of base85. By avoiding the double-quote, single-quote, and backslash characters it can be safely carried as a JSON string value, enabling REST or even command line operation of the protocol.
 
 `cancel cycle` - G80. In most cases this command should not be needed as the controller counts pixels based on the image dimensions and terminates the render when complete, and has a "file end" as part of the ascii85 encoding. If a G80 or any other Gcode modal group 1 command (e.g. G0, G1) is encountered during the render the cycle will be terminated at that point. If for some reason the render did not end (e.g. file error), an end can be forced using G80.
 
@@ -60,6 +60,8 @@ The [ZeroMQ (Z85) version of ascii85](https://en.wikipedia.org/wiki/Ascii85#Zero
 1. The MVP assumes all measurements are in metric units, and does not observe G20/G21 settings. If this is a problem the protocol can observe the units setting, but we felt this would cause more problems that it would solve.
 
 1. There are no controls for laser power in the header settings. It is assumed that 0 is off and the maximum level of the bit depth is full ON. If this is an oversimplification laser power settings can be added to the setup header.
+
+1. Technically the canned cycle specification is a Gcode error because it does not contain an XYZ (or UVW) word. It's possible to insert one of the parameters, or use a dummy axis word (e.g. X0), but these are not great options. Also, the selection of G81.1 and G81.2 is arbitrary, and could be changed. Alternately, the cycle could be invoked with a user-defined Gcode, such as M103 and M103.1 for continuation lines.
 
 # Details
 Some vocabulary:
@@ -103,7 +105,7 @@ This section is a parking lot for additional things that may be considered beyon
 Currently the LW rasterizer performs pixel upsampling - i.e. run N laser passes to get a pixel of the right size given the beam width of the laser. This requires redundant transmission that can be eliminated by moving upsampling operations to the controller.
 
 ### Transformation Matrix
-Provide full transformation matrix capability for image translation, scaling, rotation and flip. This is an extension of the optional, rudimentary matrix provided in MVP. See: https://www.adobe.com/products/postscript/pdfs/PLRM.pdf, section 4.3.3 for details.
+Provide full transformation matrix capability for image translation, scaling, rotation and flip. This is an extension of the optional, rudimentary matrix provided in MVP. See [Postscript Language Reference Manual](https://www.adobe.com/products/postscript/pdfs/PLRM.pdf), section 4.3.3 for details.
 
 ### Arbitrary Scan Lines 
 The MVP protocol only handles horizontal scan lines. This item adds diagonal and arbitrary (curves) scan lines.
@@ -115,10 +117,10 @@ Support a special value for native dot resolution as an option for vres and hres
 Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily large for large machines and high resolutions. 
 
 ### DRLE and Huffman Encoding
-Introduce 1D (PNG X-A) delta run length encoding and Huffman encoding for run-length for better image compression.
+Introduce 1D delta run length encoding (PNG X-A) and Huffman encoding for run-length for better image compression.
 
 ### 2D Compression Algorithms
-Introduce 2d compression such as PNG Up, Average, and Paeth. These require additional buffer storage similar to the scanning and upsampling items.
+Introduce 2d compression such as PNG Up, Average, and Paeth. These require additional buffer storage similar to the scanning and upsampling items. See [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) for details.
 
 ### Note on Items That May Require Larger Image Buffers
 There are two cases for memory constraints: (1) the CNC controller does not have sufficient memory to store an entire image line, (2) it does. For case 2, a Lasersaur with a 48" bed running at 1200 DPI with a bit depth of 16 would require 115,200 bytes to store an image line. Most images cases, however, should fit in a reasonable (4K, 8K, 16K) buffer without tiling the image.
