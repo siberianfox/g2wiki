@@ -31,6 +31,7 @@
 1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [G2 3DP Dialect](g2dialect)
 1. [ ] [Digital DRO](Digital-DRO)
+1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 
 **Developer Pages**
 
