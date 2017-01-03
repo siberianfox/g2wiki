@@ -18,9 +18,15 @@ What we don't support as Marlin (you have to use the g2core protocol for these):
 
 Also, this marlin support is a temporary option to ease transition, and will be deprecated once it becomes too difficult to support. This depreciation, once it has been scheduled, will be announced in the g2core changelog and on social media.
 
-## Communications protocol
+## Communications protocol and gcode handling
 
-There are a few concepts that convert more-or-less from g2core and Marlin:
+Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case mixed.
+
+On Marlin, motion of the extruder is a mixture of `E` and `T` words, where on g2core `A`, `B`, and `C` are currently used. (This is planned to change to using spindle-based controls.)
+
+On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed).
+
+There are a few other concepts that convert more-or-less from g2core and Marlin:
 
 | g2core | Marlin | Notes |
 | :---: | :---: | --- |
@@ -46,6 +52,7 @@ There are a few concepts that convert more-or-less from g2core and Marlin:
     - `Snnn` indicates the temperature in celsius
     - Wait for the heat bed with `M190 Sxxx` (for heating only) or `M190 Rxxx` (for both heating and cooling)
       - Like `M109`, `M190` will also set the target and print the temperature of the extruder and bed every second until while it's waiting.
+      - `M190` is also cancelled with `M108`.
 
     
 
