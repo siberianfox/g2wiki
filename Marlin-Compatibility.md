@@ -53,8 +53,15 @@ There are a few other concepts that convert more-or-less from g2core and Marlin:
     - Wait for the heat bed with `M190 Sxxx` (for heating only) or `M190 Rxxx` (for both heating and cooling)
       - Like `M109`, `M190` will also set the target and print the temperature of the extruder and bed every second until while it's waiting.
       - `M190` is also cancelled with `M108`.
+- [ ] **`M105` - temperature polling**
+  - Response is in the format: `ok T:18.2 /0.0 B:16.6 /0.0 @:0 B@:0`
+    - `T:nnn` contains the temperature of the "current" extruder (in celsius).
+    - ` /nnn` contains the set temperature of the given extruder (in celsius).
+    - `B:nnn` contains the bed temperature (in celsius).
+    - ` /nnn` after that is the set temperature of the bed (in celsius).
+    - `@:nnn` is the power output level (0-PID_MAX, which appears to generally be 255).
+    - `B@:nnn` is the bed power output level (0-MAX_BED_POWER, which appears to generally be 255).
 
-    
 
 ## Unsupported
 
