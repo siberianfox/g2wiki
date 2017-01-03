@@ -68,5 +68,6 @@ There are a few other concepts that convert more-or-less from g2core and Marlin:
   - For stock Marlin, the output format of `M109` and `M190` is the same as `M105`, except it adds the `W:nnn` wait time.
 
 
+
 ## Unsupported
 
