@@ -66,7 +66,11 @@ There are a few other concepts that convert more-or-less from g2core and Marlin:
     - `E:nnn` is the [extruder number](https://github.com/Ultimaker/Ultimaker2Marlin/blob/master/Marlin/Marlin_main.cpp#L1427)
     - `W:nnn` is the seconds of wait time left (and may be `?`) for the temperature to be considered "stable".
   - For stock Marlin, the output format of `M109` and `M190` is the same as `M105`, except it adds the `W:nnn` wait time.
-
+- [ ] **`G28` homing**
+  - In marlin, `G28` (no decimal) is homing, and the values are possibly provided without numbers, and the number (if provided) are ignored: `G28 X Y Z`
+  - If no axes are provided, then it will home *all axes*.
+  - As a side-effect, it [clears the auto bed-levelling rotation](https://github.com/MarlinFirmware/Marlin/blob/7bea5e5e5701de0b90b6c422c954337ce860bb0f/Marlin/Marlin_main.cpp#L3414), and sets the "ative toolhead" to `T0`.
+  - Will home Z first *if* Z homes up, then X, then Y. Otherwise it'll home X, then Y, then Z.
 
 
 ## Unsupported
