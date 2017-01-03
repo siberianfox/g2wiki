@@ -28,8 +28,15 @@ There are a few concepts that convert more-or-less from g2core and Marlin:
 | `{"he1st":210}` | `M104 S201 T1` | Set temperature of extruder 1 to `210`. |
 | `{"he1st":n}` | `M105` | Request the set temperature of extruder 1 (g2core) or current extruder and bed (Marlin). |
 | `Nxxx` (gcode) | `Nxxx`&nbsp;(gcode)&nbsp;`*`&nbsp;(checksum) | [Marlin supports a checksum, and has special requirements on line numbers.](http://reprap.org/wiki/G-code#Special_fields), where g2core accepts arbitrary line numbers and doesn't support a non-standard checksum. |
+| `{"out4":0.5}` | `M106 S128` | Set output on the fan (or generic PWM output `4` for g2core) to 50%. |
+
 
 ## Supported `Mxxx` codes
+
+- [ ] **`M104`, `M105`, `M109`, `M190`, `M108` - temperature control**
+  - On Marlin, you set the extruder temperature with a `M104 Snnn Tnnn`
+    - `Snnn` indicates the temperature
+    - `Tnnn` (optional) indicates the tool, with the first being `0`
 
 ## Unsupported
 
