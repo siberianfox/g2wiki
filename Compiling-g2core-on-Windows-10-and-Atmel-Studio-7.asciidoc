@@ -43,7 +43,9 @@ NOTE: At this point we have given up on VMware and switched to Parallels 12 Desk
 NOTE: If you are using Windows inside VMWare, please see the link:Troubleshooting#vmware-setup[VMWare Setup section of our Troubleshooting page].
 
 ## 32/64 Bits
-Go with 64 bit setup all the way if you can. Support is gradually disappearing for 32 bit packages and at some point your toolchain is likely to break if it has 32 bit components. The project is migrating to 64 bit only as the tools for 32 bit setups are starting to go away.
+Go with a 64 bit Windows, AS7, Git setup all the way if you can. Support is gradually disappearing for 32 bit packages, so this project is transitioning to 64 bit only configs. This is not our fault, as the tools for 32 bit setups are starting to go away.
+
+Don't confuse the bit widths for Windows 10 or the ARMs, the ARMs are still 32 bits and various toolchain elements mentioned below are labeled as 32 bits referring the ARM's bit width. 
 
 ## Disk Space
 Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2gore project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on the drive where the repo is, which _might not be `C:`_.
@@ -63,13 +65,13 @@ To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.
 
 ** It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio.
 
-*** Install the Smart ARM 32 architecture. You do not need tha 32 bit AVR architecture. If you want to also use this package to work on TinyG v8 you will need the  AVR8 bit architecture. The 32 bit toolchain is required even though the g2core project downloads its complete toolchain.
+*** Install the Smart ARM 32 architecture. You do not need tha 32 bit AVR architecture. If you want to also use this package to work on TinyG v8 you will need the  AVR8 bit architecture. The 32 bit toolchain is currently required even though the g2core project downloads its complete toolchain.
 
 *** We do not install the Atmel Studio Framework Code or Examples. You do NOT want this, as we don't use it, and it takes up a lot of space.
 
 ** Fire up AS7 for the first time 
 
-*** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. (We provide projects for you to use.)
+*** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. The g2core project provides Makefiles and project files for you to use.
 
 *** You **will** need the USB drivers when asked.
 
@@ -87,12 +89,12 @@ There are a few things you need to do make sure of once you have it installed
 **** Set `Startup Project` to Single Startup Project: `g2core`
 **** Unselect Motate in `Project Dependencies`
 **** Confirm or set `Project Build Order` to be g2core before Motate
-** Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Menu path is: Tools / Options / Text Editor / All Languages / Tabs. Chose the Insert Spaces option. Leave the tab spacing at 4.
+** Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Menu path is: Tools / Options / Text Editor / All Languages / Tabs. Choose the Insert Spaces option. Leave the tab spacing at 4.
 
 ## Git for Windows
 The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
 
-* Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 32 bit or 64 bit (version 2.10.0 at the time of this writing).
+* Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 64 bit is preferred (version 2.10.0 at the time of this writing).
 
 ** Option Dialog 1: Choose BASH (default, but any should work)
 
@@ -104,7 +106,7 @@ The project Makefiles rely on the `git` command, so Git for Windows needs to be 
 
 ** When it asks you if you want icons on your desktop you might want this to get Git Bash so you can debug the Windows environment (should it come to that).
 
-NOTE: The Makefiles also rely on the `curl` command that comes along with Git for Windows. If it weren't from that chicken-and-egg, then we could `curl` to get the "portable" zip-install of Git for Windows and you wouldn't have to do anything.
+NOTE: The Makefiles also rely on the `curl` command that comes along with Git for Windows. If it weren't for that chicken-and-egg, then we could `curl` to get the "portable" zip-install of Git for Windows and you wouldn't have to do anything.
 
 ## Cloning the git repository
 
@@ -161,6 +163,10 @@ To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto
 
 # Tips and Tricks
 This is a collection of random things we've foind help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
+
+- A common mistake is to not update the motate submodule. Whenever you pull from github be sure to run `git submodule update` from the comamnd line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have.
+
+- Whenever you pull from github you must CLEAN the g2core project. Run Clean or Rebuild to do this. Clean clears out the /bin and /build directories. In some cases the Windows configuration prevents this (permissions?) and those must be cleaned manually. It's OK to just delete the /bin and /build directories completely.
 
 - The ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
