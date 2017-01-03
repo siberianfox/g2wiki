@@ -63,8 +63,9 @@ There are a few other concepts that convert more-or-less from g2core and Marlin:
     - `B@:nnn` is the bed power output level (0-MAX_BED_POWER, which appears to generally be 255).
   - For Ultimaker Marlin, this differs from the response format of `M109` and `M190` of `T:101.9 E:0 W:1`
     - `T:nnn` is the same
-    - `E:nnn` is the [extruder number](https://github.com/Ultimaker/Ultimaker2Marlin/blob/master/Marlin/Marlin_main.cpp#L1429)
-    - `W:nnn` is the seconds of wait time left (and may be `?`) for the temperature to be considered "stable". 
+    - `E:nnn` is the [extruder number](https://github.com/Ultimaker/Ultimaker2Marlin/blob/master/Marlin/Marlin_main.cpp#L1427)
+    - `W:nnn` is the seconds of wait time left (and may be `?`) for the temperature to be considered "stable".
+  - For stock Marlin, the output format of `M109` and `M190` is the same as `M105`, except it adds the `W:nnn` wait time.
 
 
 ## Unsupported
