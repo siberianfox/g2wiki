@@ -158,6 +158,15 @@ NOTE: We try to eliminate all compiler errors and warnings from the project. How
 
 To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-G2-with-Windows[Flashing g2core with Windows] page.
 
+# Tips and Tricks
+This is a collection of random things we've foind help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
+
+- The ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
+
+- When firing up a new instance of AS7 you may need to disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, disconnect and reconnect.
+
+- If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
+
 # Troubleshooting Windows Configurations
 
 See the link:Troubleshooting#issues-with-compiling-on-windows[Issues with compiling on Windows] section of the Troubleshooting page.
