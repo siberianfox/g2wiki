@@ -43,7 +43,7 @@ NOTE: At this point we have given up on VMware and switched to Parallels 12 Desk
 NOTE: If you are using Windows inside VMWare, please see the link:Troubleshooting#vmware-setup[VMWare Setup section of our Troubleshooting page].
 
 ## 32/64 Bits
-Go with 64 bit setup all the way if you can. Support is gradually disappearing for 32 bit packages and at some point your toolchain is likely to break if it has 32 bit components.
+Go with 64 bit setup all the way if you can. Support is gradually disappearing for 32 bit packages and at some point your toolchain is likely to break if it has 32 bit components. The project is migrating to 64 bit only as the tools for 32 bit setups are starting to go away.
 
 ## Disk Space
 Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on your C: drive (virtual or otherwise). The g2gore project itself downloads the entire tool chain (in g2/Motate/Tools/win32) so it's also pretty big - currently almost 800Mb. You should have at least 1 Gb free on the drive where the repo is, which _might not be `C:`_.
@@ -65,7 +65,7 @@ To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.
 
 *** Install the Smart ARM 32 architecture. You do not need tha 32 bit AVR architecture. If you want to also use this package to work on TinyG v8 you will need the  AVR8 bit architecture. The 32 bit toolchain is required even though the g2core project downloads its complete toolchain.
 
-*** We do not install the Atmel Studio Framework Code or Examples. You do NOT want this, as we don;t use it, and it takes up a lot of space.
+*** We do not install the Atmel Studio Framework Code or Examples. You do NOT want this, as we don't use it, and it takes up a lot of space.
 
 ** Fire up AS7 for the first time 
 
