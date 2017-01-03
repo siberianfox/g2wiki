@@ -34,9 +34,14 @@ There are a few concepts that convert more-or-less from g2core and Marlin:
 ## Supported `Mxxx` codes
 
 - [ ] **`M104`, `M105`, `M109`, `M190`, `M108` - temperature control**
-  - On Marlin, you set the extruder temperature with a `M104 Snnn Tnnn`
-    - `Snnn` indicates the temperature
+  - On Marlin, you set the extruder temperature (and return immediately) with a `M104 Snnn Tnnn`
+    - `Snnn` indicates the temperature in celsius
     - `Tnnn` (optional) indicates the tool, with the first being `0`
+  - On Marlin, if you wish to wait until the extruder is at temperature, change `M104` to `M109`.
+    - Cancel the wait with `M108` (with no further words).
+  - On Marlin, the bed temperature is set with `M140 Snnn`, and it does NOT wait for the bed to heat up.
+    - `Snnn` indicates the temperature in celsius
+    
 
 ## Unsupported
 
