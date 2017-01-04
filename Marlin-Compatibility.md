@@ -2,7 +2,7 @@
 
 ### Why have a Marlin Compatibility mode?
 
-For 3D printing, there is a large number of utilities that are written to speak to [Marlin](https://github.com/MarlinFirmware/Marlin) or various other mostly-compatible variants. Even though there are several things that don't translate between Marlin and g2core, we can make an effort to at least accept gcode sliced for Marlin, and to be able to conditionally speak the Marlin protocol.
+For 3D printing, there are a large number of utilities that are written to speak to [Marlin](https://github.com/MarlinFirmware/Marlin) or various other mostly-compatible variants. Even though there are several things that don't translate between Marlin and g2core, we can make an effort to at least accept gcode sliced for Marlin, and to be able to conditionally speak the Marlin protocol.
 
 This gives the authors of those various utilities (assuming that they are still being maintained) some time to support the g2core protocol and gcode flavor.
 
