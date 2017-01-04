@@ -20,7 +20,11 @@ The Marlin compatibility mode is not a full 100% work-alike for Marlin, although
 * Setup of motors, heaters, etc.
 * Tuning PID, limit switch polarity, etc.
 
-## Communications Protocol and Gcode Handling
+## Marlin Serial Communications Protocol
+
+--- to be completed ---
+
+## Marlin Gcode Handling
 
 Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case mixed.
 
