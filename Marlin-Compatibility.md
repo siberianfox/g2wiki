@@ -2,23 +2,25 @@
 
 ### Why have a Marlin Compatibility mode?
 
-For 3D printing, there are a large number of utilities that are written to speak to [Marlin](https://github.com/MarlinFirmware/Marlin) or various other mostly-compatible variants. Even though there are several things that don't translate between Marlin and g2core, we can make an effort to at least accept gcode sliced for Marlin, and to be able to conditionally speak the Marlin protocol.
+For 3D printing there are a large number of utilities that are written to speak to [Marlin](https://github.com/MarlinFirmware/Marlin) or various other mostly-compatible variants. Even though there are several things that don't translate between Marlin and g2core, we can make an effort to at least accept gcode sliced for Marlin, and to be able to conditionally speak the Marlin protocol.
 
-This gives the authors of those various utilities (assuming that they are still being maintained) some time to support the g2core protocol and gcode flavor.
+This makes g2core advanced 3d printing capabilities, such as instant feedhold and 6th order acceleration management  accessible to upstream tools that speak Marlin. It also gives the authors of those various utilities (assuming that they are still being maintained) a migration path to native g2core support should they wish to do so.
 
-### What it's not
+Marlin compatibility support is viewed as a transition option to ease migration, and may be declared "done" once it's achieved broad enough support. 
 
-This will support the most-used gcode and protocol of Marlin, and nothing more.
+### What It Is
 
-What we don't support as Marlin (you have to use the g2core protocol for these):
+The Marlin compatibility mode supports the most-used gcode/mcodes used in Marlin, and enough of the Marlin communications protocol to be able to drive a g2core 3d printer from a Marlin sender. Supported codes are listed on this page.
+
+### What It's Not
+
+The Marlin compatibility mode is not a full 100% work-alike for Marlin, although some additional commands may be added over time. You have to use the g2core protocol for these:
 
 * Configuration of the machine and various parameters
 * Setup of motors, heaters, etc.
 * Tuning PID, limit switch polarity, etc.
 
-Also, this marlin support is a temporary option to ease transition, and will be deprecated once it becomes too difficult to support. This depreciation, once it has been scheduled, will be announced in the g2core changelog and on social media.
-
-## Communications protocol and gcode handling
+## Communications Protocol and Gcode Handling
 
 Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case mixed.
 
