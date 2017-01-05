@@ -109,6 +109,8 @@ image:Windows-Open-in-Git-Shell.png[GitHub Desktop Windows: Open in Git Shell,24
 Explanation::
 The `Motate/` directory isn't *just* a directory, it's a https://git-scm.com/book/en/v2/Git-Tools-Submodules[submodule]. This means that it's *contents* are actually contained in a different git repo (located at https://github.com/synthetos/Motate) and you cannot simply commit changes to _that repo_ in _this repo_. All this repo contains is a reference (http://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html[SHA1]) to the commit in the Motate repo.
 
+WARNING: The "download zip file" capability of GitHub appears to ignore submodules. For that reason, it's recommended that you clone the repo instead of downloading it as a zip file. 
+
 Solution::
 After the first checkout, or after switching to an older branch from before Motate was a submodule you will need to run this command (from the G2Core repo clone directory, *not* the Motate directory):
 ```bash
