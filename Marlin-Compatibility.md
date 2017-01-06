@@ -42,7 +42,7 @@ There are a few concepts that convert more-or-less between g2core and Marlin, so
 
 ### Status report (SR) analog
 
-The Marlin communications protocol appears to be fairly simple, but also somewhat lossy. It's expected that requests (such as `M105`) can be ignored and time out on the host side.
+The Marlin communications protocol is fairly simple, but also somewhat lossy. It's expected that requests (such as `M105`) can be ignored and time out on the host side.
 
 There's also no clear indication as to what's "part of the tape" gcode and what's a polling request such as `M105`.
 
