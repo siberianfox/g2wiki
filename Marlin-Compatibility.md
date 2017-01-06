@@ -77,10 +77,62 @@ Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case
 
 On Marlin, motion of the extruder is a mixture of `E` and `T` words, where on g2core `A`, `B`, and `C` are currently used. (This is planned to change to using spindle-based controls.)
 
-On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed).
+On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed). In Marlin, G0 is [the same as G1](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L2930-L2962).
 
+## Marlin comment Handling
 
-## Supported `Mxxx` codes
+Generally, comments are handled the same way in Marlin and g2core.
+
+In Ultimaker2Marlin there is some header gcode comments in the form [`;FLAVOR:UltiGCode`](https://github.com/Ultimaker/Ultimaker2Marlin/blob/1dfce5af3e9ab960078c1e6664b1e01a31609946/Marlin/UltiLCD2_menu_print.cpp#L393), etc. Here's an example:
+```gcode
+;FLAVOR:UltiGCode
+;TIME:45010
+;MATERIAL:40112
+;MATERIAL2:0
+;NOZZLE_DIAMETER:0.4
+;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
+
+;LAYER_COUNT:240
+;LAYER:0
+M107
+G10
+G0 X60.763 Y31.538 Z0.27
+;TYPE:SKIRT
+```
+
+Even when exporting "RepRap" flavor gcode, Cura prints some of these:
+```gcode
+;FLAVOR:RepRap
+;TIME:16333
+;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
+...
+;LAYER_COUNT:120
+;LAYER:0
+```
+
+## Supported `Gxxx` and `Mxxx` codes (different from normal g2core behavior)
+
+- [ ] **`G0`**
+  - On Marlin, `G0` is the same as `G1`.
+
+- [ ] **`G28` - homing**
+  - In Marlin, `G28` (no decimal) is homing, and the values are possibly provided without numbers, and the number (if provided) are ignored: `G28 X Y Z`
+  - If no axes are provided, then it will home *all axes*.
+  - As a side-effect, it [clears the auto bed-levelling rotation](https://github.com/MarlinFirmware/Marlin/blob/7bea5e5e5701de0b90b6c422c954337ce860bb0f/Marlin/Marlin_main.cpp#L3414), and sets the "active toolhead" to `T0`.
+  - Will home Z first *if* Z homes up, then X, then Y. Otherwise it'll home X, then Y, then Z.
+
+- [ ] **`G29` - bed tramming**
+  - *Not suppored in Ultimaker2Marlin*
+  - There are two types of `G29` - "mesh bed leveling" and "auto bed leveling." Each takes different parameters. *Here we'll discuss "auto bed leveling" with `AUTO_BED_LEVELING_3POINT` compiled in only.*
+  - This will probe three points (internally stored and compiled-in as [`ABL_PROBE_PT_[123]_[XYZ]`](https://github.com/MarlinFirmware/Marlin/blob/182a1c949f27fd699d60cf971d88ecc3c8a7966d/Marlin/example_configurations/delta/generic/Configuration.h#L936-L941)), then activate bed tramming ("leveling").
+  - The three points are stored in the firmware, and `G29` starts a "canned cycle" much like homing.
+
+- [ ] **`G10`, `G11` - retract and unretract (prime) filament**
+  - Retracts or primes filament according to settings of `M207`.
+
+- [ ] **`M82`, `M83` - set extruder to absolute/relative mode**
+  - `M82` sets the `E` to be absolute, while `M83` makes it relative.
+  - *Not implemented in Ultimaker2Marlin, since E is volumetric and always effectively absolute and in volume.*
 
 - [ ] **`M104`, `M109`, `M140`, `M190`, `M108` - temperature control**
   - On Marlin, you set the extruder temperature (and return immediately) with a `M104 Snnn Tnnn`
@@ -112,14 +164,12 @@ On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'st
   - For stock Marlin, the output format of `M109` and `M190` is the same as `M105`, except it adds the `W:nnn` wait time.
   - Cura [parses](https://github.com/Ultimaker/Cura/blob/master/plugins/USBPrinting/USBPrinterOutputDevice.py#L492-L501) looking for `/T: *([0-9.]*)/` and `/B: *([0-9.]*)/` only, and the rest appears to be ignored.
 
-- [ ] **`G28` homing**
-  - In marlin, `G28` (no decimal) is homing, and the values are possibly provided without numbers, and the number (if provided) are ignored: `G28 X Y Z`
-  - If no axes are provided, then it will home *all axes*.
-  - As a side-effect, it [clears the auto bed-levelling rotation](https://github.com/MarlinFirmware/Marlin/blob/7bea5e5e5701de0b90b6c422c954337ce860bb0f/Marlin/Marlin_main.cpp#L3414), and sets the "active toolhead" to `T0`.
-  - Will home Z first *if* Z homes up, then X, then Y. Otherwise it'll home X, then Y, then Z.
+- [ ] **`M106`, `M107` - set fans speed/turn fan off**
+  - `M106` turns the fan indicated with `Px` to the speed indicated with `Snnn`, or 255 by default.
+    - `Snnn` has values for `nnn` of integers between 0 - 255, and is silently clipped to those values.
+  - `M017` turns off the fan indicated in `Px`.
 
-- [ ] **`G29` bed tramming**
-  - This will probe three (internally stored) points, then activate bed levelling
-
+- [ ] **`M117` - display on LCD**
+  - This is similar to the `MSG` mechanism in g2core, except it's intended for driving an LCD display.
 
 ## Unsupported
