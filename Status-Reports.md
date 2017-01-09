@@ -34,7 +34,7 @@ The following are available for all axes, XYZABC. Only the X axis values are sho
 	Request | Response | Description
 	---------|--------------|-------------
 	posx | x work position | X work position in current units (mm/inch) (posy, posz...)
-	mpox | x absolute position | X machine position in absolute coord system (mm/inch)
+	mpox | x absolute position | X machine position in absolute coord system, MM, with no offsets
 	g92x | offset | G92 origin offset for X axis
 	g54x | coord 1 offset | X axis G54 coordinate system offset
 	g55x | coord 2 offset | X axis G55 coordinate system offset
