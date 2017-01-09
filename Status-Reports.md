@@ -48,7 +48,7 @@ The following are available for all axes, XYZABC. Only the X axis values are sho
 Notes:
 
 1. {posx: ... through {posa:... are reported in the currently active Units mode (G20/G21), and also apply any offsets, including coordinate system selection, G92, and tool offsets. These are provided to drive digital readouts
-2. {mpox: ... through {mpoa:... are reported in millimeters, with no offsets (i.e. in canonical machine coordiantes) These are provided to drive graphical displays so they do not have to be aware of Gcode Units mode or any offsets in effect.
+2. {mpox: ... through {mpoa:... are reported in the machine's internal coordinate system (canonical machine) and will always be in millimeters with no offsets. These are provided to drive graphical displays so they do not have to be aware of Gcode Units mode or any offsets in effect.
 
 ## Text Mode Status Reports
 ### Text Mode On-Demand Status Reports
