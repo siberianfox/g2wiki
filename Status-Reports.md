@@ -33,8 +33,8 @@ The following are available for all axes, XYZABC. Only the X axis values are sho
 
 	Request | Response | Description
 	---------|--------------|-------------
-	posx | x work position | X work position in current units (mm/inch) (posy, posz...)
-	mpox | x absolute position | X machine position in absolute coord system, MM, with no offsets
+	posx | x work position | X work position in current units & all offsets (See 1)
+	mpox | x absolute position | X canonical machine position (See 2)
 	g92x | offset | G92 origin offset for X axis
 	g54x | coord 1 offset | X axis G54 coordinate system offset
 	g55x | coord 2 offset | X axis G55 coordinate system offset
@@ -44,6 +44,11 @@ The following are available for all axes, XYZABC. Only the X axis values are sho
 	g59x | coord 6 offset | X axis G59 coordinate system offset
 	g28x | G28 position | X axis G28 saved position
 	g30x | G30 position | X axis G30 saved position
+
+Notes:
+
+1. {posx: ... through {posa:... are reported in the currently active Units mode (G20/G21), and also apply any offsets, including coordinate system selection, G92, and tool offsets. These are provided to drive digital readouts
+2. {mpox: ... through {mpoa:... are reported in millimeters, with no offsets (i.e. in canonical machine coordiantes) These are provided to drive graphical displays so they do not have to be aware of Gcode Units mode or any offsets in effect.
 
 ## Text Mode Status Reports
 ### Text Mode On-Demand Status Reports
