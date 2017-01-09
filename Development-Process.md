@@ -38,6 +38,7 @@ Generate a PR to the target branch - presumably g2/edge<br>
 - First ensure that the PR will merge into the target branch by merging current edge into it in your repo
 - If the test build does not merge resolve merge conflicts in the new branch
 - Do the pull request: - https://github.com/synthetos/g2/pulls
+  - Go to [Compare](https://github.com/synthetos/g2/compare) and hit `compare across forks` to pull from your repo
 
 Notes:
 
