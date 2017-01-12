@@ -1,4 +1,4 @@
-See also [Common Gcode](g2dialect-Consensus-Gcode)
+See also [Consensus Gcode](g2dialect-Consensus-Gcode)
 
 ##Consensus Mcode Usage
 This table lists rough consensus usage from the above sources.
