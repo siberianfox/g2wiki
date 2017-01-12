@@ -15,16 +15,17 @@ This table lists rough consensus usage from the above sources.
 	M7 | Mist Coolant On | 
 	M8 | Flood Coolant On | 
 	M9 | Mist And Flood Coolant Off | 
+	M19 | Orient Spindle | (Fanuc, Haas)
 	M30 | Program End | 
-	M48 | Enable Feed & Spindle Overrides | cnc
-	M49 | Disable Feed & Spindle Overrides | cnc
-	M50 | Feed Override Control | cnc
-	M51 | Spindle Override Control | cnc
-	M60 | Stop | cnc
-	M62 | Digital Output - Turn on sync w/motion | cnc
-	M63 | Digital Output - Turn off sync w/motion | cnc
-	M64 | Digital Output - Turn on immediately | cnc
-	M65 | Digital Output - Turn off immediately | cnc
-	M66 | Wait on Input | cnc
-	M67 | Analog Output Control | cnc
-	M68 | Analog Output Control | cnc
+	M48 | Enable Feed & Spindle Overrides |
+	M49 | Disable Feed & Spindle Overrides |
+	M50 | Feed Override Control |
+	M51 | Spindle Override Control |
+	M60 | Pallet Change Pause | (LinuxCNC)
+	M62 | Digital Output - Turn on sync w/motion | (LinuxCNC)
+	M63 | Digital Output - Turn off sync w/motion | (LinuxCNC)
+	M64 | Digital Output - Turn on immediately | (LinuxCNC)
+	M65 | Digital Output - Turn off immediately | (LinuxCNC)
+	M66 | Wait on Input | (LinuxCNC)
+	M67 | Analog Output Control | (LinuxCNC)
+	M68 | Analog Output Control | (LinuxCNC)
