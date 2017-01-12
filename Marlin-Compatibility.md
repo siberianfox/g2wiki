@@ -27,7 +27,7 @@ There are a few concepts that convert more-or-less between g2core and Marlin, so
 | g2core | Marlin | Notes |
 | :---: | :---: | --- |
 | `{"r":...,"f":[...]}` | `ok` | In response to every sent gcode, g2core will return a response JSON, and Marlin will return `ok`. <br\> (Marlin has an ["advanced `ok`"](https://github.com/MarlinFirmware/Marlin/blob/7bea5e5e5701de0b90b6c422c954337ce860bb0f/Marlin/Marlin_main.cpp#L8704) option as well.) |
-| `{"he1st":210}` | `M104 S201 T1` | Set temperature of extruder 1 to `210`. |
+| `{"he1st":210}` | `M104 S210 T1` | Set temperature of extruder 1 to `210`. |
 | `{"he1st":n}` | `M105` | Request the set temperature of extruder 1 (g2core) or current extruder and bed (Marlin). |
 | `Nxxx` (gcode) | `Nxxx`&nbsp;(gcode)&nbsp;`*`&nbsp;(checksum) | [Marlin supports a checksum, and has special requirements on line numbers](http://reprap.org/wiki/G-code#Special_fields), where g2core accepts arbitrary line numbers and doesn't support a non-standard checksum. |
 | `{"out4":0.5}` | `M106 S128` | Set output on the fan (or generic PWM output `4` for g2core) to 50%. |
