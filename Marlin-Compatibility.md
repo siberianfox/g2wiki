@@ -110,6 +110,57 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 ;LAYER:0
 ```
 
+## Detecting Marlin communications
+
+Of the two Marlin-speaking tools checked, [Cura](https://github.com/Ultimaker/Cura/blob/master/plugins/USBPrinting/avr_isp/stk500v2.py#L47-L54) and [OctoPrint](https://github.com/foosel/OctoPrint/blob/master/src/octoprint/util/avr_isp/stk500v2.py#L34-L35), both open a [stk500v2](http://www.atmel.com/images/doc2591.pdf) connection to speak to the bootloader on the Mega. (Note: The commands' values are not listed in the STK500v2 doc, but can be found [here](http://www.nongnu.org/pulsefire/apidocs/src-html/org/nongnu/pulsefire/device/flash/avr/Stk500v2Command.html).)
+
+Cura starts with a `CMD_ENTER_PROGMODE_ISP` while OctoPrint starts with a `CMD_SIGN_ON` (but ignores the value of the response, as long as it parses and has a valid checksum).
+
+Cura:
+```python
+if self.sendMessage([0x10, 0xc8, 0x64, 0x19, 0x20, 0x00, 0x53, 0x03, 0xac, 0x53, 0x00, 0x00]) != [0x10, 0x00]:
+    raise ispBase.IspError("Failed to enter programming mode")
+
+self.sendMessage([0x06, 0x80, 0x00, 0x00, 0x00])
+if self.sendMessage([0xEE])[1] == 0x00:
+    self._has_checksum = True
+else:
+    self._has_checksum = False
+
+# then, later, to leave ISP mode
+
+if self.sendMessage([0x11]) != [0x11, 0x00]:
+    raise ispBase.IspError("Failed to leave programming mode")
+```
+
+OctoPrint:
+```python
+self.sendMessage([1])
+if self.sendMessage([0x10, 0xc8, 0x64, 0x19, 0x20, 0x00, 0x53, 0x03, 0xac, 0x53, 0x00, 0x00]) != [0x10, 0x00]:
+  self.close()
+  raise ispBase.IspError("Failed to enter programming mode")
+
+# then, later, to leave ISP mode
+
+if self.sendMessage([0x11]) != [0x11, 0x00]:
+  raise ispBase.IspError("Failed to leave programming mode")
+```
+
+After the `CMD_LEAVE_PROGMODE_ISP` (`0x11`) then the handling of stk500v2 comands is no longer necessary (or desired).
+
+In order to handle when an actual programmer attempts to connect, we need to also handle anything we don't know with a `STATUS_CMD_FAILED` (`0xC0`) reply.
+
+We can ignore checksums on receive, but on transmit we should compute it correctly. It's a simple XOR of every byte of the message, including the header.
+
+Messages either direction are of the following format:
+- 1-byte: `0x1B`
+- 1-byte sequence number, which starts at 1 and overflows to 0
+- 2-byte big-endian message-payload length (does not include the header): `msg_length`
+- 1-byte: `0x0E`
+- `msg_length`-bytes of the payload data
+- 1-byte checksum, which is the XOR of each byte of the message (including the header)
+
+
 ## Supported `Gxxx` and `Mxxx` codes (different from normal g2core behavior)
 
 - [ ] **`G0`**
