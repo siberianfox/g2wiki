@@ -1,6 +1,6 @@
 This page provides reference information used by the [g2dialect](g2dialect).
 
-OK, There is no "standard" Gcode, despite multiple attempts to establish one. This page collects common Gcode and Mcode uses derived from the following sources:
+OK, There is no "standard" Gcode, despite multiple attempts to establish one. These pages collect common Gcode and [Mcode](g2dialect-Consensus-Mcodes) uses derived from the following sources:
 
 - NIST
 - LinuxCNC
@@ -10,6 +10,8 @@ OK, There is no "standard" Gcode, despite multiple attempts to establish one. Th
 - CNC Cookbook
 
 It also lists Reprap, Machinekit, TinyG and other usage that is incompatible with the common usage, and provides some notes and some recommendations for alternatives.
+
+See also: [Consensus Mcodes](g2dialect-Consensus-Mcodes)
 
 ##Consensus Gcode Usage
 This table lists rough consensus usage from the above sources. 
