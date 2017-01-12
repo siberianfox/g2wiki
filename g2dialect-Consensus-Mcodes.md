@@ -1,3 +1,5 @@
+This page lists common Mcodes used across NIST, Fanuc, Haas, Tormach, LinuxCNC and are typically documented in the CNC Cookbook and other sources. It does not list the numerous Mcodes used in the 3D printing arena, as these are not used or may be in conflict with standard CNC machines.
+
 See also [Consensus Gcode](g2dialect-Consensus-Gcode)
 
 ##Consensus Mcode Usage
@@ -29,3 +31,7 @@ This table lists rough consensus usage from the above sources.
 	M66 | Wait on Input | (LinuxCNC)
 	M67 | Analog Output Control | (LinuxCNC)
 	M68 | Analog Output Control | (LinuxCNC)
+	M98 | Call Macro/Subprogram |
+	M99 | Return from Macro/Subprogram |
+
+**Mcodes 100 and above are user defined**
