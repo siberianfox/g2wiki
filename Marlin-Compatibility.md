@@ -10,7 +10,11 @@ Marlin compatibility support is viewed as a transition option to ease migration,
 
 ### What It Is
 
-The Marlin compatibility mode supports the most-used gcode/mcodes used in Marlin, and enough of the Marlin communications protocol to be able to drive a g2core 3d printer from a Marlin sender. Supported codes are listed on this page.
+The Marlin compatibility mode is to solve two closely related problems:
+- User-interfaces that are designed to control a Marlin-compatible machine use a different protocol than that of g2core. We'll call this "the Marlin protocol" as opposed to the "g2core protocol."
+- Marlin has a large amount of M-codes that are not used by g2core (or are interpreted differently), and a handful of G-codes are interpreted differently. We'll call this the "Marlin flavor of gcode" as opposed to the "g2core flavor of gcode." Supported G/M-codes are listed later on this page. When possible, we will still support g2core extensions (such as `M100`, `M100.1`, and `M101`) when interpreting Marlin-flavor gcode.
+
+These are treated as different problems, and are solved independently. This allows a UI that speaks the g2core-protocol to send a file sliced for a Marlin-based machine, without losing the advanced capabilities of g2core such as feed-hold. This also allows UIs that speak the Marlin protocol to talk to g2core. It's assumed that a UI designed to talk to Marlin will be sending Marlin-flavor gcode.
 
 ### What It's Not
 
@@ -19,6 +23,7 @@ The Marlin compatibility mode is not a full 100% work-alike for Marlin, although
 * Configuration of the machine and various parameters
 * Setup of motors, heaters, etc.
 * Tuning PID, limit switch polarity, etc.
+* Anything not natively supported by Marlin
 
 ## Concepts Cheat Sheet
 
@@ -38,7 +43,7 @@ There are a few concepts that convert more-or-less between g2core and Marlin, so
 * [Ultimaker2Marlin Repo](https://github.com/Ultimaker/Ultimaker2Marlin)
 * [RepRap Gcode list](http://reprap.org/wiki/G-code)
 
-## Marlin Serial Communications Protocol
+## Marlin Protocol
 
 ### Status report (SR) analog
 
@@ -69,50 +74,20 @@ The line numbers (`Nxxx`) must be sequential, or Marlin will assume one was miss
 
 If verification fails, it'll respond with a `Resend: nnn` where `nnn` is the last seen line number + 1. The host is then expected to send that line again.
 
-## Marlin Gcode Handling
 
-Note that Marlin has several branches, and there are various "flavors" of gcode that work in various Marlins. This is partially controlled by compile-time options, but some variants may require using a completely different Marlin fork. (Needed: clear documentation of UltiGCode and Volumetric RepRap gcode.)
+## Detecting Marlin Protocol
 
-Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case mixed.
+There is the problem of knowing when to speak the Marlin protocol without removing the ability to speak the g2core protocol. It's assumed that we cannot modify a Marlin-speaking UI.
 
-On Marlin, motion of the extruder is a mixture of `E` and `T` words, where on g2core `A`, `B`, and `C` are currently used. (This is planned to change to using spindle-based controls.)
+In order to do this, we have to detect when the device want to speak Marlin. There are two possible methods:
 
-On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed). In Marlin, G0 is [the same as G1](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L2930-L2962).
+### STK500v2
 
-## Marlin comment Handling
+Marlin-based machines are generally running on an Arduino Mega, when will automatically reset upon connection  due to the RTS pin is wired to the reset pin. In this case, the Mega boots into the STK500v2-speaking bootloader.
 
-Generally, comments are handled the same way in Marlin and g2core.
+Of the two Marlin-speaking tools checked, [Cura](https://github.com/Ultimaker/Cura/blob/master/plugins/USBPrinting/avr_isp/stk500v2.py#L47-L54) and [OctoPrint](https://github.com/foosel/OctoPrint/blob/master/src/octoprint/util/avr_isp/stk500v2.py#L34-L35), both try to talk to the [stk500v2](http://www.atmel.com/images/doc2591.pdf) bootloader immediately after opening a connection. (Note: The commands' values are not listed in the STK500v2 doc, but can be found [here](http://www.nongnu.org/pulsefire/apidocs/src-html/org/nongnu/pulsefire/device/flash/avr/Stk500v2Command.html).) In both cases, if this communication is successful, then the connection is left open and the bootloader is told to exit into the main firmware.
 
-In Ultimaker2Marlin there is some header gcode comments in the form [`;FLAVOR:UltiGCode`](https://github.com/Ultimaker/Ultimaker2Marlin/blob/1dfce5af3e9ab960078c1e6664b1e01a31609946/Marlin/UltiLCD2_menu_print.cpp#L393), etc. Here's an example:
-```gcode
-;FLAVOR:UltiGCode
-;TIME:45010
-;MATERIAL:40112
-;MATERIAL2:0
-;NOZZLE_DIAMETER:0.4
-;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
-
-;LAYER_COUNT:240
-;LAYER:0
-M107
-G10
-G0 X60.763 Y31.538 Z0.27
-;TYPE:SKIRT
-```
-
-Even when exporting "RepRap" flavor gcode, Cura prints some of these:
-```gcode
-;FLAVOR:RepRap
-;TIME:16333
-;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
-...
-;LAYER_COUNT:120
-;LAYER:0
-```
-
-## Detecting Marlin communications
-
-Of the two Marlin-speaking tools checked, [Cura](https://github.com/Ultimaker/Cura/blob/master/plugins/USBPrinting/avr_isp/stk500v2.py#L47-L54) and [OctoPrint](https://github.com/foosel/OctoPrint/blob/master/src/octoprint/util/avr_isp/stk500v2.py#L34-L35), both open a [stk500v2](http://www.atmel.com/images/doc2591.pdf) connection to speak to the bootloader on the Mega. (Note: The commands' values are not listed in the STK500v2 doc, but can be found [here](http://www.nongnu.org/pulsefire/apidocs/src-html/org/nongnu/pulsefire/device/flash/avr/Stk500v2Command.html).)
+If we see this communication, we have to handle it, but then we can put the connection into Marlin-protocol mode until the connection is closed.
 
 Cura starts with a `CMD_ENTER_PROGMODE_ISP` while OctoPrint starts with a `CMD_SIGN_ON` (but ignores the value of the response, as long as it parses and has a valid checksum).
 
@@ -160,6 +135,56 @@ Messages either direction are of the following format:
 - `msg_length`-bytes of the payload data
 - 1-byte checksum, which is the XOR of each byte of the message (including the header)
 
+### `M105` and `M114`- temperature/position polling
+
+The `M105` command is used to poll for temperature. Cura sends this and analyzes the returned value to determine if it's speaking to a Marlin-based machine. This should never be seen in a gcode "tape", but it is sent from the UI interleaved with gcode from the tape.
+
+The `M114` command is another command that should only be sent from the UI and never from the tape, and might be used to poll if a machine is Marlin-based or not.
+
+The `M115` command is used to return the machine's capabilities, and is another that should only be from a Marlin-speaking UI.
+
+There is a small possibility of these commands showing up in the tape, but by the point we start seeing tape commands, we should already have seen some indication that it's a Marlin-protocol speaker or a g2core-protocol speaker.
+
+## Marlin Gcode Flavor
+
+Note that Marlin has several branches, and there are various "flavors" of gcode that work in various Marlins. This is partially controlled by compile-time options, but some variants may require using a completely different Marlin fork. (Needed: clear documentation of UltiGCode and Volumetric RepRap gcode.)
+
+Gcode on Marlin must be all uppercase. g2core accepts both upper- and lower-case mixed.
+
+On Marlin, motion of the extruder is a mixture of `E` and `T` words, where on g2core `A`, `B`, and `C` are currently used. (This is planned to change to using spindle-based controls.)
+
+On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed). In Marlin, G0 is [the same as G1](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L2930-L2962).
+
+### Marlin Comment Handling
+
+Generally, comments are handled the same way in Marlin and g2core.
+
+In Ultimaker2Marlin there is some header gcode comments in the form [`;FLAVOR:UltiGCode`](https://github.com/Ultimaker/Ultimaker2Marlin/blob/1dfce5af3e9ab960078c1e6664b1e01a31609946/Marlin/UltiLCD2_menu_print.cpp#L393), etc. Here's an example:
+```gcode
+;FLAVOR:UltiGCode
+;TIME:45010
+;MATERIAL:40112
+;MATERIAL2:0
+;NOZZLE_DIAMETER:0.4
+;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
+
+;LAYER_COUNT:240
+;LAYER:0
+M107
+G10
+G0 X60.763 Y31.538 Z0.27
+;TYPE:SKIRT
+```
+
+Even when exporting "RepRap" flavor gcode, Cura prints some of these:
+```gcode
+;FLAVOR:RepRap
+;TIME:16333
+;Generated with Cura_SteamEngine 2.3.1-g2core-0.9
+...
+;LAYER_COUNT:120
+;LAYER:0
+```
 
 ## Supported `Gxxx` and `Mxxx` codes (different from normal g2core behavior)
 
