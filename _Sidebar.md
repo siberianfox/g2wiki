@@ -26,13 +26,13 @@
 
 **Discussion Topics**
 
+1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 1. [ ] [Raster Streaming Prototol](Raster-Streaming-Protocol)
 1. [ ] [g2core REST Interface](g2core-REST-Interface)
 1. [ ] [Gcode Parsing](GCode-Parsing)
 1. [ ] [G2 3DP Dialect](g2dialect)
 1. [ ] [Consensus Gcode](g2dialect-Consensus-Gcode)
 1. [ ] [Digital DRO](Digital-DRO)
-1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 
 **Developer Pages**
 
