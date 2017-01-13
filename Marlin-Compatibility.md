@@ -248,4 +248,9 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 - [ ] **`M117` - display on LCD**
   - This is similar to the `MSG` mechanism in g2core, except it's intended for driving an LCD display.
 
+- [ ] **`M110` - reset line number**
+  - A line of the form `NxxxM110*nnn` will set the current line number to `Nxxx`, and so the next line number expected will be `xxx + 1`.
+  - Note that Marlin *requires* lines with numbers to start with the `N` and end with the `*nnn` with `nnn` being the checksum. Any comment will then follow the checksum and a `;`.
+    - The Marlin checksum checker
+
 ## Unsupported
