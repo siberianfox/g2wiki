@@ -25,4 +25,4 @@ Run the `mode` command by itself and it should return a `COM`x.  Note your port 
 
 After that go ahead and run these commands, replacing `COMx` with your port, like this: `COM4`.
 * `mode COMx BAUD=1200`
-* `bossac.exe --port=COMx -e -w -v -b PATH_TO_BINARY -R`
+* `bossac.exe --port=COMx -U false -e -w -v -b PATH_TO_BINARY -R`
