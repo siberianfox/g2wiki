@@ -188,16 +188,22 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 
 ## Supported `Gxxx` and `Mxxx` codes (different from normal g2core behavior)
 
-- [ ] **`G0`**
+When codes marked with :baby_chick: (for "canary") are seen, the protocol will be switched to Marlin-compatible.
+
+When codes marked with :zap: are seen, then the gcode-flavor will be switch to Marlin-flavor.
+
+**Note that the protocol and gcode-flavor are switched independently.**
+
+- [x] **`G0`**
   - On Marlin, `G0` is the same as `G1`.
 
-- [ ] **`G28` - homing**
+- [x] **`G28` - homing**
   - In Marlin, `G28` (no decimal) is homing, and the values are possibly provided without numbers, and the number (if provided) are ignored: `G28 X Y Z`
   - If no axes are provided, then it will home *all axes*.
   - As a side-effect, it [clears the auto bed-levelling rotation](https://github.com/MarlinFirmware/Marlin/blob/7bea5e5e5701de0b90b6c422c954337ce860bb0f/Marlin/Marlin_main.cpp#L3414), and sets the "active toolhead" to `T0`.
   - Will home Z first *if* Z homes up, then X, then Y. Otherwise it'll home X, then Y, then Z.
 
-- [ ] **`G29` - bed tramming**
+- [x] **`G29` - bed tramming**
   - *Not suppored in Ultimaker2Marlin*
   - There are two types of `G29` - "mesh bed leveling" and "auto bed leveling." Each takes different parameters. *Here we'll discuss "auto bed leveling" with `AUTO_BED_LEVELING_3POINT` compiled in only.*
   - This will probe three points (internally stored and compiled-in as [`ABL_PROBE_PT_[123]_[XYZ]`](https://github.com/MarlinFirmware/Marlin/blob/182a1c949f27fd699d60cf971d88ecc3c8a7966d/Marlin/example_configurations/delta/generic/Configuration.h#L936-L941)), then activate bed tramming ("leveling").
@@ -206,11 +212,11 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 - [ ] **`G10`, `G11` - retract and unretract (prime) filament**
   - Retracts or primes filament according to settings of `M207`.
 
-- [ ] **`M82`, `M83` - set extruder to absolute/relative mode**
-  - `M82` sets the `E` to be absolute, while `M83` makes it relative.
+- [x] **`M82`, `M83` - set extruder to absolute/relative mode** :zap:
+  - [`M82`](http://reprap.org/wiki/G-code#M82:_Set_extruder_to_absolute_mode) sets the `E` to be absolute, while `M83` makes it relative.
   - *Not implemented in Ultimaker2Marlin, since E is volumetric and always effectively absolute and in volume.*
 
-- [ ] **`M104`, `M109`, `M140`, `M190`, `M108` - temperature control**
+- [x] **`M104`, `M109`, `M140`, `M190` - temperature control** :zap:
   - On Marlin, you set the extruder temperature (and return immediately) with a `M104 Snnn Tnnn`
     - `Snnn` indicates the temperature in celsius
     - `Tnnn` (optional) indicates the tool, with the first being `0`
@@ -223,9 +229,12 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
     - `Snnn` indicates the temperature in celsius
     - Wait for the heat bed with `M190 Sxxx` (for heating only) or `M190 Rxxx` (for both heating and cooling)
       - Like `M109`, `M190` will also set the target and print the temperature of the extruder and bed every second until while it's waiting.
-      - `M190` is also cancelled with `M108`.
 
-- [ ] **`M105` - temperature polling**
+- [x] **`M108` - temperature wait cancel** :baby_chick:
+  - `M104` and `M190` are cancelled with `M108`.
+  - *Partially implemented - Marlin support is sketchy as well*
+
+- [x] **`M105` - temperature polling** :baby_chick:
   - Response is in the format: `ok T:18.2 /0.0 B:16.6 /0.0 @:0 B@:0`
     - `T:nnn` contains the temperature of the "current" extruder (in celsius).
     - ` /nnn` contains the set temperature of the given extruder (in celsius).
@@ -240,7 +249,7 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
   - For stock Marlin, the output format of `M109` and `M190` is the same as `M105`, except it adds the `W:nnn` wait time.
   - Cura [parses](https://github.com/Ultimaker/Cura/blob/master/plugins/USBPrinting/USBPrinterOutputDevice.py#L492-L501) looking for `/T: *([0-9.]*)/` and `/B: *([0-9.]*)/` only, and the rest appears to be ignored.
 
-- [ ] **`M106`, `M107` - set fans speed/turn fan off**
+- [x] **`M106`, `M107` - set fans speed/turn fan off** :zap:
   - `M106` turns the fan indicated with `Px` to the speed indicated with `Snnn`, or 255 by default.
     - `Snnn` has values for `nnn` of integers between 0 - 255, and is silently clipped to those values.
   - `M017` turns off the fan indicated in `Px`.
@@ -248,9 +257,13 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 - [ ] **`M117` - display on LCD**
   - This is similar to the `MSG` mechanism in g2core, except it's intended for driving an LCD display.
 
-- [ ] **`M110` - reset line number**
+- [ ] **`M110` - reset line number** :baby_chick:
   - A line of the form `NxxxM110*nnn` will set the current line number to `Nxxx`, and so the next line number expected will be `xxx + 1`.
-  - Note that Marlin *requires* lines with numbers to start with the `N` and end with the `*nnn` with `nnn` being the checksum. Any comment will then follow the checksum and a `;`.
-    - The Marlin checksum checker
+  - Note that Marlin *requires* lines with numbers to start with the `N` and end with the `*nnn` with `nnn` being the checksum. Any comment will follow the checksum and a `;`.
+  - *Current implementation does NOT check for consecutive line numbers*
+
+- [x] **`M114` - get current position** :baby_chick:
+  - Since there are no status reports in Marlin-protocol, the position must be polled for. [`M114`](http://reprap.org/wiki/G-code#M114:_Get_Current_Position) is the command used to poll for current position.
+  - See discussion above about [[Response (R) analog]] for details
 
 ## Unsupported
