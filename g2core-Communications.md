@@ -28,6 +28,54 @@ The protocol distinguishes between data and controls, and always executes contro
 * When connected to a single port, all data must go through the same channel, and this is essentially the same as if you are communicating over a raw UART channel.
 * _Dual-endpoint USB has been deprecated, and will be made a custom compile-time setting at some point._ In the future, only a single serial-port will enumerate. When building a UI, it's recommended to support using a single port if the second one is not available.
 
+### Order of operation
+
+To somewhat repeat what was just said, there are three times that a line will get executed:
+
+1) When it's read - JSON (first character of the line is a `{`) and single-character commands (`!`, `%`, etc) fit in this category.
+
+  * Note that the single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
+
+  * Multiple single character commands may be put together, such as `!%` with nothing in between. Note that if there is a space, such as `! %` then the `%` **will not be seen as a queue flush**.
+
+2) When it's queued - `M100.1` is how you make JSON fit in this category. See example below.
+
+3) In the queue, synchronized with motion. Everything that's not part of one of the above categories, including most gcode, fits into this category.
+
+For example, if the internal buffer contains this:
+```gcode
+G0 X20
+M100 ({out1:0.5})
+M100.1 ({g55z:-0.1})
+G0 X10
+G55
+G0 X0
+{sr:n}
+```
+
+They will be executed in this order:
+
+1) `{sr:n}` - JSON is executed as soon as it's seen in the buffer, past anything else.
+
+  * Note that it has the be in the g2core buffer before it can be seen. If the host can commands buffered, it might not be seen immediately.
+
+2) `G0 X20` - the move will get queued and start executing almost immediately
+
+3) `M100 ({out1:0.5})` - the JSON command `{out1:0.5}` will be *queued* to execute after the move is completed.
+
+4) `M100.1 ({g55z:-0.1})` - the JSON command `{g55z:-0.1}` will be executed *immediately*, and the `G55` offset space will be adjusted for the next gcode line on.
+
+  * Note that the `G55` offset space may not yet be *applied*.
+
+5) `G0 X10` - another move will be queued
+
+6) `G55` - the `G55` offset space will be queued to activate for further moves.
+
+7) `G0 X0` - this move will be queued to execute in the `G55` offset space.
+
+Note that the `{out1:0.5}` will have only been queued to happen, and will only actually be executed in sync with the motion, while the machine is at `X20`.
+
+
 ## Problem Description - the "Bucket Brigade"
 
 [![Bucket Brigade](http://www.stepneyct.org/history/ht/images/stop_17e_430x195.jpg)](http://www.stepneyct.org/history/ht/stop17.html)
