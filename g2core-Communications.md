@@ -11,22 +11,16 @@ A **microhost** is a tiny linux system like a Beaglebone, Edison, Raspberry Pi, 
 
 As of the g2core 100 builds we recommended using [Line Mode protocol](#linemode-protocol) for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. More on the details later.
 
-g2core 100 builds also supports character mode (byte streaming) which is deprecated and will be removed at a later time. 
+g2core 100 builds also support character mode (byte streaming) which is deprecated and will be removed at a later time. 
 
 ### Control and Data Channels
 
 A **command** is a single line of text sent from the host to the board. A command can be either **data** or **control**.
 
 * **Data**: Gcode lines are always data commands. Generally, unless a line is identified as a control, it's considered data.
-* **Control**: JSON commands (_not_ JSON in active comments, which are actually gcode lines) and single-character commands (`!` feedhold, `%` queue flush, `~` resume, etc) are considered as control commands. 
+* **Control**: JSON commands and single-character commands (`!` feedhold, `%` queue flush, `~` resume, etc) are considered as control commands. Note: JSON in active comments are actually data commands, as they are gcode lines.
 
 The protocol distinguishes between data and controls, and always executes controls first.
-
-**Note:** g2core 100 builds still enumerate as dual-endpoint USB (two serial ports show up when connected). Line mode works when connected to a single port or to both ports.
-
-* When connected to both ports, the first port opened is the control channel, and the second port is considered data. Only raw JSON and single-character commands should be sent over control channel, and everything else (including gcode) should be sent over the data line. All responses from g2core will be sent over the control channel.
-* When connected to a single port, all data must go through the same channel, and this is essentially the same as if you are communicating over a raw UART channel.
-* _Dual-endpoint USB has been deprecated, and will be made a custom compile-time setting at some point._ In the future, only a single serial-port will enumerate. When building a UI, it's recommended to support using a single port if the second one is not available.
 
 ### Order of operation
 
@@ -34,9 +28,9 @@ To somewhat repeat what was just said, there are three times that a line will ge
 
 1. When it's read - JSON (first character of the line is a `{`) and single-character commands (`!`, `%`, etc) fit in this category.
 
-  * Note that the single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
+  * Single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
 
-  * Multiple single character commands may be put together, such as `!%` with nothing in between. Note that if there is a space, such as `! %` then the `%` **will not be seen as a queue flush**.
+  * Multiple single character commands may be put together, such as `!%` with nothing in between. If there is a space, such as `! %` then the `%` **will not be seen as a queue flush**.
 
 2. When it's queued - `M100.1` is how you make JSON fit in this category. See example below.
 
@@ -75,6 +69,12 @@ They will be executed in this order:
 
 Note that the `{out1:0.5}` will have only been queued to happen, and will only actually be executed in sync with the motion, while the machine is at `X20`.
 
+
+**Note:** g2core 100 builds can enumerate as dual-endpoint USB (two serial ports show up when connected). Line mode works when connected to a single port or to both ports.
+
+* When connected to both ports, the first port opened is the control channel, and the second port is considered data. Only raw JSON and single-character commands should be sent over control channel, and everything else (including gcode) should be sent over the data line. All responses from g2core will be sent over the control channel.
+* When connected to a single port, all data must go through the same channel, and this is essentially the same as if you are communicating over a raw UART channel.
+* _Dual-endpoint USB has been deprecated, and will be made a custom compile-time setting at some point._ In the future, only a single serial-port will enumerate. When building a UI, it's recommended to support using a single port if the second one is not available.
 
 ## Problem Description - the "Bucket Brigade"
 
