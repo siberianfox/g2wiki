@@ -9,7 +9,7 @@ A **host** is any computer that talks to a g2core board. Typically this is an OS
 
 A **microhost** is a tiny linux system like a Beaglebone, Edison, Raspberry Pi, or NextThingCo CHIP. These usually talk to g2core over a direct serial UART - although they may also communicate over USB.
 
-As of the g2core 100 builds we recommended using Line Mode protocol for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. More on the details later.
+As of the g2core 100 builds we recommended using [Line Mode protocol](#linemode-protocol) for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. More on the details later.
 
 g2core 100 builds also supports character mode (byte streaming) which is deprecated and will be removed at a later time. 
 
