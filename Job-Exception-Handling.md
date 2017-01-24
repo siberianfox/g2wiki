@@ -1,5 +1,7 @@
 _NOTE: Functions on this page are in effect as of build 083.xx and later._
 
+See also: [Alarm Processing](Alarm-Processing)
+
 ## Summary
 	Character | Operation | Description
 	------|------------|---------
