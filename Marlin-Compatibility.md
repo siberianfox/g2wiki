@@ -216,6 +216,11 @@ When codes marked with :zap: are seen, then the gcode-flavor will be switch to M
   - [`M82`](http://reprap.org/wiki/G-code#M82:_Set_extruder_to_absolute_mode) sets the `E` to be absolute, while `M83` makes it relative.
   - *Not implemented in Ultimaker2Marlin, since E is volumetric and always effectively absolute and in volume.*
 
+- [ ] **`M84` - disable motors**
+  - [`M84`](http://reprap.org/wiki/G-code#M84:_Stop_idle_hold) Will, with no arguments, disable all motors.
+  - With `X`, `Y`, `Z`, or `E` it will disable [just that motor](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L5868-L5895).
+  - Can be mapped to `{md:0}` for now
+
 - [x] **`M104`, `M109`, `M140`, `M190` - temperature control** :zap:
   - On Marlin, you set the extruder temperature (and return immediately) with a `M104 Snnn Tnnn`
     - `Snnn` indicates the temperature in celsius
@@ -254,8 +259,9 @@ When codes marked with :zap: are seen, then the gcode-flavor will be switch to M
     - `Snnn` has values for `nnn` of integers between 0 - 255, and is silently clipped to those values.
   - `M017` turns off the fan indicated in `Px`.
 
-- [ ] **`M117` - display on LCD**
+- [x] **`M117` - display on LCD**
   - This is similar to the `MSG` mechanism in g2core, except it's intended for driving an LCD display.
+  - *Current implementation simply ignores the line.*
 
 - [ ] **`M110` - reset line number** :baby_chick:
   - A line of the form `NxxxM110*nnn` will set the current line number to `Nxxx`, and so the next line number expected will be `xxx + 1`.
