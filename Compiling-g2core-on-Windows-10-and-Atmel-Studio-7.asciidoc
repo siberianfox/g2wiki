@@ -120,7 +120,7 @@ See link:https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Develo
 NOTE: These instructions are for the Atmel-ICE debugger. Many of these instructions will work with the Atmel SAM-ICE as well. The J-Link Segger works as well and is faster and cheaper than the Atmel ICE (Student model on Adafruit), but we haven't documented it yet - so you are on your own - or be a pal and update this page. It's also possible to upload directly through the USB or serial ports, but there is no real-time debugger in that case.
 
 ### Loading the Project
-- The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate. 
+- The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate. It's best to start AS7 by clicking on `g2core.atsln` in the `g2` directory - or a shortcut to it. This should load both projects.
 
 - If you have changed your git branch you need to run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case. 
 
