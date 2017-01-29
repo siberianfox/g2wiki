@@ -67,7 +67,7 @@ image:Clone-in-GHDesktop.png[Clone in GitHub Desktop]
 
 ** There is one additional step that is _only_ necessary if the `Motate/` directory appears to be empty:
 
-*** Right click on the repo on the left and choose "Open in Terminal" (OS X) or "Open in Git Shell" (Windows), as shown for Windows (or just open a terminal or cmd window and navigate to the .../g2core/g2 directory):
+*** Right click on the repo on the left and choose "Open in Terminal" (OS X) or "Open in Git Shell" (Windows), as shown for Windows (or on OSX or linux just open a terminal window and navigate to the parent git directory, which should be .../g2):
 +
 image:Windows-Open-in-Git-Shell.png[GitHub Desktop Windows: Open in Git Shell,242,187]
 *** Now type (or Copy/Paste) the following command:
