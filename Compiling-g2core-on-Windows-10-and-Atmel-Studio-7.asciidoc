@@ -97,9 +97,9 @@ There are a few things you need to do make sure of once you have it installed
 ## Git for Windows
 The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
 
-* Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 64 bit is preferred (version 2.10.0 at the time of this writing).
+* Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 64 bit is preferred (version 2.10.0 at the time of this writing). It may automatically DL the Windows 32 bit version. Don't be fooled if this is not what you want.
 
-** Option Dialog 1: Choose BASH (default, but any should work)
+** Option Dialog 1: Choose `Use Git from Windows Command Prompt` (default, but any should work)
 
 ** Option Dialog 2: Choose option 2, Checkout as-is, Unix style line endings
 
