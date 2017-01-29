@@ -92,6 +92,7 @@ There are a few things you need to do make sure of once you have it installed
 **** Confirm `Motate` is unchecked in `Project Dependencies` (it doesn't ever compile here). OK.
 **** Right click `Solution 'g2core'` again and confirm or set `Project Build Order` to be g2core before Motate. OK.
 ** From top menu bar select Tools / Options / Text Editor / All Languages / Tabs. Change the default TAB mode from tabs to spaces (especially if you are going to contribute back to the project). Choose the Insert Spaces option. Leave the tab spacing at 4.
+** From top menu bar hit File / Save All to make sure this sticks.
 
 ## Git for Windows
 The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
