@@ -43,7 +43,7 @@ There are things you will need to know, and things you'll need to have.
 
 - [ ] A somewhat modern computer running a modern OS.
 
-** A computer with an OS for the last 5 years or so should do. The Synthetos team mostly run OS X and test with Windows 10 and Linux running inside VMWare VMs.
+** A computer with an OS for the last 5 years or so should do. The Synthetos team mostly run OS X and test with Windows 10 and Linux running inside Parallels VMs.
 
 ** We support compiling and debugging on OS X (El Capitan, aka 10.11), Windows 10, and popular Linux distros when possible.
 
@@ -67,7 +67,7 @@ image:Clone-in-GHDesktop.png[Clone in GitHub Desktop]
 
 ** There is one additional step that is _only_ necessary if the `Motate/` directory appears to be empty:
 
-*** Right click on the repo on the left and choose "Open in Terminal" (OS X) or "Open in Git Shell" (Windows), as shown for Windows:
+*** Right click on the repo on the left and choose "Open in Terminal" (OS X) or "Open in Git Shell" (Windows), as shown for Windows (or just open a terminal or cmd window and navigate to the .../g2core/g2 directory):
 +
 image:Windows-Open-in-Git-Shell.png[GitHub Desktop Windows: Open in Git Shell,242,187]
 *** Now type (or Copy/Paste) the following command:
