@@ -71,13 +71,13 @@ To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.
 
 ** Fire up AS7 for the first time 
 
-*** Do this by clicking the `g2core.atsln` file in the g2 directory. This should bring up both the g2core and Motate projects in AS7. Yes, you trust it, when asked. If for some reason the Motate project does not load it may because you didn't initialize the Motate directory using https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development#cloning-the-repo[`git submodule update --init`]
-
 *** You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with g2core or you will have a lot of stuff to back out. The g2core project provides Makefiles and project files for you to use.
 
 *** You **will** need the USB drivers when asked (Jungo or something like that)
 
 #### Configure AS7
+
+* Start AS7 by clicking the `g2core.atsln` file in the g2 directory. This should load the g2core and Motate projects in AS7. Yes, you trust it, when asked. If for some reason the Motate project does not load it may because you didn't initialize the Motate directory using https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development#cloning-the-repo[`git submodule update --init`]
 
 * Configuring Atmel Studio 7
 There are a few things you need to do make sure of once you have it installed
