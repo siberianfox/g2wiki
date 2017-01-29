@@ -113,7 +113,7 @@ NOTE: The Makefiles also rely on the `curl` command that comes along with Git fo
 
 ## Cloning the git repository
 
-See link:Getting-Started-with-G2core#cloning-the-repo[Getting Started with G2core → Cloning the Repo] if you haven't already.
+See link:https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development#cloning-the-repo[Cloning the Repo] if you haven't already.
 
 # Compiling and Uploading
 
