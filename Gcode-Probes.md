@@ -9,10 +9,10 @@ This page is based on, but not identical to, the following references:
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
-	G38.2 | F <axes> | probe toward workpiece | stop on contact, signal error if failure
-	G38.3 | F <axes> | probe toward workpiece | stop on contact
-	G38.4 | F <axes> | probe away from workpiece | stop on loss of contact, signal error if failure
-	G38.5 | F <axes> | probe away from workpiece | stop on loss of contact
+	G38.2 | F axes | probe toward workpiece | stop on contact, signal error if failure
+	G38.3 | F axes | probe toward workpiece | stop on contact
+	G38.4 | F axes | probe away from workpiece | stop on loss of contact, signal error if failure
+	G38.5 | F axes | probe away from workpiece | stop on loss of contact
 
 
 - Operation of G38.2, 3, 4, 5
