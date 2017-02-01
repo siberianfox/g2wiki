@@ -23,6 +23,7 @@
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [G2 Communications](g2core-Communications)
 1. [ ] [Tool Offsets and Selection](Tool-Offsets-and-Selection)
+1. [ ] [Probing](Gcode-Probes)
 
 **Discussion Topics**
 
