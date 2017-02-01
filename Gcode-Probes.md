@@ -30,6 +30,7 @@ It is an error if:
 - The current position is the same as the target point
 - No axis word is provided
 - Feed rate is zero
+- No input is [configured for probing](#configuring-probe-input)
 - The probe input is already in the 'tripped' state
 
 ##Gcode and JSON Command Reference
