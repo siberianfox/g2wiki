@@ -33,7 +33,7 @@ It is an error if:
 - No input is [configured for probing](#configuring-probe-input)
 - The probe input is already in the 'tripped' state
 
-##Gcode and JSON Command Reference
+##Probing Command Reference
 
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
