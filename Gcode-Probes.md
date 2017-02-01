@@ -7,7 +7,7 @@ This page is similar to, but not identical to:
 ##G38.x Probes
 g2Core implements probing using the standard Gcodes G38.2, G38.3, G38.4 and G38.5. In addition, probing settings and results are accessible using JSON commands and queries.
 
-To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [Probe Input](#probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
+To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [probe input](#configuring-probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
 
 To initiate a probe cycle send `G38.x AXES Fnnn`. Any axis or axes may be used (XYZABC). The axis words together define the target point that the probe will move towards, starting from the current position. Axis words are optional but at least one of them must be used. Feed rate must be non-zero, set either in the above Gcode block, or previously set (F is modal). 
 
@@ -45,7 +45,7 @@ It is an error if:
 	{prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
 
 
-### Probe Input
+### Configuring Probe Input
 The digital input to be used by probing is selected by setting the input function to INPUT_FUNCTION_PROBE. In most cases this is the Zmin input, but does not have to be. An example of how to assign the probe input to digital input #5 is shown below. See also: [Digital IO](Digital-IO)
 ```
 {di5:n}   --> {"r":{"di5":{"mo":0,"ac":0,"fn":0}},"f":[1,0,9]}   Query DI5 before setting function
@@ -54,20 +54,26 @@ The digital input to be used by probing is selected by setting the input functio
 ```
 The input functions are:
 ```
-    INPUT_FUNCTION_NONE = 0,
-    INPUT_FUNCTION_LIMIT = 1,           // limit switch processing
-    INPUT_FUNCTION_INTERLOCK = 2,       // interlock processing
-    INPUT_FUNCTION_SHUTDOWN = 3,        // shutdown in support of external emergency stop
-    INPUT_FUNCTION_PROBE = 4,           // assign input as probe input
+INPUT_FUNCTION_NONE = 0,
+INPUT_FUNCTION_LIMIT = 1,           // limit switch processing
+INPUT_FUNCTION_INTERLOCK = 2,       // interlock processing
+INPUT_FUNCTION_SHUTDOWN = 3,        // shutdown in support of external emergency stop
+INPUT_FUNCTION_PROBE = 4,           // assign input as probe input
 ```
 Other settings are: 
 
-- `mo` - set to 0 for normally open switches and 1 for normally closed swithes (NB: at some time in the future these values will change)
+- `mo` - set to 0 for active-low (normally-open) operation and 1 for active-hi (normally-closed) operation (NB: at some time in the future these values will change)
 - `ac` - action on switch closure. Unused for probing. Set to 0.
 
+If more than one input is configured for probing the lowest numbered input is used. This is not returned as an error. Use {di:n} to see all digital inputs configured.
 
 ## Using Probes for Tramming (Bed Leveling)
+See [Tramming]()
 
-Changes
-- No more automatic probe report, Use SRs or {prb:n} request
+## Changes To Probing prior to 100.20
+The following changes were made to probing in firmware build 100.20
+
+- The probe input is assignable, and must be configured. Previously it was hard wired to Zmin or Zmax
+- Probes no longer generate an automatic probe report, Use SRs or {prb:n} request
+- Previously probes were not allowed to have ABC axes. Now they can
 
