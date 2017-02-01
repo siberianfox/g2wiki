@@ -1,4 +1,4 @@
-Reserved for Probe commands. Note - some of the information on this page will only be valid Issue #237 is committed to edge. These cases are labeled.
+_Note - some of the information on this page will only be valid after Issue #237 is committed to edge, presumably as firmware build 100.20. See [Changes]() for details._
 
 This page is similar to, but not identical to:
 
