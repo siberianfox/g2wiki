@@ -1,4 +1,4 @@
-_Note - some of the information on this page will only be valid after Issue #237 is committed to edge, presumably as firmware build 100.20. See [Changes](#changes-to-probing-prior-to-10020) for details._
+_Note - some of the information on this page will only be valid after Issue #237 is committed to edge, presumably as firmware build 100.20. See [Changes to Probing](#changes-to-probing-prior-to-10020) for details._
 
 This page is similar to, but not identical to:
 
