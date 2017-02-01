@@ -11,7 +11,6 @@
 **Reference Pages**
 
 1. [ ] [Gcodes](Gcodes)
-1. [ ] [Feedhold, Resume, etc.](Feedhold,-Resume,-and-Other-Simple-Commands)
 1. [ ] [Text Mode](Text-Mode)
 1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [Digital IO (GPIO)](Digital-IO)
@@ -20,10 +19,10 @@
 1. [ ] [Coordinate Systems](Coordinate-Systems)
 1. [ ] [Status Reports](Status-Reports)
 1. [ ] [Status Codes](Status-Codes)
-1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [G2 Communications](g2core-Communications)
 1. [ ] [Tool Offsets and Selection](Tool-Offsets-and-Selection)
 1. [ ] [Probing](Gcode-Probes)
+1. [ ] [Feedhold, Resume, etc.](Feedhold,-Resume,-and-Other-Simple-Commands)
 
 **Discussion Topics**
 
@@ -43,6 +42,7 @@
 1. [ ] [Compiling G2](Getting-Started-with-g2core-Development#compiling-the-code)
 1. [ ] [Debugging G2 on OSX](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
+1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [Diagnostics](Diagnostics)
 1. [ ] [Development Troubleshooting](Troubleshooting)
 1. [ ] [g2core Communications](g2core-Communications)
