@@ -63,7 +63,7 @@ INPUT_FUNCTION_PROBE = 4,           // assign input as probe input
 ```
 Other settings are: 
 
-- `mo` - set to 0 for active-low (normally-open) operation and 1 for active-hi (normally-closed) operation (NB: at some time in the future these values will change)
+- `mo` - set input mode to 0 for active-low (normally-open) operation and 1 for active-hi (normally-closed) operation (NB: at some time in the future these values will change)
 - `ac` - action on switch closure. Unused for probing. Set to 0.
 
 If more than one input is configured for probing the lowest numbered input is used. This is not returned as an error. Use {di:n} to see all digital inputs configured.
