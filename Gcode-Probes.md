@@ -13,13 +13,23 @@ To initiate a probe cycle send `G38.x AXES Fnnn` to perform a straight probe ope
 
 In a probing cycle the toolhead moves towards the target in a straight line at the current feed rate. _In inverse time feed mode, the feed rate is such that the whole motion from the current position to the target would take the specified time._ The move stops (within machine acceleration limits) when the target is reached or when the requested change in the probe input takes place, whichever occurs first. The probe may then perform a small backoff move to position the tool at the exact motor step on which the probe input tripped. This will be seen as a second move. 
 
+After successful probing the probe results are available by requesting `{prb:n}`. This contains probe status `e` set to 1 (true), and the the end position of all axes. Positions are in machine coordinates (absolute coordinates) and in millimeters. Values may also be queried individually as '{prbe:n}`, {prbz:n}` or similar. Examples:
+
+```
+{"prb":n}  --> {"r":{"prb":{"e":1,"x":0,"y":0,"z":-8.804,"a":0,"b":0,"c":0}},"f":[1,0,9]}
+{"prbe":n} --> {"r":{"prbe":1},"f":[1,0,10]}
+{"prbz":n} --> {"r":{"prbz":-8.804},"f":[1,0,10]}
+```
+
+To query end positions in work coordinates use `{pos:n}` which will report using current offsets and units mode.
+
+
 If the probe is not tripped before the target is reached G38.2 and G38.4 will put the machine in an Alarm state, preventing further actions from occurring until the alarm is cleared using any of: `{clear:n}`, `{clr:n}`, or `$clear`. The probe status `{prbe:n}` will read 0 (false), indicating that the probe was unsuccessful.
 
-If the probe is not tripped before the target is reached G38.3 and G38.5 the probe status `{prbe:n}` will read 0 (false), indicating that the probe was unsuccessful. No alram is triggered.
+If the probe is not tripped before the target is reached G38.3 and G38.5 the probe status `{prbe:n}` will read 0 (false), indicating that the probe was unsuccessful. No alarm is triggered.
 
-The tool in the spindle must be a probe or contact a probe switch.
 
-After successful probing, parameters 5061 to 5069 will be set to the coordinates of X, Y, Z, A, B, C, U, V, W of the location of the controlled point at the time the probe changed state. After unsuccessful probing, they are set to the coordinates of the programmed point. Parameter 5070 is set to 1 if the probe succeeded and 0 if the probe failed. If the probing operation failed, G38.2 and G38.4 will signal an error by posting an message on screen if the selected GUI supports that. And by halting program execution.
+parameters 5061 to 5069 will be set to the coordinates of X, Y, Z, A, B, C, U, V, W of the location of the controlled point at the time the probe changed state. After unsuccessful probing, they are set to the coordinates of the programmed point. Parameter 5070 is set to 1 if the probe succeeded and 0 if the probe failed. If the probing operation failed, G38.2 and G38.4 will signal an error by posting an message on screen if the selected GUI supports that. And by halting program execution.
 
 A comment of the form (PROBEOPEN filename.txt) will open filename.txt and store the 9-number coordinate consisting of XYZABCUVW of each successful straight probe in it. The file must be closed with (PROBECLOSE). For more information see the Comments Section.
 
