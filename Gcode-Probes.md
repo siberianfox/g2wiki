@@ -23,7 +23,9 @@ After a probe, results are available by requesting `{prb:n}`. This contains prob
 
 To query end positions in work coordinates use `{pos:n}` which will report using current offsets and units mode.
 
-If the probe is not tripped before the target is reached G38.2 and G38.4 will put the machine in an [Alarm](Alarm-Processing) state, preventing further actions from occurring until the alarm is cleared using any of: `{clear:n}`, `{clr:n}`, or `$clear`. Conversely, G38.3 and G38.5 will not trigger an alarm. In either case, probe status `{prbe:n}` is set to 0, indicating that the probe was unsuccessful.
+A "failed" probe is where the probe is not tripped before the target is reached. A failed G38.2 or G38.4 probe will put the machine in an [Alarm](Alarm-Processing) state, preventing further actions from occurring until the alarm is cleared using any of: `{clear:n}`, `{clr:n}`, or `$clear`. Conversely, a failed G38.3 or G38.5 probe will not trigger an alarm. In either case, probe status `{prbe:n}` is set to 0, indicating that the probe was unsuccessful. Also note that other exceptions - such as those listed in the Error list, below, will Alarm regardless of the probe type. 
+
+Spindle and coolant are not affected by probing, and will remain on or off during a probing operation.
 
 It is an error if:
 
