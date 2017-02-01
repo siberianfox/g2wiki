@@ -3,7 +3,7 @@ This page is based on, but not identical to, the following references:
 - [LinuxCNC Gcode reference](http://linuxcnc.org/docs/devel/html/gcode/g-code.html)
 - [Tormach G43 Page](http://www.tormach.com/g43_g44_g49.html)
 
-## Tool Selection and Tool Offsets
+## Tool Offsets and Tool Selection
 g2Core implements tool selection and tool changes using standard Gcodes and M codes. In addition, the tool table can be queried and set using [JSON commands](#json-commands) and current offsets and current tool can be queried using JSON.
 
 The tool table can hold offsets for up to 32 tools, 1-32. Tool zero is not used. Use the Tn command to select a tool. Selecting a tool will not use that tool - it just stages it. To use the tool program M6. These can be performed on the same Gcode line. Examples:
