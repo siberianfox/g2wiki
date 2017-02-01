@@ -70,9 +70,9 @@ This table lists rough consensus usage from the above sources.
 	G35 | Automatic Tool Diameter Measurement | (Haas)
 	G36 | Automatic Work Offset Measurement | (Haas)
 	G37 | Automatic Tool Length Measurement | (Haas)
-	G38.2 | Straight Probe To Workpiece, Report if failure |
+	G38.2 | Straight Probe To Workpiece | Report if failure 
 	G38.3 | Straight Probe To Workpiece |
-	G38.4 | Straight Probe Away From Workpiece, Report if failure |
+	G38.4 | Straight Probe Away From Workpiece | Report if failure 
 	G38.5 | Straight Probe Away From Workpiece |
 	G39 | Not used |
 	G40 | Cancel Cutter Compensation | Turn Compensation Off
