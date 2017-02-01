@@ -47,7 +47,7 @@ It is an error if:
 
 
 ### Configuring Probe Input
-The digital input to be used by probing is selected by setting the input function to INPUT_FUNCTION_PROBE. In most cases this is the Zmin input, but does not have to be. An example of how to assign the probe input to digital input #5 is shown below. See also: [Digital IO](Digital-IO)
+The digital input to be used by probing is selected by setting the input function to INPUT_FUNCTION_PROBE (4). In most cases this is the Zmin input, but does not have to be. An example of how to assign the probe input to digital input #5 is shown below. See also: [Digital IO](Digital-IO)
 ```
 {di5:n}   --> {"r":{"di5":{"mo":0,"ac":0,"fn":0}},"f":[1,0,9]}   Query DI5 before setting function
 {di5fn:4} --> {"r":{"di5fn":4},"f":[1,0,11]}                     Set function to 4 (see below)
