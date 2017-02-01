@@ -74,7 +74,7 @@ Digital inputs have these attributes (using di1 as an example)
 	------|------------|---------
 	{di1mo: | mode | 0=active low (NO), 1=active high (NC), 2=disabled
 	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown
+	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=probe
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms. Some functions (Interlock) also use the trailing edge for "coming off" the function.
 
