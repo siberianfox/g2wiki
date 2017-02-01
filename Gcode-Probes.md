@@ -40,21 +40,18 @@ It is an error if:
 	G38.3 | F axes | probe toward workpiece | stop on contact (switch closed)
 	G38.4 | F axes | probe away from workpiece | stop on loss of contact (switch open), alarm if failure
 	G38.5 | F axes | probe away from workpiece | stop on loss of contact (switch open)
+	{prb:n} | none | probe result vector | Probe status and axis positions after probe, in absolute machine coordinates, in MM. Read only
 	{prbe:n} | none | probe status | 0=failed, 1=succeeded. Read only
-	{prb:n} | none | probe result vector | Axis positions after probe, in absolute machine coordinates, in MM. Read only
 	{prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
 
 
-- Operation of G38.2, 3, 4, 5
+### Probe Input
 
 - Set  prob input INPUT_FUNCTION_PROBE
 ```
 Zmin example
 ```
 
-- small backoff
-- prbe, 
-- prbx ... a . Explain these are in MACHINE coords. If you want work coords see posx...a
 
 ## Using Probes for Tramming (Bed Leveling)
 
