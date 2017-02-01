@@ -7,7 +7,7 @@ This page is similar to, but not identical to:
 ##G38.x Probes
 g2Core implements probing using the standard Gcodes G38.2, G38.3, G38.4 and G38.5. In addition, probing settings and results are accessible using JSON commands and queries.
 
-To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [Probe Input]() _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
+To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [Probe Input](#probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
 
 To initiate a probe cycle send `G38.x AXES Fnnn`. Any axis or axes may be used (XYZABC). The axis words together define the target point that the probe will move towards, starting from the current position. Axis words are optional but at least one of them must be used. Feed rate must be non-zero, set either in the above Gcode block, or previously set (F is modal). 
 
