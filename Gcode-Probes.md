@@ -5,7 +5,7 @@ This page is similar to, but not identical to:
 - [LinuxCNC Gcode reference](http://linuxcnc.org/docs/devel/html/gcode/g-code.html)
 
 ##G38.x Probes
-g2Core implements probing using the standard Gcodes G38.2, G38.3, G38.4 and G38.5. In addition, probing settings and results are accessible using JSON commands and queries.
+g2Core implements probing using standard Gcodes G38.2, G38.3, G38.4 and G38.5. In addition, probing settings and results are accessible using JSON commands and queries.
 
 To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [probe input](#configuring-probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
 
