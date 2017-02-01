@@ -13,7 +13,7 @@ To initiate a probe cycle send `G38.x AXES Fnnn`. Any axis or axes may be used (
 
 In a probing cycle the toolhead moves towards the target in a straight line at the current feed rate. _In inverse time feed mode, the feed rate is such that the whole motion from the current position to the target would take the specified time._ The move stops (within machine acceleration limits) when the target is reached or when the requested change in the probe input takes place, whichever occurs first. The probe may then perform a small backoff move to position the tool at the exact motor step on which the probe input tripped. This will be seen as a second move. 
 
-After a probe, results are available by requesting `{prb:n}`. This contains probe status `e` set to 1 for success, or 0 if not tripped, and it lists the end position of all axes. Positions are in machine coordinates (absolute coordinates) and in millimeters. Values may also be queried individually as '{prbe:n}`, {prbz:n}` or similar. Examples:
+After a probe, results are available by requesting `{prb:n}`. This contains probe status `e` set to 1 for success, or 0 if not tripped, and it lists the end position of all axes. Positions are in machine coordinates (absolute coordinates) and in millimeters. Values may also be queried individually as `{prbe:n}`, `{prbz:n}` or similar. Examples:
 
 ```
 {"prb":n}  --> {"r":{"prb":{"e":1,"x":0,"y":0,"z":-8.804,"a":0,"b":0,"c":0}},"f":[1,0,9]}
