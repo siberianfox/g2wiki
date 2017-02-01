@@ -23,7 +23,7 @@ After a probe, results are available by requesting `{prb:n}`. This contains prob
 
 To query end positions in work coordinates use `{pos:n}` which will report using current offsets and units mode.
 
-If the probe is not tripped before the target is reached G38.2 and G38.4 will put the machine in an Alarm state, preventing further actions from occurring until the alarm is cleared using any of: `{clear:n}`, `{clr:n}`, or `$clear`. Conversely, G38.3 and G38.5 will not trigger an alarm. In either case, probe status `{prbe:n}` is set to 0, indicating that the probe was unsuccessful.
+If the probe is not tripped before the target is reached G38.2 and G38.4 will put the machine in an [Alarm](Alarm-Processing) state, preventing further actions from occurring until the alarm is cleared using any of: `{clear:n}`, `{clr:n}`, or `$clear`. Conversely, G38.3 and G38.5 will not trigger an alarm. In either case, probe status `{prbe:n}` is set to 0, indicating that the probe was unsuccessful.
 
 It is an error if:
 
