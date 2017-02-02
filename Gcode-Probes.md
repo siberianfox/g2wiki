@@ -1,4 +1,4 @@
-_Note - some of the information on this page will only be valid after Issue #237 is committed to edge, presumably as firmware build 100.20. See [Changes to Probing](#changes-to-probing-prior-to-10020) for details._
+_Note - some of the information on this page will only be valid after Issue #237 is committed to edge, presumably as firmware build 100.20. See [Changes to Probing](#changes-to-probing-prior-to-10020) end end of this page for details._
 
 This page is similar to, but not identical to:
 
@@ -9,16 +9,23 @@ g2Core implements probing using standard Gcodes G38.2, G38.3, G38.4 and G38.5. I
 
 To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [probe input](#configuring-probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
 
-To initiate a probe cycle send `G38.x AXES Fnnn`. Any axis or axes may be used (XYZABC). The axis words together define the target point that the probe will move towards, starting from the current position. Axis words are optional but at least one of them must be used. Feed rate must be non-zero, set either in the above Gcode block, or previously set (F is modal). 
+To initiate a probe cycle send `G38.x AXES Fnnn`. Any axis or axes may be used (XYZABC). The axis words together define the target point that the probe will move towards, starting from the current position. Axis words are optional but at least one of them must be provided. Feed rate must be non-zero, set either in the Gcode block or previously set (F is modal). 
 
-In a probing cycle the toolhead moves towards the target in a straight line at the current feed rate. _In inverse time feed mode, the feed rate is such that the whole motion from the current position to the target would take the specified time._ The move stops (within machine acceleration limits) when the target is reached or when the requested change in the probe input takes place, whichever occurs first. The probe may then perform a small backoff move to position the tool at the exact motor step on which the probe input tripped. This will be seen as a second move. 
+In a probing cycle the toolhead moves towards the target in a straight line at the defined feed rate. _In inverse time feed mode, the feed rate is such that the whole motion from the current position to the target would take the specified time._ The move stops (within machine acceleration limits) when the target is reached or when the requested change in the probe input takes place, whichever occurs first. The probe may then perform a small backoff move to position the tool at the exact motor step on which the probe input tripped. This will be seen as a second move. 
 
-After a probe, results are available by requesting `{prb:n}`. This contains probe status `e` set to 1 for success, or 0 if not tripped, and it lists the end position of all axes. Positions are in machine coordinates (absolute coordinates) and in millimeters. Values may also be queried individually as `{prbe:n}`, `{prbz:n}` or similar. Examples:
+After probing is complete results are available in a JSON probe report. The probe report contains probe status `e` set to 1 for success, or 0 if not tripped, and the end positions of the axes. Positions are in machine coordinates (absolute coordinates) and in millimeters. A probe report can be invoked by requesting requesting `{prb:n}`. Values may also be queried individually as `{prbe:n}`, `{prbz:n}` or similar.
+
+A probe report can also be automatically returned if `{prbr:t}` has been set (default value). Set `{prbr:f}` to disable automatic reports.
+ 
+Examples:
 
 ```
 {"prb":n}  --> {"r":{"prb":{"e":1,"x":0,"y":0,"z":-8.804,"a":0,"b":0,"c":0}},"f":[1,0,9]}
 {"prbe":n} --> {"r":{"prbe":1},"f":[1,0,10]}
 {"prbz":n} --> {"r":{"prbz":-8.804},"f":[1,0,10]}
+{"prbr":true}  enable automatic probe report
+{"prbr":1}     enable automatic probe report (also works)
+{prbr:t}       enable automatic probe report (shorter form)
 ```
 
 To query end positions in work coordinates use `{pos:n}` which will report using current offsets and units mode.
@@ -78,7 +85,7 @@ See [Tramming]()
 ## Changes To Probing prior to 100.20
 The following changes were made to probing in firmware build 100.20
 
-- The probe input is assignable, and must be configured. Previously it was hard wired to Zmin or Zmax
-- Probes no longer generate an automatic probe report, Use SRs or {prb:n} request
-- Previously probes were not allowed to have ABC axes. Now they can
+- The probe input is assignable, and must be configured. Previously it was hard wired to Zmin or Zmax. The Zmin input is assigned by default unless specified in the settings of overridden by a JSON command. If the input is changed from Zmin, then Zmin must be de-assigned manually.
+
+- Previously probes were not allowed to have ABC axes. Now they can.
 
