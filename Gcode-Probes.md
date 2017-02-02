@@ -34,6 +34,8 @@ A "failed" probe is where the probe is not tripped before the target is reached.
 
 Spindle and coolant are not affected by probing, and will remain on or off during a probing operation.
 
+Also note that soft limits are disabled during a probe cycle, allowing probes to be performed to the edge of the work volume by extending slightly beyond the work volume. _This behavior may be refined in the future, but for now it should address some of the probe failures users have been experiencing_
+
 It is an error if:
 
 - The current position is the same as the target point
