@@ -90,4 +90,5 @@ The following changes were made to probing in firmware build 100.20
 
 - The probe input is assignable, and must be configured. The Zmin input is assigned by default.
 - Previously probes were not allowed to have ABC axes. Now they can.
+- Automatic probe reports have been generated prior to 100.20. This release allows them to be turned off. The default is ON.
 
