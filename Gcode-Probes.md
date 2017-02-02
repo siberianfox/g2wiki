@@ -53,6 +53,7 @@ It is an error if:
 	{prb:n} | none | probe results | Probe status `e` and axis positions after probe, in absolute machine coordinates, in MM. Read only
 	{prbe:n} | none | probe status | 0=failed, 1=succeeded. Read only
 	{prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
+	{prbr:_} | t/f | enable probe reports | If true, generate automatic probe reports when probing is complete
 
 
 ### Configuring Probe Input
@@ -70,12 +71,12 @@ INPUT_FUNCTION_INTERLOCK = 2,       // interlock processing
 INPUT_FUNCTION_SHUTDOWN = 3,        // shutdown in support of external emergency stop
 INPUT_FUNCTION_PROBE = 4,           // assign input as probe input
 ```
-Other settings are: 
+The Zmin input (typically input 5) is assigned by default unless specified in the settings of overridden in the settings file or by a JSON command. If the input is changed from Zmin, then Zmin must be de-assigned manually. If more than one input is configured for probing the lowest numbered input is used. This is not returned as an error. Use {di:n} to see all digital inputs configured.
 
-- `mo` - set input mode to 0 for active-low (normally-open) operation and 1 for active-hi (normally-closed) operation (NB: at some time in the future these values will change)
-- `ac` - action on switch closure. Unused for probing. Set to 0.
+Other digital input settings are: 
 
-If more than one input is configured for probing the lowest numbered input is used. This is not returned as an error. Use {di:n} to see all digital inputs configured.
+- `mo` - set input mode to 0 for active-low (normally-open) operation and 1 for active-hi (normally-closed) operation (NB: at some time in the future these values will change). Most contact probes are active-low, so this value should be st to 0.
+- `ac` - action on switch closure. Unused by probing. Set to 0.
 
 See also: [Digital IO](Digital-IO).
 
@@ -85,7 +86,6 @@ See [Tramming]()
 ## Changes To Probing prior to 100.20
 The following changes were made to probing in firmware build 100.20
 
-- The probe input is assignable, and must be configured. Previously it was hard wired to Zmin or Zmax. The Zmin input is assigned by default unless specified in the settings of overridden by a JSON command. If the input is changed from Zmin, then Zmin must be de-assigned manually.
-
+- The probe input is assignable, and must be configured. The Zmin input is assigned by default.
 - Previously probes were not allowed to have ABC axes. Now they can.
 
