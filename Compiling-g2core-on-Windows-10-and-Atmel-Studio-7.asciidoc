@@ -173,7 +173,7 @@ This is a collection of random things we've foind help when using our standard t
 
 - The ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
-- When firing up a new instance of AS7 you may get an error trying to connect to the ICE. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel0ICE...  Disconnect and reconnect.
+- When firing up a new instance of AS7 you may get an error trying to connect to the ICE. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect and reconnect.
 
 - If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
