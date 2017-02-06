@@ -155,6 +155,10 @@ On Marlin, motion of the extruder is a mixture of `E` and `T` words, where on g2
 
 On g2core, `G0` does not accept an `F` word and `G1` requires one (but it is 'sticky,' so it only be included once, and from then on when it needs changed). In Marlin, G0 is [the same as G1](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L2930-L2962).
 
+On Marlin, the `T` word is effective immediately, and there is no `M6`. :see_no_evil:
+
+On Marlin, numbers after words are optional. For example, this is valid (where on g2core it's not): `G28 X Y Z` :facepunch:
+
 ### Marlin Comment Handling
 
 Generally, comments are handled the same way in Marlin and g2core.
@@ -186,6 +190,8 @@ Even when exporting "RepRap" flavor gcode, Cura prints some of these:
 ;LAYER:0
 ```
 
+Note that, at least Cura will strip out all comments before sending, so they're not generally useful, and certainly not to be relied on.
+
 ## Supported `Gxxx` and `Mxxx` codes (different from normal g2core behavior)
 
 When codes marked with :baby_chick: (for "canary") are seen, the protocol will be switched to Marlin-compatible.
@@ -193,6 +199,10 @@ When codes marked with :baby_chick: (for "canary") are seen, the protocol will b
 When codes marked with :zap: are seen, then the gcode-flavor will be switch to Marlin-flavor.
 
 **Note that the protocol and gcode-flavor are switched independently.**
+
+- [x] **`Exxx` - "extruder axis"** :zap:
+  - On Marlin, extruder moves are indicated with a fake-axis `E`.
+  - These are currently mapped to `A` for `T0` (which is first mapped to `T1`, since `T0` means "current tool" internally), and `B` for `T1` (which is internally mapped to `T2`).
 
 - [x] **`G0`**
   - On Marlin, `G0` is the same as `G1`.
@@ -216,10 +226,15 @@ When codes marked with :zap: are seen, then the gcode-flavor will be switch to M
   - [`M82`](http://reprap.org/wiki/G-code#M82:_Set_extruder_to_absolute_mode) sets the `E` to be absolute, while `M83` makes it relative.
   - *Not implemented in Ultimaker2Marlin, since E is volumetric and always effectively absolute and in volume.*
 
-- [ ] **`M84` - disable motors**
-  - [`M84`](http://reprap.org/wiki/G-code#M84:_Stop_idle_hold) Will, with no arguments, disable all motors.
-  - With `X`, `Y`, `Z`, or `E` it will disable [just that motor](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L5868-L5895).
-  - Can be mapped to `{md:0}` for now
+- [ ] **`M18`, `M84` - Stop idle hold**
+  - [`M84`](http://reprap.org/wiki/G-code#M84:_Stop_idle_hold) Will, with no arguments, disable all motors. (`M18` is accepted as an alias as `M84`.)
+  - *(Prerelease Marlin)* With `X`, `Y`, `Z`, or `E` it will disable [just that motor](https://github.com/MarlinFirmware/Marlin/blob/RC/Marlin/Marlin_main.cpp#L5868-L5895). This is not supported at the moment.)
+  - `M84` is internally queued as if it were `M100 ({"md":0})`
+  - With `Sxxx` it acts the same as `M85`
+
+- [ ] **`M85` - Set inactivity shutdown timer**
+  - [`M85`](http://reprap.org/wiki/G-code#M85:_Set_inactivity_shutdown_timer) Will, with no arguments, disable all motors.
+  - `M85 Sxxx` is internally queued as if it were `M100 ({"mt":xxx})`
 
 - [x] **`M104`, `M109`, `M140`, `M190` - temperature control** :zap:
   - On Marlin, you set the extruder temperature (and return immediately) with a `M104 Snnn Tnnn`
@@ -272,4 +287,13 @@ When codes marked with :zap: are seen, then the gcode-flavor will be switch to M
   - Since there are no status reports in Marlin-protocol, the position must be polled for. [`M114`](http://reprap.org/wiki/G-code#M114:_Get_Current_Position) is the command used to poll for current position.
   - See discussion above about [[Response (R) analog]] for details
 
+- [x] **`M115` - report firmware version and capabilities** :baby_chick:
+  - Results in  a string generated like: `"FIRMWARE_NAME:Marlin " DETAILED_BUILD_VERSION " SOURCE_CODE_URL:" FIRMWARE_URL " PROTOCOL_VERSION:" PROTOCOL_VERSION " MACHINE_TYPE:" MACHINE_NAME " EXTRUDER_COUNT:" STRINGIFY(EXTRUDERS) " UUID:" MACHINE_UUID "\n"`
+  - This would show as: `"FIRMWARE_NAME:Marlin ${BRANCH}-${VERSION} SOURCE_CODE_URL:https://github.com/MarlinFirmware/Marlin PROTOCOL_VERSION:1.0 MACHINE_TYPE:Ultimaker EXTRUDER_COUNT:1 UUID:00000000-0000-0000-0000-000000000000\n"`
+
 ## Unsupported
+
+
+- **`M111` - set debug level**
+  - [`M111`](http://reprap.org/wiki/G-code#M111:_Set_Debug_Level) is called by Repetier during connection, first with `S6` and then with `S7`.
+  - Marlin doesn't officially support M111 other than in RC versions.
