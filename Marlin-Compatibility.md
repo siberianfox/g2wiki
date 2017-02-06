@@ -291,6 +291,29 @@ When codes marked with :zap: are seen, then the gcode-flavor will be switch to M
   - Results in  a string generated like: `"FIRMWARE_NAME:Marlin " DETAILED_BUILD_VERSION " SOURCE_CODE_URL:" FIRMWARE_URL " PROTOCOL_VERSION:" PROTOCOL_VERSION " MACHINE_TYPE:" MACHINE_NAME " EXTRUDER_COUNT:" STRINGIFY(EXTRUDERS) " UUID:" MACHINE_UUID "\n"`
   - This would show as: `"FIRMWARE_NAME:Marlin ${BRANCH}-${VERSION} SOURCE_CODE_URL:https://github.com/MarlinFirmware/Marlin PROTOCOL_VERSION:1.0 MACHINE_TYPE:Ultimaker EXTRUDER_COUNT:1 UUID:00000000-0000-0000-0000-000000000000\n"`
 
+## Partially supported (or faked)
+
+- **`M20` - List SD card**
+  - Response format for no items:
+```text
+Begin file list
+End file list
+ok
+```
+- **`M21` - Initialize SD card**
+  - Ignore and respond with an `ok`
+- **`M22` - Release SD card**
+  - Ignore and respond with an `ok`
+- **`M23` - Select SD file**
+  - Example: `M23 blah.gcode`
+  - Respond with:
+  ```text
+  open failed, File: blah.gcode.
+  ok
+  ```
+  - (It appears that Marlin will actually say `ok` to that!)
+
+
 ## Unsupported
 
 
