@@ -113,16 +113,18 @@ Currently spline motion is not supported.
 `G21` selects millimeter mode<br>
 
 ##G28, G30 Go To Predefined Position
-`G28 'axes'` return to point saved in g28.1 - through intermediate point if 'axes' present<br>
 `G28.1` save location of current point in absolute coordinates<br>
-`G30 'axes'` return to point saved in g30.1 - through intermediate point if 'axes' present<br>
+`G28` return to point saved in g28.1<br>
+`G28 axes` return to point saved in g28.1 through intermediate point in axes<br><br>
 `G30.1` save location of current point in absolute coordinates<br>
+`G30` return to point saved in g30.1<br>
+`G30 axes` return to point saved in g2301 through intermediate point in axes<br>
 
-- G28 (and G30) will move the machine to the absolute coordinates set in G28.1 (G30.1)
-- Movement will occur at the traverse rate (G0 rate) 
+- G28 (and G30) will move the machine to absolute coordinates set in G28.1 (G30.1) at traverse rate (G0) 
+- If G28.1 or G30.1 is not set the return point is (0,0,0,0,0,0)
 - If 'axes' are provided the move will proceed through the intermediate point specified
-- Axes that are not specified are ignored (not moved) 
-- Movement will always occur in the machine coordinate system (absolute coordinates, G53), and is not affected by work coordinate systems (G54-G59), temporary offsets (G92), or tool length offsets 
+- Axes that are not specified in the G28 or G30 command are not included in the intermediate move 
+- Movement will occur in the machine coordinate system (absolute coordinates, G53), and is not affected by work coordinate systems (G54-G59), temporary offsets (G92), or tool length offsets. However, position reporting `{pos:n}` will be provided using all offsets in effect at the time of the G28/G30 command. 
 
 Example of use: 
 
