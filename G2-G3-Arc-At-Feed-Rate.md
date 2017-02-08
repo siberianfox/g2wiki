@@ -1,4 +1,8 @@
+_Note This page is similar to, but not identical to:_
 
+- [LinuxCNC Gcode reference](http://linuxcnc.org/docs/devel/html/gcode/g-code.html)
+
+##G2, G3 Arc At Feed Rate.x Probes
 `G2 or G3 'axes' 'offsets' Pn Fnnn` center format arc<br>
 `G2 or G3 'offsets' Pn Fnnn` center format full circle arc<br>
 `G2 or G3 'axes' Rnnn Pn Fnnn` radius format arc<br>
