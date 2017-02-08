@@ -8,6 +8,7 @@ This page and related pages describe basic Gcode commands for movement and param
 
 Related Pages
 - [Mcodes](Mcodes)
+- [G28, G30 Go To Position](G28-Go-To-Position)
 - [G38.x Probes](Gcode-Probes)
 - [Coordinate Offsets](Gcode-Coordinate-Offsets) G10, G53-G59, G92.x, JSON Offset commands
 
