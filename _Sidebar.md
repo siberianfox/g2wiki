@@ -44,6 +44,7 @@
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [Diagnostics](Diagnostics)
+1. [ ] [Debugging w/Motate Pins](Using-Pin-Changes-for-Timing-(and-light-debugging))
 1. [ ] [Development Troubleshooting](Troubleshooting)
 1. [ ] [g2core Communications](g2core-Communications)
 1. [ ] [Git Procedures](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
