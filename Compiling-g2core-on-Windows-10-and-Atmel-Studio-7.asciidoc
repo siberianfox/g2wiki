@@ -175,9 +175,9 @@ This is a collection of random things we've found help when using our standard t
 
 - When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
 
-- If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
-
 - If g2core project does not load it may be because the g2core.cppproj doesn't pass the AS7 XML parser - especially after a conflicted merge. A merge conflict can be caused a collision of the Atmel ICE settings in the g2core.cppproj file. In this case open the file manually or with a mergetool and select one or the other Atmel-ICE settings. Either one is OK because you can change to the right one once AS7 is open.
+
+- If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
 # Troubleshooting Windows Configurations
 
