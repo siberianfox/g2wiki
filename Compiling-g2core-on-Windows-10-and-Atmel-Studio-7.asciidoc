@@ -169,15 +169,15 @@ This is a collection of random things we've found help when using our standard t
 
 - A common mistake is to not update the Motate submodule after switching to a new branch or pulling a branch. Whenever you pull from github be sure to run `git submodule update` from the command line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have. The short-SHA for the Motate commit can be found by going to the github, selecting the branch you are on in the Code tab, and looking for the `Motate @ ba0db89` entry in the file listing. The SHA provided should match the `git submodule` command from the command line.
 
-- Whenever you pull from github you must CLEAN the g2core project. Run Clean or Rebuild to do this. Clean clears out the /bin and /build directories. In some cases the Windows configuration prevents this (permissions?) and those must be cleaned manually. It's OK to just delete the /bin and /build directories completely.
+- Whenever you pull from github you must CLEAN the g2core project. While running Clean or Rebuild should do this sometimes things get messed up due to Windows permissions. Clean clears out the /bin and /build directories, but we recommend just deleting the /bin and /build directories completely. If your build behaves badly (goes into panic, does completely unexpected things) you should delete these directories and recompile.
 
-- In fact, it's good practice to just delete the /bin and /build directories when you pull a new branch, as the `clean` command can fail on Windows due to permissions problems. If your build behaves badly (goes into panic, does completely unexpected things) it's a good idea to delete these directories and recompile.
-
-- The ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
+- The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
 - When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
 
 - If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
+
+- If g2core project does not load it may be because the g2core.cppproj doesn't pass the AS7 XML parser - especially after a conflicted merge. A merge conflict can be caused a collision of the Atmel ICE settings in the g2core.cppproj file. In this case open the file manually or with a mergetool and select one or the other Atmel-ICE settings. Either one is OK because you can change to the right one once AS7 is open.
 
 # Troubleshooting Windows Configurations
 
