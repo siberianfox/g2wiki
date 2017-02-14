@@ -91,7 +91,7 @@ Now you should have a local clone of the g2 repository.
 
 Each OS requires different setup, so you'll need to look at the compiling setup for each OS separately:
 
-#### link:Compiling-g2core-on-OS-X-(with-Xcode)[OSX Xcode]
+#### * link:Compiling-g2core-on-OS-X-(with-Xcode)[OSX Xcode]
 #### link:Compiling-g2core-on-Linux-and-OS-X-(command-line)[OSX and Linux Command Line]
 #### link:Compiling-g2core-on-Windows-10-and-Atmel-Studio-7[Windows 10 / Atmel Studio 7]
 
