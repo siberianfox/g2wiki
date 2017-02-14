@@ -165,9 +165,9 @@ NOTE: We try to eliminate all compiler errors and warnings from the project. How
 To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-G2-with-Windows[Flashing g2core with Windows] page.
 
 # Tips and Tricks
-This is a collection of random things we've foind help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
+This is a collection of random things we've found help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
 
-- A common mistake is to not update the motate submodule. Whenever you pull from github be sure to run `git submodule update` from the comamnd line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have.
+- A common mistake is to not update the motate submodule. Whenever you pull from github be sure to run `git submodule update` from the command line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have.
 
 - Whenever you pull from github you must CLEAN the g2core project. Run Clean or Rebuild to do this. Clean clears out the /bin and /build directories. In some cases the Windows configuration prevents this (permissions?) and those must be cleaned manually. It's OK to just delete the /bin and /build directories completely.
 
