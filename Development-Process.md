@@ -1,5 +1,7 @@
-_We encourage code contributions. This page describes the process for g2core development and code contribution. We use this ourselves to keep a better record of all the changes, and keep the repo cleaner._
+_We encourage code development and contribution. This page describes the process for g2core development and code contribution. We use this ourselves to keep a better record of all the changes, and keep the repo cleaner._
  
+See also: [Getting Started with g2core Development](https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development)
+
 ##Development Process for g2
 We do development by features branches and pull requests (PRs). A feature is any code change that adds new capability of fixes a bug. Feature branches should be separate, i.e. avoid multiple new functionality in a single feature. The basic process steps are:
 
