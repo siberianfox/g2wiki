@@ -102,7 +102,7 @@ Having wired the homing inputs, those same switches can also be used as limit sw
 It is mandatory that the homing configuration settings match the physical switch configuration otherwise homing simply won't work. In the case of NC switches the entire machine may be rendered inoperative if these settings are not in alignment. Homing is set up by first configuring the digital inputs, then configuring each homing axis to use the proper input. 
 
 ### Configuring Digital Inputs for Homing
-Digital inputs are explained on the [GPIO page](Digital-IO-(GPIO)) but are recapped here (using di1 as an example):
+Digital inputs are explained on the [GPIO page](Digital-IO) but are recapped here (using di1 as an example):
 
 	Name | Description | Values
 	------|------------|---------
