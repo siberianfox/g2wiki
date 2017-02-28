@@ -3,7 +3,7 @@ G2core is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/
 ### Features
 g2core has a number of advanced features including:
 
-* Full 6 axis motion control - XYX linear axes and ABC rotary axes
+* Full 6 axis motion control - XYZ linear axes and ABC rotary axes
 * Step outputs available for 6 motors (motors are mappable to axes)
 * Jerk controlled motion for acceleration planning (S curve 3rd order motion planning)
 * Extremely stable and jitter-free 200 kHz step generation
