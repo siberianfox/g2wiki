@@ -17,6 +17,17 @@ To use a tool offset program: G43 Hn, where the H number is the desired tool num
 
 ## Gcode Commands
 
+Gcode | Parameters | Command | Description
+------|------------|---------|-------------
+[T](#t-select-tool) | n | Select tool | `n` is tool number, 1 - 32
+[M6](#m6-change-tool) |  | Change to selected tool |
+[G10 L1](#g10-l1-set-tool-table-as-absolute-value) | Pn axes | Set tool offset as absolute value | `n` is tool number, 1 - 32
+[G10 L10](#g10-l10-set-tool-table-as-computed-value) | Pn axes | Set tool offset as computed value | `n` is tool number, 1 - 32
+[G43](#g43-set-tool-offset) | Hn | Set tool offset | `n` is tool number, 1 - 32
+[G43.2](#g43.2-set-additional-tool-offset) | Hn | Set additional tool offset | `n` is tool number, 1 - 23
+[G49](#g49-cancel-tool-offset) | | Cancel tool offset | 
+
+
 	Gcode | Parameters | Command | Description
 	------|------------|---------|-------------
 	[T](#t-select-tool) | n | Select tool | `n` is tool number, 1 - 32
