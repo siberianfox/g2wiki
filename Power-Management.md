@@ -1,5 +1,5 @@
+_[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_<br>
 _**Applies to fb 100.11 and above, which was pushed on 9/18/16**_ <br>
-_[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
 Power management is used to keep the steppers on when you need them and turn them off when you don't. 
 
