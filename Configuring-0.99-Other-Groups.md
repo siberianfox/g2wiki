@@ -1,7 +1,5 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_
 
-
-
 ## Coordinate System and Origin Offsets 
 ### $g54x - $g59c
 Coordinate system offsets are the values used by G54, G55, G56, G57, G58 and G59 commands to define the offsets from the machine (absolute) coordinate system for X,Y,Z,A,B and C. G54-G59 correspond to the Gcode coordinate systems 1-6, respectively. 
@@ -51,19 +49,18 @@ Gcode provides the G10 L2 command to perform this same coordinate system offset 
 
 TinyG does not persist G10 settings, however. This is not in accordance with the [Gcode spec](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CEkQFjAA&url=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D10.1.1.141.2441%26rep%3Drep1%26type%3Dpdf&ei=rm7UULm2F6ex0AH1sICQDA&usg=AFQjCNH72m_sRg2TycD-8cf8d40FZ6Co_g&sig2=MrjWabHA5YwPsWtrj2TtOA&bvm=bv.1355534169,d.dmQ). Any G10 settings that are provided will be used until reset, power cycle, or they are overwritten by a $g5xx command or another G10 command. 
 
-
-##PWM Group (Pulse Width Modulation)
+## PWM Group (Pulse Width Modulation)
 There is currently only one PWM channel (p1), but the configs are structured for multiple PWM groups. The PWM channel is set up to act as a remote control Electronic Speed Controller (ESC), but can be used for other PWM functions using these settings. 
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	{p1frq:_} | Frequency | in Hz, e.g. 100
-	{p1csl:_} | Clockwise speed low | In RPM - arbitrary units unless you calibrate it, e.g. 1000
-	{p1csh:_} | Clockwise speed high | In RPM
-	{p1cpl:_} | Clockwise phase low | 0.000 to 1.000, e.g. 0.125 for 12.5% phase angle
-	{p1cph:_} | Clockwise_phase_high | 0.000 to 1.000
-	{p1wsl:_} | CCW speed low | In RPM 
-	{p1wsh:_} | CCW speed high | In RPM
-	{p1wpl:_} | CCW phase low | 0.000 to 1.000
-	{p1wph:_} | CCW phase high | 0.000 to 1.000
-	{p1pof:_} | Phase off | 0.000 to 1.000 used to set OFF phase for PWM devices that are not off at 0 phase
+Setting | Description | Notes
+--------|-------------|-------
+{p1frq:_} | Frequency | in Hz, e.g. 100
+{p1csl:_} | Clockwise speed low | In RPM - arbitrary units unless you calibrate it, e.g. 1000
+{p1csh:_} | Clockwise speed high | In RPM
+{p1cpl:_} | Clockwise phase low | 0.000 to 1.000, e.g. 0.125 for 12.5% phase angle
+{p1cph:_} | Clockwise_phase_high | 0.000 to 1.000
+{p1wsl:_} | CCW speed low | In RPM 
+{p1wsh:_} | CCW speed high | In RPM
+{p1wpl:_} | CCW phase low | 0.000 to 1.000
+{p1wph:_} | CCW phase high | 0.000 to 1.000
+{p1pof:_} | Phase off | 0.000 to 1.000 used to set OFF phase for PWM devices that are not off at 0 phase
