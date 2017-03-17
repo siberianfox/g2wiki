@@ -7,7 +7,7 @@ See the [g2core Communications](g2core-Communications) page if you need details 
 ### OSX
 OSX you have everything you need.  The drivers will install automatically.
 
-###Windows
+### Windows
 Windows users need download an INF file in order to use g2core. Use this [G2 Windows Driver](https://raw.githubusercontent.com/synthetos/g2/edge/Resources/TinyGv2.inf) to download the inf file.  **Besure to "right click save as** when downloading. Note that the g2core USB registration makes it show up in the device list as `TinyG v2`.
 
 Here is a video tutorial explaining how to install the g2core drivers on windows 7.<br>
