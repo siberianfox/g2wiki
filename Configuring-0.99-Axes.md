@@ -10,7 +10,7 @@ This page documents axis settings. Each axis object ("group") has a collection o
 
 Setting | Description | Notes
 --------|-------------|-------
-________|___________________|
+________|_____________________|
 [{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
 [{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
 [{xfr:_}](#xfr---feed-rate-maximum) | Feed_rate_maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
@@ -116,6 +116,7 @@ By way of example, a Shapeoko2 can be set up this way:
 
 Setting | Description | Example
 --------|-------------|--------------
+________|_____________________|
 $ST | Switch Type | 1=NC
 $XJH | X Homing Jerk | 10000 (10 billion)
 $XSN | X Minimum Switch Mode | 3=limit-and-homing
