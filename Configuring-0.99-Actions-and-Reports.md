@@ -13,7 +13,7 @@ Command | Description | Notes
 [{test:_}](#test---run-self-test) | Invoke self tests | $test=n for test number; $test returns help screen in text mode
 [{defa:1}](#defa---reset-default-profile-settings) | reset to DEFAults | Reset to compiled default settings
 [{flash:1}] | Enter_FLASH_loader | WILL ERASE AND REFLASH BOARD. BE CAREFUL WITH THIS
-^x | Reset tinyG | cntl+x restarts tinyG same as hardware rest button
+^x | Reset g2core | cntl+x restarts g2core same as hardware rest button
 [{help:_}] | Show help screen | Show system help screen; $h also works
 
 Note: Status report parameters is settable in JSON only - see JSON mode for details
@@ -41,6 +41,6 @@ Energizes all non-disabled motors. Motors will time out according to their power
 Execute `$test` to get a listing of available tests. Run `$test=N`, where N is the test number.
 
 ### $DEFA - Reset default profile settings
-TinyG comes with a set of defaults pre-programmed to a specific machine profile. The default profile is set for a relatively slow screw machine such as the Zen Toolworks 7x12. Other default profiles are settable at compile time by including the right settings_XXXXXX.h file. If you are having trouble with your settings and want to revert to the default settings enter: `$defa=1`  
+g2core comes with a set of defaults pre-programmed to a specific machine profile. The default profile is set for a relatively slow screw machine such as the Zen Toolworks 7x12. Other default profiles are settable at compile time by including the right settings_XXXXXX.h file. If you are having trouble with your settings and want to revert to the default settings enter: `$defa=1`  
 
 ***WARNING*** This will revert all settings to defaults. Do a screencap of the $$ dump if you want to refer back to the current settings
