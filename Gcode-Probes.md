@@ -4,7 +4,7 @@ This page is similar to, but not identical to:
 
 - [LinuxCNC Gcode reference](http://linuxcnc.org/docs/devel/html/gcode/g-code.html)
 
-##G38.x Probes
+## G38.x Probes
 g2Core implements probing using standard Gcodes G38.2, G38.3, G38.4 and G38.5. In addition, probing settings and results are accessible using JSON commands and queries.
 
 To run a probe the tool in the spindle (toolhead) must be a probe, contact a probe switch, or otherwise provide a reliable contact signal to the designated [probe input](#configuring-probe-input) _(Note: We don't recommend probing with tools, but some people do this. Tool coatings can be a problem.)_
@@ -44,19 +44,18 @@ It is an error if:
 - No input is [configured for probing](#configuring-probe-input)
 - The probe input is already in the 'tripped' state
 
-##Probing Command Reference
+## Probing Command Reference
 
-	Gcode | Parameters | Command | Description
-	------|------------|---------|-------------
-	G38.2 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed), alarm if probe does not trip
-	G38.3 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed)
-	G38.4 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open), alarm if probe does not trip
-	G38.5 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open)
-	{prb:n} | none | probe results | Probe status `e` and axis positions after probe, in absolute machine coordinates, in MM. Read only
-	{prbe:n} | none | probe status | 0=failed, 1=succeeded. Read only
-	{prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
-	{prbr:_} | t/f | enable probe reports | If true, generate automatic probe reports when probing is complete
-
+Gcode | Parameters | Command | Description
+------|------------|---------|-------------
+G38.2 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed), alarm if probe does not trip
+G38.3 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed)
+G38.4 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open), alarm if probe does not trip
+G38.5 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open)
+{prb:n} | none | probe results | Probe status `e` and axis positions after probe, in absolute machine coordinates, in MM. Read only
+{prbe:n} | none | probe status | 0=failed, 1=succeeded. Read only
+{prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
+{prbr:_} | t/f | enable probe reports | If true, generate automatic probe reports when probing is complete
 
 ### Configuring Probe Input
 The digital input to be used by probing is selected by setting the input function to INPUT_FUNCTION_PROBE (4). In most cases this is the Zmin input, but does not have to be. An example of how to assign the probe input to digital input #5 is shown below. 
