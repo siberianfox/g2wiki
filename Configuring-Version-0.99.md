@@ -16,7 +16,7 @@ If you have an older firmware version:
 - [Configuring Actions and Reports](Configuring-0.99-Actions-and-Reports)
 - [Configuring 3D Printing Extensions](Configuring-0.99-3D-Printing-Extensions)
 
-##Conventions Used for Config Documentation
+## Conventions Used for Config Documentation
 - Examples show relaxed JSON input. e.g. `{fv:n}`. Strict JSON is also accepted in all cases, e.g. `{"fv":null}`
 - Multi-level JSON is shown in its parent/child form, e.g. `{x:{vm:...}}`. The flat forms are also supported: `{xvm:...}`
 - CMD means some command - aka the "name" of the name/value pair. CMDs are case insensitive.
