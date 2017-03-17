@@ -10,7 +10,7 @@ This page documents axis settings. Each axis object ("group") has a collection o
 
 Setting | Description | Notes
 --------|-------------|-------
-________|_____________________|
+________|_____________________|__
 [{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
 [{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
 [{xfr:_}](#xfr---feed-rate-maximum) | Feed_rate_maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
