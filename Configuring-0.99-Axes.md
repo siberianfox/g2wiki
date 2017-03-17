@@ -142,7 +142,7 @@ $ZSV | Z Homing Search Velocity | 1000 mm/min
 $ZLV | Z Homing Latch Velocity | 100 mm/min
 $ZLB | Z Homing Latch Backoff | 10 mm
 $ZZB | Z Homing Zero Backoff | 5 mm
-||
+|____|
 $ASN | A Minimum Switch Mode | 0=disabled 
 $ASX | A Maximum Switch Mode | 0=disabled
 <br>
