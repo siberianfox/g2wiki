@@ -12,7 +12,7 @@ g2core has a number of advanced features including:
 * Complete status and system state displays
 * Advanced hardware abstraction layer for easy port to multiple ARM and non-ARM processing environments
 
-###Some Clarification on Naming
+### Some Clarification on Naming
 It was pretty simple when there was just TinyG but now there are more options. Here's the scheme:
  * TinyG is the Synthetos hardware. TinyG v8 is the Xmega based hardware, and v9 is the (first) ARM based hardware. Presumably there will be more TinyG variants including a 5 axis board and a number of g2core-based custom boards such as the Shopbot sbv300 and the Printrbot printrBoardG2.
  * g2core is the ARM code base. It is cross platform based on the Motate hardware abstraction layer. G2core is written in C++ and is licensed under [GPLv2 with the BeRTOS exception](https://github.com/synthetos/g2/wiki/Licensing). We are now making the distinction between the firmware and the hardware as there are a growing number of combinations. 
