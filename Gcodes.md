@@ -12,7 +12,7 @@ Related Pages
 - [G38.x Probes](Gcode-Probes)
 - [Coordinate Offsets](Gcode-Coordinate-Offsets) G10, G53-G59, G92.x, JSON Offset commands
 
-##Gcode Summary 
+## Gcode Summary 
 This table summarizes Gcode supported. In the following _'axes'_ means one or more of X,Y,Z,A,B,C, along with a corresponding floating point value for a specified axis.
 
 	Gcode | Parameters | Command | Description
@@ -69,10 +69,10 @@ This table summarizes Gcode supported. In the following _'axes'_ means one or mo
 	[;](#gcode-comments) | comment | alternate comment | A semicolon is an alternate way to delimit a comment. This is not Gcode "standard", but is used by Mach and some Reprap codes. (available as of build 378.05)
 	(msg....) | message | gcode message | Gcode messages are comments that begin with the characters `msg` (case insensitive). These will be echoed to the operator 
 
-##Gcode Comments
+## Gcode Comments
 Gcode comments possess a number of features that extend their capabilities beyond classic Gcode. This is to support active comments and other developments. Please see [Gcode Comments](JSON-Active-Comments#gcode-comments)
 
-##G0 Straight Traverse (Rapid Move)
+## G0 Straight Traverse (Rapid Move)
 `G0 'axes'`<br>
 Straight traverse motion at maximum velocity
 
@@ -84,35 +84,35 @@ The velocity will be the vector sum of the axes participating in the move, limit
 
 the achievable velocity may also be limited by the jerk settings `xJM` for each participating axis. This occurs in the case where the move cannot achieve its maximum velocity due to jerk limitations in one or more axes. Jerk is also computed as a vector sum so that none of the participating axes will exceed their maximum jerk settings during the move.
 
-##G1 Straight Feed (Cutting Move)
+## G1 Straight Feed (Cutting Move)
 `G1 'axes' Fnnn` causes straight feed motion at the requested feed rate or slower
 
 - All axis words are optional but must have a value if present. A feed with no axes words will set motion mode to G1 but cause no movement
 - `G1` is optional if the current motion mode is G1
 - `F` is optional if a feed rate is in effect. It is an error if no feed rate is in effect and none is specified.
 
-##G2, G3 Arc At Feed Rate
+## G2, G3 Arc At Feed Rate
 See [G2, G3 Arc At Feed Rate](G2-G3-Arc-At-Feed-Rate)
 
-##G4 Dwell
+## G4 Dwell
 `G4 Pnnn` causes motion to stop and resume nnnn seconds later
 
 - The P number is a required floating point number; fractions of a second may be used
 - `G4` affects spindle, coolant and I/O as programmed (details of this are currently incomplete and not listed)
 
-##G5 Reserved for Spline Motion
+## G5 Reserved for Spline Motion
 Currently spline motion is not supported.
 
-##G17, G18, G19 Select Arc Plane
+## G17, G18, G19 Select Arc Plane
 `G17` select XY arc plane
 `G18` select XZ arc plane
 `G19` select YZ arc plane
 
-##G20, G21 Select Units Mode
+## G20, G21 Select Units Mode
 `G20` selects inches mode<br>
 `G21` selects millimeter mode<br>
 
-##G28, G30 Go To Predefined Position
+## G28, G30 Go To Predefined Position
 `G28.1` save location of current point in absolute coordinates<br>
 `G28` return to point saved in g28.1<br>
 `G28 axes` return to point saved in g28.1 through intermediate point in axes<br><br>
@@ -137,7 +137,7 @@ Example:
 - Go back to X0Y0
 - Send G91 G28 Z10 - this will move to x100 y100. The tool will initially lift z by 10 mm (or inches); G91 is used to set relative mode for this command. 
 
-##G61, G64 Path Control Modes
+## G61, G64 Path Control Modes
 `G61` set exact stop mode<br>
 `G61.1` set path stop mode<br>
 `G64` set continuous mode (behaves like exact path mode<br>
@@ -145,12 +145,12 @@ Example:
 G2core supports exact stop mode (G61) and exact path mode (G61.1). G64 is recognized, but is treated as exact path mode. In exact stop mode motion will stop between each Gcode block. In exact path mode the exact path is followed (i.e. corners are not rounded). The velocity at the points joining 2 blocks is controlled to keep the change in direction between the blocks within the jerk limits of the participating axes.
 
 
-##G80 Cancel Motion Mode
+## G80 Cancel Motion Mode
 `G80` cancel motion mode<br>
 
 G80 cancels the current motion mode. Send G80 to make sure no movement will occur. Motion modes are the [NIST Gcode](http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=823374) modal group 1, which includes: G0, G1, G2, G3, G38.2, G80, G81, G82, G83, G84, G85, G86, G87, G88, G89
 
-##G90, G91 Set Distance Mode
+## G90, G91 Set Distance Mode
 `G90` set absolute distance mode (default)<br>
 `G91` set incremental distance mode<br>
 `G90.1` set absolute arc distance mode<br>
@@ -158,7 +158,7 @@ G80 cancels the current motion mode. Send G80 to make sure no movement will occu
 
 In absolute distance mode axis positions are provided as abopsulte coordinates in the currently active coordinate system.  In incremental distance mode axis positions represent incremental movement from the current point.
 
-##G93, G94, G95 Feed Rate Mode
+## G93, G94, G95 Feed Rate Mode
 `G93` set inverse-time feedrate mode<br>
 `G94` set units-per-minutes feedrate mode<br>
 `G95` reserved for set units-per-revolution feedrate mode (unimplemented)<br>
