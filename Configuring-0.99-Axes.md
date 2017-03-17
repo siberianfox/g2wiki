@@ -8,22 +8,22 @@ This page documents axis settings. Each axis object ("group") has a collection o
 
 ## Summary
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
-	[{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
-	[{xfr:_}](#xfr---feed-rate-maximum) | Feed_rate_maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
-	[{xtn:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
-	[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
-	[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management
-	[{xjh:_}](#xjh---jerk-high) | Jerk High | Jerk used during homing operations
-	[{ara:_}](#ara---radius-value) | Radius setting | Artificial radius to convert linear values to degrees. ABC axes only.
-	[{xhi:_}](#homing-settings) | Homing Input | Switch (input) to use for homing this axis
-	[{xhd:_}](#homing-settings) | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
-	[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch)
-	[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch)
-	[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
-	[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates
+Setting | Description | Notes
+--------|-------------|-------
+[{xam:_}](#xam---axis-mode) | Axis mode | Normally {xam:1} "normal". See details for setting. 
+[{xvm:_}](#xvm---velocity-maximum) | Velocity maximum | Max velocity for axis, aka "traverse rate" or "seek" 
+[{xfr:_}](#xfr---feed-rate-maximum) | Feed_rate_maximum | Sets maximum feed rate for that axis. Does NOT set the Gcode F word
+[{xtn:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel minimum | Minimum travel in absolute coordinates. Used by homing and soft limits 
+[{xtm:_}](#xtn-xtm---travel-minimum-travel-maximum) | Travel maximum | Maximum travel in absolute coordinates. Used by homing and soft limits 
+[{xjm:_}](#xjm---jerk-maximum) | Jerk maximum | Main parameter for acceleration management
+[{xjh:_}](#xjh---jerk-high) | Jerk High | Jerk used during homing operations
+[{ara:_}](#ara---radius-value) | Radius setting | Artificial radius to convert linear values to degrees. ABC axes only.
+[{xhi:_}](#homing-settings) | Homing Input | Switch (input) to use for homing this axis
+[{xhd:_}](#homing-settings) | Homing Direction | 0=search-towards-negative, 1=search-torwards-positive
+[{xsv:_}](#homing-settings) | Search velocity | Homing speed during search phase (drive to switch)
+[{xlv:_}](#homing-settings) | Latch velocity | Homing speed during latch phase (drive off switch)
+[{xlb:_}](#homing-settings) | Latch backoff | Maximum distance to back off switch during latch phase (drive off switch)
+[{xzb:_}](#homing-settings) | Zero backoff | Offset from switch for zero in absolute coordinates
 ## Axis Settings
 
 ### xam - Axis Mode
@@ -113,37 +113,37 @@ Please see [g2core Homing](Homing-g2core) for details and more help on homing se
 
 By way of example, a Shapeoko2 can be set up this way:
 
-	Setting | Description | Example
-	--------|-------------|--------------
-	$ST | Switch Type | 1=NC
-	$XJH | X Homing Jerk | 10000000000 (10 billion)
-	$XSN | X Minimum Switch Mode | 3=limit-and-homing
-	$XSX | X Maximum Switch Mode | 2=limit-only
-	$XTM | X Travel Maximum | 180 mm
-	$XSV | X Homing Search Velocity | 3000 mm/min
-	$XLV | X Homing Latch Velocity | 100 mm/min
-	$XLB | X Homing Latch Backoff | 20 mm
-	$XZB | X Homing Zero Backoff | 3 mm
-	||
-	$YJH | Y Homing Jerk | 10000000000 (10 billion)
-	$YSN | Y Minimum Switch Mode | 3=limit-and-homing
-	$YSX | Y Maximum Switch Mode | 2=limit-only
-	$YTM | Y Travel Maximum |  180 mm
-	$YSV | Y Homing Search Velocity | 3000 mm/min
-	$YLV | Y Homing Latch Velocity | 100 mm/min
-	$YLB | Y Homing Latch Backoff | 20 mm
-	$YZB | Y Homing Zero Backoff | 3 mm
-	||
-	$ZJH | X Homing Jerk | 100000000 (100 million)
-	$ZSN | Z Minimum Switch Mode | 0=disabled (with NC switches it's important all unused switches are disabled)
-	$ZSX | Z Maximum Switch Mode | 3=limit-and-homing
-	$ZTM | Z Travel Maximum | 100 mm
-	$ZSV | Z Homing Search Velocity | 1000 mm/min
- 	$ZLV | Z Homing Latch Velocity | 100 mm/min
-	$ZLB | Z Homing Latch Backoff | 10 mm
-	$ZZB | Z Homing Zero Backoff | 5 mm
-	||
-	$ASN | A Minimum Switch Mode | 0=disabled 
-	$ASX | A Maximum Switch Mode | 0=disabled
+Setting | Description | Example
+--------|-------------|--------------
+$ST | Switch Type | 1=NC
+$XJH | X Homing Jerk | 10000 (10 billion)
+$XSN | X Minimum Switch Mode | 3=limit-and-homing
+$XSX | X Maximum Switch Mode | 2=limit-only
+$XTM | X Travel Maximum | 180 mm
+$XSV | X Homing Search Velocity | 3000 mm/min
+$XLV | X Homing Latch Velocity | 100 mm/min
+$XLB | X Homing Latch Backoff | 20 mm
+$XZB | X Homing Zero Backoff | 3 mm
+||
+$YJH | Y Homing Jerk | 10000 (10 billion)
+$YSN | Y Minimum Switch Mode | 3=limit-and-homing
+$YSX | Y Maximum Switch Mode | 2=limit-only
+$YTM | Y Travel Maximum |  180 mm
+$YSV | Y Homing Search Velocity | 3000 mm/min
+$YLV | Y Homing Latch Velocity | 100 mm/min
+$YLB | Y Homing Latch Backoff | 20 mm
+$YZB | Y Homing Zero Backoff | 3 mm
+||
+$ZJH | X Homing Jerk | 100 (100 million)
+$ZSN | Z Minimum Switch Mode | 0=disabled (with NC switches it's important all unused switches are disabled)
+$ZSX | Z Maximum Switch Mode | 3=limit-and-homing
+$ZTM | Z Travel Maximum | 100 mm
+$ZSV | Z Homing Search Velocity | 1000 mm/min
+$ZLV | Z Homing Latch Velocity | 100 mm/min
+$ZLB | Z Homing Latch Backoff | 10 mm
+$ZZB | Z Homing Zero Backoff | 5 mm
+||
+$ASN | A Minimum Switch Mode | 0=disabled 
+$ASX | A Maximum Switch Mode | 0=disabled
 <br>
 <br>
