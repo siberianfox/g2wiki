@@ -17,4 +17,4 @@ We want to use Gcode in a way that is as standard as possible but still supports
 - The g2 dialect uses "standard" Gcode, with minimal extensions for 3dp and other applications. "Standard" gcode is determined by examining multiple industry sources and adopting the rough consensus for G and M commands. See [Consensus Gcode](g2dialect-Consensus-Gcode).
 - Use Gcode simply as a way to describe the job, not machine setup, configuration, job overrides and other functions. See [g2dialect Operating Model](https://github.com/synthetos/g2/wiki/g2dialect-Operating-Model).
 - Use JSON for non-job functions. Provide job extensibility by embedding JSON into Gcode in a way that does not break existing parsers and conventions. See [JSON Active Comments](https://github.com/synthetos/g2/wiki/JSON-Active-Comments)
-- Re-cast the Reprap Gcode and Mcodes using the above. See [g2dialect 3D Printing Codes](g2dialect-3D-Printing-Codes)
+- Re-cast the Reprap Gcode and Mcodes using the above. See [g2dialect 3D Printing Codes](Configuring-0.99-3D-Printing-Extensions)
