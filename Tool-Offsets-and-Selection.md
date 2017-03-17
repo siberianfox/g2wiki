@@ -27,17 +27,6 @@ Gcode | Parameters | Command | Description
 [G43.2](#g43.2-set-additional-tool-offset) | Hn | Set additional tool offset | `n` is tool number, 1 - 23
 [G49](#g49-cancel-tool-offset) | | Cancel tool offset | 
 
-
-	Gcode | Parameters | Command | Description
-	------|------------|---------|-------------
-	[T](#t-select-tool) | n | Select tool | `n` is tool number, 1 - 32
-	[M6](#m6-change-tool) |  | Change to selected tool |
-	[G10 L1](#g10-l1-set-tool-table-as-absolute-value) | Pn axes | Set tool offset as absolute value | `n` is tool number, 1 - 32
-	[G10 L10](#g10-l10-set-tool-table-as-computed-value) | Pn axes | Set tool offset as computed value | `n` is tool number, 1 - 32
-	[G43](#g43-set-tool-offset) | Hn | Set tool offset | `n` is tool number, 1 - 32
-	[G43.2](#g43.2-set-additional-tool-offset) | Hn | Set additional tool offset | `n` is tool number, 1 - 23
-	[G49](#g49-cancel-tool-offset) | | Cancel tool offset | 
-
 ### T Select Tool
 Select the tool using Tn, where `n` is an index into the tool table, from 1 to 32. Selecting a tool out-of-range will result in a T_WORD_IS_INVALID error (181).
 
@@ -81,12 +70,12 @@ Cancels the current tool offset.
 ### Read Tool Table
 The tool table can be examined using the following commands:
 
-	JSON | Command | Description
-	-----|---------|-------------
-	{tt1:n} | Tool table slot 1 | Returns tool table values
-	{tt2:n} | Tool table slot 2 | As above
-	... | ... | ...
-	{tt32:n} | Tool table slot 32 | As above
+JSON | Command | Description
+-----|---------|-------------
+{tt1:n} | Tool table slot 1 | Returns tool table values
+{tt2:n} | Tool table slot 2 | As above
+... | ... | ...
+{tt32:n} | Tool table slot 32 | As above
 
 These will return the tool table entry, as so:<br>
 `{"r":{"tt1":{"x":0,"y":0,"z":0,"a":0,"b":0,"c":0}},"f":[1,0,8]}`
