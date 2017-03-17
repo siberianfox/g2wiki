@@ -124,7 +124,7 @@ $XSV | X Homing Search Velocity | 3000 mm/min
 $XLV | X Homing Latch Velocity | 100 mm/min
 $XLB | X Homing Latch Backoff | 20 mm
 $XZB | X Homing Zero Backoff | 3 mm
-||
+|____|
 $YJH | Y Homing Jerk | 10000 (10 billion)
 $YSN | Y Minimum Switch Mode | 3=limit-and-homing
 $YSX | Y Maximum Switch Mode | 2=limit-only
@@ -133,7 +133,7 @@ $YSV | Y Homing Search Velocity | 3000 mm/min
 $YLV | Y Homing Latch Velocity | 100 mm/min
 $YLB | Y Homing Latch Backoff | 20 mm
 $YZB | Y Homing Zero Backoff | 3 mm
-||
+|____|
 $ZJH | X Homing Jerk | 100 (100 million)
 $ZSN | Z Minimum Switch Mode | 0=disabled (with NC switches it's important all unused switches are disabled)
 $ZSX | Z Maximum Switch Mode | 3=limit-and-homing
