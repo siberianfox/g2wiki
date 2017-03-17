@@ -11,15 +11,15 @@ The system groups contain the following global machine and communication setting
 ##Identification Parameters
 These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless otherwise noted.
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{fv:n}](#fvn-firmware-version) | Firmware Version | Version number, e.g. 0.99
-	[{fb:n}](#fbn-firmware-build-number) | Firmware Build | Build number, e.g. 100.00
-	[{fbs:n}](#fbsn-firmware-build-string) | Firmware Build String | Git string
-	[{fbc:n}](#fbcn-firmware-build-config-file) | Firmware Build Config | Name of settings file 
-	[{hp:n}](#hpn-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
-	[{hv:n}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
-	[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
+Setting | Description | Notes
+--------|-------------|-------
+[{fv:n}](#fvn-firmware-version) | Firmware Version | Version number, e.g. 0.99
+[{fb:n}](#fbn-firmware-build-number) | Firmware Build | Build number, e.g. 100.00
+[{fbs:n}](#fbsn-firmware-build-string) | Firmware Build String | Git string
+[{fbc:n}](#fbcn-firmware-build-config-file) | Firmware Build Config | Name of settings file 
+[{hp:n}](#hpn-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
+[{hv:n}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
+[{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
 
 ### {fv:n} Firmware Version
 Read-only value. Example `fv:0.99`. Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
@@ -50,14 +50,13 @@ Unused in g2core. This value is writable in TinyG and is used to set behaviors i
 ### {id:n} Unique Board Identifier
 Read-only value derived from factory settings in the ARM chip
 
+## Global Machining Parameters
 
-##Global Machining Parameters
-
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{jt:...}](#jt-junction-integration-time) | Junction Integration Time | Global cornering acceleration value
-	[{ct:...}](#ct-chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
-	[{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
+Setting | Description | Notes
+--------|-------------|-------
+[{jt:...}](#jt-junction-integration-time) | Junction Integration Time | Global cornering acceleration value
+[{ct:...}](#ct-chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+[{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
 
 ### {jt:...} Junction Integration Time 
 The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering.
@@ -95,18 +94,18 @@ Sets the number of seconds motors will remain powered after the last 'event'. E.
 {mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
 </pre> 
 
-##Communications Parameters
+## Communications Parameters
 Set communications speeds and modes. 
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{ej:...}](#ej-enable-json-mode) | Enable JSON mode | 0=text mode, 1=JSON mode, 2=auto mode
-	[{jv:...}](#jv-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
-	[{tv:...}](#tv-text-verbosity) | Text mode verbosity | 0=silent, 1=verbose
-	[{qv:...}](#qv-queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
-	[{sv:...}](#sv-status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
-	[{si:...}](#si-status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
-	[{ex:...}](#ex-flow-control) | Enable flow control | no function in 0.99 but remains for future use
+Setting | Description | Notes
+--------|-------------|-------
+[{ej:...}](#ej-enable-json-mode) | Enable JSON mode | 0=text mode, 1=JSON mode, 2=auto mode
+[{jv:...}](#jv-json-verbosity) | JSON verbosity | 0=silent ... 5=verbose
+[{tv:...}](#tv-text-verbosity) | Text mode verbosity | 0=silent, 1=verbose
+[{qv:...}](#qv-queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
+[{sv:...}](#sv-status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
+[{si:...}](#si-status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
+[{ex:...}](#ex-flow-control) | Enable flow control | no function in 0.99 but remains for future use
 
 _Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
@@ -178,19 +177,18 @@ This setting has no effect, but will not return an error if used.
 
 Prior to 0.99 `ex` was used to select XON/XOFF, RTS/CTS or no flow control. In 0.99 there are two ways to communication o the board. (1) USB, which does its own flow control and therefore needs no configuration, and (2) UART serial which assumes (and currently requires) hardware RTS/CTS flow control. In the future we anticipate adding XON/XOFF software flow control back into the firmware, so this variable has not been removed. 
 
-
-##Gcode Initialization Defaults
+## Gcode Initialization Defaults
 **NOTE: g2core currently does not support local persistence (i.e. on-board EEPROM or equivalent), so these Gcode initialization settings are effectively read-only. They can be set during compile time to change them, but a reset or power-on will always load the compiled values. Any changes that have been made to the values through the settings API are not applied.**  
 
 Gcode settings loaded on power up and reset. Changing these does NOT change the current Gcode state, only the initialization settings. Being as how g2core does not have any native persistence these commands are only set at compile time and will not have an effect is written.
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{gpl:_}](#gpl-gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
-	[{gun:_}](#gun-gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
-	[{gco:_}](#gco-gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
-	[{gpa:_}](#gpa-gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
-	[{gdi:_}](#gdi-gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
+Setting | Description | Notes
+--------|-------------|-------
+[{gpl:_}](#gpl-gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
+[{gun:_}](#gun-gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
+[{gco:_}](#gco-gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
+[{gpa:_}](#gpa-gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
+[{gdi:_}](#gdi-gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
 
 These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. 
 For example, entering $gun=0 will cause the system to start up from reset or power up in inches mode, but will **not** change the system to inches mode when it is entered. A G20 or G21 received in the Gcode stream will change the units to inches or MM mode, respectively. On reset or restart they will change back to the $gun setting.
