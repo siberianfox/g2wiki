@@ -1,4 +1,6 @@
-G2core is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on ARM 32bit processors such as the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue) and the Synthetos v9 hardware. On the Due it can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 6 axis motion control system. This wiki covers both platforms.
+G2core is a cross-platform ARM Port of the [TinyG](https://github.com/synthetos/TinyG) motion control system that runs on ARM 32bit processors such as the [Arduino Due](http://arduino.cc/en/Main/ArduinoBoardDue) and the Synthetos v9 hardware. 
+
+On the Due it can be used with the [gShield](https://github.com/synthetos/grblShield/wiki) to build a high performance 6 axis motion control system. This wiki covers both platforms.
 
 ### Features
 g2core has a number of advanced features including:
