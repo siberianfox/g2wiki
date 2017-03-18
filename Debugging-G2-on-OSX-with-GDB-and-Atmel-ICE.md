@@ -1,18 +1,18 @@
 See also: [Compiling G2 on OSX with Xcode](Compiling-G2-on-OS-X-(with-Xcode))
-##Hardware Required
+## Hardware Required
 You will need the following hw and configuration
 * TinyGv9 board
 * Atmel-ICE debugger
 * Both plugged into an OSX machine via USB, preferably without a hub. See the [Apple] / About this Mac / More Info / System Report / USB section. Hit command R if you want to refresh. Some times getting these connected takes some unplugging and replugging to get USB to behave.
 
-##Install OpenOCD Debugger
+## Install OpenOCD Debugger
 1. Install hombrew: http://brew.sh/
    Homebrew is a package manager for OSX which (in this case) provides an easy way to install OpenOCD. Look for "Install Homebrew” near the bottom of that page. Follow those instructions in Terminal.<br>
 <pre>
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 </pre>
 
-As instructed, run `brew doctor` before you install anything, and 
+As instructed, run `brew doctor` before you install anything, and
 install the Command Line Tools for Xcode: https://developer.apple.com/downloads. Search "Command Line Tools for Xcode". You may need to register as an Apple Developer for this step.
 You can also run this command in terminal to install Xcode Command Line Tools:
 ```bash
@@ -34,7 +34,7 @@ That should have you debugging in gdb. If you get connection errors make sure th
 On OSX it might pop a dialog box requesting you to accept an inbound connection. Do it. You may also need to try to connect more than once for it to work.
 
 ##Using GDB
-* References: 
+* References:
   * [GDB reference manual](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top)
   * [GDB cheat sheet](http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
 
@@ -46,7 +46,7 @@ On OSX it might pop a dialog box requesting you to accept an inbound connection.
 
 * This is Embedded GDB, so `run` and some commands in the cheat sheets do not work
 
-* for help on any command type `help <command>` 
+* for help on any command type `help <command>`
 
 ### A Very Brief Embedded GDB primer
 Even if you are familiar with GDB, you may find a few important differences when using it with an embedded project. This will not be a thorough how-to on this topic, but will hopefully serve enough to get you started.

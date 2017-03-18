@@ -8,9 +8,9 @@ These preliminary design pages are for discussion of the g2core REST interface: 
 
 ---
 
-#g2core REST API Examples
+# g2core REST API Examples
 
-##Version
+## Version
 Provides an endpoint for system and API version information that is independent of the machine or any other resource
 ### `GET /version`
 
@@ -25,7 +25,7 @@ RESPONSE:
 
 ```
 ## Machine
-The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most configuration gets and sets do. 
+The machine REST endpoint is used to query machine state and to query and set machine parameters in the [machine resource](g2core-REST-Resources#machine-resource). It is intended for JSON commands that execute synchronously, as most configuration gets and sets do.
 
 - The API can handle single values, JSON objects, or composite JSON documents consisting of multiple values and/or objects. It will accept as arguments pretty much anything supported in the [configuration for the board's firmware version](Configuring-Version-0.99). Examples are provided for some common cases.
 
@@ -273,7 +273,7 @@ RESPONSE:
   {"value":{"posx":10,"posy":20,"posz":-1,"vel":1000,"stat":5},"code":0,"description":"OK"}
 ```
 
-Use a status report filter with non-null values to return only keys that have different values (have changed) 
+Use a status report filter with non-null values to return only keys that have different values (have changed)
 ```http
 REQUEST:
   GET /status_report HTTP/1.1
@@ -326,7 +326,7 @@ RESPONSE:
 ```
 
 ### `GET /operation/{id}`
-Get return values from a current operation. Mostly what you want is the operation state - is it running, is it done, has it erred out? Some optypes may have specific information returned by a GET call. Note: In most cases a [status_report](#status_report-resource) is sufficient for monitoring additional information about an operation. 
+Get return values from a current operation. Mostly what you want is the operation state - is it running, is it done, has it erred out? Some optypes may have specific information returned by a GET call. Note: In most cases a [status_report](#status_report-resource) is sufficient for monitoring additional information about an operation.
 
 ```http
 REQUEST:

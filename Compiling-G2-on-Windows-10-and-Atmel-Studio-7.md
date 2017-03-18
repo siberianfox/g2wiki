@@ -22,9 +22,9 @@ To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 buil
   * There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
   * They require you to either register or fill out a "guest" form. Otherwise it's free.
 
-* Walk through the entire installation process. 
+* Walk through the entire installation process.
   * It should install .NET, Microsoft Studio, Atmel Drivers, Atmel Studio
-  * Fire up AS7 for the first time 
+  * Fire up AS7 for the first time
     * You **do not** want the Atmel Solutions Framework (ASF) when asked. You won't want to update it and you can turn off notifications about it. Do NOT use an ASF project (like the Arduino Due board) if you are playing with G2 Core or you will have a lot of stuff to back out. (We provide projects for you to use.)
     * You **will** need the USB drivers when asked.
 
@@ -32,13 +32,13 @@ To compile G2 on Windows with Atmel Studio you will need the Atmel Studio 7 buil
 The project Makefiles rely on Git for Windows, so even if you use Git on your native OS for all your other activities it needs to be installed in your Windows environment.
 * Go to the [official Git site](http://git-scm.com/downloads) and download and install the Git for Windows. Get the right one for your VM - 32 bit or 64 bit (version 2.9.3 at the time of this writing).
   * Option Dialog 1: Choose BASH (default, but any should work)
-  * Option Dialog 2: Choose option 2, Checkout as-is, Unix style line endings 
+  * Option Dialog 2: Choose option 2, Checkout as-is, Unix style line endings
   * Option Dialog 3: Choose MinTTY (default, but  doesn't matter for our uses)
   * Option Dialog 4: Both boxes checked ON, but turn OFF if windows weirdness (works for us)
   * when it asks you if you want icons on your desktop you might want this to get Git Bash so you can debug the Windows environment (should it come to that)
 
 ### Cloning the Git Repository
-There is more than one way to clone the Git repository. 
+There is more than one way to clone the Git repository.
 - Direct clone in a terminal window
 - Use Github Windows app
 
@@ -77,7 +77,7 @@ _Note:_ These instructions are for the Atmel-ICE debugger. Many of these instruc
 ### Loading the Project
 - The `g2` project directory is the parent for all of the source files and the Atmel project files. the `g2core` subdirectory contains the main project and the g2core project file `g2core.cppproj`, and `Motate` contains the module and its project file. Generally you shouldn't need to work in Motate.
 
-- If you have changed your git branch you should run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case. 
+- If you have changed your git branch you should run `git submodule update` to make sure the right commit of Motate is associated with the g2core you have. It's a good idea to run this before opening the project in any case.
 
 - Open AS7 by double clicking on `g2core.atsln` in the parent g2 directory. AS7 should fire up - tell it to trust us. AS7 has a bug so you might get this warning which can be ignored:
 `[warning] Error updating project settings:Object reference not set to an instance of an object`
@@ -96,11 +96,11 @@ To compile the project:
   * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually
   * The first time it compiles the projcet it will download the entire toolchain and install it in the Motate Tools directory. This can take a while (~200 Mbytes). You will want a good Internet connection.
 3. Configure the Device and Atmel-ICE Tool in the g2core project Properties window, which can be found by right clicking the g2core root directory in the Solution Explorer pane
-  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board 
+  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board
   * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number
   * The Interface should be `SWD`. JTAG doesn't always work
   * You can now program and debug the buttons labeled '5' in the picture, as per step 5, below.
-4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window: 
+4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window:
   * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
   * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board
   * The Interface should be `SWD`. JTAG doesn't always work
@@ -113,7 +113,7 @@ To compile the project:
 
 To flash G2 (using the TinyG2.bin file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the [[Flashing G2 with Windows]] page.
 
-#Troubleshooting Windows Configurations
+# Troubleshooting Windows Configurations
 
 The following tags are used. They can apply to the problem, and also the possible solutions:
   - [w32], [w64]: This problem affects Windows32 / Windows64 configurations

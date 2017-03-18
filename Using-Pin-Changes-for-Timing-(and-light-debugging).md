@@ -63,7 +63,7 @@ __PLEASE__ -- don't git commit the changes to the `motate_pin_assignments.h` fil
 
 __ALSO__ -- avoid putting more than just the pin changes in. `if...then` statements around the pins can easily have side effects, and it you're just timing or doing light debugging, you don't want that.
 
-###Tips:
+### Tips:
 
 - Make sure the that pin isn't already being used elsewhere as well.
 Just search for the name: kDebug1_PinNumber (for example)

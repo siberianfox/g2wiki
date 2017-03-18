@@ -8,7 +8,7 @@ The system groups contain the following global machine and communication setting
 - [Communications Parameters](#communications-parameters)
 - [Gcode Initialization Defaults](#gcode-initialization-defaults)
 
-##Identification Parameters
+## Identification Parameters
 These are reported in the startup strings and should be included in any support discussions. All parameters are read-only unless otherwise noted.
 
 Setting | Description | Notes
@@ -16,7 +16,7 @@ Setting | Description | Notes
 [{fv:n}](#fvn-firmware-version) | Firmware Version | Version number, e.g. 0.99
 [{fb:n}](#fbn-firmware-build-number) | Firmware Build | Build number, e.g. 100.00
 [{fbs:n}](#fbsn-firmware-build-string) | Firmware Build String | Git string
-[{fbc:n}](#fbcn-firmware-build-config-file) | Firmware Build Config | Name of settings file 
+[{fbc:n}](#fbcn-firmware-build-config-file) | Firmware Build Config | Name of settings file
 [{hp:n}](#hpn-hardware-platform) | Hardware_Platform | 1=Xmega, 2=Due, 3=v9(ARM)
 [{hv:n}](#hvn-hardware-version) | Hardware Version | Always set to 0 (used in v8 for HW configuration)
 [{id:n}](#idn-unique-board-identifier) | board ID | Each board has a read-only unique ID
@@ -25,11 +25,11 @@ Setting | Description | Notes
 Read-only value. Example `fv:0.99`. Indicates the major version of the firmware; changes infrequently. Generally all settings, behaviors and other system functions will remain the same within a version - that's why this page is useful for all 0.99 versions.
 
 ### {fb:n} Firmware Build number
-Read-only value. Example `"fb":100.00`. 
+Read-only value. Example `"fb":100.00`.
 Indicates the build of firmware and changes frequently. Please provide this number in any communication about an issue.
 
 ### {fbs:n} Firmware Build String
-Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`. 
+Git "describe" string / aka full version. Example `"fbs":"086.03-57-g843e-dirty"`.
 The format is "TAG-NN-sha1" with optional "-dirty", where NN is how many commits past the tag, and sha1 being the exact unique sha1 prefix. "-dirty" should not be seen unless you're doing development, and means there are uncommitted changes in the repo when it's built.
 
 ### {fbc:n} Firmware Build Config File
@@ -55,10 +55,10 @@ Read-only value derived from factory settings in the ARM chip
 Setting | Description | Notes
 --------|-------------|-------
 [{jt:...}](#jt-junction-integration-time) | Junction Integration Time | Global cornering acceleration value
-[{ct:...}](#ct-chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate 
+[{ct:...}](#ct-chordal-tolerance) | Chordal Tolerance | Sets precision of arc drawing. Trades off precision for max arc draw rate
 [{mt:...}](#mt-global-motor-power-timeout) | Motor_disable_Timeout | Number of seconds before power to motors is removed. Maximum value is 40 million seconds.
 
-### {jt:...} Junction Integration Time 
+### {jt:...} Junction Integration Time
 The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a normalized scaled factor that is nominally set to 1.000. Set to less than 1 for slower cornering (less aggressive), greater than 1 (but probably less than 2) for more aggressive cornering.
 
 <pre>
@@ -69,7 +69,7 @@ The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a nor
 {jt:5.00}  Upper limit. Absolutely will fail
 </pre>
 
-If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run some arcs, which are composed of many short lines joined at angles. The [chordal tolerance](#ct-chordal-tolerance) controls the resolution of the lines. Run a large arc, such as the following sequence. Reducing the radius from I50 will test tighter and tighter corners. 
+If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run some arcs, which are composed of many short lines joined at angles. The [chordal tolerance](#ct-chordal-tolerance) controls the resolution of the lines. Run a large arc, such as the following sequence. Reducing the radius from I50 will test tighter and tighter corners.
 
 <pre>
 (Starting with machine at (0,0) with at least 50mm clearance in X and Y)
@@ -92,10 +92,10 @@ Sets the number of seconds motors will remain powered after the last 'event'. E.
 <pre>
 {mt:5}        Keep motors energized for 5 seconds after last movement command
 {mt:1000000}  Keep motors energized for 1 million seconds after last movement command (11.57 days)
-</pre> 
+</pre>
 
 ## Communications Parameters
-Set communications speeds and modes. 
+Set communications speeds and modes.
 
 Setting | Description | Notes
 --------|-------------|-------
@@ -118,14 +118,14 @@ Enable JSON mode sets the g2core response mode:
 {ej:2}  AUTO: Responses provided in the format of the request
 </pre>
 
-By selecting TEXT or JSON the setting is "sticky". Commands are accepted in either text or JSON mode, but responses are delivered in the selected mode. 
+By selecting TEXT or JSON the setting is "sticky". Commands are accepted in either text or JSON mode, but responses are delivered in the selected mode.
 
 By selecting AUTO g2core will send responses in the same format as the command (it auto-configures according to the input). JSON mode is set by sending a line starting with an open curly '{'. TEXT mode is set by sending a line starting with '$', '?' or 'h'. Gcode commands do not change the auto mode. Responses to Gcode are returned in the current mode
 
 _Note: The two startup lines on reset will always be in JSON format regardless of setting in order to allow UIs to sync with an unknown board._
 
 ### {jv:...} JSON verbosity
-Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5). 
+Sets how much information is returned in JSON mode. If you are using JSON mode with high-speed files (many short lines at high feed rates) you probably do not full verbose mode (5).
 <pre>
 {jv:0}  Silent   - No response is provided for any command
 {jv:1}  Footer   - Returns footer only - no command echo, gcode blocks or messages
@@ -143,7 +143,7 @@ Sets how much information is returned in text mode. We recommend using Verbose, 
 </pre>
 
 ### {qv:...} Queue Report Verbosity
-Queue reports return the number of available buffers in the planner queue. The planner queue has 28 buffers and therefore can have as many as 28 Gcode blocks queued for execution. An empty queue will report 28 available buffers. A full one will report 0. 
+Queue reports return the number of available buffers in the planner queue. The planner queue has 28 buffers and therefore can have as many as 28 Gcode blocks queued for execution. An empty queue will report 28 available buffers. A full one will report 0.
 
 Using the planner queue depth as a way to manage flow control when sending a Gcode file is actually a much better way than managing the serial input buffer. If you keep the planner full to about 2 blocks available it will run really smoothly. You also want to make sure the queue doesn't starve, say - more than 20 blocks available.
 
@@ -166,8 +166,8 @@ Please see [Status Reports](https://github.com/synthetos/TinyG/wiki/Status-Repor
 {sv:2}  Verbose  - returns all values in status reports
 </pre>
 
-### {si:...} Status Interval 
-The minimum is 100 ms. Trying to set a value below the minimum will set the minimum value. 
+### {si:...} Status Interval
+The minimum is 100 ms. Trying to set a value below the minimum will set the minimum value.
 <pre>
 {si:250}  Status interval in milliseconds
 </pre>
@@ -175,7 +175,7 @@ The minimum is 100 ms. Trying to set a value below the minimum will set the mini
 ### {ex:...} Enable Flow Control
 This setting has no effect, but will not return an error if used.
 
-Prior to 0.99 `ex` was used to select XON/XOFF, RTS/CTS or no flow control. In 0.99 there are two ways to communication o the board. (1) USB, which does its own flow control and therefore needs no configuration, and (2) UART serial which assumes (and currently requires) hardware RTS/CTS flow control. In the future we anticipate adding XON/XOFF software flow control back into the firmware, so this variable has not been removed. 
+Prior to 0.99 `ex` was used to select XON/XOFF, RTS/CTS or no flow control. In 0.99 there are two ways to communication o the board. (1) USB, which does its own flow control and therefore needs no configuration, and (2) UART serial which assumes (and currently requires) hardware RTS/CTS flow control. In the future we anticipate adding XON/XOFF software flow control back into the firmware, so this variable has not been removed.
 
 ## Gcode Initialization Defaults
 **NOTE: g2core currently does not support local persistence (i.e. on-board EEPROM or equivalent), so these Gcode initialization settings are effectively read-only. They can be set during compile time to change them, but a reset or power-on will always load the compiled values. Any changes that have been made to the values through the settings API are not applied.**  
@@ -185,12 +185,12 @@ Gcode settings loaded on power up and reset. Changing these does NOT change the 
 Setting | Description | Notes
 --------|-------------|-------
 [{gpl:_}](#gpl-gcode-default-plane-selection) | PLane selection | 0=XY plane (G17), 1=XZ plane (G18), 2=YZ plane (G1)
-[{gun:_}](#gun-gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21) 
+[{gun:_}](#gun-gcode-default-units) | UNits mode | 0=inches mode (G20), 1=mm mode (G21)
 [{gco:_}](#gco-gcode-default-coordinate-system) | COordinate system | 1=G54, 2=G55, 3=G56, 4=G57, 5=G58, 6=G59
 [{gpa:_}](#gpa-gcode-default-path-control) | PAth_control_mode | 0=Exact path mode (G61), 1=Exact stop mode (G61.1), 2=Continuous mode (G64)
 [{gdi:_}](#gdi-gcode-distance-mode) | Distance mode | 0=Absolute mode (G90), 1=Incremental mode (G91)
 
-These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model. 
+These parameters set the values for the Gcode model on power-up or reset. They do not affect the current gcode dynamic model.
 For example, entering $gun=0 will cause the system to start up from reset or power up in inches mode, but will **not** change the system to inches mode when it is entered. A G20 or G21 received in the Gcode stream will change the units to inches or MM mode, respectively. On reset or restart they will change back to the $gun setting.
 
 These parameters are reported as part of the "sys" group.
@@ -200,13 +200,13 @@ These parameters are reported as part of the "sys" group.
 {gpl:0}  G17 (XY plane)
 {gpl:1}  G18 (XZ plane)
 {gpl:2}  G19 (YZ plane)
-</pre> 
+</pre>
 
 ### {gun:...} Gcode Default Units
 <pre>
 {gun:0}  G20 (inches)
 {gun:1}  G21 (millimeters)
-</pre> 
+</pre>
 
 ### {gco:...} Gcode Default Coordinate System
 <pre>
@@ -216,17 +216,17 @@ These parameters are reported as part of the "sys" group.
 {gco:4}  G57 (coordinate system 4)
 {gco:5}  G58 (coordinate system 5)
 {gco:6}  G59 (coordinate system 6)
-</pre> 
+</pre>
 
 ### {gpa:...} Gcode Default Path Control
 <pre>
 {gpa:0}  G61 (exact path mode)
 {gpa:1}  G61.1 (exact stop mode)
 {gpa:2}  G64 (continuous mode)
-</pre> 
+</pre>
 
 ### {gdi:...} Gcode Distance Mode
 <pre>
 {gdi:0}  G90 (absolute mode)
 {gdi:1}  G91 (incremental mode)
-</pre> 
+</pre>

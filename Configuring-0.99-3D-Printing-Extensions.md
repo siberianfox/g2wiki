@@ -9,10 +9,10 @@ There are 3 heater groups. The examples below show heater group 1 - `{_he1:n}`
 
 Setting | Description | Notes
 --------|-------------|-------
-[{_he1:{e:...}}](#_he1e-heater-enable) | Heater Enable | 0=off, 1=on 
-[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write 
-[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write 
-[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write 
+[{_he1:{e:...}}](#_he1e-heater-enable) | Heater Enable | 0=off, 1=on
+[{_he1:{p:...}}](#_he1p-i-d-heater-pid-values) | Heater P (PID) | read/write
+[{_he1:{i:...}}](#_he1p-i-d-heater-pid-values) | Heater I (PID) | read/write
+[{_he1:{d:...}}](#_he1p-i-d-heater-pid-values) | Heater D (PID) | read/write
 [{_he1:{st:...}}](#_he1st-setpoint-temperature) | Setpoint temperature | write-only
 [{_he1:{t:...}}](#_he1t-current-temperature) | Current temperature | read-only
 [{_he1:{at:...}}](#_he1at-at-temperature-flag) | "At temperature" flag | read-only
@@ -60,11 +60,11 @@ There are 3 PID groups. The examples below show PID group 1 - `{_pid1:n}`
 
 ## Summary
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{_pid1:{p:...}}](#_pid1p-i-d-pid-values) | Raw P Value | read-only 
-	[{_pid1:{i:...}}](#_pid1p-i-d-pid-values) | Raw I Value | read-only 
-	[{_pid1:{d:...}}](#_pid1p-i-d-pid-values) | Raw D Value | read-only 
+Setting | Description | Notes
+--------|-------------|-------
+[{_pid1:{p:...}}](#_pid1p-i-d-pid-values) | Raw P Value | read-only
+[{_pid1:{i:...}}](#_pid1p-i-d-pid-values) | Raw I Value | read-only
+[{_pid1:{d:...}}](#_pid1p-i-d-pid-values) | Raw D Value | read-only
 
 ### {_pid1:{p:..., i:..., d:...}} Raw PID Values
 These are Read-Only values from the live PID. They are not scaled to temperature
@@ -73,9 +73,9 @@ These are Read-Only values from the live PID. They are not scaled to temperature
 
 ## Summary
 
-	Setting | Description | Notes
-	--------|-------------|-------
-	[{tram:t](#tramt-tram-command) | Tram Command | Set and enable tramming matrix 
+Setting | Description | Notes
+--------|-------------|-------
+[{tram:t](#tramt-tram-command) | Tram Command | Set and enable tramming matrix
 
 ### {tram:t} Tram Command
 Setting Tram will use the last three Probe values to define the plane of the Z axis. For operation, probe the bed (Z axis) at three disparate points, then invoke Tram.

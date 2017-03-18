@@ -2,20 +2,20 @@
 # JSON Cheat Sheet
 This table summarizes using JSON for [configuration and commands](https://github.com/synthetos/TinyG/wiki/TinyG-Configuration). Details are provided in the subsequent sections.
 
-	Request | Response | Description
-	---------|--------------|-------------
-	{"xvm":n} | {"r":{"xvm":16000},"f":[3,0,6]}<nl>| get X axis maximum velocity
-	{xvm:n} | {"r":{"xvm":16000},"f":[3,0,6]}<nl>| same as above with a relaxed mode request
-	{"xvm":15000} | {"r":{"xvm":15000},"f":[3,0,6]}<nl>| set X axis maximum velocity to 15000
-	{"x":{"vm":n}} | {"r":{"x":{"vm":16000}},"f":[3,0,6]}<nl>| alternate form to get X axis maximum velocity
-	{"x":{"vm":15000}} | {"r":{"x":{"vm":15000}},"f":[3,0,6]}<nl>| alternate form to set X axis maximum velocity to 15000
-	{"x":n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group (see below for entire response)
-	{"gc":"g0x10"} | {"f":[3,0,6]}<nl>| send Gcode with verbosity=1, 2 or 3
-	{"gc":"n20g0x20"} | {"r":{"n":20},"f":[3,0,6]} | send Gcode with verbosity=4
-	{"gc":"n20g0x20"} | {"r":{"gc":"n20g0x20","n":20},"f":[3,0,6]} | send Gcode with verbosity=5
-	{"gc":"g0x10"} | {"r":{"gc":"g0x10"},"f":[3,0,6]}<nl>| send Gcode with verbosity=5
-	n20g0x20 | {"r":{"gc":"n20g0x20","n":20},"f":[3,0,6]} | send unwrapped Gcode with verbosity=5
-	g0x10 | {"r":{"gc":"g0x10"},"f":[3,0,6]}<nl>| send unwrapped Gcode with verbosity=5
+Request | Response | Description
+---------|--------------|-------------
+{"xvm":n} | {"r":{"xvm":16000},"f":[3,0,6]}<nl>| get X axis maximum velocity
+{xvm:n} | {"r":{"xvm":16000},"f":[3,0,6]}<nl>| same as above with a relaxed mode request
+{"xvm":15000} | {"r":{"xvm":15000},"f":[3,0,6]}<nl>| set X axis maximum velocity to 15000
+{"x":{"vm":n}} | {"r":{"x":{"vm":16000}},"f":[3,0,6]}<nl>| alternate form to get X axis maximum velocity
+{"x":{"vm":15000}} | {"r":{"x":{"vm":15000}},"f":[3,0,6]}<nl>| alternate form to set X axis maximum velocity to 15000
+{"x":n} | {"r":{"x":{"am":1,"vm":16000.000,"fr":16000.000,.... | get entire X axis group (see below for entire response)
+{"gc":"g0x10"} | {"f":[3,0,6]}<nl>| send Gcode with verbosity=1, 2 or 3
+{"gc":"n20g0x20"} | {"r":{"n":20},"f":[3,0,6]} | send Gcode with verbosity=4
+{"gc":"n20g0x20"} | {"r":{"gc":"n20g0x20","n":20},"f":[3,0,6]} | send Gcode with verbosity=5
+{"gc":"g0x10"} | {"r":{"gc":"g0x10"},"f":[3,0,6]}<nl>| send Gcode with verbosity=5
+n20g0x20 | {"r":{"gc":"n20g0x20","n":20},"f":[3,0,6]} | send unwrapped Gcode with verbosity=5
+g0x10 | {"r":{"gc":"g0x10"},"f":[3,0,6]}<nl>| send unwrapped Gcode with verbosity=5
 
 
 X axis group response:

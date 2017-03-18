@@ -1,6 +1,6 @@
 _This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters. See [LaserWeb Issue #99](https://github.com/LaserWeb/LaserWeb4/issues/99)_
 
-##Summary
+## Summary
 The protocol uses a Gcode canned cycle approach to sending multiple image lines. It uses JSON active comments to provide parameters for the rendering operation. An example of a MVP (minimum viable protocol?) is provided below. The control header is designed to be extensible to accommodate more sophisticated CNC controllers and capabilities. Some options are discussed in the Protocol Extensions below, but are left out of the MVP discussion.
 
 In the example below the JSON is split across multiple lines for readability. In practice all JSON is on unbroken line(s). JSON may also be delivered as multiple unbroken lines if necessary to observe line length constraints by using a G81.2 as a parameter continuation line.
@@ -43,7 +43,7 @@ Parameters:
 
 - `chars` - Maximum ASCII characters. This parameter allows the rasterizer to tell the controller the maximum number of ASCII characters it will send in an image line (including terminating CR and/or LF characters). If the controller cannot handle this number it should send an error and the number of characters it can handle. (The method of returning the allowable line length in case of error is TBD).
 
-`pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters. 
+`pixel array` - These lines contain up to as many bytes as can fit in a single transmission (ASCII line). The number of characters should not exceed the `chars` value, including terminating LF / CR characters.
 
 There is not a 1:1 correspondence between ASCII text lines and image lines; An image line may span multiple text lines, and a text line may contain data for 2 or more image lines. Image line breaks are handled by the controller counting pixels, not by looking for ASCII line ends.
 
@@ -55,7 +55,7 @@ The protocol uses the [ZeroMQ (Z85) version of ascii85](https://rfc.zeromq.org/s
 
 #### Notes
 
-1. The origin of the image is at the current location of the tool, and is not specified in the cycle parameters 
+1. The origin of the image is at the current location of the tool, and is not specified in the cycle parameters
 
 1. The MVP assumes all measurements are in metric units, and does not observe G20/G21 settings. If this is a problem the protocol can observe the units setting, but we felt this would cause more problems that it would solve.
 
@@ -98,23 +98,23 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
-#Protocol Extensions
+# Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
-### On-board Upsampling 
+### On-board Upsampling
 Currently the LW rasterizer performs pixel upsampling - i.e. run N laser passes to get a pixel of the right size given the beam width of the laser. This requires redundant transmission that can be eliminated by moving upsampling operations to the controller.
 
 ### Transformation Matrix
 Provide full transformation matrix capability for image translation, scaling, rotation and flip. This is an extension of the optional, rudimentary matrix provided in MVP. See [Postscript Language Reference Manual](https://www.adobe.com/products/postscript/pdfs/PLRM.pdf), section 4.3.3 for details.
 
-### Arbitrary Scan Lines 
+### Arbitrary Scan Lines
 The MVP protocol only handles horizontal scan lines. This item adds diagonal and arbitrary (curves) scan lines.
 
 ### Support Native Dot Resolution
 Support a special value for native dot resolution as an option for vres and hres to better support direct rasterization of dithering and special grey scale patterns. A 'dot' is a the smallest resolvable step of the CNC machine.
 
 ### Bidirectional Scanning
-Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily large for large machines and high resolutions. 
+Introduce controls over unidirectional and bidirectional scans. Unidirectional mode can be preferable to eliminate machine backlash "jaggies" at high pixel resolutions. Bidirectional mode will scan in two directions when this is practical. Some modes are only practical if the controller has sufficient memory to store one or two scan lines, which can be arbitrarily large for large machines and high resolutions.
 
 ### DRLE and Huffman Encoding
 Introduce 1D delta run length encoding (PNG X-A) and Huffman encoding for run-length for better image compression.
@@ -130,4 +130,3 @@ For most operations the controller would not need an entire line, but here are s
 - Pixel-to-dot upsampling, where multiple passes of the laser are required to achieve a pixel of sufficient size
 - Bi-directional scanning - where the pixel in the return scan must be played out from "right to left"
 - 2D compression encodings like PNG's Up, Average, and Paeth compression filters (actually require *2* lines)
- 

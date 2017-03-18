@@ -1,6 +1,6 @@
 This page describes the layering of the [g2dialect](g2dialect)
 
-##Operating Model
+## Operating Model
 This operating model is used to simplify and reduce the number of functions that must be handled from within Gcode. In short, we want to use Gcode only for functions that must run at Job time. Setup, configuration functions, and run-time overrides (controls) are handled in JSON or by other non-Gcode channels.
 
 However, in keeping with 50+ years of CNC practice, Gcode has some practical exceptions that are noted and respected. When these exceptions occur we follow Gcode practice and try not to invent anything new.
@@ -9,8 +9,8 @@ Gcode is primarily a job description language, and much less a job control langu
 - Express exact details of pre-planned motion - i.e. Gcode is static
 - Initiate real-time state changes in peripherals (when these states are planned in advance)
 - Sequence and synchronize complex / coordinated sets of events
-	
-What Gcode does not do as well:	
+
+What Gcode does not do as well:
 - Interject realtime changes into pre-planned motion (dynamic control)
 - Manage devices and perform configuration (setup)
 - Provide job management, beyond rudimentary START, STOP and END functions
@@ -43,7 +43,7 @@ Format: Native OS commands and dialogs are used.
 These are parameters and actions that set up the CNC machine regardless of the job that is to be run. They may be done once and once only, periodically, or before a job that is to be run. These may include the following.
 
 - **End-User Configuration** includes settings that are accessible to users and generally are not changed on a per-job basis. Examples include communications settings, reporting levels, machine startup defaults.
-- **Deep Configuration** includes settings that define machine operation, are generally not of interest to users, and are typically not changed per job or during a job. Examples include maximum velocity, work area sizes, axis count and configuration. 
+- **Deep Configuration** includes settings that define machine operation, are generally not of interest to users, and are typically not changed per job or during a job. Examples include maximum velocity, work area sizes, axis count and configuration.
 - **Machine Initialization** includes settings and actions such as homing, axis tramming or automatic bed leveling that may be run on power up or periodically. These are also independent of any particular job.
 
 Formats: The g2dialect performs these actions using JSON where possible, but may also use some consensus / historical Gcode commands such as coordinate system offsets and probing where necessary.

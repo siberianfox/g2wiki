@@ -5,7 +5,7 @@ To read the firmware version type `{fv:n}`. To read build number type `{fb:n}`
 Related Pages:
 - [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 
-##Digital Inputs
+## Digital Inputs
 ### Reading Digital Inputs
 The current state of an input can be read using JSON objects. `{inN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the input is disabled or not present (large numbers may return status code 100). Note that the 0/1 return states are corrected for input sense. 1 is active. Digital inputs are read-only.
 <pre>
@@ -32,11 +32,11 @@ Digital inputs are configured using a set of digital input objects referenced as
 
 Digital inputs have these attributes (using di1 as an example)
 
-	Name | Description | Values
-	------|------------|---------
-	{di1mo: | mode | 0=active low (NO), 1=active high (NC)
-	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=panic, 5=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown
+Name | Description | Values
+------|------------|---------
+{di1mo: | mode | 0=active low (NO), 1=active high (NC)
+{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=panic, 5=reset
+{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms.
 
@@ -56,18 +56,18 @@ The function is the default function for that input. These functions set flags t
 
 Internal state for inputs may include:
 
-	Name | Description 
-	------|------------
-	lockout_timer | time in ticks (ms) to remove lockout
-	homing_mode | set true if the switch is the homing switch now
+Name | Description
+------|------------
+lockout_timer | time in ticks (ms) to remove lockout
+homing_mode | set true if the switch is the homing switch now
 
 ### Digital Inputs During Homing
 Homing is an exception as an input can be configured as a homing input and a limit input. To configure homing these new parameters are added to the axis config:
 
-	Name | Description | Values
-	------|------------|---------
-	{xhi: | homing input | 1-N corresponding to input switch, or 0 to disable homing for this axis
-	{xhd: | homing direction | 0=search-to-negative, 1=search-to-positive
+Name | Description | Values
+------|------------|---------
+{xhi: | homing input | 1-N corresponding to input switch, or 0 to disable homing for this axis
+{xhd: | homing direction | 0=search-to-negative, 1=search-to-positive
 
 Inputs operate differently during homing – sequence is:
 - Limits are overridden so that all limits are inactive
@@ -83,7 +83,7 @@ Notes and questions:
 ### Digital Inputs During Probing
 Probing is also an exception. Currently probing can only be performed on the Zmin input (di5 on the v9). Di5 should be set as Normally Open (Active Low).
 
-#Digital Outputs
+# Digital Outputs
 ### Reading Digital Outputs
 The current state of an output can be read or written using JSON objects. `{outN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the output is disabled or not present. Note that the 0/1 values are corrected for output sense - 1 is active.
 
@@ -109,43 +109,43 @@ Digital outputs are controlled using a set of digital output objects referenced 
 
 Digital outputs have these attributes (using do1 as an example)
 
-	Name | Description | Values
-	------|------------|---------
-	{do1mo: | mode | 0=active low, 1=active high
+Name | Description | Values
+------|------------|---------
+{do1mo: | mode | 0=active low, 1=active high
 
 
-##v9 Digital Inputs
+## v9 Digital Inputs
 
-###Digital Input Mapping to v9 Connectors
+### Digital Input Mapping to v9 Connectors
 
-| Input | Label | Input Mode | Action | Function | Notes 
+| Input | Label | Input Mode | Action | Function | Notes
 
-	Input | Label | Input Mode | Action | Function | Notes
-	------|-------|------------|--------|----------|-------
-	DI1 | Xmin | Normally Closed | Stop | Limit |
-	DI2 | Xmax | Normally Closed | Stop | Limit |
-	DI3 | Ymin | Normally Closed | Stop | Limit |
-	DI4 | Ymax | Normally Closed | Stop | Limit |
-	DI5 | Zmin | Active High | None | None | Also used as Z probe
-	DI6 | Zmax | Disabled | Stop | Limit |
-	DI7 | Amin | Disabled | Stop | Limit | Only on J15 2x13 header
-	DI8 | Amax | Disabled | Stop | Limit | Only on J15 2x13 header
-	DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
+Input | Label | Input Mode | Action | Function | Notes
+------|-------|------------|--------|----------|-------
+DI1 | Xmin | Normally Closed | Stop | Limit |
+DI2 | Xmax | Normally Closed | Stop | Limit |
+DI3 | Ymin | Normally Closed | Stop | Limit |
+DI4 | Ymax | Normally Closed | Stop | Limit |
+DI5 | Zmin | Active High | None | None | Also used as Z probe
+DI6 | Zmax | Disabled | Stop | Limit |
+DI7 | Amin | Disabled | Stop | Limit | Only on J15 2x13 header
+DI8 | Amax | Disabled | Stop | Limit | Only on J15 2x13 header
+DI9 | Interlock | Active High | Halt | Shutdown | Only on J15 2x13 header
 
-###Parameter Values
+### Parameter Values
 
-	Parameter | Value | Value Label | Notes 
-	----------|-------|-------------|------
-	Input Mode | -1 | Disabled |
-	 | 0 | Active Low | aka Normally Open
-	 | 1 | Active High | aka Normally Closed
-	Action | 0 | None |
-	 | 1 | Stop | Stop without losing position, observe jerk
-	 | 2 | Fast Stop | Stop without losing position, fast jerk
-	 | 3 | Halt | Stop immediately, may lose position
-	 | 4 | Reset | Reset system
-	Function | 0 | None |
-	 | 1 | Limit | Limit has been hit, unrecoverable
-	 | 2 | Interlock | Interlock open, recoverable
-	 | 3 | Shutdown | Enter shutdown
-	 | 4 | Panic | Cause system panic
+Parameter | Value | Value Label | Notes
+----------|-------|-------------|------
+Input Mode | -1 | Disabled |
+ | 0 | Active Low | aka Normally Open
+ | 1 | Active High | aka Normally Closed
+Action | 0 | None |
+ | 1 | Stop | Stop without losing position, observe jerk
+ | 2 | Fast Stop | Stop without losing position, fast jerk
+ | 3 | Halt | Stop immediately, may lose position
+ | 4 | Reset | Reset system
+Function | 0 | None |
+ | 1 | Limit | Limit has been hit, unrecoverable
+ | 2 | Interlock | Interlock open, recoverable
+ | 3 | Shutdown | Enter shutdown
+ | 4 | Panic | Cause system panic

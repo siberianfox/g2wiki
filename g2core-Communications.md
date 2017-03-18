@@ -1,9 +1,9 @@
 _This page describes the g2core communications options and protocol. It is intended for GUI developers and other low-level access. This page is useful if for some reason you need to write your own communications handler, or just want to know how it works._
 
-**We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles all these communications details**. 
+**We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles all these communications details**.
 
 
-##Overview of Communications Model
+## Overview of Communications Model
 
 A **host** is any computer that talks to a g2core board. Typically this is an OSX, Linux, or Windows laptop or desktop computer communicating over USB.
 
@@ -11,7 +11,7 @@ A **microhost** is a tiny linux system like a Beaglebone, Edison, Raspberry Pi, 
 
 As of the g2core 100 builds we recommended using [Line Mode protocol](#linemode-protocol) for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. More on the details later.
 
-g2core 100 builds also support character mode (byte streaming) which is deprecated and will be removed at a later time. 
+g2core 100 builds also support character mode (byte streaming) which is deprecated and will be removed at a later time.
 
 ### Control and Data Channels
 
@@ -130,7 +130,7 @@ Notes:
 * It is possible (and common) to get two or more `{r:...}` responses before you send another line. This is why it's vital to keep track of `lines_to_send`.
 * Note that only _data_ (gcode) lines go into `line_queue`! For configuration JSON or single-line commands, they are sent immediately.
   * It's important to maintain `lines_to_send` even when sending past the `line_queue`.
-    * Single-character commands will *not* generate a `{r:...}` response (they may generate other output, however), so there's nothing to do (see following notes). 
+    * Single-character commands will *not* generate a `{r:...}` response (they may generate other output, however), so there's nothing to do (see following notes).
     * JSON commands (`{` being the first character on the line) **will** have a `{r:...}` response, so when you send one of those past the queue you should still subtract one from `lines_to_send`, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses. This is the *only* case where `lines_to_send` may go negative.
   * Note that control commands, like dta commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
 * **All** communications to the g2core **must** go through this protocol. It's not acceptable to occasionally send a JSON command or gcode line directly past this protocol, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses.

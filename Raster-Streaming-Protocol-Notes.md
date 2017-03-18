@@ -1,13 +1,13 @@
 asdasd_This page is for discussion of an efficient laser raster streaming protocol for use with g2core and other CNC controllers capable of driving laser cutters._
 
-##Discussion
+## Discussion
 The challenge is to efficiently transmit a bitmapped image to a CNC controller with limited memory and processing capabilities. If the CNC controller were unconstrained the problem would reduce to look like a regular 2d printer, where all or most of the image fits in memory and can be processed at memory access speeds. So the raster protocol needs to support 'printing' while only holding a very small, partial image - in many cases not even one complete raster line.
 
 At high raster rates and pixel resolution image transmission becomes a bottleneck. Commercial laser engravers can operate at speeds as fast as of 200 inches/second (5080 mm/sec). At pixel resolutions of 300, 600, 1200 PPI this translates to 60K, 120K and 240K pixels per second. At common communications channels speeds of 115.200 bps, 1 Mbps and 12 Mbps byte transfer speeds are limited to 14,400, 125K and 1.5M bytes / second, assuming 100% channel utilization, which is of course unrealistic. So a fully utilized USB channel should be able to keep up with these transmissions, but slower channels fall short.
 
 Another factor is the efficiency of the pixel data encoding. The pixel rates above assume coding efficiency of 8 bits per pixel, or 255 grey levels (bit depth). Factors can that can improve encoding efficiency are lossless run-length encoding (RLE) and delta run length encoding (DRLE), with or without Huffman encoding. Factors that degrade pixel encoding efficiency include greater bit depth or "color channels", non-binary representations such as base64, ascii85 or asciified numbers, interspersed command and control characters, and other padding or non-image data. Common Gcode pixel methods provide encoding efficiencies less than 10% (10 or more ascii characters per image pixel).
 
-###Design Goals
+### Design Goals
 The goal of the raster protocol is to support laser raster operations as fast as possible given the constraints of typical CNC controllers and communication channels. Design goals are listed here for discussion in no particular order:
 
 - Support Laser/CNC controllers with limited image memory and/or communications bandwidth. This suggests a streaming protocol.
@@ -26,7 +26,7 @@ The goal of the raster protocol is to support laser raster operations as fast as
 
 - It may also be an option to support a mode where Gcode is not used at all - e.g. direct REST operation.
 
-##Protocol Design
+## Protocol Design
 Some vocabulary:
 
 - `Pixel` - a dot in the image - the smallest resolution of the image; e.g. 300 PPI
@@ -103,7 +103,7 @@ A command to end the render. In most cases this command should not be needed as 
 
   - Something like JSON tag `{"rend":true}` or a Gcode G80 to end a canned cycle (TBD)
 
-###Protocol Extensions
+### Protocol Extensions
 This section is a parking lot for additional things that may be considered beyond MVP functionality.
 
 - Provide a full matrix definition for image translation, scaling, rotation and flip. This is an extension of the XY unit vector into 3 dimensions

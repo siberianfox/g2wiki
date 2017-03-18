@@ -4,13 +4,13 @@ Related Pages:
 - [Configuration for Firmware Version 0.99](Configuration-for-Firmware-Version-0.98)
 - [Digital IO for Firmware Version 0.98](Digital-IO-0.98)
 
-#Overview
+# Overview
 Digital IO on 0.99 currently supports generalized digital inputs and generalized digital outputs. 0.99 represents a step along the way towards a fully general digital IO system that supports the creation of arbitrary devices and mapping IO to the functions in those devices. Please expect IO functionality to change in future releases, as well as some of the setup parameters.
 
 Currently the digital inputs accept an "old style" Mode parameter - i.e. the input enable and polarity are set by the Mode parameter (mo). In the near future 0.99 will be updated to split Mode (mo) and Polarity (po) into separate configuration variables. The documentation below has it listed both ways, with appropriate warnings.
 
 ## G2core IO Model
-###Glossary
+### Glossary
 
 **Signal** A signal is any value that is communicated. It may be binary (0,1), or analog ranging 0.000 - 1.000. An input switch generates a binary signal. An analog-to-digital converter generates an analog signal.
 
@@ -18,7 +18,7 @@ Currently the digital inputs accept an "old style" Mode parameter - i.e. the inp
 
 **Functions** are any code that does something simple, like react to a limit switch being hit, or trigger an alarm state. A function is anything that generates or consumes a signal. A limit function consumes one or more input signals. A PWM digital output consumes an analog signal and converts it to PWM on an output pin.
 
-**Bindings** are how you connect primitives to functions; for example a limit function can be bound to one of more inputs (primitives) that are wired to limit switches. 
+**Bindings** are how you connect primitives to functions; for example a limit function can be bound to one of more inputs (primitives) that are wired to limit switches.
 
 A **Component** is a collection of one or more functions that does something. In some cases the component is very simple and only has one function. Like a component to read an input and report it out as, say, a person-is-at-the-door signal. In other cases a component may be more complex, encapsulating multiple functions. A heater is a good example, as it has PWM outputs, temperature inputs, output signals and a variety of settings. A heater is a component consisting of PWM, temperature sensors, PID processing, timeout functions, and maybe more. Components may be part of other components - the heater component may be part of an extruder component.
 
@@ -45,8 +45,8 @@ The current state of an input can be read using JSON objects. `{inN:n}` will ret
 {in:n}   Read a all digital inputs as a single JSON object
 </pre>
 
-###Digital Input Properties
-- An input is exposed via JSON as `inN` 
+### Digital Input Properties
+- An input is exposed via JSON as `inN`
 - The input value reads as `0` (off) or `1` (on)
 - The value is sense-corrected according to the polarity of the Mode setting
 - The value is conditioned - it's deglitched, debounced or otherwise conditioned
@@ -70,11 +70,11 @@ Digital inputs are configured using a set of digital input objects referenced as
 
 Digital inputs have these attributes (using di1 as an example)
 
-	Name | Description | Values
-	------|------------|---------
-	{di1mo: | mode | 0=active low (NO), 1=active high (NC), 2=disabled
-	{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
-	{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=probe
+Name | Description | Values
+------|------------|---------
+{di1mo: | mode | 0=active low (NO), 1=active high (NC), 2=disabled
+{di1ac: | action | 0=none, 1=stop, 2=fast_stop, 3=halt, 4=cycle_start, 5=alarm, 6=shutdown, 7=panic, 8=reset
+{di1fn: | function | 0=none, 1=limit, 2=interlock, 3=shutdown, 4=probe
 
 Inputs are sensitive to the leading edge of the transition – so falling edge for NO and rising for NC. When an input triggers it enters a lockout state for some period of time where it will not trigger again (a deglitching mechanism). Typically about 50 ms. Some functions (Interlock) also use the trailing edge for "coming off" the function.
 
@@ -99,10 +99,10 @@ Notes:
 ### Digital Inputs During Homing
 Homing is an exception as an input can be configured as a homing input and a limit input. To configure homing these new parameters are added to the axis config (example showing X axis):
 
-	Name | Description | Values
-	------|------------|---------
-	{xhi: | homing input | 1-N corresponding to input switch, or 0 to disable homing for this axis
-	{xhd: | homing direction | 0=search-to-negative, 1=search-to-positive
+Name | Description | Values
+------|------------|---------
+{xhi: | homing input | 1-N corresponding to input switch, or 0 to disable homing for this axis
+{xhd: | homing direction | 0=search-to-negative, 1=search-to-positive
 
 Inputs operate differently during homing – sequence is:
 - Limits are overridden so that all limits are inactive
@@ -116,7 +116,7 @@ Probing is also an exception that disables limit functionality.
 
 ### Future Digital Input Settings
 The following changes t the DI settings are planned
- 
+
    Name | Description | Values
    ------|------------|---------
    `{di1mo:` | mode | 0=disabled, 1=enabled
@@ -126,10 +126,10 @@ The following changes t the DI settings are planned
 
 Notes:
 - The polarity sense changes. 0=active high, 1=active low
-- The `inN` object associated with the `diN` will be assignable (mapped) 
+- The `inN` object associated with the `diN` will be assignable (mapped)
 - Function bindings such as Limit or Interlock will be performed as a parameter of the function, not the DI.
 
-#Digital Outputs
+# Digital Outputs
 The current state of an output can be read or written using JSON objects. `{outN:n}` will return 0 if inactive, 1 if active (tripped), and `null` if the output is disabled or not present. Note that the 0/1 values are corrected for output sense - 1 is active.
 
 <pre>
@@ -146,7 +146,7 @@ The current state of an output can be read or written using JSON objects. `{outN
 ...
 {outN:1}
 
-{out:{1:1,4:1}}  Illustrates multiple outputs written in a single command 
+{out:{1:1,4:1}}  Illustrates multiple outputs written in a single command
 </pre>
 
 ### Digital Output Properties
@@ -182,9 +182,9 @@ Digital outputs are controlled using a set of digital output objects referenced 
 
 Digital outputs have these attributes (using do1 as an example)
 
-	Name | Description | Values
-	------|------------|---------
-	{do1mo: | mode | 0=active low, 1=active high, 2=disabled
+Name | Description | Values
+------|------------|---------
+{do1mo: | mode | 0=active low, 1=active high, 2=disabled
 
 Notes:
 - Mode

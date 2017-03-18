@@ -13,7 +13,7 @@ The g2core REST API is the top layer of the three nested APIs:
 - g2core NodeJS API - exposed via node-g2core-api module
 - g2core firmware API - exposed via serial and USB from the g2core firmware
 
-#Overview
+# Overview
 The g2core REST API is a RESTful API that allows control of a CNC machine and associated "print jobs". The conceptual model  has these layers:
 
 1. **Host Functions** - e.g communications setup, managing files, other non-CNC things
@@ -27,7 +27,7 @@ These functions are the domain of the host operating system and don't involve th
 - File and filesystem primitives such as get, view, edit, write, store
 - Advanced viewers such as 3d rendering
 
-Additional host functions are not the domain of this API, may include: 
+Additional host functions are not the domain of this API, may include:
 - Communications functions such as wireless setup and connectivity.
 - CAD/CAM and other modeling and design
 

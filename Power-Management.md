@@ -1,19 +1,19 @@
 _[<<< Back to Configuring Version 0.99 Main Page](Configuring-Version-0.99)_<br>
 _**Applies to fb 100.11 and above, which was pushed on 9/18/16**_ <br>
 
-Power management is used to keep the steppers on when you need them and turn them off when you don't. 
+Power management is used to keep the steppers on when you need them and turn them off when you don't.
 
-Stepper motors consume maximum power when idle. They hold torque and get hot. If you shut off power the motor has (almost) no holding torque. Most lead screw or geared machines will hold position if you shut off the power when the motor is not moving, but belt machines generally do not. 
+Stepper motors consume maximum power when idle. They hold torque and get hot. If you shut off power the motor has (almost) no holding torque. Most lead screw or geared machines will hold position if you shut off the power when the motor is not moving, but belt machines generally do not.
 
 In either case it's usually a good idea to keep all motors powered during a machining cycle to maintain absolute machine position. Depending on your machine you either may want to remove power some number of seconds after the machining cycle, or leave the motors powered on for as long as the machine is on.
 
-You also generally want to use power management to de-power the machine if it's left unattended for an extended time. You don't want to leave the steppers on for extended idle times such as walking away from your machine and leaving it on overnight with the motors idling. 
+You also generally want to use power management to de-power the machine if it's left unattended for an extended time. You don't want to leave the steppers on for extended idle times such as walking away from your machine and leaving it on overnight with the motors idling.
 
 The power management commands let you set up the right set of actions for your machine and use.
 
 ## Global Power Management Settings
 These settings affect all motors.
- 
+
 Setting | Description | Notes
 --------|-------------|-----------------------------
 [{me:...}](#me-motor-enable) | Enable motors | {md:0} to enable all motors for default timeout (mt). Set non-zero value in seconds to override default timeout
@@ -24,7 +24,7 @@ Setting | Description | Notes
 
 JSON mode and Text mode examples:
 <pre>
-{me:180}      $me=180     Lock all motors for 3 minutes for a tooling operation 
+{me:180}      $me=180     Lock all motors for 3 minutes for a tooling operation
 {md:n}        $md         Disable all motors
 {mt:900}      $mt=900     Set global timeout to 15 minutes
 {pwr:n}       $pwr        Query motor power level for all motors
@@ -42,7 +42,7 @@ Sets the number of seconds before a motor will shut off automatically. Maximum a
 
 - `{1pm:0}` Disabled motors are always off. They do not time out, and cannot be enabled using `me`
 - `{1pm:1}` Always-on motors are always on. They do not time out, and cannot be disabled using `md`
-- `{1pm:2}` Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving. A new cycle before timeout occurs will re-enable the motors restart the timeout at the end of the new cycle. 
+- `{1pm:2}` Motors that are powered-in-cycle begin timeout at the end of the cycle, which is when the last motor stops moving. A new cycle before timeout occurs will re-enable the motors restart the timeout at the end of the new cycle.
 - `{1pm:3}` Motors that are powered-while-moving begin timeout at the end of their movement. New movement before timeout occurs will re-enable the motors and restart the timeout at the end of the movement.
 
 Motor timeouts are suspended during feedholds - i.e. they will not time out during a feedhold. This allows changing or adjusting tools without loss of position.
@@ -58,10 +58,10 @@ Returns the power levels for all motors. Read-only.
 
 Setting | Description | Notes
 ------------------|-------------|-----------------------------
-___________| | 
+___________| |
 [{1:{pm:n}}](#1pm-motor-power-modes) | Display power mode | Returns one of the power modes below
-[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}` 
-[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:N}` 
+[{1:{pm:0}}](#1pm0-motor-disabled) | Disabled | Motor will not run, and is not enabled by `{me:N}`
+[{1:{pm:1}}](#1pm1-motor-always-powered) | Always powered | Motor always powered and is not disabled by `{md:N}`
 [{1:{pm:2}}](#1pm2-motor-powered-in-cycle) | Powered in cycle | Motor is powered during machining cycle (any axis is moving) and for `{mt:N}` seconds after cycle stops
 [{1:{pm:3}}](#1pm3-motor-powered-when-moving) | Powered when moving | Motor is powered when it is moving and for `{mt:N}` seconds afterwards. Motors in this state can disable themselves during cycles if timeout is less than cycle time.
 
@@ -88,4 +88,3 @@ This will turn on the motor power at the start of any move on any axis (a "cycle
 
 #### {1:{pm:3}} Motor Powered When Moving
 This will turn on the motor power only when that axis is moving, and will remove power `{mt:N}` seconds after that axis stops moving.
-

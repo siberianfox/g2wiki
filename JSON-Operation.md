@@ -7,11 +7,11 @@ Related Pages:
 
 ## General
 
-G2 can accept commands in [JSON](http://json.org/) (JavaScript Object Notation) mode or text mode. Using JSON simplifies writing host GUIs in languages such as Python, Ruby, JavaScript, Java, Processing and other languages that support dictionaries / hashmaps. 
+G2 can accept commands in [JSON](http://json.org/) (JavaScript Object Notation) mode or text mode. Using JSON simplifies writing host GUIs in languages such as Python, Ruby, JavaScript, Java, Processing and other languages that support dictionaries / hashmaps.
 
 Most commands that are available in JSON are also available in text mode, but there are some differences. ASCII communications overhead is somewhat higher in JSON than text mode but is still quite efficient and manageable.
 
-####Syntax Notes
+#### Syntax Notes
 - The examples above are in strict JSON mode, as specified by json.org. TinyG will also accept input in relaxed JSON mode which omits the quotes on all fields except if the value field is a string. All responses are always in strict mode.
 - The following values can be used in full or by their abbreviations:
   - `null` or `n`
@@ -19,15 +19,15 @@ Most commands that are available in JSON are also available in text mode, but th
   - `false` or `f`
 
 ### Is this RESTful?
-The JSON interface is modeled as a RESTful interface, albeit running over USB or serial and not HTTP. Using JSON enables exposing system internals as [RESTful resources](http://en.wikipedia.org/wiki/Representational_state_transfer), which makes the embedded system much easier to manipulate using modern programming techniques. Data is treated as resources and state is transferred in and out. Unlike RESTful HTTP, methods are implied by convention as there is no request header in which to declare them. 
+The JSON interface is modeled as a RESTful interface, albeit running over USB or serial and not HTTP. Using JSON enables exposing system internals as [RESTful resources](http://en.wikipedia.org/wiki/Representational_state_transfer), which makes the embedded system much easier to manipulate using modern programming techniques. Data is treated as resources and state is transferred in and out. Unlike RESTful HTTP, methods are implied by convention as there is no request header in which to declare them.
 
 ## Basic Concepts
-In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validator](http://jsonlint.com)). JSON requests are generally just curly braces and formatting around what would otherwise be a command line request. This may be a single value such as {"xvm":null}, or a complete group such as {"x":null}. Only one parent JSON object is processed per line. Note that groups with multiple *elements* are accepted. For example, this is OK: 
+In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validator](http://jsonlint.com)). JSON requests are generally just curly braces and formatting around what would otherwise be a command line request. This may be a single value such as {"xvm":null}, or a complete group such as {"x":null}. Only one parent JSON object is processed per line. Note that groups with multiple *elements* are accepted. For example, this is OK:
 {"x":{"vm":16000,"fr":10000}}
 
 ### How things are encoded in JSON
 
-- **name** is a JSON key (aka **token**) describing a single datum or group of data values 
+- **name** is a JSON key (aka **token**) describing a single datum or group of data values
   - Example: `xfr` referring to the X axis maximum feed rate
   - Example: `x` referring to all values associated with the X axis (the X axis group)
   - Names are not case sensitive
@@ -43,22 +43,22 @@ In JSON mode G2 expects well structured JSON (if in doubt use the [JSON validato
 
 ### What is encoded in JSON
 
-	Term | Description
-	---------------|--------------
-	**config** | A config is a static configuration setting for some aspect of the machine. These parameters are not changed by Gcode execution (but see the G10 exception). {`xfr:1000}` is an example of a config. So is `{1po:1}`. So is the X group: `{x:n}`.
-	**block** | Gcode blocks are lines of gcode consisting of one or more gcode words, optional comments and possibly gcode messages
-	**word** | Gcode words make up gcode commands. `G1` is an example of a gcode word. So is `x23.43`
-	**comment** | A Gcode comment is denoted by parentheses - `(this is a gcode comment)`
-	**JSON active comment** | A [JSON active comment](JSON-Active-Comments) is a way to insert JSON in a Gcode stream
-	**message** | A **Gcode message** is a special form of active comment that is echoed to the machine operator. It's the part of the comment that follows a `(msg` preamble. For example: `(msgThis part is echoed to the user)`
+Term | Description
+---------------|--------------
+**config** | A config is a static configuration setting for some aspect of the machine. These parameters are not changed by Gcode execution (but see the G10 exception). {`xfr:1000}` is an example of a config. So is `{1po:1}`. So is the X group: `{x:n}`.
+**block** | Gcode blocks are lines of gcode consisting of one or more gcode words, optional comments and possibly gcode messages
+**word** | Gcode words make up gcode commands. `G1` is an example of a gcode word. So is `x23.43`
+**comment** | A Gcode comment is denoted by parentheses - `(this is a gcode comment)`
+**JSON active comment** | A [JSON active comment](JSON-Active-Comments) is a way to insert JSON in a Gcode stream
+**message** | A **Gcode message** is a special form of active comment that is echoed to the machine operator. It's the part of the comment that follows a `(msg` preamble. For example: `(msgThis part is echoed to the user)`
 
 ## JSON Overview & TinyG Subset
 
 The concise JSON language definition is [here](http://json.org). [Jsonlint](http://jsonlint.com) is a handy JSON validator that you can use to check your requests or responses.
 
-TinyG implements a subset of JSON with the following limitations: 
+TinyG implements a subset of JSON with the following limitations:
 
-* Supports 7 bit ASCII characters only 
+* Supports 7 bit ASCII characters only
 * Supports decimal numbers only (no hexadecimal numbers or other non-decimals)
 * Arrays are returned but are not (yet) accepted as input
 * Names (keys) are case-insensitive and cannot be more than 5 characters
@@ -67,7 +67,7 @@ TinyG implements a subset of JSON with the following limitations:
 * Limited object nesting is supported (you won't typically see more than 3 levels)
 * All JSON input and output is on a single text line. There is only one `<LF>`, it's at the end of the line (broken lines are not supported)
 
-##JSON Request and Response Formats
+## JSON Request and Response Formats
 JSON requests are used to perform the following actions {with examples}
 
 * Return the value of a single setting or state variable `{"1mi":n}`
@@ -92,7 +92,7 @@ JSON responses to commands are in the following general form.
 
 The `r` is the response envelope. The body of the response is the result returned. In the case of a single name it returns the value. In the case of a group it returns the entire group as a child object. The `f` is the footer which is an array consisting of (1) revision number, (2) status code, (3) the number of lines available in the line buffers.
 
-###Status Reports
+### Status Reports
 Status reports are generated automatically by the system and are therefore asynchronous. JSON reports are in the following general form:
 <pre>
 {"sr":{"line":0,"posx":0.000,"posy":0.000,"posz":0.000,"posa":0.000,"vel":0.000,"momo":1,"stat":3}}
@@ -100,8 +100,8 @@ Status reports are generated automatically by the system and are therefore async
 
 It's similar to a response except there is no header or footer element. Since it's asynchronous the status code is irrelevant, as is the number of lines available in the buffer (0). The exception is a status report that is requested, which will return a footer. E.g. the the command `{sr:n}` can be used to request the status report in the above example. Look here for details of the [status reports](Status-Reports)
 
-###Exception Reports
-Exception reports are generated by the system when something wrong is detected. 
+### Exception Reports
+Exception reports are generated by the system when something wrong is detected.
 The information provided is:
 - `fb` firmware build number
 - `st` status code of the exception
@@ -124,11 +124,10 @@ JSON can be processed with either relaxed or strict syntax. The system will alwa
   - `t` suffices for a true value
   - `f` suffices for a false value
 
-###More
+### More
 See [JSON Detail](JSON-Details) for more information
 
-#Random Notes
+# Random Notes
 _NOTE 1: In text mode the differences in units are obvious in the responses. In JSON there is no inherent units indication - so best to issue {"gc":"g20"} or {"gc":"g21"} at the start of every config session._
 
 _NOTE 2: internally, everything is converted to mm mode, so if you do a bunch of settings in one units mode then change to the other the settings are still valid. Try it. Change back and forth by issuing in sequence: $x, G20, $x, G21, $x_
-

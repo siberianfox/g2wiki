@@ -1,6 +1,6 @@
-#TinyG2 Project Status
+# TinyG2 Project Status
 
-### Main Differences 
+### Main Differences
 For most practical purposes the G2 and TinyG functionality are the same. Differences are noted below.
 
 Main differences between TinyG and G2
@@ -10,11 +10,11 @@ Main differences between TinyG and G2
 * G2 provides digitally controllable current references as opposed to on-board potentiometers
 * Both TinyG and G2 compute 6 axes. G2 can output 6 axes (depending on platform hardware), TinyG is limited to 4 axes
 
-###Update as of June 9, 2014
+### Update as of June 9, 2014
 We recommend working from the edge branch, which is the most stable branch to date. As changes are made and tested in lower branches these will be posted to edge.
 
-###Update as of Oct 16, 2013
-Build 020.20 has been pushed to edge and master. 
+### Update as of Oct 16, 2013
+Build 020.20 has been pushed to edge and master.
 
 The following features are still in development for G2:
 * Non-volatile storage (EEPROM). The Atmel SAM ARM chips do not have EEPROM. Non-volatile storage is not provided or must be provided off-board.

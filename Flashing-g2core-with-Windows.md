@@ -14,7 +14,7 @@ The [arduino-flash-tools](https://github.com/facchinm/arduino-flash-tools/tree/m
 
 Expand the zip file in a location where you know the path, and note that path.
 
-###Step 3 - Program g2core using `bossac.exe`
+### Step 3 - Program g2core using `bossac.exe`
 
 Hold down the Windows Key and press r then type cmd.exe and hit enter:
 

@@ -2,7 +2,7 @@ _Note This page is similar to, but not identical to:_
 
 - [LinuxCNC Gcode Reference, Arc Move](http://linuxcnc.org/docs/devel/html/gcode/g-code.html#gcode:g2-g3)
 
-##G2, G3 Arc At Feed Rate.x Probes
+## G2, G3 Arc At Feed Rate.x Probes
 `G2 or G3 'axes' 'offsets' Pn Fnnn` center format arc<br>
 `G2 or G3 'offsets' Pn Fnnn` center format full circle arc<br>
 `G2 or G3 'axes' Rnnn Pn Fnnn` radius format arc<br>
@@ -32,7 +32,7 @@ It is an error if:
 - No feed rate has been set
 - The P word is not an integer
 
-###Center Format Arcs
+### Center Format Arcs
 Center format arcs are more accurate than radius format arcs and are the preferred format to use.
 
 - The end point of the arc ('axes') along with the offset to the center of the arc from the current location ('offsets') are used to program arcs that are less than a full circle
@@ -43,21 +43,21 @@ Center format arcs are more accurate than radius format arcs and are the preferr
 
 - When programming arcs an error due to rounding can result from using a precision of less than 4 decimal places (0.0000) for inch and less than 3 decimal places (0.000) for millimeters.
 
-####Incremental Arc Distance Mode
+#### Incremental Arc Distance Mode
 Incremental Arc Distance Mode is the default mode, and may be set by `G91.1`. The following applies:
 
 - Arc center offsets are a relative distance from the start location of the arc
 - One or more axis words and one or more offsets must be programmed for an arc that is less than 360 degrees
 - No axis words and one or more offsets must be programmed for full circles. The P word defaults to 1 and is optional
 
-####Absolute Arc Distance Mode
+#### Absolute Arc Distance Mode
 Absolute Arc Distance Mode may be set by `G90.1`. The following applies:
 
 - Arc center offsets are the absolute distance from the current 0 position of the axis
 - One or more axis words and both offsets must be programmed for arcs less than 360 degrees
 - No axis words and both offsets must be programmed for full circles. The P word defaults to 1 and is optional
 
-####XY-Plane Arcs (G17)
+#### XY-Plane Arcs (G17)
 `G2 or G3 Xnnn Ynnn Znnn Innn Jnnn Pn`
 
   - X, Y - Endpoint, or omitted for full-circle arc
@@ -67,7 +67,7 @@ Absolute Arc Distance Mode may be set by `G90.1`. The following applies:
   - K - Z offset MUST NOT BE PRESENT
   - P - number of turns (optional, must be integer)
 
-####XZ-Plane Arcs (G18)
+#### XZ-Plane Arcs (G18)
 `G2 or G3 Xnnn Znnn Ynnn Innn Knnn Pn`
 
   - X, Z - Endpoint, or omitted for full-circle arc
@@ -77,7 +77,7 @@ Absolute Arc Distance Mode may be set by `G90.1`. The following applies:
   - K - Z offset
   - P - number of turns (optional, must be integer)
 
-####YZ-Plane Arcs (G19)
+#### YZ-Plane Arcs (G19)
 `G2 or G3 Ynnn Znnn Xnnn Jnnn Knnn Pn`
 
   - Y, Z - Endpoint, or omitted for full-circle arc
@@ -94,13 +94,13 @@ For any of the the G17, G18, G19 arcs, it is an error if:
 - An illegal offset is present
 - When the arc is projected on the selected plane, the distance from the current point to the center differs from the distance from the end point to the center by more than (.05 inch/.5 mm) OR ((.0005 inch/.005mm) AND .1% of radius).
 
-###Radius Format Arcs
+### Radius Format Arcs
 `G2 or G3 Xnnn Ynnn Znnn Rnnn Fnnn`<br>
 `G2 or G3 Rnnn Pn Fnnn`<br>
 
-In the radius format the coordinates of the end point of the arc in the selected plane are specified along with the radius of the arc. 
+In the radius format the coordinates of the end point of the arc in the selected plane are specified along with the radius of the arc.
 
-- The axis words are optional except at least one of the two words for the axes in the selected plane must be used 
+- The axis words are optional except at least one of the two words for the axes in the selected plane must be used
 - The R number is the radius
 - A positive radius indicates that the arc turns through less than 180 degrees, while a negative radius indicates a turn of more than 180 degrees
 - If the arc is helical, the value of the end point of the arc on the coordinate axis parallel to the axis of the helix is also specified.
