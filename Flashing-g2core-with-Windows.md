@@ -1,6 +1,6 @@
 _This page is for uploading an already compiled G2 binary to a target board without a debugger from Windows. Please see [Getting Started with g2core Development](Getting-Started-with-g2core-Development) for information about other options._
 
-###Step 1 - Get the TinyG2.bin file
+### Step 1 - Get the TinyG2.bin file
 
 **Option 1** - Compile your own using the instruction in [Compiling the Code](Getting-Started-with-g2core-Development#compiling-the-code)
 
@@ -8,7 +8,7 @@ _This page is for uploading an already compiled G2 binary to a target board with
 
 In either case you'll need to note the path to the resulting binary file. For example, if it's called `g2core.bin` and it's in the Downloads directory of your home page, you would use `%HOMEPATH%\Downloads\g2core.bin`. We'll call this `PATH_TO_BINARY` in the commands below.
 
-###Step 2 - Download the `arduino-flash-tools`
+### Step 2 - Download the `arduino-flash-tools`
 
 The [arduino-flash-tools](https://github.com/facchinm/arduino-flash-tools/tree/master) repo contains the `bossac` utility. You can download the [zip file here](https://github.com/facchinm/arduino-flash-tools/archive/master.zip).
 
