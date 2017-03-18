@@ -2,7 +2,7 @@ This page assumes you have already built or downloaded ```gShield_flash.bin```.
 
 Edit: 4/23/2015 Make is now building ```gShield.bin```, modify file name in commands as necessary
 
-####Step 1. Install BOSSA flash programming utility.
+#### Step 1. Install BOSSA flash programming utility.
 
 Most likely (on Debian or Ubuntu), you will need to type the following in the terminal:
 
@@ -11,11 +11,11 @@ sudo apt-get install bossa-cli
 ```
 Alternatively, you could get this utility from [SourceForge](http://sourceforge.net/projects/b-o-s-s-a/).
 
-####Step 2. Connect Arduino Due via micro-usb cable.
+#### Step 2. Connect Arduino Due via micro-usb cable.
 
 Make sure, you use the Programming USB port.
 
-####Step 3. Activate bootloader:
+#### Step 3. Activate bootloader:
 ```
 stty -F /dev/ttyACM0 1200
 ```
@@ -26,7 +26,7 @@ stty -F /dev/ttyACM0 9600
 ```
 which I think will wind up erasing twice, but it leaves the default at 9600, so that if you accidentally open /dev/ttyACM0 then it won't wipe out your firmware.
 
-####Step 4. Flash the chip with `bossac`:
+#### Step 4. Flash the chip with `bossac`:
 ```
 bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/gShield_flash.bin
 ```
