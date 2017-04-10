@@ -17,7 +17,7 @@ Make sure, you use the Programming USB port.
 
 #### Step 3. Activate bootloader:
 ```
-stty -F /dev/ttyACM0 1200
+stty -F /dev/ttyACM0 1200 hup
 ```
 Note: This changes the default baud rate for port /dev/ttyACM0 to 1200, so if you leave the programming port and the native port both hooked up and the accidentally open /dev/ttyACM0 at a later time, you will erase your flash. So I do this instead:
 ```
