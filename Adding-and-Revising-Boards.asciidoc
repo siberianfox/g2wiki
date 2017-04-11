@@ -60,13 +60,13 @@ You need to know this so the other pages make sense. The makefile command line r
 *** All board revisions are located in the same _board_file_ for that board type.
 ** `BASE_BOARD` is a sub-argument that is used internally and describes the underlying hardware platform. `BASE_BOARD` handles the boilerplate for configuring the compiler flags and paths for a range of devices.
 *** For example, in the case of a Due or other motherboard/daughterboard the `BASE_BOARD` is the motherboard, and the `BOARD` is the daughter board (the actual shield). You should not specify the `BASE_BOARD` in the command line, but it can be edited in the board file.
-*** For example `board/g2v9.mk` will contain definitions for `BOARD=g2v9k` and `BOARD=g2v9l`. Both of those `BOARD`s specify `BASE_BOARD=g2v9`, which handles the boilerplate setup for all of those boards.
+*** For example `board/g2v9.mk` will contain definitions for `BOARD=g2v9k` and `BOARD=g2v9l`. Both of those `BOARD`{zwsp}s specify `BASE_BOARD=g2v9`, which handles the boilerplate setup for all of those boards.
 +
 NOTE: Name all `BOARD` and .mk files in lower case from here on.
 
 * **`SETTINGS_FILE`** - specifies the default settings that are applied at compile time
 ** example: `SETTINGS_FILE="settings_shapeoko2.h"` will tell `settings.h` to include the file `settings/settings_shapeoko2.h`.
-** If `SETTINGS_FILE` is not specified directly on the command line or in a `CONFIG`, then `settings_default.h` is used. `settings_default.h` runs after the settings file, and provides a default value for every settings #define. This way the `settings_xxxxx.h` file does not ahve to contain every possible define. The values in the default file will compile a functional board (i.e. it will communicate), but will disable most devices. 
+** If `SETTINGS_FILE` is not specified directly on the command line or in a `CONFIG`, then `settings_default.h` is used. `settings_default.h` runs after the settings file, and provides a default value for every settings #define. This way the `settings_xxxxx.h` file does not have to contain every possible define. The values in the default file will compile a functional board (i.e. it will communicate), but will disable most devices. 
 ** Note that the `CONFIG` sets the `SETTINGS_FILE` option, overriding what is on the command line
 
 NOTE: **`PLATFORM`** has been deprecated and is no longer a make flag.
@@ -307,3 +307,5 @@ endif
 * We use `device/step_dir_driver` so it's added to `SOURCE_DIRS` *after* `${BOARD_PATH}`.
 * We let Motate configure the rest of the compile with `include $(PLATFORM_BASE).mk` at the end.
 ====
+
+Next, continue on to link:Adding-and-Revising-Configurations-and-Settings[Adding and Revising Configurations and Settings]
