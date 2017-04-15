@@ -16,6 +16,9 @@ M6 | | Change tool | No operation at this time
 M7 | | Mist coolant on | Note that mist and flood share the same Coolant ON/OFF pin
 M8 | | Flood coolant on | Note that mist and flood share the same Coolant ON/OFF pin
 M9 | | All coolant off | Note that mist and flood share the same Coolant ON/OFF pin
+M100 | *active comment* | Run active comment in sync with motion | `M100 ({out1:1})` will turn `out1` on in between the moves surrounding this line
+M100.1 | *active comment* | Run active comment as soon as it's parsed | `M100.1 ({g55z:0.1})` will set the `G55` Z-offset to 0.1 as soon as it's parsed
+M101 | *active comment* | Delay motion in this point in the program until the active comment evaluates true | `M101 ({he1at:t})` will make the program wait until heater 1 is at temp (The value *must* be `true` or `false`, not numeric.)
 
 ## M2, M30 Program End
 program END (M2, M30) performs the following actions:
