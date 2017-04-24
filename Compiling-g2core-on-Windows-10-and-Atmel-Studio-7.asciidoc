@@ -162,7 +162,7 @@ NOTE: We try to eliminate all compiler errors and warnings from the project. How
 
 ## Uploading g2core to a target board (without a Atmel ICE)
 
-To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-G2-with-Windows[Flashing g2core with Windows] page.
+To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto a target board _without_ using a debugger such as the Atmel ICE or Atmel SAM-ICE, please visit the link:Flashing-g2core-with-Windows[Flashing g2core with Windows] page.
 
 # Tips and Tricks
 This is a collection of random things we've found help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
