@@ -87,6 +87,29 @@ git clone https://github.com/synthetos/g2.git --recursive
 
 Now you should have a local clone of the g2 repository.
 
+# Setting up g2core fork for development contribution
+** Make a fork of g2 and Motate
+** Clone local fork of g2
+** Update submodule(s) (Motate)
+** Make synthetos/g2 the "upstream" remote for fork/g2
+** Rename the "origin" remote to "upstream"
+** Checkout dev-168-gQuintic in g2
+** Checkout sams70-port in Motate
+
+# Contributing to g2core via fork/g2core
+** Create issue ticket within g2core
+** Use issue number to generate branch - dev-<issue#>-<brief_description_of_issue>
+** Branch from parent (dev-168-gQuintic, sams70-port, ...)
+** Commit often
+** Push changes to fork(s)
+** Make a Pull-Request on synthetos/g2 and/or synthetos/Motate
+** Occasionally sync from upstream
+** Continue to code and push while commenting in the Pull-Request
+** When code is finished, merge parent branch into your branch
+** Test code
+** Close the Pull-Request
+** Close the origin Issue
+
 # Compiling the code
 
 Each OS requires different setup, so you'll need to look at the compiling setup for each OS separately:
