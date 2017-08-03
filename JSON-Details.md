@@ -129,4 +129,4 @@ g0 x100 | {"r":{"gc":"G0X100"},"f":[3,0,6]} | unwrapped gcode
 
 The first responses are pretty normal. The fourth has a comment in it. The fifth is what would happen if a MSG were communicated in the Gcode comment.
 
-_Note that Gcode send as json are considered control code and is immediately acknowledged bypassing checks for motion planner buffers space potentially resulting in errors. Consider sending Gcode as plain unwrapped text, especially Gcode that results in moves. See [issue 287](https://github.com/synthetos/g2/issues/287) for more details_
+_Note that Gcode send as json are considered control code and is immediately acknowledged bypassing checks for motion planner buffers space potentially resulting in errors. Consider sending Gcode as plain unwrapped text, especially Gcode that results in moves. See [issue 287](https://github.com/synthetos/g2/issues/287) for more detail._
