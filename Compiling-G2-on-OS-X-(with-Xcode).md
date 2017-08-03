@@ -1,4 +1,4 @@
-_This page is for compiling the G2 project on OS X with XCode. Please see [Getting Started with G2](Getting-Started-with-G2) for information about hardware and compiling on other platforms._
+_This page is for compiling the G2 project on OS X with XCode. Please see [Getting Started with G2](Getting-Started-with-G2core) for information about hardware and compiling on other platforms._
 
 See also: [Debugging G2 on OSX with GDB and Atmel-ICE](https://github.com/synthetos/g2/wiki/Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
 
