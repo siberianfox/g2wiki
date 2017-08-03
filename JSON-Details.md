@@ -7,7 +7,7 @@ Commands in JSON mode are sent as JSON objects. Some request and response exampl
     {xfr:n}         {"r":{"xfr":12000.000},"f":[3,0,6]}   get the X axis max feed rate
     {xfr:12000}     {"r":{"xfr":12000.000},"f":[3,0,6]}   set the X maximum feed rate to 12000 mm/min (assuming G21 mode)
     {x:n}           {"r":{"x":{"am":1,"vm":16000.000,.... get all configuration settings for the X axis
-    {gc:"g0 x100"}  {"r":{"gc":"g0x100"},"f":[3,0,6]}     execute the Gcode block "G0 X100"
+    {gc:"g0 x100"}  {"r":{"gc":"g0x100"},"f":[3,0,6]}     execute the Gcode block "G0 X100". Don't use this for sending large Gcode blocks as it may cause buffer overflows, send them as plain Gcode instead.
 
     where  "f":[3,0,6]  
        is  "f":[<protocol_version>, <status_code>, <available_buffer_count>]
@@ -128,3 +128,5 @@ g0 x100 | {"r":{"gc":"G0X100"},"f":[3,0,6]} | unwrapped gcode
 {gc:"m6 t2 (msgChange tool)"} | {"r":{"gc":"M6T2","msg":"Change tool"},"f":[3,0,6]} | Gcode with message in comment
 
 The first responses are pretty normal. The fourth has a comment in it. The fifth is what would happen if a MSG were communicated in the Gcode comment.
+
+_Note that Gcode send as json are considered control code and is immediately acknowledged bypassing checks for motion planner buffers space potentially resulting in errors. Consider sending Gcode as plain unwrapped text, especially Gcode that results in moves. See [issue 287](https://github.com/synthetos/g2/issues/287) for more details_
