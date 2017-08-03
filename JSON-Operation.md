@@ -74,7 +74,7 @@ JSON requests are used to perform the following actions {with examples}
 * Return the values of a group of settings or state variables (aka a Resource) `{"1":n}`
 * Set a single setting or state variable (note that many state variables are read-only) `{"1mi":8}`
 * Set a multiple settings or state variables in a group `{"1":{"po":1,"mi":8}}`
-* Submit a block (line) of Gcode to perform any supported Gcode command `{"gc":"n20g1f350 x23.4 y43.2"}`
+* Submit a block (line) of Gcode to perform any supported Gcode command `{"gc":"n20g1f350 x23.4 y43.2"}`. Don't send all your Gcode this way as it can cause problems, see `note 3` for more information.
 * Special functions and actions;
  * Request a status report `{"sr":n}`
  * Set status report contents `{"sr":{"line":true,"posx":true,posy":true,   ...}}`
@@ -131,3 +131,5 @@ See [JSON Detail](JSON-Details) for more information
 _NOTE 1: In text mode the differences in units are obvious in the responses. In JSON there is no inherent units indication - so best to issue {"gc":"g20"} or {"gc":"g21"} at the start of every config session._
 
 _NOTE 2: internally, everything is converted to mm mode, so if you do a bunch of settings in one units mode then change to the other the settings are still valid. Try it. Change back and forth by issuing in sequence: $x, G20, $x, G21, $x_
+
+_NOTE 3: Sending Gcode wrapped in `{"gc": ""}` can cause an overflow in the motion planer buffer when using linemode protocol. Instead send you Gcode as plain text (while still observing linemode protocol), this is also more efficient in terms of serial bandwidth. The issue is caused by all json commands being seen as control instructions which are immediately acknowledged. See [Issue 287](https://github.com/synthetos/g2/issues/287) for an in depth discussion of this._
