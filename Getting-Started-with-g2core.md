@@ -27,8 +27,8 @@ The following is a list of the minimum you will need strictly for g2core, regard
 
 If you are _not_ planning on compiling the firmware yourself, then all you need the the Arduino 1.5+ IDE installed on your machine (for the `bossac` binary). You can then program any provided hex directly onto the Due or TinyG v9.
 
-* [Flashing g2core with Windows](Flashing-G2-with-Windows)
-* [Flashing g2core with OSX](Flashing-G2-with-OSX)
-* [Flashing g2core with Linux](Flashing-G2-with-Linux)
+* [Flashing g2core with Windows](Flashing-g2core-with-Windows)
+* [Flashing g2core with OSX](Flashing-g2core-with-OSX)
+* [Flashing g2core with Linux](Flashing-g2core-with-Linux)
 
 
