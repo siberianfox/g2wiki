@@ -12,7 +12,7 @@
 
 # Cloning the repo
 
-  * See [Getting Started with G2core → Cloning the Repo](https://github.com/synthetos/g2_private/wiki/Getting-Started-with-G2core#cloning-the-repo) if you haven't already.
+  * See [Getting Started with G2core → Cloning the Repo](https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development#cloning-the-repo) if you haven't already.
 
 # Build the sources:
 
