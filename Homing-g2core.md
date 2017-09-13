@@ -92,8 +92,8 @@ Having wired the homing inputs, those same switches can also be used as limit sw
 
 Pin  | Function    | Position on machine
 -----|-------------|-------------------------
-Xmin | X min limit switch | on the right of the machine
-Xmax | X max limit switch | on the left of the machine
+Xmin | X min limit switch | on the left of the machine
+Xmax | X max limit switch | on the right of the machine
 Ymin | Y min limit switch | at the front of the machine
 Ymax | Y max limit switch | at the back of the machine
 Zmax | Z max limit switch | at the top of Z axis travel
