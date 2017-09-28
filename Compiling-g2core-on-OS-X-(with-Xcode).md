@@ -51,4 +51,4 @@ If you have [created a new `BOARD` or `CONFIG`](https://github.com/synthetos/g2_
 
 ## Uploading G2 to a target board and Debugging
 
-- See [Debugging g2core on OSX with GDB and Atmel ICE](Debugging-g2core-on-OSX-with-GDB-and-Atmel-ICE)
+- See [Debugging g2core on OSX with GDB and Atmel ICE](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE)
