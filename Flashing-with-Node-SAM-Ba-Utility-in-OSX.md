@@ -23,8 +23,15 @@ Installing is pretty simple.  Change to the sam-node-ba directory and then issue
 ![](https://c1.staticflickr.com/5/4392/36693403503_bb9baab96a_c.jpg)
 ## Usage
 To use the node-sam-ba programming utility you need to make sure your AVR Atmel ICE programmer is hooked up via usb and your g2core board is also hooked up via usb and is in bootloader mode. *IE: No heart beats blinking.* See entering bootloader mode for more details on this.<br>
-You can now type:<br>
-`node flash.js` <br>
-to get the command usage.
+You can now type: `node flash.js` to get the command usage.
 
 ![](https://c1.staticflickr.com/5/4499/23511638068_281b120bf1_c.jpg)
+<p>
+You will notice that you must provide a port (-p option) to specify which serial port the g2core board is identified in your computer.  If you do not see a port make sure that your board is hooked up and is in bootloader mode.
+
+<p>
+My command looked something like this: 
+node flash.js -p /dev/tty.usbmodem146231 -b ~/Documents/GitHub/g2/g2core/bin/Ultimaker2Plus-gquintic-c/g2core.bin
+
+<p>
+INCOMPLETE: Attach Video and screen shot. -ril3y
