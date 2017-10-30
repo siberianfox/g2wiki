@@ -104,3 +104,8 @@ Power management is used to keep the steppers on when you need them and turn the
 Power level is used to set the stepper driver current. `0` is off, `1.000` is maximum, which is about 2.5 amps for the DRV8825 drivers used on most G2 boards.
 
 Set the current carefully, since the value can be too high or too low. Is short: a higher power level does *not* necessarily mean a higher torque. Underdriving the motor can yield skipped steps and too low of torque. Overdriving the motor typically yields motor performance that's actually worse than a more moderate power setting. When overdriving the motor "runs rough" (often caused by it skipping over microsteps to full-step positions), heats up excessively, and may even cause damage to the motors over time. If there is too much current the drivers may also heat up until they go into thermal shutdown to protect themselves.
+
+# Config Files to enable more motors
+
+4 motors are enabled by default on the default build target: gShield on ArduinoDue Board.
+To enable more motors, edit the following: board_stepper.h (uncomment motor_5) board_stepper.cpp (uncomment motor_5) hardware.h (#define MOTORS 5) settings_shapeoko2.h (define the list of M5_ settings)
