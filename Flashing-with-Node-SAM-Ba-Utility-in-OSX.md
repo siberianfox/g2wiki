@@ -22,7 +22,7 @@ Installing is pretty simple.  Change to the sam-node-ba directory and then issue
 `npm install`<br><br>
 ![](https://c1.staticflickr.com/5/4392/36693403503_bb9baab96a_c.jpg)
 ## Usage
-To use the node-sam-ba programming utility you need to make sure your AVR Atmel ICE programmer is hooked up via usb and your g2core board is also hooked up via usb and is in bootloader mode. *IE: No heart beats blinking.* See entering bootloader mode for more details on this.<br>
+To use the node-sam-ba programming utility you need to make sure your USB cable is hooked to your g2core board and that the board is in bootloader mode. *IE: No heart beats blinking.* See entering bootloader mode for more details on this.<br>
 You can now type: `node flash.js` to get the command usage.
 
 ![](https://c1.staticflickr.com/5/4499/23511638068_281b120bf1_c.jpg)
