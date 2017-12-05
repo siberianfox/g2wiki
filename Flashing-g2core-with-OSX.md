@@ -1,37 +1,16 @@
 _This page is for uploading an already compiled G2 binary to a target board without a debugger from OS X. Please see [Getting Started with G2](Getting-Started-with-G2) for information about other options._
 
-Note that these instructions are for flashing TinyG2 to a Arduino Due or TinyG v9, and even though it *requires* the Arduino IDE it doesn't use the Arduino IDE. You will still need to use the command line.
-
 This is also for flashing *without* a hardware debugger such as the Atmel ICE, Atmel SAM-ICE, or Segger JLink.
 
 Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-firmware-onto-the-board) for instructions on flashing *with* a hardware debugger
 
-### Step 1 - Get the TinyG2.elf file
+### Step 1 - Get the g2core.bin file
 
 **Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
-
 **Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
-### Step 2 - Install the Arduino IDE
-#### Part a
 
-_If you already have the Arduino IDE installed you can skip this step_
 
-Download the Arduino 1.6.x for MacOS X from http://arduino.cc/en/Main/Software
-
-Expand the downloaded zip file then move Arduino.app to /Applications on your hard drive. (Often, this is found on the sidebar of Finder windows.)
-
-#### Part b
-Start the Arduino IDE.  In the main menu bar, go to Tools→Board→Boards Manager.
-
-Click on the "Arduino SAM Boards (32-bit ARM Cortex-M3)" entry (likely the 2nd one down), and click the INSTALL button.  This can take a while to install, depending on the speed of your computer.
-
-Once it has installed, close the Boards Manager, then quit the Arduino IDE.
-
-### Step 3 - Clone the g2 git repository to your local disk
-
-You need some of the scripts in the https://github.com/synthetos/g2 git repository, so clone it to your local disk.
-
-### Step 4 - Program TinyG2 onto the Due
+### Step 2 - Program g2core onto the Due
 
 Open Terminal.app, then change to the Resources/TinyG2-OSX-Programmer/ subdirectory in the g2 repository you just cloned.  One way to do that is:
 
@@ -39,15 +18,15 @@ Open Terminal.app, then change to the Resources/TinyG2-OSX-Programmer/ subdirect
 2. Then drag the Resources/TinyG2-OSX-Programmer/ *folder* from the cloned g2 repository to that Terminal.app window. It should type in a path for you.
 3. Now press return.
 
-Either place the .elf file you want to program into that directory or remove the trailing version number from the elf file that is present; e.g. 
+Either place the .bin file you want to program into that directory or remove the trailing version number from the elf file that is present; e.g. 
 
-	mv TinyG2.elf.13.01 TinyG2.elf
+	mv TinyG2.bin.13.01 TinyG2.bin
 
 Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers, debuggers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
 
 Copy and paste the following line into the Terminal window:
 
-	./DueFromOSX.sh -f TinyG2.elf -p /dev/cu.usbmodem*
+	./DueFromOSX.sh -f TinyG2.bin -p /dev/cu.usbmodem*
 
 The output should look something like this (the numbers after cu.usbmodem will be different):
 
@@ -67,7 +46,7 @@ The flashing is done.  You now have a Due/TinyG2. :grinning:
 
 You may need to press the reset button on the Due before continuing.
 
-### Step 5.  Make use of your new Due/TinyG2
+### Step 3.  Make use of your new Due/TinyG2
 
 Generally the next step will be connecting to your Due to verify it's working, and to make use of it.
 
