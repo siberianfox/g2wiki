@@ -135,7 +135,7 @@ $YLV | Y Homing Latch Velocity | 100 mm/min
 $YLB | Y Homing Latch Backoff | 20 mm
 $YZB | Y Homing Zero Backoff | 3 mm
 |____|
-$ZJH | X Homing Jerk | 100 (100 million)
+$ZJH | Z Homing Jerk | 100 (100 million)
 $ZSN | Z Minimum Switch Mode | 0=disabled (with NC switches it's important all unused switches are disabled)
 $ZSX | Z Maximum Switch Mode | 3=limit-and-homing
 $ZTM | Z Travel Maximum | 100 mm
