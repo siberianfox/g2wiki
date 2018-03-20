@@ -200,7 +200,7 @@ Each `BOARD` sets a few important values:
 
 * **`BASE_BOARD`** - This is used later to know which settings to use for a range of boards. We show how to create that next.
 +
-TIP: Even if you only have one board revision, it's still good practice to break `BASE_BOAD` and `BOARD` out so you can revise later.
+TIP: Even if you only have one board revision, it's still good practice to break `BASE_BOARD` and `BOARD` out so you can revise later.
 
 * **`DEVICE_DEFINES`** - This is where you pass defines directly into the code (as if they were ``#define``d).
 +
