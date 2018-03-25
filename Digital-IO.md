@@ -189,7 +189,7 @@ Name | Description | Values
 Notes:
 - Mode
   - Mode will return NULL if an output is queried that is not available due to hardware of configuration
-  - _Note: Mode settings will [change in furtture releases](#future-digital-output-settings)_
+  - _Note: Mode settings will [change in future releases](#future-digital-output-settings)_
 
 ### Future Digital Output Settings
 
