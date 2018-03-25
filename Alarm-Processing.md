@@ -1,4 +1,4 @@
-##Machine State and Alarm Processing
+## Machine State and Alarm Processing
 This page describes the internal machine state and how exception processing such as alarms and shutdown affect this state.
 
 Related pages
@@ -96,7 +96,7 @@ PANIC may only be cleared by:
 
 - ^x (control x) --- resets the system
 
-####C lear on Dual Endpoint USB
+#### Clear on Dual Endpoint USB
 Using clear is slightly more complicated on dual endpoint USB. Clears should be sent over the data channel, as this ensures that all queued commands are cleared up to the clear command itself. A clear will be honored if sent via the control channel but this practice is discouraged as it can lead to unpredictable results. Clears received on the control channel will be warned in the response. In this case it is the host’s responsibility to ensure that the data buffers are drained or stopped before CLEAR is sent.
 
 ### Other Topics
