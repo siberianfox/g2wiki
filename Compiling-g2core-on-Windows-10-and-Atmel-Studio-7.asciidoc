@@ -53,7 +53,7 @@ Atmel Studio 7 weighs in at a portly 2.01 Gb, so you need this much space on you
 ## Atmel Studio 7 - Download
 To compile g2core on Windows with Atmel Studio you will want the Atmel Studio 7.0.1188 (or greater). We recommend a clean machine or VM.
 
-* Go to Atmel and download the http://www.atmel.com/tools/atmelstudio.aspx[Atmel Studio 7 Installer] install package. Either Web or Online versions should work.
+* Go to Atmel and download the http://www.microchip.com/avr-support/atmel-studio-7[Atmel Studio 7 Installer] install package. Either Web or Online versions should work.
 
 ** There may also be USB driver updates that are not in the main file. If so, you might want these as well. You should not need any of the Part Packs or other files.
 
