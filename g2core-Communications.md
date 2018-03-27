@@ -25,13 +25,15 @@ Line mode protocol is designed to prevent the serial buffer from either filling 
 
 Data and Control commands are sent over the same link, and are sent to separate internal queues, allowing control commands to always take priority over data commands like Gcode. 
 
-The protocol is very simple - "blast" 4 commands (text lines) to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands - which do not consume line buffers and do not generate responses.** Recognized single character commands are:
-- `!` - Feedhold request
-- `~` - Feedhold exit (restart)
-- `%` - Queue flush
-- `^d` - Kill job (ASCII 0x04)
-- `^x` - Reset board (ASCII 0x18)
-- `ENQ` - Enquire communications status (ASCII 0x05) 
+The protocol is very simple - "blast" 4 commands (text lines) to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands - which do not consume line buffers and do not generate responses.** 
+
+* Recognized single character commands are:
+  * `!` - Feedhold request
+  * `~` - Feedhold exit (restart)
+  * `%` - Queue flush
+  * `^d` - Kill job (ASCII 0x04)
+  * `^x` - Reset board (ASCII 0x18)
+  * `ENQ` - Enquire communications status (ASCII 0x05) 
 
 ### Line Mode Reference Implementation
 Here's a pseudocode reference implementation that's actually rather simple:
@@ -66,16 +68,17 @@ To somewhat repeat what was just said, there are three distinct places that a li
 
 1. Command is executed when it's read by the serial input handler - Control commands such as JSON (first character of the line is a `{`) and single-character commands (`!`, `%`, etc) fit in this category.
 
-  * Single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
+    * Single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
 
-  * Multiple single character commands may be put together, such as `!%` with nothing in between. If there is a space, such as `! %` then the `%` **will not be seen as a queue flush**. (This is to deal with Inkscape that uses % as a comment character in CAM output, so there's some stateful dancing that needs to be done to keep this from being a problem).
+    * Multiple single character commands may be put together, such as `!%` with nothing in between. If there is a space, such as `! %` then the `%` **will not be seen as a queue flush**. (This is to deal with Inkscape that uses % as a comment character in CAM output, so there's some stateful dancing that needs to be done to keep this from being a problem).
 
-2. Command is executed immediately when it's read from the serial input queue - Data commands that are not synchonized with motion fit in this category. See `M100.1` in the example below.
+2. Command is executed immediately when it's read from the serial input queue - Data commands that are not synchronized with motion fit in this category. `M100.1` is a command that has this behavior. See `M100.1` in the example below.
 
 3. Command is executed synchronized with motion (i.e. executed from the planner queue). Everything that's not part of one of the above categories, including most gcode, fits into this category.
 
 For example, if the internal buffer contains this:
 ```gcode
+G54
 G0 X20
 M100 ({out1:0.5})
 M100.1 ({g55z:-0.1})
@@ -89,21 +92,21 @@ They will be executed in this order:
 
 1. `{sr:n}` - JSON is executed as soon as it's seen in the buffer, past anything else.
 
-  * Note that it has the be in the g2core buffer before it can be seen. If the host has commands buffered, it might not be seen immediately.
+    * Note that it has the be in the g2core buffer before it can be seen. If the host has commands buffered, it might not be seen immediately.
 
-2. `G0 X20` - the move will be queued to the planner and start executing almost immediately
+2. `G54` - this command is synchronized with motion, so it's queue to the planner. Assuming the planner is empty it is executed shortly thereafter. 
 
-3. `M100 ({out1:0.5})` - the JSON command `{out1:0.5}` will be *queued* to the planner to execute after the move is completed.
+3. `G0 X20` - the move will be queued to the planner and start executing almost immediately
 
-4. `M100.1 ({g55z:-0.1})` - once queue - following the previous M100 command - the JSON command `{g55z:-0.1}` will be executed *immediately*, and the `G55` offset space will be adjusted for the next gcode line on.
+4. `M100 ({out1:0.5})` - the JSON command `{out1:0.5}` will be *queued* to the planner to execute after the move is completed.
 
-  * Note that the `G55` offset space may not yet be *applied*.
+5. `M100.1 ({g55z:-0.1})` - will be read from the serial queue after the preceding M100 command is queued to the planner, and the JSON command `{g55z:-0.1}` will be executed *immediately*. The `G55` offsets will thus be adjusted, but the Select G55 Coordinate System command itself has not yet been executed, so the machine is still in G54 and reflecting these offsets.
 
-5. `G0 X10` - another move will be queued
+6. `G0 X10` - another move will be queued
 
-6. `G55` - the `G55` offset space will be queued to activate for further moves.
+7. `G55` - the `G55` offsets will be queued to activate for further moves.
 
-7. `G0 X0` - this move will be queued to execute in the `G55` offset space.
+8. `G0 X0` - this move will be queued to execute in the `G55` coordinate system.
 
 Note that the `{out1:0.5}` will have only been queued to happen, and will only actually be executed in sync with the motion, while the machine is at `X20`.
 
