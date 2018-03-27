@@ -3,7 +3,6 @@ _This page describes the g2core communications options and protocol. It is inten
 **We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles these communications details.**
 **If you are building your own, we strongly recommend you use the linemode protocol described below.**
 
-
 ## Overview of Communications Model
 
 A **host** is any computer that talks to a g2core board. Typically this is an OSX, Linux, or Windows laptop or desktop computer communicating over USB.
@@ -34,7 +33,8 @@ The protocol is very simple - "blast" 4 commands (text lines) to the board witho
 - `^x` - Reset board (ASCII 0x18)
 - `ENQ` - Enquire communications status (ASCII 0x05) 
 
-Here's a reference implementation that's actually rather simple:
+### Line Mode Reference Implementation
+Here's a pseudocode reference implementation that's actually rather simple:
 
 1. Prepare or start reading the list of _data_ lines to send to the g2core. We'll call this list `line_queue`.
 2. Set `lines_to_send` to `4`.
@@ -58,19 +58,21 @@ Notes:
   * Note that control commands, like dta commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
 * **All** communications to the g2core **must** go through this protocol. It's not acceptable to occasionally send a JSON command or gcode line directly past this protocol, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses.
 
+## More Details
+
 ### Order of Operation
 
-To somewhat repeat what was just said, there are three times that a line will get executed:
+To somewhat repeat what was just said, there are three distinct places that a line may be executed:
 
-1. When it's read - JSON (first character of the line is a `{`) and single-character commands (`!`, `%`, etc) fit in this category.
+1. Command is executed when it's read by the serial input handler - Control commands such as JSON (first character of the line is a `{`) and single-character commands (`!`, `%`, etc) fit in this category.
 
   * Single-character lines must be the first character on a line, and do not need a following line-ending `\n` *but can have one.* Some serial-port libraries will auto-flush on a line-ending, making it better to add a `\n` to the end of a `!`.
 
-  * Multiple single character commands may be put together, such as `!%` with nothing in between. If there is a space, such as `! %` then the `%` **will not be seen as a queue flush**.
+  * Multiple single character commands may be put together, such as `!%` with nothing in between. If there is a space, such as `! %` then the `%` **will not be seen as a queue flush**. (This is to deal with Inkscape that uses % as a comment character in CAM output, so there's some stateful dancing that needs to be done to keep this from being a problem).
 
-2. When it's queued - `M100.1` is how you make JSON fit in this category. See example below.
+2. Command is executed immediately when it's read from the serial input queue - Data commands that are not synchonized with motion fit in this category. See `M100.1` in the example below.
 
-3. In the queue, synchronized with motion. Everything that's not part of one of the above categories, including most gcode, fits into this category.
+3. Command is executed synchronized with motion (i.e. executed from the planner queue). Everything that's not part of one of the above categories, including most gcode, fits into this category.
 
 For example, if the internal buffer contains this:
 ```gcode
@@ -89,11 +91,11 @@ They will be executed in this order:
 
   * Note that it has the be in the g2core buffer before it can be seen. If the host has commands buffered, it might not be seen immediately.
 
-2. `G0 X20` - the move will get queued and start executing almost immediately
+2. `G0 X20` - the move will be queued to the planner and start executing almost immediately
 
-3. `M100 ({out1:0.5})` - the JSON command `{out1:0.5}` will be *queued* to execute after the move is completed.
+3. `M100 ({out1:0.5})` - the JSON command `{out1:0.5}` will be *queued* to the planner to execute after the move is completed.
 
-4. `M100.1 ({g55z:-0.1})` - the JSON command `{g55z:-0.1}` will be executed *immediately*, and the `G55` offset space will be adjusted for the next gcode line on.
+4. `M100.1 ({g55z:-0.1})` - once queue - following the previous M100 command - the JSON command `{g55z:-0.1}` will be executed *immediately*, and the `G55` offset space will be adjusted for the next gcode line on.
 
   * Note that the `G55` offset space may not yet be *applied*.
 
