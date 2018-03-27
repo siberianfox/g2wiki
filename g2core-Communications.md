@@ -10,10 +10,6 @@ A **host** is any computer that talks to a g2core board. Typically this is an OS
 
 A **microhost** is a tiny linux system like a Beaglebone, Edison, Raspberry Pi, or NextThingCo CHIP. These usually talk to g2core over a direct serial UART - although they may also communicate over USB.
 
-As of the g2core 100 builds we recommended using [Line Mode protocol](#linemode-protocol) for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. More on the details later.
-
-g2core 100 builds also support character mode (byte streaming) which is deprecated and will be removed at a later time.
-
 ### Control and Data Channels
 
 A **command** is a single line of text sent from the host to the board. A command can be either **data** or **control**.
@@ -23,11 +19,20 @@ A **command** is a single line of text sent from the host to the board. A comman
 
 The protocol distinguishes between data and controls, and always executes controls first.
 
-## Linemode Protocol
+## Line Mode Protocol
+As of the g2core 100 builds we recommended using Line mode protocol for host-to-board communications. In line mode the host sends a few command lines to prime the board's receive queue, then sends a new line each time it receives a response from a processed line. g2core 100 builds also support character mode (byte streaming) which is deprecated and may be removed at a later time.
 
-We designed the _linemode protocol_ to help prevent the serial buffer from either filling completely (preventing time-critical commands from getting through) while keeping the serial buffer full enough in order to prevent degradation to motion quality due to the motion commands not making it to the machine in a timely manner.
+Line mode protocol is designed to prevent the serial buffer from either filling completely (preventing time-critical commands from getting through) while keeping the serial buffer full enough in order to prevent degradation to motion quality due to the motion commands not making it to the machine in a timely manner.
 
-The protocol is simple - "blast" 4 lines to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands, such as !, ~, or ENQ, which do not consume line buffers and do not generate responses.**
+Data and Control commands are sent over the same link, and are sent to separate internal queues, allowing control commands to always take priority over data commands like Gcode. 
+
+The protocol is very simple - "blast" 4 commands (text lines) to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands - which do not consume line buffers and do not generate responses.** Recognized single character commands are:
+- `!` - Feedhold request
+- `~` - Feedhold exit (restart)
+- `%` - Queue flush
+- `^d` - Kill job (ASCII 0x04)
+- `^x` - Reset board (ASCII 0x18)
+- `ENQ` - Enquire communications status (ASCII 0x05) 
 
 In implementation it's actually rather simple:
 
