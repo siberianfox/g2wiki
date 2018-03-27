@@ -40,11 +40,7 @@ which are are not reverted should they have been changed during the feedhold. Mo
 
 * **Flush**: If `%` is received the hold is exited with the exit actions described below. State is restored as with `~`, but pending motion commands are flushed from the hold point. The tool will not move until new commands are received.
 
-* **Kill Job**: If Control-d `^d` is received the job is abandoned immediately. No exit actions occur. The following actions occur:
-  * Machine is restored to the state of the primary planner, including current position of tool
-  * Coolant and spindle are stopped
-  * Runs an M30 (PROGRAM_END), which restores Gcode defaults
-  * An exception report and status report are sent
+* **Kill Job**: If Control-d `^d` is received within a feedhold the job is abandoned immediately. No exit actions occur. See [Job Kill](Feedhold,-Resume,-and-Other-Simple-Commands#job-kill)
 
 #### Exit Actions
 1. **Coolant Restore**: If Coolant Pause On Hold `{coph:t}` is true mist and flood coolants are returned to their state prior to the feedhold. (If they were ON they are restored, if they were OFF they are not.) If `{coph:f}` is false the coolant state is unaffected. Coolant may be turned ON and OFF while in a feedhold. If `{coph:t}` is true these settings are overridden and the coolants are returned to their prior states. If `{coph:f}` is false the new coolant states will still be in effect after the feedhold is exited.
