@@ -1,6 +1,6 @@
 ## Feedhold Overview
 
-Character | Command | AKA | Description
+Char | Command | AKA | Description
 ----------|---------|-----|-------------
 ! | Feedhold | Pause | Stop movement immediately. Maintains positional accuracy
 ~ | Cycle Start | Resume | Resume movement from hold point (where motion stopped)
