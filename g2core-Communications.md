@@ -62,6 +62,14 @@ Notes:
 
 ## More Details
 
+### ENQ/ACK - Checking for Clean Startup
+USB does not always connect reliably. Sometimes you have to hit it a few times (Windows is the worst). The ENQ/ACK dialog is provided as a test of connectivity and board health. The protocol is:
+
+* Send ENQ - send a single-character ENC (0x05)
+* Returns `{"ack":true}\n` - Indicating that the serial communication and board's main loop are operational
+
+Note that if Marlin Compatibility Mode is enabled board startup is delayed by 2 seconds from power-on. This is to allow for Marlin's STK-500 dialog to complete. If Marlin Compatibility Mode is not enabled board startup occurs within a few milliseconds of power-on. 
+
 ### Order of Operation
 
 To somewhat repeat what was just said, there are three distinct places that a line may be executed:
