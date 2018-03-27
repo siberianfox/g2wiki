@@ -1,6 +1,7 @@
 _This page describes the g2core communications options and protocol. It is intended for GUI developers and other low-level access. This page is useful if for some reason you need to write your own communications handler, or just want to know how it works._
 
-**We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles all these communications details**.
+**We strongly recommend using the [node-g2core-api](https://github.com/synthetos/node-g2core-api) nodeJS module, which already handles these communications details.**
+**If you are building your own, we strongly recommend you use the linemode protocol described below.**
 
 
 ## Overview of Communications Model
@@ -22,7 +23,37 @@ A **command** is a single line of text sent from the host to the board. A comman
 
 The protocol distinguishes between data and controls, and always executes controls first.
 
-### Order of operation
+## Linemode Protocol
+
+We designed the _linemode protocol_ to help prevent the serial buffer from either filling completely (preventing time-critical commands from getting through) while keeping the serial buffer full enough in order to prevent degradation to motion quality due to the motion commands not making it to the machine in a timely manner.
+
+The protocol is simple - "blast" 4 lines to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands, such as !, ~, or ENQ, which do not consume line buffers and do not generate responses.**
+
+In implementation it's actually rather simple:
+
+1. Prepare or start reading the list of _data_ lines to send to the g2core. We'll call this list `line_queue`.
+2. Set `lines_to_send` to `4`.
+  * `4` has been determined to be a good starting point. This is subject to tuning, and might be adjusted based on your results.
+3. Send the first `lines_to_send` lines of `line_queue` to the g2core, decrementing `lines_to_send` by one for _each line sent_.
+  * If you need to read more lines into `line_queue`, do so as soon as `lines_to_send` is zero.
+  * If `line_queue` is being filled by dynamically generated commands then you can send up to `lines_to_send` lines immedately.
+  * Don't forget to decrement `lines_to_send` for _each line sent_! And don't send more than `lines_to_send` lines!
+4. When a `{r:...}` response comes back from the g2core, add one to `lines_to_send`.
+  * It's **vital** that when any `{r:...}` comes back that `lines_to_send`. If one is lost or ignored then the system will get out of sync and sending will stall.
+5. Loop back to 3. (Better yet, have 3 and 4 each loop in their own thread or context.)
+
+Notes:
+* Steps 3 and 4 are best to run in their own threads or context. (In node we have each in event handlers, for example.) If that's not practical, it's vital that when a `{r:...}` comes in that `lines_to_send` is incremented and that lines can be sent as quickly after that as possible.
+* It is possible (and common) to get two or more `{r:...}` responses before you send another line. This is why it's vital to keep track of `lines_to_send`.
+* Note that only _data_ (gcode) lines go into `line_queue`! For configuration JSON or single-line commands, they are sent immediately.
+  * It's important to maintain `lines_to_send` even when sending past the `line_queue`.
+    * Single-character commands will *not* generate a `{r:...}` response (they may generate other output, however), so there's nothing to do (see following notes).
+    * JSON commands (`{` being the first character on the line) **will** have a `{r:...}` response, so when you send one of those past the queue you should still subtract one from `lines_to_send`, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses. This is the *only* case where `lines_to_send` may go negative.
+  * Note that `{"gc":"...}` Gcode line are considered control lines and bypasses motion planner buffer tests and are acknowledged immediately. Consider sending GCode as unwrapped text, _while observing linemode protocol_. See [issue 287](https://github.com/synthetos/g2/issues/287) for more detail.
+  * Note that control commands, like dta commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
+* **All** communications to the g2core **must** go through this protocol. It's not acceptable to occasionally send a JSON command or gcode line directly past this protocol, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses.
+
+### Order of Operation
 
 To somewhat repeat what was just said, there are three times that a line will get executed:
 
@@ -106,32 +137,4 @@ There are other issues that are dealt with in other ways, such as if the serial 
 
 One further note: Due to the way g2core plans motion in real-time, if the gcode commands request moves of very brief duration, and the serial buffer isn't kept full enough of moves, then there will be a noticeable degradation in velocity and in some configurations the machine will exhibit a noticeable "stutter" as it executes each move on it's own or in small groups.
 
-## Linemode Protocol
 
-We designed the _linemode protocol_ to help prevent the serial buffer from either filling completely (preventing time-critical commands from getting through) while keeping the serial buffer full enough in order to prevent degradation to motion quality due to the motion commands not making it to the machine in a timely manner.
-
-The protocol is simple - "blast" 4 lines to the board without waiting for responses. From that point on send a single line for every `{r:...}` response received. Every command will return one and only one response. **The exceptions are single character commands, such as !, ~, or ENQ, which do not consume line buffers and do not generate responses.**
-
-In implementation it's actually rather simple:
-
-1. Prepare or start reading the list of _data_ lines to send to the g2core. We'll call this list `line_queue`.
-2. Set `lines_to_send` to `4`.
-  * `4` has been determined to be a good starting point. This is subject to tuning, and might be adjusted based on your results.
-3. Send the first `lines_to_send` lines of `line_queue` to the g2core, decrementing `lines_to_send` by one for _each line sent_.
-  * If you need to read more lines into `line_queue`, do so as soon as `lines_to_send` is zero.
-  * If `line_queue` is being filled by dynamically generated commands then you can send up to `lines_to_send` lines immedately.
-  * Don't forget to decrement `lines_to_send` for _each line sent_! And don't send more than `lines_to_send` lines!
-4. When a `{r:...}` response comes back from the g2core, add one to `lines_to_send`.
-  * It's **vital** that when any `{r:...}` comes back that `lines_to_send`. If one is lost or ignored then the system will get out of sync and sending will stall.
-5. Loop back to 3. (Better yet, have 3 and 4 each loop in their own thread or context.)
-
-Notes:
-* Steps 3 and 4 are best to run in their own threads or context. (In node we have each in event handlers, for example.) If that's not practical, it's vital that when a `{r:...}` comes in that `lines_to_send` is incremented and that lines can be sent as quickly after that as possible.
-* It is possible (and common) to get two or more `{r:...}` responses before you send another line. This is why it's vital to keep track of `lines_to_send`.
-* Note that only _data_ (gcode) lines go into `line_queue`! For configuration JSON or single-line commands, they are sent immediately.
-  * It's important to maintain `lines_to_send` even when sending past the `line_queue`.
-    * Single-character commands will *not* generate a `{r:...}` response (they may generate other output, however), so there's nothing to do (see following notes).
-    * JSON commands (`{` being the first character on the line) **will** have a `{r:...}` response, so when you send one of those past the queue you should still subtract one from `lines_to_send`, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses. This is the *only* case where `lines_to_send` may go negative.
-  * Note that `{"gc":"...}` Gcode line are considered control lines and bypasses motion planner buffer tests and are acknowledged immediately. Consider sending GCode as unwrapped text, _while observing linemode protocol_. See [issue 287](https://github.com/synthetos/g2/issues/287) for more detail.
-  * Note that control commands, like dta commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
-* **All** communications to the g2core **must** go through this protocol. It's not acceptable to occasionally send a JSON command or gcode line directly past this protocol, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses.
