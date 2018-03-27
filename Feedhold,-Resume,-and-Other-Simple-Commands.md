@@ -69,6 +69,14 @@ When a feedhold is in effect the machine can execute moves and other operations 
 
 - **Probing**: G38.x probing can be performed while in p2.
 
+## Job Kill
+If Control-d `^d` is received the job is abandoned immediately. The following actions occur:
+  * Machine is restored to the state of the primary planner, including current position of tool
+  * Coolant and spindle are stopped
+  * Runs an M30 (PROGRAM_END), which restores Gcode defaults
+  * An exception report and status report are sent
+
+
 ## Jogging Using Feedhold and Queue Flush
 To jog using feedhold and queue flush do the following:
 * Start the jog by issuing a move in the jogging direction at the velocity you want for the jog
