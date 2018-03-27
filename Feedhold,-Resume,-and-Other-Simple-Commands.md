@@ -5,6 +5,7 @@ Character | Command | AKA | Description
 ! | Feedhold | Pause | Stop movement immediately. Maintains positional accuracy
 ~ | Cycle Start | Resume | Resume movement from hold point (where motion stopped)
 % | Queue Flush | | Exit feedhold while deleting remaining moves from planner buffer
+^d | Job Kill | End Program | Kill job from inside or outside feedhold
 
 To pause motion send a feedhold character (`!`) character during motion. Movement will decelerate to a stop while maintaining positional accuracy. To resume motion send a cycle start tilde character (`~`).
 
