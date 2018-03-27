@@ -34,7 +34,7 @@ The protocol is very simple - "blast" 4 commands (text lines) to the board witho
 - `^x` - Reset board (ASCII 0x18)
 - `ENQ` - Enquire communications status (ASCII 0x05) 
 
-In implementation it's actually rather simple:
+Here's a reference implementation that's actually rather simple:
 
 1. Prepare or start reading the list of _data_ lines to send to the g2core. We'll call this list `line_queue`.
 2. Set `lines_to_send` to `4`.
