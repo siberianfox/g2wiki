@@ -24,7 +24,7 @@
 1. [ ] [Tool Offsets and Selection](Tool-Offsets-and-Selection)
 1. [ ] [Probing](Gcode-Probes)
 1. [ ] [Feedhold, Resume, Job Kill](Feedhold,-Resume,-and-Other-Simple-Commands)
-1. [ ] [9 Axis UVW Operation](9 Axis UVW Operation)
+1. [ ] [9 Axis UVW Operation](9-Axis-UVW-Operation)
 
 **Discussion Topics**
 
