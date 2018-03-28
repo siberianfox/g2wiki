@@ -46,7 +46,7 @@ Here's a pseudocode reference implementation that's actually rather simple:
   * If `line_queue` is being filled by dynamically generated commands then you can send up to `lines_to_send` lines immedately.
   * Don't forget to decrement `lines_to_send` for _each line sent_! And don't send more than `lines_to_send` lines!
 4. When a `{r:...}` response comes back from the g2core, add one to `lines_to_send`.
-  * It's **vital** that when any `{r:...}` comes back that `lines_to_send`. If one is lost or ignored then the system will get out of sync and sending will stall.
+  * It's **vital** that when any `{r:...}` comes back that `lines_to_send` is incremented. If one is lost or ignored then the system will get out of sync and sending will stall.
 5. Loop back to 3. (Better yet, have 3 and 4 each loop in their own thread or context.)
 
 Notes:
@@ -57,7 +57,7 @@ Notes:
     * Single-character commands will *not* generate a `{r:...}` response (they may generate other output, however), so there's nothing to do (see following notes).
     * JSON commands (`{` being the first character on the line) **will** have a `{r:...}` response, so when you send one of those past the queue you should still subtract one from `lines_to_send`, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses. This is the *only* case where `lines_to_send` may go negative.
   * Note that `{"gc":"...}` Gcode line are considered control lines and bypasses motion planner buffer tests and are acknowledged immediately. Consider sending GCode as unwrapped text, _while observing linemode protocol_. See [issue 287](https://github.com/synthetos/g2/issues/287) for more detail.
-  * Note that control commands, like dta commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
+  * Note that control commands, like data commands, must start at the beginning of a line, so you should always send whole lines. IOW, don't interrupt a line being sent from the `line_queue` to send a JSON command or feedhold `!`.
 * **All** communications to the g2core **must** go through this protocol. It's not acceptable to occasionally send a JSON command or gcode line directly past this protocol, or `lines_to_send` will get out of sync and the sender will eventually stall waiting for responses.
 
 ## More Details
