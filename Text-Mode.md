@@ -51,17 +51,17 @@ A group is a collection of related tokens. Groups are used to specify all parame
 Group | Tokens | Notes
 --------|----------|-------
 system | sys | system global parameters
-axis | x y x a b c | all settings for that axis
+axis | x y z a b c | all settings for that axis
 motor | 1 2 3 4 5 6 | all settings for that motor
 pwm | p1...pN | all settings for pulse width modulation channel
 offsets | g54 g55 g56 g57 g58 g59 | offset settings xyzabc in named coordinate system.
 temporary offset | g92 | g92 offset settings. These are not persistent
 return to home values | g28, g30 | return values in machine coordinates
-pos | x y x a b c | current work position; with offsets in current units
-mpo | x y x a b c | current machine position; no offsets, always in millimeters
-ofs | x y x a b c | current offsets,  always in millimeters
-hom | x y x a b c e | homing status by axis. 'e' reports homing status for Entire machine
-prb | x y x a b c e | probe state by axis. 'e' reports success or failure
+pos | x y z a b c | current work position; with offsets in current units
+mpo | x y z a b c | current machine position; no offsets, always in millimeters
+ofs | x y z a b c | current offsets,  always in millimeters
+hom | x y z a b c e | homing status by axis. 'e' reports homing status for Entire machine
+prb | x y z a b c e | probe state by axis. 'e' reports success or failure
 di | 1...N | digital input configuration
 in | 1...N | digital input readouts (switch readers)
 do | 1...N | digital output configuration
