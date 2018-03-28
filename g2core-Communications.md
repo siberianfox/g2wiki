@@ -100,7 +100,7 @@ They will be executed in this order:
 
 1. `{sr:n}` - JSON is executed as soon as it's seen in the buffer, past anything else.
 
-    * Note that it has the be in the g2core buffer before it can be seen. If the host has commands buffered, it might not be seen immediately.
+    * Note that it has to be in the g2core buffer before it can be seen. If the host has commands buffered, it might not be seen immediately.
 
 2. `G54` - this command is synchronized with motion, so it's queue to the planner. Assuming the planner is empty it is executed shortly thereafter. 
 
