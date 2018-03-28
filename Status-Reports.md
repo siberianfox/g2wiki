@@ -107,7 +107,7 @@ All variables are reset and must be specified in a single SET command.
 ## Stat Values
 `stat` is the **machine state** variable that can be queried directly or set to return in a status report. Values are:
 
-# | Value | Description
+\# | Value | Description
 ---------|--------------|-------------
 0 | INITIALIZING | Machine is initializing
 1 | READY | Machine is ready for use
