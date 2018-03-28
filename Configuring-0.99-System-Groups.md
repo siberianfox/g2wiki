@@ -69,7 +69,7 @@ The`{jt:...}` parameter is the way to set cornering velocity limits. JT is a nor
 {jt:5.00}  Upper limit. Absolutely will fail
 </pre>
 
-If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting it too low is to run some arcs, which are composed of many short lines joined at angles. The [chordal tolerance](#ct-chordal-tolerance) controls the resolution of the lines. Run a large arc, such as the following sequence. Reducing the radius from I50 will test tighter and tighter corners.
+If the JT parameter is set too low the machine will exhibit "stuttering" motion as mild corners will decelerate, possibly to zero. One way to tell if the setting is too low is to run some arcs, which are composed of many short lines joined at angles. The [chordal tolerance](#ct-chordal-tolerance) controls the resolution of the lines. Run a large arc, such as the following sequence. Reducing the radius from I50 will test tighter and tighter corners.
 
 <pre>
 (Starting with machine at (0,0) with at least 50mm clearance in X and Y)
