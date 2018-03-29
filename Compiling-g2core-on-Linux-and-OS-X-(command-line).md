@@ -16,6 +16,13 @@
 
 # Build the sources:
 
+For Arduino Due:
+```
+cd g2/gcore
+make PLATFORM=DUE BOARD=gShield
+```
+
+For TinyG V9 board:
 ```
 cd g2/g2core
 make CONFIG=TestV9
