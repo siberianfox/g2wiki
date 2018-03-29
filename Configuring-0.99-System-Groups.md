@@ -105,7 +105,7 @@ Setting | Description | Notes
 [{qv:...}](#qv-queue-report-verbosity) | Queue report verbosity | 0=off, 1=filtered, 2=verbose
 [{sv:...}](#sv-status-report-verbosity) | Status_report_Verbosity | 0=off, 1=filtered, 2=verbose
 [{si:...}](#si-status-interval) | Status report interval | in milliseconds (100 ms minimum interval)
-[{ex:...}](#ex-flow-control) | Enable flow control | no function in 0.99 but remains for future use
+[{ex:...}](#ex-enable-flow-control) | Enable flow control | no function in 0.99 but remains for future use
 
 _Note: As of 0.99 JSON syntax (`{js:n}`) has been removed. All responses are strict JSON format. G2core accepts commands in strict or relaxed JSON format_
 
