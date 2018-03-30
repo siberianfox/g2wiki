@@ -1,7 +1,7 @@
 _Note: This page and the DRO capability have not been tested since 2014, so be advised._
 
 ## Using the Digital Digital Readout
-The Digital Digital Read Out uses G2 on a Due to count steps an an external device and convert them back to position for display as JSON. This is useful for very fine accuracy measurement and testing.
+The Digital Digital Read Out uses G2 on a Due to count steps of an external device and convert them back to position for display as JSON. This is useful for very fine accuracy measurement and testing.
 
 ## Building the DDRO
 The digital DRO builds from the digital-dro branch of the Synthetos G2 github repo. Do this:
@@ -38,7 +38,7 @@ Due Pin | Signal | Description
 # Software Setup
 You should see an OpenMoko TinyG v2 USB port which will show up as usbmodem001 or something similar in the Coolterm Options / Serial Port dialog (did we mention Coolterm was our favorite?). You do not need to set a baud rate or flow control as these are handed by the USB on the Due. You may want to select terminal mode, CR line feed from the Terminal page
 
-The following elements in the config much match the board under test.
+The following elements in the config must match the board under test.
 
 ### Motor Configuration
 1 is used as an example but all motors should be set.
