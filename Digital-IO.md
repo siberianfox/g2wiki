@@ -1,7 +1,8 @@
 _This page describes how digital inputs work **provisionally** in firmware version 0.99, firmware builds 100+. To read the firmware version type `{fv:n}`. To read build number type `{fb:n}`_
 
 Related Pages:
-- [Configuration for Firmware Version 0.99](Configuration-for-Firmware-Version-0.98)
+- [Configuration for Firmware Version 0.99](Configuring-Version-0.99)
+- [Configuration for Firmware Version 0.98](Configuration-for-Firmware-Version-0.98)
 - [Digital IO for Firmware Version 0.98](Digital-IO-0.98)
 
 # Overview
@@ -65,7 +66,7 @@ Digital inputs are configured using a set of digital input objects referenced as
 ...
 {diN:n}
 
-{d1:n}   Uber-group of all digital input groups
+{di:n}   Uber-group of all digital input groups
 </pre>
 
 Digital inputs have these attributes (using di1 as an example)
@@ -115,7 +116,7 @@ Inputs operate differently during homing – sequence is:
 Probing is also an exception that disables limit functionality.
 
 ### Future Digital Input Settings
-The following changes t the DI settings are planned
+The following changes to the DI settings are planned
 
    Name | Description | Values
    ------|------------|---------
@@ -152,7 +153,7 @@ The current state of an output can be read or written using JSON objects. `{outN
 ### Digital Output Properties
 
 **Binary Digital Outputs (0/1 Outputs)**
-- An binary output is exposed- via JSON as `outN`
+- A binary output is exposed- via JSON as `outN`
 - Output values are written as `0` (off) and `1` (on)
 - A boolean value (`true`, `false`) may be written and will be converted to `1` and `0`
 - A floating point value may be written and will be interpreted as `(bool)(value >= 0.5)`.
@@ -188,7 +189,7 @@ Name | Description | Values
 
 Notes:
 - Mode
-  - Mode will return NULL if an output is queried that is not available due to hardware of configuration
+  - Mode will return NULL if an output is queried that is not available due to hardware or configuration
   - _Note: Mode settings will [change in future releases](#future-digital-output-settings)_
 
 ### Future Digital Output Settings
@@ -200,7 +201,7 @@ Notes:
    `{do1out:` | exposed-as | 0=not-exposed, 1-M = bound to `out1` through `outM`
    `{do1frq:` | frequency | 0=PWM off, >0 = PWM frequency in Hz
    `{do1dcl:` | duty cycle low | set duty cycle lower bound 0.000 - 1.000
-   `{do1dch:` | duty cycle high | set duty cycle upper bound 0.000 - 1.000. Must be > dl
+   `{do1dch:` | duty cycle high | set duty cycle upper bound 0.000 - 1.000. Must be > dcl
 
 Notes:
 - Mode
