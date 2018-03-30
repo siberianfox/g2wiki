@@ -118,7 +118,7 @@ Currently spline motion is not supported.
 `G28 axes` return to point saved in g28.1 through intermediate point in axes<br><br>
 `G30.1` save location of current point in absolute coordinates<br>
 `G30` return to point saved in g30.1<br>
-`G30 axes` return to point saved in g2301 through intermediate point in axes<br>
+`G30 axes` return to point saved in g30.1 through intermediate point in axes<br>
 
 - G28 (and G30) will move the machine to absolute coordinates set in G28.1 (G30.1) at traverse rate (G0)
 - If G28.1 or G30.1 is not set the return point is (0,0,0,0,0,0)
@@ -140,7 +140,7 @@ Example:
 ## G61, G64 Path Control Modes
 `G61` set exact stop mode<br>
 `G61.1` set path stop mode<br>
-`G64` set continuous mode (behaves like exact path mode<br>
+`G64` set continuous mode (behaves like exact path mode)<br>
 
 G2core supports exact stop mode (G61) and exact path mode (G61.1). G64 is recognized, but is treated as exact path mode. In exact stop mode motion will stop between each Gcode block. In exact path mode the exact path is followed (i.e. corners are not rounded). The velocity at the points joining 2 blocks is controlled to keep the change in direction between the blocks within the jerk limits of the participating axes.
 
@@ -156,7 +156,7 @@ G80 cancels the current motion mode. Send G80 to make sure no movement will occu
 `G90.1` set absolute arc distance mode<br>
 `G91.1` set incremental arc distance mode (default)<br>
 
-In absolute distance mode axis positions are provided as abopsulte coordinates in the currently active coordinate system.  In incremental distance mode axis positions represent incremental movement from the current point.
+In absolute distance mode, axis positions are provided as absolute coordinates in the currently active coordinate system. In incremental distance mode, axis positions represent incremental movement from the current point.
 
 ## G93, G94, G95 Feed Rate Mode
 `G93` set inverse-time feedrate mode<br>
