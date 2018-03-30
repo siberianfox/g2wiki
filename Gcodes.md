@@ -10,7 +10,7 @@ Related Pages
 - [Mcodes](Mcodes)
 - [G2, G3 Arc At Feed Rate](G2-G3-Arc-At-Feed-Rate)
 - [G38.x Probes](Gcode-Probes)
-- [Coordinate Offsets](Gcode-Coordinate-Offsets) G10, G53-G59, G92.x, JSON Offset commands
+- [Coordinate Offsets](Gcode-Coordinate-Offsets) and [Coordinate Systems](Cooordinate-Systems) for G10, G53-G59, G92.x, JSON Offset commands
 
 ## Gcode Summary
 This table summarizes Gcode supported. In the following _'axes'_ means one or more of X,Y,Z,A,B,C, along with a corresponding floating point value for a specified axis.
@@ -23,6 +23,7 @@ __________|___________|_____________________|
 [G2](G2-G3-Arc-At-Feed-Rate) | _axes_ F P  IJK or R | Clockwise arc feed | Arc at feed rate F
 [G3](G2-G3-Arc-At-Feed-Rate) | _axes_ F P  IJK or R | Counterclockwise arc feed | Arc at feed rate F
 [G4](#g4-dwell) | P | Dwell | Pause for P seconds
+[G5](#g5-reserved-for-spline-motion) | | | Reserved for Spline Motion
 [G10 L2](Gcode-Coordinate-Offsets#g10-ln-set-parameters) [G10 L20](Gcode-Coordinate-Offsets#g10-ln-set-parameters)  | _axes_, P | Set coord offsets
 [G17](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select XY arc plane |
 [G18](Gcode-Circular-Arcs#g17-g18-g19-select-arc-plane) | | Select XZ arc plane |
@@ -39,13 +40,13 @@ __________|___________|_____________________|
 [G38.3](Gcode-Probes#g38x-probe) | _axes_ Fnnn | Probe | Probe toward, do not alarm if error
 [G38.4](Gcode-Probes#g38x-probe) | _axes_ Fnnn | Probe | Probe away, alarm if error
 [G38.5](Gcode-Probes#g38x-probe) | _axes_ Fnnn | Probe | Probe away, do not alarm if error  
-[G53](Gcode-Coordinate-Offsets) | | Select absolute coordinates | Non-Modal: Applies only to current block
-[G54](Gcode-Coordinate-Offsets) | | Select coord system 1 | G54 is typically used as the "normal" coordinate system and reflects the machine position
-[G55](Gcode-Coordinate-Offsets) | | Select coord system 2 |
-[G56](Gcode-Coordinate-Offsets) | | Select coord system 3 |
-[G57](Gcode-Coordinate-Offsets) | | Select coord system 4 |
-[G58](Gcode-Coordinate-Offsets) | | Select coord system 5 |
-[G59](Gcode-Coordinate-Offsets) | | Select coord system 6 |
+[G53](Coordinate-Systems) | | Select absolute coordinates | Non-Modal: Applies only to current block
+[G54](Coordinate-Systems) | | Select coord system 1 | G54 is typically used as the "normal" coordinate system and reflects the machine position
+[G55](Coordinate-Systems) | | Select coord system 2 |
+[G56](Coordinate-Systems) | | Select coord system 3 |
+[G57](Coordinate-Systems) | | Select coord system 4 |
+[G58](Coordinate-Systems) | | Select coord system 5 |
+[G59](Coordinate-Systems) | | Select coord system 6 |
 [G61](#g61-g64-path-control-modes) | | Exact stop mode | Motion will stop between each Gcode block
 [G61.1](#g61-g64-path-control-modes) | | Exact path mode | Continuous motion between Gcode blocks - exact path will be traced
 [G64](#g61-g64-path-control-modes) | | Continuous path mode | Same as exact path mode
@@ -54,13 +55,13 @@ __________|___________|_____________________|
 [G90.1](Gcode-Circular-Arcs#g901-g911-arc-distance-mode) | | Set absolute arc distance mode |
 [G91](#g90-g91-set-distance-mode) | | Set incremental distance mode |
 [G91.1](Gcode-Circular-Arcs#g901-g911-arc-distance-mode) | | Set incremental arc distance mode | default arc mode
-[G92](Gcode-Coordinate-Offsets) | _axes_ | Set origin offsets |
-[G92.1](Gcode-Coordinate-Offsets) | | Reset origin offsets |
-[G92.2](Gcode-Coordinate-Offsets) | | Suspend origin offsets |
-[G92.3](Gcode-Coordinate-Offsets) | | Resume origin offsets |
+[G92](Coordinate-Systems) | _axes_ | Set origin offsets |
+[G92.1](Coordinate-Systems) | | Reset origin offsets |
+[G92.2](Coordinate-Systems) | | Suspend origin offsets |
+[G92.3](Coordinate-Systems) | | Resume origin offsets |
 [G93](#g93-g94-g95-feed-rate-mode) | | Set inverse feedrate mode |
 [G94](#g93-g94-g95-feed-rate-mode) | | Set units-per-minutes feedrate mode / Cancel inverse feedrate mode |
-
+[G95](#g93-g94-g95-feed-rate-mode) | | Reserved for "Set units-per-revolution feedrate mode" (unimplemented) |
 
  Other | Parameter |Command | Description
 ------|-----------|--------|-------------
@@ -103,6 +104,10 @@ See [G2, G3 Arc At Feed Rate](G2-G3-Arc-At-Feed-Rate)
 ## G5 Reserved for Spline Motion
 Currently spline motion is not supported.
 
+
+## G10 Offsets
+See [G10 coordinate offsets](Gcode-Coordinate-Offsets#g10-ln-set-parameters)
+
 ## G17, G18, G19 Select Arc Plane
 `G17` select XY arc plane
 `G18` select XZ arc plane
@@ -137,6 +142,12 @@ Example:
 - Go back to X0Y0
 - Send G91 G28 Z10 - this will move to x100 y100. The tool will initially lift z by 10 mm (or inches); G91 is used to set relative mode for this command.
 
+## G38.x Probes
+See [G38.x Probes](Gcode-Probes#g38x-probe)
+
+## G53, G54, G55, G56, G57, G58, G59 Coordinate systems
+See [Coordinate Systems](Coordinate-Systems).
+
 ## G61, G64 Path Control Modes
 `G61` set exact stop mode<br>
 `G61.1` set path stop mode<br>
@@ -157,6 +168,9 @@ G80 cancels the current motion mode. Send G80 to make sure no movement will occu
 `G91.1` set incremental arc distance mode (default)<br>
 
 In absolute distance mode, axis positions are provided as absolute coordinates in the currently active coordinate system. In incremental distance mode, axis positions represent incremental movement from the current point.
+
+## G92, G92.x
+See [Coordinate Systems](Coordinate-Systems).
 
 ## G93, G94, G95 Feed Rate Mode
 `G93` set inverse-time feedrate mode<br>
