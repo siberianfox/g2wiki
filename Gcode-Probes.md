@@ -52,7 +52,7 @@ G38.2 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed), 
 G38.3 | _axes_ Fnnn | probe toward workpiece | stop on contact (switch closed)
 G38.4 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open), alarm if probe does not trip
 G38.5 | _axes_ Fnnn | probe away from workpiece | stop on loss of contact (switch open)
-{prb:n} | none | probe results | Probe status `e` and axis positions after probe, in absolute machine coordinates, in MM. Read only
+{prb:n} | none | probe results | Probe status `e` and axis positions after probe, in absolute machine coordinates, in mm. Read only
 {prbe:n} | none | probe status | 0=failed, 1=succeeded. Read only
 {prbz:n} | none | probe result Z | Z axis position, as above. Other axes are similar
 {prbr:_} | t/f | enable probe reports | If true, generate automatic probe reports when probing is complete
@@ -82,7 +82,7 @@ Other digital input settings are:
 See also: [Digital IO](Digital-IO).
 
 ## Using Probes for Tramming (Bed Leveling)
-See [Tramming]()
+TODO
 
 ## Changes To Probing prior to 100.20
 The following changes were made to probing in firmware build 100.20
