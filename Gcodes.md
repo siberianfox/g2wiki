@@ -59,7 +59,7 @@ __________|___________|_____________________|
 [G92.2](Gcode-Coordinate-Offsets) | | Suspend origin offsets |
 [G92.3](Gcode-Coordinate-Offsets) | | Resume origin offsets |
 [G93](#g93-g94-g95-feed-rate-mode) | | Set inverse feedrate mode |
-[G94](#g93-g94-g95-feed-rate-mode) | | Cancel inverse feedrate mode |
+[G94](#g93-g94-g95-feed-rate-mode) | | Set units-per-minutes feedrate mode / Cancel inverse feedrate mode |
 
 
  Other | Parameter |Command | Description
