@@ -47,8 +47,8 @@ __________|___________|_____________________|
 [G57](Coordinate-Systems) | | Select coord system 4 |
 [G58](Coordinate-Systems) | | Select coord system 5 |
 [G59](Coordinate-Systems) | | Select coord system 6 |
-[G61](#g61-g64-path-control-modes) | | Exact stop mode | Motion will stop between each Gcode block
-[G61.1](#g61-g64-path-control-modes) | | Exact path mode | Continuous motion between Gcode blocks - exact path will be traced
+[G61](#g61-g64-path-control-modes) | | Set exact path mode | Continuous motion between Gcode blocks - exact path will be traced
+[G61.1](#g61-g64-path-control-modes) | | Set exact stop mode | Motion will stop between each Gcode block
 [G64](#g61-g64-path-control-modes) | | Continuous path mode | Same as exact path mode
 [G80](#g80-cancel-motion-mode) | | Cancel motion mode |
 [G90](#g90-g91-set-distance-mode) | | Set absolute distance mode |
@@ -149,11 +149,11 @@ See [G38.x Probes](Gcode-Probes#g38x-probe)
 See [Coordinate Systems](Coordinate-Systems).
 
 ## G61, G64 Path Control Modes
-`G61` set exact stop mode<br>
-`G61.1` set path stop mode<br>
+`G61` set exact path mode<br>
+`G61.1` set exact stop mode<br>
 `G64` set continuous mode (behaves like exact path mode)<br>
 
-G2core supports exact stop mode (G61) and exact path mode (G61.1). G64 is recognized, but is treated as exact path mode. In exact stop mode motion will stop between each Gcode block. In exact path mode the exact path is followed (i.e. corners are not rounded). The velocity at the points joining 2 blocks is controlled to keep the change in direction between the blocks within the jerk limits of the participating axes.
+G2core supports exact path mode (G61) and exact stop mode (G61.1). G64 is recognized, but is treated as exact path mode. In exact stop mode motion will stop between each Gcode block. In exact path mode the exact path is followed (i.e. corners are not rounded). The velocity at the points joining 2 blocks is controlled to keep the change in direction between the blocks within the jerk limits of the participating axes.
 
 
 ## G80 Cancel Motion Mode
