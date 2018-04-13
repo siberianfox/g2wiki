@@ -12,3 +12,9 @@ This wiki serves as a user and programmer manual and documents progress on the p
 The [Master](https://github.com/synthetos/g2/tree/master) branch contains the current stable code. New feature development takes place in various feature branches which are then promoted to the [Edge](https://github.com/synthetos/g2/tree/edge) branch to make them available for beta testing.
 
 Currently the [Master](https://github.com/synthetos/g2/tree/master) branch has the 100.xx firmware builds. The firmware version is 0.99. The firmware version indicates the configuration and UI compatibility. Please note the changes in the Readme.md for the respective branch.
+
+### Who uses g2core?
+
+g2core is already used by people, projects, and businesses all over the world.
+
+We've recently started creating a page on the wiki showcasing them: [g2core in use](https://github.com/synthetos/g2/wiki/g2core-in-use)
