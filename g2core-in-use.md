@@ -2,6 +2,8 @@ g2core is in use by people all over the world
 
 This page links to the users we know about.  If your project, business, (etc) uses g2core, then please add yourself here.  Preferably with video (of g2core in use), or even helpful instructions for others to do the same. :smile:
 
+Also, if you know of other projects, people, businesses (etc) using g2core who aren't listed, here, please feel welcome to add them.
+
 ### Video's
 
 Things being created, where g2core is part of the process
