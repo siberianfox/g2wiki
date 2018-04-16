@@ -11,11 +11,11 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 ### Current
 
 * [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/)
+* [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/)
 
 #### Older
 
 * [Printrbot Play](https://printrbot.zendesk.com/hc/en-us/categories/201643523-Play-Model-1505-)
-* [Printrbot Plus](https://printrbot.zendesk.com/hc/en-us/categories/201643563-Plus-model-1504-)
 
 
 ## Video's
@@ -28,7 +28,6 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 ### ToDo
 
-* Ultimaker
 * eggbot
 * makeblock
 * oermill.h
