@@ -25,13 +25,10 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 * eggbot
 * makeblock
-* oermill.h
-* oermill_test.h
+* othermill.h
+* othermill_test.h
 * probotixV90
-* apeoko2.h
-* apeoko2dualY.h
-* apeoko375_Dual.h
-* opbot_sbv300.h
-* opbot_test.h
+* shopbot_sbv300.h
+* shopbot_test.h
 * watercolorbot_v2
 * zen7x12
