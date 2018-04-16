@@ -13,6 +13,10 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 * [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/)
 * [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/)
 
+### Future
+
+* [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) appear to be basing future products on g2core
+
 ## Video's
 
 ### Things being created, where g2core is part of the process
@@ -28,7 +32,5 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 * othermill.h
 * othermill_test.h
 * probotixV90
-* shopbot_sbv300.h
-* shopbot_test.h
 * watercolorbot_v2
 * zen7x12
