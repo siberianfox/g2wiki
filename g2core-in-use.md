@@ -20,7 +20,7 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 ### Older
 
 * The [Othermill](https://www.bantamtools.com/pages/products) - Uses TinyG as the electronic controller.
-  * This was superseded by the Othermill Pro, which was itself been superseded by the "Bantam Tools Desktop PCB Milling Machine".  Not sure (yet) if TinyG or G2core is used, but am looking into it.
+  * This was superseded by the Othermill Pro, which was itself superseded by the "Bantam Tools Desktop PCB Milling Machine".  Not sure (yet) if TinyG or G2core is used, but am looking into it.
 
 
 ## Video's
