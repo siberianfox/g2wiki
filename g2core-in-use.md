@@ -17,6 +17,12 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 * [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) appear to be basing future products on g2core
 
+### Older
+
+* The [Othermill](https://www.bantamtools.com/pages/products) - Uses TinyG as the electronic controller.
+  * This was superseded by the Othermill Pro, which was itself been superseded by the "Bantam Tools Desktop PCB Milling Machine".  Not sure (yet) if TinyG or G2core is used, but am looking into it.
+
+
 ## Video's
 
 ### Things being created, where g2core is part of the process
@@ -29,7 +35,5 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 * eggbot
 * makeblock
-* othermill.h
-* othermill_test.h
 * watercolorbot_v2
 * zen7x12
