@@ -13,17 +13,17 @@ Most of what follows is shamelessly cribbed from the BeRTOS site.
 
 ## Info
 ### You are free to...
-* Include g2core components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
-* Modify g2core components as you want under the following conditions:
- * Attribution - You must declare in a written statement in documentation and source code that you are using g2core components in your application and offer to provide the (possibly modified) g2core source code
- * Share-alike - If you modify g2core components, you may distribute them only under the original license
- * Contribution - If you modify g2core components, you must contribute the modifications back to the g2core project
+- Include g2core components within any product, distributed under any license, including commercial licenses and/or closed-source licenses
+- Modify g2core components as you want under the following conditions:
+  - Attribution - You must declare in a written statement in documentation and source code that you are using g2core components in your application and offer to provide the (possibly modified) g2core source code
+  - Share-alike - If you modify g2core components, you may distribute them only under the original license
+  - Contribution - If you modify g2core components, you must contribute the modifications back to the g2core project
 
 ### What you can do with g2core components...
 If you are a company or individual doing commercial embedded products, you can:
-* Download and use g2core components as you want
-* Sell products based on g2core components without paying royalties or other fees
-* Sell products based on g2core components without opening or giving away your other application source code
+- Download and use g2core components as you want
+- Sell products based on g2core components without paying royalties or other fees
+- Sell products based on g2core components without opening or giving away your other application source code
 
 ### What you must do with g2core components...
 If you sell or otherwise distribute code/products that use g2core components you must:
@@ -45,7 +45,7 @@ If you sell or otherwise distribute code/products that use g2core components you
  * This file ("the software") is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2 as published by the
  * Free Software Foundation. You should have received a copy of the GNU General Public
- * License, version 2 along with the software.  If not, see <http://www.gnu.org/licenses/>.
+ * License, version 2 along with the software.  If not, see http://www.gnu.org/licenses.
  *
  * As a special exception, you may use this file as part of a software library without
  * restriction. Specifically, if other files instantiate templates or use macros or
