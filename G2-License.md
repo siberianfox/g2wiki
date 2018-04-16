@@ -3,7 +3,7 @@ The g2core **project** is a motion control **application** built on a set of und
 * Ensure that the g2core project remains open source
 * Encourage contribution to the project and ensure that most changes and enhancements are returned to the community
 * Make it easy to use g2core components in free and commercial projects/products- i.e. encourage use of g2core components as a library
-* Notwithstanding the above, make the application when used as a whole retain GPLv2 copyleft and other provisions
+* Notwithstanding the above, make the application when used as a whole retain GPLv2 provisions
 
 G2core licensing is based on GPLv2 with the [BeRTOS extension](http://www.bertos.org/discover/license) to enable using component files without invoking GPL copyleft. To this end, all files in the project are licensed under GPLv2. Those files that are considered "components" carry the BeRTOS exception, that allows their use without opening source code that they come in contact with.
 
