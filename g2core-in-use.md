@@ -33,7 +33,5 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 ### ToDo
 
-* eggbot
 * makeblock
-* watercolorbot_v2
 * zen7x12
