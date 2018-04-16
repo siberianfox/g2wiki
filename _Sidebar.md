@@ -54,4 +54,4 @@
 1. [ ] [Git Procedures](https://github.com/synthetos/g2/wiki/G2-in-Git:-cloning-and-updating-procedures)
 1. [ ] [Windows 10 / VMware 8 Issues](Windows-10-VMware-Fusion-8-Issues)
 1. [ ] [Dual Endpoint USB Internals](Dual-Endpoint-USB-Internals)
-1. [ ] [G2 License](G2-License)
+1. [ ] [G2core License](G2core-License)
