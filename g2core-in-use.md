@@ -34,4 +34,3 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 ### ToDo
 
 * makeblock
-* zen7x12
