@@ -1,10 +1,10 @@
-g2core is in use by people all over the world
+g2core (and TinyG) are in use by people all over the world
 
-This page links to the users we know about.  If your project, business, (etc) uses g2core then please add yourself here.
+This page links to the users we know about.  If your project, business, (etc) uses TinyG or g2core then please add yourself here.
 
-Preferably with video (of g2core in use), or even helpful instructions for others to do the same. :smile:
+Preferably with video (of TinyG/g2core in use), or even helpful instructions for others to do the same. :smile:
 
-Also, if you know of other projects, people, businesses (etc) using g2core who aren't listed here, please feel welcome to add them.
+Also, if you know of other projects, people, businesses (etc) using TinyG/g2core who aren't listed here, please feel welcome to add them.
 
 **Note that this page is very new, and is only just starting to have entries added**
 
@@ -12,8 +12,10 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 ### Current
 
-* [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/)
-* [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/)
+* [Bantam Tools Desktop PCB Milling Machine](https://www.bantamtools.com/pages/products) - Uses TinyG
+
+* [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/) - Uses g2core
+* [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/) - Uses g2core
 
 ### Future
 
@@ -21,8 +23,7 @@ Also, if you know of other projects, people, businesses (etc) using g2core who a
 
 ### Older
 
-* The [Othermill](https://www.bantamtools.com/pages/products) - Uses TinyG as the electronic controller.
-  * This was superseded by the Othermill Pro, which was itself superseded by the "Bantam Tools Desktop PCB Milling Machine".  Not sure (yet) if TinyG or G2core is used, but am looking into it.
+* The [Othermill and Othermill Pro](https://www.bantamtools.com/pages/products) - Uses TinyG
 
 
 ## Video's
