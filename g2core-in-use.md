@@ -15,7 +15,8 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 * [Bantam Tools Desktop PCB Milling Machine](https://www.bantamtools.com/pages/products) - Uses TinyG
 
 * [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/) - Uses g2core
-* [Printrbot Printrboard G2](https://printrbot.com/2018/04/08/printrboard-g2-general-information/) - Uses g2core
+* [Printrbot Printrboard G2](https://printrbot.com/shop/printrboard-g2/) - Uses g2core
+  * [Further general information](https://printrbot.com/2018/04/08/printrboard-g2-general-information/) on the Printrboard G2
 * [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/) - Uses g2core
 
 ### Future
