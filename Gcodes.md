@@ -94,17 +94,9 @@ the achievable velocity may also be limited by the jerk settings `xJM` for each 
 
 #### Calculation of Feed Rate for Moves Including Rotary Axes
 
-G2 adheres to the NIST definition for calculating feedrate for moves that include movement in A, B, C axes:
+G2 adheres to the [NIST Gcode definition](https://www.nist.gov/publications/nist-rs274ngc-interpreter-version-3) for calculating feedrate for moves that include movement in A, B, C axes. 
 <pre>
-/* --- NIST RS274NGC_v3 Guidance ---
- *
- *  The following is verbatim text from NIST RS274NGC_v3. Note: For moves that
- *  combine both linear and rotational movement the feed rate should apply to the XYZ
- *  movement, with the rotational axis (or axes) timed to start and end at the same time
- *  the linear move is performed. It is possible under this case for the rotational move
- *  to rate-limit the linear move.
- *
- *   2.1.2.5 Feed Rate
+/*   2.1.2.5 Feed Rate
  *
  *  The rate at which the controlled point or the axes move is nominally a steady rate
  *  which may be set by the user. In the Interpreter, the interpretation of the feed
@@ -131,6 +123,11 @@ G2 adheres to the NIST definition for calculating feedrate for moves that includ
  *       any time required for acceleration or deceleration.
  */ 
 </pre>
+
+Notes:
+- When computing feed rate for a move, if one or more axis (linear or rotary) is not capable of meeting the acceleration/velocity to achieve the desired feed rate the move will be slowed down to accommodate the rate limiting axis, and hence a lower feed rate will be achieved. 
+- In case [A] above, if one or more rotary axes are involved in the move they will complete their motion(s) in the same time that the linear axes are moving. It is possible that the rotary axis (axes) may rate limit the move as described above.
+- For g2core builds that support UVW axes g2core extends the NIST definition to include all linear axes (XYZ & UVW) when calculating feed rates.  
 
 ## G2, G3 Arc At Feed Rate
 See [G2, G3 Arc At Feed Rate](G2-G3-Arc-At-Feed-Rate)
