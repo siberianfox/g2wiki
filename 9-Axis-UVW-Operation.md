@@ -8,9 +8,9 @@ Axis | Axis # | Description (by convention)
 X | 0 | +X motion moves left to right when facing the machine
 Y | 1 | +Y motion forward to back when facing the machine
 Z | 2 | +Z motion moves up to the op of the machine when facing the machine; Z is by convention the tool-holding axis (cutting or actuating)
-A | 3 | A rotates around X with clockwise as viewed from the positive side (right side)
-B | 4 | B rotates around Y with clockwise as viewed from the positive side (back side)
-C | 5 | C rotates around Z with clockwise as viewed from the positive side (top)
+A | 3 | +A rotates around X with clockwise as viewed from the positive side (right side)
+B | 4 | +B rotates around Y with clockwise as viewed from the positive side (back side)
+C | 5 | +C rotates around Z with clockwise as viewed from the positive side (top)
 U | 6 | U is a secondary X axis and moves by the rules of that axis
 V | 7 | V is a secondary Y axis and moves by the rules of that axis
 W | 8 | W is a secondary Z axis and moves by the rules of that axis
