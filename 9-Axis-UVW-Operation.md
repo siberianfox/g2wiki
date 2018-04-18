@@ -6,14 +6,14 @@ As of firmware build `{fb:101.00}` a limited form of 9 axis motion control has b
 Axis | Axis # | Description (by convention)
 ------|---| ---------
 X | 0 | +X motion moves left to right when facing the machine
-Y | 1 | +Y motion forward to back when facing the machine
-Z | 2 | +Z motion moves up to the op of the machine when facing the machine; Z is by convention the tool-holding axis (cutting or actuating)
-A | 3 | +A rotates clockwise around X as viewed from the positive side (right 'end' of the X axis)
-B | 4 | +B rotates clockwise around Y as viewed from the positive side (back 'end' of the Y axis)
-C | 5 | +C rotates clockwise around Z as viewed from the positive side (top of the Z axis)
-U | 6 | U is a secondary X axis and moves by the rules of that axis
-V | 7 | V is a secondary Y axis and moves by the rules of that axis
-W | 8 | W is a secondary Z axis and moves by the rules of that axis
+Y | 1 | +Y motion moves front to back when facing the machine
+Z | 2 | +Z motion moves up to the top when facing the machine; Z is by convention the tool-holding axis (cutting or actuating)
+A | 3 | +A rotates clockwise around X as viewed from the positive end (right 'end' of the X axis)
+B | 4 | +B rotates clockwise around Y as viewed from the positive end (back 'end' of the Y axis)
+C | 5 | +C rotates clockwise around Z as viewed from the positive end (top of the Z axis)
+U | 6 | U is a secondary X axis and moves by the rules of the X axis
+V | 7 | V is a secondary Y axis and moves by the rules of the Y axis
+W | 8 | W is a secondary Z axis and moves by the rules of the Z axis
 
 ### Using UVW Axes
 Motors can be mapped to any of the 9 axes. This allows a machine to have as many as sis linear axes that are independent of each other and obey coupled kinematics.
