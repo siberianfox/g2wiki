@@ -14,7 +14,7 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 * [Bantam Tools Desktop PCB Milling Machine](https://www.bantamtools.com/pages/products) - Uses TinyG
 
-* [Dorna](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/) (kickstarter) - 6-axis robot using g2core
+* [Dorna](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/) (kickstarter) - 5-axis robot using g2core
 
 * [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/) - Uses g2core
 * [Printrbot Printrboard G2](https://printrbot.com/shop/printrboard-g2/) - Uses g2core
