@@ -18,7 +18,8 @@ toc::[]
 NOTE: Tormach now uses LinuxCNC.
 
 
-Overview::
+### Overview
+
 - G Code is a line-based static file format. It is first split on line endings (`\n`, `\r`, or `\r\n`), then each line is processed in turn.
 - Each line breaks down into an optional "line number", zero or more "words", and zero or more "comments."
 - There are rules on what words can be on a line together, and what words are required with other words.
