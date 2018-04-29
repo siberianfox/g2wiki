@@ -95,7 +95,7 @@ There are a few things you need to do make sure of once you have it installed
 ** From top menu bar hit File / Save All to make sure this sticks.
 
 ## Git for Windows
-The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*.
+The project Makefiles rely on the `git` command, so Git for Windows needs to be installed in your Windows environment *even if you use GitHub Desktop or you're using Windows in a VM and use Git on your host OS*. Make a note of which directory Git installs into. This may affect the build process later on.
 
 * Go to the http://git-scm.com/downloads[official Git site] and download and install the Git for Windows. Get the right one for your Windows - 64 bit is preferred (version 2.10.0 at the time of this writing). It may automatically DL the Windows 32 bit version. Don't be fooled if this is not what you want.
 
@@ -142,6 +142,9 @@ image:Windows-Choose-Build-And-Processor.png[Windows: Choose build and processor
   * This will also create a `g2core.elf` file in the `g2core` directory (see note below)
   * You will need one of these files to upload to the board. With option 5, below, it will use this file automatically. All other ways of uploading to the board will require you to locate this file manually
   * The first time it compiles the project it will download the entire toolchain and install it in the Motate Tools directory. This can take a while (~200 Mbytes). You will want a good Internet connection.
+
+NOTE: If your build fails with errors stating that it is unable to find 'gcc-arm-none-eabi', or similar, you may need to modify the '\g2\Motate\MotateProject\motate\Motate.mk' file so it points tot he correct location for your Git install. In particular, at line 236, or close to that, you'll see a comment saying '# Here we use some heuristics to find the OS'. For your particular build environment, update that PATH to point to the correct directories for your Git installation, and make sure you save the changes. After that, the build will be able to properly pull down and install the tool chain for the rest of the build.
+
 3. Configure the Device and Atmel-ICE Tool in the g2core project Properties window, which can be found by right clicking the g2core root directory in the Solution Explorer pane.
   * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board (gQuadratic and gQuintic use ATSAMS70N19)
   * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number
