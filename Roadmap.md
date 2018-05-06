@@ -20,7 +20,7 @@ Last updated: *5th May 2018*
       * Will not conflict.
       * Will review it and pull it asap. Needs Travis review.
 
-    - [ ] [#339 Fix coolant-init](https://github.com/synthetos/g2/pull/339)
+    - [x] [#339 Fix coolant-init](https://github.com/synthetos/g2/pull/339)
       * Looks relatively straightforward
 
     - [ ] [#299 Reading Nested JSON fail](https://github.com/synthetos/g2/pull/299)
