@@ -8,27 +8,27 @@ Last updated: *5th May 2018*
 
     In rough sequence order:
 
-    * [#307 Spring Compensation](https://github.com/synthetos/g2/pull/307)
+    - [x] [#307 Spring Compensation](https://github.com/synthetos/g2/pull/307)
       * Just closed it (canceled) as it needs work.
       * We’ll bring that one back up later (after some project stuff, it'll be a lot cleaner).
 
-    * [#334 Update A, B, C axes radius defaults to use motors 4, 5, & 6](https://github.com/synthetos/g2/pull/334)
+    - [x] [#334 Update A, B, C axes radius defaults to use motors 4, 5, & 6](https://github.com/synthetos/g2/pull/334)
       * Just approved it.
       * We should go ahead and merge it too.
 
-    * [#341 Add the gShield .elf and .bin files to our releases page](https://github.com/synthetos/g2/pull/341)
+    - [ ] [#341 Add the gShield .elf and .bin files to our releases page](https://github.com/synthetos/g2/pull/341)
       * Will not conflict.
       * Will review it and pull it asap. Needs Travis review.
 
-    * [#339 Fix coolant-init](https://github.com/synthetos/g2/pull/339)
+    - [ ] [#339 Fix coolant-init](https://github.com/synthetos/g2/pull/339)
       * Looks relatively straightforward
 
-    * [#299 Reading Nested JSON fail](https://github.com/synthetos/g2/pull/299)
+    - [ ] [#299 Reading Nested JSON fail](https://github.com/synthetos/g2/pull/299)
       * Waiting for @aldenharts' review and regression testing the JSON command lines
 
     Then:
 
-    * [#329: Finish Merge of #320 to Edge](https://github.com/synthetos/g2/pull/329)
+    - [ ] [#329: Finish Merge of #320 to Edge](https://github.com/synthetos/g2/pull/329)
       * It changes config app a lot, so we want to do this last (see item #4, below)
 
 2. **M7 Core**
