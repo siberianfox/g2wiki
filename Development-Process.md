@@ -10,6 +10,7 @@ We do development by features branches and pull requests (PRs). A feature is any
 1. [ ] [Regression Test The Branch](#regression-test-the-branch)
 1. [ ] [Pull Request](#pull-request)
 1. [ ] [Close the Feature](#close-the-feature)
+1. [ ] [Tag a Release](#tag-a-release)
 
 ### Open An Issue
 Here are our conventions for developing new features. Yours might be somewhat different, as sometimes you don't know if you will contribute code, so these steps may be done later, or tied directly to a PR (no new issue).
@@ -49,3 +50,24 @@ Notes:
 ### Close the Issue
 
 - We will close the issue once the PR is accepted/ We may advance the build number as well, depending on the nature of the PR.
+
+### Tag a Release
+
+- After a group of PRs are closed, and the code in `edge` is determined to be at least usable for testing, then we can tag it, which will trigger TravisCI to make a build and push the binaries to to [releases](https://github.com/synthetos/g2/releases) page.
+
+- The tagging process:
+
+  - In a commit on it's own, change the define [`G2CORE_FIRMWARE_BUILD`](https://github.com/synthetos/g2/blob/edge/g2core/g2core_info.h#L24) to use the format described next, with a one-sentence brief description of what's in the change. You can refer to fixed issues by the github convention of `#nnn`.
+
+  - For now, tags must take the form of `XXX.nn` where XXX is currently `101` and `nn` is updates by 1 each tag. It is important that there not be any additional spaces or letters in the tag itself. The git tag itslef is an "annotated" and unsigned tag with the comment/description on the tag should match the comment in the code.
+
+  - For example, the code would say:
+      ```c++
+      #define G2CORE_FIRMWARE_BUILD 101.01 // fixes #123, #124, and #125
+      ```
+  
+      and the git commit line would read:
+  
+      ```bash
+      git tag -a 101.01 -m '// fixes #123, #124, and #125'
+      ```
