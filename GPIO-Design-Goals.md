@@ -8,9 +8,9 @@ This page discusses upcoming functionality being added to the GPIO system.<br>
 - [GPIO Implementation](gpio-implementation)
 
 See also:
-- [G2 GPIO System](https://github.com/synthetos/g2/wiki/Digital-IO-(GPIO))
-- [JSON Operation](https://github.com/synthetos/g2/wiki/JSON-Operation)
-- [Toolheads](https://github.com/synthetos/g2_private/wiki/Toolheads)
+- [G2 GPIO System](Digital-IO)
+- [JSON Operation](JSON-Operation)
+- [Toolheads](Toolheads)
 
 # Design Goals
 In short, we want the GPIO system to be general enough to connect any pin to any machine function as a configuration option. Practically speaking, some pins like motor drive signals will be hard wired, but everything else should be configurable.
