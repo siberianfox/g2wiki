@@ -8,9 +8,9 @@ This page discusses upcoming functionality being added to the GPIO system.<br>
 - GPIO Implementation
 
 See also:
-- [G2 GPIO System](https://github.com/synthetos/g2/wiki/Digital-IO-(GPIO))
-- [JSON Operation](https://github.com/synthetos/g2/wiki/JSON-Operation)
-- [Toolheads](https://github.com/synthetos/g2_private/wiki/Toolheads)
+- [G2 GPIO System](Digital-IO)
+- [JSON Operation](JSON-Operation)
+- [Toolheads](Toolheads)
 
 # GPIO Implementation
 
