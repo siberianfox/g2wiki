@@ -16,7 +16,6 @@
 1. [ ] [Text Mode](Text-Mode)
 1. [ ] [JSON Communications](JSON-Operation)
 1. [ ] [GPIO Digital IO](Digital-IO)
-1. [ ] [GPIO Design Discussion](gpio-design-discussion)
 1. [ ] [Alarms & Exceptions](Alarm-Processing)
 1. [ ] [Power Management](Power-Management)
 1. [ ] [Coordinate Systems](Coordinate-Systems)
@@ -31,6 +30,7 @@
 **Discussion Topics**
 
 1. [ ] [Roadmap](https://github.com/synthetos/g2/wiki/Roadmap)
+1. [ ] [GPIO Design Discussion](gpio-design-discussion)
 1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 1. [ ] [Raster Streaming Prototol](Raster-Streaming-Protocol)
 1. [ ] [g2core REST Interface](g2core-REST-Interface)
