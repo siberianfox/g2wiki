@@ -8,7 +8,7 @@ This page discusses upcoming functionality being added to the GPIO system.<br>
 - [GPIO Implementation](gpio-implementation)
 
 See also:
-- [G2 GPIO System](Digital-IO-(GPIO))
+- [G2 GPIO System](Digital-IO)
 - [JSON Operation](JSON-Operation)
 - [Toolheads](Toolheads)
 
