@@ -42,7 +42,7 @@ Last updated: *5th May 2018*
     This also has a cleaned up Motate and some stepper enhancements.
 
 
-3. **Issue #347 - GPIO Enhancements**
+3. **[Issue #347 - GPIO Enhancements](https://github.com/synthetos/g2/issues/347)**
 
     Bring in refactored GPIO with a bunch of enhancements. See discussion [here](gpio-design-discussion). The code is in the works but is not completely done or tested yet. The CAN stuff slots in after this is available, as the new GPIO model supports all kinds of “non-io IO” like CAN.
 
