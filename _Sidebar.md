@@ -25,13 +25,14 @@
 1. [ ] [Tool Offsets and Selection](Tool-Offsets-and-Selection)
 1. [ ] [Probing](Gcode-Probes)
 1. [ ] [Feedhold, Resume, Job Kill](Feedhold,-Resume,-and-Other-Simple-Commands)
+1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 1. [ ] [9 Axis UVW Operation](9-Axis-UVW-Operation)
 
 **Discussion Topics**
 
 1. [ ] [Roadmap](https://github.com/synthetos/g2/wiki/Roadmap)
 1. [ ] [GPIO Design Discussion](gpio-design-discussion)
-1. [ ] [Marlin Compatibility](Marlin-Compatibility)
+1. [ ] [Toolheads](Toolheads)
 1. [ ] [Raster Streaming Prototol](Raster-Streaming-Protocol)
 1. [ ] [g2core REST Interface](g2core-REST-Interface)
 1. [ ] [Gcode Parsing](GCode-Parsing)
