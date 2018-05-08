@@ -8,9 +8,9 @@ This page discusses upcoming functionality being added to the GPIO system.<br>
 - [GPIO Implementation](gpio-implementation)
 
 See also:
-- [G2 GPIO System](https://github.com/synthetos/g2/wiki/Digital-IO-(GPIO))
-- [JSON Operation](https://github.com/synthetos/g2/wiki/JSON-Operation)
-- [Toolheads](https://github.com/synthetos/g2_private/wiki/Toolheads)
+- [G2 GPIO System](Digital-IO)
+- [JSON Operation](JSON-Operation)
+- [Toolheads](Toolheads)
 
 # GPIO Primitives
 The three IO primitives are **digital input**, **analog input**, and **digital output**. Analog output is not implemented, but practically speaking we always use pulse width modulation (PWM) for variable outputs, so PWM functionality is folded into the digital outputs and digital outputs can be driven using analog values (0.000 - 1.000).
