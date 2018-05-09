@@ -28,12 +28,12 @@
 
 - Inputs
   - 10 input protected 3.3v digital inputs  
-
-- Outputs
   - 4x analog to digital inputs 
     - configured as straight-through 0v-3.2v ADC channels
     - external analog front-end boards can be used to run 100K thermistors, PT100, PT1000 RTDs
     - OEM boards can be configured on-board for these front-ends
+
+- Outputs
   - 4x buffered digital outputs - selectable 3.3v/5v level
   - 4x low-power FET digital outputs - up to 300 ma each (fans, etc.)
   - 2x high-power 6amp FET digital outputs - for extruders
