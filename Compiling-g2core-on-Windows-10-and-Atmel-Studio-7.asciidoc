@@ -181,14 +181,14 @@ This is a collection of random things we've found help when using our standard t
 ## Atmel ICE and Other USB Connection Issues
 
 * When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug mode. Possible fixes:
-** Make sure the ICE is selected in the `g2core` window, `Tools` menu
-** Go to `Tools`, `Device Programming` and hit Apply. SOMetimes it takes more than one try
-** Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
-** If Debug mode or Run mode (the green right arrow) does not start reliably it may be because of a low-quality USB hub in the chain. This can cause all kinds of other connection problems. Replace the hub with a high-quality one, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
+** Make sure the ICE is selected in the `g2core` properties window, `Tools` menu. Right click the `g2core` directory in the Solution Explorer and select `Properties` to get this window.
+** If still having problems go to `Tools` menu bar, `Device Programming` and hit Apply. Sometimes it takes more than one try to make it apply.
+** If still having problems disconnect / reconnect the ICE from the VM - in Parallels use: `/Devices/External Devices, Atmel-ICE...`  Disconnect it, wait a second, then reconnect it.
+** If still having issues physically disconnect and reconnect the ICE.
+** Lastly, if the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
+** Problems may be because of a low-quality USB hub in the chain (we've seen this a lot). This can cause all kinds of other connection problems. Replace the hub with a high-quality one, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
 
 * The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
-
-* If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
 ## Some stubborn warning messages
 * We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
