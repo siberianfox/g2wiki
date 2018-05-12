@@ -11,6 +11,7 @@ We do development by features branches and pull requests (PRs). A feature is any
 1. [ ] [Pull Request](#pull-request)
 1. [ ] [Close the Feature](#close-the-feature)
 1. [ ] [Tag a Release](#tag-a-release)
+1. [ ] [Publish the Release and Release Notes](#publish-release-and-release-notes)
 
 ### Open An Issue
 Here are our conventions for developing new features. Yours might be somewhat different, as sometimes you don't know if you will contribute code, so these steps may be done later, or tied directly to a PR (no new issue).
@@ -71,4 +72,9 @@ Notes:
       ```bash
       git tag -a 101.01 -m '// fixes #123, #124, and #125'
       ```
-- When satisfied with the tag, push to Origin
+
+### Publish Release and Release Notes
+
+- When satisfied with the tag, push it to Origin (or whatever your target is). This will kick off the Travis build that creates the release on the releases page.
+
+- Once that's done, go to the release page and create / edit the release notes. This should just be a cut and paste of the latest section of the readme. but may have additional information as well. 
