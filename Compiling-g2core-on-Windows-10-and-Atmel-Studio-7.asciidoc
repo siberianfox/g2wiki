@@ -179,16 +179,17 @@ This is a collection of random things we've found help when using our standard t
 * If g2core project does not load it may be because the g2core.cppproj doesn't pass the AS7 XML parser - especially after a conflicted merge. A merge conflict can be caused a collision of the Atmel ICE settings in the g2core.cppproj file. In this case open the file manually or with a mergetool and select one or the other Atmel-ICE settings. Either one is OK because you can change to the right one once AS7 is open.
 
 ## Atmel ICE and Other USB Connection Issues
-* The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
 * When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
 
 * If Debug mode or Run mode (the green right arrow) does not start reliably it may be because of a low-quality USB hub in the chain. This can cause all kinds of other connection problems. Replace the hub with a high-quality one, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
 
+* The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
+
 * If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
 ## Some stubborn warning messages
-* We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
+We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
   * after compile: "changing start of section .bss by 4 bytes"
   * on AS7 startup: "object not referenced..." (or something like that)  
 
