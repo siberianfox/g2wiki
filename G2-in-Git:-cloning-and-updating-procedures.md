@@ -4,6 +4,6 @@ _These notes are written from the perspective of running GitX [GitX-dev (rowanj 
 
 ## Making a Remote to pull code for a PR
 
-* Add the remote `git@github.com:MitchBradley/g2.git`
+* Add the remote, e.g. `git@github.com:MitchBradley/g2.git`
 * restart Gitx or it will not be visible
 
