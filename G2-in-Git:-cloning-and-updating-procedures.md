@@ -3,3 +3,7 @@ This page is a parking lot for git procedures that I always forget because I don
 _These notes are written from the perspective of running GitX [GitX-dev (rowanj fork) Version Version 0.15.1964 dev (0.15.1964)](http://rowanj.github.io/gitx/) on OSX while using Apple Terminal for command line functions._
 
 ## Making a Remote to pull code for a PR
+
+* Add the remote `git@github.com:MitchBradley/g2.git`
+* restart Gitx or it will not be visible
+
