@@ -170,25 +170,27 @@ To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto
 # Tips and Tricks
 This is a collection of random things we've found help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
 
-## When changing branches
+## When pulling a new branch or changing branches
 
-- A common mistake is to not update the Motate submodule after switching to a new branch or pulling a branch. Whenever you pull from github be sure to run `git submodule update` from the command line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have. The short-SHA for the Motate commit can be found by going to the github, selecting the branch you are on in the Code tab, and looking for the `Motate @ ba0db89` entry in the file listing. The SHA provided should match the `git submodule` command from the command line.
+* A common mistake is to not update the Motate submodule after switching to a new branch or pulling a branch. Whenever you pull from github be sure to run `git submodule update` from the command line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have. The short-SHA for the Motate commit can be found by going to the github, selecting the branch you are on in the Code tab, and looking for the `Motate @ ba0db89` entry in the file listing. The SHA provided should match the `git submodule` command from the command line.
 
-- Whenever you pull from github you must CLEAN the g2core project. While running Clean or Rebuild should do this sometimes things get messed up due to Windows permissions. Clean clears out the /bin and /build directories, but we recommend just deleting the /bin and /build directories completely. If your build behaves badly (goes into panic, does completely unexpected things) you should delete these directories and recompile.
+* Whenever you pull from github you should CLEAN the g2core project. While running Clean or Rebuild should do this sometimes things get messed up due to Windows permissions. Clean clears out the /bin and /build directories, but we recommend just deleting the /bin and /build directories completely. If your build behaves badly (goes into panic, does completely unexpected things) you should delete these directories and recompile.
 
-## Atmel ICE
-- The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
+* If g2core project does not load it may be because the g2core.cppproj doesn't pass the AS7 XML parser - especially after a conflicted merge. A merge conflict can be caused a collision of the Atmel ICE settings in the g2core.cppproj file. In this case open the file manually or with a mergetool and select one or the other Atmel-ICE settings. Either one is OK because you can change to the right one once AS7 is open.
 
-- When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
+## Atmel ICE Issues
+* The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
-- If g2core project does not load it may be because the g2core.cppproj doesn't pass the AS7 XML parser - especially after a conflicted merge. A merge conflict can be caused a collision of the Atmel ICE settings in the g2core.cppproj file. In this case open the file manually or with a mergetool and select one or the other Atmel-ICE settings. Either one is OK because you can change to the right one once AS7 is open.
+* When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
 
-- If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
+* If Debug mode or Run mode (the green right arrow) does not start reliably it may be because of a low-quality USB hub in the chain. This can cause all kinds of other connection problems. Replace the hub with a high-quality one, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
+
+* If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
 ## Some stubborn warning messages
-- We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
-  - after compile: "changing start of section .bss by 4 bytes"
-  - on AS7 startup: "object not referenced..." (or something like that)  
+* We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
+  * after compile: "changing start of section .bss by 4 bytes"
+  * on AS7 startup: "object not referenced..." (or something like that)  
 
 ## Troubleshooting Windows Configurations
 
