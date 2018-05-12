@@ -194,8 +194,8 @@ This is a collection of random things we've found help when using our standard t
 * We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
 
 ** after compile: "changing start of section .bss by 4 bytes"
-
 ** on AS7 startup: "object not referenced..." (or something like that)  
+** on clean: "recipe for clean failed" in motate.mk
 
 ## Troubleshooting Windows Configurations
 
