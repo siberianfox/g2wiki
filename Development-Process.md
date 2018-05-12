@@ -71,3 +71,4 @@ Notes:
       ```bash
       git tag -a 101.01 -m '// fixes #123, #124, and #125'
       ```
+- When satisfied with the tag, push to Origin
