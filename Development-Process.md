@@ -57,7 +57,7 @@ Notes:
 
 - The tagging process:
 
-  - In a commit on it's own, change the define [`G2CORE_FIRMWARE_BUILD`](https://github.com/synthetos/g2/blob/edge/g2core/g2core_info.h#L24) to use the format described next, with a one-sentence brief description of what's in the change. You can refer to fixed issues by the github convention of `#nnn`.
+  - In a commit on it's own, change the define [`G2CORE_FIRMWARE_BUILD`](https://github.com/synthetos/g2/blob/edge/g2core/g2core_info.h#L24) in g2core_info.h to use the format described next, with a one-sentence brief description of what's in the change. You can refer to fixed issues by the github convention of `#nnn`.
 
   - For now, tags must take the form of `XXX.nn` where XXX is currently `101` and `nn` is updates by 1 each tag. It is important that there not be any additional spaces or letters in the tag itself. The git tag itslef is an "annotated" and unsigned tag with the comment/description on the tag should match the comment in the code.
 
