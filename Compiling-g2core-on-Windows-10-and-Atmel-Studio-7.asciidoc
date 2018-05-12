@@ -186,7 +186,7 @@ This is a collection of random things we've found help when using our standard t
 ** If still having problems disconnect / reconnect the ICE from the VM - in Parallels use: `/Devices/External Devices, Atmel-ICE...`  Disconnect it, wait a second, then reconnect it.
 ** If still having issues physically disconnect and reconnect the ICE.
 ** Lastly, if the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
-** Problems may be because of a low-quality USB hub in the chain (we've seen this a lot). This can cause all kinds of other connection problems. Replace the hub with a high-quality one, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
+** Problems may be because of a low-quality USB hub in the chain (we've seen this a lot). Replace the hub with a high-quality one like a Belkin 4 Port SuperSpeed Hub, and if on a Macbook with USB B connection use the USB on the right side of the computer (one less hub in the chain).
 
 * The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
