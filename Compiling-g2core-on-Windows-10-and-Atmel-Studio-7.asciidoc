@@ -189,9 +189,11 @@ This is a collection of random things we've found help when using our standard t
 * If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
 ## Some stubborn warning messages
-We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
-* after compile: "changing start of section .bss by 4 bytes"
-* on AS7 startup: "object not referenced..." (or something like that)  
+* We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
+
+  * after compile: "changing start of section .bss by 4 bytes"
+
+  * on AS7 startup: "object not referenced..." (or something like that)  
 
 ## Troubleshooting Windows Configurations
 
