@@ -170,10 +170,13 @@ To flash g2core (using the `g2core.elf` file you just made in step 2 above) onto
 # Tips and Tricks
 This is a collection of random things we've found help when using our standard toolchain --> OSX 10.11 (El Capitan), Parallels VM, Windows 10, Atmel Studio 7.0.1188, Atmel-ICE.
 
+## When changing branches
+
 - A common mistake is to not update the Motate submodule after switching to a new branch or pulling a branch. Whenever you pull from github be sure to run `git submodule update` from the command line (e.g. OSX Terminal) to make sure the right commit of Motate is associated with the g2core you have. The short-SHA for the Motate commit can be found by going to the github, selecting the branch you are on in the Code tab, and looking for the `Motate @ ba0db89` entry in the file listing. The SHA provided should match the `git submodule` command from the command line.
 
 - Whenever you pull from github you must CLEAN the g2core project. While running Clean or Rebuild should do this sometimes things get messed up due to Windows permissions. Clean clears out the /bin and /build directories, but we recommend just deleting the /bin and /build directories completely. If your build behaves badly (goes into panic, does completely unexpected things) you should delete these directories and recompile.
 
+## Atmel ICE
 - The Atmel ICE works best when connected as SWD, clock speed maxed out to 10 MHz.
 
 - When firing up a new instance of AS7 you may get an error trying to connect to the ICE. This may occur when you try to program, or enter Debug. Disconnect / reconnect the ICE - in Parallels: /Devices/External Devices, Atmel-ICE...  Disconnect it, wait a second, then reconnect it.
@@ -182,6 +185,10 @@ This is a collection of random things we've found help when using our standard t
 
 - If the USB gets thoroughly confused it's time for a VM and OSX reboot. Happens occasionally.
 
-# Troubleshooting Windows Configurations
+## Some stubborn warning messages
+- We try to get rid of all warning and error messages but some have us stumped. These can be ignored:
+  - 
+
+## Troubleshooting Windows Configurations
 
 See the link:Troubleshooting#issues-with-compiling-on-windows[Issues with compiling on Windows] section of the Troubleshooting page.
