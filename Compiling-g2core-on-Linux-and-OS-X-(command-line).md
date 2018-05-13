@@ -18,7 +18,7 @@
 
 For Arduino Due:
 ```
-cd g2/gcore
+cd g2/g2core
 make PLATFORM=DUE BOARD=gShield
 ```
 
