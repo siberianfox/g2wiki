@@ -5,6 +5,12 @@
   sudo apt-get install git-core make
   ```
 
+  If you're running a 64-bit version of Ubuntu, you'll also need to install some 32-bit pieces:
+
+  ```bash
+  sudo apt-get install libstdc++6:i386
+  ```
+
 * OS X - If you don't already have Xcode command line tools installed (it doesn't hurt to run it again):
   ```bash
   xcode-select --install
