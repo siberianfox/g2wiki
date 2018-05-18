@@ -35,6 +35,11 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 ## Video's
 
+### Implementation
+
+* [Katt Scott's ROSCon 2014 talk](https://vimeo.com/106993910#t=547s) about using ROS (Robot OS) to build a three axes pick and place robot
+  * TinyG content starts around ~9:07.  Not super in depth on TinyG, mostly high level.
+
 ### Things being created, where g2core is part of the process
 
 * [5 Axis - Custom Made Hotwire Cutter](https://vimeo.com/138558233)
