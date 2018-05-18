@@ -32,6 +32,7 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 ## Projects
 
 * [5 Axis Hotwire cutter](http://www.victorleung.info/post/5-axis-hotwire-cutter) - Uses g2core
+* [CNC Stencil Cake decoration](http://www.victorleung.info/post/cnc-stencil-cake-decoration-for-ines-birthday) - Uses g2core
 
 ## Video's
 
