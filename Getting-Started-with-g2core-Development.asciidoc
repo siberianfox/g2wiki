@@ -125,4 +125,4 @@ We also have some outdated instructions for compiling with Xcode on OSX/MacOS X.
 
 * https://github.com/synthetos/g2/wiki/Compiling-g2core-on-OS-X-(with-Xcode)[Compiling g2core on OS X with Xcode]
 
-Be aware they seem to [result in a build error](https://github.com/synthetos/g2/issues/350#issuecomment-390467466) to due every target being compiled instead of just the selected one.  If you know how to fix that problem, please update the wiki and let us know. :smile:
+Be aware they seem to https://github.com/synthetos/g2/issues/350#issuecomment-390467466[result in a build error] to due every target being compiled instead of just the selected one.  If you know how to fix that problem, please update the wiki and let us know. :smile:
