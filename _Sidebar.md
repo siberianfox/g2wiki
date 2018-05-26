@@ -27,7 +27,7 @@
 1. [ ] [Feedhold, Resume, Job Kill](Feedhold,-Resume,-and-Other-Simple-Commands)
 1. [ ] [Marlin Compatibility](Marlin-Compatibility)
 1. [ ] [9 Axis UVW Operation](9-Axis-UVW-Operation)
-
+1. [ ] [gQuintic Specs](gQuintic-Specs)
 **Discussion Topics**
 
 1. [ ] [Roadmap](https://github.com/synthetos/g2/wiki/Roadmap)
