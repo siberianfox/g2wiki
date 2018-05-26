@@ -8,12 +8,12 @@
   - 32 and 64 bit single instruction floating point hardware
   - Multi-level cache, instruction pipeline, simultaneous instruction execution
   - All communications IO is DMA driven
-  - USB is on-chip (our own drivers - very very field tested already)
+  - USB is on-chip (w/custom USB drivers - field tested for about 2 years now)
 
 - Host and Communications
   - USB-B connector for driving from "standard" external hosts
   - Host expansion connector for Linux host carrier board
-    - Board design accommodates wide variety of linux hosts such as nano-Pi, Beaglebone, rPi, etc.
+    - Board design accommodates wide variety of linux hosts such as nanoPi family, Beaglebone, rPi, etc.
     - Host-to-board communications via 4 wire UART - RX/TX/RTS/CTS
     - 1.2 Amps 5v @ 1200 ma available for host processor
 
