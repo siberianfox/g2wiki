@@ -60,14 +60,14 @@ Here are conditions where SafeOut would de-assert form hardware:
 * The MCU is booting - and has not started the main loop yet
 * The MCU is being flashed (and therefore not executing)
 * Motor power is applied but for some reason logic power has failed or not applied (the MCU is therefore not functioning)
-* The firmware is off in the weeds and the main loop has been terminated accordingly 
 
 In addition, there are some software conditions that remove the pulse train and de-assert SafeOut:
-* One or more failsafe assertion in the code has triggered, placing the firmware into a PANIC or ALARM state
+* The firmware is off in the weeds and the main loop has been terminated accordingly 
+* A failsafe assertion in the code has triggered, placing the firmware into a PANIC or ALARM state
 * An external shutdown has been detected placing the system into a SHUTDOWN state (see Emergency Stop, below)
 
 ### Emergency Stop and External Shutdown Options
-First, some background and philosophy: Since the controller may be the cause of a problem requiring an emergency stop, the controller should never be in the critical path of an emergency stop.
+Background and philosophy: Since the controller may be the cause of a problem requiring an emergency stop, the controller should never be in the critical path of an emergency stop.
 
 With that in mind, the board is design so that motor and FET power can be killed by an external switch independently of the processor continuing to operate. The incoming Vmot (typically 24v) has two connectors - One high-current to power the motors and FETs, another low-current to feed the regulator stages. These can be bridged for single-connection configurations.
 
