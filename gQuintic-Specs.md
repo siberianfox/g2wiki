@@ -49,6 +49,8 @@
   - JTAG/SWD connection and real-time debugging using Atmel-ICE
   - ROHS
 
+## Features
+
 ### Watchdog Safety Circuit
 Most product safety certifications (e.g. CE for Europe) for things like machine tools require that a redundant hardware failsafe be provided to shut down the machine in various failure cases. This should be in hardware, unless you have a software solution that is separate form the main SW, and the failsafe SW itself then needs to be certified (which we want to avoid).
 
