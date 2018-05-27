@@ -61,3 +61,11 @@ Here are conditions where the pulse train would fail:
 * The firmware is off in the weeds and the main loop has been terminated accordingly (Note: there are a series of assertions that are also run as part of the main loop that will shut down the machine if a fatal error is detected)
 
 ### Emergency Stop and External Shutdown Options
+First, some background and philosophy: Since the controller may be the cause of a problem requiring an emergency stop, the controller should never be in the critical path of an emergency stop.
+
+With that in mind, the board is design so that motor and FET power can be killed by an external switch independently of the processor continuing to operate. The incoming Vmot (typically 24v) has two connectors - One high-current to power the motors and FETs, another low-current to feed the regulator stages. These can be bridged for single-connection configurations.
+
+If Vmot drops a number of things happen:
+* The motors, FETs and DAC de-power - this includes the high-current FETS (heaters), and the low-current FETs and the DAC output will drop to zero (The DAC is 0-10v, typically used for spindle speed)
+* The Trinamic rail voltages drop in order to prevent them from blowing up (which they will if you don't remove power)
+* The CPU receives a LO on a pin, which can be used to signal the firmware that an external Estop has occurred (really that Vmot has been lost). The firmware (as it stands now) enters a Shutdown sequence, where it stops motion, shuts off the Safety signal, and informs the host that this has occurred.
