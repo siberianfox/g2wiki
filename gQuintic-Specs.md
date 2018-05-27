@@ -48,3 +48,14 @@
   - Can remove motor/output power w/o killing logic power
   - JTAG/SWD connection and real-time debugging using Atmel-ICE
   - ROHS
+
+### Watchdog Safety Circuit
+Most product safety certifications (e.g. CE for Europe) for things like machine tools require that a redundant hardware failsafe be provided to shut down the machine in various failure cases. This should be in hardware, unless you have a software solution that is separate form the main SW, and the failsafe SW itself then needs to be certified (which we want to avoid).
+
+The gQuintic has a discrete multivibrator circuit made of two cockroach FETs (BSS84, BSS138) that asserts as long as a pulse train is present on the input. If the pulse train is not present or fails the safety circuit de-asserts. All the output FETs and the step signal are gated by this SafeOut signal. The pulse train generator is in the main loop of the MCU. 
+
+Here are conditions where the pulse train would fail:
+* The MCU is booting - and has not started the main loop yet
+* The MCU is being flashed (and therefore not executing)
+* Motor power is applied but for some reason logic power has failed or not applied (the MCU is therefore not functioning)
+* The firmware is off in the weeds and the main loop has been terminated accordingly (Note: there are a series of assertions that are also run as part of the main loop that will shut down the machine if a fatal error is detected)
