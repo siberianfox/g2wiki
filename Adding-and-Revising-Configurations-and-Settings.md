@@ -30,4 +30,4 @@ A few notes from that example:
 1. It then *only* sets `BOARD` if it hasn't been set. (Before `boards.mk` is included, `BOARD` is defaulted to `"NONE"`.)
 1. Then `SETTINGS_FILE` is set explicitly. We could also check to see if it has been set, but generally you use a `CONFIG` to set the `SETTINGS_FILE`, and wouldn't wish to override it.
 
-One additional note: The same of the `CONFIG` is used in the output path, and should be something that can be a directory name without issues. Specifically, you shouldn't use spaces, slashes, etc. that could cause trouble with shell scripts, Makefiles, or C++ code. Numbers, upper and lowercase letters, dashes (`-`), dots (`.`), and underscores (`_`) are safe. Everything else should be avoided.
+One additional note: The name of the `CONFIG` is used in the output path, and should be something that can be a directory name without issues. Specifically, you shouldn't use spaces, slashes, etc. that could cause trouble with shell scripts, Makefiles, or C++ code. Numbers, upper and lowercase letters, dashes (`-`), dots (`.`), and underscores (`_`) are safe. Everything else should be avoided.
