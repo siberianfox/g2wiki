@@ -60,6 +60,4 @@ Here are conditions where the pulse train would fail:
 * Motor power is applied but for some reason logic power has failed or not applied (the MCU is therefore not functioning)
 * The firmware is off in the weeds and the main loop has been terminated accordingly (Note: there are a series of assertions that are also run as part of the main loop that will shut down the machine if a fatal error is detected)
 
-### External Shutdown Options
-
-THe 
+### Emergency Stop and External Shutdown Options
