@@ -52,15 +52,19 @@
 ## Features
 
 ### Watchdog Safety Circuit
-Most product safety certifications (e.g. CE for Europe) for things like machine tools require that a redundant hardware failsafe be provided to shut down the machine in various failure cases. This should be in hardware, unless you have a software solution that is separate form the main SW, and the failsafe SW itself then needs to be certified (which we want to avoid).
+Most product safety certifications (e.g. CE for Europe) for things like machine tools require that a redundant hardware failsafe be provided to shut down the machine in various failure cases. This should be in hardware, unless you have a software solution that is separate from the main SW, and the failsafe SW itself then needs to be certified (which we want to avoid).
 
-The gQuintic has a discrete multivibrator circuit made of two cockroach FETs (BSS84, BSS138) that asserts as long as a pulse train is present on the input. If the pulse train is not present or fails the safety circuit de-asserts. All the output FETs and the step signal are gated by this SafeOut signal. The pulse train generator is in the main loop of the MCU. 
+gQuintic has a discrete multivibrator circuit made of two cockroach FETs (BSS84, BSS138) that asserts as long as a pulse train is present on the input. If the pulse train is not present or fails the safety circuit de-asserts. All the output FETs, the Step signals and the DAC voltage are gated by this SafeOut signal. The pulse train generator is in the main loop of the MCU. 
 
-Here are conditions where the pulse train would fail:
+Here are conditions where SafeOut would de-assert form hardware:
 * The MCU is booting - and has not started the main loop yet
 * The MCU is being flashed (and therefore not executing)
 * Motor power is applied but for some reason logic power has failed or not applied (the MCU is therefore not functioning)
-* The firmware is off in the weeds and the main loop has been terminated accordingly (Note: there are a series of assertions that are also run as part of the main loop that will shut down the machine if a fatal error is detected)
+* The firmware is off in the weeds and the main loop has been terminated accordingly 
+
+In addition, there are some software conditions that remove the pulse train and de-assert SafeOut:
+* One or more failsafe assertion in the code has triggered, placing the firmware into a PANIC or ALARM state
+* An external shutdown has been detected placing the system into a SHUTDOWN state (see Emergency Stop, below)
 
 ### Emergency Stop and External Shutdown Options
 First, some background and philosophy: Since the controller may be the cause of a problem requiring an emergency stop, the controller should never be in the critical path of an emergency stop.
