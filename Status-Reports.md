@@ -126,3 +126,25 @@ All variables are reset and must be specified in a single SET command.
 
 #### Run State Transitions
 ![System States](images/SystemStates.jpg)
+
+## Incremental Status Report Settings
+_The following is a design specification for implementing an incremental status report setting function. This is NOT in the code yet - it's just here for discussion. (5/30/18)_
+
+Issue: Currently the entire status report setup string must be presented as a single string. The new string replaces the previous status report setting. With the addition of new status watches and UVW axes the setup string may exceed the line lengths available to on-board and host string buffers.
+
+Incremental status report setup changes status report setting behavior as so: 
+
+ * `{sr:f}` removes all status reports (clears)
+ * `{sr:t}` restores status reports to default settings from the stored profile
+ * `{sr:{<key1>:t,...<keyN>:t}}` **adds** key1 through keyN to the status report list
+ * `{sr:{<key1>:f,...<keyN>:f}}` **removes** key1 through keyN from the status report list
+
+  - Lines may have a mix of t and f pairs
+  - List ordering is not guaranteed in the case of mixed removes and adds in the same command
+
+Error conditions:
+  - All failures leave original status report list untouched
+  - A key that is not recognized fails with STAT_UNRECOGNIZED_NAME (stat=100)
+  - A value other than 't', or 'f' fails with STAT_INPUT_VALUE_RANGE_ERROR (stat=110)
+  - An attempt to add an element that exceeds SR list max fails with STAT_INPUT_EXCEEDS_MAX_LENGTH (stat=107)
+  - Malformed JSON (bad syntax) fails as usual (stat=111)
