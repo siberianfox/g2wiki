@@ -138,13 +138,12 @@ Incremental status report setup changes status report setting behavior as so:
  * `{sr:t}` restores status reports to default settings from the stored profile
  * `{sr:{<key1>:t,...<keyN>:t}}` **adds** key1 through keyN to the status report list
  * `{sr:{<key1>:f,...<keyN>:f}}` **removes** key1 through keyN from the status report list
-
-  - Lines may have a mix of t and f pairs
-  - List ordering is not guaranteed in the case of mixed removes and adds in the same command
+  * Lines may have a mix of t and f pairs
+  * List ordering is not guaranteed in the case of mixed removes and adds in the same command
 
 Error conditions:
-  - All failures leave original status report list untouched
-  - A key that is not recognized fails with STAT_UNRECOGNIZED_NAME (stat=100)
-  - A value other than 't', or 'f' fails with STAT_INPUT_VALUE_RANGE_ERROR (stat=110)
-  - An attempt to add an element that exceeds SR list max fails with STAT_INPUT_EXCEEDS_MAX_LENGTH (stat=107)
-  - Malformed JSON (bad syntax) fails as usual (stat=111)
+* All failures leave original status report list untouched
+* A key that is not recognized fails with STAT_UNRECOGNIZED_NAME (stat=100)
+* A value other than 't', or 'f' fails with STAT_INPUT_VALUE_RANGE_ERROR (stat=110)
+* An attempt to add an element that exceeds SR list max fails with STAT_INPUT_EXCEEDS_MAX_LENGTH (stat=107)
+* Malformed JSON (bad syntax) fails as usual (stat=111)
