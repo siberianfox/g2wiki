@@ -34,7 +34,7 @@ Here are our conventions for developing new features. Yours might be somewhat di
 - We appreciate at least some documentation for a feature that adds new capabilities. You can create a wiki page in your repo that can be ported over later. In some cases this is a modification of an existing g2 capability, so you can start there.
 
 ### Regression Test The Branch
-When you think you are ready to promote the branch you should run a full regression test using github/synthetos/tg_pytest. Obviously trap and correct and errors. All instructions are in the readme.
+When you think you are ready to promote the branch you should run a full regression test using [github/synthetos/tg_pytest](github/synthetos/tg_pytest). Obviously trap and correct and errors. All instructions are in the readme.
 
 ### Pull Request
 Generate a PR to the target branch - presumably g2/edge<br>
