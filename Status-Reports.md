@@ -134,12 +134,12 @@ Issue: Currently the entire status report setup string must be presented as a si
 
 Incremental status report setup changes status report setting behavior as so: 
 
- * `{sr:f}` removes all status reports (clears)
- * `{sr:t}` restores status reports to default settings from the stored profile
- * `{sr:{<key1>:t,...<keyN>:t}}` **adds** key1 through keyN to the status report list
- * `{sr:{<key1>:f,...<keyN>:f}}` **removes** key1 through keyN from the status report list
-  * Lines may have a mix of t and f pairs
-  * List ordering is not guaranteed in the case of mixed removes and adds in the same command
+* `{sr:f}` removes all status reports (clears)
+* `{sr:t}` restores status reports to default settings from the stored profile
+* `{sr:{<key1>:t,...<keyN>:t}}` **adds** key1 through keyN to the status report list
+* `{sr:{<key1>:f,...<keyN>:f}}` **removes** key1 through keyN from the status report list
+** Lines may have a mix of t and f pairs
+** List ordering is not guaranteed in the case of mixed removes and adds in the same command
 
 Error conditions:
 * All failures leave original status report list untouched
