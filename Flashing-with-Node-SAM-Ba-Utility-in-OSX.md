@@ -10,7 +10,7 @@ After nvm is installed type:\
 This will install node version 6.
 
 ## Getting node-sam-ba
-Next we use git to download sam-node-ba like the screen shot below:<br>
+Next we use git to download node-sam-ba like the screen shot below:<br>
 `git clone https://github.com/synthetos/node-sam-ba.git`
 <br><br>
 ![](https://c1.staticflickr.com/5/4388/36654186324_b987109e4c_c.jpg)
