@@ -16,7 +16,7 @@ Next we use git to download node-sam-ba like the screen shot below:<br>
 ![](https://c1.staticflickr.com/5/4388/36654186324_b987109e4c_c.jpg)
 
 ## Installing node-sam-ba
-Installing is pretty simple.  Change to the sam-node-ba directory and then issue the npm command to download and install all needed dependencies.<br>
+Installing is pretty simple.  Change to the node-sam-ba directory and then issue the npm command to download and install all needed dependencies.<br>
 **Type:**
 `cd node-sam-ba`<br>
 `npm install`<br><br>
