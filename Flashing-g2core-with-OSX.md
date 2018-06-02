@@ -52,4 +52,4 @@ Generally the next step will be connecting to your Due to verify it's working, a
 
 Disconnect the Due, then plug the USB cable into the other port.
 
-Continue on with [connecting to TinyG](https://github.com/synthetos/g2/wiki/Connecting-to-TinyG).
+Continue on with [connecting to g2core](https://github.com/synthetos/g2/wiki/Connecting-to-g2core).
