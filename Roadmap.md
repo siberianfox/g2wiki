@@ -15,7 +15,7 @@ Last updated: *5th June 2018*
       * Done
 
     - [ ] [#341 Add the gShield .elf and .bin files to our releases page](https://github.com/synthetos/g2/pull/341)
-      * Will not conflict.
+      * Discussion on the best approach here is still in progress.
 
 2. **[#285 - M7 Core](https://github.com/synthetos/g2/pull/285)**
 
