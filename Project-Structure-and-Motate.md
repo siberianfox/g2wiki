@@ -28,5 +28,5 @@ The directory structure of the g2Core project in brief:
 
 # Where to go from here
 
-Please check out [Getting Started with g2core](Getting-Started-with-g2core).
-This page is useful for [Setting up Configs](Adding-and-Revising-Boards) for new boards
+Please check out [Getting Started with g2core](Getting-Started-with-g2core).<br>
+This page is useful for [Setting up Configs](Adding-and-Revising-Boards) for new boards.
