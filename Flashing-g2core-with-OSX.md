@@ -6,8 +6,8 @@ Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-
 
 ### Step 1 - Get the g2core.bin file
 
-**Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
-**Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
+**Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]<br />
+**Option 2** - Get the a suitable .bin firmware file from https://github.com/synthetos/g2/releases
 
 
 ### Step 2 - Program g2core onto the Due
