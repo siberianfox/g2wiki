@@ -33,6 +33,8 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 * [5 Axis Hotwire cutter](http://www.victorleung.info/post/5-axis-hotwire-cutter) - Uses g2core
 * [CNC Stencil Cake decoration](http://www.victorleung.info/post/cnc-stencil-cake-decoration-for-ines-birthday) - Uses g2core
+* [Craniobot Courier GUI](https://github.com/brettbalder/CraniobotCourier) - A HMI for the Craniobot Microsurgical Platform, developed by the Bio-Sensing and Bio-Robotics Laboratory at the University of Minnesota - Twin Cities
+  * This is a fairly new project, started just a few weeks ago. :smile:
 
 ## Video's
 
