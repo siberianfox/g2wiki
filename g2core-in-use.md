@@ -20,7 +20,7 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 * [Printrbot Printrboard G2](https://printrbot.com/shop/printrboard-g2/) - Uses g2core
   * [Further general information](https://printrbot.com/2018/04/08/printrboard-g2-general-information/) on the Printrboard G2
 * [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/) - Uses g2core
-* [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) FabMo-based products (including the HandiBot) use g2core
+* [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) - FabMo-based products (including the HandiBot) use g2core
 
 ### Older
 
