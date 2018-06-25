@@ -77,7 +77,7 @@ The GET semantic will be changed as it violates RESTful GET safety - GETs should
 G2core has (and will continue to have) one exception to this rule: that's for clearing an alarm or shutdown condition using `{clear:n}` or `{clr:n}`. In alarm, shutdown and panic conditions no SET commands are accepted - i.e. commands with other than NULL as an argument. In order to accept a clear we make an exception for that one command.
 
 ### Removing Queue Reports {qr:n}
-Queue reports are an early strategy for communications synchronization that has been deprecated in favor of [line mode protocol](/g2core-Communications#line-mode-protocol). We are planning to remove Queue reports as of 1.0.0. If this impacts you negatively please contact us. 
+Queue reports are an early strategy for communications synchronization that has been deprecated in favor of [line mode protocol](g2core-Communications#line-mode-protocol). We are planning to remove Queue reports as of 1.0.0. If this impacts you negatively please contact us. 
 
 
 ### Deprecating G28.2, G28.3 and G28.4 
