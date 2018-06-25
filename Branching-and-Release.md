@@ -41,7 +41,7 @@ Once the new branching and versioning is in place a merged branch labeled `1.0.0
 
 This section lists the changes that may be incompatible with previous releases (either branch). This is an attempt to get these all together for the 1.0.0 release and take the hit at one time.
 
-### Changes to ID Attributes
+### ID Attribute Changes
 Proposed changes to IDs:
 * {fv:n} string in form Major.Minor.Patch, e.g. `1.0.0`, not a float
 * {fb:n} string with ShortSha, e.g. `49b671a`, not a float
@@ -52,7 +52,9 @@ The following remain the same:
 * {hv:n} board version string - e.g. revF
 * {id:n} board ID string - e.g. 0271-6fd3-e29c-14d
 
-### Changes to Polarities
+Note: These are and remain Read Only attributes. TinyGv8 has a case where hardware version can be written. This in not so in g2core.
+
+### Polarity Changes
 All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
 * Coolant
   * {comp:n} coolant mist polarity - 0=active HI, 1=active LO
@@ -66,19 +68,25 @@ The following remain the same:
 * Motor enable polarity {1ep:n}
 * Motor step polarity {1ep:n}
 
-### Changes to Global Motor Enable and Disable Commands (me/md)
-The current motor enable {me:n} and disable {md:n} commands function as so:
-* GETting me or md with NULL will enable or disable all motors: `{me:n}`, `{md:n}`
-* SETting a value of 0 will enable or disable all motors: `{me:0}`, `{md:0}`
-* SETting a value from 1 to MOTORS will enable or disable that motor only: `{me:1}`, `{md:1}`
+### Global Motor Enable and Disable Commands (me/md) Changes
+Motor enable {me:n} and disable {md:n} commands will function as so:
+* {me:n} global motor enable
+    * Returns True if any motor is enabled
+    * In previous releases this command would enable all motors
+* {md:n} global motor disable
+    * Returns True if all motors are disabled
+    * In previous releases this command would disable all motors
 
-The GET semantic will be changed as it violates RESTful GET safety - GETs should not cause any action. 
+The following remain the same:
+* {me:0} enable all motors
+* {md:0} disable all motors
+* {me:M} enable motor M (where M is a number from 1 to max motor)
+* {md:M} disable motor M (where M is a number from 1 to max motor)
+* {mt:XXX} sets motor timeout in seconds which is obeyed by enabled motors
 
-Note: {me:XXX} obeys the motor timeout seconds set by {mt:XXX} 
+Why?: The GET semantic will be changed as it violates RESTful GET safety - GETs should not cause any action. G2core has (and will continue to have) one exception to this rule: that's for clearing an alarm or shutdown condition using `{clear:n}` or `{clr:n}`. In alarm, shutdown and panic conditions no SET commands are accepted - i.e. commands with other than NULL as an argument. In order to accept a clear we make an exception for alarm and shutdown. Panics can only be cleared by a board reset.
 
-G2core has (and will continue to have) one exception to this rule: that's for clearing an alarm or shutdown condition using `{clear:n}` or `{clr:n}`. In alarm, shutdown and panic conditions no SET commands are accepted - i.e. commands with other than NULL as an argument. In order to accept a clear we make an exception for that one command.
-
-### Removing Queue Reports {qr:n}
+### Remove Queue Reports {qr:n}
 Queue reports are an early strategy for communications synchronization that has been deprecated in favor of [line mode protocol](g2core-Communications#line-mode-protocol). We are planning to remove Queue reports as of 1.0.0. If this impacts you negatively please contact us. 
 
 ### Deprecating G28.2, G28.3 and G28.4 Homing for JSON Versions
