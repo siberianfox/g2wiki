@@ -77,6 +77,11 @@ The following remain the same:
 * Motor enable polarity {1ep:n}
 * Motor step polarity {1ep:n}
 
+### Changed References to NORMALLY_OPEN and NORMALLY_CLOSED
+These are synonymous with the following, and have been replaced by their synonym:
+* NORMALLY_OPEN is replaced by IO_ACTIVE_LOW
+* NORMALLY_CLOSED is replaced by IO_ACTIVE_HIGH
+
 ### Global Motor Enable and Disable Commands (me/md) Changes
 Motor enable {me:n} and disable {md:n} commands will function as so:
 * {me:n} global motor enable
