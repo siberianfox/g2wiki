@@ -115,7 +115,7 @@ NOTE: The Makefiles also rely on the `curl` command that comes along with Git fo
 
 See link:https://github.com/synthetos/g2/wiki/Getting-Started-with-g2core-Development#cloning-the-repo[Cloning the Repo] if you haven't already.
 
-# Compiling and Uploading
+# Compiling and Uploading (Flashing the board)
 
 NOTE: These instructions are for the Atmel-ICE debugger. Many of these instructions will work with the Atmel SAM-ICE as well. The J-Link Segger works as well and is faster and cheaper than the Atmel ICE (Student model on Adafruit), but we haven't documented it yet - so you are on your own - or be a pal and update this page. It's also possible to upload directly through the USB or serial ports, but there is no real-time debugger in that case.
 
@@ -131,7 +131,7 @@ NOTE: Git is configured to ignore the changes to some of the project's dependent
 
 NOTE: If the g2core project is present but the Motate project is missing in AS7 check out this troubleshooting item: https://github.com/synthetos/g2/wiki/Troubleshooting#problem-the-motate-directory-is-empty-the-motate-project-is-missing 
 
-#### Compiling the Project
+### Compiling the Project
 To compile the project:
 
 image:Windows-Choose-Build-And-Processor.png[Windows: Choose build and processor]
@@ -146,13 +146,14 @@ image:Windows-Choose-Build-And-Processor.png[Windows: Choose build and processor
 NOTE: If your build fails with errors stating that it is unable to find `gcc-arm-none-eabi`, or similar, you may need to modify the `\g2\Motate\MotateProject\motate\Motate.mk` file so it points to the correct location for your Git install. In particular, at line 236, or close to that, you'll see a comment saying `# Here we use some heuristics to find the OS`. For your particular build environment, update that PATH to point to the correct directories for your Git installation, and make sure you save the changes. After that, the build will be able to properly pull down and install the tool chain for the rest of the build.
 
 3. Configure the Device and Atmel-ICE Tool in the g2core project Properties window, which can be found by right clicking the g2core root directory in the Solution Explorer pane.
-  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board. For gQuadratic and gQuintic use `ATSAMS70N19`
+  * In the Device tab select one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board. For gQuadratic and gQuintic use `ATSAMS70N19`. (Use the N part, not the J part listed earlier)  
   * In the Tool tab select your `Atmel-ICE`, which must be plugged in for it to appear. If you have more than one plugged in you can identify them by the last 4 digits of the serial number
   * The Interface should be `SWD`. JTAG doesn't always work. Max out clock speed to 10 MHz for best operation
   * You can now program and debug the buttons labeled '5' in the picture, as per step 5, below.
+
 4. (Alternately) Connect, configure and test the Atmel-ICE Tool in the Device Programming window:
   * The Tool should be Atmel-ICE. If you have more than one connected identify by the last 4 digits of the serial number.
-  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board. For gQuadratic and gQuintic use `ATSAMS70N19`
+  * The Device is one of: `ATSAM3X8C` for a v9 board, or `ATSAM3X8E` for the Due, or the right M4 or M7 processor for your particular board. For gQuadratic and gQuintic use `ATSAMS70N19`. (Use the N part, not the J part listed earlier) 
   * The Interface should be `SWD`. JTAG doesn't always work. Max out clock speed to 10 MHz for best operation
   * Hit Apply
   * You can hit Read the Device Signature to verify that you are connected. Or just hit the Memories tab
