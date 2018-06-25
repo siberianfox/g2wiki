@@ -46,19 +46,19 @@ Proposed changes to IDs:
 * {fb:ShortSha} - is now a string, not a float
 
 The following remain the same:
-* {fbc: settings file - e.g. settings_axidraw_v3.h
-* {hp: board platform string - e.g. gQuintic
-* {hv: board version string - e.g. revF
-* {id: board ID string - e.g. 0271-6fd3-e29c-14d
+* {fbc:n} settings file - e.g. settings_axidraw_v3.h
+* {hp:n} board platform string - e.g. gQuintic
+* {hv:n} board version string - e.g. revF
+* {id:n} board ID string - e.g. 0271-6fd3-e29c-14d
 
 ### Changes to Polarities
 All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
 * Coolant
-  * Coolant mist polarity        // {comp:} 0=active HI, 1=active LO
-  * Coolant flood polarity       // {cofp:} 0=active HI, 1=active LO
+  * {comp:n} coolant mist polarity - 0=active HI, 1=active LO
+  * {cofp:n} coolant flood polarity - 0=active HI, 1=active LO
 * Spindle
-  * Spindle enable polarity      // {spep:} 0=active HI, 1=active LO
-  * Spindle direction polarity   // {spdp:} 0=clockwise HI, 1=clockwise LO
+  * {spep:n} spindle enable polarity - 0=active HI, 1=active LO
+  * {spdp:n} spindle direction polarity - 0=clockwise HI, 1=clockwise LO
 
 The following remain the same:
 * Motor direction polarity {1po:n}
