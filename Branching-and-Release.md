@@ -78,8 +78,8 @@ G2core has (and will continue to have) one exception to this rule: that's for cl
 
 ### Deprecating G28.2, G28.3 and G28.4 
 Back in the day we added G28.2, G28.3 and G28.4 homing behaviors. These are not strictly Gcode and should never be called from within a Gcode job. We plan to substitute the following JSON commands for these functions:
-* G28.2 --> {hom:...tbd}
-* G28.3 --> {hom:...tbd}
-* G28.4 --> {hom:...tbd}
+* G28.2 --> {home:...tbd}
+* G28.3 --> {home:...tbd}
+* G28.4 --> {home:...tbd}
 
 The G28 forms will be removed in a later release.
