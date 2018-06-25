@@ -20,10 +20,11 @@
     - 5volt @ 1500 ma available for host processor
 
 - Motors
-  - 5x Trinamic TMC2130 stepper motor drivers
-  - 5x STEP / DIRECTION / ENABLE breakouts for external drivers (in lieu of Trinamic)  
-    - selectable 3.3v/5v output levels
-  - 4x "hobby servo" PWM outputs (uses the buffered digital outputs)
+  - 5 motor outouts - may be a mix of:
+    - 5 Trinamic TMC2130 stepper motor drivers
+    - 5 STEP / DIRECTION / ENABLE breakouts for external drivers (in lieu of Trinamic)  
+      - selectable 3.3v/5v output levels
+  - 4 "hobby servo" PWM outputs (uses the buffered digital outputs)
     - can be configured to interpret Gcode directly, or run as PWM devices
 
 - Inputs
