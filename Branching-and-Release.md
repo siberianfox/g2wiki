@@ -37,19 +37,12 @@ do we mean by:
 Major.minor.
 
 ### ID changes
-Things to record and make reportable, and as long as we are in the code making ID changes:
+Proposed changes to IDs:
+* {fv:Major.Minor.Patch} - is now a string, not a float
+* {fb:ShortSha} - is now a string, not a float
 
-* {ver:Major.Minor.Patch}
-  * deprecate {fv:
-  * alternately we could take over fv with a string: {fv:maj.min.pat}
-* {sha:ShortSHA}
-  * deprecate {fb:
-  * alternately we could take over fb with a string: {fb:shortSHA}
+The following remain the same:
 * {fbc:Settings file}
-* {hp: become a board string - e.g. gQuintic
+* {hp: board string - e.g. gQuintic
 * {hv: becomes a board string - e.g. revF
 * {id: remains the same
-* key: 6 digit code to access cloud-stored records from the board, including its test record
-  * built as modulus of salted hash of ID
-  * key is not actually on the board
-  * just spitballing here
