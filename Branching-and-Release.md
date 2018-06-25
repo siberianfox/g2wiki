@@ -42,8 +42,8 @@ This section lists the changes that may be incompatible with previous releases (
 
 ### Changes to ID Attributes
 Proposed changes to IDs:
-* {fv:Major.Minor.Patch} - is now a string, not a float
-* {fb:ShortSha} - is now a string, not a float
+* {fv:n} string in form `Major.Minor.Patch`, not a float
+* {fb:n} string with ShortSha, e.g. `49b671a`, not a float
 
 The following remain the same:
 * {fbc:n} settings file - e.g. settings_axidraw_v3.h
