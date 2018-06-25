@@ -64,3 +64,7 @@ The following remain the same:
 * Motor direction polarity {1po:n}
 * Motor enable polarity {1ep:n}
 * Motor step polarity {1ep:n}
+
+### Changes to Global Motor Enable and Disable Commands (me/md)
+The current motor enable {me:n} and disable {md:n} commands function as so:
+* 
