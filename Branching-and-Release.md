@@ -3,9 +3,14 @@ _**This page discusses proposed changes to the branching and release scheme for 
 
 # Current Branch and Release
 * Master branch - is the stable release branch. Pushes to master are performed periodically as code gets sufficient field history from early adopters of edge code
-* Edge branch - is the working branch. Bug and feature updates are performed against this branch. 
+* Edge branch - is the working branch. Bug and feature updates are performed against this branch. All pull requests should be performed from this branch.
 * Issue-NNN branches - are created to work on bugs or features. These are pulled into edge via pull requests. 
 * Dev branches - The Dev prefix has been deprecated, but you may still see some dev branches around.
 
 # New Branch and Release
-The proposed scheme 
+The proposed scheme is below:
+* Release branch - is the stable release branch. Pushes to Release are performed periodically as code gets sufficient field history from early adopters of edge code. Some patches may be applied to Release, but these should always be promoted up through Master. New feature development should not be done against Release. 
+* Master branch - is the working branch. Bug and feature updates are performed against this branch. All pull requests should be performed from this branch.
+* Issue-NNN branches - are created to work on bugs or features. These are pulled into Master via pull requests against Master. 
+* Edge branch - this branch will be deprecated and ultimately removed. 
+* Dev branches - The Dev prefix has been deprecated, but you may still see some dev branches around.
