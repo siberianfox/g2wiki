@@ -42,7 +42,7 @@ This section lists the changes that may be incompatible with previous releases (
 
 ### Changes to ID Attributes
 Proposed changes to IDs:
-* {fv:n} string in form `Major.Minor.Patch`, not a float
+* {fv:n} string in form Major.Minor.Patch, e.g. `1.0.0`, not a float
 * {fb:n} string with ShortSha, e.g. `49b671a`, not a float
 
 The following remain the same:
