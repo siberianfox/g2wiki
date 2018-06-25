@@ -37,7 +37,9 @@
     - Analog inputs can be configured for thermistor / PT100 / PT1000 on-board for OEM volumes 
   - 4 buffered digital outputs - selectable 3.3v/5v level
   - 4 low-power FET digital outputs - up to 300 ma each (fans, etc.)
-  - 3 high-power FET digital outputs - 2 extruders @ 6A, 1 heated bed @ 20A)
+  - 3 high-power FET digital outputs 
+    - 2 extruders @ 6A
+    - 1 heated bed @ 20A
   - Neopixel LED array output with DMA firmware driver
 
 - Other
