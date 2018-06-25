@@ -46,7 +46,7 @@ Proposed changes to IDs:
 * {fb:ShortSha} - is now a string, not a float
 
 The following remain the same:
-* {fbc:Settings file}
+* {fbc: settings file - e.g. settings_axidraw_v3.h
 * {hp: board platform string - e.g. gQuintic
 * {hv: board version string - e.g. revF
 * {id: board ID string - e.g. 0271-6fd3-e29c-14d
@@ -59,7 +59,8 @@ All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (invert
 * Spindle
   * Spindle enable polarity      // {spep:} 0=active HI, 1=active LO
   * Spindle direction polarity   // {spdp:} 0=clockwise HI, 1=clockwise LO
-Note: The following do not change from previous release:
+
+The following remain the same:
 * Motor direction polarity {1po:n}
 * Motor enable polarity {1ep:n}
 * Motor step polarity {1ep:n}
