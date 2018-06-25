@@ -55,7 +55,7 @@ The following remain the same:
 Note: These are and remain Read Only attributes. TinyGv8 has a case where hardware version can be written. This in not so in g2core.
 
 ### Polarity Changes
-All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
+All polarities will obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
 * Coolant
   * {comp:n} coolant mist polarity - 0=active HI, 1=active LO
   * {cofp:n} coolant flood polarity - 0=active HI, 1=active LO
