@@ -9,6 +9,7 @@
   - Multi-level cache, instruction pipeline, simultaneous instruction execution
   - All communications IO is DMA driven
   - USB is on-chip
+  - We have seen 10x to 80x performance improvements relative to 84Mhz M3 core
 
 - Host and Communications
   - USB-B connector for driving from "standard" external hosts
