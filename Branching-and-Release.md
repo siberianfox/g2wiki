@@ -57,8 +57,8 @@ Note: These are and remain Read Only attributes. TinyGv8 has a case where hardwa
 ### GPIO Configuration Changes
 GPIO configuration is different - See [GPIO Design Discussion](GPIO-Design-Discussion/_edit). Key Changes:
 * Mode (mo) has been removed: replaces by separate Enable (en) and Polarity (po) settings
-  * [{...en:n} Enable Setting](gpio-primitives#enn-enable-setting)
-  * [{...po:n} Polarity Setting](gpio-primitives#pon-polarity-setting)
+  * [{...en:n} Enable Setting](gpio-primitives#enn-enable-setting) used to enable and disable IO channels
+  * [{...po:n} Polarity Setting](gpio-primitives#pon-polarity-setting) used to set polarity of IO channels
 * Function (fn) has been removed from digital inputs:
   * [{di1ac: Action](gpio-primitives#digital-input-configuration-values) now handles all actions and functions
   * [{di1in: Exposed As](gpio-primitives#digital-input-configuration-values) allows flexible bindings of input readers to digital input channels
