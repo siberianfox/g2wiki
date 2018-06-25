@@ -74,6 +74,8 @@ The current motor enable {me:n} and disable {md:n} commands function as so:
 
 The GET semantic will be changed as it violates RESTful GET safety - GETs should not cause any action. 
 
+Note: {me:XXX} obeys the motor timeout seconds set by {mt:XXX} 
+
 G2core has (and will continue to have) one exception to this rule: that's for clearing an alarm or shutdown condition using `{clear:n}` or `{clr:n}`. In alarm, shutdown and panic conditions no SET commands are accepted - i.e. commands with other than NULL as an argument. In order to accept a clear we make an exception for that one command.
 
 ### Removing Queue Reports {qr:n}
