@@ -15,7 +15,7 @@
   - USB-B connector for driving from "standard" external hosts
   - Host expansion connector for Linux host carrier board
     - Board design accommodates Linux daugterboards 
-      - e.g. Intel Edison, Beaglebone, rPi, etc.
+      - e.g. Beaglebone, rPi and variants, etc.
     - Host-to-board communications via 4 wire UART - RX/TX/RTS/CTS
     - 5volt @ 1500 ma available for host processor
 
