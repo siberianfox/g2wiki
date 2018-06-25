@@ -15,7 +15,7 @@ The proposed scheme is below:
 * Edge branch - this branch will be deprecated and ultimately removed. 
 * Dev branches - The Dev prefix has been deprecated, but you may still see some dev branches around.
 
-## Semver and Changes to ID attributes
+## Semantic Versioning
 The new branches will work to a fairly standard semantic versioning scheme - major.minor.patch:
 * Major: Anything can change, including:
   * changes to machining behaviors
@@ -33,10 +33,14 @@ The new branches will work to a fairly standard semantic versioning scheme - maj
 * Patch: bug fixes:
   * may change erroneous behavior but not "enhancement" bugs
  
-do we mean by:
-Major.minor.
+## Changes in version 1.0.0 
+_Perhaps this doesn't belong here, and will move somewhere else, but it's a topic of general interest and is related._
 
-### ID changes
+Once the new branching and versioning is in place a merged branch labeled `1.0.0` will be pushed. This combines the work that has been done on edge (the ARM M3 code base) with the work done in the ARM M7 code base. They will then be a single code base with the ARM chip being selected by the board hardware.
+
+This section lists the changes that may be incompatible with previous releases (either branch). This is an attempt to get these all together for the 1.0.0 release and take the hit at one time.
+
+### Changes to ID Attributes
 Proposed changes to IDs:
 * {fv:Major.Minor.Patch} - is now a string, not a float
 * {fb:ShortSha} - is now a string, not a float
@@ -46,3 +50,16 @@ The following remain the same:
 * {hp: board string - e.g. gQuintic
 * {hv: becomes a board string - e.g. revF
 * {id: remains the same
+
+### Changes to Polarities
+All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
+* Coolant
+  * Coolant mist polarity        // {comp:} 0=active HI, 1=active LO
+  * Coolant flood polarity       // {cofp:} 0=active HI, 1=active LO
+* Spindle
+  * Spindle enable polarity      // {spep:} 0=active HI, 1=active LO
+  * Spindle direction polarity   // {spdp:} 0=clockwise HI, 1=clockwise LO
+Note: The following do not change from previous release:
+* Motor direction polarity {1po:n}
+* Motor enable polarity {1ep:n}
+* Motor step polarity {1ep:n}
