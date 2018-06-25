@@ -54,8 +54,14 @@ The following remain the same:
 
 Note: These are and remain Read Only attributes. TinyGv8 has a case where hardware version can be written. This in not so in g2core.
 
-### Polarity Changes
-All polarities will obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
+### GPIO Configuration Changes
+GPIO configuration is different - See [GPIO Design Discussion](GPIO-Design-Discussion/_edit). Key Changes:
+* Mode (mo) has been removed
+* Enable (en) and polarity (po) have been introduced in it's place
+* Function (fn) has been removed. Action (ac) now handles all actions and functions bound to IO
+
+### GPIO Polarity Changes
+In addition to the above GPIO configuration changes, all polarities will obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This affects: 
 * Coolant
   * {comp:n} coolant mist polarity - 0=active HI, 1=active LO
   * {cofp:n} coolant flood polarity - 0=active HI, 1=active LO
