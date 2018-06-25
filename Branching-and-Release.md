@@ -1,5 +1,5 @@
-# ### DRAFT ###
-This page discusses proposed changes to the branching and release scheme for g2core. Please feel free to comment and edit.
+# --- DRAFT ---
+_**This page discusses proposed changes to the branching and release scheme for g2core. Please feel free to comment and edit.**_
 
 # Current Branch and Release
 * Master branch - is the stable release branch. Pushes to master are performed periodically as code gets sufficient field history from early adopters of edge code
