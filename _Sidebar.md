@@ -44,6 +44,7 @@
 **Developer Pages**
 
 1. [ ] [Development & Contribution](Development-Process)
+1. [ ] [Branching and Release Strategy - DRAFT](Branching-and-Release)
 1. [ ] [Getting Started with g2core Development](Getting-Started-with-g2core-Development)
 1. [ ] [Project Structure & Motate](Project-Structure-and-Motate)
 1. [ ] [Compiling G2](Getting-Started-with-g2core-Development#compiling-the-code)
