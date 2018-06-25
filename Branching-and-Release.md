@@ -57,11 +57,11 @@ Note: These are and remain Read Only attributes. TinyGv8 has a case where hardwa
 ### GPIO Configuration Changes
 GPIO configuration is different - See [GPIO Design Discussion](GPIO-Design-Discussion/_edit). Key Changes:
 * Mode (mo) has been removed, replaced by:
-  * [{...en:n} Enable Setting](gpio-primitives#enn-enable-setting) used to enable and disable IO channels
-  * [{...po:n} Polarity Setting](gpio-primitives#pon-polarity-setting) used to set polarity of IO channels
+  * [{...en:n} Enable Setting](gpio-primitives#enn-enable-setting): used to enable and disable IO channels
+  * [{...po:n} Polarity Setting](gpio-primitives#pon-polarity-setting): used to set polarity of IO channels
 * Function (fn) has been removed from digital inputs:
-  * [{di1ac: Action](gpio-primitives#digital-input-configuration-values) now handles all actions and functions
-  * [{di1in: Exposed As](gpio-primitives#digital-input-configuration-values) allows flexible bindings of input readers to digital input channels
+  * [{di1ac: Action](gpio-primitives#digital-input-configuration-values): handles all actions and functions
+  * [{di1in: Exposed-As](gpio-primitives#digital-input-configuration-values): allows flexible bindings of input readers to arbitrary digital input channels
 
 ### GPIO Polarity Changes
 In addition to the above GPIO configuration changes, all polarities will obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This affects: 
