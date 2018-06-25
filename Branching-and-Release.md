@@ -30,6 +30,7 @@ The new branches will work to a fairly standard semantic versioning scheme - maj
     * ...as long as they do not change the semantics of existing attributes
   * new values to existing objects
   * patch level changes may also be included, but do not force a Minor revision 
+  * NOTE: In some limited and very well documented cases a deprecated command may be removed that may force changes to UIs 
 * **Patch**: bug fixes:
   * may change erroneous behavior but not "enhancement" bugs
  
@@ -74,3 +75,11 @@ The current motor enable {me:n} and disable {md:n} commands function as so:
 The GET semantic will be changed as it violates RESTful GET safety - GETs should not cause any action. 
 
 G2core has (and will continue to have) one exception to this rule: that's for clearing an alarm or shutdown condition using `{clear:n}` or `{clr:n}`. In alarm, shutdown and panic conditions no SET commands are accepted - i.e. commands with other than NULL as an argument. In order to accept a clear we make an exception for that one command.
+
+### Deprecating G28.2, G28.3 and G28.4 
+Back in the day we added G28.2, G28.3 and G28.4 homing behaviors. These are not strictly Gcode and should never be called from within a Gcode job. We plan to substitute the following JSON commands for these functions:
+* G28.2 --> {hom:...tbd}
+* G28.3 --> {hom:...tbd}
+* G28.4 --> {hom:...tbd}
+
+The G28 forms will be removed in a later release.
