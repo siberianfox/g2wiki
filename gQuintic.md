@@ -13,10 +13,10 @@
 - Host and Communications
   - USB-B connector for driving from "standard" external hosts
   - Host expansion connector for Linux host carrier board
-    - Board design accommodates Next Thing Co C.H.I.P.
-    - Can also be used with Intel Edison, Beaglebone, rPi, etc.
+    - Board design accommodates Linux daugterboards 
+      - e.g. Intel Edison, Beaglebone, rPi, etc.
     - Host-to-board communications via 4 wire UART - RX/TX/RTS/CTS
-    - 1.2 Amps 5v @ 1200 ma available for host processor
+    - 5volt @ 1500 ma available for host processor
 
 - Motors
   - 5x Trinamic TMC2130 stepper motor drivers
@@ -26,14 +26,16 @@
     - can be configured to interpret Gcode directly, or run as PWM devices
 
 - Inputs
-  - 12x protected 3.3v digital inputs  
+  - 10 protected 3.3v digital inputs  
 
 - Outputs
-  - 4x analog to digital inputs 
-    - configured as thermistor inputs but can be setup as resistor-divided ADC inputs
-  - 4x buffered digital outputs - selectable 3.3v/5v level
-  - 4x low-power FET digital outputs - up to 500 ma each (fans, etc.)
-  - 3x high-power FET digital outputs - 2x extruders @ 6A, 1x heated bed @ 20A)
+  - 4 analog to digital inputs 
+    - Straight ADC with 0.0v to 3.2v range
+    - Use external adapter board for thermistor, PT100 or load cell
+    - Analog inputs can be configured for thermistor / PT100 / PT1000 on-board for OEM volumes 
+  - 4 buffered digital outputs - selectable 3.3v/5v level
+  - 4 low-power FET digital outputs - up to 300 ma each (fans, etc.)
+  - 3 high-power FET digital outputs - 2 extruders @ 6A, 1 heated bed @ 20A)
   - Neopixel LED array output with DMA firmware driver
 
 - Other
