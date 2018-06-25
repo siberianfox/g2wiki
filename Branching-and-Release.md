@@ -47,9 +47,9 @@ Proposed changes to IDs:
 
 The following remain the same:
 * {fbc:Settings file}
-* {hp: board string - e.g. gQuintic
-* {hv: becomes a board string - e.g. revF
-* {id: remains the same
+* {hp: board platform string - e.g. gQuintic
+* {hv: board version string - e.g. revF
+* {id: board ID string - e.g. 0271-6fd3-e29c-14d
 
 ### Changes to Polarities
 All polarities now obey 0=ACTIVE_HI (non-inverted polarity), 1=ACTIVE_LO (inverted polarity). This changes: 
