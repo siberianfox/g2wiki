@@ -11,7 +11,7 @@ Last updated: *5th June 2018*
 
 2. **[#285 - M7 Core](https://github.com/synthetos/g2/pull/285)**
 
-Bring in the code to support the Atmel M7 core [Verion 1.0.0](#changes-planned-for-version-100), so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the gQuintic board, which we are almost ready to do. (One more proto revision!). It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
+Bring in the code to support the Atmel M7 core [Verion 1.0.0](#changes-planned-for-version-100), so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the [gQuintic board](gquintic-specs), which we are almost ready to do. (One more proto revision!). It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
 
 
 3. **[Issue #347 - GPIO Enhancements](https://github.com/synthetos/g2/issues/347)**
