@@ -11,7 +11,8 @@
 
 - Host and Communications
   - USB-B connector for driving from "standard" external hosts
-  - USB is on-chip (w/custom USB drivers - field tested for about 2 years now)
+    - USB is on-chip w/custom USB drivers - field tested for about 2 years now
+    - Supports 480 Mbps transfer rates
   - Host expansion connector for Linux host carrier board
     - Board design accommodates Linux daughterboards 
       - e.g. Beaglebone, rPi and variants, etc.
@@ -64,19 +65,8 @@
        - Host interrupt line driven from controller MCU
        - Logic 3.3v and ground 
   - SPI and I2C expansion port
-  - Watchdog safety circuit to disable powered outputs
-     - Safety signal de-assert causes the following
-       - Stop STEP signals from reaching on-board and off-board drivers
-       - (Does not change state of driver ENABLES, as this could be a safety issue)
-       - Shut down all FETs, including extruder, heated bed, and low-power FETs
-     - Safety signal de-asserts in the following conditions
-       - Board encounters alarm, shutdown or panic conditions (settable as compiler options)
-       - Board is erased or reset
-       - Board firmware fault (main loop stops operating)
-  - Support for external ESTOP
-    - Can remove 24v motor/heater/FET power w/o killing logic power
-    - Can remove 24v motor power w/o damaging on-board drivers
-    - Power removed is detectable by CPU - can be used to initiate shutdown sequence
+  - Watchdog safety circuit to disable powered outputs (see Features)
+  - Support for external ESTOP (see Features)
   - JTAG/SWD connection and real-time debugging using Atmel-ICE
   - ROHS
 
@@ -87,12 +77,12 @@ Most product safety certifications (e.g. CE for Europe) for things like machine 
 
 gQuintic has a discrete multivibrator circuit made of two cockroach FETs (BSS84, BSS138) that asserts as long as a pulse train is present on the input. If the pulse train is not present or fails the safety circuit de-asserts. All the output FETs, the Step signals and the DAC voltage are gated by this SafeOut signal. The pulse train generator is in the main loop of the MCU. 
 
-Here are conditions where SafeOut would de-assert form hardware:
+Here are conditions where SafeOut would de-assert from hardware:
 * The MCU is booting - and has not started the main loop yet
 * The MCU is being flashed (and therefore not executing)
 * Motor power is applied but for some reason logic power has failed or not applied (the MCU is therefore not functioning)
 
-In addition, there are some software conditions that remove the pulse train and de-assert SafeOut:
+In addition, there are software conditions that remove the pulse train and de-assert:
 * The firmware is off in the weeds and the main loop has been terminated accordingly 
 * A failsafe assertion in the code has triggered, placing the firmware into a PANIC or ALARM state
 * An external shutdown has been detected placing the system into a SHUTDOWN state (see Emergency Stop, below)
@@ -100,9 +90,9 @@ In addition, there are some software conditions that remove the pulse train and 
 ### Emergency Stop and External Shutdown Options
 Background and philosophy: Since the controller may be the cause of a problem requiring an emergency stop, the controller should never be in the critical path of an emergency stop.
 
-With that in mind, the board is design so that motor and FET power can be killed by an external switch independently of the processor continuing to operate. The incoming Vmot (typically 24v) has two connectors - One high-current to power the motors and FETs, another low-current to feed the regulator stages. These can be bridged for single-connection configurations.
+The gQuintic is designed so motor and FET power can be killed by an external switch independently while the processor continues to receive power and operate. The incoming Vmot (typically 24v) has two connectors - One high-current to power the motors and FETs, another low-current to feed the regulator stages. These can be bridged for single-connection configurations.
 
 If Vmot drops a number of things happen:
 * The motors, FETs and DAC de-power - this includes the high-current FETS (heaters), and the low-current FETs and the DAC output will drop to zero (The DAC is 0-10v, typically used for spindle speed)
-* The Trinamic rail voltages drop in order to prevent them from blowing up (which they will if you don't remove power)
-* The CPU receives a LO on a pin, which can be used to signal the firmware that an external Estop has occurred (really that Vmot has been lost). The firmware (as it stands now) enters a Shutdown sequence, where it stops motion, shuts off the Safety signal, and informs the host that this has occurred.
+* The Trinamic rail voltages drop in order to prevent them from blowing up (they may be damaged if you don't remove power)
+* The CPU receives a LO on a pin, which can be used to signal the firmware that an external Estop has occurred (really that Vmot has been lost). The firmware enters a Shutdown sequence, where it stops motion, shuts off the Safety signal, and informs the host that this has occurred.
