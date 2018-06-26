@@ -55,7 +55,6 @@
 1. [ ] [Board and Machine Profiles](Adding-and-Revising-Boards)
 1. [ ] [Arduino Due Pinout](Arduino-DUE-Pinout-for-g2core)
 1. [ ] [Arduino DUE External Interfaces](https://github.com/synthetos/g2/wiki/G2core-on-DUE---External-Interfaces)
-1. [ ] [gQuintic](gQuintic)
 1. [ ] [Diagnostics](Diagnostics)
 1. [ ] [Debugging w/Motate Pins](Using-Pin-Changes-for-Timing-(and-light-debugging))
 1. [ ] [Development Troubleshooting](Troubleshooting)
