@@ -6,20 +6,12 @@ Last updated: *5th June 2018*
 
 1. **Close out a lot of the PRs that are in the works**
 
-    In rough sequence order:
-
-    - [x] [#299 Reading Nested JSON fail](https://github.com/synthetos/g2/pull/299)
-      * Done
-
-    - [x] [#329: Finish Merge of #320 to Edge](https://github.com/synthetos/g2/pull/329)
-      * Done
-
     - [ ] [#341 Add the gShield .elf and .bin files to our releases page](https://github.com/synthetos/g2/pull/341)
       * Discussion on the best approach here is still in progress.
 
 2. **[#285 - M7 Core](https://github.com/synthetos/g2/pull/285)**
 
-    Bring in the code to support the Atmel M7 core, so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the gQuintic board, which we are almost ready to do. (One more proto revision!). It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
+Bring in the code to support the Atmel M7 core [Verion 1.0.0](), so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the gQuintic board, which we are almost ready to do. (One more proto revision!). It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
 
 
 3. **[Issue #347 - GPIO Enhancements](https://github.com/synthetos/g2/issues/347)**
@@ -36,7 +28,7 @@ Last updated: *5th June 2018*
     We have a UI working for this that Rob and our colleague Laurie Barth are presenting at the Nation JS developer conference later this month. But so far we are only driving this from “canned” descriptors, not directly off the hardware.
 
 
-# Changes in Version 1.0.0 
+# Changes Planned for Version 1.0.0 
 Once the new branching and versioning is in place a merged branch labeled `1.0.0` will be pushed. This combines the work that has been done on edge (the ARM M3 code base) with the work done in the ARM M7 code base. They will then be a single code base with the ARM chip being selected by the board hardware.
 
 This section lists the changes that may be incompatible with previous releases (either branch). This is an attempt to get these all together for the 1.0.0 release and take the hit at one time.
