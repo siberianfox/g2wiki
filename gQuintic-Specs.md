@@ -56,21 +56,26 @@
     - uses one of the 4 low-power FETs channels for the VFD DAC
 
 - Other
-  - Configured for daughterboard to carry Linux host computer
-    - Supply up to 5v @ 1500ma to off-board host
-    - Host connector provides
-       - 4-wire UART RX/TX/RTS/CTS
-       - Safety signal from board (board-is-sane assertion signal, as well as sanity pulse-train signal)
-       - RESET and ERASE lines drivable from host
-       - Host interrupt line driven from controller MCU
-       - Logic 3.3v and ground 
-  - SPI and I2C expansion port
+  - Configured for daughterboard to carry Linux host computer (see Features)
   - Watchdog safety circuit to disable powered outputs (see Features)
   - Support for external ESTOP (see Features)
-  - JTAG/SWD connection and real-time debugging using Atmel-ICE
+  - SPI and I2C expansion port
+  - JTAG/SWD connection and real-time debugging using Atmel-ICE or other ICE
   - ROHS
 
 ## Features
+
+### Linux Host Connector
+The gQuintic is designed to carry a daughterboard with a small host computer (presumably Linux). One connection to the daughterboard provides 5 volts at up to 1500 ma. 
+
+The Host Connector provides the following:
+- 4-wire UART RX/TX/RTS/CTS
+- Safety signal from board (board-is-sane assertion signal, as well as sanity pulse-train signal)
+- RESET and ERASE lines drivable from host
+- Host interrupt line driven from controller MCU to notify the host of significant events
+- Logic 3.3v and ground 
+
+The daughterboard may also bridge the SPI/ I2C expansion connector providing I2C and 2 SPI channels
 
 ### Watchdog Safety Circuit
 Most product safety certifications (e.g. CE for Europe) for things like machine tools require that a redundant hardware failsafe be provided to shut down the machine in various failure cases. This should be in hardware, unless you have a software solution that is separate from the main SW, and the failsafe SW itself then needs to be certified (which we want to avoid).
