@@ -17,8 +17,8 @@ Bring in the code to support the Atmel M7 core [Verion 1.0.0](#changes-planned-f
 
     Bring in [refactored GPIO with a bunch of enhancements](gpio-design-discussion). The code is being tested on dev-168 and slated for release in 1.0.0. The CAN stuff slots in after this is available, as the new GPIO model supports all kinds of “non-io IO” like CAN.
 
-
-
+## Changes To Branching and Release
+[Described here](branching-and-release)
 
 ## Changes Planned for Version 1.0.0 
 Once the new branching and versioning is in place a merged branch labeled `1.0.0` will be pushed. This combines the work that has been done on edge (the ARM M3 code base) with the work done in the ARM M7 code base. They will then be a single code base with the ARM chip being selected by the board hardware.
