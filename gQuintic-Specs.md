@@ -14,8 +14,7 @@
     - USB is on-chip w/custom USB drivers - field tested for about 2 years now
     - Supports 480 Mbps transfer rates
   - Host expansion connector for Linux host carrier board
-    - Board design accommodates Linux daughterboards 
-      - e.g. Beaglebone, rPi and variants, etc.
+    - Board design accommodates Linux daughterboards, hosting Beaglebone, rPi variants, etc.
 
 - Motors
   - 5 motor outouts - may be a mix of:
