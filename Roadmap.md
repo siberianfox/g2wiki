@@ -98,8 +98,6 @@ The G28 forms will be removed in a later release.
 ## Still To Go
 **Clean up the Configs**
 
-    Once we are done with the above there are a series of changes to the configs we want to make to break it up and make it more modular.
+* Once we are done with the above there are a series of changes to the configs we want to make to break it up and make it more modular.
 
-    We've also built a machine-builder UI that configures itself based on metadata provided by system objects (think dynamic binding at the HW level). We need the refactoring to get the metadata in play.
-
-    We have a UI working for this that Rob and our colleague Laurie Barth are presenting at the Nation JS developer conference later this month. But so far we are only driving this from “canned” descriptors, not directly off the hardware.
+* We've also built a machine-builder UI that configures itself based on metadata provided by system objects (think dynamic binding at the HW level). We need the refactoring to get the metadata in play. We have a UI working for this that Rob and our colleague Laurie Barth are presenting at the Nation JS developer conference later this month. But so far we are only driving this from “canned” descriptors, not directly off the hardware.
