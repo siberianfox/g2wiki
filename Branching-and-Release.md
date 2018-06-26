@@ -9,11 +9,13 @@ _**This page discusses proposed changes to the branching and release scheme for 
 
 # New Branch and Release
 The proposed scheme is below:
-* **Release branch** - is the stable release branch. Pushes to Release are performed periodically as code gets sufficient field history from early adopters of edge code. Some patches may be applied to Release, but these should always be promoted up through Master. New feature development should not be done against Release. 
 * **Master branch** - is the working branch. Bug and feature updates are performed against this branch. All pull requests should be performed from this branch.
-* **Issue-NNN branches** - are created to work on bugs or features. These are pulled into Master via pull requests against Master. 
-* **Edge branch** - Edge will be deprecated and ultimately removed. 
-* **Dev branches** - The Dev prefix has been deprecated, but you may still see some dev branches around.
+* ** Release branches ** are branches for creating releases. These are created from master when a Major or Minor release is planned. Subsequent development occurs again the release branch, and is usually limited to version number changes and tagging. The release branch  is used to create binaries for the release section, put out release notes, update the wiki with info about it, etc. Bug fixes that come in against the release are addressed as issues/PRs in master, then cherry picked back to the release branch. After a certain point the version may be updated with a new point release (patch) and new binaries created.
+* **Issue-NNN branches** - are created to work on bugs or features. These are pulled into Master via pull requests against Master.
+* Deprecated and Older Branches
+  * Edge branch - Edge will be deprecated and ultimately removed. 
+  * Dev branches - The Dev prefix has been deprecated, but you may still see some dev branches for a while
+  * Legacy branches such as digital-dro and omc-072.65 may still exist for historical reasons
 
 ## Semantic Versioning
 The new branches will work to a fairly standard semantic versioning scheme - major.minor.patch:
@@ -110,3 +112,4 @@ Back in the day we added G28.2, G28.3 and G28.4 homing behaviors. These are not 
 * G28.4 --> {home:...tbd}
 
 The G28 forms will be removed in a later release.
+
