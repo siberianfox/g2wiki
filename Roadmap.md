@@ -1,6 +1,6 @@
 ## Our Roadmap, in broad strokes
 
-Last updated: *25th June 2018*
+Last updated: *26th June 2018*
 
 ### Near term objectives
 
