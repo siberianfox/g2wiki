@@ -1,5 +1,4 @@
-
-## gQuintic Specs
+# gQuintic Specs
 - Runs [g2core](https://github.com/synthetos/g2) codebase
 
 - Processor
@@ -8,44 +7,76 @@
   - 32 and 64 bit single instruction floating point hardware
   - Multi-level cache, instruction pipeline, simultaneous instruction execution
   - All communications IO is DMA driven
-  - USB is on-chip (w/custom USB drivers - field tested for about 2 years now)
+  - We have seen 10x to 80x performance improvements relative to 84Mhz M3 core
 
 - Host and Communications
   - USB-B connector for driving from "standard" external hosts
+  - USB is on-chip (w/custom USB drivers - field tested for about 2 years now)
   - Host expansion connector for Linux host carrier board
-    - Board design accommodates wide variety of linux hosts such as nanoPi family, Beaglebone, rPi, etc.
+    - Board design accommodates Linux daughterboards 
+      - e.g. Beaglebone, rPi and variants, etc.
     - Host-to-board communications via 4 wire UART - RX/TX/RTS/CTS
-    - 1.2 Amps 5v @ 1200 ma available for host processor
+    - 5volt @ 1500 ma available for host processor
 
 - Motors
-  - 5x Trinamic TMC2130 stepper motor drivers
-    - Will handle up to 1.7 amps;
-    - Good for almost all NEMA17 motors, will do some NEMA23s
-  - 5x STEP / DIRECTION / ENABLE breakouts for external drivers (in lieu of Trinamics)  
-    - selectable 3.3v/5v output levels
-  - 4x "hobby servo" PWM outputs (uses the buffered digital outputs)
+  - 5 motor outouts - may be a mix of:
+    - 5 Trinamic TMC2130 stepper motor drivers
+      - Will handle up to 1.7 amps;
+      - Good for almost all NEMA17 motors, will do some NEMA23s
+    - 5 STEP / DIRECTION / ENABLE breakouts for external drivers  
+      - selectable 3.3v/5v output levels
+  - 4 "hobby servo" PWM outputs (uses the buffered digital outputs)
     - can be configured to interpret Gcode directly, or run as PWM devices
 
-- Inputs
-  - 10 input protected 3.3v digital inputs  
-  - 4x analog to digital inputs 
-    - configured as straight-through 0v-3.2v ADC channels
-    - external analog front-end boards can be used to run 100K thermistors, PT100, PT1000 RTDs
-    - OEM boards can be configured on-board for these front-ends
+- Digital Inputs
+  - 10 digital inputs
+    - ESD protected & RC deglitched
+    - light pullup to 3.3v
+    - 3.3v and ground available on each connector  
 
-- Outputs
-  - 4x buffered digital outputs - selectable 3.3v/5v level
-  - 4x low-power FET digital outputs - up to 300 ma each (fans, etc.)
-  - 2x high-power 6amp FET digital outputs - for extruders
-  - 1x high-power 20A FET digital outputs - for heated bed
-  - 0v-10v DAC output for spindle controller 
+- Analog Inputs
+  - 4 ADC inputs (analog to digital)
+    - configured as straight-through 0.0v - 3.3v ADC channels
+    - use external RTD front-end boards to run 100K thermistors, PT100, PT1000
+    - use external load cell front-end boards to terminate standard 1mv/V load cells  
+    - OEM boards can be configured on-board for RTD termination
+
+- Digital Outputs
+  - 4 buffered digital outputs - jumper selectable for 3.3v/5v level
+  - 4 low-power FET digital outputs - up to 300 ma each (for fans, etc.)
+  - 3 high-power FET digital outputs 
+    - 2 extruders @ 6A
+    - 1 heated bed @ 20A
   - Neopixel LED array output with DMA firmware driver
+  - All digital output channels can be PWM driven
+
+- Analog Outputs
+  - 0-10 volt digital to analog converter for running variable frequency drive spindles
+    - uses one of the 4 low-power FETs channels for the VFD DAC
 
 - Other
-  - Can be configured for separate 24v motor and logic input to support eStop that cuts motor power while leaving controller board and host live to handle whatever hit the fan.
+  - Configured for daughterboard to carry Linux host computer
+    - Supply up to 5v @ 1500ma to off-board host
+    - Host connector provides
+       - 4-wire UART RX/TX/RTS/CTS
+       - Safety signal from board (board-is-sane assertion signal, as well as sanity pulse-train signal)
+       - RESET and ERASE lines drivable from host
+       - Host interrupt line driven from controller MCU
+       - Logic 3.3v and ground 
   - SPI and I2C expansion port
   - Watchdog safety circuit to disable powered outputs
-  - Can remove motor/output power w/o killing logic power
+     - Safety signal de-assert causes the following
+       - Stop STEP signals from reaching on-board and off-board drivers
+       - (Does not change state of driver ENABLES, as this could be a safety issue)
+       - Shut down all FETs, including extruder, heated bed, and low-power FETs
+     - Safety signal de-asserts in the following conditions
+       - Board encounters alarm, shutdown or panic conditions (settable as compiler options)
+       - Board is erased or reset
+       - Board firmware fault (main loop stops operating)
+  - Support for external ESTOP
+    - Can remove 24v motor/heater/FET power w/o killing logic power
+    - Can remove 24v motor power w/o damaging on-board drivers
+    - Power removed is detectable by CPU - can be used to initiate shutdown sequence
   - JTAG/SWD connection and real-time debugging using Atmel-ICE
   - ROHS
 
