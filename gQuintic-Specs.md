@@ -16,8 +16,6 @@
   - Host expansion connector for Linux host carrier board
     - Board design accommodates Linux daughterboards 
       - e.g. Beaglebone, rPi and variants, etc.
-    - Host-to-board communications via 4 wire UART - RX/TX/RTS/CTS
-    - 5volt @ 1500 ma available for host processor
 
 - Motors
   - 5 motor outouts - may be a mix of:
@@ -69,11 +67,11 @@
 The gQuintic is designed to carry a daughterboard with a small host computer (presumably Linux). One connection to the daughterboard provides 5 volts at up to 1500 ma. 
 
 The Host Connector provides the following:
-- 4-wire UART RX/TX/RTS/CTS
-- Safety signal from board (board-is-sane assertion signal, as well as sanity pulse-train signal)
+- 4-wire UART RX/TX/RTS/CTS. Supports Host-Board communication w/std Linux kernals 
+- Safety signals from board - de-assert if board is not functioning properly
 - RESET and ERASE lines drivable from host
 - Host interrupt line driven from controller MCU to notify the host of significant events
-- Logic 3.3v and ground 
+- Logic 3.3v and ground. 3.3v can be used to detect if logic power is present
 
 The daughterboard may also bridge the SPI/ I2C expansion connector providing I2C and 2 SPI channels
 
