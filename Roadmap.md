@@ -11,24 +11,16 @@ Last updated: *5th June 2018*
 
 2. **[#285 - M7 Core](https://github.com/synthetos/g2/pull/285)**
 
-Bring in the code to support the Atmel M7 core [Verion 1.0.0](#changes-planned-for-version-100), so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the [gQuintic board](gquintic-specs), which we are almost ready to do. (One more proto revision!). It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
-
+Bring in the code to support the Atmel M7 core [Verion 1.0.0](#changes-planned-for-version-100), so it’s part of the main project rather than an offshoot living in the dev-168 branch. That sets the stage for releasing the [gQuintic board](gquintic-specs), which we are almost ready to do. It also gives us an enormous amount of cycles to do some really cool stuff like advanced kinematics. This also has a cleaned up Motate and some stepper enhancements.
 
 3. **[Issue #347 - GPIO Enhancements](https://github.com/synthetos/g2/issues/347)**
 
-    Bring in refactored GPIO with a bunch of enhancements. See discussion [here](gpio-design-discussion). The code is in the works but is not completely done or tested yet. The CAN stuff slots in after this is available, as the new GPIO model supports all kinds of “non-io IO” like CAN.
+    Bring in [refactored GPIO with a bunch of enhancements](gpio-design-discussion). The code is being tested on dev-168 and slated for release in 1.0.0. The CAN stuff slots in after this is available, as the new GPIO model supports all kinds of “non-io IO” like CAN.
 
 
-4. **Clean up the Configs**
-
-    Once we are done with the above there are a series of changes to the configs we want to make to break it up and make it more modular.
-
-    We've also built a machine-builder UI that configures itself based on metadata provided by system objects (think dynamic binding at the HW level). We need the refactoring to get the metadata in play.
-
-    We have a UI working for this that Rob and our colleague Laurie Barth are presenting at the Nation JS developer conference later this month. But so far we are only driving this from “canned” descriptors, not directly off the hardware.
 
 
-# Changes Planned for Version 1.0.0 
+## Changes Planned for Version 1.0.0 
 Once the new branching and versioning is in place a merged branch labeled `1.0.0` will be pushed. This combines the work that has been done on edge (the ARM M3 code base) with the work done in the ARM M7 code base. They will then be a single code base with the ARM chip being selected by the board hardware.
 
 This section lists the changes that may be incompatible with previous releases (either branch). This is an attempt to get these all together for the 1.0.0 release and take the hit at one time.
@@ -102,3 +94,12 @@ Back in the day we added G28.2, G28.3 and G28.4 homing behaviors. These are not 
 * G28.4 --> {home:...tbd}
 
 The G28 forms will be removed in a later release.
+
+## Still To Go
+**Clean up the Configs**
+
+    Once we are done with the above there are a series of changes to the configs we want to make to break it up and make it more modular.
+
+    We've also built a machine-builder UI that configures itself based on metadata provided by system objects (think dynamic binding at the HW level). We need the refactoring to get the metadata in play.
+
+    We have a UI working for this that Rob and our colleague Laurie Barth are presenting at the Nation JS developer conference later this month. But so far we are only driving this from “canned” descriptors, not directly off the hardware.
