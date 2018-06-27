@@ -66,7 +66,7 @@
 The gQuintic is designed to carry a daughterboard with a small host computer (presumably Linux). One connection to the daughterboard provides 5 volts at up to 1500 ma. 
 
 The Host Connector provides the following:
-- 4-wire UART RX/TX/RTS/CTS. Supports Host-Board communication w/std Linux kernals 
+- 4-wire UART RX/TX/RTS/CTS. Supports Host-Board communication w/std Linux kernels 
 - Safety signals from board - de-assert if board is not functioning properly
 - RESET and ERASE lines drivable from host
 - Host interrupt line driven from controller MCU to notify the host of significant events
