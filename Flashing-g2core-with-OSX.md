@@ -4,10 +4,12 @@ This is also for flashing *without* a hardware debugger such as the Atmel ICE, A
 
 Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-firmware-onto-the-board) for instructions on flashing *with* a hardware debugger
 
+**Note** - Flashing the Due from OSX seems to be occasionally unreliable.  If you experience weirdness with the flashing process, using a Raspberry Pi or other Linux machine to do the flashing should work reliably.
+
 ### Step 1 - Get the g2core.bin file
 
 **Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]<br />
-**Option 2** - Get the a suitable .bin firmware file from https://github.com/synthetos/g2/releases
+**Option 2** - Get a suitable .bin firmware file from https://github.com/synthetos/g2/releases
 
 
 ### Step 2 - Program g2core onto the Due
@@ -52,4 +54,16 @@ Generally the next step will be connecting to your Due to verify it's working, a
 
 Disconnect the Due, then plug the USB cable into the other port.
 
-Continue on with [connecting to g2core](https://github.com/synthetos/g2/wiki/Connecting-to-g2core).
+### Troubleshooting
+
+If the flashing doesn't appear to work, and you get all red lights on the board when it starts, don't panic.
+
+The red lights just mean the board is in bootloader mode.  You haven't bricked the board. :smile:
+
+OSX seems to have difficulty recognising boards on bootloader mode, not even showing a `/dev/cu.usbmodem*` entry for them.
+
+If this happens to you, one work around with successfull results is to try flashing again, but this time from a Linux system.  A Linux PC - even a Raspberry Pi running Linux - will still be able to recognise and flash the Due, even when the Due is in bootloader mode.
+
+---
+
+[Continue on with connecting to g2core](https://github.com/synthetos/g2/wiki/Connecting-to-g2core).
