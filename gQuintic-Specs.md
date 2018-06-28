@@ -17,7 +17,7 @@
     - Board design accommodates Linux daughterboards, hosting Beaglebone, rPi variants, etc.
 
 - Motors
-  - 5 motor outouts - may be a mix of:
+  - 5 motor outputs - may be a mix of:
     - 5 Trinamic TMC2130 stepper motor drivers
       - Will handle up to 1.7 amps;
       - Good for almost all NEMA17 motors, will do some NEMA23s
