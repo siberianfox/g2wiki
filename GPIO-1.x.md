@@ -1,4 +1,4 @@
-This page discusses upcoming functionality being added to the GPIO system in the 1.0.0 release<br>
+This page discusses the GPIO system in the upcoming 1.0.0 release<br>
 
 ### Pages:
 - GPIO Overview
