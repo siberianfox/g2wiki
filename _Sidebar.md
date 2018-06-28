@@ -32,7 +32,7 @@
 **Discussion Topics**
 
 1. [ ] [Roadmap](https://github.com/synthetos/g2/wiki/Roadmap)
-1. [ ] [GPIO for 1.X Releases](gpio-1x)
+1. [ ] [GPIO for 1.X Releases](gpio-1.x)
 1. [ ] [Toolheads](Toolheads)
 1. [ ] [Raster Streaming Prototol](Raster-Streaming-Protocol)
 1. [ ] [g2core REST Interface](g2core-REST-Interface)
