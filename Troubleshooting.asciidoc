@@ -38,6 +38,20 @@ This page has some issues people have reported whist getting started with g2core
 toc::[]
 
 # Motors Do Not Move
-The board seems fine, but the motors don't move.
+PROBLEM: The board seems fine, but the motors don't move. This is from https://github.com/synthetos/g2/issues/365[Issue #365]
 
-##
+The default settings disable axes for safety. Axes need to be enabled. In the x/y/z lines, it's showing those axis as disabled:
+
+```
+{"r":{"x":{"am":0,"vm":1000,"fr":1000,"tn":0,"tm":0,"jm":1000,"jh":1000,"hi":0,"hd":0,"sv":500,"lv":100,"lb":4,"zb":2}},"f":[1,0,1]}
+{"r":{"y":{"am":0,"vm":1000,"fr":1000,"tn":0,"tm":0,"jm":1000,"jh":1000,"hi":0,"hd":0,"sv":500,"lv":100,"lb":4,"zb":2}},"f":[1,0,1]}
+{"r":{"z":{"am":0,"vm":1000,"fr":1000,"tn":0,"tm":0,"jm":500,"jh":500,"hi":0,"hd":0,"sv":250,"lv":25,"lb":4,"zb":2}},"f":[1,0,1]}
+```
+
+Change "am" to enable the axis:
+
+```
+{"r":{"x":{"am":1,"vm":1000,"fr":1000,"tn":0,"tm":0,"jm":1000,"jh":1000,"hi":0,"hd":0,"sv":500,"lv":100,"lb":4,"zb":2}},"f":[1,0,1]}
+```
+
+There is ongoing discussion on how best to change the defaults.
