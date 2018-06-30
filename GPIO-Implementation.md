@@ -101,7 +101,7 @@ There are only three values in a `gpioDigitalInputHandler`, and they are (in thi
   - `triggering_pin_number` is the number of the pin, so for `din3` that would be `3`
   - The callback must return `true` if no other handlers are to see the event, or `false` to allow this event to propagate 
   - **IMPORTANT** the callback is called from an interrupt context, and must act accordingly so as to not interrupt the typical flow of the system! The callback should be relatively light weight and must be non-blocking (run-to-completion). In general, requesting processing (e.g. feedholds), setting flags or altering state machines for further processing from less critical contexts should be what's done here.
-- `priority` - this `const` is the priority of the event handler, with `254` being the highest and `0` being the lowest
+- `priority` - this `const` is the priority of the event handler, with `100` being the highest and `1` being the lowest. By convention, use 5 for "normal" handlers, and 100 for special handlers like homing and probing that need to consume events w/o firing lower-priority handlers.
   - > This has not been used yet to decide how we should group these
 - `next` - this is the only mutable value, and should always be initialized as `nullptr`
 
