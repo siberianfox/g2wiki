@@ -90,7 +90,9 @@ JSON responses to commands are in the following general form.
 {"r":{"2":{"ma":1,"sa":1.800,"tr":36.540,"mi":8,"po":1,"pm":1}},"f":[3,0,6]}
 </pre>
 
-The `r` is the response envelope. The body of the response is the result returned. In the case of a single name it returns the value. In the case of a group it returns the entire group as a child object. The `f` is the footer which is an array consisting of (1) revision number, (2) status code, (3) the number of lines available in the line buffers.
+The `r` is the response envelope. The body of the response is the result returned. In the case of a single name it returns the value. In the case of a group it returns the entire group as a child object. 
+
+The `f` is the footer which is an array consisting of (1) revision number, (2) status code, (3) the number of lines available in the line buffers.
 
 ### Status Reports
 Status reports are generated automatically by the system and are therefore asynchronous. JSON reports are in the following general form:
