@@ -9,6 +9,7 @@
 1. [ ] [Configuring g2core](Configuring-Version-0.99)
 1. [ ] [Flashing g2core](Flashing-g2core)
 1. [ ] [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr)
+1. [ ] [Troubleshooting](troubleshooting)
 
 **Reference Pages**
 
