@@ -98,3 +98,6 @@ If Vmot drops a number of things happen:
 * The motors, FETs and DAC de-power - this includes the high-current FETS (heaters), and the low-current FETs and the DAC output will drop to zero (The DAC is 0-10v, typically used for spindle speed)
 * The Trinamic rail voltages drop in order to prevent them from blowing up (they may be damaged if you don't remove power)
 * The CPU receives a LO on a pin, which can be used to signal the firmware that an external Estop has occurred (really that Vmot has been lost). The firmware enters a Shutdown sequence, where it stops motion, shuts off the Safety signal, and informs the host that this has occurred.
+
+### Feedhold and Job Kill state Model
+![Top Copper](images/gQuintic_top.pdf)
