@@ -99,5 +99,3 @@ If Vmot drops a number of things happen:
 * The Trinamic rail voltages drop in order to prevent them from blowing up (they may be damaged if you don't remove power)
 * The CPU receives a LO on a pin, which can be used to signal the firmware that an external Estop has occurred (really that Vmot has been lost). The firmware enters a Shutdown sequence, where it stops motion, shuts off the Safety signal, and informs the host that this has occurred.
 
-### gQuintic Connection
-![Top Copper](images/gQuintic_fc.png)
