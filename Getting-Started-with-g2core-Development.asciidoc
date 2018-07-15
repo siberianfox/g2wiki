@@ -55,7 +55,11 @@ There are things you will need to know, and things you'll need to have.
 
 - [ ] To contribute you'll need a GitHub account
 
-- [ ] It will help if you have http://synthetos.com[some hardware] that is capable of running g2core, and further helpful (but not completely necessary) to have a hardware debugger. These will be explained in more detail in other sections.
+- [ ] It will help if you have http://synthetos.com[some hardware] that is capable of running g2core. The Arduino Due or a Synthetos v9 or g series board (gQuintic, gQuadratic) are our recommended choices.
+
+- [ ] While not strictly necessary, a hardware debugger is really useful to have. The [Atmel ICE Basic](https://www.mouser.com/ProductDetail/Microchip-Technology-Atmel/ATATMEL-ICE-BASIC?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d) is the officially supported Atmel product, and has the cable that mates with the 0.050" 2x5 on the Arduino Due and the Synthetos boards. We have also had some luck with the Segger JTAG units, but offer no further guidance on these.
+
+_Note: The ICE seems the be very sensitive to a clean USB path or it can throw errors during debug startup and run. At least this has been observed on OSX with Parallels running Windows 10 and Atmel Studio 7. It's best to use a high-quality USB micro cable, and connect directly to the Mac USB port that has the fewest internal hubs. This USB port can be found by examining About THis Mac / System Report / USB._ 
 
 # Cloning the Repo
 
