@@ -16,15 +16,17 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 * [Dorna](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/) (kickstarter) - 5-axis robot using g2core
 
-* [Printrbot CNC v2](https://printrbot.com/shop/printrbot-cnc-v2-bare-bones-beta-kit/)
-* [Printrbot Printrboard G2](https://printrbot.com/shop/printrboard-g2/)
-  * [Further general information](https://printrbot.com/2018/04/08/printrboard-g2-general-information/) on the Printrboard G2
-* [Printrbot Simple Pro](https://printrbot.com/new-simple-pro/)
 * [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) - FabMo-based products (including the HandiBot)
 
 ### Older
 
 * The [Othermill and Othermill Pro](https://www.bantamtools.com/pages/products)
+
+* Several [Printrbot](https://printrbot.com) (no longer in business) projects used TinyG/g2core:
+  * Printrbot CNC v2
+  * Printrbot Printrboard G2
+  * Printrbot Simple Pro
+
 
 ## Projects
 
