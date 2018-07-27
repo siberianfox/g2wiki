@@ -18,8 +18,17 @@ Windows 10 does not need this procedure and should work out-of-the-box.
 
 ## Connecting
 
-### Option 1: g2core-api
-Use the [g2core-api](https://github.com/synthetos/node-g2core-api) NodeJS module to connect to g2core, run command lines, and send files. The Readme at the above link explains how to install and use. 
+### Option 1: Choose a G-Code Sender
+Several G-Code Senders support g2core.  You only need one, so feel free to experiment and choose whichever appeals to you the most:
+
+* [CNCjs](https://cnc.js.org) - Fully featured, and suitable for remote usage.
+  * eg set it up on a Raspberry Pi 3, control your CNC, 3D printer, (etc) from that
+* [Universal G-Code Sender](https://github.com/winder/Universal-G-Code-Sender) - Desktop/laptop application.
+  * Support for g2core is in the nightly builds.  Choose "UGS Platform" from the downloads.
+* [Goko](https://github.com/cncgoko/Goko) - Desktop/laptop application.
+  * Not much development activity recently, but should still work ok.
+* [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr) - Requires an online internet connection, and uses Google provided services.
+  * Doesn't load if you use an ad blocker.
 
 ### Option 2: Coolterm 1.4.3
 For OSX you can also use Coolterm version 1.4.3. There is a bug in the latest version and 1.4.3 is the latest we have tested that works well. (A bug has been opened with the author who has supported us extremely well throughout this project). Look on this page for this file: [CoolTermMac143](http://freeware.the-meiers.org/previous/)
