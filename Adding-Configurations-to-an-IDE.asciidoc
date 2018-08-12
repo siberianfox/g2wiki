@@ -99,6 +99,7 @@ TIP: We generally try to name these in the style of __machine__-__board__, where
 ** Verify that the "Active solution configuration" is the solution you just created.
 
 * In the `g2core` row (*not* the `Motate` row!), in the Configuration column, click and choose "<New...>" from the bottom of the menu. (See image for clarification.)
+** Alternately, select the Solution name in the drop list and skip the rest of this step 
 +
 image:AS7-New-Configuration.png[AS7: Chose new from the g2core->Configuration cell,608,526]
 +
