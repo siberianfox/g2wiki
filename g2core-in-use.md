@@ -14,7 +14,7 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 * [Bantam Tools Desktop PCB Milling Machine](https://www.bantamtools.com/pages/products)
 
-* [Dorna](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/) (kickstarter) - 5-axis robot using g2core
+* [Dorna](https://www.dorna.ai) ([kickstarter](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/)) - 5-axis robot using g2core, initially created via a successful kickstarter
 
 * [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) - FabMo-based products (including the HandiBot)
 
