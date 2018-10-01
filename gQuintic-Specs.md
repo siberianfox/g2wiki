@@ -53,8 +53,21 @@
     - uses one of the 4 low-power FETs channels for the VFD DAC
 
 - Voltages
-  - Vmot - Main motor and FET voltage 12v to 30vdc. Powers Trinamic TMS2130, High power FETs, Low power FETs
-
+  - Supplied to board
+    - Vmot - Main motor and FETs (12v to 30vdc). Powers Trinamic TMS2130, High power Extruder FETs, Low power FETs
+    - Vmot2 - Regulator input (12v to 30vdc). Powers switching regulator. 
+      - Typically connected to Vmot via on-board 0 ohm resistor, but may be powered independently of Vmot via J2 (0.100 2 pin connector)
+    - Vbed - Heated bed voltage (12v to 30vdc). Separate power input for heated bed
+  - On-board voltages
+     - +5v external - up to 1.5A available for any combination of:
+       - 5v power to daughterboard microhost computer
+       - 5v selectable for external stepper drivers
+       - 5v selectable for digital outputs - may be used to power hobby-servos directly or just provide PWM w/external power
+       - 5v for neopixel output
+     - +3.3v external - up to 100ma available for any combination of:
+       - Digital inputs
+       - Digital outputs (selecteable to 3.3v or 5v)
+       - 3.3v selectable for external stepper drivers
 
 - Other
   - Configured for daughterboard to carry Linux host computer (see Features)
