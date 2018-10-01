@@ -52,6 +52,10 @@
   - 0-10 volt digital to analog converter for running variable frequency drive spindles
     - uses one of the 4 low-power FETs channels for the VFD DAC
 
+- Voltages
+  - Vmot - Main motor and FET voltage 12v to 30vdc. Powers Trinamic TMS2130, High power FETs, Low power FETs
+
+
 - Other
   - Configured for daughterboard to carry Linux host computer (see Features)
   - Watchdog safety circuit to disable powered outputs (see Features)
