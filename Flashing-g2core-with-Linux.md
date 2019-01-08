@@ -65,7 +65,7 @@ sudo usermod -a -G dialout $USER
 Then repeat steps 2 and 3.
 
 I found that the following script allows me to leave both the programming port and the native port both hooked up, and flashes over the native port, which is much faster than flashing over the programming port.
-I wrote a script called find_port.py which you can find here: https://github.com/dhylands/usb-ser-mon/blob/master/find_port.py
+I wrote a script called find_port.py which you can find here: https://github.com/dhylands/usb-ser-mon/blob/master/usb_ser_mon/find_port.py
 
 ```
 #!/bin/bash
