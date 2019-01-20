@@ -33,7 +33,7 @@ Or you can enter the parameters that compute the steps per unit, which are Step 
 ...and it will compute and set the SU value. If the SU is set directly the TR value is changed to agree with the SU value. The values entered for step angle and microsteps are not changed.
 
 ### {1:{ma:...}} Map Motor to Axis
-Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor4. 
+Axes must be input as numbers, with X=0, Y=1, Z=2, A=3, B=4 and C=5. As you might expect, mapping motor 1 to X will cause X movement to drive motor 1. The example below is a way to run a dual-Y gantry such as a 4 motor Shapeoko2 setup. Movement in Y will drive both motor2 and motor3. 
 
 <pre>
 {1:{ma:0}}  Map motor 1 to X axis
