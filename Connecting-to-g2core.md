@@ -28,7 +28,6 @@ Several G-Code Senders support g2core.  You only need one, so feel free to exper
 * [Goko](https://github.com/cncgoko/Goko) - Desktop/laptop application.
   * Not much development activity recently, but should still work ok.
 * [Chilipeppr](https://github.com/synthetos/TinyG/wiki/Chilipeppr) - Requires an online internet connection, and uses Google provided services.
-  * Doesn't load if you use an ad blocker.
 
 ### Option 2: Coolterm 1.4.3
 For OSX you can also use Coolterm version 1.4.3. There is a bug in the latest version and 1.4.3 is the latest we have tested that works well. (A bug has been opened with the author who has supported us extremely well throughout this project). Look on this page for this file: [CoolTermMac143](http://freeware.the-meiers.org/previous/)
