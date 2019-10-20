@@ -55,3 +55,8 @@ Change "am" to enable the axis:
 ```
 
 There is ongoing discussion on how best to change the defaults.
+
+# Arduino Due flash getting erased at random moments
+PROBLEM: The flash on Chinese clones of Arduino Due is getting erased at seemingly random moments. This is from https://github.com/synthetos/g2/issues/235[Issue #235]
+
+There was a hardware mistake in the older version of the Arduino Due (which happens to be the common version to be cloned in China) and luckily it is easy to fix by adding an SMD resistor to the PCB as explained http://translate.google.com/translate?hl=en&sl=auto&tl=en&u=http%3A%2F%2Fwww.civade.com%2Fpost%2F2016%2F12%2F18%2FCorriger-les-problèmes-de-Reset-sur-Arduino-DUE-R3-et-clones-chinois&sandbox=1[here].
