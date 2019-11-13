@@ -1,6 +1,4 @@
-This page assumes you have already built or downloaded ```gShield_flash.bin```.
-
-Edit: 4/23/2015 Make is now building ```gShield.bin```, modify file name in commands as necessary
+This page assumes you have already built or downloaded ```g2core.bin```.
 
 #### Step 1. Install BOSSA flash programming utility.
 
@@ -9,7 +7,7 @@ Most likely (on Debian or Ubuntu), you will need to type the following in the te
 ```
 sudo apt-get install bossa-cli
 ```
-Alternatively, you could get this utility from [SourceForge](http://sourceforge.net/projects/b-o-s-s-a/).
+Alternatively, you could get this utility from the [BOSSA repository on GitHub](https://github.com/shumatech/BOSSA).
 
 #### Step 2. Connect Arduino Due via micro-usb cable.
 
@@ -28,7 +26,7 @@ which I think will wind up erasing twice, but it leaves the default at 9600, so 
 
 #### Step 4. Flash the chip with `bossac`:
 ```
-bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/gShield_flash.bin
+bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/g2core.bin
 ```
 It will output something like:
 
@@ -78,7 +76,7 @@ stty -F ${PORT} 9600
 sleep 3
 
 # Program
-bossac -e -w -v -i -b -R ./bin/gShield/gShield.bin
+bossac -e -w -v -i -b -R ./bin/gShield/g2core.bin
 ```
 
 It takes about 20 seconds after flashing before the native port becomes available for use. You can use: ```find_port.py --vid 1d50``` or ```find_port.py --vendor Synthetos``` to find the native port.
