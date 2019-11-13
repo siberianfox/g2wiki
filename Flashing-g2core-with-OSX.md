@@ -8,8 +8,10 @@ Please see [this guide](Debugging-G2-on-OSX-with-GDB-and-Atmel-ICE#flashing-the-
 
 ### Step 1 - Get the g2core.bin file
 
-**Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]<br />
+**Option 1** - Compile your own using the instructions in [[Compiling G2 on OS X (with Xcode)]]
+
 **Option 2** - Get a suitable .bin firmware file from https://github.com/synthetos/g2/releases
+ * Click the "Assets" drop down for any of the releases. The various g2core.bin files will be displayed, with names appropriate for specific boards we have configuration files for.
 
 
 ### Step 2 - Program g2core onto the Due
@@ -22,19 +24,19 @@ Open Terminal.app, then change to the Resources/TinyG2-OSX-Programmer/ subdirect
 
 Either place the .bin file you want to program into that directory or remove the trailing version number from the elf file that is present; e.g. 
 
-	mv TinyG2.bin.13.01 TinyG2.bin
+	mv g2core.bin.13.01 g2core.bin
 
 Plug a USB cable from the computer to the Programming port of the Due (the one closest to the power jack). Make sure there are no shields, programmers, debuggers or other devices plugged into the Due. The Due does not need external power for programming - it will be powered by the USB programming cable.
 
 Copy and paste the following line into the Terminal window:
 
-	./DueFromOSX.sh -f TinyG2.bin -p /dev/cu.usbmodem*
+	./DueFromOSX.sh -f g2core.bin -p /dev/cu.usbmodem*
 
 The output should look something like this (the numbers after cu.usbmodem will be different):
 
 	Forcing reset using 1200bps open/close on port /dev/cu.usbmodem241311
 	wait...
-	Starting programming of file TinyG2.elf -> TinyG2.bin on port cu.usbmodem241311
+	Starting programming of file g2core.elf -> g2core.bin on port cu.usbmodem241311
 	Erase flash
 	Write 119380 bytes to flash
 	[==============================] 100% (467/467 pages)
@@ -62,7 +64,7 @@ The red lights just mean the board is in bootloader mode.  You haven't bricked t
 
 OSX seems to have difficulty recognising boards on bootloader mode, not even showing a `/dev/cu.usbmodem*` entry for them.
 
-If this happens to you, one work around with successfull results is to try flashing again, but this time from a Linux system.  A Linux PC - even a Raspberry Pi running Linux - will still be able to recognise and flash the Due, even when the Due is in bootloader mode.
+If this happens to you, one work around with successful results is to try flashing again, but this time from a Linux system.  A Linux PC - even a Raspberry Pi running Linux - will still be able to recognise and flash the Due, even when the Due is in bootloader mode.
 
 ---
 
