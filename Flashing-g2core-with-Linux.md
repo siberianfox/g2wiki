@@ -26,7 +26,7 @@ which I think will wind up erasing twice, but it leaves the default at 9600, so 
 
 #### Step 4. Flash the chip with `bossac`:
 ```
-bossac  --port=ttyACM0  -U true -e -w -v -i -b -R ./bin/gShield/g2core.bin
+bossac --port=ttyACM0 -u=true -e -w -v -i -b -R bin/gShield/g2core.bin
 ```
 It will output something like:
 
