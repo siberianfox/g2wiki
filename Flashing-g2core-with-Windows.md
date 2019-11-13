@@ -1,10 +1,11 @@
 _This page is for uploading an already compiled G2 binary to a target board without a debugger from Windows. Please see [Getting Started with g2core Development](Getting-Started-with-g2core-Development) for information about other options._
 
-### Step 1 - Get the TinyG2.bin file
+### Step 1 - Get the g2core.bin file
 
 **Option 1** - Compile your own using the instruction in [Compiling the Code](Getting-Started-with-g2core-Development#compiling-the-code)
 
-**Option 2** - Get the tinyg2.bin binary firmware files from http://synthetos.github.io/g2/
+**Option 2** - Get the g2core.bin binary firmware files from https://github.com/synthetos/g2/releases
+ * Click the "Assets" drop down for any of the releases.  The various g2core.bin files will be displayed, with names appropriate for specific boards we have configuration files for.
 
 In either case you'll need to note the path to the resulting binary file. For example, if it's called `g2core.bin` and it's in the Downloads directory of your home page, you would use `%HOMEPATH%\Downloads\g2core.bin`. We'll call this `PATH_TO_BINARY` in the commands below.
 
