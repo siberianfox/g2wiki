@@ -22,6 +22,7 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
     * https://www.youtube.com/watch?v=MpIj-GnSnfM
     * https://www.youtube.com/watch?v=QkCUD1GEFDE - 3D Carving
     * https://www.youtube.com/watch?v=5CGOPUWAM4s - Carving a Foam Bust
+    * https://www.youtube.com/watch?v=Q9y0Ceq6Edk - A & B Axis Calibration
 
 ### Older
 
