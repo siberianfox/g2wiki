@@ -120,3 +120,8 @@ If Vmot drops a number of things happen:
 
 TODO: Place image of silk screen on page
 
+### Useful images
+
+Board power input connector (12v)
+
+![gQuintic board power connector](https://raw.githubusercontent.com/wiki/synthetos/g2/images/gquintic-power-input.jpg)
