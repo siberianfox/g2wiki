@@ -18,13 +18,12 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 * [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) - FabMo-based products (including the HandiBot)
   * The ShopBot 5-Axis (uses g2core) has several demonstration videos on YouTube:
+    * https://www.youtube.com/watch?v=wgbZENmGais - Trimming a vacuum formed part
     * https://www.youtube.com/watch?v=52zC5eYVvOU
     * https://www.youtube.com/watch?v=MpIj-GnSnfM
     * https://www.youtube.com/watch?v=QkCUD1GEFDE - 3D Carving
     * https://www.youtube.com/watch?v=5CGOPUWAM4s - Carving a Foam Bust
     * https://www.youtube.com/watch?v=Q9y0Ceq6Edk - A & B Axis Calibration
-  * Further demonstration of ShopBot 5-Axis:
-    * https://twitter.com/Brian_Handibot/status/1194373346709905408
 
 ### Older
 
