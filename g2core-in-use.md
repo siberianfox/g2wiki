@@ -17,6 +17,11 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 * [Dorna](https://dorna.ai) - 5-axis robot using g2core, initially created via a [successful kickstarter](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/)
 
 * [ShopBot](http://www.shopbottools.com/mApplications/developers.htm) - FabMo-based products (including the HandiBot)
+  * The ShopBot 5-Axis (uses g2core) has several demonstration videos on YouTube:
+    * https://www.youtube.com/watch?v=52zC5eYVvOU
+    * https://www.youtube.com/watch?v=MpIj-GnSnfM
+    * https://www.youtube.com/watch?v=QkCUD1GEFDE - 3D Carving
+    * https://www.youtube.com/watch?v=5CGOPUWAM4s - Carving a Foam Bust
 
 ### Older
 
