@@ -122,6 +122,6 @@ TODO: Place image of silk screen on page
 
 ### Useful images
 
-Board power input connector (12v)
+Board power input connector (12-24v)
 
 ![gQuintic board power connector](https://raw.githubusercontent.com/wiki/synthetos/g2/images/gquintic-power-input.jpg)
