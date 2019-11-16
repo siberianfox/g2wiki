@@ -6,8 +6,6 @@ Preferably with video (of TinyG/g2core in use), or even helpful instructions for
 
 Also, if you know of other projects, people, businesses (etc) using TinyG/g2core who aren't listed here, please feel welcome to add them.
 
-**Note that this page is very new, and is only just starting to have entries added**
-
 ## Products
 
 ### Current
