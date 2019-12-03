@@ -32,8 +32,8 @@ __________|___________|_____________________|
 [G21](#g20-g21-select-units-mode) | | Select mm mode | All Gcode from this point on will be interpreted in millimeters
 [G28](#g28-g30-go-to-predefined-position) | _axes_ | Goto G28 position | Optional axes specify an intermediate point
 [G28.1](#g28-g30-go-to-predefined-position) | | Set G28 position | The current machine position is recorded (No parameters are provided)
-[G28.2](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g282---homing-sequence-homing-cycle) | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis must be specified
-[G28.3](https://github.com/synthetos/TinyG/wiki/Homing-and-Limits-Description-and-Operation#g283---set-absolute-position) | _axes_ | Set Absolute Position | Set axis to zero or other value. Use to zero axes that cannot otherwise be homed
+[G28.2](https://github.com/synthetos/g2/wiki/Homing-g2core) | _axes_ | Homing Sequence | Homes all axes present in command. At least one axis must be specified
+[G28.3](https://github.com/synthetos/g2/wiki/Homing-g2core#g283---set-absolute-position) | _axes_ | Set Absolute Position | Set axis to zero or other value. Use to zero axes that cannot otherwise be homed
 [G30](#g28-g30-go-to-predefined-position) | _axes_ | Goto G30 position | Optional axes specify an intermediate point
 [G30.1](#g28-g30-go-to-predefined-position) | | Set G30 position | The current machine position is recorded (No parameters are provided)
 [G38.2](Gcode-Probes#g38x-probe) | _axes_ Fnnn | Probe | Probe toward, alarm if error
