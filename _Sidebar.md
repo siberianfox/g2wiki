@@ -63,5 +63,5 @@
 1. [ ] [Windows 10 / VMware 8 Issues](Windows-10-VMware-Fusion-8-Issues)
 1. [ ] [Dual Endpoint USB Internals](Dual-Endpoint-USB-Internals)
 1. [ ] [G2core License](G2core-License)
-1. [ ] [VSCode Setup](VSCode Setup)
+1. [ ] [VSCode Setup](VSCode-Setup)
 1. [ ] [Wiki History](https://github.com/synthetos/g2/wiki/_history)
