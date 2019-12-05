@@ -47,17 +47,25 @@ The following Gcode/Mcode commands use JSON active comments
 | Code  | Definition | Notes |
 | --- | --- | --- |
 | M100 | Execute from Planner | Execute JSON when the planner reaches it
+| M100.1 | Execute from parser | Execute JSON when the gcode parser reaches it
 | M101 | Wait on Event | Pause execution until condition in JSON is met
 
 
 **Examples**
 
-Set heater 1 temperature to 220 degrees
-<pre>
-m100 ({he1st:220})
-</pre>
+- Set heater 1 temperature to 220 degrees *after* the moves before this line complete:
+  ```
+  m100 ({he1st:220})
+  ```
 
-Pause movement until heater 1 is at temperature, then continue
-<pre>
-m101 ({he1at:t})
-</pre>
+
+- Set X and Y jerk max to 1000 for the following moves:
+  ```
+  m100.1 ({xjm:1000,yjm:1000})
+  ```
+  - This *HAS* to be an `M100.1` and *not* an `M100` in order for the following gcode to be interpreted with the change jerk setting.
+
+- Pause movement until heater 1 is at temperature, then continue
+  ```
+  m101 ({he1at:t})
+  ```
