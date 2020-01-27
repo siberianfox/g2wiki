@@ -92,8 +92,9 @@ Windows:
     * May be warnings about things already installed and not being updated - safe to ignore
 * Install WSL (https://docs.microsoft.com/en-us/windows/wsl/install-win10) and The in the Windows Store install Ubuntu
   * Note the command to enable WSL needs to run in a PowerShell running as Administrator. Search for PowerShell and click on “Run as Administrator” and then wave away all the various warnings about the dangers.
-* Connect to Ubuntu
-* Open Cloned Repo (may be easier if it’s cloned inside Ubuntu)
+* In VScode, Connect to Ubuntu (Screen with network-like icon in the toolbar, it’ll open a new window most likely), or re-open a previous Ubuntu connection
+* Open Cloned Repo from *inside the Ubuntu-connected window* (may be easier if it’s cloned inside Ubuntu)
+  * The window will have “>< WSL: Ubuntu” in the bottom left corner
 * In the shell, run `sudo apt-get update -y && sudo apt-get install build-essential -y`
   * `sudo apt-get install nodejs -y`
 
