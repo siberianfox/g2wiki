@@ -97,4 +97,7 @@ Windows:
   * The window will have “>< WSL: Ubuntu” in the bottom left corner
 * In the shell, run `sudo apt-get update -y && sudo apt-get install build-essential -y`
   * `sudo apt-get install nodejs -y`
+* Install [JLink](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/)
+  * Download the latest `.deb`
+  * `sudo dpkg -i <path_to_deb>`
 
