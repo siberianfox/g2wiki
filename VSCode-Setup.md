@@ -89,3 +89,4 @@ Windows:
   * Install Recommended Extensions
     * May be warnings about things already installed and not being updated - safe to ignore
 * Install WSL (https://docs.microsoft.com/en-us/windows/wsl/install-win10) and The in the Windows Store install Ubuntu
+  * Note the command to enable WSL needs to run in a PowerShell running as Administrator. Search for PowerShell and click on “Run as Administrator” and then wave away all the various warnings about the dangers.
