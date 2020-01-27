@@ -81,3 +81,11 @@ Briefly: Under the `Terminal` menu (or using the [Command Palette](https://code.
 We have already configured Debugging for several targets, all using the J-Link tools. Follow the VSCode [documentation](https://code.visualstudio.com/docs/editor/debugging) (additional notes for [C++ here](https://code.visualstudio.com/docs/cpp/cpp-debug)), using one of those profiles.
 
 # Notes (To be incorporated above and then deleted)
+
+Windows:
+
+* Install gitHub Desktop
+* Install VSCode
+  * Install Recommended Extensions
+    * May be warnings about things already installed and not being updated - safe to ignore
+* Install WSL (https://docs.microsoft.com/en-us/windows/wsl/install-win10) and The in the Windows Store install Ubuntu
