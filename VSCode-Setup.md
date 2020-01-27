@@ -85,6 +85,8 @@ We have already configured Debugging for several targets, all using the J-Link t
 Windows:
 
 * Install gitHub Desktop
+* Install git
+  * See screenshots for specific configuration, use defaults for the rest
 * Install VSCode
   * Install Recommended Extensions
     * May be warnings about things already installed and not being updated - safe to ignore
