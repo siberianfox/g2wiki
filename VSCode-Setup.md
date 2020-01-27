@@ -92,5 +92,5 @@ Windows:
   * Note the command to enable WSL needs to run in a PowerShell running as Administrator. Search for PowerShell and click on “Run as Administrator” and then wave away all the various warnings about the dangers.
 * Connect to Ubuntu
 * Open Cloned Repo (may be easier if it’s cloned inside Ubuntu)
-* In the shell, run `sudo apt-get install build-essential`
+* In the shell, run `sudo apt-get update && sudo apt-get install build-essential`
 
