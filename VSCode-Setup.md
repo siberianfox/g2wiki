@@ -95,9 +95,8 @@ Windows:
 * In VScode, Connect to Ubuntu (Screen with network-like icon in the toolbar, it’ll open a new window most likely), or re-open a previous Ubuntu connection
 * Open Cloned Repo from *inside the Ubuntu-connected window* (may be easier if it’s cloned inside Ubuntu)
   * The window will have “>< WSL: Ubuntu” in the bottom left corner
-* In the shell, run `sudo apt-get update -y && sudo apt-get install build-essential -y`
-  * `sudo apt-get install nodejs -y`
+* In the shell, run `sudo apt-get update -y && sudo apt-get install build-essential nodejs -y`
 * Install [JLink](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/)
   * Download the latest `.deb`
-  * `sudo dpkg -i <path_to_deb> && sudo apt-get install libsm6 -y`
+  * `sudo dpkg -i <path_to_deb> && sudo apt-get install libsm6 libxrandr-dev libxrender-dev libxfixes-dev libxcurson-dev -y`
 
