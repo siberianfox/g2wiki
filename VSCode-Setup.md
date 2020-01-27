@@ -95,4 +95,5 @@ Windows:
 * Connect to Ubuntu
 * Open Cloned Repo (may be easier if it’s cloned inside Ubuntu)
 * In the shell, run `sudo apt-get update -y && sudo apt-get install build-essential -y`
+  * `sudo apt-get install nodejs -y`
 
