@@ -99,5 +99,5 @@ Windows:
   * `sudo apt-get install nodejs -y`
 * Install [JLink](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/)
   * Download the latest `.deb`
-  * `sudo dpkg -i <path_to_deb>`
+  * `sudo dpkg -i <path_to_deb> && sudo apt-get install libsm6 -y`
 
