@@ -12,6 +12,6 @@ The significant pieces we'll be working with in this guide:
 
 General supporting pieces we need for the above to work:
 
-* Something to mount the stepper motor drivers on.  We're using a [common breadboard](https://www.jaycar.com.au/arduino-compatible-breadboard-with-830-tie-points/p/PB8815) in this instance.
+* Something to mount the stepper motor drivers on.  We're using [generic protoboard](https://www.ebay.com/c/1239214948) in this instance.
 * [Jumper leads](https://www.jaycar.com.au/jumper-lead-mixed-pack-100-pieces/p/WC6027) to connect things
 * A USB-A to micro-USB cable, for connecting my computer to the Arduino Due 
