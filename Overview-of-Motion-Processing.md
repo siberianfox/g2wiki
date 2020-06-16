@@ -6,13 +6,13 @@ There are six  stages to get from gcode to steps:
 
 1. parser, pretty obvious, but it also puts moves into the planner as blocks
 
-2. back-planner, where it takes the last inserted block (and what would be the last to execute) and plans from there “backward” to the currently executing block. This stage only handles feedrate limits to ensure the machine can stop before it runs out of moves, and setting the cornering speeds.
+2. back-planner, where it takes the most recently inserted block (and what would be the last to execute) and plans from there “backward” to the currently executing block. This stage only handles feedrate limits to ensure the machine can stop before it runs out of moves, and setting the cornering speeds.
 
 3. just-in-time (JIT) forward-planner, where it computes the head (jerk-bound acceleration), body (cruise), and tail (deceleration) sections of the next block past the one currently running
 
 All of these parts so far we generally lump together and call the “planner” conversationally.
 
-4. Execution, or “the exec,” where it breaks the head, body, and tail sections into the next linear-acceleration segment that is generally between ¼ to 1ms in length (depending on hardware and configuration), and computes the start and end velocity, number of steps for each motor (Via kinematics), and duration of said segment and puts it where the loader can get it
+4. Execution, or “the exec,” where it breaks the head, body, and tail sections into the next linear-acceleration segment that is generally between 0.25ms to 1ms in length (depending on hardware and configuration), and computes the start and end velocity, number of steps for each motor (Via kinematics), and duration of said segment and puts it where the loader can get it
 
 5. The loader, which takes the next segment and loads it into the runtime between steps
 
@@ -27,8 +27,6 @@ As for the timing I mentioned before, our system is designed to be pull, where:
 
 So, if you remove the runtime and exec and move them to a new processor, you’ll have to handle the timing and pull of those subsystems another way.
 
-Timing is also important in that some segments (as brief as ¼ ms) are a whole block which was a gcode segment. UART and USB serial (generally on the host side) is not that fast, generally, and so we have to throttle those by other means.
+Timing is also important in that some segments (as brief as 0.25 ms) are a whole block which was a gcode segment. UART and USB serial (generally on the host side) is not that fast, generally, and so we have to throttle those by other means.
 
-Don’t think I’m saying all that to discourage you. I’d love to see what you’re proposing worked out. But there are a few technical hurdles to figure out. Mostly they involve how to communicate the segments (less likely) or sections (better bet) fast enough and reliably enough to keep everyone in sync, and also how to keep the clocks synchronized.
-
--Rob
+Basically if you take all of stepper.cpp and the last third of plan_exec.cpp and move them to another processor, then you’ll have achieved your goal (of separating out the step generation from the motion planning). Of course you have to make them talk and sync up as I mentioned before.
