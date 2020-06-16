@@ -41,6 +41,7 @@
 1. [ ] [G2 3DP Dialect](g2dialect)
 1. [ ] [Consensus Gcode](g2dialect-Consensus-Gcode)
 1. [ ] [Digital DRO](Digital-DRO)
+1. [ ] [Overview of Motion Processing](Overview-of-Motion-Processing)
 
 **Developer Pages**
 
