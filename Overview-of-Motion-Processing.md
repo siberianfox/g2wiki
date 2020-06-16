@@ -4,11 +4,11 @@ You can break the step-direction motion out from the planner, as they are indepe
 
 There are six  stages to get from gcode to steps:
 
-1. parser, pretty obvious, but it also puts moves into the planner as blocks
+1. Parser, pretty obvious, but it also puts moves into the planner as blocks
 
-2. back-planner, where it takes the most recently inserted block (and what would be the last to execute) and plans from there “backward” to the currently executing block. This stage only handles feedrate limits to ensure the machine can stop before it runs out of moves, and setting the cornering speeds.
+2. Back-planner, where it takes the most recently inserted block (and what would be the last to execute) and plans from there “backward” to the currently executing block. This stage only handles feedrate limits to ensure the machine can stop before it runs out of moves, and setting the cornering speeds.
 
-3. just-in-time (JIT) forward-planner, where it computes the head (jerk-bound acceleration), body (cruise), and tail (deceleration) sections of the next block past the one currently running
+3. Just-in-time (JIT) forward-planner, where it computes the head (jerk-bound acceleration), body (cruise), and tail (deceleration) sections of the next block past the one currently running
 
 All of these parts so far we generally lump together and call the “planner” conversationally.
 
