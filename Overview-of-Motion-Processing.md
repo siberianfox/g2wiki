@@ -28,6 +28,6 @@ As for the timing I mentioned before, our system is designed to be pull, where:
 
 So, if you remove the runtime and exec and move them to a new processor, you’ll have to handle the timing and pull of those subsystems another way.
 
-Timing is important in that some segments (as brief as 0.25 ms) are a whole block which was a gcode segment. UART and USB serial (generally on the host side) is not that fast, generally, and so we have to throttle those by other means. If the planner detects that the serial system cannot keep up with these short moves it slows down the velocity (throttles) so that the input system can keep up and the planner is not starved.
+Timing is important in that some segments (as brief as 0.25 ms) are a whole gcode block (line of gcode). UART and USB serial (generally on the host side) are not that fast, generally, and so we have to throttle those by other means. If the planner detects that the serial system cannot keep up with these short moves it slows down the velocity (throttles) so that the input system can keep up and the planner is not starved.
 
 Basically if you take all of stepper.cpp and the last third of plan_exec.cpp and move them to another processor, then you’ll have achieved your goal (of separating out the step generation from the motion planning). Of course you have to make them talk and sync up as I mentioned before.
