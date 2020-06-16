@@ -1,6 +1,6 @@
 _This page contains an overview of motion processing. It was originally written as a response to a question of how to separate the step/direction outputs from the rest of the planner._
 
-You can break the step-direction motion out from the planner, as they are independent (but currently deeply symbiotic) systems. The people lies mostly in the timing.
+You can break the step-direction motion out from the planner, as they are independent (but currently deeply symbiotic) systems. The challenge lies mostly in the timing.
 
 There are six  stages to get from gcode to steps:
 
