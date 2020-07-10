@@ -10,7 +10,9 @@ Also, if you know of other projects, people, businesses (etc) using TinyG/g2core
 
 ### Current
 
-* [Bantam Tools Desktop PCB Milling Machine](https://www.bantamtools.com/pages/products)
+* [Bantam Tools](https://www.bantamtools.com/pages/products)
+  * [Desktop CNC Milling Machine](https://www.bantamtools.com/cnc-milling-machine) - Designed for milling aluminium ([video](https://www.youtube.com/watch?v=VHYM_QhZq5Y))!
+  * [Desktop PCB Milling Machine](https://www.bantamtools.com/pcb-milling-machine)
 
 * [Dorna](https://dorna.ai) - 5-axis robot using g2core, initially created via a [successful kickstarter](https://www.kickstarter.com/projects/775197166/dorna-fast-powerful-and-precise-robotic-arm/)
 
