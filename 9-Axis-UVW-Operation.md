@@ -16,7 +16,7 @@ V | 7 | V is a secondary Y axis and moves by the rules of the Y axis
 W | 8 | W is a secondary Z axis and moves by the rules of the Z axis
 
 ### Using UVW Axes
-Motors can be mapped to any of the 9 axes. This allows a machine to have as many as sis linear axes that are independent of each other and obey coupled kinematics.
+Motors can be mapped to any of the 9 axes. This allows a machine to have as many as six linear axes that are independent of each other and obey coupled kinematics.
 
 The primary use case for the UVW axes are to support a secondary 'Z' axis. Some machines have two toolheads - One can be operated as Z, the other as W. 
 
