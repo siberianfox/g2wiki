@@ -15,9 +15,19 @@ The following is a list of the minimum you will need strictly for g2core, regard
 * Currently the only publicly-available board g2core works on is the Arduino Due.
 * We plan to release the gQuadratic and gQuintic boards in fall 2016 that will also run g2core.
 
-**Adapter Cabling/Shield** - gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
+**Adapter Cabling/Shield**
+
+If you're only going to use 3 axes (XYZ), the most popular shield is the gShield ($50) ([Synthetos Store](https://synthetos.myshopify.com/products/gshield-v5), [Adafruit](http://www.adafruit.com/products/1750), [Inventables](https://www.inventables.com/technologies/gshield)), or roll-your-own cabling.
 * The gShield provides three stepper drivers and pinouts for spindle controls and limit switches.
 * Depending on the project and your level of expertise, you may be able to wire stepper drivers you already have (as long as they have STEP/DIRECTION/ENABLE pinouts) to the Due or roll your own shield.
+
+For using more axes (eg 4th, 5th, or 6th axes), the most popular options are the DJuke shields.  There are two to choose from, depending on your needs:
+* [g2core shield (onboard drivers)](https://webshop.djuke.nl/kits/g2shield-onboard-kit) - Choose this one if you're using smaller stepper motor drivers. eg [Pololu](https://www.pololu.com/category/120/stepper-motor-drivers)
+* [g2core shield (external drivers)](https://webshop.djuke.nl/kits/g2shield-external-kit) - Choose this one if your using external stepper motor drivers. eg [DM542](http://leadshine.com/series.aspx?type=products&category=stepper-products&producttype=stepper-drives&subtype=general-stepper-drives&series=dm)
+
+## For developers (only)
+
+For doing development of g2core itself, you'll need a hardware debugger.  People just wanting to *use* g2core and not do development can completely skip this bit. :smile:
 
 **Debugger/Programmer** - Atmel-ICE debugger on [Mouser](http://www.mouser.com/ProductDetail/Atmel/ATATMEL-ICE-BASIC/?qs=sGAEpiMZZMsn4IaorHFpMNdmy%252bJMuxsJtWHi7YhUN7M%3d) and  [Digikey](http://www.digikey.com/product-detail/en/atmel/ATATMEL-ICE-BASIC/ATATMEL-ICE-BASIC-ND/4753381). 
 * You _can_ program the Due and the TinyG v9 boards without a debugger, but to do realtime debugging you need an ICE of some sort. 
