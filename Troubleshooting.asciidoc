@@ -40,7 +40,82 @@ toc::[]
 # Motors Do Not Move
 PROBLEM: The board seems fine, but the motors don't move. This is from https://github.com/synthetos/g2/issues/365[Issue #365]
 
-The default settings disable axes for safety. Axes need to be enabled. In the x/y/z lines, it's showing those axis as disabled:
+The default settings disable axes for safety.  Axes need to be enabled.
+
+### When using text mode
+
+Note - text mode is enabled using the `$ej=0` command.
+
+To tell if this is what's happening to you, look for the `am` settings of your axes.
+
+```
+$x
+[xam] x axis mode                 0 [disabled]
+[xvm] x velocity maximum      18000 mm/min
+[xfr] x feedrate maximum      18000 mm/min
+[xtn] x travel minimum            0.000 mm
+[xtm] x travel maximum          420.000 mm
+[xjm] x jerk maximum           3000 mm/min^3 * 1 million
+[xjh] x jerk homing           18000 mm/min^3 * 1 million
+[xhi] x homing input              2 [input 1-N or 0 to disable homing this axis]
+[xhd] x homing direction          1 [0=search-to-negative, 1=search-to-positive]
+[xsv] x search velocity        2000 mm/min
+[xlv] x latch velocity       100.00 mm/min
+[xlb] x latch backoff             4.000 mm
+[xzb] x zero backoff              2.000 mm
+g2core[mm] ok> 
+$y
+[yam] y axis mode                 0 [disabled]
+[yvm] y velocity maximum      17000 mm/min
+[yfr] y feedrate maximum      17000 mm/min
+[ytn] y travel minimum            0.000 mm
+[ytm] y travel maximum          435.000 mm
+[yjm] y jerk maximum           3000 mm/min^3 * 1 million
+[yjh] y jerk homing           17000 mm/min^3 * 1 million
+[yhi] y homing input              4 [input 1-N or 0 to disable homing this axis]
+[yhd] y homing direction          1 [0=search-to-negative, 1=search-to-positive]
+[ysv] y search velocity        2000 mm/min
+[ylv] y latch velocity       100.00 mm/min
+[ylb] y latch backoff             4.000 mm
+[yzb] y zero backoff              2.000 mm
+g2core[mm] ok> 
+$z
+[zam] z axis mode                 0 [disabled]
+[zvm] z velocity maximum       1200 mm/min
+[zfr] z feedrate maximum       1200 mm/min
+[ztn] z travel minimum            0.000 mm
+[ztm] z travel maximum           68.000 mm
+[zjm] z jerk maximum           3000 mm/min^3 * 1 million
+[zjh] z jerk homing            3000 mm/min^3 * 1 million
+[zhi] z homing input              6 [input 1-N or 0 to disable homing this axis]
+[zhd] z homing direction          1 [0=search-to-negative, 1=search-to-positive]
+[zsv] z search velocity        1200 mm/min
+[zlv] z latch velocity       100.00 mm/min
+[zlb] z latch backoff             4.000 mm
+[zzb] z zero backoff              4.000 mm
+```
+
+Note the "0 [disabled]" lines there.  eg:
+
+```
+[xam] x axis mode                 0 [disabled]
+[yam] y axis mode                 0 [disabled]
+[zam] z axis mode                 0 [disabled]
+```
+
+To fix this, set the `am` values to `1`:
+
+```
+$xam=1
+$yam=1
+$zam=1
+```
+
+The same applies to other axes as well.  eg The a, b, c axes all have their own `am` variables too.
+
+### When using JSON mode
+
+In the x/y/z lines, it's showing those axis as disabled (check the `am` values):
 
 ```
 {"r":{"x":{"am":0,"vm":1000,"fr":1000,"tn":0,"tm":0,"jm":1000,"jh":1000,"hi":0,"hd":0,"sv":500,"lv":100,"lb":4,"zb":2}},"f":[1,0,1]}
