@@ -42,6 +42,10 @@ PROBLEM: The board seems fine, but the motors don't move. This is from https://g
 
 The default settings disable axes for safety.  Axes need to be enabled.
 
+If you're using external drivers, the motor enable polarity may need to be set and power management enabled for the startup logic state to change.
+
+## Enabling Axes
+
 ### When using text mode
 
 Note - text mode is enabled using the `$ej=0` command.
@@ -113,6 +117,8 @@ $zam=1
 
 The same applies to other axes as well.  eg The a, b, c axes all have their own `am` variables too.
 
+
+
 ### When using JSON mode
 
 In the x/y/z lines, it's showing those axis as disabled (check the `am` values):
@@ -130,6 +136,21 @@ Change "am" to enable the axis:
 ```
 
 There is ongoing discussion on how best to change the defaults.
+
+## Setting Motor Enable Polarity
+
+If you've enabled axes and the system is showing velocity/position status updates when you jog but motors still aren't energizing or moving, you may need to modify the Enable Polarity and Power Management for your motors.
+
+Enable polarity may default to HIGH depending on your board definition settings, so if your drivers are enable low they need polarity changed and power management enabled for the new logic state to be sent to the pins. 
+
+```
+$1ep = 0 // Enable Polarity LOW
+$1pm = 1 // Any setting other than 0 (disabled). If power management is disabled then the Enable Polarity change isn't sent to the pin.
+
+```
+
+These settings will need to be changed for all motors. 
+
 
 # Arduino Due flash getting erased at random moments
 PROBLEM: The flash on Chinese clones of Arduino Due is getting erased at seemingly random moments. This is from https://github.com/synthetos/g2/issues/235[Issue #235]
