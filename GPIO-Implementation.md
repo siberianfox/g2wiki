@@ -34,7 +34,7 @@ Here we will focus on the direct interface, which is what will be used from othe
 
 ## Digital Inputs
 
-In `board_gpio.{h,cpp}` the digital inputs are defined (roughly) as:
+In `gpio.{h,cpp}` the digital inputs are defined (roughly) as:
 
 ```c++
 gpioDigitalInput*   const d_in[D_IN_CHANNELS];
@@ -138,7 +138,7 @@ din_handlers[INPUT_ACTION_LIMIT].deregisterHandler(limitHandler);
 
 ## Digital Outputs
 
-In `board_gpio.{h,cpp}` the digital outputs are defined (roughly) as:
+In `gpio.{h,cpp}` the digital outputs are defined (roughly) as:
 
 ```c++
 gpioDigitalOutput*  const d_out[D_OUT_CHANNELS];
